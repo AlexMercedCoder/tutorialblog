@@ -1,7 +1,7 @@
 ---
-title: Hello World in Vue
+title: React 101 Tutorial
 date: "2020-08-18T22:12:03.284Z"
-description: "React 101 Tutorial"
+description: "Basics of How React Works"
 ---
 
 ## What is React?
