@@ -4,6 +4,8 @@ date: "2020-08-18T22:12:03.284Z"
 description: "Creating a Ruby on Rails API with Auth"
 ---
 
+_Certain parts of this tutorial were adapted from this tutorial, https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833_
+
 ## Our Mission
 
 Our goal is to make an API where users can login and creates notes under their account. I'm assuming some basic knowledge of Ruby on Rails and that you have it installed. If this is not the case just do this basic hello world tutorial to get a basic introduction before this tutorial.
