@@ -8,6 +8,8 @@ description: "Building Reactive and Styling UI Components"
 
 AMPonent is my newest Web Component library that allows you to create Web Components with super powers with ease. It bakes in things like reactive data, reducers, styled components and lifecycle functions in a nice function based approach.
 
+*You can find this and my other libraries at AlexMercedCoder.com
+
 ## Setup
 
 - in a folder somewhere on your computer create three files.
