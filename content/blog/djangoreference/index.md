@@ -1,6 +1,6 @@
 ---
 title: Ultimate Django Reference (Deployment, Rest API, Commands, .env)
-date: "2020-08-18T22:12:03.284Z"
+date: "2020-08-27T22:12:03.284Z"
 description: "A one stop shop for many of the things you'll have to look up a lot"
 ---
 
