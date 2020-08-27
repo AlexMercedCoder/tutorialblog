@@ -343,6 +343,7 @@ In your app folder create a ```serializers.py``` with the following.
 
 ```python
 from .models import Dog
+from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 
@@ -350,7 +351,19 @@ class DogSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dog
         fields = ['name', 'age']
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'groups']
+
+class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['url', 'name']
 ```
+
+*Users and Groups are serialized so we have a restful routes for the built in User and Group models*
 
 ### Create Views for your API
 
@@ -358,9 +371,10 @@ In your apps views.py create the following
 
 ```python
 from .models import Dog
+from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import DogSerializer
+from .serializers import DogSerializer, UserSerializer, GroupSerializer
 
 
 class DogViewSet(viewsets.ModelViewSet):
@@ -370,6 +384,23 @@ class DogViewSet(viewsets.ModelViewSet):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
     permission_classes = [permissions.AllowAny] #Coule be [permissions.IsAuthenticated]
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
 ```
 For Details on different permission sets:
 - https://www.django-rest-framework.org/api-guide/permissions/
@@ -387,6 +418,8 @@ from project1.api import views
 
 router = routers.DefaultRouter()
 router.register(r'dogs', views.DogViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -401,3 +434,65 @@ urlpatterns = [
 - make migrations
 - migrate
 - test
+
+## Adding JWT Authentication to your application
+
+### Download the django simple jwt library
+
+`pip install djangorestframework-simplejwt`
+
+### Add JWT Authenticator to Settings.py
+
+In settings.py add...
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+```
+
+### Add Route to get and refresh tokens
+
+add the following routes in your urls.py
+
+```python
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+urlpatterns = [
+    ...
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    ...
+]
+```
+
+### Update your model views that you want to have permissions
+
+```python
+from .models import Dog
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import DogSerializer
+from rest_framework_simplejwt import authentication # <=add this
+
+
+
+class DogViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Dog.objects.all()
+    serializer_class = DogSerializer
+    permission_classes = [permissions.IsAuthenticated] # <= update this
+    authentication_classes = (authentication.JWTAuthentication,)# <= add this
+
+```
+
+With this you can pass username and password to api/token/ to get your token, then pass it in the headers to access routes for models with protected views. Keep in mind, for this library it seems to expect a capital "Bearer" in your Authorization header value.
+
+_To Read the Docs on this library and learn how to change settings like token expiration go here: https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html_
