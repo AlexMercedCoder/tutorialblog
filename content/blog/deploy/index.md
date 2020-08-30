@@ -6,7 +6,7 @@ description: "Quality, Fast, Deployment for your static or full stack site."
 
 ## And the categories are...
 
-So we are going to cover a lot of current options for deploying your website. The options on this list should all have a free tier and of course upgrade for as your site grows.
+So we are going to cover a lot of current options for deploying your website. The options on this list should all have a free tier and of course, upgrades as your site grows.
 
 - Static Site/JAM Stack Friendly Hosts
 - Full Stack Hosting
