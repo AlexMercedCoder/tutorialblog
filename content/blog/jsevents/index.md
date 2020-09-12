@@ -6,25 +6,25 @@ description: "A Comprehensive Guide to Javascript Events"
 
 ## What are Events
 
-Javascript events are a great way controlling "when" certain processes are run. The essential workflow of event is the following.
+Javascript events are a great way of controlling "when" certain processes are run. The essential workflow of events is the following.
 
 - a listener is created that takes an event name (ex. "click") and an event handler (a function to be run when the event occurs).
 
-- something happens that causes and event by that name to be emitted/triggered
+- something happens that causes an event by that name to be emitted/triggered
 
 - listeners are iterated over and if a listener is attached to an event of the same name, the function is run.
 
-In this post I want to discuss...
+In this post, I want to discuss...
 
-- Built in browser event (DOM Events)
+- Built-in browser event (DOM Events)
 
 - Custom Browser Events
 
 - Custom Events in Node
 
-## Built in Browser Events
+## Built-in Browser Events
 
-There are dozens of built-events that occur when browsing a website; clicks, hovers, etc. Any individual element in the browser can listen for these events. To do so we have to create a listener to listen to the event.
+There are dozens of built-events that occur when browsing a website; clicks hovers, etc. Any individual element in the browser can listen for these events. To do so we have to create a listener to listen to the event.
 
 ```js
 // Grab first button and save it in a variable
@@ -52,7 +52,7 @@ button.addEventListener("click", event => {
   //This gives us the element that initiated the event which may be different if this particular event was triggered by an interaction of a child element, this property would contain the child element.
   console.log(event.target)
 
-  // This function prevents bubbling, means an event emitted/triggered on a child element will not trigger events on the parents. (A click event on a button won't trigger a click event on the div its inside in, which would normally occur)
+  // This function prevents bubbling, means an event emitted/triggered on a child element will not trigger events on the parents. (A click event on a button won't trigger a click event on the div it is inside in, which would normally occur)
   event.stopPropagation()
 
   // This function would prevent any elements default behavior. This is primarily useful when submitting a form as by default forms refresh on every submit.
@@ -64,13 +64,13 @@ button.addEventListener("click", event => {
 })
 ```
 
-That's pretty much how built in events work and they can be very powerful. We can take it to the next level with custom events...
+That's pretty much how built-in events work and they can be very powerful. We can take it to the next level with custom events...
 
 ## Custom Events in the Browser
 
-Javascript being a backend and frontend language gives it the unique position of having two different APIs for most features, a browser API built for DOM interactions on a web page and the nodeJS API built for processes outside of the browser (building servers, scripts, web scraping).
+Javascript being a backend and frontend language gives it the unique position of having two different APIs for most features, a browser API built for DOM interactions on a web page, and the nodeJS API built for processes outside of the browser (building servers, scripts, web scraping).
 
-In the browser there are two ways to build custom events and it really just depends whether you wanted to include any additional information to the event object.
+In the browser, there are two ways to build custom events and it really just depends whether you wanted to include any additional information to the event object.
 
 ### The Simple Way
 
@@ -96,7 +96,7 @@ The event object would still be passed to this custom event with all the info we
 
 ## The Slightly Less Simple Way
 
-Maybe you want to include some custom information inside the event object. The syntax below allows use to add info to the event object.
+Maybe you want to include some custom information inside the event object. The syntax below allows users to add info to the event object.
 
 ```js
 //Create the Event
@@ -114,7 +114,7 @@ const theBearHasBeenHugged = event => {
 }
 ```
 
-The detail property in the second argument of CustomEvent allow us to pass more information in. If you want to pass a lot of information detail could be an object or an array. The second argument is object cause there are other properties you can specify on how the event behavior such as...
+The detail property in the second argument of CustomEvent allows us to pass more information in. If you want to pass a lot of information detail could be an object or an array. The second argument is object cause there are other properties you can specify on how the event behaves such as...
 
 - **bubbles:** a boolean on whether the event bubbles or not
 
@@ -124,7 +124,7 @@ So that's the world of custom events in the browser!
 
 ## Custom Events in NodeJS
 
-Outside of the browser Javascript lives in the world of NodeJS. In node there is a built-in events library that allows us to create custom event which is heavily used in many of the libraries you know and love. See the example below...
+Outside of the browser Javascript lives in the world of NodeJS. In node, there is a built-in events library that allows us to create custom events which is heavily used in many of the libraries you know and love. See the example below...
 
 ```js
 //Bring in the events library
@@ -150,7 +150,7 @@ Cool thing is that we can pass data when the event is emitted. Any arguments to 
 
 #### When to use events
 
-- To signal when certain things have occured or ending
+- To signal when certain things have occurred or ending
 - To trigger the resolution of a promise (run the resolve function when an event is emitted)
 - To signal open and closed connections (you see this a lot in database libraries)
 - To signal errors
