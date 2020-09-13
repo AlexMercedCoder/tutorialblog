@@ -129,6 +129,7 @@ Let's say we have several `<li>` elements that we'd like to loop over and add an
 **Plain Vanilla**
 
 ```js
+const liArray = document.querySelectorAll("li")
 liArray.forEach((li, index) => {
   li.id = index
 })
