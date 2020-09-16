@@ -95,9 +95,9 @@ That should give you plenty to immerse yourself in the terminology and culture o
 - Practice talking about code which will make for smoother interviews
 - Potential Revenue Stream if it grows
 
-Audio can be tricky place for tutorials so when considering what to cover in a podcast here are tips.
+Audio can be a tricky place for tutorials so when considering what to cover in a podcast here are tips.
 
-- Being non-visual focus on concepts and terms and less on syntax, this is great avenue to help people understand code in concept
+- Being non-visual, focus on concepts and terms and less on syntax, this is a great avenue to help people understand code in concept
 
 - Focus your podcast on a specific language or framework and interview people who work with that tech. This helps establish you as an SME and will make it easier to think of show ideas.
 
