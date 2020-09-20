@@ -1,103 +1,133 @@
 ---
-title: Spin-up your next project with merced-spinup
-date: "2020-09-19T22:12:03.284Z"
-description: Templates for days
+title: Passing Data Between Components in Vue
+date: "2020-09-20T22:12:03.284Z"
+description: Props, Queries and Events oh my!
 ---
 
-## What is merced-spinup
+## The dilemma
 
-This all began with my exploring the world of web components and me creating several front end libraries to work with web components (MercedUI, AMPonent, funComponent, etc.). After releasing these, the more I came to realize that just being downloadable on NPM isn't going to be enough to get people to consider them or try them out. One of the things that helps get people going in the major frameworks are CLI tools that can help spinup or bootstrap basic project structures (Vue/Angular CLI or Create-React-App).
+When you are using a modern front-end UI framework that is based around building components (React, Vue, Svelte and Angular), you get some very nice benefits for large data intensive projects...
 
-So I used WebPack to create build setups for each of my front-end frameworks and along with each template I created a CLI tool (create-mercedui-app, create-amponent-app), you get the idea. While this was a lot of fun and quite a 7knowledge building journey, I started thinking why not build all of this into one tool.
+- Reactive Data, your UI will update based on changes in data
+- Encapsulation, since components are defined separately, they are reusable.
+- Speed Optimization, Shadow DOM and good data management lowers the amount of re-rendering, resulting in faster performance.
 
-So I created merced-spinup which allows you to spin up a project from one of several templates. First it started with my libraries but then I also included templates for several other libraries, custom templates made and maintained by myself.
+Although, for all this bountiful goodness, you get one huge catch.
 
-So in this article I'll discuss how to use this tool and all the current templates, more constantly being added.
+- State Management, since each component is a walled garden, they don't see each other's data, which can be cumbersome when many components need to make use of the same data.
 
-## The basics
+Communication usually occurs between parent and children components and not through siblings, so state management becomes a game thinking through how data will traverse the component tree. Some people bypass altogether with libraries like Redux, NGRX, Vuex, and MobX that allow you to manage state at a application level but this may come at the cost of less encapsulation and reusability of components.
 
-Regardless of the template the format of the command and getting started is always the same.
+In this article I hope to explain how traverse data among Vue components. First we always have to think which component is speaking to which.
 
-`npx merced-spinup <template> <projectname>`
+## #1 Parent => Direct Child: Props/$attrs
 
-**template**: keyword for the template you want created
+So let's say in the Parent component the template looks like this.
 
-**projectName**: The name of the folder you want the project cloned to.
+```html
 
-After running the command a folder will be created, now you can go into this folder and run `npm install` and you are off to the races.
+<template>
 
-Each template should have a read me with any other pertinent details and I often attempted to put lots of comments in the files to further elaborate on the workflow.
+<Child/>
 
-\*If you type an incorrect template name an error message will appear listing all existing templates in case you needed to take a quick look.
+</template>
 
-## Frontend Templates
+```
 
-### My Libraries
+The Child component is being directly rendered by the Parents template, so we'll call this a direct child. We can pass information by including attribute in the Child tag like so.
 
-These are the templates for my libraries most built around web components and have a very react-ish or vue-ish workflow. All these templates use webpack and have two commands.
+```html
 
-`npm run dev` run dev server
+<template>
 
-`npm run build` build to a "dist" folder
+<Child hello="world" v-bind:cheese="cheese"/>
 
-#### Web Component Based
+</template>
 
-- mercedui
-- amponent
-- componentzoo
-- superfunc
-- funcomponent
-- basicelement
+```
 
-#### Custom, non-component based front-end libraries
+So here we are passing two attributes, hello and cheese. Hello is just directly passing the string world down to the child component. The second attribute is using v-bind to pull from its data object, so in this case it will look in data for property named cheese and pass it to the child as a property named cheese.
 
-- mblocks
-- renderblocks
+Now how do we access the property in the child? By default all the attributes are stored in this.$attrs (attributes) so they'd be this.$attrs.hello and this.$attrs.cheese but this seems like excessive typing... we can make them this.hello and this.cheese by bringing them in as props. To do this we have to declare the props in the components Vue Instance.
 
-### The Mainstream Frontend Libraries
+```js
+export default {
+    name: "child",
+    props: ["hello", "cheese"]
+}
 
-- **vue** => Spin up a Vue template with Vue Router and the Buefy (Bulma for Vue) component library configured
-- **angular** => Spins up an angular template with angular router ready to go with some helper components
-- **svelte** => Spins up a Svelte template with some starter components
-- **jquerywebpack** => That's right, jQuery and Lodash with webpack... have fun.
+```
 
-#### React
+Adding the props property allow the component to anticipate the attributes and move them over where they can access with less characters.
 
-- **react** => Spins up a react template using parcel as the bundler
-- **reactwebp** => Spins up a react template using webpack as bundler
-- **reactrouter** => Spins up a react router configured template
-- **reactredux** => Spins up a react template that has redux setup for global state mgmt
-- **reactreducer** => Spins up a react template that uses useReducer for global statemanagement in a very redux like setup
-- **reactts** => Spins up a typescript react
+## From Parent to Router-View
 
-### Other
+Vue Router is great tool for making a single page application feel more like a multi-page application but it does create one challenge for us, passing data. Usually the component is rendered directly by the parent and we just can pass props to it from there, but with router a ```<router-view>``` component fills the gap on where a component would be depending on the url in the url bar. 
 
-- **kofu** A library that combines things like JSX with Observables and more, created by my colleague at General Assembly, Arthur Bernier. This is the only template I don't maintain as I chose to instead make this clone his official template that he is often updating so you always have the latest kofu setup if you want to try it before globally installing the kofu CLI tools for the full KofuJS experience.
+To pass data we can use a query, how we pass down the query depends on whether we invoke the route using ```<router-link>``` or push. So you can see both below where we pass some information.
 
-- **basichtml** This is a template with no bundler, just an index.html, style.js and app.js ready to go. Bootstrap and jQuery script/link tags ready to go, just need to be commented out. Great for just building a plain web page.
+```html
 
-## Backend templates
+<router-link :to="{path: '/route', query: {hello: 'world', cheese: this.cheese}}">
 
-Not only do I have several frontend templates but also several backend templates for quicky spinning up a server with common middleware pre-installed and conventional folder structures.
+```
 
-### Express
+using push
 
-All express builds should have morgan, static serving, and bodyparsing pre-configured. Cors is also configured in templates for Restful apis
+```js
 
-- **expressreact** => An express build using express-react-views as the template engine
-- **expressejs** => An express build using EJS as the template engine.
-- **expressrest** => An express build for create an API, includes CORS configurations
+this.$router.push({path: '/route', query: {hello: 'world', cheese: this.cheese}})
 
-## Other
+```
 
-These templates use many of the other popular NodeJS minimalist web server frameworks. They all should be setup for building a RESTful api so have CORS, bodyparsing and logging configured out of the box.
+This data then becomes then becomes available to the view being rendered by the router by this.$route.query
 
-- **fastify**
-- **koa**
-- **polka**
-- **merver** => This is actually a minimalist web server framework I created, try it out
-- **apollo** => Build a graphql API with ease with this template getting all the boilerplate setup out of the way and exposing many of apollos configurations for easy customization
+## Sending Data to Parents, Emit Events
 
-## Other
+Sending data up the component tree is often more difficult. In Vue and Angular children will emit event that parents can listen for while in react there really isn't a built in way other than sending down methods from the parent via props.
 
-- **ts** => a basic typescript setup so you can begin writing and typescript in a few seconds. Out of the box configured to compile the index.ts file in the root and and send the output to a folder called compiled. The start command will compile and then run the compiled program for you. Great template for typescript practice to build up a typescript project from.
+So the way it works in vue is that the child components would emit an event and send some data with the event.
+
+```js
+export default {
+    name: "Child",
+    methods: {
+        itHappened: function(){
+            this.$emit("it", {hello: "world", cheese: this.cheese})
+        }
+    }
+}
+
+
+```
+
+the parent can then listen for the event and handle it appropriately.
+
+```html
+<template>
+<Child @it="handleIt($event)">
+</template>
+
+<script>
+import Child from "./Child.vue"
+
+export default {
+    name: "Parent",
+    components: {
+        Child
+    },
+    methods: {
+        handleIt: function(event){
+            console.log(event)
+        }
+    }
+}
+
+</script>
+```
+
+So you will see the event will be logged by handleIt, the event contains the data sent up with which you can do with what you want. 
+
+## Conclusion
+
+Data can be frustrating to move from component to component but know how to do so is the first step. Also I highly recommend adding the Vue devtools in your browser so you can inspect the data in your components at any point it'll save hours of endless logging.
