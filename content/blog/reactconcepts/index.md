@@ -18,9 +18,9 @@ React is a frontend UI library. The purpose of this library is to help in creati
 
 While you'll also have standard variables, much of the data in your components will fall into one of two categories, state or props.
 
-One way to think of this, is to think of yourself as a ```<Human/>``` component. Your state are things you know internally, no one has to tell you things like your name, feelings or opinions that is internal knowledge. If your state changes, your external actions immediately change. If you feel sad you may have a new frown on your face, or if your opinions change you may vote or act differently. So when your state changes, what others experience from you changes too. This is how state works in react, when state changes the component updates which typically not always have visual effects.
+One way to think of this, is to think of yourself as a ```<Human/>``` component. Your state are things you know internally, no one has to tell you things like your name, feelings or opinions, that is internal knowledge. If your state changes, your external actions immediately change. If you feel sad you may have a new frown on your face, or if your opinions change you may vote or act differently. So when your state changes, what others experience from you changes too. This is how state works in react, when state changes the component updates which typically but not always have visual effects.
 
-On the other hand, some knowledge you get externally. For example the weather forecast is given to you by the News, once you are aware of the forecast you may change your state (your opinion on what to wear) and thus your behavior changes depending on the forecast but you don't control what the forecast will be an external force is giving you this and your state changes internally. 
+On the other hand, some knowledge you get externally. For example the weather forecast is given to you by the News, once you are aware of the forecast you may change your state (your opinion on what to wear) and thus your behavior changes depending on the forecast but you don't control what the forecast will be, an external force is giving you this and your state changes internally. 
 
 This is the concept of props, which is information that comes externally to a component usually from its parent. 
 
@@ -35,7 +35,7 @@ So all data coming to your component will be state (internal) or props (external
 
 ## Lifecycle
 
-Lifecycle is essentially saying that certain things should always happen at certain points. For example, for our ```<Human/>``` component when it is create it should be given a birth certificate and has a birthday everything it's a year older. When the component is removed it gets a death certificate. The cycle of a component is that is mounts, updates and is removed from the DOM. We can could write out lifecycle for our human component as such...
+Lifecycle is essentially saying that certain things should always happen at certain points. For example, for our ```<Human/>``` component when it is created it should be given a birth certificate and has a birthday everytime it's a year older. When the component is removed it gets a death certificate. The lifecycle of a component is that it mounts, updates and is removed from the DOM. We can could write out lifecycle for our human component as such...
 
 ```js
 React.useEffect(() => {
