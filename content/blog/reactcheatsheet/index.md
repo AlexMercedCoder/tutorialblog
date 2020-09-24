@@ -134,10 +134,6 @@ class MyComponent extends React.Component {
 ### Function Components
 
 ```js
-;<MyComponent myProp="Hello World" />
-
-/////////////////////////////////////////////
-
 const MyComponent = props => {
   const [count, setCount] = React.useState(0)
 
