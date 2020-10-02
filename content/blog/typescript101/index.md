@@ -12,13 +12,13 @@ Javascript is the language of the web and that's not changing anytime soon, alth
 
 In other languages typing offers several benefits:
 
-- defining what values variables and parameters should receive or functions should return allow for compile time errors to be discovered before the code is ever run.
+- defining what values variables and parameters should receive or functions should return allow for compile-time errors to be discovered before the code is ever run.
 
 - Typing allows the code to be more self-documenting to other developers on the team so they know what should be going into your functions.
 
-- Typing also allow IDE's to monitor code for mistakes and warn you early on when functions are misused.
+- Typing also allows IDE's to monitor code for mistakes and warn you early on when functions are misused.
 
-Typescript is a language created by Microsoft that makes switching from Javascript very easy... cause it is literally just javascript with typing. Typescript requires a compile step and is heavily integrated into Microsofts Visual Studio Code. This gives you two lines of defense from deploying code that breaks at runtime (when the end user is experiencing your code.)
+Typescript is a language created by Microsoft that makes switching from Javascript very easy... cause it is literally just javascript with typing. Typescript requires a compile step and is heavily integrated into Microsofts Visual Studio Code. This gives you two lines of defense from deploying code that breaks at runtime (when the end-user is experiencing your code.)
 
 - VS Code can catch error based on your typing
 - The TS Compiler (TSC) will not compile unless all type checks successfully pass
@@ -29,13 +29,13 @@ The end result is browser compliant Javascript, but you get all the cool latest 
 
 For this tutorial I'll be working from this CodeSandBox: https://codesandbox.io/s/typescript-starter-u7of1
 
-To create a local typescript setup from scratch you can run the follow commands.
+To create a local typescript setup from scratch you can run the following commands.
 
 - just typescript: `npx merced-spinup ts projectName`
 
 - Typescript/React: `npx merced-spinup reactts projectname`
 
-Also many frameworks have typescript inherently built into them...
+Also, many frameworks have typescript inherently built into them...
 
 - Frontend: Angular
 - Backend: NestJS
@@ -43,7 +43,7 @@ Also many frameworks have typescript inherently built into them...
 
 ## Typing Your First Variable
 
-So delete all the current contents of index.ts and open up the codesandbox console, we won't really be using the browser screen so the terminal can take up all the space. Let's make a variable!
+Delete all the current contents of index.ts and open up the codesandbox console, we won't really be using the browser screen so the terminal can take up all the space. Let's make a variable!
 
 ```ts
 let myFirstVariable: string = "3"
@@ -92,11 +92,11 @@ console.log(myArray)
 myArray.push(5)
 ```
 
-This syntax allows to say any of the elements of the array can be a string or number.
+This syntax allows saying any of the elements of the array can be a string or number.
 
 ### Objects
 
-For non-class objects we should create a new interface for typing (for objects made from a class, the class is the type).
+For non-class objects, we should create a new interface for typing (for objects made from a class, the class is the type).
 
 ```ts
 interface Person {
@@ -182,13 +182,13 @@ You can also just pre-name your types so you don't have to type them out each ti
 type yesno = "yes" | "no"
 ```
 
-This is a type that only accepts yes or no as as string value
+This is a type that only accepts yes or no as a string value
 
 ```ts
 type weirdarray = [string, number, boolean]
 ```
 
-This a type that only accepts an array with a string, number and a boolean in that order.
+This a type that only accepts an array with a string, number, and a boolean in that order.
 
 ```ts
 type error = "network error" | "schema error"
@@ -196,7 +196,7 @@ type success = "success"
 type response = error | success
 ```
 
-Here we define two types, error which must one of several strings and success which can only be success. Then we make a type that can be either one of these types.
+Here we define two types, error which must one of several strings, and success which can only be success. Then we make a type that can be either one of these types.
 
 ```ts
 type response = error | success
@@ -209,8 +209,8 @@ interface res {
 type APIResponse = data & res
 ```
 
-So for an object to succeed the check for APIResponse it must have data property which is object with any properties and a response property of type response.
+So for an object to succeed the check for APIResponse, it must have data property which is an object with any properties and a response property of type response.
 
 ## Bottom Line
 
-Typescript doesn't really change Javascript it just allows you to be more explicit so you can have less errors as quicker debugging as your codebase grows and a greater number of people are writing code for it.
+Typescript doesn't really change Javascript it just allows you to be more explicit so you can have fewer errors as quicker debugging as your codebase grows and a greater number of people are writing code for it.
