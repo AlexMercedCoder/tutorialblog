@@ -66,7 +66,7 @@ You'll notice the IDE show a red line error saying number is assignable to type 
 So let's say I have an array, I could type it like so.
 
 ```ts
-const myArray: [string] = ["Hello", "World"]
+const myArray: string[] = ["Hello", "World"]
 console.log(myArray)
 ```
 
@@ -79,7 +79,7 @@ myArray.push(5)
 What if I want an array with numbers and strings, we can use the built TS escape hatch, "any".
 
 ```ts
-const myArray: [any] = ["Hello", "World"]
+const myArray: any[] = ["Hello", "World"]
 console.log(myArray)
 myArray.push(5)
 ```

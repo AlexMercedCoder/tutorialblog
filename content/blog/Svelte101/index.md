@@ -6,6 +6,8 @@ description: Cybernetically Enhanced Web Apps!
 
 **This tutorial will be using this codesandbox, so open it up and fork it**: https://codesandbox.io/s/welcome-to-svelte-is0hb
 
+**My Svelte Video Playlist** https://www.youtube.com/playlist?list=PLY6oTPmKnKbZpyj6WhUsjri1Tw_BO-obP
+
 In the future you can spinup a quick Svelte Template using the command `npx merced-spinup svelte projectName`
 
 ## What is Svelte
