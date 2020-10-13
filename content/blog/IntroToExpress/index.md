@@ -133,3 +133,25 @@ Read the express documentation to learn how to do the following:
 - create clusters of routes with routers (express.Router())
 
 You can also learn all this from my express playlist linked in the beginning of this post.
+
+## Templates
+
+Here are some templates you can scaffold for express...
+
+Express with EJS templating
+```npx merced-spinup expressejs projectName```
+
+Express with Express-React-Views templating
+```npx merced-spinup expressreact projectName```
+
+Express for Restful APIS
+```npx merced-spinup expressrest projectName```
+
+Express with Express-React-Views and Mongo
+```npx create-ervmongo-app projectName```
+
+Express API with Mongo
+```npx merced-spinup expressmongo projectName```
+
+Express API with Postgres
+```npx merced-spinup expresspg projectName```
