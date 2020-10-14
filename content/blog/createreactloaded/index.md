@@ -8,7 +8,7 @@ description: Router, GlobalState, Sass and more!
 
 So you may be aware I've made a huge amount of templates across several frameworks using my merced-spinup tool, but for certain templates I give them their own tool cause I expect many want to use them.
 
-For react I have create a tool for a very basic build that you can customize that comes in at half the size of create-react-app, the commands for this build are.
+For react I have created a tool for a very basic build that you can customize that comes in at half the size of create-react-app, the commands for this build are.
 
 ```
 npx create-react-basic folderName
@@ -36,7 +36,7 @@ You have the ability to use sass files for styling, there is already a global sa
 
 ### Router
 
-Router is installed and a couple sample pages in a pages folder.
+Router is installed with a couple sample pages in a pages folder.
 
 ### GlobalState
 
@@ -52,7 +52,7 @@ In customHooks.js there are a couple of custom hooks.
 
 **useFetch:** Pass the url you want to fetch and it returns an array with the data from the fetch and a setUrl function. Everytime you use the setUrl function it will remake the API call and update the data.
 
-**useAdjuster:** takes a starting a value and an interval. Returns and array with the value and two functions that will increment and decrement the value by that interval.
+**useAdjuster:** takes a starting value and interval. Returns and array with the value and two functions that will increment and decrement the value by that interval.
 
 ### Pre-made Components
 
