@@ -4,7 +4,7 @@ date: "2020-10-14T22:12:03.284Z"
 description: Router, GlobalState, Sass and more!
 ---
 
-## Array Callback Methods
+## React Templates
 
 So you may be aware I've made a huge amount of templates across several frameworks using my merced-spinup tool, but for certain templates I give them their own tool cause I expect many want to use them.
 
