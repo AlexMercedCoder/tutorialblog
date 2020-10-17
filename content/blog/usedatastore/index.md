@@ -28,7 +28,7 @@ The Library provides you with one function, createDataStore. This function takes
 Best practice is to house the initialState, the reducer and invoke createDataStore in a file called ds.js in your /src folder. Here is an example...
 
 ```js
-const {createDataStore} = require("usedatastore");
+import {createDataStore} from "usedatastore"
 console.log(createDataStore);
 
 const initialState = { count: 0 };
@@ -49,7 +49,6 @@ const reducer = (state, action) => {
 
 export const [DataStore, useDataStore] = createDataStore(initialState, reducer);
 ```
-**NOTE:** At least in my tests, it only worked if I used require (not import) when importing createDataStore.
 
 ## Adding the Provider Component
 
