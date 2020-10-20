@@ -8,7 +8,8 @@ description: Allowing Cross-Origin API Requests
 
 Watch this video where I explain what CORS errors are and their solution in concept.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fsMKB7PJoFY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![CORS ERRORS](http://img.youtube.com/vi/fsMKB7PJoFY/0.jpg)](http://www.youtube.com/watch?v=fsMKB7PJoFY "CORS ERRORS")
+
 
 ## CORS IN EXPRESS
 
