@@ -8,11 +8,11 @@ description: Ionics Component Creation Tool
 
 ## The Problem
 
-The problem with React, Angular, Vue and Svelte that as frameworks if you create a component it can't be used in another framework (at least not in a way that would make workflow easier or bundles smaller). So if you company has multiple teams working across different frameworks it may limit the transportability of their work.
+The problem with React, Angular, Vue and Svelte that as frameworks if you create a component it can't be used in another framework (at least not in a way that would make workflow easier or bundles smaller). So if your company has multiple teams working across different frameworks it may limit the transportability of their work.
 
 One possible solution is the Native Web Component API which has several frameworks built on top of it such Google's LitElement, SalesForces LightningElements, and frameworks I've created such as MercedUI, AMPonent and funComponent. The potential problem with this is browser compatibility with the Web Component API (which is much better now) and being boxed in using HTMLElement base class.
 
-So Ionic in trying make sure the components they put out for their Ionic framework can work cross frameworks they created a took for creating components that compiles them into standard js that avoid less widespread browser APIs, this tool is StencilJS. The result is a developer experience that seems like a cross between Angular 9 and React. Let's dive in!
+So Ionic in trying to make sure the components they put out for their Ionic framework can work cross frameworks they created a took for creating components that compiles them into standard js that avoid less widespread browser APIs, this tool is StencilJS. The result is a developer experience that seems like a cross between Angular 9 and React. Let's dive in!
 
 ## Install
 
@@ -95,17 +95,17 @@ export class AppButton {
 
 You always have to import the parts of stencil your using.
 
-**Component:** Decorator that tells compiler that the class is a component, takes the name of the tag and location of CSS file to scope.
+**Component:** Decorator that tells the compiler that the class is a component, takes the name of the tag and location of CSS file to scope.
 
-**Host:** The host component can be used to make references and add event listener to the component itself but even if you don't you think of it as a glorified fragment, no need to remove it so it can be our top-level element to follow the rules of JSX. Oh yeah, component templates are written in JSX like react so for the most part all the sames rules and syntax applies.
+**Host:** The host component can be used to make references and add an event listener to the component itself but even if you don't you think of it as a glorified fragment, no need to remove it so it can be our top-level element to follow the rules of JSX. Oh yeah, component templates are written in JSX like react so for the most part all the same rules and syntax applies.
 
-**h:** h just facilitates the comiling of JSX into the virtualDOM.
+**h:** h just facilitates the compiling of JSX into the virtualDOM.
 
-```<slot>```: If you've used Angular/Vue, then you probably know slots well. If your coming from React think of slot as props.children with a few neat extra features.
+**slot**: If you've used Angular/Vue, then you probably know slots well. If your coming from React thinks of slot as props.children with a few neat extra features.
 
 ## State and Props
 
-So if we can use JSX like React but we are using Typescript and Decorators like angular... how is State and Props handled? The way it works is you'll declare any state and props as individual class properties using the Props and State decorators. Try out the follow in app-button.
+So if we can use JSX like React but we are using Typescript and Decorators like angular... how are State and Props handled? The way it works is you'll declare any state and props as individual class properties using the Props and State decorators. Try out the following in app-button.
 
 ```ts
 import { Component, Host, h, Prop, State } from '@stencil/core';
@@ -164,11 +164,11 @@ export class AppHome {
 
 ```
 
-Run the server npm start and you'll see the button. When generating the components, Stencil is automatically managing registering the components with the app so you don't have to export or import the components across your app, nice!
+Run the server npm start and you'll see the button. When generating the components, Stencil is automatically managing to register the components with the app so you don't have to export or import the components across your app, nice!
 
 ## Events
 
-While there is a Listen decorator you can use there is also the ability to just add event in your JSX like you would in React.
+While there is a Listen decorator you can use there is also the ability to just add an event in your JSX like you would in React.
 
 ```ts
 import { Component, Host, h, Prop, State } from '@stencil/core';
