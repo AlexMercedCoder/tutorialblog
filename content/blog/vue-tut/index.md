@@ -4,9 +4,11 @@ date: "2020-08-17T22:12:03.284Z"
 description: "Firs Blog Post and Vue Tutorial"
 ---
 
+**VUE VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbbsEAIDfFAlhAVbSCIt2Bxx
+
 ## Welcome
 
-Welcome to my new Gatasby driven markdown blog! I'll be using this space mainly to create tutorials on different coding topics. In this first post I'll make an introductory tutorial to Vue.
+Welcome to my new Gatsby driven markdown blog! I'll be using this space mainly to create tutorials on different coding topics. In this first post I'll make an introductory tutorial to Vue.
 
 ## What is Vue?
 
@@ -127,7 +129,7 @@ const app = new Vue({
   data: {
     hello: "Hello World",
     show: true,
-    numbers: [1,2,3,4,5,6,7,8,9]
+    numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   },
 })
 ```
@@ -140,7 +142,7 @@ const app = new Vue({
     <h1 v-if="show">This may or may not show</h1>
 
     <ul>
-        <li v-for="num of numbers"> {{num}} </li>
+      <li v-for="num of numbers">{{num}}</li>
     </ul>
   </div>
 </body>
@@ -178,7 +180,7 @@ const app = new Vue({
     <h1 v-if="show">This may or may not show</h1>
 
     <ul>
-        <li v-for="num of numbers"> {{num}} </li>
+      <li v-for="num of numbers">{{num}}</li>
     </ul>
     <input type="text" name="name" v-model="formName" />
     <input type="number" name="age" v-model="formAge" />

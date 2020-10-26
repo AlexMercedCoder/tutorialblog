@@ -4,6 +4,8 @@ date: "2020-08-21T22:12:03.284Z"
 description: "Enterprise level frontend framework"
 ---
 
+**ANGULAR VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbahNK_YUsjTzP5U-FkGA544
+
 ## What is Angular?
 
 From Angular.io:
@@ -182,6 +184,6 @@ The once the routes are creates they can be used as links in your component like
 
 When the link is clicked on that component will render where the `<router-outlet>` component is on the template.
 
-## Bottomline
+## Bottom line
 
 Angular is a robust framework with a lot of features and capability. Practice and get comfortable with the above then learn about some of the features and modules in the Angular ecosystem such as the http module and lifecycle methods.
