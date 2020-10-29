@@ -1,5 +1,5 @@
 ---
-title: merced-react-hooks: Application State, LocalStorage, Lifecycle
+title: merced-react-hooks => Application State, LocalStorage, Lifecycle
 date: "2020-10-29T22:12:03.284Z"
 description: Utility Hooks Library for React
 ---
@@ -8,7 +8,7 @@ description: Utility Hooks Library for React
 
 ## The Purpose
 
-While of course I always enjoy creating new tools, there was a few reasons I wanted to create this library.
+While of course I always enjoy creating new tools, there were a few reasons I wanted to create this library.
 
 - To reduce boilerplate in very common react patterns (do we really need to create the same handleChange function over and over again)
 
@@ -20,11 +20,11 @@ While of course I always enjoy creating new tools, there was a few reasons I wan
 
 ## Application Level State
 
-Often you have two main choices when achieving application level state. Using the Redux library which has a lot boilerplate in its setup or use a combo of useContext and useReducer to get a basic redux like setup. I've created two tools
+Often you have two main choices when achieving application-level state. Using the Redux library which has a lot boilerplate in its setup or use a combo of useContext and useReducer to get a basic redux like setup. I've created two tools
 
 ### useDataStore
 
-This automates a lot of the boilerplate in the useContext/useReducer path. First you create a ds.js file with the following.
+This automates a lot of the boilerplate in the useContext/useReducer path. First, you create a ds.js file with the following.
 
 ```js
 import { createDataStore } from "merced-react-hooks"
@@ -93,9 +93,9 @@ const Component = props => {
 While DataStore certainly simplified the combo of Context/Reducer hooks but the problem with a reducer is the following...
 
 - The reducer must always return a value that becomes the new value of state
-- You can't do async operations in the reducer function, so async logic would still exist out side your reducer.
+- You can't do async operations in the reducer function, so async logic would still exist outside your reducer.
 
-So I created the TaskRunner to give a near identical patter that addresses the above two problems. The big difference is that instead of a reducer function you are passing taskList object and each key is a function that is called via the taskRun function.
+So I created the TaskRunner to give a near-identical pattern that addresses the above two problems. The big difference is that instead of a reducer function you are passing taskList object and each key is a function that is called via the taskRun function.
 
 Each function in the taskList is passed the state, setState and payload. So you can decide whether a particular function should even setState at all or do async operations and setState within the async operations.
 
