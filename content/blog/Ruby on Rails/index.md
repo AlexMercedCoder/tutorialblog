@@ -3,6 +3,7 @@ title: Ruby on Rails Reference - CLI Commands, Bundler, Macros
 date: "2020-10-22T22:12:03.284Z"
 description: All You need to know to be productive in Rails
 ---
+**My Learning Ruby on Rails Video Playlist:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbYlAqVHgzZl5lou54bizdbV
 
 ## Gems
 
@@ -12,13 +13,13 @@ Gems are Ruby Libraries, and the gem command is like npm in the nodeJS world. He
 
 ## Bundler
 
-Keeping tracks of which Gems are used in a project can be tricky. Similar to package.json in Node you have a Gemfile that lists a projects dependencies. With bundler you can make sure all these Gems are installed.
+Keeping track of which Gems are used in a project can be tricky. Similar to package.json in Node you have a Gemfile that lists a projects dependencies. With bundler you can make sure all these Gems are installed.
 
 ![Bundler](https://i.imgur.com/WVSX5Aa.png)
 
 ## Ruby on Rails CLI
 
-The Ruby on Rails CLI has several commands to make assempling your rails project very easy. Here are some of those commands.
+The Ruby on Rails CLI has several commands to make assembling your rails project very easy. Here are some of those commands.
 
 ![Rails Commands Part I](https://i.imgur.com/W0ZBpLc.png)
 
