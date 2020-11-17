@@ -1124,11 +1124,11 @@ For out final piece of functionality we need to be able to delete a todo. All th
 
 - Make sure todo API server is running and Navigate to todo folder in terminal
 
-- Run the command ```npx merced-spinup angular todo_angular_frontend```
+- Run the command `npx merced-spinup angular todo_angular_frontend`
 
-- cd into todo_angular_frontend folder and run ```npm install```
+- cd into todo_angular_frontend folder and run `npm install`
 
-- run  ```npm start``` to start up the dev server
+- run `npm start` to start up the dev server on port 4200
 
 ### Displaying Our Todos
 
@@ -1144,7 +1144,385 @@ So, first things first. We need...
 
 - Create a method that will fetch the todos
 
-- Call that message on component
+- Call that method with the component initializes using the OnInit method
+
+**app.component.ts**
+
+```ts
+import { Component, OnInit } from "@angular/core"
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent implements OnInit {
+  todos: Array<any> = []
+  baseUrl: string = "http://localhost:3000/todos"
+
+  async getTodos() {
+    const response = await fetch(this.baseUrl)
+    const data = await response.json()
+    this.todos = await data
+  }
+
+  ngOnInit() {
+    this.getTodos()
+  }
+}
+```
+
+Now let's make those todos visible in the template.
+
+**app.component.html**
+
+```html
+<h1>The Todo App</h1>
+
+<h2>The Todos</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    <h3>{{todo.title}}</h3>
+    <h4>{{todo.body}}</h4>
+  </li>
+</ul>
+```
+
+### Creating Some Todos
+
+First we need to add the Forms Module to our application, make sure your **src/app/app.module.ts** file looks like this. This is the file where different Angular features get loaded, this is referred as dependency injection. You inject what you need and not what you don't.
+
+```ts
+import { BrowserModule } from "@angular/platform-browser"
+import { NgModule } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+
+import { AppRoutingModule } from "./app-routing.module"
+import { AppComponent } from "./app.component"
+import { HeaderComponent } from "./header/header.component"
+import { FooterComponent } from "./footer/footer.component"
+import { MainComponent } from "./main/main.component"
+
+@NgModule({
+  declarations: [AppComponent, HeaderComponent, FooterComponent, MainComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+This module will unlock the ability to use the ngModel directive to implement two-way finding on our form inputs like the v-model directive did in Vue.
+
+**app.component.ts**
+
+```ts
+import { Component, OnInit } from "@angular/core"
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent implements OnInit {
+  todos: Array<any> = []
+
+  baseUrl: string = "http://localhost:3000/todos"
+
+  //Properties to Bind with Create Form
+  createTitle: string = ""
+  createBody: string = ""
+
+  //Function to Grab list of todos
+  async getTodos() {
+    const response = await fetch(this.baseUrl)
+    const data = await response.json()
+    this.todos = await data
+  }
+
+  //takes data from form and creates new todo
+  async createTodo() {
+    console.log(this.createTitle, this.createBody)
+    await fetch(this.baseUrl, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.createTitle,
+        body: this.createBody,
+      }),
+    })
+    //update todo list and reset form
+    this.getTodos()
+    this.createTitle = ""
+    this.createBody = ""
+  }
+
+  //this function runs when the component loads
+  ngOnInit() {
+    this.getTodos()
+  }
+}
+```
+
+**app.component.html**
+
+```html
+<h1>The Todo App</h1>
+
+<h2>Create a Todo</h2>
+<form (submit)="createTodo()">
+  <input type="text" [(ngModel)]="createTitle" name="title" #ctrl="ngModel" />
+  <input type="text" [(ngModel)]="createBody" name="body" #ctrl="ngModel" />
+  <input type="submit" value="create Todo" />
+</form>
+
+<h2>The Todos</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    <h3>{{todo.title}}</h3>
+    <h4>{{todo.body}}</h4>
+  </li>
+</ul>
+```
+
+### Let's update todos
+
+So here we need create another form with the same workflow as creating a todo, except we need a function for when an edit button is clicked on.
+
+**app.component.ts**
+
+```ts
+import { Component, OnInit } from "@angular/core"
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent implements OnInit {
+  todos: Array<any> = []
+
+  baseUrl: string = "http://localhost:3000/todos"
+
+  //Properties to Bind with Create Form
+  createTitle: string = ""
+  createBody: string = ""
+
+  //Properties to Bind with Create Form
+  editTitle: string = ""
+  editBody: string = ""
+  editId: number = 0
+
+  //Function to Grab list of todos
+  async getTodos() {
+    const response = await fetch(this.baseUrl)
+    const data = await response.json()
+    this.todos = await data
+  }
+
+  //takes data from form and creates new todo
+  async createTodo() {
+    await fetch(this.baseUrl, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.createTitle,
+        body: this.createBody,
+      }),
+    })
+    //update todo list and reset form
+    this.getTodos()
+    this.createTitle = ""
+    this.createBody = ""
+  }
+
+  editSelect(todo) {
+    this.editId = todo.id
+    this.editTitle = todo.title
+    this.editBody = todo.body
+  }
+
+  //takes data from form and updates new todo
+  async updateTodo() {
+    await fetch(this.baseUrl + "/" + this.editId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.editTitle,
+        body: this.editBody,
+      }),
+    })
+    //update todo list and reset form
+    this.getTodos()
+    this.editTitle = ""
+    this.editBody = ""
+    this.editId = 0
+  }
+
+  //this function runs when the component loads
+  ngOnInit() {
+    this.getTodos()
+  }
+}
+```
+
+**app.component.html**
+
+```html
+<h1>The Todo App</h1>
+<hr />
+<h2>Create a Todo</h2>
+<form (submit)="createTodo()">
+  <input type="text" [(ngModel)]="createTitle" name="title" #ctrl="ngModel" />
+  <input type="text" [(ngModel)]="createBody" name="body" #ctrl="ngModel" />
+  <input type="submit" value="create Todo" />
+</form>
+<hr />
+<h2>Edit a Todo</h2>
+<form (submit)="updateTodo()">
+  <input type="text" [(ngModel)]="editTitle" name="title" #ctrl="ngModel" />
+  <input type="text" [(ngModel)]="editBody" name="body" #ctrl="ngModel" />
+  <input type="submit" value="Edit Todo" />
+</form>
+<hr />
+<h2>The Todos</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    <h3>{{ todo.title }}</h3>
+    <h4>{{ todo.body }}</h4>
+    <button (click)="editSelect(todo)">Edit</button>
+  </li>
+</ul>
+```
+
+### Delete a Todo
+
+We just need to a add a delete method, then attach that method to a delete button and ta-da! We are done!
+
+**app.component.ts**
+
+```ts
+import { Component, OnInit } from "@angular/core"
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent implements OnInit {
+  todos: Array<any> = []
+
+  baseUrl: string = "http://localhost:3000/todos"
+
+  //Properties to Bind with Create Form
+  createTitle: string = ""
+  createBody: string = ""
+
+  //Properties to Bind with Create Form
+  editTitle: string = ""
+  editBody: string = ""
+  editId: number = 0
+
+  //Function to Grab list of todos
+  async getTodos() {
+    const response = await fetch(this.baseUrl)
+    const data = await response.json()
+    this.todos = await data
+  }
+
+  //takes data from form and creates new todo
+  async createTodo() {
+    await fetch(this.baseUrl, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.createTitle,
+        body: this.createBody,
+      }),
+    })
+    //update todo list and reset form
+    this.getTodos()
+    this.createTitle = ""
+    this.createBody = ""
+  }
+
+  editSelect(todo) {
+    this.editId = todo.id
+    this.editTitle = todo.title
+    this.editBody = todo.body
+  }
+
+  //takes data from form and updates new todo
+  async updateTodo() {
+    await fetch(this.baseUrl + "/" + this.editId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: this.editTitle,
+        body: this.editBody,
+      }),
+    })
+    //update todo list and reset form
+    this.getTodos()
+    this.editTitle = ""
+    this.editBody = ""
+    this.editId = 0
+  }
+
+  async deleteTodo(todo) {
+    await fetch(this.baseUrl + "/" + todo.id, {
+      method: "delete",
+    })
+    //update list of todos
+    this.getTodos()
+  }
+
+  //this function runs when the component loads
+  ngOnInit() {
+    this.getTodos()
+  }
+}
+```
+
+**app.component.html**
+
+```html
+<h1>The Todo App</h1>
+<hr />
+<h2>Create a Todo</h2>
+<form (submit)="createTodo()">
+  <input type="text" [(ngModel)]="createTitle" name="title" #ctrl="ngModel" />
+  <input type="text" [(ngModel)]="createBody" name="body" #ctrl="ngModel" />
+  <input type="submit" value="create Todo" />
+</form>
+<hr />
+<h2>Edit a Todo</h2>
+<form (submit)="updateTodo()">
+  <input type="text" [(ngModel)]="editTitle" name="title" #ctrl="ngModel" />
+  <input type="text" [(ngModel)]="editBody" name="body" #ctrl="ngModel" />
+  <input type="submit" value="Edit Todo" />
+</form>
+<hr />
+<h2>The Todos</h2>
+<ul>
+  <li *ngFor="let todo of todos">
+    <h3>{{ todo.title }}</h3>
+    <h4>{{ todo.body }}</h4>
+    <button (click)="editSelect(todo)">Edit</button>
+    <button (click)="deleteTodo(todo)">Delete</button>
+  </li>
+</ul>
+```
 
 ---
 
