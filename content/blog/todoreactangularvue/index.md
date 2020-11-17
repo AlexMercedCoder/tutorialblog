@@ -1,6 +1,6 @@
 ---
-title: 1 Backend, 3 Frontends - Todo List with Rails, React, Angular, Vue, Svelte, and jQuery
-date: "2020-11-16T22:12:03.284Z"
+title: 1 Backend, 5 Frontends - Todo List with Rails, React, Angular, Vue, Svelte, and jQuery
+date: "2020-11-17T22:12:03.284Z"
 description: Same app... different frontend frameworks
 ---
 
