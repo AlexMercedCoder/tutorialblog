@@ -1940,6 +1940,430 @@ Now we just need to make a delete method and connect it to a delete button with 
 
 ## jQuery Frontend
 
-**COMING SOON**
+So let's do something a little different, how about jQuery using webpack!
+
+### Setup
+
+- Make sure your todo api is running and navigate to your todo folder in terminal
+
+- run the command `npx merced-spinup jquerywebpack todo_jquery_frontend`
+
+- cd into todo_jquery_frontend folder and run `npm install`
+
+- `npm run dev` to start dev server
+
+### Displaying Todos
+
+- create a function to pull todos from api
+
+- create a function to take those todos and render lis
+
+- call that latter function
+
+**src/index.js**
+
+```js
+import $ from "jquery"
+import _ from "lodash"
+
+//Adding the initial HTML to the body
+$("body").append(`
+<h1>The Todo App</h1>
+<hr>
+<h2>The Todos</h2>
+<ul id="todolist">
+
+</ul>
+`)
+
+//The UL for the Todo List
+const $todoList = $("#todolist")
+
+const baseURL = "http://localhost:3000/todos"
+
+//function to get todos
+const fetchTodos = async () => {
+  const response = await fetch(baseURL)
+  const data = await response.json()
+  //return promise of data
+  return data
+}
+
+//render todos to DOM
+const renderTodos = async () => {
+  const todos = await fetchTodos()
+
+  todos.forEach(todo => {
+    const $li = $("<li>")
+
+    $li.html(`
+        <h3>${todo.title}</h3>
+        <h4>${todo.body}</h4>
+        `)
+
+    $todoList.append($li)
+  })
+}
+
+// Initial Fetch of Todos
+renderTodos()
+```
+
+### Creating a Todo
+
+- Create a Form and Variables to hold form and inputs
+- Create a Function for when the form is submitted
+
+```js
+import $ from "jquery";
+import _ from "lodash";
+
+//Adding the initial HTML to the body
+$("body").append(`
+<h1>The Todo App</h1>
+<hr>
+<h2>Create a Todo</h2>
+<form id="createForm">
+<input type="text" name="createTitle"/>
+<input type="text" name="createBody"/>
+<input type="submit" value="Create Todo">
+</form>
+<hr>
+<h2>The Todos</h2>
+<ul id="todolist">
+
+</ul>
+`);
+
+//The UL for the Todo List
+const $todoList = $("#todolist");
+
+//Create Form Variables
+const $createForm = $("#createForm");
+const $createTitle = $('input[name="createTitle');
+const $createBody = $('input[name="createBody');
+const baseURL = "http://localhost:3000/todos";
+
+//function to get todos
+const fetchTodos = async () => {
+  const response = await fetch(baseURL);
+  const data = await response.json();
+  //return promise of data
+  return data;
+};
+
+//render todos to DOM
+const renderTodos = async () => {
+  const todos = await fetchTodos();
+  $todoList.empty();
+
+  todos.forEach((todo) => {
+    const $li = $("<li>");
+
+    $li.html(`
+        <h3>${todo.title}</h3>
+        <h4>${todo.body}</h4>
+        `);
+
+    $todoList.append($li);
+  });
+};
+
+//Function to Create a to do
+const createTodo = async (event) => {
+  event.preventDefault();
+  await fetch(baseURL, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: $createTitle.val(),
+      body: $createBody.val(),
+    }),
+  });
+  renderTodos();
+  $createTitle.val("");
+  $createBody.val("");
+};
+
+//Add Event Listener to Form
+$createForm.on("submit", createTodo);
+
+// Initial Fetch of Todos
+renderTodos();
+```
+
+### Update a Todo
+
+- add an edit button
+- add an edit form
+- create variables for form and input
+- create function to set variables for selected todo
+- create function to make post request when form submitted.
+
+```js
+
+import $ from "jquery";
+import _ from "lodash";
+
+//Adding the initial HTML to the body
+$("body").append(`
+<h1>The Todo App</h1>
+<hr>
+<h2>Create a Todo</h2>
+<form id="createForm">
+<input type="text" name="createTitle"/>
+<input type="text" name="createBody"/>
+<input type="submit" value="Create Todo">
+</form>
+<hr>
+<form id="editForm">
+<input type="text" name="editTitle"/>
+<input type="text" name="editBody"/>
+<input type="submit" value="Update Todo">
+</form>
+<hr>
+<h2>The Todos</h2>
+<ul id="todolist">
+
+</ul>
+`);
+
+//The UL for the Todo List
+const $todoList = $("#todolist");
+
+//Create Form Variables
+const $createForm = $("#createForm");
+const $createTitle = $('input[name="createTitle"]');
+const $createBody = $('input[name="createBody"]');
+
+//Create Form Variables
+const $editForm = $("#editForm");
+const $editTitle = $('input[name="editTitle"]');
+const $editBody = $('input[name="editBody"]');
+let editId = 0
+
+//API URL
+const baseURL = "http://localhost:3000/todos";
+
+//function to get todos
+const fetchTodos = async () => {
+  const response = await fetch(baseURL);
+  const data = await response.json();
+  //return promise of data
+  return data;
+};
+
+//render todos to DOM
+const renderTodos = async () => {
+  const todos = await fetchTodos();
+  $todoList.empty();
+
+  todos.forEach((todo) => {
+    const $li = $("<li>");
+
+    $li.html(`
+        <h3>${todo.title}</h3>
+        <h4>${todo.body}</h4>
+        <button id="${todo.id}editbutton">Edit</button>
+        `);
+
+    $todoList.append($li);
+
+    $(`#${todo.id}editbutton`).on('click', () => {
+        $editTitle.val(todo.title)
+        $editBody.val(todo.body)
+        editId = todo.id
+    })
+  });
+};
+
+//Function to Create a to do
+const createTodo = async (event) => {
+  event.preventDefault();
+  await fetch(baseURL, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: $createTitle.val(),
+      body: $createBody.val(),
+    }),
+  });
+  renderTodos();
+  $createTitle.val("");
+  $createBody.val("");
+};
+
+//Function to update a to do
+const updateTodo = async (event) => {
+    event.preventDefault();
+    await fetch(baseURL + "/" + editId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: $editTitle.val(),
+        body: $editBody.val(),
+      }),
+    });
+    renderTodos();
+    $editTitle.val("");
+    $editBody.val("");
+  };
+
+//Add Event Listener to Form
+$createForm.on("submit", createTodo);
+
+//Add Event Listener to Form
+$editForm.on("submit", updateTodo);
+
+// Initial Fetch of Todos
+renderTodos();11
+
+```
+
+### Delete Todos
+
+Finally... our last function in our last build. We just need to create a delete button that triggers a delete function and we're done! We'll define the function when we add the listener in the renderTodos function so the todo is in scope.
+
+```js
+import $ from "jquery";
+import _ from "lodash";
+
+//Adding the initial HTML to the body
+$("body").append(`
+<h1>The Todo App</h1>
+<hr>
+<h2>Create a Todo</h2>
+<form id="createForm">
+<input type="text" name="createTitle"/>
+<input type="text" name="createBody"/>
+<input type="submit" value="Create Todo">
+</form>
+<hr>
+<form id="editForm">
+<input type="text" name="editTitle"/>
+<input type="text" name="editBody"/>
+<input type="submit" value="Update Todo">
+</form>
+<hr>
+<h2>The Todos</h2>
+<ul id="todolist">
+
+</ul>
+`);
+
+//The UL for the Todo List
+const $todoList = $("#todolist");
+
+//Create Form Variables
+const $createForm = $("#createForm");
+const $createTitle = $('input[name="createTitle"]');
+const $createBody = $('input[name="createBody"]');
+
+//Create Form Variables
+const $editForm = $("#editForm");
+const $editTitle = $('input[name="editTitle"]');
+const $editBody = $('input[name="editBody"]');
+let editId = 0
+
+//API URL
+const baseURL = "http://localhost:3000/todos";
+
+//function to get todos
+const fetchTodos = async () => {
+  const response = await fetch(baseURL);
+  const data = await response.json();
+  //return promise of data
+  return data;
+};
+
+//render todos to DOM
+const renderTodos = async () => {
+  const todos = await fetchTodos();
+  $todoList.empty();
+
+  todos.forEach((todo) => {
+    const $li = $("<li>");
+
+    $li.html(`
+        <h3>${todo.title}</h3>
+        <h4>${todo.body}</h4>
+        <button id="${todo.id}editbutton">Edit</button>
+        <button id="${todo.id}deletebutton">Delete</button>
+        `);
+
+    $todoList.append($li);
+
+    //add function to edit button
+    $(`#${todo.id}editbutton`).on('click', () => {
+        $editTitle.val(todo.title)
+        $editBody.val(todo.body)
+        editId = todo.id
+    })
+
+    //add function to delete button
+    $(`#${todo.id}deletebutton`).on('click', async () => {
+        await fetch(baseURL + "/" + todo.id, {
+            method: "delete"
+        })
+        renderTodos()
+    })
+  });
+};
+
+//Function to Create a to do
+const createTodo = async (event) => {
+  event.preventDefault();
+  await fetch(baseURL, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: $createTitle.val(),
+      body: $createBody.val(),
+    }),
+  });
+  renderTodos();
+  $createTitle.val("");
+  $createBody.val("");
+};
+
+//Function to update a to do
+const updateTodo = async (event) => {
+    event.preventDefault();
+    await fetch(baseURL + "/" + editId, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: $editTitle.val(),
+        body: $editBody.val(),
+      }),
+    });
+    renderTodos();
+    $editTitle.val("");
+    $editBody.val("");
+  };
+
+//Add Event Listener to Form
+$createForm.on("submit", createTodo);
+
+//Add Event Listener to Form
+$editForm.on("submit", updateTodo);
+
+// Initial Fetch of Todos
+renderTodos();
+```
+
+## Congrats
+
+You've just taken a single api and built 5 seperate frontend applications! Hopefully this gives you a deeper appreciation for the different way to build out your frontend applications and the modularity of APIs.
 
 ---
