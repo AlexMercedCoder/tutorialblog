@@ -214,7 +214,7 @@ export const App = props => {
   //useEffect to initially grab todos when page loads
   React.useEffect(() => {
     getTodos()
-  })
+  }, [])
 
   /////////////////////////
   //RETURN JSX
@@ -280,7 +280,7 @@ export const App = props => {
   //useEffect to initially grab todos when page loads
   React.useEffect(() => {
     getTodos()
-  })
+  }, [])
 
   /////////////////////////
   //RETURN JSX
@@ -377,7 +377,7 @@ export const App = props => {
   //useEffect to initially grab todos when page loads
   React.useEffect(() => {
     getTodos()
-  })
+  }, [])
 
   /////////////////////////
   //RETURN JSX
@@ -521,7 +521,7 @@ export const App = props => {
   //useEffect to initially grab todos when page loads
   React.useEffect(() => {
     getTodos()
-  })
+  }, [])
 
   /////////////////////////
   //RETURN JSX
@@ -695,7 +695,7 @@ export const App = props => {
   //useEffect to initially grab todos when page loads
   React.useEffect(() => {
     getTodos()
-  })
+  }, [])
 
   /////////////////////////
   //RETURN JSX
