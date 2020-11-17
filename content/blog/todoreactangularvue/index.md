@@ -1528,7 +1528,413 @@ export class AppComponent implements OnInit {
 
 ## Svelte Frontend
 
-**COMING SOON**
+### Setup
+
+- Make sure todo api server is running and navigate terminal to todo folder
+
+- run the command `npx merced-spinup svelte todo_svelte_frontend`
+
+- cd into todo_svelte_frontend folder and run `npm install`
+
+- run `npm run dev` to start the dev server on port 5000
+
+### Displaying Our Todos
+
+Svelte is very similar to Vue that everything for one component is in one file. So we'll be working entirely with one component like we've done in the previous runs which will be src/App.svelte.
+
+Just like before we need methods to pull the data and the template to render them like so...
+
+```html
+<script>
+  import { onMount } from "svelte"
+
+  //Variable to hold todos
+  let todos = []
+
+  //base URL
+  const baseURL = "http://localhost:3000/todos"
+
+  //Method to pull data
+  const getTodos = async () => {
+    const response = await fetch(baseURL)
+    const data = await response.json()
+    todos = await data
+  }
+
+  onMount(() => {
+    getTodos()
+  })
+</script>
+
+<main>
+  <h1>The Todo App</h1>
+  {#each todos as todo}
+  <div>
+    <h2>{todo.title}</h2>
+    <h3>{todo.body}</h3>
+  </div>
+  {/each}
+</main>
+
+<style></style>
+```
+
+### Creating a todo
+
+Once again, the same logic as usual
+
+- create a form
+- bind the form to values
+- function that runs on form submission that makes the post request
+
+**App.svelte**
+
+```html
+<script>
+  import { onMount } from "svelte"
+
+  //Variable to hold todos
+  let todos = []
+
+  //base URL
+  const baseURL = "http://localhost:3000/todos"
+
+  //Method to pull data
+  const getTodos = async () => {
+    const response = await fetch(baseURL)
+    const data = await response.json()
+    todos = await data
+  }
+
+  //Runs when component loads
+  onMount(() => {
+    getTodos()
+  })
+
+  //properties for create form
+  let createTitle
+  let createBody
+
+  //create function for form submission
+  const createTodo = async event => {
+    event.preventDefault()
+    await fetch(baseURL, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: createTitle,
+        body: createBody,
+      }),
+    })
+
+    //refetch todos
+    getTodos()
+
+    //reset form
+    createTitle = ""
+    createBody = ""
+  }
+</script>
+
+<main>
+  <h1>The Todo App</h1>
+  <hr />
+  <h2>Create a Todo</h2>
+  <form on:submit="{createTodo}">
+    <input type="text" bind:value="{createTitle}" />
+    <input type="text" bind:value="{createBody}" />
+    <input type="submit" value="Create Todo" />
+  </form>
+  <hr />
+  <h2>The Todos</h2>
+  {#each todos as todo}
+  <div>
+    <h2>{todo.title}</h2>
+    <h3>{todo.body}</h3>
+  </div>
+  {/each}
+</main>
+
+<style></style>
+```
+
+### Update a Todo
+
+- add properties for edit form
+- add edit form
+- add method to select item to edit
+- bind method to edit button
+
+```html
+
+<script>
+	import {onMount} from 'svelte'
+
+	//Variable to hold todos
+	let todos = []
+
+	//base URL
+	const baseURL = "http://localhost:3000/todos"
+
+	//Method to pull data
+	const getTodos = async () => {
+		const response = await fetch(baseURL)
+		const data = await response.json()
+		todos = await data
+	}
+
+	//Runs when component loads
+	onMount(()=>{
+		getTodos()
+	})
+
+	//properties for create form
+	let createTitle;
+	let createBody;
+
+	//create function for form submission
+	const createTodo = async (event) => {
+		event.preventDefault()
+		await fetch(baseURL, {
+			method: "post",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify({
+				title: createTitle,
+				body: createBody
+			})
+		})
+
+		//refetch todos
+		getTodos()
+
+		//reset form
+		createTitle = ""
+		createBody = ""
+	}
+
+	//properties for edit form
+	let editTitle;
+	let editBody;
+	let editId
+
+	//create function for form submission
+	const updateTodo = async (event) => {
+		event.preventDefault()
+		await fetch(baseURL + "/" + editId, {
+			method: "put",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify({
+				title: editTitle,
+				body: editBody
+			})
+		})
+
+		//refetch todos
+		getTodos()
+
+		//reset form
+		editTitle = ""
+		editBody = ""
+		editId = 0
+	}
+
+	const editSelect = (todo) => {
+		editTitle = todo.title
+		editBody = todo.body
+		editId = todo.id
+	}
+
+
+
+</script>
+
+
+
+
+<main>
+
+<h1>The Todo App</h1>
+<hr>
+<h2>Create a Todo</h2>
+	<form on:submit={createTodo}>
+		<input type="text" bind:value={createTitle}/>
+		<input type="text" bind:value={createBody}/>
+		<input type="submit" value="Create Todo"/>
+	</form>
+<hr>
+<h2>Edit a Todo</h2>
+	<form on:submit={updateTodo}>
+		<input type="text" bind:value={editTitle}/>
+		<input type="text" bind:value={editBody}/>
+		<input type="submit" value="Update Todo"/>
+	</form>
+<hr>
+<h2>The Todos</h2>
+{#each todos as todo}
+	<div>
+		<h2>{todo.title}</h2>
+		<h3>{todo.body}</h3>
+		<button on:click={(e) => editSelect(todo)}>Edit</button>
+	</div>
+{/each}
+
+</main>
+
+
+
+
+<style>
+</style>
+
+```
+
+### Delete a Todo
+
+Now we just need to make a delete method and connect it to a delete button with an inline function and we're done!
+
+```html
+
+<script>
+	import {onMount} from 'svelte'
+
+	//Variable to hold todos
+	let todos = []
+
+	//base URL
+	const baseURL = "http://localhost:3000/todos"
+
+	//Method to pull data
+	const getTodos = async () => {
+		const response = await fetch(baseURL)
+		const data = await response.json()
+		todos = await data
+	}
+
+	//Runs when component loads
+	onMount(()=>{
+		getTodos()
+	})
+
+	//properties for create form
+	let createTitle;
+	let createBody;
+
+	//create function for form submission
+	const createTodo = async (event) => {
+		event.preventDefault()
+		await fetch(baseURL, {
+			method: "post",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify({
+				title: createTitle,
+				body: createBody
+			})
+		})
+
+		//refetch todos
+		getTodos()
+
+		//reset form
+		createTitle = ""
+		createBody = ""
+	}
+
+	//properties for edit form
+	let editTitle;
+	let editBody;
+	let editId
+
+	//create function for form submission
+	const updateTodo = async (event) => {
+		event.preventDefault()
+		await fetch(baseURL + "/" + editId, {
+			method: "put",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			body: JSON.stringify({
+				title: editTitle,
+				body: editBody
+			})
+		})
+
+		//refetch todos
+		getTodos()
+
+		//reset form
+		editTitle = ""
+		editBody = ""
+		editId = 0
+	}
+
+	const editSelect = (todo) => {
+		editTitle = todo.title
+		editBody = todo.body
+		editId = todo.id
+	}
+
+		const deleteTodo = async (todo) => {
+		event.preventDefault()
+		await fetch(baseURL + "/" + todo.id, {
+			method: "delete",
+		})
+
+		//refetch todos
+		getTodos()
+	}
+
+
+
+</script>
+
+
+
+
+<main>
+
+<h1>The Todo App</h1>
+<hr>
+<h2>Create a Todo</h2>
+	<form on:submit={createTodo}>
+		<input type="text" bind:value={createTitle}/>
+		<input type="text" bind:value={createBody}/>
+		<input type="submit" value="Create Todo"/>
+	</form>
+<hr>
+<h2>Edit a Todo</h2>
+	<form on:submit={updateTodo}>
+		<input type="text" bind:value={editTitle}/>
+		<input type="text" bind:value={editBody}/>
+		<input type="submit" value="Update Todo"/>
+	</form>
+<hr>
+<h2>The Todos</h2>
+{#each todos as todo}
+	<div>
+		<h2>{todo.title}</h2>
+		<h3>{todo.body}</h3>
+		<button on:click={(e) => editSelect(todo)}>Edit</button>
+		<button on:click={(e) => deleteTodo(todo)}>Delete</button>
+	</div>
+{/each}
+
+</main>
+
+
+
+
+<style>
+</style>
+
+```
 
 ---
 
