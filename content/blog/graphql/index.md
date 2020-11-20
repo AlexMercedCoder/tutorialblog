@@ -6,7 +6,7 @@ description: An Alternative to RESTFul API
 
 ## What is GraphQL?
 
-GraphQL is alternative method of creating APIs created by Facebook. GraphQL takes the approach that of instead of having several different "endpoint" URLs that retrieve pre-determined data that instead...
+GraphQL is an alternative method for creating APIs created by Facebook. GraphQL takes the approach that instead of having several different "endpoint" URLs that retrieve pre-determined data...
 
 - You have one URL
 - Instead of endpoints you have queries (get info) and mutations (alter info)
@@ -16,6 +16,7 @@ Benefits:
 
 - Don't have to memorize a bunch of API endpoints
 - Don't have to receive information you don't need in your response
+- The API is self documenting (My Favorite Part)
 
 ## Getting Started
 
