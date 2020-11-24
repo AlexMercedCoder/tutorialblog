@@ -93,11 +93,11 @@ Go to localhost:3000/dogs to see if our dogs are there, if so we are ready to de
 
 ## Deploy to Heroku
 
-- push your code to heroku (make sure the root of the repo is the same folder as the gemfile)
+- push your code to github (make sure the root of the repo is the same folder as the gemfile)
 - create a new heroku project and connect it to your github repo
 - using the heroku cli run the following commands
 
-```heroku run rails db:migrate --app=youAppName && rails db:seed --app=youAppName```
+```heroku run rails db:migrate --app=youAppName && heroku run rails db:seed --app=youAppName```
 *make sure to replace yourAppName with the name of your heroku project
 
 That's it, go to https://HEROKUURL/dogs
