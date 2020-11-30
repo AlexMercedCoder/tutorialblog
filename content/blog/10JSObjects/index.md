@@ -83,7 +83,7 @@ There are several other pre-made symbols which are used as object keys to manipu
 
 Generators are a way of creating functions that happen in a particular sequence. To use a generator add and * after the function key word.
 
-## Using Generatores
+## Using Generators
 
 ```js
 
@@ -137,7 +137,7 @@ Reflect.set(myObj, "vegetable", "Broccolli")
 
 ## 6 Proxy
 
-The Proxy type allows you to create a proxy object that refers to another existing objects but can change some of its functionality.
+The Proxy type allows you to create a proxy object that refers to other existing objects but can change some of its functionality.
 
 ```js 
 
