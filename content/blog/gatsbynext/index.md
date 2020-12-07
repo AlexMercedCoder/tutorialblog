@@ -39,7 +39,7 @@ Change directory into the new folder and run `npm install`
 
 ### The Markdown
 
-In this templates any markdown you want as part of the blog should be put into the markdown folder.
+In this template any markdown you want as part of the blog should be put into the markdown folder.
 
 ```markdown
 
