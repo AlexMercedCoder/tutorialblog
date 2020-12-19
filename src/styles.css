@@ -1,0 +1,36 @@
+#nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px auto;
+    padding: 15px 0;
+
+}
+
+header h1 {
+    font-size: 3.3em !important;
+}
+
+#nav div a {
+    text-decoration: none;
+    box-shadow: 0 !important;
+}
+
+#nav svg {
+    stroke: darkred;
+    fill: darkred;
+    height: 3em;
+    width: 3em;
+}
+
+#nav svg:hover {
+    stroke: #007acc;
+    fill: #007acc;
+}
+
+@media screen and (max-width: 600px){
+    header h1 {
+        font-size: 1.47em !important;
+        margin-bottom: .1em !important;
+        line-height: 1em !important;
+    }
+}

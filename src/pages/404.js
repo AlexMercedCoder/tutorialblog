@@ -11,7 +11,16 @@ const NotFoundPage = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title="404: Not Found" />
       <h1>Not Found</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+      <p>
+        You just hit a route that doesn&#39;t exist... the sadness. The URL May
+        of move so head to the main page.
+      </p>
+      <p>
+        Also make sure to subscribe to{" "}
+        <a href="https://www.youtube.com/AlexMercedFullStackDeveloper">
+          my youtube channel!
+        </a>
+      </p>
     </Layout>
   )
 }

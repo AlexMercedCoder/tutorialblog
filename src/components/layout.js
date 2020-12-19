@@ -1,11 +1,17 @@
 import React from "react"
 import { Link } from "gatsby"
+import {FaYoutube, FaFacebookSquare, FaTwitter, FaGithubSquare, FaInstagramSquare} from "react-icons/fa"
+import "../styles.css"
 
 import { rhythm, scale } from "../utils/typography"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
+
+  const shadow = {
+    boxShadow: "0"
+  }
 
   if (location.pathname === rootPath) {
     header = (
@@ -59,6 +65,13 @@ const Layout = ({ location, title, children }) => {
       }}
     >
       <header>{header}</header>
+      <nav id="nav">
+        <div><a href="https://www.youtube.com/AlexMercedFullStackDeveloper" style={shadow}><FaYoutube/></a></div>
+        <div><a href="https://www.facebook.com/AlexMercedCoder"><FaFacebookSquare/></a></div>
+        <div><a href="https://www.twitter.com/AlexMercedCoder"><FaTwitter/></a></div>
+        <div><a href="https://www.instagram.com/AlexMercedCoder"><FaInstagramSquare/></a></div>
+        <div><a href="https://www.github.com/AlexMercedCoder"><FaGithubSquare/></a></div>
+      </nav>
       <main>{children}</main>
       <footer>© AlexMercedCoder.com 2020</footer>
     </div>
