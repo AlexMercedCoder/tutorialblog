@@ -6,7 +6,7 @@ description: Using Headless CMS's
 
 ## What is a Headless CMS
 
-A Headless CMS is hot trend in web development. It provides a ready to go way to manage your data with a visual dashboard like traditional CMS (Wordpress, Drupal) but allows you pull the data via an API so you can use the frontend technologies of your choice. Headless CMS's are a power and popular combo with a Static Site Generator but can be used in most web applications.
+A Headless CMS is a hot trend in web development. It provides a ready-to-go way to manage your data with a visual dashboard like traditional CMS (WordPress, Drupal) but allows you to pull the data via an API so you can use the frontend technologies of your choice. Headless CMS's are a powerful and popular combo with a Static Site Generator but can be used in most web applications.
 
 To see a list of all Headless CMS solutions and Static Site Generators checkout the directories at JAMStack.org.
 
@@ -22,7 +22,7 @@ Once on the dashboard select the model panel then:
 
 2. Click add
 
-3. name the model blog and set type to list
+3. name the model blog and set the type to list
 
 4. Add the following fields (feel free to add more)
     - a text field named title
@@ -33,7 +33,7 @@ Once on the dashboard select the model panel then:
 
 ## Step 3 - Add some content
 
-On the menu on the left select the content section are:
+On the menu on the left select the content section and:
 
 1. Select the plus sign for new content
 
