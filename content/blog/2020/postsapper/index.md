@@ -1,6 +1,6 @@
 ---
 title: Svelte after Sapper - The Svelte Ecosystem
-date: "2020-08-23T22:12:03.284Z"
+date: "2020-12-23T22:12:03.284Z"
 description: "Enterprise level frontend framework"
 ---
 
