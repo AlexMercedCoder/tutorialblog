@@ -36,7 +36,7 @@ To make this easier I created a library of custom hooks, merced-react-hooks, whi
 
         - Create and Export the TaskStore and useTaskStore hook
 
-        ```js
+```js
 
         import {createTaskRunner} from "merced-react-hooks"
 
@@ -61,7 +61,7 @@ To make this easier I created a library of custom hooks, merced-react-hooks, whi
             taskList
             )
 
-        ```
+```
 
 4. Then import the TaskStore Provider Component into index.js to provide the state
 
