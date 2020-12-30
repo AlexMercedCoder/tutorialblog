@@ -1,6 +1,6 @@
 ---
 title: Ultimate CSS Reference
-date: "2020-12-27T24:12:03.284Z"
+date: "2020-12-27T12:12:03.284Z"
 description: "CSS All the Things!"
 ---
 

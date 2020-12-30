@@ -1,6 +1,6 @@
 ---
 title: Create Your Dev Portfolio with this Gatsby Template
-date: "2020-12-30T24:12:03.284Z"
+date: "2020-12-30T12:12:03.284Z"
 description: Template designed for Dev Portfolios
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Fundamentals of Client Side Javascript
-date: "2020-12-28T24:12:03.284Z"
+date: "2020-12-28T12:12:03.284Z"
 description: The Building Blocks of Client-Side Javascript Master
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: React - Why use TaskRunner over Redux, useReducer
-date: "2020-12-24T24:12:03.284Z"
+date: "2020-12-24T12:12:03.284Z"
 description: "A State Management Alternative"
 ---
 
