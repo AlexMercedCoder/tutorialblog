@@ -1,6 +1,6 @@
 ---
 title: In-Depth Guide on Understanding Deploying Web Apps
-date: "2021-1-1T12:12:03.284Z"
+date: "2021-01-01T12:12:03.284Z"
 description: Servers, Ports and Environmental Variables oh my
 ---
 
