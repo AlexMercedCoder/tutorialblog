@@ -14,9 +14,9 @@ To really understand deployment we need to understand how the web works and all 
 
 #### The Browser
 
-Your browser is really the heart of the "client" experience. The browser allows an internet user to type in requests for different resources from web and render them into a unified user experience.
+Your browser is really the heart of the "client" experience. The browser allows an internet user to type in requests for different resources from the web and render them into a unified user experience.
 
-When you type a url into the address bar of a browser and hit enter the browser does what is called an HTTP request (Hyper Text Transfer Protocol) which is a process by which computers send text-based information to each other. Literally, every image, site, video, and audio piece of content you experience starts as a stream of text going into your browser to then be rendered.
+When you type a URL into the address bar of a browser and hit enter the browser does what is called an HTTP request (Hyper Text Transfer Protocol) which is a process by which computers send text-based information to each other. Literally, every image, site, video, and audio piece of content you experience starts as a stream of text going into your browser to then be rendered.
 
 So we know we are just sending text back forth between computers all over the world, but how do these requests know where they are going and how they should be handled?
 
@@ -24,7 +24,7 @@ So we know we are just sending text back forth between computers all over the wo
 
 Let's break down this url
 
-- **http://** This is the protocol being used to make a connection to the eventual web server. http/https protocol makes a one way connection to the server to send the request when the server processes the request and generates a response will open a new connection to send it back. Think of this like two pen pals mailing each other letters back and forth. ws/wss protocol are web sockets where an open connection is made between two points and each side listens for the event from the other. Imagine a volleyball game where the players on both sides are alert cause the ball can be volleyed over to their side at any moment. http/ws traffic is no encrypted by SSL and is by default directed to IP Port 80 on the destination server while https/wss traffic is secured by SSL and directed to port 443.
+- **http://** This is the protocol being used to make a connection to the eventual web server. HTTP/HTTPS protocol makes a one-way connection to the server to send the request when the server processes the request and generates a response will open a new connection to send it back. Think of this as two pen pals mailing each other letters back and forth. ws/wss protocol are web sockets where an open connection is made between two points and each side listens for the event from the other. Imagine a volleyball game where the players on both sides are alert cause the ball can be volleyed over to their side at any moment. http/ws traffic is no encrypted by SSL and is by default directed to IP Port 80 on the destination server while https/wss traffic is secured by SSL and directed to port 443.
 
   - IP Ports are places where internet requests can be received, imagine them like the different piers in a seaport and the boats docking the piers being internet requests. Servers can listen to requests on port numbers up to 65535 (not that you'd ever want that many servers running on one computer).
 
@@ -36,13 +36,13 @@ Let's break down this url
 
   - The response always comes with a status code. If the server found a controller function or static file associated with the slug it'll respond with a 200. If it cannot find a way to respond it will send a 404 not found response. If there is some error in completing the response you'll get a 500 level response and if your browser used a cached version of the request you'll get a 300 level response.
 
-- **?type=gouda&taste=good** This is a url query. The server may expect these with certain slugs to get more information. For example when you view a video on youtube, which video should be shown on the page comes from a url query (watch a youtube video and look at the url.). In this example, I've sent the server a type query with a value of gouda and a taste query with a value of good, which does nothing unless the server expected to receive these queries. The "?" signifies the beginning of the query and the "&" separates the different queries.
+- **?type=gouda&taste=good** This is a URL query. The server may expect these with certain slugs to get more information. For example, when you view a video on youtube, which video should be shown on the page comes from a URL query (watch a youtube video and look at the URL.). In this example, I've sent the server a type query with a value of gouda and a taste query with a value of good, which does nothing unless the server expected to receive these queries. The "?" signifies the beginning of the query and the "&" separates the different queries.
 
 #### In Summary
 
 How does a request work...
 
-1. User types a url in the address bar of a browser
+1. User types a URL in the address bar of a browser
 2. request is sent to users router/modem
 3. request is routed to users ISP
 4. ISP sends a request to a DNS server
@@ -56,11 +56,11 @@ How does a request work...
 
 Nowadays there are several ways to architect your application and this will affect how you will eventually deploy your application.
 
-- **Frontend Only Application** This can range from pure static html/css/js or a more elaborate single page application built with React, Svelte, Vue, Angular, or with Native Web Components. These sites are usually deployed using static servers which is essentially what services like Vercel and Netlify provide where you upload files to some web server space that are statically served. When using a framework like React and friends, these services connect your deployment to your project's github then anytime you update GitHub it runs your project's build command and serves the output statically.
+- **Frontend Only Application** This can range from pure static html/css/js or a more elaborate single page application built with React, Svelte, Vue, Angular, or with Native Web Components. These sites are usually deployed using static servers which is essentially what services like Vercel and Netlify provide where you upload files to some web server space that are statically served. When using a framework like React and friends, these services connect your deployment to your project's Github then anytime you update GitHub it runs your project's build command and serves the output statically.
 
-- **Full-Stack Applications** These are applications where you create a more complex server (not static) that does more advanced data manipulation and then uses that data with a template engine (ejs, blade, erb, plush, pug) to generate static HTML from the server which is then sent to the client. This generally needs more robust deployment services so either requires you to set up your own server using a VPS from Amazon, Microsoft, google, Linode, Digital Ocean, or other cloud services or using a service like Heroku which simplified many of the setup steps.
+- **Full-Stack Applications** These are applications where you create a more complex server (not static) that does more advanced data manipulation and then uses that data with a template engine (ejs, blade, erb, plush, pug) to generate static HTML from the server which is then sent to the client. This generally needs more robust deployment services so either requires you to set up your own server using a VPS from Amazon, Microsoft, Google, Linode, Digital Ocean, or other cloud services or using a service like Heroku which simplified many of the setup steps.
 
-- **Backend and Frontend Applications** Nowadays applications are so complex they are really many applications or "Micro Services" handling dedicated parts of the application. You may have one backend application that only handles user authentication while other applications then handle different products (this of Google vast array of services). All these backend microservices will be deployed like a full-stack application using a service like Heroku while the frontend will be built as a separate application deployed by a service like Heroku. The frontend application will make requests to all the API's these microservices deliver. This makes the architecture more modular and reusable for different client-side platforms (desktop, mobile, devices).
+- **Backend and Frontend Applications** Nowadays applications are so complex they are really many applications or "Micro Services" handling dedicated parts of the application. You may have one backend application that only handles user authentication while other applications then handle different products (this of Google's vast array of services). All these backend microservices will be deployed like a full-stack application using a service like Heroku while the frontend will be built as a separate application deployed by a service like Heroku. The frontend application will make requests to all the API's these microservices deliver. This makes the architecture more modular and reusable for different client-side platforms (desktop, mobile, devices).
 
 - **Serverless** This takes microservices to the next level where you just don't have backend applications at all. Instead, all your APIs are built as several cloud functions that run on-demand which then have URLs for your frontend to call them. Since you don't have to have a persistent backend server running 24/7 and the much lower-cost of static hosting for the frontend, taking a serverless approach can be very affordable even at large scales. AWS, Azure, and Google all offer cloud function platforms and Netlify offers a nice abstraction of Amazon's Cloud Functions and Firebase offers a nice abstraction over Google's Cloud functions service.
 
@@ -68,7 +68,7 @@ Nowadays there are several ways to architect your application and this will affe
 
 If running a static website with basic html/css/js files there are endless hosting solutions usually using Apache Servers running PHP based cPanel dashboards. Although If you want to use React/Vue/Svelte/Angular you are going to want a service with Continuous Deployment so you don't have to reupload all your content each time you deploy and that's where Netlify and Vercel fit in wonderfully. 
 
-- *Continuous Deployment* is the concept of creating an automated pipeline of your deployment process. Typically this takes the form of updating your code on GitHub which then triggers automations that end in your project being deployed (Netlify and Vercel make this very easy). This type of pipeline is also used to integrate code from others into a project automating a pipeline of tests and this is referred to as Continuous Integration. (CI/CD)
+- *Continuous Deployment* is the concept of creating an automated pipeline of your deployment process. Typically this takes the form of updating your code on GitHub which then triggers automation that ends in your project being deployed (Netlify and Vercel make this very easy). This type of pipeline is also used to integrate code from others into a project automating a pipeline of tests and this is referred to as Continuous Integration. (CI/CD)
 
 ### Virtual Private Server (VPS)
 
@@ -128,4 +128,4 @@ So when calling third-party data sources a typical strategy is to create a "prox
 
 - When deploying to Netlify or Vercel if you don't know what the build command is check your package.json file's script section. Also if you are not sure what directory the final build goes into, run the build command locally and see what the result is.
 
-- If your deployment isn't working... logs are your best friend! All platforms have logs during project build and when the project runs so treat that as your first line of defense in determining 
+- If your deployment isn't working... logs are your best friend! All platforms have logs during project build and when the project runs so treat that as your first line of defense in determining what issues you may have with your deployment.
