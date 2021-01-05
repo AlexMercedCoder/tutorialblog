@@ -29,7 +29,7 @@ Views deal with the visual aspect of an application. Essentially templates with 
 
 - Server-Side Rendering: You use a templating library like EJS/ERB, Jinja, Plush, Blade, Pug, Handlebars, and more which renders an HTML/CSS page by injecting the data into the proper spots in the template then sending the finished file to the client's browser.
 
-- Client-Side Rendering: Using a framework like React, Angular, Vue or Svelte an application to send to the client without the data and the application then pulls the data via API request as needed to fill in the placeholders as needed.
+- Client-Side Rendering: Using a framework like React, Angular, Vue or Svelte a frontend application is sent to the client without the data and the application then pulls the data via API request as needed to fill in the placeholders as needed.
 
 **BONUS** Another growingly popular option is static site generation where instead of rendering the site server-side/client-side when the site is requested, the site is pre-rendered on a regular schedule. Whenever a build is run the data is pulled and the templates are rendered and the end result is hosted statically. Great for data that may not change frequently. Gatsby, NextJS, NuxtJS, Gridsome, Scully, Sapper, JungleJS, Plenti, and Elder.js are all popular static site generators you can find a full list at JAMStack.org.
 
