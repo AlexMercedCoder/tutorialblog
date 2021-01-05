@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Python Web Framework, FastAPI
-date: "2021-02-01T12:12:03.284Z"
+date: "2021-01-02T12:12:03.284Z"
 description: The New Fast Web Framework in Python
 ---
 

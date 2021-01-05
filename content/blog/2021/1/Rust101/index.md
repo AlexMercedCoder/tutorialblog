@@ -1,6 +1,6 @@
 ---
 title: Rust 101 - The Syntax and Basics
-date: "2021-04-01T12:12:03.284Z"
+date: "2021-01-04T12:12:03.284Z"
 description: A Fun Language for Fast Compiled Apps
 ---
 
