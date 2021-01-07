@@ -3,7 +3,6 @@ title: Guide to Becoming a Developer in 2021
 date: "2021-01-07T12:12:03.284Z"
 description: Step by Step Guide and Advice
 ---
-
 ## Reasons to Become a Developer
 
 1. Jobs! If you check our the [Bureau of Labor Statics](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm) you will see that the demand for developers is growing at above-average levels and after 2020 with every business have to embrace technology to survive there is no reason to expect that to change.
@@ -43,7 +42,7 @@ I highly discourage attempting to be a purely self-taught developer unless the f
 
 - You have a high amount of discipline
 - Have a clear idea of what direction you want to go
-- Are you comfortable in conducting job searches
+- Are comfortable in conducting job searches
 
 While the web is filled with blogs, videos, and courses to teach you coding if you don't have the discipline you'll find yourself building bad habits that will be hard to break later. 
 
@@ -82,13 +81,13 @@ This is at least a four-year journey and unless you have a scholarship a high am
 
 The Pros:
 
-- Must higher starting salaries
+- Much higher starting salaries
 - The level of algorithmic practice and theory over four years will make technical interviews easier
 - You'll walk away with a deeper understanding of the theory and concepts underlying how computers work and communicate
 
 The Cons:
 
-- May be overlooked by some employers as overqualified (which means they think your too expensive or will leave soon as other opportunities arise)
+- May be overlooked by some employers as overqualified (which means they think your too expensive or will leave soon as other opportunities arise) although these probably aren't the jobs you'd want as CS graduate.
 - Higher Expectations of ability
 - You'll probably have to teach yourself a lot of tooling and languages which are highly used but are not taught over more complex less used languages. (Does anyone use prolog in production?)
 
