@@ -1,5 +1,5 @@
 ---
-title: Git - A Guide to Understand and Using Git
+title: Git - A Guide to Understanding and Using Git
 date: "2021-01-09T12:12:03.284Z"
 description: All The Commands in Words that Make Sense
 ---
