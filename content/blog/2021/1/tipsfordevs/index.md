@@ -59,7 +59,7 @@ Depending on your role you may not find yourself writing Linked Lists and Hash T
 
 While I agree with the advice that you should really have one language you should really invest your time into for a level of mastery, I have found a lot of value in learning the basic syntax of as many languages as possible (just some light exposure, most of your time should still be in your "home" language unless you get a job that requires you to shift focus).
 
-When I've learned new languages I've noticed much is the same making concepts that just "general programming" concepts much easier to discern from concepts unique to that language. Also, you begin to notice patterns in the syntax of different languages that after a while you look at a language you haven't seen before and really pick up on what's going without much effort.
+When I've learned new languages I've noticed much of what there is to learn are just "general programming" concepts making it much much easier to discern from concepts unique to that language. . Also, you begin to notice patterns in the syntax of different languages that after a while you look at a language you haven't seen before and really pick up on what's going without much effort.
 
 ###### List of Languages based on Similarity
 
