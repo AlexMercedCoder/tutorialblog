@@ -9,13 +9,13 @@ description: Libraries of Pre-Built Web Components
 Web Components are a framework agnostic way of creating UI Components similar to Components in React, Angular, Vue or Svelte. In previous articles I've discussed how to make components and libraries for creating Web Components. In this article I'll be focusing on libraries of pre-built components. Before we do that let me list the previous resources.
 
 - [Video Playlist on Web Components](https://www.youtube.com/playlist?list=PLY6oTPmKnKbaNVkXHOHWxgdKEZLGKuFP9)
-- [Basics of Web Components](https://tuts.alexmercedcoder.com/webcomp1/)
-- [Web Component Styling and Slots](https://tuts.alexmercedcoder.com/webcomp2/)
-- [Web Component Lifecycle Functions](https://tuts.alexmercedcoder.com/webcomp3/)
-- [Building Components with AMPonent](https://tuts.alexmercedcoder.com/amponenttut/)
-- [Building Components with MercedUI](https://tuts.alexmercedcoder.com/mercedui/)
-- [Building Components with mBlocks](https://tuts.alexmercedcoder.com/mblocks/)
-- [Building Components with RenderBlocks](https://tuts.alexmercedcoder.com/renderblocks/)
+- [Basics of Web Components](https://tuts.alexmercedcoder.com/2020/webcomp1/)
+- [Web Component Styling and Slots](https://tuts.alexmercedcoder.com/2020/webcomp2/)
+- [Web Component Lifecycle Functions](https://tuts.alexmercedcoder.com/2020/webcomp3/)
+- [Building Components with AMPonent](https://tuts.alexmercedcoder.com/2020/amponenttut/)
+- [Building Components with MercedUI](https://tuts.alexmercedcoder.com/2020/mercedui/)
+- [Building Components with mBlocks](https://tuts.alexmercedcoder.com/2020/mblocks/)
+- [Building Components with RenderBlocks](https://tuts.alexmercedcoder.com/2020/renderblocks/)
 
 ## Pre-Built Web Component Libraries
 

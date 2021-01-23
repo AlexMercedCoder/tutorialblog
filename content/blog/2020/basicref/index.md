@@ -194,7 +194,7 @@ You can run a file but nodemon will watch for changes in any javascript or json 
 
 - RunKit.com is a place to prototype NodeJS project
 
-- For places to deploy your project checkout this blog post with a comprehensive list => https://tuts.alexmercedcoder.com/deploy/
+- For places to deploy your project checkout this blog post with a comprehensive list => https://tuts.alexmercedcoder.com/2020/deploy/
 
 - Find videos on the basics of git, vscode, bash and more at intro.alexmercedcoder.com
 
