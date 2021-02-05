@@ -47,6 +47,7 @@ description: All the commands you'll need all the time
 - list remotes `git remote -v`
 - create new commit reverting to old commit `git revert commitHash`
 - move back to old commit removing prior commits ` git reset commitHash`
+
 ---
 # NodeJS
 ---
@@ -57,6 +58,7 @@ description: All the commands you'll need all the time
 - run script from package.json `npm run scriptName`
 - uninstall library `npm uninstall libName`
 - install library globally `npm install -g libName`
+
 ---
 # Terminal Text Editors
 ---
@@ -69,6 +71,7 @@ description: All the commands you'll need all the time
 - go to insert mode `i`
 - exit insert mode `esc`
 - save and exit `:wq`
+
 ---
 # Ruby
 ---
@@ -101,6 +104,7 @@ description: All the commands you'll need all the time
 - rollback last migration `rails db:rollback`
 - seed the database `rails db:seed`
 - drop the database `rails db:drop`
+
 ---
 Python
 ---
@@ -117,6 +121,7 @@ Python
 - create migrations `python manage.py makemigrations`
 - run migrations `python manage.py migrate`
 - create a superuser `python manage.py createsuperuser`
+
 ---
 PHP
 ---
