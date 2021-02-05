@@ -16,7 +16,7 @@ Run Development Server
 `python manage.py runserver`
 
 Make Migration Files for Unmigrated Changes
-``python manage.py makemigrations`
+`python manage.py makemigrations`
 
 Run Migrations
 `python manage.py migrate`
@@ -34,6 +34,8 @@ Need a psychopg2 installed to use postgres
 `pip install psycopg2`
 
 _note: You may need to install the following for psycopg2 to install correct, google their installation, not needed for windows sudo "python3-dev" "libpq-dev"_
+
+**NOTE: if using Heroku you can avoid setting all these settings as the django-heroku library will setup all the postgres settings when deployed so you can use SQLite locally guilt free**
 
 **The database configuration in settings.py**
 
@@ -64,6 +66,8 @@ DATABASES = {
 ```
 
 ## Using a .env file with django
+
+**Note: If deploying to heroku, you may not need this and it may cause errors because no env fill is present in production. The django-heroku library will make sure all your heroku config vars are available to your application**
 
 Install django-environ
 
@@ -263,7 +267,7 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/django
 ```
 
-### Gunicorn and the Procfile
+### Gunicorn, Procfile, runtime.txt and requirements.txt
 
 We need Gunicorn to run our apps server so 
 
@@ -274,6 +278,19 @@ create a file called "Procfile" in your project root with the following.
 ```web: gunicorn project.wsgi`` 
 
 *project should be replaced with your projects name (the name of the folder your settings.py is in)
+
+**ALSO MAKE SURE TO MAKE A runtime.txt WITH YOUR PYTHON VERSION, HEROKU MAY DEFAULT AN EARLIER VERSION OF PYTHON FROM WHICH PIP MAY NOT BE ABLE TO INSTALL THE EXACT VERSION OF YOUR LIBRARIES FROM requirements.txt**
+
+runtime.txt
+```
+python-3.9.0
+```
+
+to create the requirements.txt run this file while in the virtual environment for your project. Make sure to regenerate this file as you add and subtract libraries to your project.
+
+```pip freeze > requirements.txt```
+
+**Procfile, requirements.txt and runtime.txt should all be in the root of your project which is the folder with manage.py**
 
 ### Download django-heroku
 
@@ -341,6 +358,8 @@ class Dog(models.Model):
 
 In your app folder create a ```serializers.py``` with the following.
 
+**The Serializer handles taking your objects data and turning it into JSON**
+
 ```python
 from .models import Dog
 from django.contrib.auth.models import User, Group
@@ -366,6 +385,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 *Users and Groups are serialized so we have a restful routes for the built in User and Group models*
 
 ### Create Views for your API
+
+**Viewsets have all the functions neccessary for RESTFul routes ready to go they just need to be connected to your model and related serializer**
 
 In your apps views.py create the following
 
@@ -409,6 +430,8 @@ For Details on different permission sets:
 ### Setup URLS
 
 Now to setup the urls for our API in the urls.py in the folder that holds our settings.py.
+
+**The router knows how to create conventional routes and connect them to the right functions in your ViewSet**
 
 ```python
 from django.contrib import admin
