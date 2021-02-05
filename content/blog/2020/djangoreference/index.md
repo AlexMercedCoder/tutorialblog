@@ -12,9 +12,6 @@ Start a new project
 Start a new app in your project
 `django-admin startapp <appName>`
 
-Run Development Server
-`python manage.py runserver`
-
 Make Migration Files for Unmigrated Changes
 `python manage.py makemigrations`
 
