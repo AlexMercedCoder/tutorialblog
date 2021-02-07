@@ -78,7 +78,7 @@ description: All the commands you'll need all the time
 ## Ruby Gem
 - Install a Gem `gem install gemName`
 - List all installed Gems `gem list`
-- Uninstall a Gem `get ininstall gemName`
+- Uninstall a Gem `get uninstall gemName`
 - Update Gems `gem update`
 - Clean Old Gem Versions `gem cleanup`
 
