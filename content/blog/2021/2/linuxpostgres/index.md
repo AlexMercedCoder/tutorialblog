@@ -20,19 +20,19 @@ When you first install Postgres on Linux it creates a new Linux user called Post
 
 To fix this issue we need to switch over to the postgres user.
 
-```sudo su postgres```
+`sudo su postgres`
 
 ### Creating a New User and Database
 
 Once you are working in the terminal under the postgres user do the following.
 
-1. enter the postgres shell ```psql```
+1. enter the postgres shell `psql`
 
-2. create a new superuser ```CREATE USER <YourLinuxUsername> WITH SUPERUSER PASSWORD "somepassword";```
+2. create a new superuser `CREATE USER <YourLinuxUsername> WITH SUPERUSER PASSWORD 'somepassword';`
 
-3. create a new database ```CREATE DATABASE <YourLinuxUsername>;```
+3. create a new database `CREATE DATABASE <YourLinuxUsername>;`
 
-4. quit postgres ```\q```
+4. quit postgres `\q`
 
 ### Port 5432
 
@@ -40,7 +40,7 @@ The default port for postgres is 5432 in the same way the default port for mongo
 
 ### Other Notes
 
-- Postgres drivers in many languages are compiled from source by the package manager, if installing the database drivers in that language fail, you may need to download Xcode on mac or install python3-dev libpq-dev on Linux. 
+- Postgres drivers in many languages are compiled from source by the package manager, if installing the database drivers in that language fail, you may need to download Xcode on mac or install python3-dev libpq-dev on Linux.
 
 - On PHP you need to find your PHP installs php.ini and uncomment the pg drivers
 
