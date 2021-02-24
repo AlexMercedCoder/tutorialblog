@@ -71,6 +71,8 @@ Run the following commands for a basic dogs api...
 
 ```rails g scaffold dog name:string age:integer breed:string```
 
+```rails db:create```
+
 ```rails db:migrate```
 
 Add the following in db/seeds.rb
@@ -99,6 +101,8 @@ Go to localhost:3000/dogs to see if our dogs are there, if so we are ready to de
 
 ```heroku run rails db:migrate --app=youAppName && heroku run rails db:seed --app=youAppName```
 *make sure to replace yourAppName with the name of your heroku project
+
+**NOTE** If you run into a weird deployment error about your bundler platform, refer to this stack overflow for a solution: https://stackoverflow.com/questions/43429685/how-can-i-resolve-your-bundle-only-supports-platforms-x86-mingw32-but-your
 
 That's it, go to https://HEROKUURL/dogs
 
