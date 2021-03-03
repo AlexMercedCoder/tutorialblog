@@ -357,6 +357,8 @@ Step 6 - Then make sure to head over to settings in the project to set the follo
 
 - DB_PORT: get this from the database settings on heroku (under resources)
 
+- DB_DATABASE: get this from the database settings on heroku (under resources)
+
 After that is done you can run the following commands using the heroku cli or the run console option under more (next to open app).
 
 - heroku run php artisan migrate
