@@ -114,7 +114,7 @@ type Todo struct {
 }
 
 // TableName overrides the table name used by Pop.
-func (u User) TableName() string {
+func (u Todo) TableName() string {
 	return "todos"
   }
 
