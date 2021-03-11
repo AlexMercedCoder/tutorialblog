@@ -1,7 +1,7 @@
 ---
 title: API With Java Spring & VSCode, from zero to deploy
 date: "2021-03-09T12:12:03.284Z"
-description: Buffalo, The Rails of the Go World
+description: Using Javas Most Popular Framework
 ---
 
 Java is one of the most popular programming languages of all time and Spring one of its most popular frameworks for building all types of applications including a web application. In this tutorial, we will build a very basic API using VSCode as our editor.
