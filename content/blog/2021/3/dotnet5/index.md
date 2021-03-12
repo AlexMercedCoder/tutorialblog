@@ -203,7 +203,7 @@ Let's create a model class before we connect to a database...
 ```cs
 namespace firstapi.Models
 {
-    public class PersonItem
+    public class Person
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -227,7 +227,7 @@ namespace firstapi.Models
         {
         }
 
-        public DbSet<PersonItem> TodoItems { get; set; }
+        public DbSet<Person> TodoItems { get; set; }
     }
 }
 ```
