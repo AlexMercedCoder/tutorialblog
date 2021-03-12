@@ -488,7 +488,7 @@ ENTRYPOINT [ "dotnet", "firstapi.dll" ]
 
 - with the heroku cli login to the heroku container repository, `heroku container:login`
 
-- then push the container to your project `heroku container:push - firstdotnetapiam web` notice I used the name of the heroku project followed by web so it knows it's a web application
+- then push the container to your project `heroku container:push -a firstdotnetapiam web` notice I used the name of the heroku project followed by web so it knows it's a web application
 
 - once that is done, release the site with this command `heroku container:release -a firstdotnetapiam web`
 
