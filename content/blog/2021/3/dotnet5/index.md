@@ -71,7 +71,7 @@ This will allow a local SSL certificate to be signed for development purposes
 
 The Main file for everything is the Startup.cs in the root of the project:
 
-```c#
+```cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -147,7 +147,7 @@ namespace firstapi
 
 This route is our default route and it will match the following pattern
 
-```c#
+```cs
 pattern: "{controller=Home}/{action=Index}/{id?}");
 ```
 
@@ -181,7 +181,7 @@ namespace firstapi.Controllers
 
 - let's add another action in the controller
 
-```c#
+```cs
         // Since our route pattern includes a pattern called ID we can receive it as a parameter to our action
         public Hashtable Another(int id)
         {
@@ -200,7 +200,7 @@ Let's create a model class before we connect to a database...
 
 - In that folder create a Person.cs
 
-```c#
+```cs
 namespace firstapi.Models
 {
     public class PersonItem
@@ -246,7 +246,7 @@ Then we need to add our database connection as a service in the ConfigureService
 
 Startup.cs
 
-```c#
+```cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -340,7 +340,7 @@ To update just make another migration (it'll figure everything out), then run th
 
 Let's create a new controller and use the constructor to add our database connection via the PersonContext we created, we will call it People.
 
-```c#
+```cs
 using firstapi.Models;
 namespace firstapi.Controllers
 {
