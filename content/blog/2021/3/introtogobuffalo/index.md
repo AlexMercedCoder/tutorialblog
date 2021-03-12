@@ -39,7 +39,18 @@ In Go 1.16 or later with buffalo 0.16.21 or earlier may have some issues to take
 
 - If it starts asking you to do a go get on a bunch of libraries... do so. I think this is caused in go 1.16 a go install doesn't auto add modules to go.mod so until fixed you'll have to add manually.
 
+```
+go get github.com/gobuffalo/envy@v1.9.0
+go get github.com/gobuffalo/pop/v5@v5.3.0
+go get github.com/gobuffalo/packr/v2@v2.8.0
+go get github.com/rs/cors
+go get github.com/gobuffalo/buffalo-pop/v2/pop/popmw@v2.3.0
+go get
+```
+
 - If you get an error about sqlite3 exporting this into your environment should fix the issue, this seems to not be a go or buffalo issue but an issue regarding libsqlite3 and particular versions of the gcc compiler. `export CGO_CFLAGS="-g -O2 -Wno-return-local-addr"`
+
+- If get an error regarding packr make sure to add the following to the import statement in actions/app.go `"github.com/gobuffalo/packr/v2"`
 
 ## Setting up our database
 
