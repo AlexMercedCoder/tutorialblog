@@ -107,7 +107,7 @@ So now that our table has been created we need a model to take advantage of the 
 
 - generate a migration with the command `buffalo pop g model todo`
 
-- edit the migration file to match below so that you've added the item field to the struct and renamed any "todoes" to "todos". Also make sure to add the bit about overriding the tablename since it will by default look for a "todoes" table but our table is called "todos".
+- edit the migration file to match below so that you've added the item field to the struct and renamed any "todoes" to "todos". Also make sure to add the bit about overriding the tablename since it will by default look for a "todoes" table but our table is called "todos". (Make sure the type of your ID field matches the type in your migration)
 
 ```go
 package models
@@ -121,7 +121,7 @@ import (
 )
 // Todo is used by pop to map your todoes database table to your go code.
 type Todo struct {
-    ID uuid.UUID `json:"id" db:"id"`
+    ID int `json:"id" db:"id"`
 	Item string `json:"item" db:"item"`
     CreatedAt time.Time `json:"created_at" db:"created_at"`
     UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
