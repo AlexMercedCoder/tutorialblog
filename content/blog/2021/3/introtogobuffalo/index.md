@@ -47,6 +47,7 @@ go get github.com/rs/cors
 go get github.com/gobuffalo/buffalo-pop/v2/pop/popmw@v2.3.0
 go get github.com/gobuffalo/validate/v3@v3.1.0
 go get github.com/gofrs/uuid@v3.2.0+incompatible
+go get github.com/gobuffalo/validate/v3@v3.1.0
 go get
 go mod tidy
 ```
