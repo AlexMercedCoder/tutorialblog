@@ -4,18 +4,18 @@ date: "2021-03-16T12:12:03.284Z"
 description: Building APIs with Rust
 ---
 
-Rust along with Go have been growing as popular alternatives to many of the use cases of languages like C & C++. With a more straightforward and centralized package management systems along with Syntax and Standard libraries that minimize many of the pain points of working with C/C++. Go/Rust offer the ability to have a lower level language that creates faster application but still maintain a pleasant and productive developer experience.
+Rust along with Go has been growing as popular alternatives to many of the use cases of languages like C & C++. With more straightforward and centralized package management systems along with Syntax and Standard libraries that minimize many of the pain points of working with C/C++. Go/Rust offers the ability to have a lower-level language that creates faster applications but still maintains a pleasant and productive developer experience.
 
-In a prior tutorial I went over Go's equivalent to Ruby on Rails, Buffalo. In this interview I'll go over Rust's big web framework, Rocket. We will build an API using a postgres database and deploy it.
+In a prior tutorial, I went over Go's equivalent to Ruby on Rails, Buffalo. In this tutorial I'll go over Rust's big web framework, Rocket. We will build an API using a Postgres database and deploy it.
 
 ## Setup
 
 **Prerequisites**
-- Rust Nightly (version of Rust with latest and even experimental features), if you installed rust with rustup then you can switch to nightly with the command `rustup default nightly`
+- Rust Nightly (a version of Rust with latest and even experimental features, released every night), if you installed rust with rustup then you can switch to nightly with the command `rustup default nightly`
 
 - Postgres 12 or above
 
-1. generate a new cargo project `cargo new personapi --bin` (cargo is the package manager of the rust work, like NPM is for node)
+1. generate a new cargo project `cargo new personapi --bin` (cargo is the package manager of the rust world, like NPM is for node)
 
 2. In the cargo.toml (plays the role package.json does for node), add rocket as a dependency.
 
@@ -74,9 +74,9 @@ fn main() {
 }
 ```
 
-- restart server and go to localhost:8000/cheese/munster
+- restart the server and go to localhost:8000/cheese/munster
 
-Now for one that uses a url query
+Now for one that uses a URL query
 
 ```rust
 // Macro for annotating our route methods
@@ -135,7 +135,7 @@ fn main() {
 
 #### Sending JSON Data
 
-Let's test out sending JSON Data. We have to type our Json data as a serializable type (in this case a hashmap).
+Let's test out sending JSON Data. We have to type our JSON data as a serializable type (in this case a hashmap).
 
 src/routes.rs
 
@@ -157,7 +157,7 @@ pub fn index() -> Json<HashMap<String, String>> {
 }
 ```
 
-Now run your server and go to localhost:8000 to see the json response!
+Now run your server and go to localhost:8000 to see the JSON response!
 
 ## Connecting a Database
 
@@ -178,7 +178,7 @@ default-features = false
 features = ["json", "serve"]
 ```
 
-- Create a postgres table called rocketpeople `createdb rocketpeople`
+- Create a Postgres table called rocketpeople `createdb rocketpeople`
 
 - Hop on PSQL and create a table `psql rocketpeople` then `CREATE TABLE people (id SERIAL, name VARCHAR(100), age INTEGER);`
 
@@ -190,7 +190,7 @@ features = ["json", "serve"]
 DATABASE_STRING="user=test5 password=test5 dbname=rocketpeople sslmode=disable host=localhost port=5432"
 ```
 
-Create a personroutes.rs with the following code to setup databases connections and CRUD routes.
+Create a personroutes.rs with the following code to setup database connection and CRUD routes.
 
 ```rust
 use rocket_contrib::json::Json;
@@ -301,7 +301,7 @@ pub fn destroy(id: i32) -> String {
 }
 ```
 
-Notice we did use the request body to create and update database entries. This was cause to do so in Rocket you have to implement a custom FromBody trait on your Struct which was a little more complicated that necessary for this tutorial so I opted for using URL params instead.
+Notice we did use the request body to create and update database entries. This was cause to do so in Rocket you have to implement a custom FromData trait on your Struct which was a little more complicated than necessary for this tutorial so I opted for using URL params instead.
 
 Now, let's pull in some our recently added libraries and mount are new routes in our main.rs.
 
@@ -350,7 +350,7 @@ nightly
 web: ROCKET_PORT=$PORT ./target/release/personapi
 ```
 
-- create a new heroku project `heroku create projectName`
+- create a new Heroku project `heroku create projectName`
 
 - specify the buildpack `heroku buildpacks:set emk/rust`
 
@@ -366,4 +366,85 @@ This will work... to configure your heroku postgres:
 "user=test5 password=test5 dbname=rocketpeople sslmode=require host=localhost port=5432"
 ```
 
-At this point the only thing holding back the is TLS handshake. You have configure the TLS settings on the connect function specifically for Heroku. Haven't found any clear solution to this year, I'll update this article if I do. If you find one post it in a commment.
+## Heroku TLS Handshake
+
+So here everything should be working except the database still. This is cause Heroku Postgres needs particular handling of SSL and TLS. It took me a while to figure this out but by looking at the source code of [this library](https://github.com/dhbradshaw/dhb-postgres-heroku) I was able to do so.
+
+So in our Cargo.toml we need to bring in two more libraries...
+
+```toml
+openssl = "0.10.33"
+postgres-openssl = "0.5.0"
+```
+
+then in personroutes.rs we import the following.
+
+```rust
+use openssl::ssl::{SslConnector, SslMethod, SslVerifyMode};
+use postgres_openssl::MakeTlsConnector;
+```
+
+- create this function to return a new TLS connector
+
+```rust
+//CREATE HEROKU TLS BUILDER
+fn get_connector() -> MakeTlsConnector {
+    // Create Ssl postgres connector without verification as required to connect to Heroku.
+    let mut builder = SslConnector::builder(SslMethod::tls()).unwrap();
+    builder.set_verify(SslVerifyMode::NONE);
+    MakeTlsConnector::new(builder.build())
+}
+```
+
+Then update our connection code to use the new connect
+
+```rust
+// CREATE FUNCTION TO ESABLISH DATABASE CONNECTION
+fn getConn() -> Result<Client, Error> {
+    // GET DATABASE URL ENV VARIABLE
+    let uri;
+    let connector = get_connector();
+    dotenv().ok();
+    match env::var("DATABASE_URL2") {
+        Ok(val) => uri = val,
+        Err(_e) => uri = "none".to_string(),
+    }
+    print!("{}", uri);
+    // return database connection
+    return Client::connect(&uri, connector);
+}
+```
+
+- push up the new code and should be working
+
+## Using the Request Body
+
+Figured out the trick to this. Instead of having to create an implementation for each of your structs of the FromData trait. If you use the JSON struct built into Rocket, this has the FromData trait so you can wrap the type of your data in it.
+
+After receiving the data, the into_inner function allows you to unpack the JSON, and JSON function allows you to encode back into JSON. Here are two additional routes to see this at work.
+
+```rust
+// Receiving a Hash Map as the body
+#[post("/bread", data = "<body>")]
+pub fn rye(body:Json<HashMap<String, String>>) -> Json<HashMap<String, String>> {
+    return body;
+}
+
+// CREATE STRUCT THAT IS SERIALIZABLE INTO JSON
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Cheese {
+    name: String,
+    age: i32
+}
+
+// Receiving a Struct as body
+#[post("/bread2", data = "<body>")]
+pub fn wheat(body:Json<Cheese>) -> Json<Cheese> {
+    // unpack the json
+    let cheese = body.into_inner();
+    // print the cheese struct
+    print!("{:?}", cheese);
+    // encode the cheese struct as json and send out
+    return Json(cheese);
+}
+```
