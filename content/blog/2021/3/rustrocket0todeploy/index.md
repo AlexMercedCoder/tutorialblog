@@ -1,6 +1,6 @@
 ---
 title: Rust & Rocket - Zero to Deploy
-date: "2021-03-16T12:12:03.284Z"
+date: "2021-03-18T12:12:03.284Z"
 description: Building APIs with Rust
 ---
 
