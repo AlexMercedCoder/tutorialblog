@@ -4,6 +4,10 @@ date: "2021-01-09T12:12:03.284Z"
 description: All The Commands in Words that Make Sense
 ---
 
+- [VIDEO: Intro to Git](https://www.youtube.com/watch?v=L4zbgo7KFoA&list=PLY6oTPmKnKbYjGEm9nLowExbgkI-epIgg&index=7&t=9s)
+- [VIDEO: Working with Git Remotes](https://www.youtube.com/watch?v=TOsVVxXdtu8&list=PLY6oTPmKnKbYjGEm9nLowExbgkI-epIgg&index=9&t=2s)
+- [Setting Up SSH](https://www.youtube.com/watch?v=6u84sACs0v0&list=PLY6oTPmKnKbYjGEm9nLowExbgkI-epIgg&index=8)
+
 ## What is Version Control
 
 Imagine that you had a camera where you can take photos of yourself. At any time you can take a photo album off the shelf find a particular picture and travel back to that moment.
