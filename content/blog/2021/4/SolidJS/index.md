@@ -76,6 +76,43 @@ Solid doesn't use a virtual DOM and on state updates it doesn't run the componen
 
 So in the snippet below, the only code that reflects the updates to state is the JSX express and the code in the createEffect. Since neither uses count2, count2 triggers no changes on each update.
 
+```js
+import {createSignal, createEffect} from "solid-js"
+import './App.css';
+
+function App() {
+
+  // create state
+  const [count, setCount] = createSignal(1)
+  const [count2, setCount2] = createSignal(1)
+
+  // add function
+  const add = () => {
+    //notice in this context I must invoke the state to get the value (not in jsx)
+    setCount(count() + 1)
+    setCount2(count2() + 1)
+  }
+
+  // happens once
+  console.log("Count non-effect", count())
+  console.log("Count2 non-effect",count2())
+
+  // happens when count updates
+  createEffect(() => console.log("Count effect",count()))
+
+  // JSX works like normal
+  return (
+    <div class="App">
+      <h1>My Counter</h1>
+      <h2>{count}</h2>
+      <button onClick={add}>Add</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
 The nice thing about this is updates are more granular making the need for the expense of a virtual dom unnecessary (only code that depends on the updated data will change without having to run any comparisons.)
 
 ## Bottom Line
