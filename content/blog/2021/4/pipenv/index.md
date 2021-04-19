@@ -1,5 +1,5 @@
 ---
-title: Pipenv - Yep, another post about Pythong Virtual Environments
+title: Pipenv - Yep, another post about Python Virtual Environments
 date: "2021-04-07T12:12:03.284Z"
 description: Venv... the best way?
 ---
