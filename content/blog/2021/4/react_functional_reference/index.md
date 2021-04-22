@@ -38,6 +38,8 @@ The only bundler I didn't cover in the above is Vite which can be generated like
 
 Feel free to post more in the comments!
 
+Always make sure to read the package.json to know what scripts turn on the dev server and trigger the build process!
+
 ## Writing React Functional Components
 
 You can write a react component using any method of writing functions. Check out the the below snippet.
@@ -159,9 +161,7 @@ return (
 Your JSX is treated as html, and anything in curly brackets are treated as Javascript expressions in the functions scope. Any valid javascript expression can be used this way.
 
 ```jsx
-
 return <h1> I am {30 + 5} years old </h1>
-
 ```
 
 ## Props
@@ -176,30 +176,25 @@ Some rules
 
 ```jsx
 //The Child Component
-const Child = (props) => {
+const Child = props => {
+  //change the value of someVariable using function sent via props
+  props.setter(8)
 
-    //change the value of someVariable using function sent via props
-    props.setter(8)
-
-
-    return <h1>{props.stuff}</h1>
+  return <h1>{props.stuff}</h1>
 }
 
 // THe Parent Component
-const Parent = (props) => {
+const Parent = props => {
+  let someVariable
 
-    let someVariable;
+  //function to set someVariable
+  const setSV = data => {
+    someVariable = data
+  }
 
-    //function to set someVariable
-    const setSV = (data) => {
-        someVariable = data
-    }
-
-    // send down two props, stuff and setter
-    return <Child stuff="hello world" setter={setSV}/>
+  // send down two props, stuff and setter
+  return <Child stuff="hello world" setter={setSV} />
 }
-
-
 ```
 
 ## The useState Hook
@@ -209,7 +204,7 @@ The useState hook allows us to generate variables that are special, as updating 
 First step is always importing the useState hook.
 
 ```js
-import {useState} from "react"
+import { useState } from "react"
 ```
 
 Inside the body of your component function you can then initiate a state variable. The name convention is "state" for the variable and "setState" for the function that updates the states value.
@@ -224,26 +219,26 @@ const [counter, setCounter] = useState(0)
 So a simple counter component would look like this...
 
 ```jsx
-import {useState} from "react"
+import { useState } from "react"
 
-const Counter = (props) => {
+const Counter = props => {
+  // Declare the state
+  const [counter, setCounter] = useState(0)
 
-    // Declare the state
-    const [counter, setCounter] = useState(0)
+  // Function to add one to the state
+  const addOne = () => {
+    // sets counter to its current value + 1
+    setCounter(counter + 1)
+  }
 
-    // Function to add one to the state
-    const addOne = () => {
-        // sets counter to its current value + 1
-        setCounter(counter + 1)
-    }
-
-    // The h1 display the counter and button runs addOne function
-    return <div>
-    <h1>{counter}</h1>
-    <button onClick={addOne}>Click Me to Add One</button>
+  // The h1 display the counter and button runs addOne function
+  return (
+    <div>
+      <h1>{counter}</h1>
+      <button onClick={addOne}>Click Me to Add One</button>
     </div>
+  )
 }
-
 ```
 
 That's as simple as it gets. What happens when the button is clicked.
@@ -267,7 +262,6 @@ Don't do this
 state[0] = 6
 // then setState as the existing state, triggering NO update
 setState(state)
-
 ```
 
 Do this
@@ -286,33 +280,34 @@ setState(updatedState)
 Here is our counter component from earlier with a console.log and second piece of state.
 
 ```jsx
-import {useState} from "react"
+import { useState } from "react"
 
-const Counter = (props) => {
+const Counter = props => {
+  // Declare the state
+  const [counter, setCounter] = useState(0)
+  // second piece of state
+  const [evenCounter, setEvenCounter] = useState(0)
 
-    // Declare the state
-    const [counter, setCounter] = useState(0)
-    // second piece of state
-    const [evenCounter, setEvenCounter] = useState(0)
+  console.log("I'm just a random log")
 
-    console.log("I'm just a random log")
-
-    // Function to add one to the state
-    const addOne = () => {
-        // if counter is even before the update, update evenCounter
-        if(counter % 2 === 0){
-            setEvenCounter(evenCounter + 1)
-        }
-        // sets counter to its current value + 1
-        setCounter(counter + 1)
+  // Function to add one to the state
+  const addOne = () => {
+    // if counter is even before the update, update evenCounter
+    if (counter % 2 === 0) {
+      setEvenCounter(evenCounter + 1)
     }
+    // sets counter to its current value + 1
+    setCounter(counter + 1)
+  }
 
-    // The h1 display the counter and button runs addOne function
-    return <div>
-    <h1>{counter}</h1>
-    <h1>{evenCounter}</h1>
-    <button onClick={addOne}>Click Me to Add One</button>
+  // The h1 display the counter and button runs addOne function
+  return (
+    <div>
+      <h1>{counter}</h1>
+      <h1>{evenCounter}</h1>
+      <button onClick={addOne}>Click Me to Add One</button>
     </div>
+  )
 }
 ```
 
@@ -331,36 +326,37 @@ This is where the useEffect hook comes into play. This hook is a function that t
 - An array of values, when they change the function will run again. Usually an empty array if you never want the function to run again.
 
 ```jsx
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 
-const Counter = (props) => {
+const Counter = props => {
+  // Declare the state
+  const [counter, setCounter] = useState(0)
+  // second piece of state
+  const [evenCounter, setEvenCounter] = useState(0)
 
-    // Declare the state
-    const [counter, setCounter] = useState(0)
-    // second piece of state
-    const [evenCounter, setEvenCounter] = useState(0)
+  //making sure console.log only runs on certain renders
+  useEffect(() => {
+    console.log("I'm just a random log")
+  }, [evenCounter])
 
-    //making sure console.log only runs on certain renders
-    useEffect(() => {
-            console.log("I'm just a random log")
-    }, [evenCounter])
-
-    // Function to add one to the state
-    const addOne = () => {
-        // if counter is even before the update, update evenCounter
-        if(counter % 2 === 0){
-            setEvenCounter(evenCounter + 1)
-        }
-        // sets counter to its current value + 1
-        setCounter(counter + 1)
+  // Function to add one to the state
+  const addOne = () => {
+    // if counter is even before the update, update evenCounter
+    if (counter % 2 === 0) {
+      setEvenCounter(evenCounter + 1)
     }
+    // sets counter to its current value + 1
+    setCounter(counter + 1)
+  }
 
-    // The h1 display the counter and button runs addOne function
-    return <div>
-    <h1>{counter}</h1>
-    <h1>{evenCounter}</h1>
-    <button onClick={addOne}>Click Me to Add One</button>
+  // The h1 display the counter and button runs addOne function
+  return (
+    <div>
+      <h1>{counter}</h1>
+      <h1>{evenCounter}</h1>
+      <button onClick={addOne}>Click Me to Add One</button>
     </div>
+  )
 }
 ```
 
@@ -373,8 +369,7 @@ useEffect is more regularly used for API calls. Usually you'll call the API, get
 
 ```jsx
 useEffect(() => {
-    axios(URL)
-    .then(data => setState(data))
+  axios(URL).then(data => setState(data))
 }, [])
 ```
 
@@ -385,20 +380,267 @@ Also if the function given to useEffect returns a function, the returned functio
 Think of the useRef hook kind of like document.querySelector, it let's you assign a DOM node to a variable so you can access its properties. React declarative (express what you want, not how to make it) nature makes it hard to write normal imperative (how to make the thing step by step) DOM code. So if you need to get access to a DOM node like an input you can do the following:
 
 ```jsx
-import {useRef} from "react"
+import { useRef } from "react"
 
-const Component = (props) => {
-    // create a new ref, we'll assign it in our JSX
-    const inputRef = useRef(null)
+const Component = props => {
+  // create a new ref, we'll assign it in our JSX
+  const inputRef = useRef(null)
 
-    const handleClick = () => {
-        //log the inputs elements value
-        console.log(inputRef.current.value)
-    }
+  const handleClick = () => {
+    //log the inputs elements value
+    console.log(inputRef.current.value)
+  }
 
-    return <div>
-    <input type="text" ref={inputRef}/>
-    <button onClick={handleClick}>Click Me</button>
+  return (
+    <div>
+      <input type="text" ref={inputRef} />
+      <button onClick={handleClick}>Click Me</button>
     </div>
+  )
 }
 ```
+
+## Form Handling
+
+There are two ways to handle forms in React.
+
+- **Controlled Forms:** The value of the inputs are bound to state, so value of state and the value of the inputs are always in sync.
+
+- **Uncontrolled Forms:** The forms are not bound by state, instead their values are pulled using a ref when needed.
+
+### Example of a Controlled Form
+
+Parts:
+
+- object holding form values as state
+- handleChange function that updates the state when we type into the form
+- handleSubmit function to handle form submission and do what you want with the data
+
+```jsx
+import { useState } from "react"
+
+const Form = props => {
+  //State to hold the form data
+  const [form, setForm] = useState({
+    name: "",
+    age: 0,
+  })
+
+  // handleChange function
+  const handleChange = event => {
+    // dynamically update the state using the event object
+    // this function always looks the same
+    setForm({ ...form, [event.target.name]: event.target.value })
+  }
+
+  const handleSubmit = event => {
+    // prevent page refresh
+    event.preventDefault()
+    // do what you want with the form data
+    console.log(form)
+  }
+
+  // The JSX for the form binding the functions and state to our inputs
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={form.name}
+        onChange={handleChange}
+        name="name"
+        placeholder="write name here"
+      />
+      <input
+        type="number"
+        value={form.age}
+        onChange={handleChange}
+        name="age"
+        placeholder="write age here"
+      />
+      <input type="submit" value="Submit Form" />
+    </form>
+  )
+}
+```
+
+### Example of an Uncontrolled Form
+
+- a ref created for each input
+- handleSubmit for when form is submitted
+
+```jsx
+import { useRef } from "react"
+
+const Form = props => {
+  // ref to get input values
+  const nameInput = useRef(null)
+  const ageInput = useRef(null)
+
+  const handleSubmit = event => {
+    // prevent page refresh
+    event.preventDefault()
+    // do what you want with the form data
+    console.log({
+      name: nameInput.current.value,
+      age: ageInput.current.value,
+    })
+  }
+
+  // The JSX for the form binding the functions and state to our inputs
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" ref={nameInput} placeholder="write name here" />
+      <input type="number" ref={ageInput} placeholder="write age here" />
+      <input type="submit" value="Submit Form" />
+    </form>
+  )
+}
+```
+
+## State Management
+
+State is the most important concept in React, your app is "reactive" because you have state for data your UI depends on. As Apps get more complex, deciding how to handle state and where it should be housed can get quite daunting.
+
+Here are some questions to use as a guide.
+
+**This Piece of State is Used in how many components?**
+
+![The React Component Tree](https://i.imgur.com/yaERGHf.png)
+
+- 0-1: It should be in the one component using it and nowhere else
+- 2-5: It should be located in a parent all the components share but as low in the component tree as possible
+- 5+: Time to consider Context
+
+#### Prop Drilling
+
+This is the inevitable tragedy that occurs when your components trees grow to several layers. Imagine a piece of state is in a component that is needed in a grandchild component... you'd have to do the following.
+
+```jsx
+const GrandChild = props => <h1>{props.data}</h1>
+
+const Child = props => <GrandChild data={cheese} />
+
+const Parent = props => <Child cheese="gouda" />
+```
+
+This is prop drilling, the Parent passes cheese to child, who passes the same data as data to GrandChild. Imagine if it was a Great-Great-Grandchild... that's a lot of typing just so one component can receive a single piece of data.
+
+There are several solutions to this.
+
+- React Context
+- React useReducer Hook
+- [The TaskRunner Pattern](https://tuts.alexmercedcoder.com/2020/taskrunner/)
+- Redux
+- And many more... (MobX, State Machines, ...)
+
+Let's cover a few!
+
+### Context
+
+What context allows us to do is to create an object that be passed directly to children of any level without having to pass them around as props. If props were like walking down several flights of stairs, Context is liking taking an elevator to where you need to go, faster and easier.
+
+```jsx
+import { createContext, useContext } from "react"
+
+//create the context object
+const context = createContext(null)
+
+const GrandChild = props => {
+  // consume the data from the provider in parent
+  const ctx = useContext(context)
+  return <h1>{ctx}</h1>
+}
+
+// notice... no props pass through child in this scenario
+const Child = props => <GrandChild />
+
+// the context provider determines what data the parent provides its children
+const Parent = props => (
+  <context.Provider value={"cheese"}>
+    <Child />
+  </context.Provider>
+)
+```
+
+So notice, because we used Context, the parent component was able to pass data directly to it's grandchild without having to pass any props. Context makes transporting data across your components much easier. The only downside is the direction of the data and where it is used will be a little less obvious to a random spectator.
+
+### The useReducer Hook
+
+Before context many use Redux for state management. Not only did Redux allow you to store all your state in one place (the Redux Store) but also allowed you to house all your stateful logic in one place called the Reducer function.
+
+The reducer function would normally be passed an "action" which is an object with two properties. This action was passed to the reducer calling a "dispatch" function.
+
+- type: A string that is passed to a switch to determine how to update the state
+
+- payload: Any data needed for the state update.
+
+React eventually took the core Redux functionality and built it in to React as the useReducer hook. Below is a basic example of the useReducer hook.
+
+```jsx
+import { createContext, useContext, useReducer } from "react"
+
+//create the context object
+const context = createContext(null)
+
+const GrandChild = props => {
+  // consume the data from the provider in parent
+  const ctx = useContext(context)
+  // the h1 displays the state pulled from context
+  // the buttons call dispatch and pass the action to the reducer
+  return (
+    <>
+      <h1>{ctx.state}</h1>
+      <button onClick={() => ctx.dispatch({ type: "add", payload: null })}>
+        Add
+      </button>
+      <button onClick={() => ctx.dispatch({ type: "subtact", payload: null })}>
+        Subtract
+      </button>
+    </>
+  )
+}
+
+// notice... no props pass through child in this scenario
+const Child = props => <GrandChild />
+
+// the context provider determines what data the parent provides its children
+const Parent = props => {
+  // the reducer with our stateful logic
+  const reducer = (state, action) => {
+    // get the type and payload from the action
+    const { type, payload } = action
+
+    switch (type) {
+      // determine how to update the state based on action type
+      case "add":
+        return state + 1
+      case "subtract":
+        return state - 1
+      default:
+        // if it doesn't match any type, keep the state as is
+        return state
+    }
+  }
+
+  // the initial value of the state
+  const initialState = 0
+
+  // create the state and the dispatch function
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  // pass the state and dispatch via context in an object
+  return (
+    <context.Provider value={{ state, dispatch }}>
+      <Child />
+    </context.Provider>
+  )
+}
+```
+
+## Learning More About React
+
+- [React Router Masterclass](https://www.youtube.com/watch?v=UOh4WzovSpQ&t=19s)
+- [The TaskRunner Patten (alternative to redux/useReducer)](https://www.youtube.com/watch?v=B0NHSDmPKlo)
+- [Redux vs useReducer](https://www.youtube.com/watch?v=dEGVZy6PoAA)
+- [Styled Components (React Styling Library)](https://www.youtube.com/watch?v=Loz7RYU-JKM)
+- [React Forms with Formik](https://www.youtube.com/watch?v=T307WJ5eDOw)
