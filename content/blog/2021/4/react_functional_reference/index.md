@@ -693,9 +693,7 @@ If you are giving a component a LOOOOOT of props and it may be a little messy to
 So instead of...
 
 ```jsx
-
-<Component name="Alex Merced" age={35} website="devNursery.com"/>
-
+<Component name="Alex Merced" age={35} website="devNursery.com" />
 ```
 
 Do this...
@@ -722,11 +720,13 @@ return <Component {...props}>
 - Redux (state management)
 
 #### Other Popular Parts of the React Ecosystem
+
 - NextJS (Server-Side Rendering and Static Generation)
 - Gatasby (Static Site Generator)
 - ReactNative (Mobile Development)
 
 #### Other Frontend Frameworks (Competitors)
+
 - Angular
 - Vue
 - Svelte
@@ -736,7 +736,6 @@ return <Component {...props}>
 - AMPonent (Web Components)
 - KofuJS (Opinionated Class Based Library with JSX and Observables)
 - Ember
-
 
 ## useMemo and useCallback
 
@@ -749,5 +748,5 @@ The purpose of these hooks are really for after you've completed your applicatio
 - [Redux vs useReducer](https://www.youtube.com/watch?v=dEGVZy6PoAA)
 - [Styled Components (React Styling Library)](https://www.youtube.com/watch?v=Loz7RYU-JKM)
 - [React Forms with Formik](https://www.youtube.com/watch?v=T307WJ5eDOw)
-
-
+- [Writing Tests with React](https://dev.to/alexmercedcoder/the-basics-of-writing-tests-for-react-with-jest-5ap5)
+- [React with Typescript](https://www.typescriptlang.org/docs/handbook/react.html)
