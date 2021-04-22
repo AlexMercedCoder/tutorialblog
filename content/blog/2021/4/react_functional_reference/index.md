@@ -36,6 +36,11 @@ Easy enough! Here are many of the templates I maintain through my merced-spinup 
 The only bundler I didn't cover in the above is Vite which can be generated like so...
 `npm init @vitejs/app appName --template react`
 
+Other Official Generators from the Bundler makers...
+
+- [Official Snowpak Project Generator](https://github.com/snowpackjs/snowpack/tree/main/create-snowpack-app/cli)
+- [Parcel App Recipes Including React](https://parceljs.org/recipes.html)
+
 Feel free to post more in the comments!
 
 Always make sure to read the package.json to know what scripts turn on the dev server and trigger the build process!
@@ -194,6 +199,35 @@ const Parent = props => {
 
   // send down two props, stuff and setter
   return <Child stuff="hello world" setter={setSV} />
+}
+```
+
+## Using Arrays in React
+
+Often times we may want generate JSX for many elements of an array, the standard way of doing so is using the array.map method. Use the example below to see how.
+
+```jsx
+const Component = () => {
+  // an array of dogs
+  const dogs = [
+    { name: "Sparky", age: 5 },
+    { name: "Spot", age: 5 },
+    { name: "Ralph", age: 5 },
+    { name: "Fido", age: 5 },
+  ]
+  // map over the dogs array and create an array of JSX for each dog
+  const dogJSX = dogs.map(dog => {
+    // we return JSX for each dog in the array which we store in the dog variable, essentially we are looping over dog of dogs
+    return (
+      <div>
+        <h1>{dog.name}</h1>
+        <h2>{dog.age}</h2>
+      </div>
+    )
+  })
+
+  // the component returns JSX that uses the dogJSX array
+  return <div>{dogJSX}</div>
 }
 ```
 
@@ -637,6 +671,77 @@ const Parent = props => {
 }
 ```
 
+## Quick Tips
+
+#### Destructuring Props
+
+If you know the names of the props your component will receive you can destructure them and save you the hassle of typing props.
+
+```jsx
+const Component = ({ name, age }) => (
+  <div>
+    <h1>{name}</h1>
+    <h2>{age}</h2>
+  </div>
+)
+```
+
+#### Spreading Props
+
+If you are giving a component a LOOOOOT of props and it may be a little messy to type them inline, then bundle them in an object and spread them.
+
+So instead of...
+
+```jsx
+
+<Component name="Alex Merced" age={35} website="devNursery.com"/>
+
+```
+
+Do this...
+
+```jsx
+
+const props = {
+    name: "Alex Merced",
+    age: 35,
+    website: "devNursery.com"
+}
+
+return <Component {...props}>
+```
+
+#### Popular React Libraries
+
+- react-router & react-router-dom (client side router)
+- Formik (forms)
+- Styled Components (Styling)
+- Reactstap and React Bootstrap (different bootstrap implementations)
+- MaterialUI (Material Design Implementation)
+- merced-react-hooks (Several Custom Hooks for API calls, Forms, State Management, etc.)
+- Redux (state management)
+
+#### Other Popular Parts of the React Ecosystem
+- NextJS (Server-Side Rendering and Static Generation)
+- Gatasby (Static Site Generator)
+- ReactNative (Mobile Development)
+
+#### Other Frontend Frameworks (Competitors)
+- Angular
+- Vue
+- Svelte
+- SolidJS (Write JSX that compiles like Svelte)
+- StencilJS (Create Web Components with JSX)
+- litHTML/litElement (Web Components)
+- AMPonent (Web Components)
+- KofuJS (Opinionated Class Based Library with JSX and Observables)
+- Ember
+
+
+## useMemo and useCallback
+
+The purpose of these hooks are really for after you've completed your application and you want to improve it's performance. You can wrap the calculation of certain variables and functions in these hooks so they only get redefined if certain data changes. These are really advanced and should really wait till your app really needs performance optimization.
+
 ## Learning More About React
 
 - [React Router Masterclass](https://www.youtube.com/watch?v=UOh4WzovSpQ&t=19s)
@@ -644,3 +749,5 @@ const Parent = props => {
 - [Redux vs useReducer](https://www.youtube.com/watch?v=dEGVZy6PoAA)
 - [Styled Components (React Styling Library)](https://www.youtube.com/watch?v=Loz7RYU-JKM)
 - [React Forms with Formik](https://www.youtube.com/watch?v=T307WJ5eDOw)
+
+
