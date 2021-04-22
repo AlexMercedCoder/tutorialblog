@@ -6,6 +6,38 @@ description: React for Everyone
 
 [I will Continue to Expand on Guide in this Gist](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c)
 
+### by Alex Merced of AlexMercedCoder.com & devNursery.com
+## Table of Contents
+- [React Project Generators](#react-project-generators)
+- [Writing Functional Components](#writing-react-functional-components)
+- [The Rules of JSX](#rules-of-jsx)
+  - [Only One Top-Level Element](#1-only-one-top-level-element)
+  - [Attributes are Camel Case](#2-attributes-are-camelcase)
+  - [Inline Styles in JSX](#3-inline-styles-in-jsx)
+  - [Arrays of JSX](#4-arrays-work)
+  - [Injecting Javascript Expressions](#5-injecting-javascript-expressions)
+- [Props](#props)
+- [Using Arrays in React](#using-arrays-in-react)
+- [The useState Hook](#the-usestate-hook)
+- [The useEffect Hook](#the-useeffect-hook)
+- [The useRef Hook](#the-useref-hook)
+- [Form Handling](#form-handling)
+  - [Controlled Forms](#example-of-a-controlled-form)
+  - [Uncontrolled Forms](#example-of-an-uncontrolled-form)
+- [State Management (Context, useReducer)](#state-management)
+  - [Listing State](#lifting-state)
+  - [Props Drilling](#prop-drilling)
+  - [Context](#context)
+  - [useReducer](#the-usereducer-hook)
+- [Quick Tips](#quick-tips)
+  - [Destructuring Props](#destructuring-props)
+  - [Spreading Props](#spreading-props)
+  - [Popular React Libraries](#popular-react-libraries)
+  - [The React Ecosystem](#other-popular-parts-of-the-react-ecosystem)
+  - [Other Frontend Frameworks](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c#other-frontend-frameworks-competitors)
+- [useMemo and useCallback](#usememo-and-usecallback)
+- [Learning More about React](#learning-more-about-react)
+
 ## React Project Generators
 
 There is a huge world of generators for a React Project. First off, there is always the generator that comes straight from Facebook/React, create-react-app.
@@ -544,6 +576,45 @@ Here are some questions to use as a guide.
 - 0-1: It should be in the one component using it and nowhere else
 - 2-5: It should be located in a parent all the components share but as low in the component tree as possible
 - 5+: Time to consider Context
+
+#### Lifting State
+
+The concept of Lifting state occurs when siblings need to share state with each other. The lifting state pattern occurs of the following pattern.
+
+- The state is housed in the parent of the two siblings
+
+- The parent passes a function as props to the sender to alter the parents state
+
+- The parent passes the state itself as a prop to the receiver to receive the updated state
+
+```jsx
+// Component receive function as prop to update parents state
+const SenderChild = props => {
+  return <button onClick={() => props.update("Goodbye")}>Click Me</button>
+}
+
+// Component receives parents state
+const SeceiverChild = props => {
+  return <h1>{props.value}</h1>
+}
+
+// The parent who passes props to both children
+const Parent = props => {
+  // The State
+  const [state, setState] = useState("Hello")
+
+  // Function to update state to send to child
+  const updateState = data => setState(data)
+
+  // we pass the function and the state as props to the children
+  return (
+    <div>
+      <ReceiverChild value={state} />
+      <SenderChild update={updateState} />
+    </div>
+  )
+}
+```
 
 #### Prop Drilling
 

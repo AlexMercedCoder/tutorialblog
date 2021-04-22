@@ -4,6 +4,7 @@ date: "2021-04-22T12:12:03.284Z"
 description: Making Sure React Works
 ---
 
+[MY VIDEO ON REACT TESTING](https://youtu.be/Qpp67fEqtxo)
 ## Why Testing Matters
 
 While we can test our own code in our local environment it can get tedious replicating every piece of functionality and every edge case for every change we make. This results in shipping code with errors. These errors fall into several categories.
