@@ -5,8 +5,6 @@ description: React for Everyone
 ---
 
 [I will Continue to Expand on Guide in this Gist](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c)
-
-### by Alex Merced of AlexMercedCoder.com & devNursery.com
 ## Table of Contents
 - [React Project Generators](#react-project-generators)
 - [Writing Functional Components](#writing-react-functional-components)
@@ -779,6 +777,54 @@ const props = {
 
 return <Component {...props}>
 ```
+
+#### props.children
+
+All component have a prop by default called "children", the children prop represent any wrapped in the components opening and closing tag. So imagine the below we have a Container Component we use to block of content.
+
+```jsx
+const Container = (props) => {
+  const style = {
+    width: "90%",
+    margin: "auto,
+    border: "1px solid green"
+  }
+  return <div style={style}> {props.children} </div>
+}
+
+const App = (props) => {
+  return <Container><h1>Hello World</h1></Container>
+}
+```
+
+In this case anything between the opening and closing Container tag are stored in props.children will render inside of a div with a green border.
+
+#### Portals
+
+Portals are a way of injecting something somewhere else in the DOM, not used very often but here is an example.
+
+```jsx
+import {createPortal} from "react"
+
+// This component renders div with the id of target
+const Target = (props) => {
+  return <div id="target"></div>
+}
+
+// regardless of where this component is used, the h1 will be rendered inside of an element that has the id of "target"
+const Payload = (props) => {
+  return createPortal(<h1>This is a weird place to be</h1>, document.querySelector("#target"))
+}
+
+const App = () => (
+  <>
+  <Target/>
+  <Payload/>
+  </>
+)
+```
+
+So even though the Payload component is below Target, it's output will appear within Target since we are mounting Payload to the div Target renders.
 
 #### Popular React Libraries
 
