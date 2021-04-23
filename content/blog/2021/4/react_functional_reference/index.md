@@ -5,38 +5,6 @@ description: React for Everyone
 ---
 
 [I will Continue to Expand on Guide in this Gist](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c)
-## Table of Contents
-- [React Project Generators](#react-project-generators)
-- [Writing Functional Components](#writing-react-functional-components)
-- [The Rules of JSX](#rules-of-jsx)
-  - [Only One Top-Level Element](#1-only-one-top-level-element)
-  - [Attributes are Camel Case](#2-attributes-are-camelcase)
-  - [Inline Styles in JSX](#3-inline-styles-in-jsx)
-  - [Arrays of JSX](#4-arrays-work)
-  - [Injecting Javascript Expressions](#5-injecting-javascript-expressions)
-- [Props](#props)
-- [Using Arrays in React](#using-arrays-in-react)
-- [The useState Hook](#the-usestate-hook)
-- [The useEffect Hook](#the-useeffect-hook)
-- [The useRef Hook](#the-useref-hook)
-- [Form Handling](#form-handling)
-  - [Controlled Forms](#example-of-a-controlled-form)
-  - [Uncontrolled Forms](#example-of-an-uncontrolled-form)
-- [State Management (Context, useReducer)](#state-management)
-  - [Listing State](#lifting-state)
-  - [Props Drilling](#prop-drilling)
-  - [Context](#context)
-  - [useReducer](#the-usereducer-hook)
-- [Quick Tips](#quick-tips)
-  - [Destructuring Props](#destructuring-props)
-  - [Spreading Props](#spreading-props)
-  - [props.children](#propschildren)
-  - [Portals](#portals)
-  - [Popular React Libraries](#popular-react-libraries)
-  - [The React Ecosystem](#other-popular-parts-of-the-react-ecosystem)
-  - [Other Frontend Frameworks](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c#other-frontend-frameworks-competitors)
-- [useMemo and useCallback](#usememo-and-usecallback)
-- [Learning More about React](#learning-more-about-react)
 
 ## React Project Generators
 
