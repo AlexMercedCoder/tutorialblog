@@ -30,6 +30,8 @@ description: React for Everyone
 - [Quick Tips](#quick-tips)
   - [Destructuring Props](#destructuring-props)
   - [Spreading Props](#spreading-props)
+  - [props.children](#propschildren)
+  - [Portals](#portals)
   - [Popular React Libraries](#popular-react-libraries)
   - [The React Ecosystem](#other-popular-parts-of-the-react-ecosystem)
   - [Other Frontend Frameworks](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c#other-frontend-frameworks-competitors)
