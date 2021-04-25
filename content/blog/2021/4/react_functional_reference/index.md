@@ -231,6 +231,28 @@ const Component = () => {
 }
 ```
 
+## Iterating Over an Object in React
+
+Using Objects.keys to generate an array of strings that are the keys of the objects properties. You can then map over the array to generate JSX for each property.
+
+```jsx
+const Component = props => {
+  const Alex = {
+    name: "Alex Merced",
+    age: "35",
+    email: "alex@alexmerced.dev",
+  }
+
+  return Object.keys(Alex).map((key, index) => {
+    return (
+      <h2>
+        {key}: {Alex[key]}
+      </h2>
+    )
+  })
+}
+```
+
 ## The useState Hook
 
 The useState hook allows us to generate variables that are special, as updating them would trigger your component and its children to update.
@@ -710,6 +732,168 @@ const Parent = props => {
 }
 ```
 
+## React Router
+
+- install `npm install react-router-dom`
+
+#### Router Component
+
+The Router component tracks url bar and passes information for all the other React Router components to work. Router is a Provider so anywhere you plan on using Router should be a child of Router. To give the whole app access to Router wrap the App component is Router.
+
+```jsx
+import { BroswerRouter as Router } from "react-router-dom"
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+)
+```
+
+#### Route Component
+
+The Route component defines a route and will render JSX only if the URL matches the path specified. There are three ways to write your routes.
+
+**JSX as Child of Route Component**
+
+Pro: Easiest to Write and can pass props to components
+Con: Does not receive the Router Props (History, Location, Match)
+
+```jsx
+import { Route } from "react-router-dom"
+
+function App(props) {
+  return (
+    <div>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/about">
+        <About />
+      </Route>
+      <Route path="/projects">
+        <Projects />
+      </Route>
+    </div>
+  )
+}
+```
+
+**Using the Component Prop**
+
+Pro: Easy to write, receives router props
+Con: Can't pass custom props
+
+```jsx
+import { Route } from "react-router-dom"
+
+function App(props) {
+  return (
+    <div>
+      <Route path="/home" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/projects" component={Projects} />
+    </div>
+  )
+}
+```
+
+**Passing a Function to the Render Prop**
+
+Pro: Can receive custom props and router props
+Con: Most Verbose (hard to write)
+
+```jsx
+import { Route } from "react-router-dom"
+
+function App(props) {
+  return (
+    <div>
+      <Route path="/home" render={routerProps => <Home {...routerProps} />} />
+      <Route path="/about" render={routerProps => <About {...routerProps} />} />
+      <Route
+        path="/projects"
+        render={routerProps => <Projects {...routerProps} />}
+      />
+    </div>
+  )
+}
+```
+
+#### Switch Component
+
+Normally if multiple routes match the URL then they all render. Switch only allows the first matching route within the switch to appear.
+
+```jsx
+import { Route, Switch } from "react-router-dom"
+
+function App(props) {
+  return (
+    <div>
+      <Switch>
+        <Route path="/home" render={routerProps => <Home {...routerProps} />} />
+        <Route
+          path="/about"
+          render={routerProps => <About {...routerProps} />}
+        />
+        <Route
+          path="/projects"
+          render={routerProps => <Projects {...routerProps} />}
+        />
+      </Switch>
+    </div>
+  )
+}
+```
+
+#### Link Component
+
+The Link component should be used instead Anchor tags when making a link that should trigger a route.
+
+```jsx
+import { Link } from "react-router-dom"
+
+function Navigation(props) {
+  return (
+    <nav>
+      <Link to="/home">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/projects">Projects</Link>
+    </nav>
+  )
+}
+```
+
+## Styled Components
+
+Styled Components is a 3rd party library for creating components with built in css.
+
+- install `npm install styled-components`
+
+Use like so...
+
+```jsx
+import styled from "styled-components"
+
+const Container = styled.div`
+  width: 80%;
+  margin: auto;
+  text-align: center;
+`
+
+const Title = styled.h1`
+  font-size: 3em;
+  color: red;
+`
+
+const Component = props => (
+  <Container>
+    <Title>Hello World</Title>
+  </Container>
+)
+```
+
 ## Quick Tips
 
 #### Destructuring Props
@@ -774,22 +958,25 @@ In this case anything between the opening and closing Container tag are stored i
 Portals are a way of injecting something somewhere else in the DOM, not used very often but here is an example.
 
 ```jsx
-import {createPortal} from "react"
+import { createPortal } from "react"
 
 // This component renders div with the id of target
-const Target = (props) => {
+const Target = props => {
   return <div id="target"></div>
 }
 
 // regardless of where this component is used, the h1 will be rendered inside of an element that has the id of "target"
-const Payload = (props) => {
-  return createPortal(<h1>This is a weird place to be</h1>, document.querySelector("#target"))
+const Payload = props => {
+  return createPortal(
+    <h1>This is a weird place to be</h1>,
+    document.querySelector("#target")
+  )
 }
 
 const App = () => (
   <>
-  <Target/>
-  <Payload/>
+    <Target />
+    <Payload />
   </>
 )
 ```
