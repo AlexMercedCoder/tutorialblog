@@ -1,5 +1,5 @@
 ---
-title: 10 Programming Languages Side by Side (JS, Python, Ruby, PHP, GO, Rust, Dart, C#, Java, Ballerina)
+title: 10 Programming Languages Side by Side (JS, Python, Ruby, PHP, GO, Rust, Dart, C Sharp, Java, Ballerina)
 date: "2021-06-02T12:12:03.284Z"
 description: Learn Languages by see what's similar and different
 ---
@@ -68,7 +68,7 @@ void main(){
 }
 ```
 
-#### C#
+#### C Sharp
 
 ```cs
 using System;
@@ -182,7 +182,7 @@ void main (){
 }
 ```
 
-#### C#
+#### C Sharp
 
 ```cs
 using System;
@@ -327,7 +327,7 @@ void main (){
 }
 ```
 
-#### C#
+#### C Sharp
 
 ```cs
 using System;
@@ -474,7 +474,7 @@ void main(){
 }
 ```
 
-#### C#
+#### C Sharp
 
 ```cs
 using System;
