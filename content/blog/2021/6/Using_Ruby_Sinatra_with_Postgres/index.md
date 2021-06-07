@@ -22,7 +22,7 @@ In Ruby on Rails we use ActiveRecord as our ORM (Object Relationship Mapper). Si
 
 - create a database `CREATE DATABASE sequel_test;`
 
-- create a super user to connect `CREATE USER myuser WITH SUPERUSER PASSWORD 'myuser;'`
+- create a super user to connect `CREATE USER myuser WITH SUPERUSER PASSWORD 'myuser';`
 
 - connect to the database `\c sequel_test`
 
@@ -46,7 +46,7 @@ require 'sequel'
 # Connect to our database using our database string
 DB = Sequel.connect('postgres://test7:test7@localhost:5432/sequel_test')
 
-#Create a route to create a table
+#Create a route to see all records
 get '/' do
     # create a dataset from the people table
     result = DB[:people]
