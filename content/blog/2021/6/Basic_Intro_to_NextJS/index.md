@@ -32,7 +32,7 @@ There are lot more features that frameworks for Isomorphic apps bring to the tab
 - choose an application name
 - cd into the new folder for your project
 
-# Routing
+# NextJs Features
 
 NextJS has file based routing, these are the essential rules:
 
@@ -64,6 +64,8 @@ export default function Food() => {
     return <h1>{food}</h1>
 }
 ```
+
+Other Features
 
 - Files can be served statically outside of public folder
 
