@@ -17,7 +17,7 @@ Meaning, you can optimize for speed and security static rendering while not givi
 | React | Gatsby | NextJS |
 | Vue | Gridsome | NuxtJS |
 | Svelte | ElderJS | SvelteKit |
-| Angular | Scully | Anular Universal |
+| Angular | Scully | Angular Universal |
 | SolidJS | NOT YET | NOT YET |
 
 There are lot more features that frameworks for Isomorphic apps bring to the table but how about we just take NextJS for a Spin.
