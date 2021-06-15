@@ -227,7 +227,7 @@ namespace firstapi.Models
         {
         }
 
-        public DbSet<Person> TodoItems { get; set; }
+        public DbSet<Person> Persons { get; set; }
     }
 }
 ```
@@ -538,3 +538,5 @@ CMD ASPNETCORE_URLS=http://*:$PORT dotnet firstapi.dll
 - push image
 
 - release image... and you're good!!!
+
+[If you run into CORS issues, Read This](https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0)
