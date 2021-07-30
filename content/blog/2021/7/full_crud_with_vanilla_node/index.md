@@ -664,5 +664,6 @@ Well, we created a very crude full crud json api using raw node and no framework
 - creating routing params
 - setting up cors headers
 - being able to parse urlEncoded or XML bodies
+- adding https support with the "https" library
 
 So while I doubt you'll be making a raw api like this again anytime soon. I hope having done this has given you a deeper appreciation for the abstractions and patterns you'll find in express, koa and fastify.
