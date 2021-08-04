@@ -295,3 +295,84 @@ end
 ## Conclusion
 
 You've just made a full crud API using Ruby Sinatra. The next step is to try to implement a database so that the data persists. There are many databases and corresponding libraries to use so go out and experiment.
+
+## Bonus (CORS)
+
+Here is a version of the build with the extra code for setting CORS headers:
+
+```rb
+
+require "sinatra"
+posts = [{title: "First Post", body: "content of first"}]
+## custom method for getting Request body
+def getBody(req)
+    ## rewind the body
+    req.body.rewind
+    ## parse the body
+    return JSON.parse(req.body.read)
+end
+## Function for setting CORS headers
+def setCors
+    ## create hash of the cors headers
+    cors_headers = {
+        ## URLS allowed to make request (* means any)
+        "Access-Control-Allow-Origin" => "*",
+        ## Request methods allowed
+        "Access-Control-Allow-Methods" => "*",
+        ## Headers allowed in requests
+        "Access-Control-Allow-Headers" => "*",
+        ## Max length of a request before timing out in seconds
+        "Access-Control-Max-Age" => "86400"
+    }
+    ## set the headers
+    headers(cors_headers)
+end
+## Index Route
+get '/posts' do
+    #Return all the posts as json
+    setCors()
+    return posts.to_json
+end
+## Show Route
+get "/posts/:id" do
+    setCors()
+    id = params["id"].to_i ## the string "0" turning to 0
+    return posts[id].to_json
+end
+## Create Route
+post '/posts' do
+    setCors()
+    ## get the request body
+    body = getBody(request)
+    ## create the new post
+    new_post = {title: body["title"], body: body["body"]}
+    ## push the new post into the array
+    posts.push(new_post)
+    ## return the post as json
+    return new_post.to_json
+end
+## Update Route
+put "/posts/:id" do
+    setCors()
+    ## get the id from params
+    id = params["id"].to_i
+    ## get the body
+    body = getBody(request)
+    ## go update the thing
+    posts[id][:title] = body["title"]
+    posts[id][:body] = body["body"]
+    ## return the updated post
+    return posts[id].to_json
+end
+## Destroy Route
+delete "/posts/:id" do
+    setCors()
+    ## Get the id from params
+    id = params["id"].to_i
+    ## Delete the item
+    post = posts.delete_at(id)
+    ## return the deleted item as json
+    return post.to_json
+end
+
+```
