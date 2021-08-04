@@ -8,11 +8,11 @@ No matter what kind of application you are working on in any programming languag
 
 On a small scale most databases can work well for most use cases but for large sets of data how the database works and organizes the data and searches through the data can make a big difference in performance for your application.
 
-Not only does the database platform make a difference but also the design of your data. Thinking through your data models in a way that minimizes redundant data and structures the data in logical and easy to look up ways.
+Not only does the database platform make a difference but also the design of your data. Thinking through your data models in a way that minimizes redundant data and structures the data in logical and easy to look up ways can make or break the scalability of your application.
 
 ## Data Design
 
-WHen designing how your database will structure your data, first we break up our data in different units called models. Each model is a description of what one record of data should look like.
+When designing how your database will structure your data, first we break up our data into different units called models. Each model is a description of what one record of data should look like.
 
 For example, let's say you want to save mortgage applications in a database. The client filling out the application may include the following.
 
@@ -20,9 +20,9 @@ For example, let's say you want to save mortgage applications in a database. The
 - Their current address
 - The address they are purchasing
 
-We could just create one "Application" model with all this data. The problem is maybe there is two applicants applying to buy the same address or living in the same address. Also, while one applicant may be applying to buy one house, the owner of the the property may be filling another application for a property they are buying. This will result in the same address showing up in your data several times which overtime can bloat and slow down your database software.
+We could just create one "Application" model with all this data. The problem is maybe there are two applicants applying to buy the same address or living in the same address. Also, while one applicant may be applying to buy one house, the owner of the property may be filling another application for a property they are buying. This will result in the same address showing up in your data several times which over time can bloat and slow down your database software.
 
-Better way to structure the data:
+**A better way to structure the data:**
 
 Applicant Model
 
