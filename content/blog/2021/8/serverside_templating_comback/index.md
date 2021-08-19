@@ -1,5 +1,5 @@
 ---
-title: The renaissance of server side rendering with Alipine and HTMX, Reactivity with Minimal JS
+title: The renaissance of server side rendering with Alpine and HTMX, Reactivity with Minimal JS
 date: "2021-08-19T14:12:03.284Z"
 description: A Beginning oriented dive into databases
 ---
