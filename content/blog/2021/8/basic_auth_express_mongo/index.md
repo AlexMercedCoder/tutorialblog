@@ -4,6 +4,8 @@ date: "2021-08-20T14:12:03.284Z"
 description: A Beginning oriented dive into databases
 ---
 
+[REPO OF CODE FROM THIS LESSON HERE AS A TEMPLATE](https://github.com/AlexMercedCoder/Express-Mongo-Auth-Template)
+
 This article is a walkthrough to creating a basic level of authentication with Express, Mongo and JSON Web Token. You can add more layers of complexity if you wish (user roles, refresh tokens, etc.).
 
 ## Step 1 - Create the Application
@@ -485,7 +487,7 @@ Another great use of middleware is creating a context property and request which
 
 update your middleware.js
 
-```
+```js
 require("dotenv").config(); // loading env variables
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
