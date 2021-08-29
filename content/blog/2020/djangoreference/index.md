@@ -4,6 +4,14 @@ date: "2020-08-27T22:12:03.284Z"
 description: "A one stop shop for many of the things you'll have to look up a lot"
 ---
 
+#### Other Useful Python Articles:
+- [Django RestAPI without Django Rest Framework](https://tuts.alexmercedcoder.com/2021/3/puredjangoapi/)
+- [Using virtualenv or pyenv for generating virtual environments](https://tuts.alexmercedcoder.com/2021/1/pythonvirtualenv/)
+- [Using the Building Python Venv Module](https://tuts.alexmercedcoder.com/2021/3/rivisitingpyenv/)
+- [Using Pipenv to Track Dependences](https://tuts.alexmercedcoder.com/2021/4/pipenv/)
+- [Basics of Building a CRUD API with Flask and FastAPI](https://tuts.alexmercedcoder.com/2021/7/full_crud_flask_fastapi/)
+- [The Basics of Masonite - (Like Ruby on Rails, but python)](https://tuts.alexmercedcoder.com/2021/5/Masonite-Python-Web-Framework-101/)
+
 ## Basic Commands
 
 Start a new project
@@ -64,7 +72,7 @@ DATABASES = {
 
 ## Using a .env file with django
 
-**Note: If deploying to heroku, you may not need this and it may cause errors because no env fill is present in production. The django-heroku library will make sure all your heroku config vars are available to your application**
+**Note: If deploying to heroku, you may not need this and it may cause errors because no .env file is present in production causing an attempt to access .env file to fail (you could wrap it in a conditional). The django-heroku library will make sure all your heroku config vars are available to your application**
 
 Install django-environ
 
@@ -90,7 +98,7 @@ DOCS: https://github.com/joke2k/django-environ
 
 ## Deploying to Heroku
 
-### Step 1 - Adjust your database settings
+### Step 1 - Adjust your database settings (optional, django-heroku will override you settings.py to work with heroku postgres)
 
 ```python
 DATABASES = {
@@ -266,13 +274,13 @@ dmypy.json
 
 ### Gunicorn, Procfile, runtime.txt and requirements.txt
 
-We need Gunicorn to run our apps server so 
+We need Gunicorn to run our app's server so 
 
-```pip install gunicorn```
+`pip install gunicorn`
 
 create a file called "Procfile" in your project root with the following.
 
-```web: gunicorn project.wsgi`` 
+`web: gunicorn project.wsgi`
 
 *project should be replaced with your projects name (the name of the folder your settings.py is in)
 
