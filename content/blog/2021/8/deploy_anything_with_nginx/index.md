@@ -1,5 +1,5 @@
 ---
-title: Walkthrough - Deploy Anything with JSX
+title: Walkthrough - Deploy Anything with Nginx
 date: "2021-08-30T12:12:03.284Z"
 description: Getting Data from an external API
 ---
