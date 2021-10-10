@@ -61,7 +61,7 @@ const Bio = () => {
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>
           You should follow him on Twitter
-        </a>
+        </a> and checkout his <a href="https://blog.logrocket.com/author/alexmerced/">articles on LogRocket.</a>
       </p>
     </div>
   )
