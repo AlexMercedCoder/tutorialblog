@@ -19,10 +19,7 @@
     "titleBar.inactiveForeground": "#e7e7e799",
     "sash.hoverBorder": "#ed365b",
     "statusBarItem.remoteBackground": "#dc143c",
-    "statusBarItem.remoteForeground": "#e7e7e7",
-    "statusBar.background": "blue",
-    "statusBar.foreground": "#ffffff",
-    "tab.activeBorder": "blue"
+    "statusBarItem.remoteForeground": "#e7e7e7"
   },
   "peacock.color": "crimson",
   "cSpell.words": ["merced", "spinup"],
