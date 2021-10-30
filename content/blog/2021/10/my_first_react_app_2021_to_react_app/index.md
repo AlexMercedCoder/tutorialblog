@@ -49,7 +49,7 @@ Keep in mind the file names and organization may differ slightly from generator 
 
 So let's start with the main option, run the command `npx create-react-app my-first-react-app`
 
-this create a folder with our project, keep in mind this folder will have a git repository out of the gate.
+this creates a folder with our project, keep in mind this folder will have a git repository out of the gate.
 
 ## Getting Familiar with what's inside
 
@@ -133,13 +133,13 @@ ReactDOM.render(
 
 - React is the framework, ReactDOM is the library that will take our react code and inject into that empty html file
 
-- the ReactDOM.render takes the code from the first argument (looks like html...) and injects it into the html file in the place specified in the second argument, which happens to be that div with the id of root.
+- the ReactDOM.render function takes the code from the first argument (looks like html...) and injects it into the html file in the place specified in the second argument, which happens to be that div with the id of root.
 
 Although... what is this weird HTML looking syntax, I never heard of an App html tag...
 
-This is not HTML, it is something called JSX. It's a syntax that looks a lot like HTML, but during build time a special Babel plugin from facebook converts into calls of a function called React.createElement(), luckily JSX makes it that we don't need to care about this function but just how to write JSX.
+This is not HTML, it is something called JSX. It's a syntax that looks a lot like HTML, but during build time a special Babel plugin from facebook converts JSX into calls of a function called React.createElement(), luckily JSX makes it that we don't need to care about this function but just how to write JSX.
 
-- Notice that what ReactDOM is injecting is the App tag, that's called a component. All a component is at the end of the day is a function returns JSX or null. Long as that statement is true that function can be written in JSX syntax, for example.
+- Notice that what ReactDOM is injecting is the App tag, that's called a component. All a component is at the end of the day is a function that returns JSX or null. Long as that statement is true that function can be written in JSX syntax, for example.
 
 If I define a function like so...
 
@@ -158,10 +158,10 @@ Since that is a function that returns valid JSX I can use in other JSX like so
 ### There are some rules when it comes to JSX:
 
 1. There can only be ONE top level tag
-2. when designating a class, you must "className" not "class" `<div className="container">`
-3. Variables containing numbers/booleans/strings/jsx/js expressions can be inserted using curly brackets in jsx like so `<h1>{someVariable}</h1>`
+2. when designating a class, you must use "className" not "class" `<div className="container">`
+3. Variables containing numbers/booleans/strings/jsx/arrays of jsx/js expressions can be inserted using curly brackets in jsx like so `<h1>{someVariable}</h1>` (arrays and objects can't be injected this way)
 4. all normal css or html attributes in JSX are now camelCase `<div style={{backgroundColor: "yellow"}} onClick={someFunction}>`
-5. What would normally be the onInput event on inputs is not the onChange event
+5. What would normally be the onInput event on inputs is now the onChange event
 
 ## See the default react page
 
@@ -259,9 +259,9 @@ export default App
 
 ## State
 
-The next big concept in React is State. State is just a term for special variables, these variables when they are changed will cause the component to rebuild/rerender itself and update the what the user sees on the screen.
+The next big concept in React is State. State is just a term for special variables, these variables when they are changed will cause the component to rebuild/rerender itself and update what the user sees on the screen.
 
-Let's show you can example NOT using state.
+Let's show you an example NOT using state.
 
 ```js
 
@@ -323,9 +323,9 @@ Now the variable should change on every click of the button. The take away is if
 
 ## Seperation of concerns
 
-We now have the seen the three core features of being a react beginning, creating components, passing props and using state. Although one more useful piece of knowledge is not every component needs to both track state and also render UI. Often times, it may be a good practice to have components that hold state and others that just serve the role of displaying state. 
+We now have the seen the three core features of being a react beginning: creating components, passing props and using state. Although one more useful piece of knowledge is not every component needs to both track state and also render UI. Often times, it may be a good practice to have components that hold state and others that just serve the role of displaying state. 
 
-In the example below we keep our counter state in the App component and pass the the count and addOne function to the counter component that handles the displaying and updating while App is just where the state is housed.
+In the example below we keep our counter state in the App component and pass the the count and addOne function to the counter component as props when then handles the displaying and updating while App is just where the state is housed.
 
 ```js
 import "./App.css";
@@ -357,7 +357,7 @@ function App() {
 export default App;
 ```
 
-I highly recommend download the React Developer Tools chrome extension which will allow you to examime the different components living on your page and the props and state that exist within them to better see how all this relates.
+I highly recommend downloading the React Developer Tools chrome extension which will allow you to examime the different components living on your page and the props and state that exist within them to better see how all this relates.
 
 Want to Learn More about React, here are some videos you may enjoy!
 
