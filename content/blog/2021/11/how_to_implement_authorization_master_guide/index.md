@@ -16,7 +16,7 @@ Also here are a few convieniet how tos:
 
 ## Implementing Authentication from the Backend
 
-It doesn't really matter what language or framework you are using, when building the backend your dealing with routing so what matter is you have routes that do the things that need to be done.
+It doesn't really matter what language or framework you are using, when building the backend your dealing with routing so what matters is you have routes that do the things that needs to be done.
 
 ### User Model
 
