@@ -4,8 +4,6 @@ date: "2021-12-07T12:12:03.284Z"
 description: Using A Developer Friendly Web Framework in Python
 ---
 
-![Title Image](https://i.imgur.com/tleNmhh.jpg)
-
 ## To Get Started with Masonite, Start Here
 
 - [Working with Masonite Blog](https://tuts.alexmercedcoder.com/2021/5/Masonite-Python-Web-Framework-101/)
