@@ -135,7 +135,7 @@ AUTH = {
 }
 ```
 
-By default it will use session cookies but can easily be switched to JWT tokens by changing the driver property above to "jwt", either is fine.
+By default it will use session cookies but can easily be switched to JWT tokens by changing the driver property above to "jwt", either is fine (JWT ideal for APIs).
 
 ## Creating Auth Routes
 
