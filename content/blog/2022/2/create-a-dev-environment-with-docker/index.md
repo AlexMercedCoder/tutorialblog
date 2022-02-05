@@ -5,7 +5,7 @@ description: Using Docker to create an Environment in PHP, Ruby, Python and more
 ---
 
 [VIDEO OVERVIEW OF USING DOCKER IMAGE FROM DOCKER HUB](https://youtu.be/mN5UHsMNm4U)
-
+[Repo with Docker/docker-compose.yml](https://github.com/AlexMercedCoder/ez-developer-environment/blob/main/Dockerfile)
 ## Your Dev Environment
 
 Maybe you got a new computer or you have decided to learn programming, either way you'll need to curate your development environment which means installing all the languages, tools and so forth all which can be tedious and require trouble shooting.
