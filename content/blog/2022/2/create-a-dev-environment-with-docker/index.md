@@ -15,7 +15,7 @@ I'm here to tell you how you can make life a lot easier for yourself. Instead of
 - Docker
 - Visual Studio Code
 
-- OPTIONAL: Git-Bash (so you have git on windows, git should be out of the box for Max/Linux) 
+- OPTIONAL: Git-Bash (so you have git on windows, git should be out of the box for Mac/Linux) 
 
 So google how to install these for your operating system and then we can continue!
 
