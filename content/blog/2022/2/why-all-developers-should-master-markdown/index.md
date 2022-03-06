@@ -1,6 +1,6 @@
 ---
 title: Why All Developers Should Master Markdown
-date: "2022-13-05T12:12:03.284Z"
+date: "2022-02-05T12:12:03.284Z"
 description: How to write Markdown and where you can use it
 ---
 

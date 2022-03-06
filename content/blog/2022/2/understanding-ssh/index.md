@@ -1,6 +1,6 @@
 ---
 title: Understanding SSH and What it is for
-date: "2022-27-05T12:12:03.284Z"
+date: "2022-02-27T12:12:03.284Z"
 description: Logging Securely and Conveniently with SSH
 ---
 
