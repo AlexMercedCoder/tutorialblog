@@ -1,149 +1,226 @@
 ---
-title: Getting Started with Scala 3
-date: "2022-03-06T12:12:03.284Z"
-description: Powerful Functional & OOP JVM Language
+title: Creating a Markdown Blog in 2022 with Next JS
+date: "2022-03-13T12:12:03.284Z"
+description: Creating a Blog and Deploying with NextJS
 ---
 
-## Why Scala 3
+## Why Do you want a markdown blog
 
-Scala 3 is a popular Functional and OOP language that runs on the Java Virtual Machine. It's most popular for use with the Spark Data Processing framework for data engineering work but is a powerful language that can be used for anything including data analytics and web development (Play, Akka) and much more.
+- Markdown makes it much easier to express formatting and focus on writing
+- Updating your blog means committing to github, yay for your heat map
+- More practice with markdown which is good writing documentation.
+- Since markdown blogs are typically statically rendered they are fast and great for SEO
 
-The release of Scala 3 brought Scala a much cleaner python like Syntax and simplified some of it's most unique features (such as swapping out implicits for givens). As libraries update to support Scala 3, this new syntax will likely bring in a lot of new adoption into this unique language. In this video whether you've ever used Scala 2 or not, we introduce you to the world of scala 3.
+In this tutorial I will be making a markdown blog with NextJS. I do have a tool called [create-markdown-blog](https://www.npmjs.com/package/create-markdown-blog) which can help spin you up blog template using slightly older versions of Next, Nuxt, Gatsby, Sapper and so forth if you don't want to assemble it from scratch. Also, AstroJS has a markdown blog template you can easily generate with the command `npm init astro`. 
 
-## Getting Started
+## Making the Blog
 
-- Install Java 8, 11 or 17 for your operating system (google how for your OS)
-- Install [Cousier](https://get-coursier.io/docs/sbt-coursier)
-- Use coursier to install scala3 and scala3compiler
-    - `cs install scala3`
-    - `cs install scala3-compiler`
-    - `cs install sbt`
-- Install the metals extension on VSCode
+- Generate a new nextJS app `npm init next-app@latest`
 
-## Hello World
+- cd into the new folder
 
-SBT stands for the Scala Built Tool, so it's used to help build application in scala. To start a new Scala 3 application use the following command.
+- create a folder called `components`
 
-`sbt new scala/scala3.g8`
+- create a Header and Footer component
 
-This will prompt you for a project name and it will create a folder with that project, open it up in VSCode and approve importing the build.
+/components/Header.js
 
-In the project folder you should see a build like this:
+```js
+function Header (props){
+    return <h1>Header Component</h1>
+}
 
-```
-- project (sbt uses this for its own files)
-        - build.properties
-- build.sbt (sbt's build definition file, like package.json for node)
-- src
-    - main
-        - scala (all of your Scala code goes here)
-            - Main.scala (Entry point of program)
+export default Header
 ```
 
-When you first create the project you'll see the following in the build.sbt, sbt uses a dialect of Scala for defining the build.
+/components/Footer.js
 
-```scala
-// what version of scala
-val scala3Version = "3.1.1"
+```js
+function Footer (props){
+    return <h1>Footer Component</h1>
+}
 
-// describes the details of your project
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "project1",
-    version := "0.1.0-SNAPSHOT",
-
-    scalaVersion := scala3Version,
-
-    // how 3rd party libraries are added, get code from library on scaladex
-    libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.3" % Test
-  )
+export default Footer
 ```
 
-All your code will go in src, there is the main module which you can find in src/main/scala/Main.scala which is a hello world program.
+- create a Layout component
 
-```scala
-// Annotation for defining the main function (program entrypoint)
-@main def hello: Unit = 
-  // like python, blocks are denoted by tabs
-  println("cheese")
-  println(msg)
+/components/Layout.js
+```js
+import Link from "next/link";
+import Header from "./Header";
+import Footer from "./Footer";
 
-def msg = "I was compiled by Scala 3. :)"
+export default function Layout({ children }) {
+  return (
+    <div>
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
+}
 ```
 
-We can run this file by running the command `sbt` int he same folder with the `build.sbt` then just running the command `run`. If you want the code to auto-run anytime the code changes you can do `~run`.
+- Add the layout component so it shows up on every page.
 
-## Declaring Variables
+/pages/_app.js
+```js
+import "../styles/globals.css";
+import Layout from "../components/Layout";
 
-`var` is used to declare mutable variables
-`val` is used to declare immutable variables
+function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
+}
 
-Type can be inferred unless you aren't immediately assigning a value then you need a type.
-
-```scala
-import scala.compiletime.ops.string
-
-@main def hello: Unit = 
-  val cheese1: String = "Munster"
-  var cheese2: String = "Gouda"
-
-  println(cheese1)
-  println(cheese2)
-
-  cheese2 = "Swiss"
-  println(cheese2)
+export default MyApp;
 ```
 
-Other basics:
-- multiline strings can be denoted with `"""`
-- String Interpolation can be done like so `s"The result is: ${x + y}"`
+- create a folder called `posts`
 
-## Control Flow
+### Markdown Files
 
-If Statement
+In this posts folder is where you'll add markdown files, make a file called `example-post.md` with the following.
 
-```scala
-if x == "Bob" then
-  println("It's Bob")
-else if x == "Steve" then
-  println("it's steve")
-else
-  println("I don't know you!")
+```md
+---
+title: "This is an example post"
+author: "Alex Merced"
+category: "example"
+date: "2022-03-13"
+bannerImage: "url-to-image.png"
+tags:
+    - example
+---
+
+## This is an example blog post
+
+This is sample content. The section above is called Frontmatter where we can add post metadata like title and author. You can add as little or as many properties in the frontmatter using YAML syntax.
 ```
 
-If Expression
+### Creating the Blog List
 
-```scala
+We will create a page `/blog` that will act as where all our blog posts will be listed so created `/pages/blog.js` with the following. Also make sure to install grey-matter so can get the Frontmatter (the YAML above each blog post).
 
-val to_be = if be == true then true else false
+`npm install gray-matter`
 
+/pages/blog.js
+
+```js
+import fs from 'fs';
+import matter from 'gray-matter';
+import Image from 'next/image';
+import Link from 'next/link';
+
+// The Blog Page Content
+export default function Blog({posts}){
+    return <main>
+        {posts.map(post => {
+            //extract slug and frontmatter
+            const {slug, frontmatter} = post
+            //extract frontmatter properties
+            const {title, author, category, date, bannerImage, tags} = frontmatter
+
+            //JSX for individual blog listing
+            return <article key={title}>
+                <Link href={`/posts/${slug}`}>
+                    <h1>{title}</h1>
+                </Link>
+                <h3>{author}</h3>
+                <h3>{date}</h3>
+            </article>
+        })}
+    </main>
+}
+
+
+//Generating the Static Props for the Blog Page
+export async function getStaticProps(){
+    // get list of files from the posts folder
+    const files = fs.readdirSync('posts');
+
+    // get frontmatter & slug from each post
+    const posts = files.map((fileName) => {
+        const slug = fileName.replace('.md', '');
+        const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+        const { data: frontmatter } = matter(readFile);
+        
+        return {
+          slug,
+          frontmatter,
+        };
+    });
+
+    // Return the pages static props
+    return {
+        props: {
+          posts,
+        },
+    };
+}
 ```
 
-For Loops
-```scala
-val buddies = List("Joe", "Ira", "Arthur")
+### Making the Individual Post pages
 
-for bud <- buddies do println(bud)
+We'll need to make a dynamic route that will create a page for every post we have. We start by creating `/pages/posts/[slug].js` the `[]` denotes the dynamic route to nextjs. The conents of this page should be the following:
+
+Also make sure to install markdown-it
+
+`npm install markdown-it`
+
+/pages/posts/[slug].js
+```js
+import fs from "fs";
+import matter from "gray-matter";
+import md from 'markdown-it';
+
+// The page for each post
+export default function Post({frontmatter, content}) {
+
+    const {title, author, category, date, bannerImage, tags} = frontmatter
+
+    return <main>
+        <img src={bannerImage}/>
+        <h1>{title}</h1>
+        <h2>{author} || {date}</h2>
+        <h3>{category} || {tags.join()}</h3>
+        <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+    </main>
+}
+
+// Generating the paths for each post
+export async function getStaticPaths() {
+  // Get list of all files from our posts directory
+  const files = fs.readdirSync("posts");
+  // Generate a path for each one
+  const paths = files.map((fileName) => ({
+    params: {
+      slug: fileName.replace(".md", ""),
+    },
+  }));
+  // return list of paths
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+
+// Generate the static props for the page
+export async function getStaticProps({ params: { slug } }) {
+    const fileName = fs.readFileSync(`posts/${slug}.md`, 'utf-8');
+    const { data: frontmatter, content } = matter(fileName);
+    return {
+      props: {
+        frontmatter,
+        content,
+      },
+    };
+  }
 ```
 
-You can have conditional guards applied to these loops, so some loops won't run.
-
-Loop Expression
-
-```scala
-@main def hello: Unit = 
-  val buddies = List("Joe", "Ira", "Arthur", "Alex")
-
-  val children: List[String] = for b <- buddies yield b + " jr."
-
-  for c <- children do println(c)
-```
-
-## Conclusion
-
-You can learn more by reading the Scala 3 [here](https://docs.scala-lang.org/scala3/book/taste-control-structures.html)
-
-You can find 3rd party scala libraries on [ScalaDex](https://index.scala-lang.org/)
-
-Take Scala 3 out for a spin!
+That's it, the blog functionality should be working. Now you just need to style it, tweak it to your liking and write more posts! Since this is a NextJS project deployment will be as simple as connecting a github repo to Vercel, how awesome is that!
