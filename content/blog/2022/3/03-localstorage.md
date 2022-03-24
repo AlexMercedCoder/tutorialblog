@@ -1,6 +1,6 @@
 ---
 title: Web Storage API Part 1 - LocalStorage and SessionStorage
-date: "2021-03-23"
+date: "2022-03-23"
 description: "Where to store data in the users browser"
 author: "Alex Merced"
 category: "oltp"
