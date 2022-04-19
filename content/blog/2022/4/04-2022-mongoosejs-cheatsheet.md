@@ -100,7 +100,7 @@ const User = model("User", UserSchema)
 
 Model objects have many methods for creating, deleting, updating and finding data in the database. Methods can be used in three different ways. We will write these in the context of an express route but would be pretty much the same in any node web framework.
 
-[Methods you models have](https://mongoosejs.com/docs/queries.html)
+[Methods your models have](https://mongoosejs.com/docs/queries.html)
 
 ```js
 // callback syntax
