@@ -24,19 +24,19 @@ Mongoose is an ODM (Object Document Manager) that like relational ORMs (Object R
 
 ## The Mongoose URI
 
-URI stands for Universal Resource Identifier, a string that allows applications to send messages to other applications. We use HTTP URIs all the time in the form of the URLs to our favorite website. The pattern is as follows:
+URI stands for Universal Resource Identifier, a string that allows applications to send messages to other applications. We use HTTP URIs all the time in the form of the URLs to our favorite websites. The pattern is as follows:
 
 `protocol://username:password@host:port/resource?query=string&key=value`
 
 - `protocol://` the type of message being sent such as `https://`, `mongodb://`, `postgresql://`
 
-- `username:password@` the username and password if one is needed for the target, typically needed for databases since most web pages are open to the public.
+- `username:password@` the username and password if one is needed for the target, typically needed for databases since most web pages are open to the public usually not used websites.
 
-- `host` this would be the domain and subdomains with it that are an alias for an IP address of server that hosts the destination application (`localhost` for example is an alias for `127.0.0.1` which is the machine your currently using.
+- `host` this would be the domain and subdomains that may come with it that are an alias for an IP address of the server that hosts the destination application (`localhost` for example is an alias for `127.0.0.1` which is the machine your currently using.
 
-- `port` every server can receive message on different ports numbered up to 65535 (the highest unsigned 16-bit integer). You generally don't type a port for URLs because browsers know `http` traffic goes to port 80 and `https` traffic goes to port 443. Most databases have a default port they run on `mongodb -> 27017 | postgresql -> 5432 | mysql -> 3306`
+- `port` every server can receive messages on different ports numbered up to 65535 (the highest unsigned 16-bit integer). You generally don't type a port for URLs because browsers know `http` traffic goes to port 80 and `https` traffic goes to port 443. Most databases have a default port they run on `mongodb -> 27017 | postgresql -> 5432 | mysql -> 3306`
 
-- `/resource` tell the receiving application what resources to access at the destination. For web applications this usually a particular web page, file, or JSON data. For database application this usually refers to the particular database being accessed.
+- `/resource` tell the receiving application what resources to access at the destination. For web applications this is usually a particular web page, file, or JSON data. For database applications this usually refers to the particular database being accessed.
 
 - `?query=string&key=value` this is the query string which can be used to pass additional info like data from a form or database configurations.
 
@@ -50,7 +50,7 @@ A MongoDB URI for a mongo server running on my pc would be:
 
 ## Importing Mongoose
 
-By default node using commonJS so importing a library would be done using `require`.
+By default node uses commonJS so importing a library would be done using `require`.
 `const mongoose = require("mongoose")`
 
 If you add `"type":"module"` to your package.json then your project will be treated like an ES Module and you can then do the following instead.
@@ -74,7 +74,7 @@ cxn
 ```
 ## Models
 
-Models all us save in and retrieve from our mongoose database. To create a model we must first create a schema which defines the shape of the data in the database (the individual properties and their data types). Defining a basic model can be done like so:
+Models allow us to save in and retrieve from our mongoose database. To create a model we must first create a schema which defines the shape of the data in the database (the individual properties and their data types). Defining a basic model can be done like so:
 
 ```js
 // destructure model function and Schema constructor from mongoose
@@ -138,7 +138,7 @@ app.get("/users", async (req, res) => {
 MongoDB is a document database so it is optimal for handling unrelated data, but mongoose does build in several tools to make implementing related data a lot easier.
 
 #### First Step: The ObjectID Type
-To express a relationship we specify a related field as an ObjectID type meaning it expects to strings that represent object ID of data documents in a specified collection.
+To express a relationship we specify a related field as an ObjectID type meaning it expects the field to hold strings that represent the object ID of related documents in a specified collection.
 
 ```js
 // destructure model function and Schema constructor from mongoose
@@ -188,7 +188,7 @@ app.get("/createPost/:userId", async (req, res) => {
 })
 ```
 
-The [populate](https://mongoosejs.com/docs/populate.html) method allows us to take a field marked as related to another document (the ObjectID type) and fill in the data from that related document that you don't have to manually do another query to get the additional data.
+The [populate](https://mongoosejs.com/docs/populate.html) method allows us to take a field marked as related to another document (the ObjectID type) and fill in the data from that related document that way you don't have to manually do another query to get the additional data.
 
 ## Additional Topics
 
