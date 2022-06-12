@@ -1,6 +1,6 @@
 ---
 title: Guide to JSON, YAML and TOML
-date: "2022-05-15"
+date: "2022-06-11"
 description: "Popular formats for configuration"
 author: "Alex Merced"
 category: "devops"
