@@ -1,5 +1,5 @@
 ---
-title: 
+title: Brief Hands on Intro to Apache Iceberg
 date: "2022-07-18"
 description: "Engineer a Data Lakehouse with Apache Iceberg"
 author: "Alex Merced"
