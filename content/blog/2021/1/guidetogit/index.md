@@ -135,21 +135,21 @@ So long as always push my changes I can switch computers easily and pull down th
 
 ## Branches
 
-I've now written three chapters but I have an idea for an alternate chapter 3 but I don't want to erase the current chapter 3 I've written. Git offers a feature to create alternate paths called branches. By default when you create a repo you start with a repo called "master" although many in the software development industry have been changing it to "main", [here is how to do it.](https://tuts.alexmercedcoder.com/2021/1/mastertomain/)
+I've now written three chapters but I have an idea for an alternate chapter 3 but I don't want to erase the current chapter 3 I've written. Git offers a feature to create alternate paths called branches. By default when you create a repo you start with a repo called "master" although many in the software development industry have been changing it to "main", [here is how to do it.](https://tuts.alexmercedcoder.dev/2021/1/mastertomain/)
 
 What I will do is create a new branch called new_chapter_3 with the command:
 
-```git checkout -b new_chapter_3```
+`git checkout -b new_chapter_3`
 
 The -b means to create a new branch which will start as a copy of the branch I was currently on.
 
 To switch between branches I can do the following
 
-```git checkout branchName```
+`git checkout branchName`
 
 To see the list of all my local branches along with my active branch
 
-```git branch```
+`git branch`
 
 #### Merging Branches
 
@@ -197,7 +197,7 @@ The git checkout command not only allows you to switch back and forth between sw
 
 To see the current history of commits use the command
 
-``` git log ```
+`git log`
 
 and you'll see entries like this...
 
@@ -209,11 +209,11 @@ Date:   Tue Jan 5 10:10:26 2021 -0500
 
 If you wanted to see the state of your files at a particular commit you can do the following.
 
-```git checkout 570a10827e96c2ef9b74a2e37f5360f3b4396858```
+`git checkout 570a10827e96c2ef9b74a2e37f5360f3b4396858`
 
 This will then revert all the files to where they were at that time. You can't commit while in this "detached head state", so to go back to the current state of things just...
 
-```git checkout master```
+`git checkout master`
 
 To go back to the head of the desired branch. What if you want to work from the previous commit?
 
@@ -221,13 +221,13 @@ You can only make commits to the Head (the most recent commit on the current bra
 
 #### reset
 
-```git reset 570a10827e96c2ef9b74a2e37f5360f3b4396858```
+`git reset 570a10827e96c2ef9b74a2e37f5360f3b4396858`
 
 This destroys all previous commits till the target commit is once the head. The file changes since the target commit will remain as untracked changes you can decide to work with or use `git clean` to remove.
 
 #### revert
 
-```git revert 570a10827e96c2ef9b74a2e37f5360f3b4396858```
+`git revert 570a10827e96c2ef9b74a2e37f5360f3b4396858`
 
 This instead of destroying all previous commits adds a new commit that undoes all the changes since the target commit so the state of files from this new commit matches the state of things from that previous commit. This allows you to maintain those previous commits in case you ever need to revisit them.
 

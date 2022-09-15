@@ -31,10 +31,10 @@ const config = {
     employer: "Dremio",
   },
   onlinePressence: {
-    websites: ["devnursery.com", "grokoverflow.com", "alexmercedcoder.com"],
+    websites: ["devnursery.com", "grokoverflow.com", "alexmercedcoder.dev"],
     twitter: ["alexmercedcoder", "amdatalakehouse"],
   },
-};
+}
 ```
 
 ## JSON
@@ -52,7 +52,7 @@ This will be the simplest since JSON stands for "Javascript Object Notation" it'
     "employer": "Dremio"
   },
   "onlinePressence": {
-    "websites": ["devnursery.com", "grokoverflow.com", "alexmercedcoder.com"],
+    "websites": ["devnursery.com", "grokoverflow.com", "alexmercedcoder.dev"],
     "twitter": ["alexmercedcoder", "amdatalakehouse"]
   }
 }
@@ -66,19 +66,18 @@ YAML stands for "Yet Another Markup Language", I would call this the python of m
 
 ```yaml
 description:
-    name: Alex Merced
-    age: 36
-    employer: Dremio
+  name: Alex Merced
+  age: 36
+  employer: Dremio
 
-onlinePressence: 
-    websites: 
-        - devnursery.com
-        - grokoverflow.com
-        - alexmercedcoder.com
-    twitter: 
-        - alexmercedcoder
-        - amdatalakehouse
-
+onlinePressence:
+  websites:
+    - devnursery.com
+    - grokoverflow.com
+    - alexmercedcoder.dev
+  twitter:
+    - alexmercedcoder
+    - amdatalakehouse
 ```
 
 YAML also does have access to environmental variables but does allow reuse of properties in several ways.
@@ -96,8 +95,8 @@ name: "Alex Merced"
 age: 36
 employer: "Dremio"
 
-[onlinePressence] 
-websites: ["devnursery.com","grokoverflow.com","alexmercedcoder.com"]
+[onlinePressence]
+websites: ["devnursery.com","grokoverflow.com","alexmercedcoder.dev"]
 twitter: ["alexmercedcoder", "amdatalakehouse"]
 ```
 

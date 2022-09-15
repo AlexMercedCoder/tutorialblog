@@ -43,7 +43,7 @@ Go files have a ".go" extension.
 
 ## Package Management
 
-There are several awesome Go libraries in the Go ecosystem and in the early days there wasn't a built-in method for package management although now modules are a built-in feature. 
+There are several awesome Go libraries in the Go ecosystem and in the early days there wasn't a built-in method for package management although now modules are a built-in feature.
 
 So in a folder for your new project run the following command.
 
@@ -119,6 +119,7 @@ Notice this file is also in the main package cause it is in the same directory. 
 Since we exported this value we can now use it in our main.go!
 
 main.go
+
 ```go
 package main
 
@@ -177,9 +178,9 @@ package more
 var More string = "More Stuff"
 
 func Stuff() string {
-	
+
 	mystring := "My Type is Implied"
-	
+
 	return mystring
 }
 
@@ -190,6 +191,7 @@ Here we have declared a function called Stuff. The word string after the parenth
 Now add the following to main.go
 
 main.go
+
 ```go
 package main
 
@@ -209,4 +211,4 @@ We then use the Stuff function, which passes its returned value to the Println f
 
 ## Conclusion
 
-Hopefully, this has helped you get used to how to setup and use go, in future articles I'll cover more advanced topics like structs, functions, etc. So make sure to keep checking in here at AlexMercedCoder.com for more articles!
+Hopefully, this has helped you get used to how to setup and use go, in future articles I'll cover more advanced topics like structs, functions, etc. So make sure to keep checking in here at alexmercedcoder.dev for more articles!

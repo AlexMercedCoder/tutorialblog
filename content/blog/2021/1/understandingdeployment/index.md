@@ -20,7 +20,7 @@ When you type a URL into the address bar of a browser and hit enter the browser 
 
 So we know we are just sending text back forth between computers all over the world, but how do these requests know where they are going and how they should be handled?
 
-`http://www.alexmercedcoder.com/cheese?type=gouda&taste=good`
+`http://www.alexmercedcoder.dev/cheese?type=gouda&taste=good`
 
 Let's break down this url
 
@@ -28,7 +28,7 @@ Let's break down this url
 
   - IP Ports are places where internet requests can be received by a computer, imagine them like the different piers in a seaport and the boats docking the piers being internet requests. Servers can listen to requests on port numbers up to 65535 (not that you'd ever want that many servers running on one computer).
 
-- **www.alexmercedcoder.com** this is the host made of the domain (alexmercedcoder.com) and the subdomain (www.). When the request is made your browser sends the request to your internet router who then sends it to your internet service provider. The ISP then consults DNS Servers(Domain Name Service) which are like giant phone books matching up the domain/subdomain with the IP address of the server that has the content.
+- **www.alexmercedcoder.dev** this is the host made of the domain (alexmercedcoder.dev) and the subdomain (www.). When the request is made your browser sends the request to your internet router who then sends it to your internet service provider. The ISP then consults DNS Servers(Domain Name Service) which are like giant phone books matching up the domain/subdomain with the IP address of the server that has the content.
 
   - Once the request arrives at the IP address the destination server is usually running web server software like Nginx or Apache which listens for http/ws requests on port 80 and https/wss traffic on 443 then directs it to other applications that are running at different ports on the machine (many hosting providers referred to this as "shared hosting").
 
@@ -66,9 +66,9 @@ Nowadays there are several ways to architect your application and this will affe
 
 ## Hosting Options
 
-If running a static website with basic html/css/js files there are endless hosting solutions usually using Apache Servers running PHP based cPanel dashboards. Although If you want to use React/Vue/Svelte/Angular you are going to want a service with Continuous Deployment so you don't have to reupload all your content each time you deploy and that's where Netlify and Vercel fit in wonderfully. 
+If running a static website with basic html/css/js files there are endless hosting solutions usually using Apache Servers running PHP based cPanel dashboards. Although If you want to use React/Vue/Svelte/Angular you are going to want a service with Continuous Deployment so you don't have to reupload all your content each time you deploy and that's where Netlify and Vercel fit in wonderfully.
 
-- *Continuous Deployment* is the concept of creating an automated pipeline of your deployment process. Typically this takes the form of updating your code on GitHub which then triggers automation that ends in your project being deployed (Netlify and Vercel make this very easy). This type of pipeline is also used to integrate code from others into a project automating a pipeline of tests and this is referred to as Continuous Integration. (CI/CD)
+- _Continuous Deployment_ is the concept of creating an automated pipeline of your deployment process. Typically this takes the form of updating your code on GitHub which then triggers automation that ends in your project being deployed (Netlify and Vercel make this very easy). This type of pipeline is also used to integrate code from others into a project automating a pipeline of tests and this is referred to as Continuous Integration. (CI/CD)
 
 ### Virtual Private Server (VPS)
 
@@ -118,13 +118,14 @@ So when calling third-party data sources a typical strategy is to create a "prox
 - When using an SQL database, just cause you have a local database with the data you've used during development doesn't mean your database production is ready to go. Once you deploy make sure to remember to migrate (create all the tables) and seed (add initial data) your database.
 
 - Heroku relies on files in the root of your repo to set up the proper environment so make sure the root of your repo is the root of your project. Generally, the root of your project is going to be where one of the following files exist...
-    - package.json (javascript/node)
-    - Gemfile (ruby)
-    - requirements.txt (python)
-    - manage.py (python)
-    - composer.json (php)
-    - deps.ts (javascript/deno)
-    - mod.go (Go)
+
+  - package.json (javascript/node)
+  - Gemfile (ruby)
+  - requirements.txt (python)
+  - manage.py (python)
+  - composer.json (php)
+  - deps.ts (javascript/deno)
+  - mod.go (Go)
 
 - When deploying to Netlify or Vercel if you don't know what the build command is check your package.json file's script section. Also if you are not sure what directory the final build goes into, run the build command locally and see what the result is.
 

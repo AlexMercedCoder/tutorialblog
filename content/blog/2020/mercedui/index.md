@@ -8,7 +8,7 @@ description: "Beginners Tutorial"
 
 MercedUI is the first UI library I created for helping create Web Components and remains one of my most robust and feature full libraries. In this tutorial I hope to show you the basics of making a web component with MercedUI.
 
-*You can find this and my other libraries at AlexMercedCoder.com
+*You can find this and my other libraries at alexmercedcoder.dev
 *MercedUI Github Page: https://github.com/AlexMercedCoder/MercedUI
 
 ## Setup
@@ -23,22 +23,23 @@ MercedUI is the first UI library I created for helping create Web Components and
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MercedUI</title>
 
     <!-- MERCEDUI -->
-    <script src="http://www.alexmercedcoder.com/UI.js" charset="utf-8" defer></script>
+    <script
+      src="http://www.alexmercedcoder.dev/UI.js"
+      charset="utf-8"
+      defer
+    ></script>
 
     <!-- MY CODE -->
     <script src="app.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    
-    
-</body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -50,33 +51,29 @@ In the MercedUI library there are several classes and functions available for ma
 2. The Initial State - The initial state, works just like Reacts state
 3. Reducer - A redux like reducer function built into the component
 
-
 **app.js**
+
 ```js
 class HelloWorld extends MercedElement {
-    constructor(){
-        super(
-            //the builder function
-            (state, props) => `<h1>Hello World<h1>`,
-            //the state
-            {}
-        )
-    }
+  constructor() {
+    super(
+      //the builder function
+      (state, props) => `<h1>Hello World<h1>`,
+      //the state
+      {}
+    )
+  }
 }
 
-MercedElement.makeTag('hello-world', HelloWorld)
+MercedElement.makeTag("hello-world", HelloWorld)
 ```
 
 The MercedElement class has several static functions, one of them being makeTag to make it easy to register the element with the DOM. Now let's add the component into our HTML.
 
 ```html
-
 <body>
-
-    <hello-world></hello-world>
-    
+  <hello-world></hello-world>
 </body>
-
 ```
 
 ## Props
@@ -85,24 +82,22 @@ Just like React, components made with the MercedElement base class can be passed
 
 ```js
 class HelloWorld extends MercedElement {
-    constructor(){
-        super(
-          //The Builder Function
-            (state, props) => `<h1>${props.hello}<h1>`,
-          //The State
-            {}
-        )
-    }
+  constructor() {
+    super(
+      //The Builder Function
+      (state, props) => `<h1>${props.hello}<h1>`,
+      //The State
+      {}
+    )
+  }
 }
 
-MercedElement.makeTag('hello-world', HelloWorld)
+MercedElement.makeTag("hello-world", HelloWorld)
 ```
 
 ```html
 <body>
-    
-    <hello-world hello="hello world"></hello-world>
-    
+  <hello-world hello="hello world"></hello-world>
 </body>
 ```
 
@@ -112,27 +107,26 @@ Just like React, MercedElement can store data in an object called state that is 
 
 ```js
 class HelloWorld extends MercedElement {
-    constructor(){
-        super(
-            //The Builder Function
-            (state, props) => `<h1>${state.hello}<h1><button>Click Me</button>`,
-            //The State
-            {hello: "Hello World"}
-        )
-    }
+  constructor() {
+    super(
+      //The Builder Function
+      (state, props) => `<h1>${state.hello}<h1><button>Click Me</button>`,
+      //The State
+      { hello: "Hello World" }
+    )
+  }
 
-    postBuild(state, props){
-        //Select the button from the shadowDOM
-        const button = $s.select(this, 'button')
-        //Add an event listener
-        button.addEventListener('click', () => {
-            this.setState({hello: "Goodbye World"})
-        })
-    }
+  postBuild(state, props) {
+    //Select the button from the shadowDOM
+    const button = $s.select(this, "button")
+    //Add an event listener
+    button.addEventListener("click", () => {
+      this.setState({ hello: "Goodbye World" })
+    })
+  }
 }
 
-MercedElement.makeTag('hello-world', HelloWorld)
-
+MercedElement.makeTag("hello-world", HelloWorld)
 ```
 
 Now you should see that when you click the button, the state gets updated updating the DOM. Nice!

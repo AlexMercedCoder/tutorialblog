@@ -25,7 +25,6 @@ Rust has a tool called RustUP that will let you install multiple versions of rus
 
 - [Install Rust Directions](https://www.rust-lang.org/tools/install)
 
-
 ## The Rust Compiler
 
 When working with a single rust file it can be easier to use the rust compiler. Rust files have a .rs extension. To compile the file you run the following command.
@@ -103,4 +102,4 @@ const MY_CONST:u32 = 5
 
 ## Conclusion
 
-Hopefully, now you have Rust installed and can startup and run a rust project. I will be writing more articles on how to do more in rust so to make sure to regularly check my blog at tuts.alexmercedcoder.com.
+Hopefully, now you have Rust installed and can startup and run a rust project. I will be writing more articles on how to do more in rust so to make sure to regularly check my blog at tuts.alexmercedcoder.dev.

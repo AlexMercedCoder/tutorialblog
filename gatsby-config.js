@@ -3,10 +3,10 @@ module.exports = {
     title: `Coding Tutorials Blog`,
     author: {
       name: `Alex Merced`,
-      summary: `Developer from devNursery.com and AlexMercedCoder.com`,
+      summary: `Developer from devNursery.com and alexmercedcoder.dev`,
     },
     description: `A Blog of coding tutorials`,
-    siteUrl: `https://tuts.alexmercedcoder.com/`,
+    siteUrl: `https://tuts.alexmercedcoder.dev/`,
     social: {
       twitter: `alexmercedcoder`,
     },

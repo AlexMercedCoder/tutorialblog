@@ -6,7 +6,7 @@ description: Component Based Frontend Framework
 
 ## The Origin Story
 
-Over the last year, I've been working on creating different frontend frameworks based on web components. All of them are open source and welcome contributions and pull requests, find all my libraries [here](https://meet.alexmercedcoder.com/libraries). EZComponent is my latest effort in this regard and I think I've hit a sweet spot in the workflow, learning curve, and features.
+Over the last year, I've been working on creating different frontend frameworks based on web components. All of them are open source and welcome contributions and pull requests, find all my libraries [here](https://meet.alexmercedcoder.dev/libraries). EZComponent is my latest effort in this regard and I think I've hit a sweet spot in the workflow, learning curve, and features.
 
 ## Generating a New Project
 
@@ -23,11 +23,12 @@ Let's take it for a spin by running the following command:
 In src/index.js we find this
 
 index.js
+
 ```js
 import ezcomponent from "ezcomponent"
-import "./components/Header";
-import "./components/Main";
-import "./components/Footer";
+import "./components/Header"
+import "./components/Main"
+import "./components/Footer"
 
 ezcomponent({
   name: "my-app",
@@ -35,12 +36,12 @@ ezcomponent({
   <my-header></my-header>
   <my-main></my-main>
   <my-footer></my-footer>
-  `
+  `,
 })
 
 //Inject into body
-const body = document.querySelector("body");
-body.innerHTML = `<my-app></my-app>`;
+const body = document.querySelector("body")
+body.innerHTML = `<my-app></my-app>`
 ```
 
 - We import our components
@@ -68,7 +69,7 @@ ezcomponent({
   <my-header></my-header>
   <my-main></my-main>
   <my-footer></my-footer>
-  `
+  `,
 })
 ```
 
@@ -77,8 +78,9 @@ Notice, we see no change... that's because every component has its own shadowDOM
 So let's head over to the Footer component and try styling that one.
 
 Footer.js
+
 ```js
-import ezcomponent from "ezcomponent";
+import ezcomponent from "ezcomponent"
 
 ezcomponent({
   name: "my-footer",
@@ -88,7 +90,7 @@ ezcomponent({
   }
   `,
   render: (info, props, component) => `<h1>I am the footer component</h1>`,
-});
+})
 ```
 
 Now the footer components text is red. Notice how we don't have to export the component. Just by importing the file the ezcomponent function in the file is invoked registering the component with the browser making it available to use throughout your application.

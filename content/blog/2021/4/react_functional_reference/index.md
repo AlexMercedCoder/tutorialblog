@@ -624,7 +624,7 @@ There are several solutions to this.
 
 - React Context
 - React useReducer Hook
-- [The TaskRunner Pattern](https://tuts.alexmercedcoder.com/2020/taskrunner/)
+- [The TaskRunner Pattern](https://tuts.alexmercedcoder.dev/2020/taskrunner/)
 - Redux
 - And many more... (MobX, State Machines, ...)
 
@@ -893,6 +893,7 @@ const Component = props => (
   </Container>
 )
 ```
+
 ## Conditional Rendering
 
 There are times when something should render in some situations and not in others. In frameworks like Vue, Angular and Svelte you have things like directives that directly add semantic ways to express this, React leans hard on using pure javascript to control the flow of a component (so strong Javascript skills really pay off in React).
@@ -1021,7 +1022,6 @@ const Hello = (props) => {
   }
 }
 ```
-
 
 ## Quick Tips
 

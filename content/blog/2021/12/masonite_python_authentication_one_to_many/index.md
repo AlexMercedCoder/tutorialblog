@@ -6,7 +6,7 @@ description: Using A Developer Friendly Web Framework in Python
 
 ## To Get Started with Masonite, Start Here
 
-- [Working with Masonite Blog](https://tuts.alexmercedcoder.com/2021/5/Masonite-Python-Web-Framework-101/)
+- [Working with Masonite Blog](https://tuts.alexmercedcoder.dev/2021/5/Masonite-Python-Web-Framework-101/)
 - [Video: Masonite from Zero to Deploy](https://www.youtube.com/watch?v=ayUGmt-YgkQ)
 
 ## Let's Get Started
@@ -378,7 +378,7 @@ class DogOwnerController(Controller):
 
     def get_user_owners(self):
         return self.request.user().owners
-        
+
     def get_user_dogs(self):
         return self.request.user().dogs
 

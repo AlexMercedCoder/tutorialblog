@@ -4,11 +4,11 @@ date: "2021-03-02T12:12:03.284Z"
 description: Using Pythons Built in venv module
 ---
 
-**My Original Article on [Virtual Environments](https://tuts.alexmercedcoder.com/2021/1/pythonvirtualenv/)**
+**My Original Article on [Virtual Environments](https://tuts.alexmercedcoder.dev/2021/1/pythonvirtualenv/)**
 
 In my previous article, I talked about two ways to create Python virtual environments using mkvirtualenv and pyenv. What I wasn't aware of at the time is that in Python 3.3 and above a native ability to create a virtual environment was added to python.
 
-**REMINDER:** *The Reason we want to make virtual environments is to isolate our project dependency and manage dependency versions, kinda like what a package.json does for us in Javascript, a Gemfile in Ruby, cargo.toml in rust, composer.json in PHP, you get the idea.*
+**REMINDER:** _The Reason we want to make virtual environments is to isolate our project dependency and manage dependency versions, kinda like what a package.json does for us in Javascript, a Gemfile in Ruby, cargo.toml in rust, composer.json in PHP, you get the idea._
 
 ## How to Use the Native Venv Module
 
@@ -25,7 +25,8 @@ This will create all the folders in that file, so let's say I specified a folder
 ```
 source ./venv/bin/activate
 ```
-* use the command "deactivate" to turn off venv
+
+- use the command "deactivate" to turn off venv
 
 You'll then see it active in your terminal. Although remembering all that may be tricky. Below is some bash function you may want to add to ~/.bashrc or ~/.zshrc that'll make this process easier.
 

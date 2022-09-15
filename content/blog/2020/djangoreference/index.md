@@ -5,12 +5,13 @@ description: "A one stop shop for many of the things you'll have to look up a lo
 ---
 
 #### Other Useful Python Articles:
-- [Django RestAPI without Django Rest Framework](https://tuts.alexmercedcoder.com/2021/3/puredjangoapi/)
-- [Using virtualenv or pyenv for generating virtual environments](https://tuts.alexmercedcoder.com/2021/1/pythonvirtualenv/)
-- [Using the Building Python Venv Module](https://tuts.alexmercedcoder.com/2021/3/rivisitingpyenv/)
-- [Using Pipenv to Track Dependences](https://tuts.alexmercedcoder.com/2021/4/pipenv/)
-- [Basics of Building a CRUD API with Flask and FastAPI](https://tuts.alexmercedcoder.com/2021/7/full_crud_flask_fastapi/)
-- [The Basics of Masonite - (Like Ruby on Rails, but python)](https://tuts.alexmercedcoder.com/2021/5/Masonite-Python-Web-Framework-101/)
+
+- [Django RestAPI without Django Rest Framework](https://tuts.alexmercedcoder.dev/2021/3/puredjangoapi/)
+- [Using virtualenv or pyenv for generating virtual environments](https://tuts.alexmercedcoder.dev/2021/1/pythonvirtualenv/)
+- [Using the Building Python Venv Module](https://tuts.alexmercedcoder.dev/2021/3/rivisitingpyenv/)
+- [Using Pipenv to Track Dependences](https://tuts.alexmercedcoder.dev/2021/4/pipenv/)
+- [Basics of Building a CRUD API with Flask and FastAPI](https://tuts.alexmercedcoder.dev/2021/7/full_crud_flask_fastapi/)
+- [The Basics of Masonite - (Like Ruby on Rails, but python)](https://tuts.alexmercedcoder.dev/2021/5/Masonite-Python-Web-Framework-101/)
 
 ## Basic Commands
 
@@ -274,7 +275,7 @@ dmypy.json
 
 ### Gunicorn, Procfile, runtime.txt and requirements.txt
 
-We need Gunicorn to run our app's server so 
+We need Gunicorn to run our app's server so
 
 `pip install gunicorn`
 
@@ -282,18 +283,19 @@ create a file called "Procfile" in your project root with the following.
 
 `web: gunicorn project.wsgi`
 
-*project should be replaced with your projects name (the name of the folder your settings.py is in)
+\*project should be replaced with your projects name (the name of the folder your settings.py is in)
 
 **ALSO MAKE SURE TO MAKE A runtime.txt WITH YOUR PYTHON VERSION, HEROKU MAY DEFAULT AN EARLIER VERSION OF PYTHON FROM WHICH PIP MAY NOT BE ABLE TO INSTALL THE EXACT VERSION OF YOUR LIBRARIES FROM requirements.txt**
 
 runtime.txt
+
 ```
 python-3.9.0
 ```
 
 to create the requirements.txt run this file while in the virtual environment for your project. Make sure to regenerate this file as you add and subtract libraries to your project.
 
-```pip freeze > requirements.txt```
+`pip freeze > requirements.txt`
 
 **Procfile, requirements.txt and runtime.txt should all be in the root of your project which is the folder with manage.py**
 
@@ -326,7 +328,7 @@ Create new github repository, and push to github. The ROOT of your repository sh
 
 - do an initial deploy hitting the manual deploy button
 
-- Don't forget to run makemigrations and migrate, (easily done in ```Heroku run bash```)
+- Don't forget to run makemigrations and migrate, (easily done in `Heroku run bash`)
 
 ## Django Rest Framework Reference
 
@@ -336,14 +338,14 @@ Create new github repository, and push to github. The ROOT of your repository sh
 
 then add the following to your settings.py installed apps array
 
-```'rest_framework',```
+`'rest_framework',`
 
 **ALSO MAKE SURE YOUR APP IS INSTALLED AS WELL**
 
 ### Make a model
 
-In a new app make a new model in ```models.py```.
-*model field reference => https://docs.djangoproject.com/en/3.1/ref/models/fields/#model-field-types*
+In a new app make a new model in `models.py`.
+_model field reference => https://docs.djangoproject.com/en/3.1/ref/models/fields/#model-field-types_
 
 ```python
 from django.db import models
@@ -361,7 +363,7 @@ class Dog(models.Model):
 
 ### Setup Models and Serializers in your app
 
-In your app folder create a ```serializers.py``` with the following.
+In your app folder create a `serializers.py` with the following.
 
 **The Serializer handles taking your objects data and turning it into JSON**
 
@@ -387,7 +389,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 ```
 
-*Users and Groups are serialized so we have a restful routes for the built in User and Group models*
+_Users and Groups are serialized so we have a restful routes for the built in User and Group models_
 
 ### Create Views for your API
 
@@ -428,7 +430,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 ```
+
 For Details on different permission sets:
+
 - https://www.django-rest-framework.org/api-guide/permissions/
 - https://www.django-rest-framework.org/api-guide/views/
 
@@ -455,7 +459,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 ```
-*For more on how the router works, https://www.django-rest-framework.org/api-guide/routers/*
+
+_For more on how the router works, https://www.django-rest-framework.org/api-guide/routers/_
 
 ### Finish Up
 

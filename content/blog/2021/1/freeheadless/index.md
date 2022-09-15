@@ -41,7 +41,7 @@ These aren't full-blown Headless CMS Solutions but using their Rest API's you ca
 - Wordpress.com (Has an API)
 - Trello
 - Asana
-- [Json Files Hosted on Netlify](https://tuts.alexmercedcoder.com/2020/NetlifyJSONApi/)
+- [Json Files Hosted on Netlify](https://tuts.alexmercedcoder.dev/2020/NetlifyJSONApi/)
 
 ## Self-Hosted Solutions
 

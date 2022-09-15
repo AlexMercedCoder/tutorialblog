@@ -6,7 +6,7 @@ description: GraphQL Made Easy
 
 ## What is GraphQL?
 
-[My GraphQL Article for Further Reading](https://tuts.alexmercedcoder.com/2020/graphql/)
+[My GraphQL Article for Further Reading](https://tuts.alexmercedcoder.dev/2020/graphql/)
 
 GraphQL is an alternative to Rest API created by Facebook:
 
@@ -201,12 +201,12 @@ REACT_APP_HASURA_URL=https://xxxxxxxxxxxx.hasura.app/v1/graphql
 This inside your index.js (assuming your using create-react-app):
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import React from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
+import App from "./App"
+import reportWebVitals from "./reportWebVitals"
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
 
 // New Apollo Client with Settings
 const client = new ApolloClient({
@@ -218,7 +218,7 @@ const client = new ApolloClient({
   headers: {
     "x-hasura-admin-secret": process.env.REACT_APP_HASURA_SECRET,
   },
-});
+})
 
 ReactDOM.render(
   <ApolloProvider client={client}>
@@ -227,36 +227,37 @@ ReactDOM.render(
     </React.StrictMode>
   </ApolloProvider>,
   document.getElementById("root")
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
 ```
 
 Now you can use the `useQuery` and `useMutation` hooks where needed!
 
 ```js
-import {useQuery, useMutation, gql} from "@apollo/client"
+import { useQuery, useMutation, gql } from "@apollo/client"
 
 function App() {
-
   // GraphQL Query String
-  const QUERY_STRING = gql`{
-    habits {
-      id
-      habit
-      count
+  const QUERY_STRING = gql`
+    {
+      habits {
+        id
+        habit
+        count
+      }
     }
-  }`
+  `
 
   // run query using the useQuery Hook
   // refetch is a function to repeat the request when needed
-  const {data, loading, refetch, error} = useQuery(QUERY_STRING)
+  const { data, loading, refetch, error } = useQuery(QUERY_STRING)
 
   // return value if the request errors
-  if (error){
+  if (error) {
     return <h1>There is an Error</h1>
   }
 
@@ -266,14 +267,20 @@ function App() {
   }
 
   // return value if the request is completed
-  if (data){
-    return <div>
-      {data.habits.map(h => <h1 key={h.id}>{h.habit} {h.count}</h1>)}
-    </div>
+  if (data) {
+    return (
+      <div>
+        {data.habits.map(h => (
+          <h1 key={h.id}>
+            {h.habit} {h.count}
+          </h1>
+        ))}
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
 ```
 
 #### make-graphql-query
@@ -292,25 +299,25 @@ REACT_APP_HASURA_URL=https://xxxxxxxxxxxx.hasura.app/v1/graphql
 - create a gqlFunc.js file in /src, this file exports a function that knows your graphql URL and automatically has any neccessary headers.
 
 ```js
-import makeGraphQLQuery from "make-graphql-query";
+import makeGraphQLQuery from "make-graphql-query"
 
 export default makeGraphQLQuery({
   url: process.env.REACT_APP_HASURA_URL,
   headers: {
     "x-hasura-admin-secret": process.env.REACT_APP_HASURA_SECRET,
   },
-});
+})
 ```
 
 Then we can just import it and use it as needed!
 
 ```js
-import graphQLQuery from "./gqlFunc";
-import { useState, useEffect } from "react";
+import graphQLQuery from "./gqlFunc"
+import { useState, useEffect } from "react"
 
 function App() {
   // state to hold query results
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState(null)
 
   // useState to fetch data on load
   useEffect(() => {
@@ -323,21 +330,27 @@ function App() {
         count
       }
     }`,
-    }).then((response) => setQuery(response));
-  }, []);
+    }).then(response => setQuery(response))
+  }, [])
 
   // pre-query completion jsx
-  if (!query){
+  if (!query) {
     return <h1>Loading</h1>
-  };
+  }
 
   // post-query completion jsx
-  return <div>
-    {query.habits.map((h) => <h2 key={h.id}>{h.habit} - {h.count}</h2>)}
-  </div>
+  return (
+    <div>
+      {query.habits.map(h => (
+        <h2 key={h.id}>
+          {h.habit} - {h.count}
+        </h2>
+      ))}
+    </div>
+  )
 }
 
-export default App;
+export default App
 ```
 
 ## Adding Habits
@@ -353,63 +366,68 @@ mutation add_habit ($objects: [habits_insert_input!]!){
       }
     }
 ```
-* Note the type of the variable must be an exact match as to where you use it, use GraphiQL to determine the necessary types when making your own queries.
+
+- Note the type of the variable must be an exact match as to where you use it, use GraphiQL to determine the necessary types when making your own queries.
 
 #### Apollo Client Updated Code
 
 App.js
 
 ```js
-import {useQuery, useMutation, gql} from "@apollo/client"
+import { useQuery, useMutation, gql } from "@apollo/client"
 import { useState } from "react"
 
 function App() {
-
   // GraphQL Query String
-  const QUERY_STRING = gql`{
-    habits {
-      id
-      habit
-      count
+  const QUERY_STRING = gql`
+    {
+      habits {
+        id
+        habit
+        count
+      }
     }
-  }`
+  `
 
-  const MUTATION_STRING = gql`mutation add_habit ($objects: [habits_insert_input!]!){
-    insert_habits(objects: $objects){
-      affected_rows
+  const MUTATION_STRING = gql`
+    mutation add_habit($objects: [habits_insert_input!]!) {
+      insert_habits(objects: $objects) {
+        affected_rows
+      }
     }
-  }`
+  `
 
   // run query using the useQuery Hook
   // refetch is a function to repeat the request when needed
-  const {data, loading, refetch, error} = useQuery(QUERY_STRING)
+  const { data, loading, refetch, error } = useQuery(QUERY_STRING)
 
   // create function to run mutation
   const [add_habit, response] = useMutation(MUTATION_STRING)
 
   // state to hold form data
-  const [form, setForm] = useState({habit: "", count: 0})
+  const [form, setForm] = useState({ habit: "", count: 0 })
 
   // handleChange function for form
-  const handleChange = (event) => setForm({...form, [event.target.name]: event.target.value})
+  const handleChange = event =>
+    setForm({ ...form, [event.target.name]: event.target.value })
 
   // handleSubmit function for when form is submitted
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     // prevent refresh
     event.preventDefault()
     // add habit, pass in variables
-    await add_habit({variables: {objects: [form]}})
+    await add_habit({ variables: { objects: [form] } })
     // refetch query to get new data
     refetch()
   }
 
   // check if mutation failed
-  if(response.error){
-    <h1>Failed to Add Habit</h1>
+  if (response.error) {
+    ;<h1>Failed to Add Habit</h1>
   }
 
   // return value if the request errors
-  if (error){
+  if (error) {
     return <h1>There is an Error</h1>
   }
 
@@ -419,36 +437,51 @@ function App() {
   }
 
   // return value if the request is completed
-  if (data){
-    return <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="habit" value={form.habit} onChange={handleChange}/>
-        <input type="number" name="count" value={form.count} onChange={handleChange}/>
-        <input type="submit" value="track habit"/>
-      </form>
-      {data.habits.map(h => <h1 key={h.id}>{h.habit} {h.count}</h1>)}
-    </div>
+  if (data) {
+    return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="habit"
+            value={form.habit}
+            onChange={handleChange}
+          />
+          <input
+            type="number"
+            name="count"
+            value={form.count}
+            onChange={handleChange}
+          />
+          <input type="submit" value="track habit" />
+        </form>
+        {data.habits.map(h => (
+          <h1 key={h.id}>
+            {h.habit} {h.count}
+          </h1>
+        ))}
+      </div>
+    )
   }
 }
 
-export default App;
+export default App
 ```
-
 
 #### MGQ Updated Code
 
 App.js
 
 ```js
-import graphQLQuery from "./gqlFunc";
-import { useState, useEffect } from "react";
+import graphQLQuery from "./gqlFunc"
+import { useState, useEffect } from "react"
 
 function App() {
   // state to hold query results
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState(null)
 
   // state to hold form data
-  const [form, setForm] = useState({habit: "", count: 0})
+  const [form, setForm] = useState({ habit: "", count: 0 })
 
   // function to get habits
   const getHabits = async () => {
@@ -461,13 +494,13 @@ function App() {
         count
       }
     }`,
-    });
+    })
     // assigning response to state
-    setQuery(response);
-  };
+    setQuery(response)
+  }
 
   // function to add a habit
-  const addHabit = async (variables) => {
+  const addHabit = async variables => {
     //define the query
     const q = `mutation add_habit ($objects: [habits_insert_input!]!){
       insert_habits(objects: $objects){
@@ -476,7 +509,7 @@ function App() {
     }`
 
     // run query with variables
-    await graphQLQuery({query: q, variables})
+    await graphQLQuery({ query: q, variables })
 
     // get updated list of habits
     getHabits()
@@ -484,43 +517,54 @@ function App() {
 
   // useState to fetch data on load
   useEffect(() => {
-    getHabits();
-  }, []);
+    getHabits()
+  }, [])
 
   // handleChange function for form
-  const handleChange = (event) => setForm({...form, [event.target.name]: event.target.value})
+  const handleChange = event =>
+    setForm({ ...form, [event.target.name]: event.target.value })
 
   // handleSubmit function for when form is submitted
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     // prevent refresh
     event.preventDefault()
     // add habit, pass in variables
-    addHabit({objects: [form]})
+    addHabit({ objects: [form] })
   }
 
   // pre-query completion jsx
   if (!query) {
-    return <h1>Loading</h1>;
+    return <h1>Loading</h1>
   }
 
   // post-query completion jsx
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="habit" value={form.habit} onChange={handleChange}/>
-        <input type="number" name="count" value={form.count} onChange={handleChange}/>
-        <input type="submit" value="track habit"/>
+        <input
+          type="text"
+          name="habit"
+          value={form.habit}
+          onChange={handleChange}
+        />
+        <input
+          type="number"
+          name="count"
+          value={form.count}
+          onChange={handleChange}
+        />
+        <input type="submit" value="track habit" />
       </form>
-      {query.habits.map((h) => (
+      {query.habits.map(h => (
         <h2 key={h.id}>
           {h.habit} - {h.count}
         </h2>
       ))}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
 ```
 
 ## Conclusion

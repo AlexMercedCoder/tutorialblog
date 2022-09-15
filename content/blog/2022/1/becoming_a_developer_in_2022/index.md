@@ -57,14 +57,12 @@ Having a good editor/IDE and learning how to use it will make your life a lot ea
 - [My Favorite Visual Studio Extensions](https://www.youtube.com/watch?v=eftHJZwHYTQ&t=1s)
 - [Creating an environment for any lanaguage with Docker and VSCode](https://www.youtube.com/watch?v=jHKevKjp9C8)
 
-
 #### Git and Github
 
 Git and Github can be hard to understand and work with at first, but it is arguably along with Bash the most universal and important tools you'll use. Whether you are working in Web, Mobile, Data, Blockchain, etc. you will regularly be working with Git, Github and Bash so make sure you get comfortable with these (overtime) but do not think they are something you can ignore.
 
 - [Intro to Git](https://www.youtube.com/watch?v=L4zbgo7KFoA&t=9s)
 - [Working with Git Remotes (Github)](https://www.youtube.com/watch?v=TOsVVxXdtu8&t=2s)
-
 
 #### Deployment
 
@@ -78,7 +76,7 @@ For backend application, Heroku will be your main option until you become more s
 - [More ways to deploy a static site](https://www.youtube.com/watch?v=2FVY_lm-mTY)
 - [How to Deploy to Netlify/Vercel with CodeSandBox.io](https://www.youtube.com/watch?v=X2K5NxSHtAs)
 - [Deploying React to Netlify](https://www.youtube.com/watch?v=XwOUYUBCaoI&t=2s)
-- [Deploying NodeJS Apps to Heroku](https://tuts.alexmercedcoder.com/2021/4/deploying_node_heroku/)
+- [Deploying NodeJS Apps to Heroku](https://tuts.alexmercedcoder.dev/2021/4/deploying_node_heroku/)
 - [Heroku Trouble Shooting Guide](https://www.youtube.com/watch?v=iCp54sw7uCw)
 
 #### Programming Concepts
@@ -99,23 +97,21 @@ Learn the web frameworks in the language you choose to focus on and create and d
 
 Here is a list of language and the web frameworks to learn in the order you should learn them.
 
-| Language | Mini-framework to learn first | Robust framework to learn second |
-|----------|-------------------------------|----------------------------------|
-| Javascript/Typescript | Express, Koa or Fastify | NestJS or FoalTS |
-| Python | Flask or FastAPI | Django or Masonite |
-| Ruby | Sinatra | Ruby on Rails |
-| PHP | Slim | Laravel |
-| GO | Echo or Revel | Buffalo |
-| Rust | Actix | Rocket |
-| Java | | Spring Boot or Play |
-|Kotlin| | Spring Boot |
-| Scala | | Play |
-| Groovy | | Spring Boot |
-| Swift || Vapor or Kitura |
-| OCAML | Dream ||
-| C# || .NET |
-
-
+| Language              | Mini-framework to learn first | Robust framework to learn second |
+| --------------------- | ----------------------------- | -------------------------------- |
+| Javascript/Typescript | Express, Koa or Fastify       | NestJS or FoalTS                 |
+| Python                | Flask or FastAPI              | Django or Masonite               |
+| Ruby                  | Sinatra                       | Ruby on Rails                    |
+| PHP                   | Slim                          | Laravel                          |
+| GO                    | Echo or Revel                 | Buffalo                          |
+| Rust                  | Actix                         | Rocket                           |
+| Java                  |                               | Spring Boot or Play              |
+| Kotlin                |                               | Spring Boot                      |
+| Scala                 |                               | Play                             |
+| Groovy                |                               | Spring Boot                      |
+| Swift                 |                               | Vapor or Kitura                  |
+| OCAML                 | Dream                         |                                  |
+| C#                    |                               | .NET                             |
 
 #### Computer Science
 
@@ -137,7 +133,7 @@ There are several things you want to know about how computers work that will mak
 
 So your at the 1500-2000 hour mark, you've deployed some applications, now it is time to begin the job search. Here are some resources to help you hit the ground running.
 
-- [Guide to branding yourself as a developer](https://tuts.alexmercedcoder.com/2020/branding/)
+- [Guide to branding yourself as a developer](https://tuts.alexmercedcoder.dev/2020/branding/)
 - [My Advice of the Developer Job Search](https://www.youtube.com/watch?v=yaMfHxRMZg4&t=2s)
 - [Tips on writing a developer resume](https://www.youtube.com/watch?v=J5gy9iqjwXM)
 - [2022 How to become a dev video, covering different roles you have](https://www.youtube.com/watch?v=l4UTTL6rLUA)

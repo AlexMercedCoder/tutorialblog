@@ -8,7 +8,7 @@ description: "Beginners Tutorial"
 
 In my journey building different frontend libraries to improve my own comfort with frontend development I made libraries like MercedUI and AMPonent that are built around the Web Component browser API. I wanted to try building a library that doesn't use the web component API to build reactive UI and this was my first attempt (I later created RenderBlocks).
 
-*You can find this and my other libraries at AlexMercedCoder.com
+*You can find this and my other libraries at alexmercedcoder.dev
 *mBlocks Github Page: https://github.com/AlexMercedCoder/mBlocks/blob/master/block.js
 
 ## Setup
@@ -30,7 +30,7 @@ In my journey building different frontend libraries to improve my own comfort wi
 
     <!-- mBlocks -->
     <script
-      src="http://www.alexmercedcoder.com/block.js"
+      src="http://www.alexmercedcoder.dev/block.js"
       charset="utf-8"
       defer
     ></script>

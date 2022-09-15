@@ -3,6 +3,7 @@ title: Guide to Becoming a Developer in 2021
 date: "2021-01-07T12:12:03.284Z"
 description: Step by Step Guide and Advice
 ---
+
 ## Reasons to Become a Developer
 
 1. Jobs! If you check our the [Bureau of Labor Statics](https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm) you will see that the demand for developers is growing at above-average levels and after 2020 with every business have to embrace technology to survive there is no reason to expect that to change.
@@ -44,7 +45,7 @@ I highly discourage attempting to be a purely self-taught developer unless the f
 - Have a clear idea of what direction you want to go
 - Are comfortable in conducting job searches
 
-While the web is filled with blogs, videos, and courses to teach you coding if you don't have the discipline you'll find yourself building bad habits that will be hard to break later. 
+While the web is filled with blogs, videos, and courses to teach you coding if you don't have the discipline you'll find yourself building bad habits that will be hard to break later.
 
 If you don't have a clear idea of what you are working towards you will get frustrated by the vast array of technologies and abstractness of what works with what and when.
 
@@ -64,7 +65,7 @@ With General Assembly you get:
 
 - A career coach who will be a guide, mentor and resource for you from beginning to placement.
 
-*NOTE*: While my outcome was probably above average, I had multiple job offers by graduation and I now also work as a Full-Time Developer on top of being a GA instructor. Timelines vary, but it truly is a matter of you get is a function what you put in. Doing self-preparation before your cohort, being an active participator in class, and not leaving any aspect of the job search on the table pays off in spades.
+_NOTE_: While my outcome was probably above average, I had multiple job offers by graduation and I now also work as a Full-Time Developer on top of being a GA instructor. Timelines vary, but it truly is a matter of you get is a function what you put in. Doing self-preparation before your cohort, being an active participator in class, and not leaving any aspect of the job search on the table pays off in spades.
 
 Ok, so now that I've proclaimed my admittedly biased opinion. Other benefits to Bootcamps in general:
 
@@ -121,7 +122,7 @@ There are several other fields such as desktop software development, Quality Ass
 
 - Learning how git and github work in-depth also a must
 
-- [Read this article on building your brand](https://tuts.alexmercedcoder.com/2020/branding/)
+- [Read this article on building your brand](https://tuts.alexmercedcoder.dev/2020/branding/)
 
 - subscribe to a lot of development podcasts, listening to people talk about code will help immerse you and get more comfortable hearing it
 

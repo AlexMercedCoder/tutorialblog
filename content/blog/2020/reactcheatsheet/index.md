@@ -279,4 +279,4 @@ const MyComponent = props => {
 
 ## React Function Component Hooks
 
-Read my hooks article here: https://tuts.alexmercedcoder.com/2020/reacthooks/
+Read my hooks article here: https://tuts.alexmercedcoder.dev/2020/reacthooks/

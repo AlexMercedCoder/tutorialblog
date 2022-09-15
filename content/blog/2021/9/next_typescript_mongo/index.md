@@ -449,4 +449,4 @@ This is the awesome part, usually deploying a website with backend features requ
 
 Learn More [HERE](https://nextjs.org/docs/deployment)
 
-If you enjoyed this tuturial find more of my work at http://resources.alexmercedcoder.com
+If you enjoyed this tuturial find more of my work at http://resources.alexmercedcoder.dev

@@ -28,9 +28,9 @@ In this tutorial we will be building a basic JSON API in flask. Afterwards I'll 
 
 **If not familiary with what are and what is the purpose of virtual environments read the following articles**
 
-[Part I: VirtualEnv & Pyenv](https://tuts.alexmercedcoder.com/2021/1/pythonvirtualenv/)
-[Part II: Built-in Virtual Env Generator](https://tuts.alexmercedcoder.com/2021/3/rivisitingpyenv/)
-[Part III: Pipenv, the Ultimate Virtual Environment](https://tuts.alexmercedcoder.com/2021/4/pipenv/)
+[Part I: VirtualEnv & Pyenv](https://tuts.alexmercedcoder.dev/2021/1/pythonvirtualenv/)
+[Part II: Built-in Virtual Env Generator](https://tuts.alexmercedcoder.dev/2021/3/rivisitingpyenv/)
+[Part III: Pipenv, the Ultimate Virtual Environment](https://tuts.alexmercedcoder.dev/2021/4/pipenv/)
 
 - install flask `pip install flask`
 
@@ -53,9 +53,9 @@ def first_route():
 
 ```
 
-** If your wondering about the __name__ variable, it's a special variable in python you can [read about here](https://www.geeksforgeeks.org/__name__-special-variable-python/)**
+** If your wondering about the **name** variable, it's a special variable in python you can [read about here](https://www.geeksforgeeks.org/__name__-special-variable-python/)**
 
-To run the server use the command 
+To run the server use the command
 
 `FLASK_APP=server.py python -m flask run`
 
@@ -75,12 +75,12 @@ Returning JSON responses in Flask is pretty easy, as long as the routes function
 
 ```py
 class Dog():
-    
+
     ## Dog Constructor
     def __init__(self, name, age):
       self.name = name
       self.age = age
-    
+
     ## Method for Turning to Dictionary to send back as JSON
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -124,7 +124,7 @@ If you want start the server and use a tool like postman to make a get and post 
 
 ```json
 {
-  "meal":"brunch"
+  "meal": "brunch"
 }
 ```
 

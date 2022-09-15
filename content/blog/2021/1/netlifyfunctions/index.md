@@ -6,7 +6,7 @@ description: Your First Cloud Function
 
 ## Context
 
-[First Read My Article on Cloud Functions to understand why you should learn about them!](https://tuts.alexmercedcoder.com/2021/1/cloudfunctions/)
+[First Read My Article on Cloud Functions to understand why you should learn about them!](https://tuts.alexmercedcoder.dev/2021/1/cloudfunctions/)
 
 ## Getting Started
 
@@ -17,16 +17,14 @@ description: Your First Cloud Function
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>My Netlify Function Site!</h1>
-    
-</body>
+  </body>
 </html>
 ```
 
@@ -74,36 +72,36 @@ description: Your First Cloud Function
 #       Access-Control-Allow-Headers = "*"
 
 ```
-*While a lot of the above properties we don't need for this exercise you can use the above template to easily find the other powers of the netlify.toml file*
+
+_While a lot of the above properties we don't need for this exercise you can use the above template to easily find the other powers of the netlify.toml file_
 
 - in the functions folder create a new folder called "first" and in there an index.js
 
 - in the index.js we can now write our first function!
 
 /functions/first/index.js
+
 ```js
 //We export the function
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
+  //Fetch request details from event object
+  const { path, httpMethod, headers, queryStringParameters, body } = event
 
-    //Fetch request details from event object
-    const {path, httpMethod, headers, queryStringParameters, body} = event
-
-    // return some JSON data with a status of 200
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        path,
-        httpMethod,
-        headers,
-        queryStringParameters,
-        body: body ? JSON.parse(body) : "none"
-      })
-    }
+  // return some JSON data with a status of 200
+  return {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      path,
+      httpMethod,
+      headers,
+      queryStringParameters,
+      body: body ? JSON.parse(body) : "none",
+    }),
   }
-
+}
 ```
 
 - now commit everything, push up to github and deploy to netlify

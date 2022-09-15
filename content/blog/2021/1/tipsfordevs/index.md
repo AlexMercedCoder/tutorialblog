@@ -81,4 +81,4 @@ When I've learned new languages I've noticed much of what there is to learn are 
 
 Learning how to write unit tests, using docker containers and cloud functions are worthwhile skills to have regardless of what area of development you are going into.
 
-**Bookmark this article, I'll add to it as I think of more tips and check out the other posts on this blog (updates will be on the original posting at tuts.alexmercedcoder.com)**
+**Bookmark this article, I'll add to it as I think of more tips and check out the other posts on this blog (updates will be on the original posting at tuts.alexmercedcoder.dev)**

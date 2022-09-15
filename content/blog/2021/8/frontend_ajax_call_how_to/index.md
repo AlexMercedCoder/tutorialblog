@@ -54,7 +54,7 @@ After practicing a little try building some basic applications with free public 
 
 Or you can create your own data and have an API made from it using a Headless CMS!
 
-- [List of Headless CMS services with a free tier](https://tuts.alexmercedcoder.com/2021/1/freeheadless/)
+- [List of Headless CMS services with a free tier](https://tuts.alexmercedcoder.dev/2021/1/freeheadless/)
 
 ## What's a Promise
 

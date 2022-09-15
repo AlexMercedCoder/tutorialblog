@@ -6,7 +6,7 @@ description: "Creating the Demand For You"
 
 ## Why do you need a brand?
 
-You may have taught yourself, taken a Bootcamp (thinking about one? => join a class with me as your instructor at [General Assembly]( https://generalassemb.ly/instructors/alex-merced/22978)), or received a computer science degree. Regardless, your knowledge is only as good as other people's awareness and understanding that you have it.
+You may have taught yourself, taken a Bootcamp (thinking about one? => join a class with me as your instructor at [General Assembly](https://generalassemb.ly/instructors/alex-merced/22978)), or received a computer science degree. Regardless, your knowledge is only as good as other people's awareness and understanding that you have it.
 
 The purpose of this post is to discuss tips and strategies to help you establish your brand and improve your skills as a developer. The result of building a brand can be the following.
 
@@ -21,7 +21,7 @@ All of the tips and strategies discussed are things that should be broadcast on 
 
 This is the central non-negotiable aspect of building your ability to show your knowledge. Whether it's making a functioning deployed application or creating your own frontend and backend libraries (Express, Lodash and React exist, but creating a similar library shows a deeper appreciation for programming and shows that you'd be very comfortable working with existing libraries.) These projects should not only exist but be front and center on your portfolio page, have blog posts written about their creation, have quality documentation and be the subject of Linkedin posts updating your network on your progress.
 
-* You can also show off your code with links to repl.it, codepen.io, codesandbox.io, runkit.io, etc.
+- You can also show off your code with links to repl.it, codepen.io, codesandbox.io, runkit.io, etc.
 
 ## LinkedIn
 
@@ -32,6 +32,7 @@ I was never a big LinkedIn user till I became a developer. The developer communi
 Especially if you are looking to be hired as a developer, very likely those considering you will look at your GitHub to get an idea of who you are as a coder. Make sure to have a regular commit history (ideally daily commits, but shoot for 4/7 days of the week). Also, make sure to customize your profile by creating a readme in a repo named after your username to make your GitHub profile more engaging.
 
 Some tips for improving your GitHub commit history:
+
 - Create a Repo where you save your solutions from coding challenges
 - Create a markdown blog with Gatsby(React), Gridsome(Vue), Scully(Angular), or Sapper(Svelte); that way, your blog posts add to your commit history, and you practice writing markdown.
 
@@ -45,7 +46,7 @@ If you follow my advice and use a static site generator to create a markdown blo
 - Commits to your GitHub
 
 The static site generator for each frontend framework I have listed below:
-*My Blog, tuts.alexmercedcoder.com, is created using Gatsby*
+_My Blog, tuts.alexmercedcoder.dev, is created using Gatsby_
 
 - Gatsby/React
 - Gridsome/Vue
@@ -60,7 +61,7 @@ Stack Overflow is the one-stop-shop for developers to ask questions and give ans
 
 - The way you ask questions is a signal of understanding and ability to communicate. A good question elaborates on the attempts to solve the problem, gives the appropriate code snippets to help those assisting the ability to solve the problem. Employers don't need every developer to know everything but their ability to communicate bottlenecks to their team matters, and this is an excellent way to demonstrate it.
 
-- Answering questions also help you demonstrate your expertise and show what you can contribute to your team. 
+- Answering questions also help you demonstrate your expertise and show what you can contribute to your team.
 
 ## Podcasts
 
@@ -130,4 +131,3 @@ So you are in the "need more experience" zone... well... then create more experi
 ## In Conclusion
 
 This is just the tip of the iceberg, but use the above to give you plenty of ways to use your time in building a long and fruitful development career.
-

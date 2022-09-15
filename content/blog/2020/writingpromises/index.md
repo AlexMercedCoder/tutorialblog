@@ -5,7 +5,7 @@ description: Under the Hood of Asynchronous Javascript
 ---
 
 To read my previous article explaining promises, go here:
-https://tuts.alexmercedcoder.com/2020/promises/
+https://tuts.alexmercedcoder.dev/2020/promises/
 
 ## Building a Promise
 
@@ -34,9 +34,9 @@ const myPromise = new Promise((resolve, reject) => {
 })
 
 myPromise
-.then(value => console.log(value))
-.catch(err => console.log(err))
-.finally (()=>console.log("Either Way I happen"))
+  .then(value => console.log(value))
+  .catch(err => console.log(err))
+  .finally(() => console.log("Either Way I happen"))
 ```
 
 So what happened above?
@@ -61,4 +61,4 @@ That's it, wrap any code whose completing should trigger other code in a promise
 
 - Technically your code is still synchronous (a single process), what promises do is just allow the event loop to continue as an the event loop it'll evaluates the promises status on each loop. If the status is pending, the loop just continues executing other code, if resolved .then calls will then be executed, if reject then .catch calls will be executed.
 
-- Typically under the hood of things like fetch and mongoose are event emitters that emit events when http connections are made or streams are running, and it's these events that may tell the promise to be resolved. Read my article on javascript events: https://tuts.alexmercedcoder.com/2020/jsevents/
+- Typically under the hood of things like fetch and mongoose are event emitters that emit events when http connections are made or streams are running, and it's these events that may tell the promise to be resolved. Read my article on javascript events: https://tuts.alexmercedcoder.dev/2020/jsevents/

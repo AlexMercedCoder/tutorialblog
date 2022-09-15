@@ -6,7 +6,7 @@ description: Your First Cloud Function
 
 ## Context
 
-[First Read My Article on Cloud Functions to understand why you should learn about them!](https://tuts.alexmercedcoder.com/2021/1/cloudfunctions/)
+[First Read My Article on Cloud Functions to understand why you should learn about them!](https://tuts.alexmercedcoder.dev/2021/1/cloudfunctions/)
 
 ## Getting Started
 
@@ -61,10 +61,9 @@ Try using postman or CURL to make other types of requests like POST, PUT, DELETE
 
 ## Other Things to Know
 
-- The req and res objects should work as they do in express.js 
+- The req and res objects should work as they do in express.js
 
-
-- To enable cors just set the headers like so:
+* To enable cors just set the headers like so:
 
 ```js
 headers: {

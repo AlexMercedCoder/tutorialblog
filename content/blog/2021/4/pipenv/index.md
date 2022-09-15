@@ -6,8 +6,8 @@ description: Venv... the best way?
 
 Virtual environments have always been one of those areas of constant discovery as I've learned python. I've been writing on articles what, how, and why of Virtual Environments and you can find those articles here:
 
-- [Part I: VirtualEnv & Pyenv](https://tuts.alexmercedcoder.com/2021/1/pythonvirtualenv/)
-- [Part II: Built-in Virtual Env Generator](https://tuts.alexmercedcoder.com/2021/3/rivisitingpyenv/)
+- [Part I: VirtualEnv & Pyenv](https://tuts.alexmercedcoder.dev/2021/1/pythonvirtualenv/)
+- [Part II: Built-in Virtual Env Generator](https://tuts.alexmercedcoder.dev/2021/3/rivisitingpyenv/)
 
 While all of these work great for isolating dependencies and outputting dependencies to a requirements.txt allow use to track dependencies one piece is still missing, deterministic dependency resolution.
 
@@ -36,7 +36,7 @@ This will generate a virtual environment along with the following after you inst
 - pipfile: list of dependencies and package info like Package.json for node or Cargo.toml for Rust
 - Pipfile.lock: File dependency resolution
 
-** Note if you've created a virtual environment in this directory already it will instead activate it instead of creating a new one.
+\*\* Note if you've created a virtual environment in this directory already it will instead activate it instead of creating a new one.
 
 ## Install Libraries
 

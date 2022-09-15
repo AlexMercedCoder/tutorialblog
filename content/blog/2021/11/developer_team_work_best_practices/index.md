@@ -10,7 +10,7 @@ So you've been learning how to code whether in college, in a bootcamp or self-ta
 
 Here are some other resources I've created that should help you in understanding this topic.
 
-- [Understand Git](https://tuts.alexmercedcoder.com/2021/1/guidetogit/)
+- [Understand Git](https://tuts.alexmercedcoder.dev/2021/1/guidetogit/)
 - [Group Developer Workflow Part 1](https://www.youtube.com/watch?v=llDIbfSrRB8)
 - [Group Developer Workflow Part 2](https://www.youtube.com/watch?v=n1AfM6fuc9M&t=5s)
 
@@ -27,6 +27,7 @@ Generally there should be two primary branches in any git repo:
 Everytime you take on a ticket (a unit of deliverable work) you should create a branch, the naming of the branch should follow some convention to make it easy to understand the scope of the branch.
 
 **examples**
+
 - `feature/chat` may be the name of a branch creating a new chat feature
 - `fix/new-form-button` may be a branch where I'm fixing a bug with a button on a form for adding new items
 
@@ -43,6 +44,7 @@ Agile is just an approach to project management where we move away from the old 
 When taking a scrum approach you work in sprints which cover a set period of time to complete a set amount of work (a handful of features/fixes you want to add). You do not release early, you do not do more work if done early. The reason this is important is that at the end of the sprint when the features are released you assess the result to see how the process can be improved for the next sprint (take on more or less work, improve processes). In this case you have releases happening on a set schedule and the goal is to optimize the quantity and quality of work during a sprint.
 
 **In this situation:**
+
 - you get assigned a ticket
 - you pull down any changes made to the dev branch
 - make your ticket branch off of the dev branch
@@ -54,9 +56,10 @@ When taking a scrum approach you work in sprints which cover a set period of tim
 
 #### Kanban
 
-When taking a kanban approach there are no sprints as features are released when completed. In this situation you aren't comparing the execution of several tickets within a sprint but the lifecycle of one ticket/feature. As each feature is released you assess the time it took to get done and how to improve the timeframe for a ticket to be completed. 
+When taking a kanban approach there are no sprints as features are released when completed. In this situation you aren't comparing the execution of several tickets within a sprint but the lifecycle of one ticket/feature. As each feature is released you assess the time it took to get done and how to improve the timeframe for a ticket to be completed.
 
 **In this situation:**
+
 - get assigned a ticket
 - pull all updates to main branch
 - make a ticket branch off of main
@@ -75,6 +78,7 @@ This is usually done with the use of tools like Jenkins, CircleCI, Github Action
 Trigger: making a pull request to the main branch
 
 Actions Taken:
+
 - auto-format code using prettier
 - check for syntax and style errors using ESLint (reject push if errors/warnings found)
 - run several unit tests (reject push if any test fails)
@@ -91,10 +95,7 @@ This can be a boon to the speed at which new code can be added to the codebase, 
 
 - Scrum/Kanban Board: A board often with a list of tasks in a backlog, that get assigned to a team member and moves to "in progress", then to "in review", then to "complete". The goal always is to move the tickets from the far left (backlog) to the far right (complete)
 
-**Templates you can use in your team**
--[AIRTABLE](https://airtable.com/shr60SohWPoKMqKSg)
--[Google Sheets](https://docs.google.com/spreadsheets/d/1EkEDhjxSP-dncgimZ_C1QKKrsIwY4vPXk9lFkhWdvGY/edit?)usp=sharing
--[Trello](https://trello.com/templates/project-management/project-management-1x4Uql2u)
+**Templates you can use in your team** -[AIRTABLE](https://airtable.com/shr60SohWPoKMqKSg) -[Google Sheets](https://docs.google.com/spreadsheets/d/1EkEDhjxSP-dncgimZ_C1QKKrsIwY4vPXk9lFkhWdvGY/edit?)usp=sharing -[Trello](https://trello.com/templates/project-management/project-management-1x4Uql2u)
 
 ## In Conclusion
 

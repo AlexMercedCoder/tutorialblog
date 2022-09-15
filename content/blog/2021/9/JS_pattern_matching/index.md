@@ -13,22 +13,20 @@ In javascript you generally have on of two choices to test several conditions wi
 For example if I want to test whether a variable has one of many strings as its value...
 
 ```js
-
-if (color === "red"){
-        console.log("it's red")
+if (color === "red") {
+  console.log("it's red")
 }
 
-if (color === "blue"){
-        console.log("it's blue")
+if (color === "blue") {
+  console.log("it's blue")
 }
 
-if (color === "red"){
-        console.log("it's red")
+if (color === "red") {
+  console.log("it's red")
 }
 ```
 
 This can be simplified with one line ifs...
-
 
 ```js
 if (color === "red") console.log("it's red")
@@ -55,38 +53,34 @@ These are more succinct but if the actions that need to be taken if true get com
 If all we care about is asking whether value a is equal to values b, c, c then switch statements may the happy alternative.
 
 ```js
+switch (color) {
+  case "red":
+    console.log("it's red")
+    break
 
-switch(color){
-        case "red":
-                console.log("it's red")
-                break
+  case "blue":
+    console.log("it's blue")
+    break
 
-        case "blue":
-                console.log("it's blue")
-                break
+  case "green":
+    console.log("it's green")
+    break
 
-        case "green":
-                console.log("it's green")
-                break
-
-        default:
-                console.log("none of them")
+  default:
+    console.log("none of them")
 }
-
 ```
 
 This can be nice and more clear for situations like this. Another cool variation of this is to use a javascript object along with the dynamic keys to treat an object of functions as a switch.
 
 ```js
-
 const objectSwitch = {
-        red: () => console.log("it's red"),
-        blue: () => console.log("it's blue"),
-        green: () => console.log("it's green")
+  red: () => console.log("it's red"),
+  blue: () => console.log("it's blue"),
+  green: () => console.log("it's green"),
 }
 
 objectSwitch[color]() // <--- invoke the function behind which ever string in stored in color
-
 ```
 
 This works great and has been a great solution for me but of course you run the risk on a key not present being in color and attempting to invoke undefined which will throw an error, so be careful.
@@ -98,24 +92,22 @@ The above are fine but only work if there is a match of values, not useful for m
 One trick exists to using a switch with regex by usings it's test methods a true switch.
 
 ```js
+switch (true) {
+  case /red/.test(color):
+    console.log("it's red")
+    break
 
-switch(true){
-        case /red/.test(color):
-                console.log("it's red")
-                break
+  case /blue/.test(color):
+    console.log("it's blue")
+    break
 
-        case /blue/.test(color):
-                console.log("it's blue")
-                break
+  case /color/.test(color):
+    console.log("it's green")
+    break
 
-        case /color/.test(color):
-                console.log("it's green")
-                break
-
-        default:
-                console.log("none of them")
+  default:
+    console.log("none of them")
 }
-
 ```
 
 This works for regex but what if you also want to check variable types, whether a key exist in an object, or the number of elements in a array, then just a big slew of ifs are your only choice.
@@ -132,7 +124,7 @@ So I decided to make my own Patter Matching library you can use... now.
 
 There are four functions in this library:
 
-```const {createMatcher, createSingleMatcher, matchArray, matchObject} = require("alexmerced-patternmatcher")```
+`const {createMatcher, createSingleMatcher, matchArray, matchObject} = require("alexmerced-patternmatcher")`
 
 - create a matcher with createMatcher (allows multiple matches) or createSingleMatcher (allow for a single match), which returns a function who test the registered patterns against the value passed to it. createMatcher and createSingleMatcher take two arguments...
 
@@ -142,9 +134,9 @@ There are four functions in this library:
 
 ```js
 const matcher = createMatcher([
-        ["v === 'red'", (v) => console.log("it's red")],
-        ["v === 'blue'", (v) => console.log("it's blue")],
-        ["v === 'green'", (v) => console.log("it's green")],
+  ["v === 'red'", v => console.log("it's red")],
+  ["v === 'blue'", v => console.log("it's blue")],
+  ["v === 'green'", v => console.log("it's green")],
 ])
 
 matcher(color)
@@ -165,35 +157,32 @@ Let's say we want to check the type of an object among custom types we created, 
 - Without using the externals argument
 
 ```js
-
 /// CUSTOM TYPES CAT AND DOG
 class Cat {
-    constructor(name, age){
-        this.age,
-        this.name
-    }
+  constructor(name, age) {
+    this.age, this.name
+  }
 }
 
 class Dog {
-    constructor(name, age){
-        this.age,
-        this.age
-    }
+  constructor(name, age) {
+    this.age, this.age
+  }
 }
 
 // AN ARRAY OF ANIMALS OF DIFFERENT TYPES
 const animals = [
-    new Cat("Scratchy", 5),
-    new Dog("Spunky", 3),
-    new Cat("Paws", 3),
-    new Dog("Old Yeller", 10)
+  new Cat("Scratchy", 5),
+  new Dog("Spunky", 3),
+  new Cat("Paws", 3),
+  new Dog("Old Yeller", 10),
 ]
 
 // LOOPING OVER ARRAY AND DOING DIFFERENT OPERATIONS BASED ON TYPE
 const matcher = createMatcher([
-    ["v.constructor.name === 'Dog'", (v) => console.log("It's a dog")],
-    ["v.constructor.name === 'Cat", (v) => console.log("it's a cat")],
- ])
+  ["v.constructor.name === 'Dog'", v => console.log("It's a dog")],
+  ["v.constructor.name === 'Cat", v => console.log("it's a cat")],
+])
 
 matchArray(animals, matcher)
 ```
@@ -201,10 +190,13 @@ matchArray(animals, matcher)
 - version using the externals argument
 
 ```js
-const matcher = createMatcher([
-    ["v instanceof ex.Dog", (v) => console.log("It's a dog")],
-    ["v instanceof ex.Cat", (v) => console.log("it's a cat")],
- ], {Cat, Dog})
+const matcher = createMatcher(
+  [
+    ["v instanceof ex.Dog", v => console.log("It's a dog")],
+    ["v instanceof ex.Cat", v => console.log("it's a cat")],
+  ],
+  { Cat, Dog }
+)
 
 matchArray(animals, matcher)
 ```
@@ -216,17 +208,19 @@ As you can see the object passed in as the second argument becomes available thr
 Let's say you have objects that represent users and you wanted to clean up the data (fix emails, phone numbers). The matchObject function loops over an objects properties as entries and passes them to your matcher which would be receiving an array of `[key, value]`. So you can do stuff like this.
 
 ```js
-
 const alex = {
-        name: "Alex Merced",
-        age: 36,
-        email: "alex@alexmercedcoder.com"
+  name: "Alex Merced",
+  age: 36,
+  email: "alex@alexmercedcoder.dev",
 }
 
 const matcher = createMatcher([
-        ["v[0] === 'name'", ([key, value]) => console.log("do stuff with the name")],
-        ["v[0] === 'age'", ([key, value]) => console.log("do stuff with the age")],
-        ["v[0] === 'email'", ([key, value]) => console.log("do stuff with the email")],
+  ["v[0] === 'name'", ([key, value]) => console.log("do stuff with the name")],
+  ["v[0] === 'age'", ([key, value]) => console.log("do stuff with the age")],
+  [
+    "v[0] === 'email'",
+    ([key, value]) => console.log("do stuff with the email"),
+  ],
 ])
 
 matchObject(alex, matcher)

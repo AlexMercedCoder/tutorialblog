@@ -4,7 +4,7 @@ date: "2020-10-05T22:12:03.284Z"
 description: Gulp, Express and React!
 ---
 
-**To See me list my prior templates go here**: https://tuts.alexmercedcoder.com/2020/mercedspinuptut/
+**To See me list my prior templates go here**: https://tuts.alexmercedcoder.dev/2020/mercedspinuptut/
 
 ## What's New
 

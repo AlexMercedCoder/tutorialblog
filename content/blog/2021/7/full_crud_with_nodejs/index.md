@@ -4,23 +4,23 @@ date: "2021-07-25T12:12:03.284Z"
 description: Learning REST conventions with Javascript
 ---
 
-NodeJS is an amazing tool that allows us to bring Javascript to backend development. When it comes to creating web servers, there are dozens of frameworks in the Node ecosystem. The most popular minimalist unopinionated frameworks are Express, Koa and Fastify. In this tutorial we will build a basic API that follows RESTful conventions with each one. We will not be using a database but instead an array of objects to simulate data from a database so we can focus on the RESTful patterns. 
+NodeJS is an amazing tool that allows us to bring Javascript to backend development. When it comes to creating web servers, there are dozens of frameworks in the Node ecosystem. The most popular minimalist unopinionated frameworks are Express, Koa and Fastify. In this tutorial we will build a basic API that follows RESTful conventions with each one. We will not be using a database but instead an array of objects to simulate data from a database so we can focus on the RESTful patterns.
 
 ## Summary of the RESTful Convention
 
-THe restful convention gives us a blueprint of making the basic routes for CRUD (Create, Read, Update, Delete) functionality in a uniform way. 
+THe restful convention gives us a blueprint of making the basic routes for CRUD (Create, Read, Update, Delete) functionality in a uniform way.
 
 API Restful Routes
 
-| Name of Route | Request Method | Endpoint | Result |
-|---------------|----------------|----------|--------|
-| Index | GET | `/model` | returns list of all items |
-| Show | GET | `/model/:id` | returns item with matching id |
-| Create | Post | `/model` | creates a new item, returns item or confirmation |
-| Update | Put/Patch | `/model/:id` | Updated item with matching ID |
-| Destroy | Delete | `/model/:id` | Deletes item with matching ID |
+| Name of Route | Request Method | Endpoint     | Result                                           |
+| ------------- | -------------- | ------------ | ------------------------------------------------ |
+| Index         | GET            | `/model`     | returns list of all items                        |
+| Show          | GET            | `/model/:id` | returns item with matching id                    |
+| Create        | Post           | `/model`     | creates a new item, returns item or confirmation |
+| Update        | Put/Patch      | `/model/:id` | Updated item with matching ID                    |
+| Destroy       | Delete         | `/model/:id` | Deletes item with matching ID                    |
 
-If we weren't build an API but instead rendering pages on the server there would be two additional routes. New, which renders a page with a form to create a new object, submitting the form triggers the create route. Edit, which renders a page with a form to edit an existing object, submitting the form triggers the Update route. 
+If we weren't build an API but instead rendering pages on the server there would be two additional routes. New, which renders a page with a form to create a new object, submitting the form triggers the create route. Edit, which renders a page with a form to edit an existing object, submitting the form triggers the Update route.
 
 Since we are building an api, Edit and New aren't necessary as the burden of collecting the information to submit to the Create and Update route will be on whoever builds the applications that consume the API. (Frontend Applications built in frameworks)
 
@@ -40,46 +40,46 @@ NodeJS is super flexible so we can essentially create all three servers in one p
 
 #### THINGS TO NOTICE
 
-* a node modules folder is created, this is where the frameworks you installed exist if you wanted to look through their code. Never commit this to github, to avoid this create a `.gitignore` file and inside of add this:
+- a node modules folder is created, this is where the frameworks you installed exist if you wanted to look through their code. Never commit this to github, to avoid this create a `.gitignore` file and inside of add this:
 
 ```
 /node_modules
 ```
 
-* A package-lock.json file is created, never touch this file, it just tracks the dependencies of your dependencies to optimize the speed of redownloading them in the future. (If you delete the node modules folder you can easily reinstall everything listed in package.json with the command `npm install`)
+- A package-lock.json file is created, never touch this file, it just tracks the dependencies of your dependencies to optimize the speed of redownloading them in the future. (If you delete the node modules folder you can easily reinstall everything listed in package.json with the command `npm install`)
 
-* In package.json a new section called dependencies exist listing the name and versions of libraries you've installed. (To uninstall a library the command is `npm uninstall <libraryname>` you can find the directory of libraries at npmjs.com)
+- In package.json a new section called dependencies exist listing the name and versions of libraries you've installed. (To uninstall a library the command is `npm uninstall <libraryname>` you can find the directory of libraries at npmjs.com)
 
 #### Creating Our Files
 
 - create the following files in the folder
 
-    - `express-server.js`: file for running our express server
+  - `express-server.js`: file for running our express server
 
-    - `koa-server.js`: file for running our koa server
+  - `koa-server.js`: file for running our koa server
 
-    - `fastify-server.js`: file for running our fastify server
+  - `fastify-server.js`: file for running our fastify server
 
-    - `data.js`: file for our dummy data
+  - `data.js`: file for our dummy data
 
-    ### Setting Up Our Dummer Data
+  ### Setting Up Our Dummer Data
 
-    To simulate working with a data model as we would with a database and a relationship mapper (a library that maps our database table/collections to classes to make it easier to interact with the database) what we will do is...
+  To simulate working with a data model as we would with a database and a relationship mapper (a library that maps our database table/collections to classes to make it easier to interact with the database) what we will do is...
 
-    - Build a class that represents our data type "Post" to represent a single blog post
-    - Build an array to hold our posts to simular a database collection (documentDB) or table (relationalDB)
-    - Note that everytime our server restarts the data will reset to its original state, this is why databases matter so changes can be saved beyond the life of a server instance.
+  - Build a class that represents our data type "Post" to represent a single blog post
+  - Build an array to hold our posts to simular a database collection (documentDB) or table (relationalDB)
+  - Note that everytime our server restarts the data will reset to its original state, this is why databases matter so changes can be saved beyond the life of a server instance.
 
-    `data.js`
+  `data.js`
 
 ```js
 // Class to Represent a Single Blog Post
 class Post {
-    // Constructor function for creating new posts
-    constructor(title, body){
-        this.title = title
-        this.body = body
-    }
+  // Constructor function for creating new posts
+  constructor(title, body) {
+    this.title = title
+    this.body = body
+  }
 }
 
 // Create an array to hold our posts
@@ -90,8 +90,8 @@ posts.push(new Post("Title of Post", "Body of Post"))
 
 // Export them to be used in other files
 module.exports = {
-    Post,
-    posts
+  Post,
+  posts,
 }
 ```
 
@@ -100,8 +100,8 @@ Notice this part
 ```js
 // Export them to be used in other files
 module.exports = {
-    Post,
-    posts
+  Post,
+  posts,
 }
 ```
 
@@ -149,40 +149,38 @@ The purpose of the index route is return all the items of a particular model, in
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import express
 const express = require("express")
-
 
 //create the express application
 const app = express()
 
 //The Index Route
 app.get("/posts", (request, response) => {
-    // send the posts array as a json response
-    response.json(posts)
+  // send the posts array as a json response
+  response.json(posts)
 })
 
 // Turn on the server
 app.listen(4000, () => console.log("Server Listening on Port 4000"))
 ```
 
-
 `fastify-server.js`
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import fastify
 const fastify = require("fastify")
 
 // Create application object
-const app = fastify({logger: "true"})
+const app = fastify({ logger: "true" })
 
 // The Index Route
 app.get("/posts", async (request, response) => {
-    // the response is the return value which is our posts array
-    return posts
+  // the response is the return value which is our posts array
+  return posts
 })
 
 // run server
@@ -193,12 +191,11 @@ app.listen(4000, () => console.log("listening on port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import koa
 const koa = require("koa")
 // import koa router
 const koaRouter = require("koa-router")
-
 
 //create the koa application
 const app = new koa()
@@ -207,9 +204,9 @@ const router = koaRouter()
 
 // Index Route
 // context is a combo of the node request/response objects
-router.get("/posts", async (context) => {
-    // The response is the value of the context body
-    context.body = posts
+router.get("/posts", async context => {
+  // The response is the value of the context body
+  context.body = posts
 })
 
 // Register routes
@@ -230,26 +227,25 @@ After each update run the server and go to /posts/0 in the browser!
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import express
 const express = require("express")
-
 
 //create the express application
 const app = express()
 
 //The Index Route
 app.get("/posts", (request, response) => {
-    // send the posts array as a json response
-    response.json(posts)
+  // send the posts array as a json response
+  response.json(posts)
 })
 
 // The Show Route
 app.get("/posts/:id", (request, response) => {
-    // get the id from params
-    const id = request.params.id
-    // return json data
-    response.json(posts[id])
+  // get the id from params
+  const id = request.params.id
+  // return json data
+  response.json(posts[id])
 })
 
 // Turn on the server
@@ -260,25 +256,25 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import efastify
 const fastify = require("fastify")
 
 // Create application object
-const app = fastify({logger: "true"})
+const app = fastify({ logger: "true" })
 
 // The Index Route
 app.get("/posts", async (request, response) => {
-    // the response is the return value which is our posts array
-    return posts
+  // the response is the return value which is our posts array
+  return posts
 })
 
 // The Show Route
 app.get("/posts/:id", async (request, response) => {
-    // get the id
-    const id = request.params.id
-    // return the item
-    return posts[id]
+  // get the id
+  const id = request.params.id
+  // return the item
+  return posts[id]
 })
 
 // run server
@@ -289,12 +285,11 @@ app.listen(4000, () => console.log("listening on port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import koa
 const koa = require("koa")
 // import koa router
 const koaRouter = require("koa-router")
-
 
 //create the koa application
 const app = new koa()
@@ -303,17 +298,17 @@ const router = koaRouter()
 
 // Index Route
 // context is a combo of the node request/response objects
-router.get("/posts", async (context) => {
-    // The response is the value of the context body
-    context.body = posts
+router.get("/posts", async context => {
+  // The response is the value of the context body
+  context.body = posts
 })
 
 // Show Route
-router.get("/posts/:id", async (context) => {
-    // get the id
-    const id = context.params.id
-    // send the item as a response
-    context.body = posts[id]
+router.get("/posts/:id", async context => {
+  // get the id
+  const id = context.params.id
+  // send the item as a response
+  context.body = posts[id]
 })
 
 // Register routes
@@ -330,20 +325,19 @@ The create route is typically a post request to "/model", in our case "/posts". 
 
 ```json
 {
-    "title":"title of a new post",
-    "body": "body of a new post"
+  "title": "title of a new post",
+  "body": "body of a new post"
 }
 ```
 
 `express-server.js`
-*make sure to add the express.json() middleware or it won't be able to read the request body
+\*make sure to add the express.json() middleware or it won't be able to read the request body
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import express
 const express = require("express")
-
 
 //create the express application
 const app = express()
@@ -353,26 +347,26 @@ app.use(express.json())
 
 //The Index Route
 app.get("/posts", (request, response) => {
-    // send the posts array as a json response
-    response.json(posts)
+  // send the posts array as a json response
+  response.json(posts)
 })
 
 // The Show Route
 app.get("/posts/:id", (request, response) => {
-    // get the id from params
-    const id = request.params.id
-    // return json data
-    response.json(posts[id])
+  // get the id from params
+  const id = request.params.id
+  // return json data
+  response.json(posts[id])
 })
 
 // the Create Route
 app.post("/posts", (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    response.json(post)
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  response.json(post)
 })
 
 // Turn on the server
@@ -383,35 +377,35 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import efastify
 const fastify = require("fastify")
 
 // Create application object
-const app = fastify({logger: "true"})
+const app = fastify({ logger: "true" })
 
 // The Index Route
 app.get("/posts", async (request, response) => {
-    // the response is the return value which is our posts array
-    return posts
+  // the response is the return value which is our posts array
+  return posts
 })
 
 // The Show Route
 app.get("/posts/:id", async (request, response) => {
-    // get the id
-    const id = request.params.id
-    // return the item
-    return posts[id]
+  // get the id
+  const id = request.params.id
+  // return the item
+  return posts[id]
 })
 
 // the Create Route
 app.post("/posts", async (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    return post
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  return post
 })
 
 // run server
@@ -419,18 +413,18 @@ app.listen(4000, () => console.log("listening on port 4000"))
 ```
 
 `koa-server.js`
-* make sure to install koa-bodyparser `npm install koa-bodyparser` and import it as outlined below
+
+- make sure to install koa-bodyparser `npm install koa-bodyparser` and import it as outlined below
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import koa
 const koa = require("koa")
 // import koa router
 const koaRouter = require("koa-router")
 // import koa bodyparser
 const bodyParser = require("koa-bodyparser")
-
 
 //create the koa application
 const app = new koa()
@@ -439,29 +433,29 @@ const router = koaRouter()
 
 // Index Route
 // context is a combo of the node request/response objects
-router.get("/posts", async (context) => {
-    // The response is the value of the context body
-    context.body = posts
+router.get("/posts", async context => {
+  // The response is the value of the context body
+  context.body = posts
 })
 
 // Show Route
-router.get("/posts/:id", async (context) => {
-    // get the id
-    const id = context.params.id
-    // send the item as a response
-    context.body = posts[id]
+router.get("/posts/:id", async context => {
+  // get the id
+  const id = context.params.id
+  // send the item as a response
+  context.body = posts[id]
 })
 
 // the Create Route
-router.post("/posts", async (context) => {
-    // get the body from context
-    const body = context.request.body
-    // create the new post, the data sent over is in the request body
-    post = new Post(body.title, body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    context.body = post
+router.post("/posts", async context => {
+  // get the body from context
+  const body = context.request.body
+  // create the new post, the data sent over is in the request body
+  post = new Post(body.title, body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  context.body = post
 })
 
 // Register the bodyparser (must be before routes, or routes will run before body is parsed)
@@ -482,10 +476,9 @@ After updating the code use postman/insomnia to make a put request to "/posts/0"
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import express
 const express = require("express")
-
 
 //create the express application
 const app = express()
@@ -495,41 +488,41 @@ app.use(express.json())
 
 //The Index Route
 app.get("/posts", (request, response) => {
-    // send the posts array as a json response
-    response.json(posts)
+  // send the posts array as a json response
+  response.json(posts)
 })
 
 // The Show Route
 app.get("/posts/:id", (request, response) => {
-    // get the id from params
-    const id = request.params.id
-    // return json data
-    response.json(posts[id])
+  // get the id from params
+  const id = request.params.id
+  // return json data
+  response.json(posts[id])
 })
 
 // the Create Route
 app.post("/posts", (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    response.json(post)
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  response.json(post)
 })
 
 // The Update Route
 app.put("/posts/:id", (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // get the request body
-    const body = request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    response.json(post)
+  // get the id from the url
+  const id = request.params.id
+  // get the request body
+  const body = request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  response.json(post)
 })
 
 // Turn on the server
@@ -540,50 +533,50 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import efastify
 const fastify = require("fastify")
 
 // Create application object
-const app = fastify({logger: "true"})
+const app = fastify({ logger: "true" })
 
 // The Index Route
 app.get("/posts", async (request, response) => {
-    // the response is the return value which is our posts array
-    return posts
+  // the response is the return value which is our posts array
+  return posts
 })
 
 // The Show Route
 app.get("/posts/:id", async (request, response) => {
-    // get the id
-    const id = request.params.id
-    // return the item
-    return posts[id]
+  // get the id
+  const id = request.params.id
+  // return the item
+  return posts[id]
 })
 
 // the Create Route
 app.post("/posts", async (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    return post
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  return post
 })
 
 // The Update Route
 app.put("/posts/:id", async (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // get the request body
-    const body = request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    return post
+  // get the id from the url
+  const id = request.params.id
+  // get the request body
+  const body = request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  return post
 })
 
 // run server
@@ -594,14 +587,13 @@ app.listen(4000, () => console.log("listening on port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import koa
 const koa = require("koa")
 // import koa router
 const koaRouter = require("koa-router")
 // import koa bodyparser
 const bodyParser = require("koa-bodyparser")
-
 
 //create the koa application
 const app = new koa()
@@ -610,44 +602,44 @@ const router = koaRouter()
 
 // Index Route
 // context is a combo of the node request/response objects
-router.get("/posts", async (context) => {
-    // The response is the value of the context body
-    context.body = posts
+router.get("/posts", async context => {
+  // The response is the value of the context body
+  context.body = posts
 })
 
 // Show Route
-router.get("/posts/:id", async (context) => {
-    // get the id
-    const id = context.params.id
-    // send the item as a response
-    context.body = posts[id]
+router.get("/posts/:id", async context => {
+  // get the id
+  const id = context.params.id
+  // send the item as a response
+  context.body = posts[id]
 })
 
 // the Create Route
-router.post("/posts", async (context) => {
-    // get the body from context
-    const body = context.request.body
-    // create the new post, the data sent over is in the request body
-    post = new Post(body.title, body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    context.body = post
+router.post("/posts", async context => {
+  // get the body from context
+  const body = context.request.body
+  // create the new post, the data sent over is in the request body
+  post = new Post(body.title, body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  context.body = post
 })
 
 // The Update Route
-router.put("/posts/:id", async (context) => {
-    // get the id from the url
-    const id = context.params.id
-    // get the request body
-    const body = context.request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    context.body = post
+router.put("/posts/:id", async context => {
+  // get the id from the url
+  const id = context.params.id
+  // get the request body
+  const body = context.request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  context.body = post
 })
 
 // Register the bodyparser (must be before routes, or routes will run before body is parsed)
@@ -660,16 +652,15 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 ### Destroy Route
 
-The destory route is a delete request to "/model/:id" that deletes the item with the specified id. After updating the code use postman/insomnia to send a delete request to "/posts/0" then make a get request to "/posts" to confirm it was deleted. 
+The destory route is a delete request to "/model/:id" that deletes the item with the specified id. After updating the code use postman/insomnia to send a delete request to "/posts/0" then make a get request to "/posts" to confirm it was deleted.
 
 `express-server.js`
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import express
 const express = require("express")
-
 
 //create the express application
 const app = express()
@@ -679,51 +670,51 @@ app.use(express.json())
 
 //The Index Route
 app.get("/posts", (request, response) => {
-    // send the posts array as a json response
-    response.json(posts)
+  // send the posts array as a json response
+  response.json(posts)
 })
 
 // The Show Route
 app.get("/posts/:id", (request, response) => {
-    // get the id from params
-    const id = request.params.id
-    // return json data
-    response.json(posts[id])
+  // get the id from params
+  const id = request.params.id
+  // return json data
+  response.json(posts[id])
 })
 
 // the Create Route
 app.post("/posts", (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    response.json(post)
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  response.json(post)
 })
 
 // The Update Route
 app.put("/posts/:id", (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // get the request body
-    const body = request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    response.json(post)
+  // get the id from the url
+  const id = request.params.id
+  // get the request body
+  const body = request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  response.json(post)
 })
 
 // The Destroy Route
 app.delete("/posts/:id", (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // splice it from the array (remove it)
-    const post = posts.splice(id, 1)
-    // return the deleted post as json
-    response.json(post)
+  // get the id from the url
+  const id = request.params.id
+  // splice it from the array (remove it)
+  const post = posts.splice(id, 1)
+  // return the deleted post as json
+  response.json(post)
 })
 
 // Turn on the server
@@ -734,60 +725,60 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import efastify
 const fastify = require("fastify")
 
 // Create application object
-const app = fastify({logger: "true"})
+const app = fastify({ logger: "true" })
 
 // The Index Route
 app.get("/posts", async (request, response) => {
-    // the response is the return value which is our posts array
-    return posts
+  // the response is the return value which is our posts array
+  return posts
 })
 
 // The Show Route
 app.get("/posts/:id", async (request, response) => {
-    // get the id
-    const id = request.params.id
-    // return the item
-    return posts[id]
+  // get the id
+  const id = request.params.id
+  // return the item
+  return posts[id]
 })
 
 // the Create Route
 app.post("/posts", async (request, response) => {
-    // create the new post, the data sent over is in the request body
-    post = new Post(request.body.title, request.body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    return post
+  // create the new post, the data sent over is in the request body
+  post = new Post(request.body.title, request.body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  return post
 })
 
 // The Update Route
 app.put("/posts/:id", async (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // get the request body
-    const body = request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    return post
+  // get the id from the url
+  const id = request.params.id
+  // get the request body
+  const body = request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  return post
 })
 
 // The Destroy Route
 app.delete("/posts/:id", async (request, response) => {
-    // get the id from the url
-    const id = request.params.id
-    // splice it from the array (remove it)
-    const post = posts.splice(id, 1)
-    // return the deleted post as json
-    return post
+  // get the id from the url
+  const id = request.params.id
+  // splice it from the array (remove it)
+  const post = posts.splice(id, 1)
+  // return the deleted post as json
+  return post
 })
 
 // run server
@@ -798,14 +789,13 @@ app.listen(4000, () => console.log("listening on port 4000"))
 
 ```js
 // Import Our Data
-const {Post, posts} = require("./data")
+const { Post, posts } = require("./data")
 // Import koa
 const koa = require("koa")
 // import koa router
 const koaRouter = require("koa-router")
 // import koa bodyparser
 const bodyParser = require("koa-bodyparser")
-
 
 //create the koa application
 const app = new koa()
@@ -814,54 +804,54 @@ const router = koaRouter()
 
 // Index Route
 // context is a combo of the node request/response objects
-router.get("/posts", async (context) => {
-    // The response is the value of the context body
-    context.body = posts
+router.get("/posts", async context => {
+  // The response is the value of the context body
+  context.body = posts
 })
 
 // Show Route
-router.get("/posts/:id", async (context) => {
-    // get the id
-    const id = context.params.id
-    // send the item as a response
-    context.body = posts[id]
+router.get("/posts/:id", async context => {
+  // get the id
+  const id = context.params.id
+  // send the item as a response
+  context.body = posts[id]
 })
 
 // the Create Route
-router.post("/posts", async (context) => {
-    // get the body from context
-    const body = context.request.body
-    // create the new post, the data sent over is in the request body
-    post = new Post(body.title, body.body)
-    // push the new post in the posts array
-    posts.push(post)
-    // return the new post as json
-    context.body = post
+router.post("/posts", async context => {
+  // get the body from context
+  const body = context.request.body
+  // create the new post, the data sent over is in the request body
+  post = new Post(body.title, body.body)
+  // push the new post in the posts array
+  posts.push(post)
+  // return the new post as json
+  context.body = post
 })
 
 // The Update Route
-router.put("/posts/:id", async (context) => {
-    // get the id from the url
-    const id = context.params.id
-    // get the request body
-    const body = context.request.body
-    // get the item to be updated
-    const post = posts[id]
-    // update the item
-    post.title = body.title
-    post.body = body.body
-    // return the updated item as a json response
-    context.body = post
+router.put("/posts/:id", async context => {
+  // get the id from the url
+  const id = context.params.id
+  // get the request body
+  const body = context.request.body
+  // get the item to be updated
+  const post = posts[id]
+  // update the item
+  post.title = body.title
+  post.body = body.body
+  // return the updated item as a json response
+  context.body = post
 })
 
 // The Destroy Route
-router.delete("/posts/:id", async (context) => {
-    // get the id from the url
-    const id = context.params.id
-    // splice it from the array (remove it)
-    const post = posts.splice(id, 1)
-    // return the deleted post as json
-    context.body = post
+router.delete("/posts/:id", async context => {
+  // get the id from the url
+  const id = context.params.id
+  // splice it from the array (remove it)
+  const post = posts.splice(id, 1)
+  // return the deleted post as json
+  context.body = post
 })
 
 // Register the bodyparser (must be before routes, or routes will run before body is parsed)
@@ -876,23 +866,23 @@ app.listen(4000, () => console.log("Server Listening on Port 4000"))
 
 You've now created a full crud api in the three main NodeJS Micro web frameworks! If you'd like to try this exercise again in another language I recommend these tutorials.
 
-- [Full Crud API in Python with Flask and FastAPI](https://tuts.alexmercedcoder.com/2021/7/full_crud_flask_fastapi/)
-- [Full Crud API in Ruby with Sinatra](https://tuts.alexmercedcoder.com/2021/7/full_crud_with_sinatra/)
+- [Full Crud API in Python with Flask and FastAPI](https://tuts.alexmercedcoder.dev/2021/7/full_crud_flask_fastapi/)
+- [Full Crud API in Ruby with Sinatra](https://tuts.alexmercedcoder.dev/2021/7/full_crud_with_sinatra/)
 
 If you'd like to try out some more robust battery included frameworks in these languages try these tutorials:
 
-- [Rest API with Python/Django](https://tuts.alexmercedcoder.com/2021/3/puredjangoapi/)
-- [Rest API with Ruby on Rails with 5 frontend builds](https://tuts.alexmercedcoder.com/2020/todoreactangularvue/)
-- [API with Typescript/FoalTS](https://tuts.alexmercedcoder.com/2021/5/FoalTS-Typescript-Web-Framework/)
-- [Creating an API with DENO](https://tuts.alexmercedcoder.com/2021/5/deno_ts_api/)
-- [Working with Python Masonite](https://tuts.alexmercedcoder.com/2021/5/Masonite-Python-Web-Framework-101/)
--[Creating an API with Rust and Rocket](https://tuts.alexmercedcoder.com/2021/3/rustrocket0todeploy/)
-- [Creating an API with Dart and Google Shelf](https://tuts.alexmercedcoder.com/2021/3/dartzerotodeploy/)
-- [Creating API with C# and .NET 5](https://tuts.alexmercedcoder.com/2021/3/dotnet5/)
-- [Creating an API with Java and Spring](https://tuts.alexmercedcoder.com/2021/3/javaspring/)
-- [Creating an API with GO and Buffalo](https://tuts.alexmercedcoder.com/2021/3/introtogobuffalo/)
-- [Creating an API with PHP and Laravel](https://tuts.alexmercedcoder.com/2021/3/laravelhelloworld/)
+- [Rest API with Python/Django](https://tuts.alexmercedcoder.dev/2021/3/puredjangoapi/)
+- [Rest API with Ruby on Rails with 5 frontend builds](https://tuts.alexmercedcoder.dev/2020/todoreactangularvue/)
+- [API with Typescript/FoalTS](https://tuts.alexmercedcoder.dev/2021/5/FoalTS-Typescript-Web-Framework/)
+- [Creating an API with DENO](https://tuts.alexmercedcoder.dev/2021/5/deno_ts_api/)
+- [Working with Python Masonite](https://tuts.alexmercedcoder.dev/2021/5/Masonite-Python-Web-Framework-101/) -[Creating an API with Rust and Rocket](https://tuts.alexmercedcoder.dev/2021/3/rustrocket0todeploy/)
+- [Creating an API with Dart and Google Shelf](https://tuts.alexmercedcoder.dev/2021/3/dartzerotodeploy/)
+- [Creating API with C# and .NET 5](https://tuts.alexmercedcoder.dev/2021/3/dotnet5/)
+- [Creating an API with Java and Spring](https://tuts.alexmercedcoder.dev/2021/3/javaspring/)
+- [Creating an API with GO and Buffalo](https://tuts.alexmercedcoder.dev/2021/3/introtogobuffalo/)
+- [Creating an API with PHP and Laravel](https://tuts.alexmercedcoder.dev/2021/3/laravelhelloworld/)
 
 If you want to try to rendering pages with your web server here are some other tutorials:
-- [Express with Several Templating Engines](https://tuts.alexmercedcoder.com/2021/3/expresstemplatingintro/)
-- [Fastify with Liquid](https://tuts.alexmercedcoder.com/2021/4/fastify_web_server/)
+
+- [Express with Several Templating Engines](https://tuts.alexmercedcoder.dev/2021/3/expresstemplatingintro/)
+- [Fastify with Liquid](https://tuts.alexmercedcoder.dev/2021/4/fastify_web_server/)

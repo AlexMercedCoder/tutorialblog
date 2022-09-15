@@ -161,7 +161,7 @@ you can access this variable in this script like this...
 
 `console.log(process.env.MYVAR)`
 
-*libraries like dotenv allow you to specify environment variables in a special .env file which will then add these variables to process.env when the script starts*
+_libraries like dotenv allow you to specify environment variables in a special .env file which will then add these variables to process.env when the script starts_
 
 #### Argument Variables (process.argv)
 
@@ -194,8 +194,8 @@ You can run a file but nodemon will watch for changes in any javascript or json 
 
 - RunKit.com is a place to prototype NodeJS project
 
-- For places to deploy your project checkout this blog post with a comprehensive list => https://tuts.alexmercedcoder.com/2020/deploy/
+- For places to deploy your project checkout this blog post with a comprehensive list => https://tuts.alexmercedcoder.dev/2020/deploy/
 
-- Find videos on the basics of git, vscode, bash and more at intro.alexmercedcoder.com
+- Find videos on the basics of git, vscode, bash and more at intro.alexmercedcoder.dev
 
 - Trello, Notion.so, Asana, Airtable, and Google Docs are great tools for project management and team coordination

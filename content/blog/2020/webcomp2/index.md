@@ -8,7 +8,7 @@ description: "Making Pretty and Flexible Components"
 
 In the major frontend frameworks (Angular, Vue, React) you are able to encapsulate parts of your user interface into tags like `<component/>`. In recent years, the ability to do so natively has been added to the Javascript browser API in the form of the Native Web Components API. In this series we'll explore the different aspects of building web components. I have created a few libraries that makes this process even easier such as MercedUI, ComponentZoo, FunComponent, and AMPonent.
 
-**Find my libraries at** http://alexmercedcoder.com/jslib/
+**Find my libraries at** http://alexmercedcoder.dev/jslib/
 
 **My Web Components Video Playlist:** https://www.youtube.com/watch?v=qV7jh7ctALg&list=PLY6oTPmKnKbaNVkXHOHWxgdKEZLGKuFP9
 

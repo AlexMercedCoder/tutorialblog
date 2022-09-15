@@ -3,16 +3,17 @@ title: The Guide to How to Implement Authorization in any language and framework
 date: "2021-11-18T12:12:03.284Z"
 description: Having Users Login
 ---
+
 ![Title Image](https://i.imgur.com/XbV0EzX.jpg)
 
 If your not familiar with the concept of Authentication and Authorization, I recommend first reading this article:
 
-[Authentication and Authorization in Concept](https://tuts.alexmercedcoder.com/2020/AuthConcept/)
+[Authentication and Authorization in Concept](https://tuts.alexmercedcoder.dev/2020/AuthConcept/)
 
 Also here are a few convieniet how tos:
 
-[Basic Auth with JWT & Mongo](https://tuts.alexmercedcoder.com/2021/8/basic_auth_express_mongo/)
-[JWT Auth using Ruby on Rails](https://tuts.alexmercedcoder.com/2020/ruby-tut/)
+[Basic Auth with JWT & Mongo](https://tuts.alexmercedcoder.dev/2021/8/basic_auth_express_mongo/)
+[JWT Auth using Ruby on Rails](https://tuts.alexmercedcoder.dev/2020/ruby-tut/)
 
 ## Implementing Authentication from the Backend
 
@@ -22,7 +23,7 @@ It doesn't really matter what language or framework you are using, when building
 
 Regardless what database your using you'll need a User model to save user data in a collection or table. Here are the two must-have properties.
 
-- id/_id: the primary key
+- id/\_id: the primary key
 - username: String/Unique/Required
 - password: String/Required
 
@@ -63,9 +64,9 @@ The next part depends on chosen path for Authorization
 
 - You can either send the token in the body of the login response or via a cookie
 
-    - If the token is sent to the body then the frontend application is responsible for figuring out how to securely store it... which can be tricky. (local/session storage can be subject to attacks, using [refresh tokens](https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/) to get a fresh token on refresh can be tedious to implement). Also, the frontend now has to make sure to transmit the token on all future requests explicitly (usually via a request header).
+  - If the token is sent to the body then the frontend application is responsible for figuring out how to securely store it... which can be tricky. (local/session storage can be subject to attacks, using [refresh tokens](https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/) to get a fresh token on refresh can be tedious to implement). Also, the frontend now has to make sure to transmit the token on all future requests explicitly (usually via a request header).
 
-    - If the token is sent via a cookie, it should be an [http-only cookie](https://www.youtube.com/watch?v=c_f2o5dZl8A) (look up how to do cookies in your framework). This is more secure and the cookie will automatically will be sent with subsequent requests so the frontend application doesn't have to worry about sending it with future requests explicitly.
+  - If the token is sent via a cookie, it should be an [http-only cookie](https://www.youtube.com/watch?v=c_f2o5dZl8A) (look up how to do cookies in your framework). This is more secure and the cookie will automatically will be sent with subsequent requests so the frontend application doesn't have to worry about sending it with future requests explicitly.
 
 ### Logout
 
@@ -97,16 +98,16 @@ If your creating a single page application, this gets a bit more complicated.
 
 - as far making parts of the page and links visible, this can be done by conditionally checking whether a token is available (if using an http only cookie then instead make a "loggedIn" variable and set it to true and use that to conditionally render any links or content)
 
-- if token not sent via  cookie then you need to make sure to include the token in the way your backend was setup to handle (depends on how you setup the authentication middleware, most likely a header).
+- if token not sent via cookie then you need to make sure to include the token in the way your backend was setup to handle (depends on how you setup the authentication middleware, most likely a header).
 
 - make sure to use your frontend routing library to redirect users when they login and logout
 
 - The token will be needed for all protected request so you'll probably want to use some state management solution to make the token accessible throughout your app
 
-    - context/recoil/redux for react
-    - vuex for vue
-    - svelte has a context feature built in
-    - a service for angular
+  - context/recoil/redux for react
+  - vuex for vue
+  - svelte has a context feature built in
+  - a service for angular
 
 ## GraphQL Considerations
 

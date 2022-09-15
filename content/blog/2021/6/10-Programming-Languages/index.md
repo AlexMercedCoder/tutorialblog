@@ -245,8 +245,8 @@ Usually you have two main collections you'll use most of the time.
 #### Javascript
 
 ```js
-const myArray = [1,2,3,4,5]
-const myObject = {name: "Alex Merced", age: 35}
+const myArray = [1, 2, 3, 4, 5]
+const myObject = { name: "Alex Merced", age: 35 }
 
 console.log(myArray)
 console.log(myObject)
@@ -310,7 +310,7 @@ fn main(){
   let mut my_hashmap = HashMap::new();
   my_hashmap.insert("name", "Alex Merced");
   my_hashmap.insert("age", "35");
-  println!("{:?}", my_array); 
+  println!("{:?}", my_array);
   println!("{:?}", my_hashmap);
 }
 
@@ -382,7 +382,6 @@ public function main(){
 
 ```
 
-
 ## Defining Function
 
 Functions allow you define blocks of code you can run on-demand. Pivotal to any programming language! There are two steps:
@@ -394,13 +393,11 @@ Functions allow you define blocks of code you can run on-demand. Pivotal to any 
 #### Javascript
 
 ```js
-
-function helloWorld(){
+function helloWorld() {
   console.log("Hello World")
 }
 
 helloWorld()
-
 ```
 
 #### Python
@@ -523,4 +520,4 @@ public function main(){
 ## Learning More
 
 - [Find Video Playlists on All these Languages and more at devNursery](https://www.devnursery.com)
-- [Find more tutorials and walkthroughs on my blog](https://tuts.alexmercedcoder.com)
+- [Find more tutorials and walkthroughs on my blog](https://tuts.alexmercedcoder.dev)

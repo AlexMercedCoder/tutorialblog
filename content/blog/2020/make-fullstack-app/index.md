@@ -23,6 +23,7 @@ npx make-fullstack-app express react
 ```
 
 #### Vue Frkoa
+
 ```js
 npx make-fullstack-app express vue
 ```
@@ -145,4 +146,4 @@ npx make-fullstack-app merver svelte
 
 ## Bottom Line
 
-There are many more combination, just read the docs! Head over to AlexMercedCoder.com to see my gallery of NodeJS Libraries to find the documentation.
+There are many more combination, just read the docs! Head over to alexmercedcoder.dev to see my gallery of NodeJS Libraries to find the documentation.
