@@ -20,7 +20,7 @@ Mongoose is an ODM (Object Document Manager) that like relational ORMs (Object R
 
 * We will share many examples in the context of ExpressJS application although the logic and flow should be the same with any other Node web framework like Koa or Fastify.
 
-[MongoDB Video Playlist](Working with MongoDB)
+[MongoDB Video Playlist](https://youtube.com/playlist?list=PLY6oTPmKnKbaSCVF-Imd1hkQJvl8iLrV3)
 
 ## The Mongoose URI
 
