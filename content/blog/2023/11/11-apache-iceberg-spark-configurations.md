@@ -25,7 +25,7 @@ spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.0.0\
     --conf spark.sql.catalog.local.warehouse=$PWD/warehouse
 ```
 
-The goal of this article will to help demystify this so you can configure Spark for Iceberg in any context.
+The goal of this article is help demystify this so you can configure Spark for Iceberg in any context.
 
 ## Spark Configurations
 
@@ -50,7 +50,7 @@ There are are several flags you can pass to the `spark-shell` or `spark-sql` com
 --jars /home/docker/iceberg-spark-runtime-3.2_2.12-1.0.0.jar,/home/docker/nessie-spark-extensions-3.2_2.12-0.44.0.jar
 ```
 
-- `--conf` will allow you configure many properties of your spark session it a "key"="value" format.
+- `--conf` will allow you configure many properties of your spark session in a "key"="value" format.
 
 ```
     --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
@@ -59,7 +59,7 @@ There are are several flags you can pass to the `spark-shell` or `spark-sql` com
 
 #### Function Calls
 
-Similarly you can configure your Spark Session directly from your Scala or Python Spark scripts:
+Similarly, you can configure your Spark Session directly from your Scala or Python Spark scripts:
 
 **SCALA**
 
@@ -98,7 +98,7 @@ Here is a list of the some of the packages you may want to include with your `--
 
 | Configuration | Purpose | Possible Values |
 |-----------|--------|-------|
-|spark.sql.extensions | Configure any extensions to SQL support in Spark. Each extension can be seperated with a comma | "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"|
+|spark.sql.extensions | Configure any extensions of SQL support in Spark. Each extension can be seperated with a comma | "org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions"|
 |spark.sql.catalog.CatalogName| This configures a new catalog under whatever name you want (just change CatalogName to desired name) to a particular implementation of SparkCatalog |  org.apache.iceberg.spark.SparkCatalog |
 | spark.sql.catalog.CatalogName.io-impl | This changes IO implementations of the target catalog, mainly changed for writing to Object Storage | org.apache.iceberg.aws.s3.S3FileIO |
 |spark.sql.catalog.CatalogName.warehouse| Determines where new tables will be written to for that particular catalog | A file or S3 path |
@@ -115,7 +115,7 @@ Here is a list of the some of the packages you may want to include with your `--
 
 ## Environmental Variables
 
-In a lot of the upcoming snippets I'll be using different environmental variables. If you want to use the snippets as is then define the follow environmental variables:
+In a lot of the upcoming snippets I'll be using different environmental variables. If you want to use the snippets as is, then define the follow environmental variables:
 
 ```
 export TOKEN=XXXXXX
@@ -138,7 +138,7 @@ export DB_PASSWORD=xxxxx
 
 Below you'll find sample configurations for many catalog types for reference.
 
-If you want to try some of things in a locally running Docker container with Spark, use this command to spin one up.
+If you want to try some of these in a locally running Docker container with Spark, use this command to spin one up.
 
 ```
 docker run -it -p 8080:8080 --name spark-playground alexmerced/spark33playground
@@ -173,6 +173,8 @@ spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,so
 
 **NESSIE/DREMIO ARCTIC**
 
+Nessie catalogs provide you git-like semantics with your Iceberg catalogs (Merging, Branching, Rollbacks) and if you want to get hands on to see how this works [try this Dremio Arctic tutorial](https://www.dremio.com/blog/managing-data-as-code-with-dremio-arctic-easily-ensure-data-quality-in-your-data-lakehouse/).
+
 ```
 spark-sql --packages "org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.0.0,org.projectnessie:nessie-spark-extensions-3.3_2.12:0.44.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178" \
 --conf spark.sql.extensions="org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions" \
@@ -206,7 +208,7 @@ spark-sql --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:1.0.0 \
 
 ## Conclusion
 
-Once you've configured your Spark session keep in mind you must used the configured namespace for all queries. For example if I configured the catalog with:
+Once you've configured your Spark session keep in mind you must use the configured namespace for all queries. For example if I configured the catalog with:
 
 ```
     --conf spark.sql.catalog.mycoolcatalog.catalog-impl=org.apache.iceberg.jdbc.JdbcCatalog \
