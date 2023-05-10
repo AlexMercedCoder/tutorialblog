@@ -1,7 +1,10 @@
 ---
+noteId: "d6eea4e0d3ec11ed8fd1ed948fd51e27"
+tags: []
 title: "Overview of the Data Lakehouse, Dremio and Apache Iceberg"
 date: "2023-04-05T12:12:03.284Z"
 description: "Understanding the Cutting Edge of Data Engineering"
+
 ---
 
 In this article, I hope clarify the who, what, why, and how of:
