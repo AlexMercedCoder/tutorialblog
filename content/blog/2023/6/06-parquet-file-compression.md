@@ -5,7 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Parquet File Compression for Everyone (zstd, brotli, lz4, gzip, snappy)"
-date: "2023-19-02T12:12:03.284Z"
+date: "2023-06-19T12:12:03.284Z"
 category: "data engineering"
 bannerImage: "/images/postbanner/2023/dremio-arch.png"
 
