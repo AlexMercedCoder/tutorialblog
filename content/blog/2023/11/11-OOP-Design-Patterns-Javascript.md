@@ -1,6 +1,6 @@
 ---
 title: OOP Design Patterns in Javascript
-date: "2022-11-26"
+date: "2023-11-26"
 description: "An overview of OOP Design Patterns in Spark"
 author: "Alex Merced"
 category: "javascript"

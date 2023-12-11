@@ -1,6 +1,6 @@
 ---
 title: Why Dremio is a must for Apache Iceberg Data Lakehouses
-date: "2022-11-30"
+date: "2023-11-30"
 description: "Why is Dremio so useful for Apache Iceberg data lakehouses"
 author: "Alex Merced"
 category: "data lakehouse"
