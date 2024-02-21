@@ -1,6 +1,6 @@
 ---
 title: Mastering Git: A Comprehensive Guide to git pull and git push
-date: "2024-02-03"
+date: "2024-02-21"
 description: "Having a better understanding of git pull and git push"
 author: "Alex Merced"
 category: "Javascript"
