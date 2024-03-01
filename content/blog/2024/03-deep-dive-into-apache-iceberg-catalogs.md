@@ -1,6 +1,6 @@
 ---
 title: A deep dive into the concept and world of Apache Iceberg Catalogs
-date: "2024-02-24"
+date: "2024-03-01"
 description: "Understanding how catalogs work and which one to choose"
 author: "Alex Merced"
 category: "Data Lakehouse"
