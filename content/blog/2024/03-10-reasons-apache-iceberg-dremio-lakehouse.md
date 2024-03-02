@@ -74,7 +74,7 @@ Dremio stands out by incorporating an easy-to-use semantic layer within its lake
 
 This semantic layer enhances collaboration across data teams, offering a unified access point that supports the implementation of data-centric architectures like data mesh. By streamlining data access and collaboration, Dremio not only makes data more discoverable and understandable but also ensures a secure and controlled data environment, aligning with best practices in data management and governance.
 
-### 5. Hybrid Architecture
+### 1. Hybrid Architecture
 
 Many contemporary data tools focus predominantly on cloud-based data, sidelining the vast reserves of on-premise data that cannot leverage these modern solutions. Dremio, however, stands out by offering the capability to access on-premise data sources in addition to cloud data. This flexibility allows Dremio to unify on-premise and cloud data sources, facilitating seamless migrations between different systems. With Dremio, organizations can enhance their on-premise data by integrating it with the wealth of data available in cloud data marketplaces, all without the need for data movement. This approach not only broadens the scope of data resources available to businesses but also enables a more integrated and comprehensive data strategy, accommodating the needs of organizations with diverse data environments.
 
