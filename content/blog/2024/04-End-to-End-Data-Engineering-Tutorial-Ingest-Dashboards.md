@@ -1,6 +1,6 @@
 ---
 title: End-to-End Basic Data Engineering Tutorial (Spark, Dremio, Superset)
-date: "2024-03-01"
+date: "2024-04-01"
 description: "Ingesting Data and Building BI Dashboards"
 author: "Alex Merced"
 category: "Data Lakehouse"
