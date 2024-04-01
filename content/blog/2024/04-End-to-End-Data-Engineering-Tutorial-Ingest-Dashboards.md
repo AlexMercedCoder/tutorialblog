@@ -417,7 +417,7 @@ The next step is to add a dataset by clicking on the + icon in the upper right c
 
 We can then click the + to add charts based on the datasets we’ve added. Once we create the charts we want we can add them to a dashboard, and that’s it! You’ve now taken data from an operational database, ingested it into your data lake, and served a BI dashboard using the data.
 
-## Conlclusion
+## Conclusion
 
 
 In conclusion, this comprehensive guide has journeyed through the critical steps of data engineering, from moving data between operational systems and analytical platforms to leveraging modern data architectures like the Data Lakehouse. By utilizing tools such as Apache Iceberg, Nessie, Minio, Apache Spark, and Dremio, we've demonstrated how to efficiently migrate data from a traditional database like Postgres into a scalable and manageable data lakehouse environment. Furthermore, the integration of Apache Superset for BI dashboarding illustrates the seamless end-to-end data workflow. 
