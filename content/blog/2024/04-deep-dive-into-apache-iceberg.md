@@ -86,7 +86,7 @@ One of the most significant advantages of Apache Iceberg is its open and extensi
 
 - [End-to-End Basic Data Engineering Tutorial (Spark, Dremio, Superset)](https://amdatalakehouse.substack.com/p/end-to-end-basic-data-engineering)
 - [From Postgres to Dashboards with Dremio and Apache Iceberg](https://www.dremio.com/blog/from-postgres-to-dashboards-with-dremio-and-apache-iceberg/)
-- [From SQLServer to Dashboards with Dremio and Apache Iceberg](From SQLServer to Dashboards with Dremio and Apache Iceberg)
+- [From SQLServer to Dashboards with Dremio and Apache Iceberg](https://bit.ly/am-sqlserver-dashboard)
 - [From MongoDB to Dashboards with Dremio and Apache Iceberg](https://www.dremio.com/blog/from-mongodb-to-dashboards-with-dremio-and-apache-iceberg/)
 - [Intro to Dremio, Nessie, and Apache Iceberg on Your Laptop](https://www.dremio.com/blog/intro-to-dremio-nessie-and-apache-iceberg-on-your-laptop/)
 - [Using Flink with Apache Iceberg and Nessie](https://www.dremio.com/blog/using-flink-with-apache-iceberg-and-nessie/)
