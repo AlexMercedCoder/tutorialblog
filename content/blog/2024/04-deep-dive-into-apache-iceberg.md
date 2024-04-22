@@ -1,5 +1,5 @@
 ---
-title: A Deep Intro to Apache and Resources for Learning More
+title: A Deep Intro to Apache Iceberg and Resources for Learning More
 date: "2024-04-04"
 description: "Learning about Apache Iceberg"
 author: "Alex Merced"
