@@ -1,5 +1,5 @@
 ---
-title: Databases Deconstructed: The Value of Data Lakhouses and Table Formats
+title: Databases Deconstructed - The Value of Data Lakehouses and Table Formats
 date: "2024-07-12"
 description: "Building up the Data Lakehouse"
 author: "Alex Merced"
