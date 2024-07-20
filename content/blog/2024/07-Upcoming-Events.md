@@ -8,7 +8,6 @@ bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering
-pubDatetime: 2024-20-12T09:00:00Z
 slug: 2024-7-upcoming-data-talks-from-alex-merced
 ---
 
