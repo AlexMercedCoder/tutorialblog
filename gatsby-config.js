@@ -75,6 +75,19 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // Replace "UA-XXXXXXXXX-X" with your own Google Analytics tracking ID
+        trackingId: "G-GL7YLRDWX1",
+        // Puts tracking script in the head instead of the body (default: false)
+        head: true,
+        // Other options
+        anonymize: true,
+        respectDNT: true,
+        pageTransitionDelay: 0,
+      },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
