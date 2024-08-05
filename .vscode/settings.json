@@ -17,7 +17,10 @@
     "sash.hoverBorder": "#ed365b",
     "statusBarItem.remoteBackground": "#dc143c",
     "statusBarItem.remoteForeground": "#e7e7e7",
-    "commandCenter.border": "#e7e7e799"
+    "commandCenter.border": "#e7e7e799",
+    "tab.activeBorder": "blue",
+    "statusBar.background": "blue",
+    "statusBar.foreground": "#ffffff"
   },
   "peacock.color": "crimson",
   "cSpell.words": ["merced", "spinup"],
