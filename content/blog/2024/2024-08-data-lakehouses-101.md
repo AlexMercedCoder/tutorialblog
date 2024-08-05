@@ -1,5 +1,5 @@
 ---
-title: Data Lakehouse 101: The Who, What and Why of Data Lakehouses
+title: Data Lakehouse 101 - The Who, What and Why of Data Lakehouses
 date: "2024-08-05"
 description: "The Who, What and Why of Data Lakehouses"
 author: "Alex Merced"
