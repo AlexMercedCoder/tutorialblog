@@ -198,7 +198,7 @@ By carefully evaluating these parameters, you can decide whether to transition t
 
 Below are several tutorial you can use to get hands-on with the data lakehouse on your laptop to see this architecture in action so you can then apply it to your own use case.
 
--[End-to-End Basic Data Engineering Tutorial (Spark, Dremio, Superset)](https://main.datalakehousehub.com/blog/2024-04-end-to-end-data-engineering-tutorial-ingest-dashboards/)
+- [End-to-End Basic Data Engineering Tutorial (Spark, Dremio, Superset)](https://main.datalakehousehub.com/blog/2024-04-end-to-end-data-engineering-tutorial-ingest-dashboards/)
 - [Intro to Apache Iceberg, Nessie and Dremio on your Laptop](https://bit.ly/am-dremio-lakehouse-laptop)
 - [JSON/CSV/Parquet to Apache Iceberg to BI Dashboard](https://bit.ly/am-json-csv-parquet-dremio)
 - [From MongoDB to Apache Iceberg to BI Dashboard](https://bit.ly/am-mongodb-dashboard)
