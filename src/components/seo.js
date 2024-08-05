@@ -34,6 +34,21 @@ const SEO = ({ description, lang, meta, title }) => {
       htmlAttributes={{
         lang,
       }}
+      script={[
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-DLXYYBNDKE",
+          async: true,
+        },
+        {
+          type: "text/javascript",
+          innerHTML: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DLXYYBNDKE');
+          `,
+        },
+      ]}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
@@ -71,14 +86,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
       ].concat(meta)}
     >
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DLXYYBNDKE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-DLXYYBNDKE');
-</script>
     </Helmet>
   )
 }
