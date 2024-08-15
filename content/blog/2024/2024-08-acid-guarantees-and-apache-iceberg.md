@@ -28,10 +28,6 @@ ACID is an acronym that outlines the key guarantees a data system should provide
 
 Database and Data Warehouse systems manage these guarantees by tightly coupling all the functions of a data system within their software. Their software writes data to storage in a format they control, employs its own method to catalog the written data into different tables to consistently return the correct data, and has built-in mechanisms to prevent concurrent transactions from affecting each other or allowing partial completion. These guarantees are possible because every aspect of the system is designed to work seamlessly together, effectively trapping the data within the system.
 
-## Data Lakes, Durability without the rest
-
-Database and Data Warehouse systems manage these guarantees by tightly coupling all the functions of a data system within their software. Their software writes data to storage in a format they control, employs its own method to catalog the written data into different tables to consistently return the correct data, and has built-in mechanisms to prevent concurrent transactions from affecting each other or allowing partial completion. These guarantees are possible because every aspect of the system is designed to work seamlessly together, effectively trapping the data within the system.
-
 ## Apache Iceberg Unleashes ACID on Data Lakes
 
 A Lakehouse Table Format like Apache Iceberg takes what previously required tightly coupled systems and achieves it by creating a specification for a series of metadata files that define a table and the individual files from storage that belong to that table. This metadata inherently ensures consistency, as instead of manually listing which files constitute a dataset, users can simply point their tools to the metadata to get a consistent definition.
