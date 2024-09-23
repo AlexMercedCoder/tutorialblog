@@ -1032,7 +1032,6 @@ model = joblib.load('model.joblib')
 Use Caching for Models: Cache the model loading or training functions to improve performance.
 
 python
-Copy code
 @st.cache_resource
 def load_model():
     # Load or train model
@@ -1238,7 +1237,6 @@ When dealing with large datasets, performance can become an issue. Dask is a par
 
 #### Using Dask to Query Large Tables
 ```python
-Copy code
 import dask.dataframe as dd
 
 # Read data from SQL using Dask
@@ -1648,7 +1646,6 @@ A polished UI enhances the user experience and makes your app more engaging.
 - **Modify config.toml:** Create a `.streamlit/config.toml` file to define your theme settings.
 
 ```toml
-Copy code
 [theme]
 primaryColor="#6eb52f"
 backgroundColor="#f0f0f5"
