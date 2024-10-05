@@ -130,6 +130,8 @@ Here is a list of resources to help you learn how to partition your data with Ap
 
 ### Maintaining and Auditing Apache Iceberg Tables
 
+Here is a list of resources to help you maintain and audit your Apache Iceberg tables:
+
 - [Guide to Maintaining an Apache Iceberg Lakehouse](https://www.dremio.com/blog/page/2/#:~:text=Guide%20to%20Maintaining%20an%20Apache%20Iceberg%20Lakehouse)
 - [Compaction in Apache Iceberg: Fine-Tuning Your Iceberg Table’s Data Files](https://www.dremio.com/blog/compaction-in-apache-iceberg-fine-tuning-your-iceberg-tables-data-files/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [Leveraging Apache Iceberg Metadata Tables in Dremio for Effective Data Lakehouse Auditing](https://www.dremio.com/blog/apache-iceberg-metadata-tables/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
