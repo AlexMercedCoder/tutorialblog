@@ -23,7 +23,7 @@ Apache Iceberg is open-source data lakehouse table format. That means it is a st
 
 - By operating off tables in a seperate storage layer, you can use all your favorite analytical tools on a single copy of your data.
 
-- Reduing the number of copies needed can reduce your compute costs, storage costs and network costs of your overall data platform.
+- Reducing the number of copies needed can reduce your compute costs, storage costs and network costs of your overall data platform.
 
 - By storing your data in a standard format, it reduces future migration costs when changing tooling or adopting new tools.
 
