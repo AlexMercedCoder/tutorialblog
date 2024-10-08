@@ -190,6 +190,7 @@ Here is a list of resources about Apache Iceberg and Python:
 ### Governing Apache Iceberg Tables
 
 - [Apache Iceberg and the Right to Be Forgotten](https://www.dremio.com/blog/apache-iceberg-and-the-right-to-be-forgotten/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
+- [A Brief Guide to the Governance of Apache Iceberg Tables](https://amdatalakehouse.substack.com/p/a-brief-guide-to-the-governance-of)
 
 ### Miscellaneous Apache Iceberg Resources
 
