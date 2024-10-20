@@ -1,5 +1,5 @@
 ---
-title: A Deep Dive Into GitHub Actions From Software Development to Data Engineering
+title: Orchestrating Airflow DAGs with GitHub Actions - A Lightweight Approach to Data Curation Across Spark, Dremio, and Snowflake
 date: "2024-10-19"
 description: "Advanced GitHub Actions for Data Engineering"
 author: "Alex Merced"
