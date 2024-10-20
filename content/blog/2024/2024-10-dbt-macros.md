@@ -1,7 +1,7 @@
 ---
 title: A Guide to dbt Macros - Purpose, Benefits, and Usage
 date: "2024-10-18"
-description: "Learning about dbt  Macros""
+description: "Learning about dbt  Macros"
 author: "Alex Merced"
 category: "Data Lakehouse"
 bannerImage: "https://i.imgur.com/cpoMZQ8.png"
