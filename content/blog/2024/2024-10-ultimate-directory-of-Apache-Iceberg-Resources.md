@@ -130,8 +130,6 @@ Here is a list of resources to help you learn how to partition your data with Ap
 
 ### Maintaining and Auditing Apache Iceberg Tables
 
-Here is a list of resources to help you maintain and audit your Apache Iceberg tables:
-
 - [Guide to Maintaining an Apache Iceberg Lakehouse](https://www.dremio.com/blog/page/2/#:~:text=Guide%20to%20Maintaining%20an%20Apache%20Iceberg%20Lakehouse)
 - [Compaction in Apache Iceberg: Fine-Tuning Your Iceberg Table’s Data Files](https://www.dremio.com/blog/compaction-in-apache-iceberg-fine-tuning-your-iceberg-tables-data-files/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [Leveraging Apache Iceberg Metadata Tables in Dremio for Effective Data Lakehouse Auditing](https://www.dremio.com/blog/apache-iceberg-metadata-tables/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
@@ -149,9 +147,11 @@ Here is a list of resources to help you learn about Apache Iceberg Catalogs:
 - [Why Thinking about Apache Iceberg Catalogs Like Nessie and Apache Polaris (incubating) Matters](https://www.dremio.com/blog/why-thinking-about-apache-iceberg-catalogs-like-nessie-and-apache-polaris-incubating-matters/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [Using Nessie’s REST Catalog Support for Working with Apache Iceberg Tables](https://www.dremio.com/blog/use-nessie-with-iceberg-rest-catalog/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [The Nessie Ecosystem and the Reach of Git for Data for Apache Iceberg](https://www.dremio.com/blog/the-nessie-ecosystem-and-the-reach-of-git-for-data-for-apache-iceberg/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
+- [Introduction to Apache Polaris (incubating) Data Catalog](https://www.dremio.com/blog/intro-to-polaris-data-catalog/)
 - [Understanding the Polaris Iceberg Catalog and Its Architecture](https://medium.com/data-engineering-with-dremio/understanding-the-polaris-iceberg-catalog-and-its-architecture-4fefd7655fd1)
 - [Getting Hands-on with Snowflake Managed Polaris](https://www.dremio.com/blog/getting-hands-on-with-snowflake-managed-polaris/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [Getting Hands-on with Polaris OSS, Apache Iceberg and Apache Spark](https://www.dremio.com/blog/getting-hands-on-with-polaris-oss-apache-iceberg-and-apache-spark/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
+- [The Importance of Versioning in Modern Data Platforms: Catalog Versioning with Nessie vs. Code Versioning with dbt](https://www.dremio.com/blog/why-use-nessie-catalog-versioning-and-dbt-code-versioning/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 
 ### Querying Apache Iceberg Tables
 
@@ -186,6 +186,7 @@ Here is a list of resources about Apache Iceberg and Python:
 
 - [3 Ways to Use Python with Apache Iceberg](https://www.dremio.com/blog/3-ways-to-use-python-with-apache-iceberg/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [PyIceberg Docs](https://py.iceberg.apache.org/)
+- [Hands-on with Apache Iceberg Tables using PyIceberg using Nessie and Minio](https://www.dremio.com/blog/intro-to-pyiceberg/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 
 ### Governing Apache Iceberg Tables
 
@@ -212,6 +213,3 @@ Here is a list of miscellaneous resources to help you learn Apache Iceberg:
 - [Apache Iceberg FAQ](https://www.dremio.com/blog/apache-iceberg-faq/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=ultimate_directory_of_apache_iceberg_resources&utm_content=alexmerced&utm_term=external_blog)
 - [Why Data Analysts, Engineers, Architects and Scientists Should Care about Dremio and Apache Iceberg](https://medium.com/data-engineering-with-dremio/why-data-analysts-engineers-architects-and-scientists-should-care-about-dremio-and-apache-iceberg-361ba9e01f38?source=---------1)
 - [Data Lake Mysteries Unveiled: Nessie, Dremio, and MinIO Make Waves](https://blog.min.io/uncover-data-lake-nessie-dremio-iceberg/)
-
-
-
