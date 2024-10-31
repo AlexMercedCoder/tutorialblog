@@ -356,7 +356,7 @@ Iceberg allows for flexible partitioning rules through **Partition Evolution**, 
 Finally, let’s make a `curl` request to the Nessie catalog to verify that the schema and partitioning changes are recorded in the catalog’s metadata.
 
 1. **Open a Terminal** and run the following command to check the schema:
-   ```bash
+    ```bash
    curl -X GET "http://localhost:19120/api/v2/trees/main/history"
     ```
 This will return a JSON response listing the recent commits to the `main` branch, including the schema and partitioning updates.
@@ -446,13 +446,13 @@ You can use `curl` commands to check the branch status and view commit logs in N
 
 2. **Check the Commit Log**:
    - To view a log of commits, including the merge from `development` to `main`, run:
-     ```bash
-     curl -X GET "http://localhost:19120/api/v2/trees/main/history"
-     ```
 
      ```bash
+     curl -X GET "http://localhost:19120/api/v2/trees/main/history"
+
      curl -X GET "http://localhost:19120/api/v2/trees/development/history"
      ```
+
    - This log will show each commit, giving you a clear view of data versioning over time.
 
 ### Summary
