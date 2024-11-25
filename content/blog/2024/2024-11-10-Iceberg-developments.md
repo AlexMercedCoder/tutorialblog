@@ -27,7 +27,7 @@ One of the most anticipated updates in the Iceberg ecosystem for 2025 is the add
 
 - **Enhanced Interoperability Between Table Formats**: With the catalog managing scan planning, the responsibility of supporting table formats shifts from the engine to the catalog. This makes it possible for Iceberg REST-compliant catalogs to facilitate querying tables in multiple formats. For example, a catalog could generate file lists for queries across various table formats, paving the way for broader interoperability.
 
-Looking ahead, the introduction of this endpoint is not only a step toward improving query performance but also a glimpse into a future where catalogs become the central hub for table format compatibility. To fully realize this vision, a similar endpoint for handling metadata writes may be
+Looking ahead, the introduction of this endpoint is not only a step toward improving query performance but also a glimpse into a future where catalogs become the central hub for table format compatibility. To fully realize this vision, a similar endpoint for handling metadata writes may be introduced in the future, further extending the catalog's capabilities.
 
 [Scan Planning Pull Request](https://github.com/apache/iceberg/pull/11369)
 
