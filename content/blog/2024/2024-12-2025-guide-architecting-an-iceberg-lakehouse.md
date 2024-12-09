@@ -17,7 +17,6 @@ tags:
 - [Lakehouse Catalog Course](https://hello.dremio.com/webcast-an-in-depth-exploration-on-the-world-of-data-lakehouse-catalogs-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=iceberg-2025-guide&utm_content=alexmerced&utm_term=external_blog)
 - [Iceberg Lakehouse Engineering Video Playlist](https://www.youtube.com/watch?v=SIriNcVIGJQ&list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe)
 
-# 2025 Guide to Architecting an Iceberg Lakehouse
 
 Another year has passed, and 2024 has been an eventful one for the Apache Iceberg table format. Numerous announcements throughout the year have solidified Apache Iceberg's position as the industry standard for modern data lakehouse architectures.
 
