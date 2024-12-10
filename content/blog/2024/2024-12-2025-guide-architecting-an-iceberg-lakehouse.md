@@ -23,6 +23,7 @@ Another year has passed, and 2024 has been an eventful one for the Apache Iceber
 Here are some of the highlights from 2024:
 
 - **Dremio** announced the private preview of the **Hybrid Iceberg Catalog**, extending governance and table maintenance capabilities for both on-premises and cloud environments, building on the cloud catalog's general availability from previous years.
+- **Snowflake** announces **Polaris Catalog**, and then Partners with Dremio, AWS, Google and Microsoft to donate it to the Apache Software Foundation.
 - **Upsolver** introduced native Iceberg support, including table maintenance for streamed data landing in Iceberg tables.
 - **Confluent** unveiled several features aimed at enhancing Iceberg integrations.
 - **Databricks** acquired **Tabular**, a startup founded by Apache Iceberg creators Ryan Blue, Daniel Weeks, and Jason Reid.
@@ -42,7 +43,7 @@ Before we dive into the *how*, let’s take a moment to reflect on the *why*. A 
 
 This value proposition is a major reason to consider Apache Iceberg in particular. In a world where different teams rely on different tools, Iceberg stands out with the largest ecosystem of tools for reading, writing, and—most importantly—managing Iceberg tables. 
 
-Additionally, recent advancements in portable governance through catalog technologies amplify the benefits of adopting Iceberg. Features like **hidden partitioning** and **partition evolution** further enhance Iceberg’s appeal by maximizing flexibility and simplifying partition management. These qualities ensure that you can optimize your data lakehouse architecture for both pe
+Additionally, recent advancements in portable governance through catalog technologies amplify the benefits of adopting Iceberg. Features like **hidden partitioning** and **partition evolution** further enhance Iceberg’s appeal by maximizing flexibility and simplifying partition management. These qualities ensure that you can optimize your data lakehouse architecture for both performance and cost.
 
 ## Pre-Architecture Audit
 
