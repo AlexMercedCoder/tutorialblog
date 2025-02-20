@@ -393,10 +393,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
-{{ .Release.Name }} dynamically assigns the release name.
-{{ .Values.replicaCount }} references values from values.yaml.
-{{ .Values.image.repository }}:{{ .Values.image.tag }} configures the image dynamically.
 ```
+
+- {{ .Release.Name }} dynamically assigns the release name.
+- {{ .Values.replicaCount }} references values from values.yaml.
+- {{ .Values.image.repository }}:{{ .Values.image.tag }} configures the image dynamically.
 
 ### Step 4: Customize the Service Template
 Edit `templates/service.yaml` to configure the service:
