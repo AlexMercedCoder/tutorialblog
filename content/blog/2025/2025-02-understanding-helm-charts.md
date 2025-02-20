@@ -733,7 +733,7 @@ ArgoCD monitors a Git repository and applies changes automatically.
    ```sh
    kubectl create namespace argocd
    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
+   ```
 
 Deploy a Helm Chart with ArgoCD:
 
