@@ -245,14 +245,15 @@ Agents aren’t just chatbots—they're interactive systems. Tools give them the
 
 Combined with resources, prompts, and sampling, tools make LLMs feel like collaborative assistants, not just text predictors.
 
-### Recap: Tools in MCP
+### Tool Concepts Overview
 
-- Concept	Description
-- Tool definition	Name, description, and input schema
-- Invocation	tools/call with arguments
-- Output	Text or structured response
-- Use case examples	Shell commands, API calls, code generation, analysis
-- Security guidelines	Validate input, log usage, gate sensitive actions
+| Concept            | Description                                                  |
+|--------------------|--------------------------------------------------------------|
+| Tool definition     | Name, description, and input schema                          |
+| Invocation          | `tools/call` with arguments                                  |
+| Output              | Text or structured response                                  |
+| Use case examples   | Shell commands, API calls, code generation, analysis         |
+| Security guidelines | Validate input, log usage, gate sensitive actions            |
 
 ### Coming Up Next: Sampling and Prompts — Letting the Server Ask the Model for Help
 In the final two posts of this series, we’ll explore:
