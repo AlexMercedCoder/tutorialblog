@@ -21,8 +21,6 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)**  
 
-## Introduction
-
 If you’ve ever wished you could ask an AI model like Claude to interact with your local files or run custom code—good news: **you can.** That’s exactly what the **Model Context Protocol (MCP)** makes possible.
 
 In this tutorial, we’ll walk you through building a beginner-friendly **MCP server** that acts as a simple template for future projects. You don’t need to be an expert in AI or server development—we’ll explain each part as we go.
@@ -150,7 +148,8 @@ mix_server/
 │
 ├── utils/                # Reusable file reading logic
 │
-├── server.py             # Entry point for the MCP server
+├── server.py             # Creates the Server
+├── main.py             # Entry point for the MCP server
 └── README.md             # Optional documentation
 ```
 
@@ -217,8 +216,9 @@ df = pd.read_csv("data/sample.csv")
 
 # Save as Parquet
 df.to_parquet("data/sample.parquet", index=False)
-Run the script:
 ```
+
+Run the script:
 
 ```bash
 uv run generate_parquet.py
@@ -332,7 +332,7 @@ But before we do that, let’s follow a best practice: **we’ll define our MCP 
 
 ### Step 1: Define the MCP Server Instance
 
-Open your `server.py` file (or create it if you haven’t already), and add the following:
+Open your `server.py` and `main.py` files (or create it if you haven’t already), and add the following:
 
 ```python
 # server.py
@@ -341,6 +341,10 @@ from mcp.server.fastmcp import FastMCP
 
 # This is the shared MCP server instance
 mcp = FastMCP("mix_server")
+```
+
+```python
+from server import mcp
 
 # Entry point to run the server
 if __name__ == "__main__":
@@ -365,7 +369,6 @@ Then add the following:
 # tools/csv_tools.py
 
 from server import mcp
-from mcp.server.fastmcp import tool
 from utils.file_reader import read_csv_summary
 
 @mcp.tool()
@@ -397,7 +400,6 @@ And add:
 # tools/parquet_tools.py
 
 from server import mcp
-from mcp.server.fastmcp import tool
 from utils.file_reader import read_parquet_summary
 
 @mcp.tool()
@@ -418,18 +420,15 @@ def summarize_parquet_file(filename: str) -> str:
 Since the tools are registered via decorators at import time, we just need to make sure the server.py file imports the tool modules. Add these lines at the top of server.py:
 
 ```python
-# server.py (updated)
+# main.py
 
-from mcp.server.fastmcp import FastMCP
-
-# Initialize the server
-mcp = FastMCP("mix_server")
+from server import mcp
 
 # Import tools so they get registered via decorators
 import tools.csv_tools
 import tools.parquet_tools
 
-# Run the server
+# Entry point to run the server
 if __name__ == "__main__":
     mcp.run()
 ```
@@ -449,7 +448,7 @@ Let’s start your server locally.
 In your project root (where `server.py` lives), run:
 
 ```bash
-uv run server.py
+uv run main.py
 ```
 This starts your MCP server using the tools you defined. You won’t see much output in the terminal just yet—that’s normal. Your server is now waiting for a connection from a client like Claude.
 
@@ -491,7 +490,7 @@ Paste the following JSON into the file, replacing the "/ABSOLUTE/PATH/..." with 
         "--directory",
         "/ABSOLUTE/PATH/TO/mix_server",
         "run",
-        "server.py"
+        "main.py"
       ]
     }
   }
@@ -525,7 +524,7 @@ Claude will detect the appropriate tool, call your server, and respond with the 
 ### Troubleshooting Tips
 If things don’t work right away, here are a few things to check:
 
-- Make sure your `uv run server.py` process is running and hasn't crashed
+- Make sure your `uv run main.py` process is running and hasn't crashed
 
 - Ensure the file paths in your config JSON are correct
 
