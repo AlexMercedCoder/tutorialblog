@@ -1,5 +1,5 @@
 ---
-title: Introduction to Data Engineering Concepts | Metadata, Lineage, and Governance
+title: Introduction to Data Engineering Concepts | Scheduling and Workflow Orchestration
 date: "2025-05-02"
 description: "Introduction to the terms in data engineering"
 author: "Alex Merced"
