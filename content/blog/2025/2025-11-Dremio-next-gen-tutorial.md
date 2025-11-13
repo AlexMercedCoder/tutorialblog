@@ -338,11 +338,12 @@ from pyspark.sql import SparkSession
 from pyspark.sql import Row
 
 # Fetch Dremio base URL and PAT from environment variables
-DREMIO_CATALOG_URI = os.environ.get('DREMIO_CATALOG_URI')
-DREMIO_AUTH_URI = os.environ.get('DREMIO_AUTH_URI')
+DREMIO_CATALOG_URI = "https://catalog.dremio.cloud/api/iceberg"
+DREMIO_AUTH_URI = "https://login.dremio.cloud/oauth/token"
 DREMIO_PAT = os.environ.get('DREMIO_PAT')
+CATALOG_NAME = "first-project" # should be project name
 
-if not DREMIO_CATALOG_URI or not DREMIO_AUTH_URI or not DREMIO_PAT:
+if not DREMIO_CATALOG_URI or not CATALOG_NAME or not DREMIO_AUTH_URI or not DREMIO_PAT:
     raise ValueError("Please set environment variables DREMIO_CATALOG_URI, DREMIO_AUTH_URI and DREMIO_PAT.")
 
 # Configure Spark session with Iceberg and Dremio catalog settings
@@ -357,7 +358,7 @@ conf = (
         .set('spark.sql.catalog.dremio', 'org.apache.iceberg.spark.SparkCatalog')
         .set('spark.sql.catalog.dremio.catalog-impl', 'org.apache.iceberg.rest.RESTCatalog')
         .set('spark.sql.catalog.dremio.uri', DREMIO_CATALOG_URI)
-        .set('spark.sql.catalog.dremio.warehouse', 'default')  # Not used but required by Spark
+        .set('spark.sql.catalog.dremio.warehouse', CATALOG_NAME)  # Not used but required by Spark
         .set('spark.sql.catalog.dremio.cache-enabled', 'false')
         .set('spark.sql.catalog.dremio.header.X-Iceberg-Access-Delegation', 'vended-credentials')
         # Configure OAuth2 authentication using PAT
