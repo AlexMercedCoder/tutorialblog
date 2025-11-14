@@ -331,6 +331,12 @@ GRANT ALTER, USAGE, SELECT, WRITE, DROP on FOLDER dremio.recipes to USER "alphat
 
 Now you can connect to the Dremio Platform using JDBC/ODBC/ADBC-Flight/REST and send SQL to Dremio for Dremio to execute which I hope you take full advantage of. Although, sometimes you are sharing a dataset in your catalog with someone else who wants to use their preferred compute tool. Dremio Catalog bein  Apache Polaris based supports the Apache Iceberg REST Catalog SPEC meaning it can connect to pretty much to any Apache Iceberg supporting tool. Below is an example of how you'd connect in Spark.
 
+Run a local spark envrionment using the following command:
+
+`docker run -p 8888:8888 -e DREMIO_PAT={YOUR PAT TOKEN} alexmerced/spark35nb:latest`
+
+Then use the following code to run spark code against Dremio Catalog (keep in mind the CATALOG_NAME variable should match your project name).
+
 ```python
 import os
 import pyspark
@@ -351,7 +357,7 @@ conf = (
     pyspark.SparkConf()
         .setAppName('DremioIcebergSparkApp')
         # Required external packages For FILEIO (org.apache.iceberg:iceberg-azure-bundle:1.9.2, org.apache.iceberg:iceberg-aws-bundle:1.9.2, org.apache.iceberg:iceberg-azure-bundle:1.9.2, org.apache.iceberg:iceberg-gcp-bundle:1.9.2)
-        .set('spark.jars.packages', 'org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.9.2,com.dremio.iceberg.authmgr:authmgr-oauth2-runtime:0.0.5')
+        .set('spark.jars.packages', 'org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.9.2,com.dremio.iceberg.authmgr:authmgr-oauth2-runtime:0.0.5,org.apache.iceberg:iceberg-aws-bundle:1.9.2')
         # Enable Iceberg Spark extensions
         .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions')
         # Define Dremio catalog configuration using RESTCatalog
