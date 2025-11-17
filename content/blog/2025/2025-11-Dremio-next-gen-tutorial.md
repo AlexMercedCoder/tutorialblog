@@ -13,6 +13,8 @@ tags:
   - Dremio
 ---
 
+[Video Playlist of this Walkthough](https://studio.youtube.com/playlist/PL-gIUf9e9CCvY0bcRBGu2SzFFR-yJGIB6/videos)
+
 On November 13, at the [Subsurface Lakehouse Conference](https://www.dremio.com/subsurface?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=pag&utm_term=nextgencloudtut&utm_content=alexmerced) in New York City, Dremio announced and released [Dremio Next Gen Cloud](https://www.dremio.com/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=pag&utm_term=nextgencloudtut&utm_content=alexmerced), the most complete and accessible version of its Lakehouse Platform to date. This release advances Dremio’s mission to make data lakehouses easy, fast, and affordable for organizations of any size.
 
 This tutorial offers a hands-on introduction to Dremio and walks through the new free trial experience. With managed storage and no need to connect your own infrastructure or enter a credit card (until you want to), you can explore the full platform, including new AI features, Autonomous Performance Management, and the integrated lakehouse catalog, right away.
