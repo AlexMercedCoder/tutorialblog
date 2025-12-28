@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import ScrollToTop from "./scrollToTop"
+import { rhythm, scale } from "../utils/typography"
 
 const useDarkMode = () => {
     const [isDark, setIsDark] = React.useState(false);
