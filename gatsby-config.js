@@ -137,7 +137,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `gatsby-plugin-partytown`,
+    // `gatsby-plugin-partytown`, (Removed due to React 18 conflict)
     `gatsby-plugin-use-dark-mode`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
