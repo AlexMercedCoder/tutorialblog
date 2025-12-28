@@ -1,3 +1,5 @@
+import React from "react"
+
 const Share = ({ title, url, twitterHandle }) => {
     const iconSize = 40;
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}&via=${twitterHandle || ''}`;
