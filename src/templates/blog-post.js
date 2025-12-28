@@ -82,6 +82,7 @@ export const Head = ({ data, location }) => {
       description={post.frontmatter.description || post.excerpt}
       pathname={location.pathname}
       image={post.frontmatter.bannerImage}
+      article={true}
     />
   )
 }

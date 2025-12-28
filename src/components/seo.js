@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ description, lang, meta, title, pathname = "", image }) => {
+const Seo = ({ description, lang, meta, title, pathname = "", image, article = false }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -40,12 +40,33 @@ const Seo = ({ description, lang, meta, title, pathname = "", image }) => {
     name: defaultTitle,
   }
 
-  // Schema.org/Article (if standard blog post content is present - inferred by title/desc)
-  // Ideally, we'd pass a prop to confirm "isArticle", but present logic improves base state.
-  // For exact "Article" schema, we can add it dynamically if the page is a blog post.
-  let schema = webSiteSchema
-  if (title && description) {
-      // Basic Article Schema for blog posts
+  let schema = [webSiteSchema];
+
+  // Schema.org/BreadcrumbList
+  if (pathname) {
+      const breadcrumbSchema = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+              {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": siteUrl
+              },
+              {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": title,
+                  "item": canonical || siteUrl
+              }
+          ]
+      };
+      schema.push(breadcrumbSchema);
+  }
+
+  // Schema.org/Article
+  if (article) {
        const articleSchema = {
           "@context": "https://schema.org",
           "@type": "Article",
@@ -63,12 +84,10 @@ const Seo = ({ description, lang, meta, title, pathname = "", image }) => {
                   "@type": "ImageObject",
                   url: `${siteUrl}icons/icon-512x512.png` // Default from manifest
               }
-          }
+          },
+          datePublished: null // ideally passed from prop if available
        }
-       // If it's a specific page (implied by pathname), prefer article schema or mix
-       if (pathname !== "/") {
-           schema = [webSiteSchema, articleSchema]
-       }
+       schema.push(articleSchema)
   }
 
 
@@ -80,7 +99,7 @@ const Seo = ({ description, lang, meta, title, pathname = "", image }) => {
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={article ? "article" : "website"} />
       {image && <meta property="og:image" content={`${siteUrl}${image}`} />}
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
@@ -107,6 +126,7 @@ Seo.propTypes = {
   title: PropTypes.string.isRequired,
   pathname: PropTypes.string,
   image: PropTypes.string,
+  article: PropTypes.bool,
 }
 
 export default Seo
