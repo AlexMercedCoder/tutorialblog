@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -14,6 +14,43 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const twitterHandle = data.site.siteMetadata.social.twitter
   const { previous, next } = pageContext
   const url = `${data.site.siteMetadata.siteUrl}${location.pathname}`;
+
+  useEffect(() => {
+    // Add Copy Button to code blocks
+    const codeBlocks = document.querySelectorAll('pre');
+    codeBlocks.forEach(block => {
+        if (block.querySelector('button.copy-btn')) return; // already added
+
+        const button = document.createElement('button');
+        button.innerText = 'Copy';
+        button.className = 'copy-btn';
+        button.style.position = 'absolute';
+        button.style.top = '5px';
+        button.style.right = '5px';
+        button.style.fontSize = '12px';
+        button.style.background = '#444';
+        button.style.color = '#fff';
+        button.style.border = 'none';
+        button.style.borderRadius = '3px';
+        button.style.cursor = 'pointer';
+        button.style.zIndex = '10';
+
+        // Ensure relative positioning on block for absolute button
+        if (getComputedStyle(block).position === 'static') {
+            block.style.position = 'relative'; 
+        }
+
+        button.addEventListener('click', () => {
+             const code = block.querySelector('code')?.innerText || block.innerText;
+             navigator.clipboard.writeText(code).then(() => {
+                 button.innerText = 'Copied!';
+                 setTimeout(() => { button.innerText = 'Copy' }, 2000);
+             });
+        });
+
+        block.appendChild(button);
+    });
+  }, []);
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -59,6 +96,20 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             </div>
         )}
         <Share title={post.frontmatter.title} url={url} twitterHandle={twitterHandle} />
+        
+        {pageContext.relatedPosts && pageContext.relatedPosts.length > 0 && (
+            <div style={{ marginTop: rhythm(1), marginBottom: rhythm(1) }}>
+                <h3>Related Posts</h3>
+                <ul style={{ listStyle: 'none', marginLeft: 0 }}>
+                    {pageContext.relatedPosts.map(p => (
+                        <li key={p.slug} style={{ marginBottom: rhythm(0.25) }}>
+                            <Link to={p.slug}>{p.title}</Link> <small>({p.date})</small>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )}
+
         <hr
           style={{
             marginBottom: rhythm(1),

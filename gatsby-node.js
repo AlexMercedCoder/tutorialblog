@@ -39,6 +39,29 @@ exports.createPages = async ({ graphql, actions }) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
     const next = index === 0 ? null : posts[index - 1].node
 
+    const _ = require("lodash");
+    const currentTags = post.node.frontmatter.tags || [];
+
+    // Find related posts
+    const relatedPosts = posts
+        .filter(p => p.node.fields.slug !== post.node.fields.slug) // Exclude current post
+        .map(p => {
+            const pTags = p.node.frontmatter.tags || [];
+            const commonTags = _.intersection(currentTags, pTags);
+            return {
+                ...p,
+                commonTagCount: commonTags.length
+            };
+        })
+        .filter(p => p.commonTagCount > 0) // Must have at least one common tag
+        .sort((a, b) => b.commonTagCount - a.commonTagCount) // Sort by most common tags
+        .slice(0, 3) // Take top 3
+        .map(p => ({
+            slug: p.node.fields.slug,
+            title: p.node.frontmatter.title,
+            date: p.node.frontmatter.date
+        }));
+
     createPage({
       path: post.node.fields.slug,
       component: blogPost,
@@ -46,6 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         previous,
         next,
+        relatedPosts,
       },
     })
   })

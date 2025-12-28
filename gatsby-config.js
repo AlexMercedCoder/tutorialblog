@@ -138,6 +138,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-partytown`,
+    `gatsby-plugin-use-dark-mode`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-catch-links`,

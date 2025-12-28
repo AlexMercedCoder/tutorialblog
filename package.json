@@ -22,6 +22,7 @@
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-sitemap": "^6.12.0",
     "gatsby-plugin-typography": "^5.12.0",
+    "gatsby-plugin-use-dark-mode": "^2.1.1",
     "gatsby-remark-autolink-headers": "^6.15.0",
     "gatsby-remark-copy-linked-files": "^6.12.0",
     "gatsby-remark-images": "^7.12.0",
@@ -40,7 +41,8 @@
     "react-share": "^5.2.2",
     "react-typography": "^0.16.23",
     "typography": "^0.16.24",
-    "typography-theme-wordpress-2016": "^0.16.19"
+    "typography-theme-wordpress-2016": "^0.16.19",
+    "use-dark-mode": "^2.3.1"
   },
   "devDependencies": {
     "prettier": "2.8.8"

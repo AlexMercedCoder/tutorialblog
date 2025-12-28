@@ -1,23 +1,14 @@
 import React from "react"
 import { Link } from "gatsby"
-import {
-  FaYoutube,
-  FaFacebookSquare,
-  FaTwitter,
-  FaGithubSquare,
-  FaInstagramSquare,
-} from "react-icons/fa"
-import "../styles.css"
+import useDarkMode from "use-dark-mode"
 
 import { rhythm, scale } from "../utils/typography"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
+  const darkMode = useDarkMode(false)
+  
   let header
-
-  const shadow = {
-    boxShadow: "0",
-  }
 
   if (location.pathname === rootPath) {
     header = (
@@ -26,12 +17,12 @@ const Layout = ({ location, title, children }) => {
           ...scale(1.5),
           marginBottom: rhythm(1.5),
           marginTop: 0,
-          color: "darkred",
         }}
       >
         <Link
           style={{
             boxShadow: `none`,
+            textDecoration: `none`,
             color: `inherit`,
           }}
           to={`/`}
@@ -46,12 +37,12 @@ const Layout = ({ location, title, children }) => {
         style={{
           fontFamily: `Montserrat, sans-serif`,
           marginTop: 0,
-          color: "darkred",
         }}
       >
         <Link
           style={{
             boxShadow: `none`,
+            textDecoration: `none`,
             color: `inherit`,
           }}
           to={`/`}
@@ -70,39 +61,27 @@ const Layout = ({ location, title, children }) => {
         padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
       }}
     >
-      <header>{header}</header>
-      <nav id="nav">
-        <div>
-          <a
-            href="https://www.youtube.com/AlexMercedFullStackDeveloper"
-            style={shadow}
-          >
-            <FaYoutube />
-          </a>
-        </div>
-        <div>
-          <a href="https://www.facebook.com/AlexMercedCoder">
-            <FaFacebookSquare />
-          </a>
-        </div>
-        <div>
-          <a href="https://www.twitter.com/AlexMercedCoder">
-            <FaTwitter />
-          </a>
-        </div>
-        <div>
-          <a href="https://www.instagram.com/AlexMercedCoder">
-            <FaInstagramSquare />
-          </a>
-        </div>
-        <div>
-          <a href="https://www.github.com/AlexMercedCoder">
-            <FaGithubSquare />
-          </a>
-        </div>
-      </nav>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>{header}</div>
+        <button 
+            type="button" 
+            onClick={darkMode.toggle}
+            style={{ 
+                cursor: 'pointer',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '1.5rem'
+            }}
+        >
+            {darkMode.value ? '☀️' : '🌙'}
+        </button>
+      </header>
       <main>{children}</main>
-      <footer>© alexmercedcoder.dev 2020</footer>
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.com">Gatsby</a>
+      </footer>
     </div>
   )
 }

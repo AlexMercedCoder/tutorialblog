@@ -1,0 +1,33 @@
+body.dark-mode {
+  --bg: #1a202c;
+  --textTitle: #e2e8f0;
+  --textNormal: #cbd5e0;
+  --link: #81e6d9;
+  --hr: #4a5568;
+}
+
+body.light-mode {
+  --bg: #fff;
+  --textTitle: #2d3748;
+  --textNormal: #2d3748;
+  --link: #d23669;
+  --hr: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--textNormal);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--textTitle);
+}
+
+a {
+  color: var(--link);
+}
+
+hr {
+  background: var(--hr);
+}
