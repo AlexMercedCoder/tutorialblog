@@ -55,7 +55,7 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-reading-time`,
+          // `gatsby-remark-reading-time`,
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
@@ -138,12 +138,10 @@ module.exports = {
       },
     },
     // `gatsby-plugin-partytown`, (Removed due to React 18 conflict)
-    `gatsby-plugin-use-dark-mode`,
+    // `gatsby-plugin-use-dark-mode`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-catch-links`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
   ],
 }

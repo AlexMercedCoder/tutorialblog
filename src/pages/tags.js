@@ -4,7 +4,10 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { rhythm } from "../utils/typography"
-import _ from "lodash"
+
+const kebabCase = (str) => str && str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+  .map(x => x.toLowerCase())
+  .join('-');
 
 const TagsPage = ({
   data: {
@@ -23,7 +26,7 @@ const TagsPage = ({
             <ul style={{ listStyle: 'none' }}>
             {group.map(tag => (
                 <li key={tag.fieldValue} style={{ marginBottom: rhythm(0.5) }}>
-                <Link to={`/tags/${_.kebabCase(tag.fieldValue)}/`}>
+                <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
                     {tag.fieldValue} ({tag.totalCount})
                 </Link>
                 </li>

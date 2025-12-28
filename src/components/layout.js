@@ -2,9 +2,30 @@ import React from "react"
 import { Link } from "gatsby"
 import ScrollToTop from "./scrollToTop"
 
+const useDarkMode = () => {
+    const [isDark, setIsDark] = React.useState(false);
+    
+    React.useEffect(() => {
+        const stored = localStorage.getItem('darkMode') === 'true';
+        setIsDark(stored);
+        if (stored) {
+             document.body.classList.add('dark-mode');
+        }
+    }, []);
+
+    const toggle = () => {
+        const newState = !isDark;
+        setIsDark(newState);
+        localStorage.setItem('darkMode', newState);
+        document.body.classList.toggle('dark-mode', newState);
+    };
+
+    return { value: isDark, toggle };
+}
+
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
-  const darkMode = useDarkMode(false)
+  const darkMode = useDarkMode()
   
   let header
   

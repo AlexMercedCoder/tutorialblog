@@ -8,7 +8,11 @@ import { rhythm, scale } from "../utils/typography"
 
 import Share from "../components/share"
 import ProgressBar from "../components/progressBar"
-// import confetti from "canvas-confetti" (Removed for dynamic import)
+
+
+const kebabCase = (str) => str && str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+  .map(x => x.toLowerCase())
+  .join('-');
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
@@ -26,13 +30,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
         const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
         if (scrolledToBottom) {
-            const confetti = (await import("canvas-confetti")).default;
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-            setHasCelebrated(true);
+             setHasCelebrated(true);
         }
     };
 
@@ -96,7 +94,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date} • {post.fields.readingTime.text}
+            {post.frontmatter.date} • {post.timeToRead} min read
           </p>
         </header>
         {post.tableOfContents && (
@@ -112,7 +110,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
                     {post.frontmatter.tags.map(tag => {
                         return (
                             <li key={tag} style={{ marginRight: '10px' }}>
-                                <Link to={`/tags/${_.kebabCase(tag)}/`}>#{tag}</Link>
+                                <Link to={`/tags/${kebabCase(tag)}/`}>#{tag}</Link>
                             </li>
                         )
                     })}
@@ -205,10 +203,9 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       tableOfContents(absolute: false, maxDepth: 3)
+      timeToRead
       fields {
-        readingTime {
-          text
-        }
+        slug
       }
       frontmatter {
         title
