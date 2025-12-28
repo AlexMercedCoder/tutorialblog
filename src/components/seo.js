@@ -7,10 +7,9 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, title }) => {
+const Seo = ({ description, lang, meta, title, pathname = "", image }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +17,7 @@ const SEO = ({ description, lang, meta, title }) => {
           siteMetadata {
             title
             description
+            siteUrl
             social {
               twitter
             }
@@ -28,80 +28,85 @@ const SEO = ({ description, lang, meta, title }) => {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const defaultTitle = site.siteMetadata?.title
+  const siteUrl = site.siteMetadata?.siteUrl
+  const canonical = pathname ? `${siteUrl}${pathname}` : null
+
+  // Schema.org/WebSite
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: siteUrl,
+    name: defaultTitle,
+  }
+
+  // Schema.org/Article (if standard blog post content is present - inferred by title/desc)
+  // Ideally, we'd pass a prop to confirm "isArticle", but present logic improves base state.
+  // For exact "Article" schema, we can add it dynamically if the page is a blog post.
+  let schema = webSiteSchema
+  if (title && description) {
+      // Basic Article Schema for blog posts
+       const articleSchema = {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: title,
+          description: metaDescription,
+          image: image ? `${siteUrl}${image}` : undefined,
+          author: {
+              "@type": "Person",
+              name: site.siteMetadata.author?.name || "Alex Merced"
+          },
+          publisher: {
+              "@type": "Organization",
+              name: defaultTitle,
+              logo: {
+                  "@type": "ImageObject",
+                  url: `${siteUrl}icons/icon-512x512.png` // Default from manifest
+              }
+          }
+       }
+       // If it's a specific page (implied by pathname), prefer article schema or mix
+       if (pathname !== "/") {
+           schema = [webSiteSchema, articleSchema]
+       }
+  }
+
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      script={[
-        {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-DLXYYBNDKE",
-          async: true,
-        },
-        {
-          type: "text/javascript",
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DLXYYBNDKE');
-          `,
-        },
-      ]}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.social.twitter,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    >
-
-    </Helmet>
+    <>
+      <html lang={lang} />
+      <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
+      {canonical && <link rel="canonical" href={canonical} />}
+      <meta name="description" content={metaDescription} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={metaDescription} />
+      <meta property="og:type" content="website" />
+      {image && <meta property="og:image" content={`${siteUrl}${image}`} />}
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={metaDescription} />
+      {meta.map((m, i) => (
+        <meta key={i} {...m} />
+      ))}
+      <script type="application/ld+json">{JSON.stringify(schema)}</script>
+    </>
   )
 }
 
-SEO.defaultProps = {
+Seo.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
 }
 
-SEO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  pathname: PropTypes.string,
+  image: PropTypes.string,
 }
 
-export default SEO
+export default Seo

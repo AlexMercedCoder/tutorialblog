@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import { rhythm } from "../utils/typography"
 import { useState, useRef } from "react"
 import { render } from "react-dom"
@@ -26,7 +26,6 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
       <Bio />
       <div className="search">
       <input type="text" ref={searchRef} placeholder="search articles"/>
@@ -65,6 +64,8 @@ const BlogIndex = ({ data, location }) => {
 
 export default BlogIndex
 
+export const Head = ({ location }) => <Seo title="All posts" pathname={location.pathname} />
+
 export const pageQuery = graphql`
   query {
     site {
@@ -72,7 +73,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           excerpt
