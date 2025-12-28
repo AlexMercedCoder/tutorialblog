@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -7,6 +7,8 @@ import Seo from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
 import Share from "../components/share"
+import ProgressBar from "../components/progressBar"
+// import confetti from "canvas-confetti" (Removed for dynamic import)
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
@@ -15,7 +17,27 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const { previous, next } = pageContext
   const url = `${data.site.siteMetadata.siteUrl}${location.pathname}`;
 
+  const [hasCelebrated, setHasCelebrated] = useState(false);
+
   useEffect(() => {
+    // Confetti Logic
+    const handleScroll = async () => {
+        if (hasCelebrated) return;
+
+        const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+        if (scrolledToBottom) {
+            const confetti = (await import("canvas-confetti")).default;
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            setHasCelebrated(true);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
     // Add Copy Button to code blocks
     const codeBlocks = document.querySelectorAll('pre');
     codeBlocks.forEach(block => {
@@ -50,10 +72,13 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
         block.appendChild(button);
     });
-  }, []);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [hasCelebrated]);
 
   return (
     <Layout location={location} title={siteTitle}>
+      <ProgressBar />
       <article>
         <header>
           <h1
@@ -85,7 +110,6 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             <div style={{ marginTop: rhythm(1), marginBottom: rhythm(1) }}>
                 <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', padding: 0 }}>
                     {post.frontmatter.tags.map(tag => {
-                        const _ = require("lodash");
                         return (
                             <li key={tag} style={{ marginRight: '10px' }}>
                                 <Link to={`/tags/${_.kebabCase(tag)}/`}>#{tag}</Link>

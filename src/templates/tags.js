@@ -1,4 +1,5 @@
 import React from "react"
+import _ from "lodash"
 import PropTypes from "prop-types"
 import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"

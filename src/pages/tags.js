@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { rhythm } from "../utils/typography"
+import _ from "lodash"
 
 const TagsPage = ({
   data: {
@@ -14,7 +15,6 @@ const TagsPage = ({
   },
   location,
 }) => {
-    const _ = require("lodash");
     return (
         <Layout location={location} title={title}>
         <Seo title="All Tags" />
