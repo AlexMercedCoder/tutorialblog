@@ -1,5 +1,6 @@
 ---
 title: All About  Parquet Part 10 - Performance Tuning and Best Practices with Parquet
+date: "2024-10-21"
 description: "All about the Apache Parquet File Format"
 author: "Alex Merced"
 category: "Data Lakehouse"
