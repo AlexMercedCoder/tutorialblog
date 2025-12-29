@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
 import Share from "../components/share"
+import Comments from "../components/comments"
 import ProgressBar from "../components/progressBar"
 
 
@@ -131,6 +132,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
                 </ul>
             </div>
         )}
+
+        <Comments />
 
         <hr
           style={{
