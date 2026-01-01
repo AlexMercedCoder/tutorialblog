@@ -16,7 +16,7 @@ tags:
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)
 - [Apache Polaris: The Defintive Guide](https://drmevn.fyi/tableformatblog-62P6t)
-- [Architecting an Apache Iceberg Lakehouse](https://www.manning.com/books/architecting-an-apache-iceberg-lakehouse)
+- [Architecting an Apache Iceberg Lakehouse](https://hubs.la/Q03GfY4f0)
 
 **[Join the Data Lakehouse Community](https://www.datalakehousehub.com)**
 **[Data Lakehouse Blog Roll](https://lakehouseblogs.com)**
@@ -358,7 +358,7 @@ The lakehouse era is here, and open table formats are its backbone.
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)
 - [Apache Polaris: The Defintive Guide](https://drmevn.fyi/tableformatblog-62P6t)
-- [Architecting an Apache Iceberg Lakehouse](https://www.manning.com/books/architecting-an-apache-iceberg-lakehouse)
+- [Architecting an Apache Iceberg Lakehouse](https://hubs.la/Q03GfY4f0)
 
 **[Join the Data Lakehouse Community](https://www.datalakehousehub.com)**
 **[Data Lakehouse Blog Roll](https://lakehouseblogs.com)**

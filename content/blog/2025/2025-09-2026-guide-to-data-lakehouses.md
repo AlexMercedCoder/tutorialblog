@@ -226,7 +226,7 @@ These metadata designs reflect each project’s philosophy, and they form the ba
 
 Designing a modern lakehouse isn’t about choosing a single tool, it’s about assembling the right components across **five architectural layers**. Each layer has its own responsibilities, and together they create a system that is scalable, governed, and usable for analytics and AI.
 
-[Deep Dive into the 5 layers is the core of the book "Architecting an Apache Iceberg Lakehouse"](https://www.manning.com/books/architecting-an-apache-iceberg-lakehouse)
+[Deep Dive into the 5 layers is the core of the book "Architecting an Apache Iceberg Lakehouse"](https://hubs.la/Q03GfY4f0)
 
 ### 1. Storage Layer
 This is the foundation: **low-cost, durable storage** capable of holding structured, semi-structured, and unstructured data.  
@@ -630,7 +630,7 @@ For data engineers and architects who want to go beyond blogs and documentation,
   Focuses on Hudi’s approach to incremental processing, upserts/deletes, clustering, and indexing. Demonstrates how to run production-ready lakehouses with streaming data ingestion.
 
 ### Manning Publications
-- [**Architecting an Apache Iceberg Lakehouse**](https://www.manning.com/books/architecting-an-apache-iceberg-lakehouse)  
+- [**Architecting an Apache Iceberg Lakehouse**](https://hubs.la/Q03GfY4f0)  
   *Alex Merced* (MEAP, 2025 – Forthcoming 2026)  
   A hands-on, architecture-first guide to designing scalable Iceberg-based lakehouses. Covers all five layers (storage, table formats, ingestion, catalog, consumption) with exercises and real-world design trade-offs.
 

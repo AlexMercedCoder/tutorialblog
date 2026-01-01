@@ -31,7 +31,7 @@ I've had the honor of getting to participate in some long form written content a
 
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)
 - [Apache Polaris: The Defintive Guide](https://drmevn.fyi/tableformatblog-62P6t)
-- [Architecting an Apache Iceberg Lakehouse](https://www.manning.com/books/architecting-an-apache-iceberg-lakehouse)
+- [Architecting an Apache Iceberg Lakehouse](https://hubs.la/Q03GfY4f0)
 - [The Apache Iceberg Digest: Vol. 1](https://www.puppygraph.com/ebooks/apache-iceberg-digest-vol-1)
 
 **Lakehouse Community:**
