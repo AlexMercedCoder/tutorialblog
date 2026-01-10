@@ -77,7 +77,7 @@ Here’s how it plays out:
 
 This process can happen once—or dozens of times inside a single response.
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r8r9qwefzhnhr8bxxyyb.png
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r8r9qwefzhnhr8bxxyyb.png)
 
 Let’s take a concrete example. Suppose you ask an RLM to explain a complicated technical article. Instead of trying to summarize the whole thing at once, the model might first break the article into sections. Then it could issue recursive calls to summarize each section individually. After that, it could combine those pieces into a final answer.
 
