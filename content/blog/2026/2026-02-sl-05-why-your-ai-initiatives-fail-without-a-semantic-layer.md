@@ -1,7 +1,7 @@
 ---
 title: "Why Your AI Initiatives Fail Without a Semantic Layer"
 date: "2026-02-19"
-description: "Your team builds an AI agent. It connects to your data warehouse. A product manager types "What was revenue last quarter?" and gets a number. The number is w..."
+description: "Your team builds an AI agent. It connects to your data warehouse. A product manager types What was revenue last quarter? and gets a number. The number is wrong."
 author: "Alex Merced"
 category: "Semantic Layer"
 bannerImage: "./images/semantic_layer_seo/05/ai-hallucination.png"

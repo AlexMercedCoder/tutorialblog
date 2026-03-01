@@ -1,7 +1,7 @@
 ---
 title: "Data Quality Is a Pipeline Problem, Not a Dashboard Problem"
 date: "2026-02-19"
-description: "When an analyst finds null values in a revenue column, the typical response is to add a calculated field in the BI tool: \1. That "fix" doesn't fix anything...."
+description: "When an analyst finds null values in a revenue column, the typical response is to add a calculated field in the BI tool. That fix doesn't fix anything."
 author: "Alex Merced"
 category: "Data Engineering"
 bannerImage: "./images/debp/03/data-quality-pipeline.png"

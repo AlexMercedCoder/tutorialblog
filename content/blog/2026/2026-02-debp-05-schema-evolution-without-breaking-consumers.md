@@ -1,7 +1,7 @@
 ---
 title: "Schema Evolution Without Breaking Consumers"
 date: "2026-02-19"
-description: "A source team renames a column from \1 to \1. Twelve hours later, five dashboards show blank values, two ML pipelines fail, and the data engineering team spe..."
+description: "A source team renames a column from user_id to customer_id. Twelve hours later, five dashboards show blank values, two ML pipelines fail, and the data engineering..."
 author: "Alex Merced"
 category: "Data Engineering"
 bannerImage: "./images/debp/05/additive-evolution.png"

@@ -1,7 +1,7 @@
 ---
 title: "Classify Your Data with SQL: A Hands-On Guide to Dremio's AI_CLASSIFY Function"
 date: "2026-03-01"
-description: "Most classification workflows require exporting data to Python, running a model, and importing results back into your warehouse. Dremio's \1 function elimina..."
+description: "Most classification workflows require exporting data to Python, running a model, and importing results back into your warehouse. Dremio's AI_CLASSIFY function..."
 author: "Alex Merced"
 category: "AI Features"
 bannerImage: "./images/AI_FEATURE_BLOGS/01/banner.png"
