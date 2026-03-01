@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="/home/alexmerced/development/personal/Personal/gatsblog"
 STAGING="$ROOT/staging"
 DEST="$ROOT/content/blog/2026"
-DATE="2026-02-19"
+DATE="2026-03-01"
 AUTHOR="Alex Merced"
 
 mkdir -p "$DEST"
@@ -81,8 +81,8 @@ publish_series() {
             banner_image="https://i.imgur.com/cpoMZQ8.png"
         fi
 
-        # Build output filename
-        local filename="2026-02-${slug_prefix}-${post_number}-${title_slug}.md"
+        local date_prefix="${DATE:0:7}"  # e.g. "2026-03"
+        local filename="${date_prefix}-${slug_prefix}-${post_number}-${title_slug}.md"
         local dest_path="$DEST/$filename"
 
         # Build content: frontmatter + body (with H1 stripped and image refs updated)
@@ -109,26 +109,19 @@ publish_series() {
     done
 }
 
-publish_series "data_modeling" "Data Modeling" "dm" \
-"  - data modeling
-  - data engineering
+publish_series "AI_FEATURE_BLOGS" "AI Features" "ai" \
+"  - dremio
+  - AI
+  - SQL
   - data lakehouse
-  - star schema
-  - data architecture"
+  - machine learning"
 
-publish_series "debp" "Data Engineering" "debp" \
-"  - data engineering
-  - best practices
-  - data pipelines
-  - data quality
-  - data lakehouse"
-
-publish_series "semantic_layer_seo" "Semantic Layer" "sl" \
-"  - semantic layer
-  - data governance
-  - analytics
-  - data engineering
-  - data lakehouse"
+publish_series "connector-blogs" "Dremio Connectors" "conn" \
+"  - dremio
+  - data integration
+  - connectors
+  - data lakehouse
+  - federated queries"
 
 echo ""
 echo "Done: $total posts published to $DEST"
