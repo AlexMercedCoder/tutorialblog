@@ -1,11 +1,11 @@
 #!/bin/bash
-# Publish 30 staging blog posts to content/blog/2026/
+# Publish staging blog posts to content/blog/2026/
 set -euo pipefail
 
 ROOT="/home/alexmerced/development/personal/Personal/gatsblog"
 STAGING="$ROOT/staging"
 DEST="$ROOT/content/blog/2026"
-DATE="2026-03-01"
+DATE="2026-03-05"
 AUTHOR="Alex Merced"
 
 mkdir -p "$DEST"
@@ -33,8 +33,10 @@ publish_series() {
 
         local post_dir_name
         post_dir_name=$(basename "$post_dir")
-        local post_number
-        post_number=$(echo "$post_dir_name" | grep -oP '^\d+')
+
+        # Extract post_id: use leading number if present, otherwise use folder name
+        local post_id
+        post_id=$(echo "$post_dir_name" | grep -oP '^\d+' 2>/dev/null || echo "$post_dir_name")
 
         # Extract title from H1 line
         local title
@@ -44,17 +46,32 @@ publish_series() {
         local title_slug
         title_slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9 -]//g' | sed 's/ \+/-/g' | sed 's/-\+/-/g' | cut -c1-60 | sed 's/-$//')
 
-        # Extract description: first non-empty, non-image paragraph after H1
+        # Extract description: first real paragraph after H1, strip markdown, escape quotes
         local description
         description=$(awk '
             /^# / { found_h1=1; next }
             found_h1 && /^$/ { next }
             found_h1 && /^!\[/ { next }
-            found_h1 && /.+/ { 
-                gsub(/\[([^\]]+)\]\([^)]+\)/, "\\1")
-                gsub(/\*\*([^*]+)\*\*/, "\\1")
-                gsub(/\*([^*]+)\*/, "\\1")
-                gsub(/`([^`]+)`/, "\\1")
+            found_h1 && /.+/ {
+                # Strip markdown links: [text](url) -> text
+                while (match($0, /\[[^\]]+\]\([^)]+\)/)) {
+                    before = substr($0, 1, RSTART-1)
+                    chunk = substr($0, RSTART, RLENGTH)
+                    after = substr($0, RSTART+RLENGTH)
+                    # Extract link text between [ and ]
+                    sub(/\].*/, "", chunk)
+                    sub(/^\[/, "", chunk)
+                    $0 = before chunk after
+                }
+                # Strip bold **text** -> text
+                gsub(/\*\*/, "")
+                # Strip italic *text* -> text
+                gsub(/\*/, "")
+                # Strip backticks `text` -> text
+                gsub(/`/, "")
+                # Strip double quotes to avoid YAML issues
+                gsub(/"/, "")
+                # Truncate
                 if (length > 160) $0 = substr($0, 1, 157) "..."
                 print
                 exit
@@ -62,7 +79,7 @@ publish_series() {
         ' "$content_file")
 
         # Copy images
-        local img_rel_dir="images/${series_name}/${post_number}"
+        local img_rel_dir="images/${series_name}/${post_id}"
         local img_dest_dir="$DEST/$img_rel_dir"
         mkdir -p "$img_dest_dir"
 
@@ -82,7 +99,7 @@ publish_series() {
         fi
 
         local date_prefix="${DATE:0:7}"  # e.g. "2026-03"
-        local filename="${date_prefix}-${slug_prefix}-${post_number}-${title_slug}.md"
+        local filename="${date_prefix}-${slug_prefix}-${post_id}-${title_slug}.md"
         local dest_path="$DEST/$filename"
 
         # Build content: frontmatter + body (with H1 stripped and image refs updated)
@@ -109,19 +126,12 @@ publish_series() {
     done
 }
 
-publish_series "AI_FEATURE_BLOGS" "AI Features" "ai" \
-"  - dremio
-  - AI
-  - SQL
-  - data lakehouse
-  - machine learning"
-
-publish_series "connector-blogs" "Dremio Connectors" "conn" \
-"  - dremio
-  - data integration
-  - connectors
-  - data lakehouse
-  - federated queries"
+publish_series "aitoolblogs" "AI Coding Tools" "ait" \
+"  - AI coding tools
+  - dremio
+  - developer tools
+  - agentic development
+  - data lakehouse"
 
 echo ""
 echo "Done: $total posts published to $DEST"
