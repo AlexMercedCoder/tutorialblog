@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="/home/alexmerced/development/personal/Personal/gatsblog"
 STAGING="$ROOT/staging"
 DEST="$ROOT/content/blog/2026"
-DATE="2026-03-05"
+DATE="2026-03-07"
 AUTHOR="Alex Merced"
 
 mkdir -p "$DEST"
@@ -126,12 +126,12 @@ publish_series() {
     done
 }
 
-publish_series "aitoolblogs" "AI Coding Tools" "ait" \
+publish_series "context-management-blogs" "AI Context Management" "ctx" \
 "  - AI coding tools
-  - dremio
+  - context management
   - developer tools
   - agentic development
-  - data lakehouse"
+  - prompt engineering"
 
 echo ""
 echo "Done: $total posts published to $DEST"
