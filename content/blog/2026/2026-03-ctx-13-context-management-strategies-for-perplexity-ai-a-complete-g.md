@@ -188,13 +188,23 @@ Each follow-up builds on the accumulated context of the conversation, producing 
 
 ## MCP Server Support
 
-As of early 2026, Perplexity does not support MCP server connections. Its context extension mechanism is web search: Perplexity retrieves current information from the internet rather than connecting to local tools or databases.
+Perplexity supports local MCP (Model Context Protocol) servers on its macOS desktop application. This allows the AI to connect to external tools and data sources running on your local machine, extending its capabilities beyond web search.
 
-### Alternatives to MCP
+### How MCP Works in Perplexity
 
-For most research workflows, MCP is unnecessary because Perplexity's web search provides real-time data access. Where other tools use MCP to reach databases or APIs, Perplexity reaches the web.
+On the macOS app, you can configure local MCP servers that provide Perplexity with access to your file system, local databases, applications, and other services. This is configured through the app's settings. Remote MCP servers (cloud-based services) are planned for paid subscribers.
 
-For tasks that genuinely require local tool or database connections, pair Perplexity (for research and web-sourced information) with an MCP-capable tool (like Claude Desktop or Cursor) for the technical execution.
+### When MCP Adds Value
+
+For most Perplexity use cases, web search is the primary context extension mechanism. MCP adds value when you need Perplexity to combine its web research capabilities with local data:
+
+- Researching a topic while cross-referencing your local documents
+- Analyzing data from a local database alongside web-sourced information
+- Integrating with local development tools or APIs
+
+### Web Search vs. MCP
+
+Where other tools use MCP to reach databases or APIs, Perplexity's distinguishing feature is its web search capability. MCP complements this by adding local data access, but for most research workflows, Perplexity's web search provides the primary context extension. If you need extensive MCP functionality (writing code, managing databases, interacting with multiple external services), pair Perplexity with a coding-focused tool like Claude Desktop or Cursor.
 
 ## External Documents: PDFs vs. Markdown
 

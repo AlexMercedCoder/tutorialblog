@@ -186,15 +186,34 @@ A CustomGPT is like hiring a specialist. A Project is like setting up a war room
 
 ## MCP Server Support
 
-As of early 2026, ChatGPT does not natively support the Model Context Protocol (MCP) for connecting to external tools and data sources. This is a notable gap compared to Claude Desktop, Cursor, and other tools that support MCP.
+ChatGPT added support for the Model Context Protocol (MCP) in September 2025 through a "Developer Mode" feature. This is available to paying users on Plus, Pro, Team, Enterprise, and Education plans.
 
-### Workarounds
+### How MCP Works in ChatGPT
 
-- **CustomGPT Actions:** You can achieve some MCP-like functionality using CustomGPT Actions, which allow you to define API endpoints that the GPT can call. This is more limited than MCP (no standardized protocol, requires API setup) but provides external data access.
-- **File uploads:** For reference data that does not change frequently, upload it directly rather than connecting to an external source.
-- **Copy-paste context:** For quick, one-off tasks where you need external data, pasting relevant content directly into the conversation is often faster than setting up any integration.
+With Developer Mode enabled, ChatGPT can connect to MCP servers that expose external tools and data sources. This means ChatGPT can interact with services like Jira, Google Calendar, databases, and custom APIs directly from the chat interface. MCP connections are configured through the ChatGPT settings under Developer Mode, where you specify the MCP server endpoints.
 
-If MCP support is critical to your workflow, consider pairing ChatGPT with tools that do support it (like Claude Desktop or Cursor) for tasks that require live external data access, while using ChatGPT for tasks where its strengths (Projects, Memory, CustomGPTs) are more relevant.
+### What MCP Enables
+
+MCP in ChatGPT goes beyond read-only data access. It supports both read and write operations, meaning ChatGPT can:
+
+- Fetch data from external systems (database queries, API lookups)
+- Update external systems (create tickets, send messages, update records)
+- Interact with local files and applications when using the desktop app
+
+### MCP vs. CustomGPT Actions
+
+| Feature | MCP Servers | CustomGPT Actions |
+|---|---|---|
+| **Protocol** | Standardized (MCP) | Custom API definitions |
+| **Setup** | Configure via Developer Mode | Build into a CustomGPT |
+| **Portability** | Works across MCP-compatible tools | ChatGPT only |
+| **Operations** | Read and write | Read and write |
+
+MCP servers offer the advantage of portability: the same MCP server you use with ChatGPT works with Claude Desktop, Cursor, and other MCP-compatible tools. CustomGPT Actions are ChatGPT-specific but offer tighter integration within the CustomGPT workflow.
+
+### Security Considerations
+
+OpenAI has cautioned that using Developer Mode with write operations is powerful but carries risk. Always test MCP server connections carefully, especially for servers that can modify external systems. Be aware of potential prompt injection risks when connecting to untrusted data sources.
 
 ## Structuring Context for Maximum Effectiveness
 

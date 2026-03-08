@@ -148,17 +148,34 @@ When working on a complex deliverable, ask Claude to create artifacts for each c
 
 ## MCP Server Support on Claude Web
 
-As of early 2026, the Claude Web interface does not support MCP (Model Context Protocol) server connections directly. MCP support is available in Claude Desktop and Claude Code.
+Claude Web supports MCP (Model Context Protocol) through remote MCP servers. This allows the web interface to connect to external tools and data sources without requiring a local desktop application.
 
-### What This Means in Practice
+### How MCP Works on Claude Web
 
-If your workflow requires connecting Claude to live databases, external APIs, or local file systems, you need to either:
+To connect a remote MCP server:
 
-1. **Use Claude Desktop** (which supports MCP natively)
-2. **Manually provide the context** by pasting relevant data, API responses, or file contents into the conversation
-3. **Upload files** to the Project knowledge base for persistent reference data
+1. Navigate to **Settings > Connectors** in the Claude web interface
+2. Add a custom connector by providing the remote MCP server's URL
+3. The MCP server's tools become available within your conversations
 
-For most knowledge work (writing, research, analysis, planning), the lack of MCP on the web interface is not a significant limitation. You can achieve excellent results with file uploads and conversation context alone.
+Claude Web supports remote MCP servers across all plan tiers (Free, Pro, Max, Team, Enterprise), though free users may have limitations on the number of connections.
+
+### What MCP Enables on Claude Web
+
+With MCP connectors, Claude Web can interact with external services directly:
+
+- **Productivity tools:** Google Drive, Slack, Asana, monday.com
+- **Developer tools:** GitHub, Sentry, Linear
+- **Creative tools:** Canva, Figma
+- **Custom APIs:** Any service exposed through a remote MCP server
+
+### MCP Apps
+
+Claude Web also supports MCP Apps, an extension of the protocol that allows MCP servers to provide interactive user interfaces directly within the Claude interface. This means tools connected via MCP can render visual components (dashboards, project boards, design canvases) inside your Claude conversation, reducing the need to switch between applications.
+
+### Claude Web vs. Claude Desktop MCP
+
+Claude Web connects to **remote** MCP servers (cloud-hosted, accessed via URL). Claude Desktop supports both remote and **local** MCP servers (processes running on your machine via STDIO). If you need to connect to local databases, local file systems, or services that are not exposed to the internet, use Claude Desktop. For cloud-hosted services and APIs, Claude Web's remote MCP support is sufficient.
 
 ## Structuring Context for Maximum Impact
 
@@ -235,7 +252,7 @@ This turns a single Claude conversation into a simulated review process.
 
 4. **Not starting fresh conversations.** Long conversations accumulate noise. When you shift to a new subtopic, start a new conversation within the Project.
 
-5. **Using Claude Web when you need MCP.** If your task requires live connections to external systems, switch to Claude Desktop. Use Claude Web for its strengths: knowledge work, writing, analysis, and planning.
+5. **Not connecting MCP servers when you need live data.** Claude Web supports remote MCP servers through Settings > Connectors. If your task requires live connections to cloud services, set up the relevant MCP connectors. For local services not exposed to the internet, use Claude Desktop instead.
 
 ## Go Deeper
 

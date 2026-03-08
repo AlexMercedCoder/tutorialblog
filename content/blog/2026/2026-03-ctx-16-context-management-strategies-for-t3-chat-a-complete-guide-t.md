@@ -176,9 +176,22 @@ If the document exists as a PDF and you cannot easily convert it, upload the PDF
 
 ## MCP Server Support
 
-As of early 2026, T3 Chat does not support MCP server connections. It is a web-based chat interface, and MCP requires local server connections.
+T3 Chat supports MCP (Model Context Protocol) server connections, allowing the platform to integrate with external data sources and tools. This extends T3 Chat's capabilities beyond conversation and file uploads by enabling connections to services like Google Drive, Slack, GitHub, databases, and custom APIs.
 
-For tasks that require MCP (database access, local file system interaction, API integrations), use a desktop or terminal tool. T3 Chat is best suited for conversational AI work where the context comes from your prompts, file uploads, and the model's training data.
+### How MCP Works in T3 Chat
+
+MCP servers provide T3 Chat with access to external resources and tools. When configured, the AI can query external data sources, retrieve real-time information, and perform actions through connected services. This makes T3 Chat more than just a chatbot: it becomes an interface for interacting with your broader tool ecosystem.
+
+### When MCP Adds Value
+
+MCP is most useful in T3 Chat when your conversations need live data access:
+
+- Querying a database while discussing architecture decisions
+- Accessing project management data during planning conversations
+- Retrieving documentation from connected services
+- Interacting with APIs through a conversational interface
+
+For conversations that rely purely on the AI's training data or uploaded files, MCP is unnecessary. It adds the most value when you need real-time connections to external systems during your conversations.
 
 ## Thinking About Context Levels in T3 Chat
 
