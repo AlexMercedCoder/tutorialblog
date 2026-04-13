@@ -17,13 +17,13 @@ tags:
 ---
 
 *Read the complete Open Source and the Lakehouse series:*
-* [Part 1: Apache Software Foundation: History, Purpose, and Process](../01-apache-software-foundation/README.md)
-* [Part 2: What is Apache Parquet?](../02-apache-parquet/README.md)
-* [Part 3: What is Apache Iceberg?](../03-apache-iceberg/README.md)
-* [Part 4: What is Apache Polaris?](../04-apache-polaris/README.md)
-* [Part 5: What is Apache Arrow?](../05-apache-arrow/README.md)
-* [Part 6: Assembling the Apache Lakehouse](../06-assembling-apache-lakehouse/README.md)
-* [Part 7: Agentic Analytics on the Apache Lakehouse](../07-agentic-analytics/README.md)
+* [Part 1: Apache Software Foundation: History, Purpose, and Process](/2026/2026-04-al-01-apache-software-foundation-history-purpose-and-process/)
+* [Part 2: What is Apache Parquet?](/2026/2026-04-al-02-what-is-apache-parquet-columns-encoding-and-performance/)
+* [Part 3: What is Apache Iceberg?](/2026/2026-04-al-03-what-is-apache-iceberg-the-table-format-revolution/)
+* [Part 4: What is Apache Polaris?](/2026/2026-04-al-04-what-is-apache-polaris-unifying-the-iceberg-ecosystem/)
+* [Part 5: What is Apache Arrow?](/2026/2026-04-al-05-what-is-apache-arrow-erasing-the-serialization-tax/)
+* [Part 6: Assembling the Apache Lakehouse](/2026/2026-04-al-06-assembling-the-apache-lakehouse-the-modular-architecture/)
+* [Part 7: Agentic Analytics on the Apache Lakehouse](/2026/2026-04-al-07-agentic-analytics-on-the-apache-lakehouse/)
 
 If you ask a data analyst to calculate the average transaction amount for the month of July using a massive CSV file, the compute engine must read every single line of that file. It reads the customer name, the address, the item SKUs, and the timestamps, just to find the single column it actually needs. At the petabyte scale, this row-based reading pattern guarantees slow analytics and high compute bills.
 

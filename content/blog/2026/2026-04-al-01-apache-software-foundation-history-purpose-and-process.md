@@ -17,13 +17,13 @@ tags:
 ---
 
 *Read the complete Open Source and the Lakehouse series:*
-* [Part 1: Apache Software Foundation](../01-apache-software-foundation/README.md)
-* [Part 2: What is Apache Parquet?](../02-apache-parquet/README.md)
-* [Part 3: What is Apache Iceberg?](../03-apache-iceberg/README.md)
-* [Part 4: What is Apache Polaris?](../04-apache-polaris/README.md)
-* [Part 5: What is Apache Arrow?](../05-apache-arrow/README.md)
-* [Part 6: Assembling the Apache Lakehouse](../06-assembling-apache-lakehouse/README.md)
-* [Part 7: Agentic Analytics on the Apache Lakehouse](../07-agentic-analytics/README.md)
+* [Part 1: Apache Software Foundation](/2026/2026-04-al-01-apache-software-foundation-history-purpose-and-process/)
+* [Part 2: What is Apache Parquet?](/2026/2026-04-al-02-what-is-apache-parquet-columns-encoding-and-performance/)
+* [Part 3: What is Apache Iceberg?](/2026/2026-04-al-03-what-is-apache-iceberg-the-table-format-revolution/)
+* [Part 4: What is Apache Polaris?](/2026/2026-04-al-04-what-is-apache-polaris-unifying-the-iceberg-ecosystem/)
+* [Part 5: What is Apache Arrow?](/2026/2026-04-al-05-what-is-apache-arrow-erasing-the-serialization-tax/)
+* [Part 6: Assembling the Apache Lakehouse](/2026/2026-04-al-06-assembling-the-apache-lakehouse-the-modular-architecture/)
+* [Part 7: Agentic Analytics on the Apache Lakehouse](/2026/2026-04-al-07-agentic-analytics-on-the-apache-lakehouse/)
 
 If you build a modern data lakehouse, you inevitably stack Apache Iceberg, Apache Parquet, and Apache Arrow. These projects dictate how you store, query, and govern petabytes of data. But the code itself is only half the story. The legal and operational framework supporting that code dictates whether a project survives for decades or gets hijacked by a single vendor. 
 
