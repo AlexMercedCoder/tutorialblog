@@ -14,10 +14,10 @@ import shutil
 import glob
 import textwrap
 
-ROOT = "/home/alexmerced/development/personal/Personal/gatsblog"
+ROOT = "/home/alexmerced/development/personal/Personal/blog/gatsblog"
 STAGING = os.path.join(ROOT, "staging")
 DEST = os.path.join(ROOT, "content", "blog", "2026")
-DATE = "2026-02-19"
+DATE = "2026-04-13"
 AUTHOR = "Alex Merced"
 
 # Series config: folder name -> (category, tags, series slug for filenames)
@@ -54,6 +54,20 @@ SERIES_CONFIG = {
             "data lakehouse",
         ],
         "slug_prefix": "sl",
+    },
+    "apache-lakehouse": {
+        "category": "Data Lakehouse",
+        "tags": [
+            "apache",
+            "lakehouse",
+            "data engineering",
+            "dremio",
+            "parquet",
+            "iceberg",
+            "polaris",
+            "arrow"
+        ],
+        "slug_prefix": "al",
     },
 }
 
@@ -209,7 +223,7 @@ def process_post(series_name, post_dir, config):
 
     # Build filename
     title_slug = slugify(title)[:60]  # cap slug length
-    filename = f"2026-02-{config['slug_prefix']}-{post_number}-{title_slug}.md"
+    filename = f"{DATE[:7]}-{config['slug_prefix']}-{post_number}-{title_slug}.md"
     dest_path = os.path.join(DEST, filename)
 
     # Write file
