@@ -140,7 +140,30 @@ module.exports = {
     // `gatsby-plugin-partytown`, (Removed due to React 18 conflict)
     // `gatsby-plugin-use-dark-mode`,
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-robots-txt`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://tuts.alexmercedcoder.dev',
+        sitemap: 'https://tuts.alexmercedcoder.dev/sitemap-index.xml',
+        env: {
+          development: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          },
+          production: {
+            policy: [
+              { userAgent: '*', allow: '/' },
+              { userAgent: 'GPTBot', allow: '/' },
+              { userAgent: 'ClaudeBot', allow: '/' },
+              { userAgent: 'Claude-Web', allow: '/' },
+              { userAgent: 'PerplexityBot', allow: '/' },
+              { userAgent: 'Google-Extended', allow: '/' },
+              { userAgent: 'Anthropic-ai', allow: '/' },
+              { userAgent: 'OAI-SearchBot', allow: '/' }
+            ]
+          }
+        }
+      }
+    },
     `gatsby-plugin-catch-links`,
     // `gatsby-plugin-offline`,
   ],

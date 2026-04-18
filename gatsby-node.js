@@ -130,3 +130,53 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
+
+exports.onPostBuild = async ({ graphql }) => {
+  const fs = require('fs');
+  const path = require('path');
+  const result = await graphql(`
+    {
+      site {
+        siteMetadata {
+          title
+          description
+          siteUrl
+        }
+      }
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }, limit: 20) {
+        nodes {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            description
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) {
+    console.error("Error generating llms.txt", result.errors);
+    return;
+  }
+
+  const { site, allMarkdownRemark } = result.data;
+  const { title, description, siteUrl } = site.siteMetadata;
+
+  let llmsContent = `# ${title}\n> ${description}\n\n`;
+  llmsContent += `This is a coding tutorial website providing actionable insights for developers.\n\n`;
+  llmsContent += `## Recent Articles\n`;
+
+  allMarkdownRemark.nodes.forEach(node => {
+    const postUrl = `${siteUrl}${node.fields.slug}`;
+    const postTitle = node.frontmatter.title;
+    const postDesc = node.frontmatter.description || '';
+    llmsContent += `- [${postTitle}](${postUrl}): ${postDesc}\n`;
+  });
+
+  const outputPath = path.join(__dirname, 'public', 'llms.txt');
+  fs.writeFileSync(outputPath, llmsContent);
+  console.log('Successfully generated llms.txt for AEO.');
+};
