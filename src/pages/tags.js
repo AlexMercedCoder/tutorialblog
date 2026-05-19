@@ -20,7 +20,6 @@ const TagsPage = ({
 }) => {
     return (
         <Layout location={location} title={title}>
-        <Seo title="All Tags" />
         <div>
             <h1>Tags</h1>
             <ul style={{ listStyle: 'none' }}>
@@ -56,6 +55,14 @@ TagsPage.propTypes = {
 }
 
 export default TagsPage
+
+export const Head = ({ data, location }) => (
+  <Seo
+    title="All Tags"
+    description={`Browse articles by tags on ${data.site.siteMetadata.title}.`}
+    pathname={location.pathname}
+  />
+)
 
 export const pageQuery = graphql`
   query {

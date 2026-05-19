@@ -16,7 +16,6 @@ const Tags = ({ pageContext, data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo title={`Tags - ${tag}`} />
       <h1>{tagHeader}</h1>
       <ul style={{ listStyle: `none`, padding: 0 }}>
         {edges.map(({ node }) => {
@@ -76,6 +75,17 @@ Tags.propTypes = {
 }
 
 export default Tags
+
+export const Head = ({ data, pageContext, location }) => {
+  const { tag } = pageContext
+  return (
+    <Seo
+      title={`Posts tagged with "${tag}"`}
+      description={`Browse all coding tutorials and posts tagged with ${tag} on ${data.site.siteMetadata.title}.`}
+      pathname={location.pathname}
+    />
+  )
+}
 
 export const pageQuery = graphql`
   query($tag: String) {

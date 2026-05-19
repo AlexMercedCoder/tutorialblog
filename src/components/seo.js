@@ -9,7 +9,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ description, lang, meta, title, pathname = "", image, article = false }) => {
+const Seo = ({ description, lang, meta, title, pathname = "", image, article = false, datePublished, dateModified }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +18,9 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
             title
             description
             siteUrl
+            author {
+              name
+            }
             social {
               twitter
             }
@@ -30,7 +33,17 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
   const siteUrl = site.siteMetadata?.siteUrl
-  const canonical = pathname ? `${siteUrl}${pathname}` : null
+
+  // Normalize siteUrl and pathname to avoid double slashes and ensure trailing slashes for canonical URLs
+  const cleanSiteUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl
+  let cleanPathname = pathname.startsWith('/') ? pathname : `/${pathname}`
+  
+  if (cleanPathname !== '/' && !cleanPathname.endsWith('/') && !cleanPathname.includes('.')) {
+    cleanPathname = `${cleanPathname}/`
+  }
+
+  const canonical = pathname ? `${cleanSiteUrl}${cleanPathname}` : null
+  const twitterCard = image ? "summary_large_image" : "summary"
 
   // Schema.org/WebSite
   const webSiteSchema = {
@@ -75,7 +88,8 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
           image: image ? `${siteUrl}${image}` : undefined,
           author: {
               "@type": "Person",
-              name: site.siteMetadata.author?.name || "Alex Merced"
+              name: site.siteMetadata.author?.name || "Alex Merced",
+              url: "https://alexmercedcoder.dev/"
           },
           publisher: {
               "@type": "Organization",
@@ -85,7 +99,12 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
                   url: `${siteUrl}icons/icon-512x512.png` // Default from manifest
               }
           },
-          datePublished: null // ideally passed from prop if available
+          datePublished: datePublished || null,
+          dateModified: dateModified || datePublished || null,
+          mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": canonical || siteUrl
+          }
        }
        schema.push(articleSchema)
   }
@@ -96,15 +115,18 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
       <html lang={lang} />
       <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
       {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="alternate" type="text/plain" href={`${cleanSiteUrl}/llms.txt`} title="LLMs.txt" />
       <meta name="description" content={metaDescription} />
+      <meta property="og:site_name" content={defaultTitle} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={article ? "article" : "website"} />
       {image && <meta property="og:image" content={`${siteUrl}${image}`} />}
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
+      {image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
       {meta.map((m, i) => (
         <meta key={i} {...m} />
       ))}
@@ -127,6 +149,8 @@ Seo.propTypes = {
   pathname: PropTypes.string,
   image: PropTypes.string,
   article: PropTypes.bool,
+  datePublished: PropTypes.string,
+  dateModified: PropTypes.string,
 }
 
 export default Seo

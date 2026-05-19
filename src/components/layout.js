@@ -30,8 +30,50 @@ const Layout = ({ location, title, children }) => {
   const darkMode = useDarkMode()
   
   let header
+  const isIndexPage = location.pathname === rootPath || location.pathname.startsWith('/page/') || location.pathname === '/ten' || location.pathname === '/ten/'
   
-  // ... (header logic remains same)
+  if (isIndexPage) {
+    header = (
+      <h1
+        style={{
+          ...scale(1.5),
+          marginBottom: rhythm(1.5),
+          marginTop: 0,
+        }}
+      >
+        <Link
+          style={{
+            boxShadow: `none`,
+            textDecoration: `none`,
+            color: `inherit`,
+          }}
+          to={`/`}
+        >
+          {title}
+        </Link>
+      </h1>
+    )
+  } else {
+    header = (
+      <h3
+        style={{
+          fontFamily: `Montserrat, sans-serif`,
+          marginTop: 0,
+        }}
+      >
+        <Link
+          style={{
+            boxShadow: `none`,
+            textDecoration: `none`,
+            color: `inherit`,
+          }}
+          to={`/`}
+        >
+          {title}
+        </Link>
+      </h3>
+    )
+  }
 
   return (
     <ThemeContext.Provider value={darkMode}>

@@ -1,4 +1,5 @@
 module.exports = {
+  trailingSlash: `always`,
   siteMetadata: {
     title: `Coding Tutorials Blog`,
     author: {
@@ -139,7 +140,12 @@ module.exports = {
     },
     // `gatsby-plugin-partytown`, (Removed due to React 18 conflict)
     // `gatsby-plugin-use-dark-mode`,
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: [`/404`, `/404.html`, `/using-typescript`, `/page/*`],
+      },
+    },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {

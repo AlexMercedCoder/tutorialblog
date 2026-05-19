@@ -89,7 +89,16 @@ const BlogIndex = ({ data, location, pageContext }) => {
 
 export default BlogIndex
 
-export const Head = ({ location }) => <Seo title="All posts" pathname={location.pathname} />
+export const Head = ({ pageContext, location }) => {
+  const { currentPage } = pageContext
+  const pageTitle = currentPage && currentPage > 1 ? `Articles - Page ${currentPage}` : "All Posts"
+  return (
+    <Seo
+      title={pageTitle}
+      pathname={location.pathname}
+    />
+  )
+}
 
 export const pageQuery = graphql`
   query blogPageQuery($skip: Int!, $limit: Int!) {
