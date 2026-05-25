@@ -223,3 +223,22 @@ exports.onPostBuild = async ({ graphql }) => {
   fs.writeFileSync(fullPath, llmsFullContent);
   console.log('Successfully generated full index llms-full.txt for AEO.');
 };
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  createTypes(`
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      title: String
+      description: String
+      date: Date @dateformat
+      bannerImage: String
+      tags: [String]
+      category: String
+      author: String
+    }
+  `);
+};
+
