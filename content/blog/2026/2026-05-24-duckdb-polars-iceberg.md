@@ -6,11 +6,11 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 bannerImage: "./images/duckdb-polars-iceberg/duckdb-vs-polars-feature-comparison.png"
 tags:
-  - duckdb polars iceberg
-  - polars iceberg sink
   - polars cloud remote execution
+  - polars iceberg sink
   - duckdb iceberg write
   - duckdb-wasm iceberg
+  - duckdb polars iceberg
 ---
 
 # Using DuckDB and Polars to Query Iceberg Tables
@@ -32,19 +32,27 @@ To connect to an Iceberg table through a REST Catalog:
 ```sql
 -- Install and load the Iceberg extension
 INSTALL iceberg;
-LOAD iceberg;—Configure a REST catalog connection
+LOAD iceberg;
+
+-- Configure a REST catalog connection
 CREATE SECRET iceberg_catalog (
     TYPE iceberg_rest,
     ENDPOINT 'https://my-polaris-catalog.example.com/api/catalog',
     CREDENTIAL 'Bearer my-oauth-token'
-);—Attach the catalog
-ATTACH 'my_namespace' AS my_lake (TYPE iceberg_rest, SECRET 'iceberg_catalog');—Query a table
-SELECT * FROM my_lake.events WHERE event_date = '2025-05-24';—Write to a table
+);
+
+-- Attach the catalog
+ATTACH 'my_namespace' AS my_lake (TYPE iceberg_rest, SECRET 'iceberg_catalog');
+
+-- Query a table
+SELECT * FROM my_lake.events WHERE event_date = '2025-05-24';
+
+-- Write to a table
 INSERT INTO my_lake.events 
 SELECT * FROM read_parquet('s3://staging/events-2025-05-24/*.parquet');
 ```
 
-The write constraint to be aware of: DuckDB implements updates and deletes using positional deletes rather than full row rewrites (copy-on-write). For tables receiving heavy mutation loads, this means delete files accumulate between compaction runs—the same issue described earlier for Iceberg V2 CDC pipelines. For append-heavy analytical tables where DuckDB's primary use case lies, this is a non-issue.
+The write constraint to be aware of: DuckDB implements updates and deletes using positional deletes rather than full row rewrites (copy-on-write). For tables receiving heavy mutation loads, this means delete files accumulate between compaction runs, the same issue described earlier for Iceberg V2 CDC pipelines. For append-heavy analytical tables where DuckDB's primary use case lies, this is a non-issue.
 
 DuckDB-Wasm's Iceberg integration is more architecturally novel. The browser build uses JavaScript's Fetch API to handle HTTP requests, meaning DuckDB-Wasm can communicate with Iceberg REST Catalog endpoints directly from a browser tab. This enables analytics dashboards and data exploration tools that run entirely client-side, with the browser reading Iceberg table metadata and Parquet data from S3 directly, without any server-side query layer.
 
@@ -141,7 +149,7 @@ The tools serve complementary rather than competing use cases. DuckDB is the rig
 
 Polars is the right choice when your primary artifacts are Python pipeline code, when you're building ML preprocessing pipelines that need to chain DataFrame operations with scikit-learn or PyTorch, or when you want a Rust-native execution engine with guaranteed memory safety properties.
 
-Both now support Iceberg as a first-class data store, which means you can build a lakehouse workflow where data lands in Iceberg via Flink or Spark ingestion, is queried and explored via DuckDB for ad-hoc analysis, and processed through Polars for feature engineering and ML training set generation—all using the same Iceberg table as the shared source of truth.
+Both now support Iceberg as a first-class data store, which means you can build a lakehouse workflow where data lands in Iceberg via Flink or Spark ingestion, is queried and explored via DuckDB for ad-hoc analysis, and processed through Polars for feature engineering and ML training set generation, all using the same Iceberg table as the shared source of truth.
 
 ## The Development Workflow: Local to Lakehouse
 
@@ -190,7 +198,7 @@ await conn.query(`
     );
 `);
 
-// Query directly from browser—no server required
+// Query directly from browser, no server required
 const result = await conn.query(`
     SELECT region, SUM(amount) as total_revenue
     FROM iceberg_catalog.main.orders
@@ -274,17 +282,17 @@ feature_pipeline = (
 )
 ```
 
-The same pipeline runs locally against a sample for development and at full scale via Polars Cloud for production. No Spark job code, no cluster management—just Python and Polars.
+The same pipeline runs locally against a sample for development and at full scale via Polars Cloud for production. No Spark job code, no cluster management, just Python and Polars.
 
 ---
 
 ## DuckDB-Wasm: Browser-Native Analytics Without a Backend
 
-One of the more surprising directions in the DuckDB ecosystem is its WebAssembly (Wasm) build—a version of DuckDB that runs entirely in the browser without any server component.
+One of the more surprising directions in the DuckDB ecosystem is its WebAssembly (Wasm) build, a version of DuckDB that runs entirely in the browser without any server component.
 
 DuckDB-Wasm allows a web application to execute SQL queries against Parquet files or Iceberg tables stored in object storage directly from the user's browser. The query engine runs in a Web Worker (keeping the UI thread responsive), and results render in the browser without any data passing through a backend API. For analytics dashboards, internal reporting tools, and embedded BI use cases, this architecture eliminates the per-query compute cost and reduces infrastructure to just an object storage bucket.
 
-The practical limitation is that DuckDB-Wasm operates within browser memory constraints—typically 1-4 GB depending on the browser and device. For datasets that fit in memory, it's fast. For datasets that don't, the query must be restructured to use streaming or partitioned reads. DuckDB's Iceberg support in the Wasm build is still developing as of mid-2025, but the trajectory is toward full parity with the native binary's Iceberg capabilities.
+The practical limitation is that DuckDB-Wasm operates within browser memory constraints, typically 1-4 GB depending on the browser and device. For datasets that fit in memory, it's fast. For datasets that don't, the query must be restructured to use streaming or partitioned reads. DuckDB's Iceberg support in the Wasm build is still developing as of mid-2025, but the trajectory is toward full parity with the native binary's Iceberg capabilities.
 
 Several open-source observability and BI tools are already built on DuckDB-Wasm: Evidence, Observable Framework, and Rill all use DuckDB as their embedded query engine. The pattern of "ship the query engine with the application, not the data" is becoming a standard architecture for lightweight analytics tools.
 
@@ -302,9 +310,9 @@ The practical signals that a workload has outgrown single-process analytics:
 
 **Data size exceeds what fits in reasonable cloud storage in a single query path.** When the input data for a transformation is multiple terabytes, DuckDB and Polars' sequential scan (even with parallel execution) can't match the parallelism of a distributed Spark or Dremio query that reads hundreds of partitions simultaneously from dozens of executors.
 
-**Team size creates contention.** DuckDB and Polars run in-process. When a team of 20 analysts all need to run queries simultaneously, a shared distributed warehouse—Redshift, Snowflake, Dremio—provides resource isolation and fair scheduling that single-process tools can't.
+**Team size creates contention.** DuckDB and Polars run in-process. When a team of 20 analysts all need to run queries simultaneously, a shared distributed warehouse, Redshift, Snowflake, Dremio, provides resource isolation and fair scheduling that single-process tools can't.
 
-The transition from local analytics to distributed infrastructure is not a failure of the local tools. It's a success signal—the platform has grown to the scale where distributed compute investment pays off. DuckDB and Polars remain valuable at that scale too, in their appropriate roles: DuckDB for developer-local exploration and testing, Polars for Python-based feature engineering pipelines that run as Kubernetes jobs, and both as components in larger orchestrated workflows.
+The transition from local analytics to distributed infrastructure is not a failure of the local tools. It's a success signal, the platform has grown to the scale where distributed compute investment pays off. DuckDB and Polars remain valuable at that scale too, in their appropriate roles: DuckDB for developer-local exploration and testing, Polars for Python-based feature engineering pipelines that run as Kubernetes jobs, and both as components in larger orchestrated workflows.
 
 ---
 
@@ -314,7 +322,7 @@ The ecosystem has converged on Iceberg as the shared table format that connects 
 
 The practical guidance: use DuckDB for SQL-centric exploration, ad-hoc analytics, data quality profiling, embedded analytics, and browser applications. Use Polars for Python pipeline code that transforms and moves data, particularly in data science and ML feature engineering workflows. Neither requires you to spin up a Spark cluster for tasks at the scale where a well-tuned single process or small cloud cluster handles the job.
 
-Both tools share a commitment to Apache Arrow as their in-memory columnar format. This means data can be passed between DuckDB and Polars without serialization overhead—a DuckDB query result becomes a Polars DataFrame directly through Arrow's zero-copy interface. Combined with shared Iceberg table access, the two tools form a coherent local analytics toolkit that scales gracefully to cloud infrastructure when workload demands grow.
+Both tools share a commitment to Apache Arrow as their in-memory columnar format. This means data can be passed between DuckDB and Polars without serialization overhead, a DuckDB query result becomes a Polars DataFrame directly through Arrow's zero-copy interface. Combined with shared Iceberg table access, the two tools form a coherent local analytics toolkit that scales gracefully to cloud infrastructure when workload demands grow.
 
 ### Explore Further
 

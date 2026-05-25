@@ -6,18 +6,18 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 bannerImage: "./images/real-time-lakehouse-flink/flink-static-vs-dynamic-sink-comparison.png"
 tags:
-  - flink iceberg sink
   - kafka to iceberg
-  - real-time lakehouse flink
   - dynamic iceberg sink
   - schema evolution flink
+  - flink iceberg sink
+  - real-time lakehouse flink
 ---
 
 # Real-Time Lakehouse Patterns with Apache Flink and Iceberg
 
 Most streaming pipelines solve the wrong problem. Teams spend months building infrastructure to move data fast, then discover their downstream lakehouse tables are a mess: thousands of tiny files per partition, schemas that drift silently across topics, and compaction jobs fighting live writes at 3 a.m. The ingestion is fast, but the data is barely usable.
 
-Apache Flink 2.1, released in July 2025, explicitly frames itself as a unified real-time Data and AI platform. Paired with the Dynamic Iceberg Sink—which reached production-ready status with Apache Iceberg 1.10.0 support—you now have a concrete path to an architecture where Kafka topics land cleanly in Iceberg tables, schema changes never require a job restart, and a single Flink job can serve hundreds of tables simultaneously.
+Apache Flink 2.1, released in July 2025, explicitly frames itself as a unified real-time Data and AI platform. Paired with the Dynamic Iceberg Sink, which reached production-ready status with Apache Iceberg 1.10.0 support, you now have a concrete path to an architecture where Kafka topics land cleanly in Iceberg tables, schema changes never require a job restart, and a single Flink job can serve hundreds of tables simultaneously.
 
 This post walks through how to actually build that architecture, including the configuration details teams usually skip and the failure modes nobody documents until something breaks in production.
 
@@ -29,7 +29,7 @@ The classic Kafka-to-lake pipeline works like this: a Kafka consumer reads from 
 
 The first problem is schema drift. Kafka producers add fields, rename values, and change types. If your consumer expects a fixed schema, it either crashes or silently drops new data. In the best case, your pipeline goes down. In the more common case, you get quiet data loss that doesn't surface until a report is wrong.
 
-The second problem is file proliferation. Every Flink checkpoint commits a set of files. If your checkpoint interval is 60 seconds, you produce one set of files per minute. At a 128 MB target file size—the standard recommendation—you can handle that load. But if your data volume drops overnight, you're writing sub-megabyte files every minute. A week of low-traffic hours can leave a partition with thousands of small files that kill query performance.
+The second problem is file proliferation. Every Flink checkpoint commits a set of files. If your checkpoint interval is 60 seconds, you produce one set of files per minute. At a 128 MB target file size, the standard recommendation, you can handle that load. But if your data volume drops overnight, you're writing sub-megabyte files every minute. A week of low-traffic hours can leave a partition with thousands of small files that kill query performance.
 
 The third problem is operational rigidity. A traditional Flink job defines its source topics and sink tables statically at job startup. Adding a new Kafka topic means modifying the job definition and restarting. For platforms with dozens of microservices publishing to Kafka, that constraint turns the streaming pipeline into a constant maintenance burden.
 
@@ -47,7 +47,7 @@ The Dynamic Sink adds three capabilities that change this:
 
 **Automated schema evolution.** When the sink encounters a field in an incoming record that doesn't exist in the current Iceberg table schema, it calls the Iceberg catalog to add the new column. Because Iceberg stores its schema as metadata rather than embedded in the data files, this operation doesn't touch any existing Parquet files. The schema update is a metadata-only write to the catalog. Existing data continues to be readable; new files written after the update include the new field.
 
-**Multi-table fan-out.** A single Dynamic Sink instance can write to an unlimited number of Iceberg tables simultaneously. The routing logic is defined in the incoming event records themselves. Your Kafka event includes a routing key—typically a topic name or entity type—and the sink maps that key to the appropriate Iceberg table. If a table doesn't exist yet, the sink creates it.
+**Multi-table fan-out.** A single Dynamic Sink instance can write to an unlimited number of Iceberg tables simultaneously. The routing logic is defined in the incoming event records themselves. Your Kafka event includes a routing key, typically a topic name or entity type, and the sink maps that key to the appropriate Iceberg table. If a table doesn't exist yet, the sink creates it.
 
 **Automatic table creation.** When the sink encounters a routing key that maps to a table that doesn't exist in the catalog, it creates the table on the fly using the schema inferred from the current record. This means onboarding a new Kafka topic requires zero changes to the Flink job.
 
@@ -124,7 +124,7 @@ In a static Flink pipeline, this silently drops the field or crashes the job dep
 1. The Flink job receives the event and detects the new field during deserialization.
 2. The Dynamic Sink calls the Iceberg catalog's `updateSchema()` API to add the `region` column as a nullable string.
 3. Because Iceberg schema evolution is a metadata-only operation, no existing data files are rewritten. The catalog records the new column in the table metadata and associates it with a new schema ID.
-4. The sink writes the current record—including the `region` field—to a new Parquet file using the updated schema.
+4. The sink writes the current record, including the `region` field, to a new Parquet file using the updated schema.
 5. All downstream readers (Spark, Trino, Dremio) that query the table see the new column for records where it exists. Historical records return NULL for the `region` column, which is correct behavior.
 
 One important constraint: Iceberg only supports widening schema evolution, not narrowing. You can add columns, rename columns (with full compatibility tracking), and widen numeric types (e.g., `int` to `long`). You cannot drop columns via the Dynamic Sink's schema evolution path. Dropping a column requires an explicit catalog operation outside the streaming job.
@@ -169,17 +169,17 @@ RewriteDataFilesSparkAction rewrite = SparkActions
 RewriteDataFilesSparkAction.Result result = rewrite.execute();
 ```
 
-A critical operational rule: never compact the hot partition currently receiving streaming writes. The compaction job reads a set of files, rewrites them into larger files, and commits a new snapshot that removes the original files. If your streaming job is concurrently writing to that same partition, the commit can conflict. Restrict compaction to cold partitions—those at least one or two intervals behind the current streaming boundary.
+A critical operational rule: never compact the hot partition currently receiving streaming writes. The compaction job reads a set of files, rewrites them into larger files, and commits a new snapshot that removes the original files. If your streaming job is concurrently writing to that same partition, the commit can conflict. Restrict compaction to cold partitions, those at least one or two intervals behind the current streaming boundary.
 
 ---
 
 ## When Flink Is the Right Choice (and When It Isn't)
 
-Flink is the right tool when you need stateful stream processing, not just event delivery. Joining a stream of user events to a slowly changing dimension table, computing windowed aggregations, or running real-time model inference in `ML_PREDICT` table-valued functions—these require Flink's managed state, event-time handling, and exactly-once guarantees.
+Flink is the right tool when you need stateful stream processing, not just event delivery. Joining a stream of user events to a slowly changing dimension table, computing windowed aggregations, or running real-time model inference in `ML_PREDICT` table-valued functions, these require Flink's managed state, event-time handling, and exactly-once guarantees.
 
 If your use case is straightforward topic-to-table ingestion with no joins or transformations, Flink may be more infrastructure than you need. Kafka Connect with the Iceberg Sink connector handles simple ingestion with less operational overhead, though it lacks Flink's transformation capabilities and the full Dynamic Sink feature set.
 
-Where Flink's real-time lakehouse pattern becomes clearly superior is in multi-source, multi-table scenarios with evolving schemas. If you're ingesting 50 Kafka topics, performing lightweight enrichment from reference tables, and landing data into 50 Iceberg tables where new fields appear regularly—that's Flink's strongest use case and where the Dynamic Sink's automation provides direct operational savings.
+Where Flink's real-time lakehouse pattern becomes clearly superior is in multi-source, multi-table scenarios with evolving schemas. If you're ingesting 50 Kafka topics, performing lightweight enrichment from reference tables, and landing data into 50 Iceberg tables where new fields appear regularly, that's Flink's strongest use case and where the Dynamic Sink's automation provides direct operational savings.
 
 ---
 

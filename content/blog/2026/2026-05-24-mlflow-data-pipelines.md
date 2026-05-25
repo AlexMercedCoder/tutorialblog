@@ -6,11 +6,11 @@ author: "Alex Merced"
 category: "Data Engineering"
 bannerImage: "./images/mlflow-data-pipelines/mlflow3-training-to-inference-lineage.png"
 tags:
-  - mlflow 3 features
   - mlflow data pipeline observability
-  - mlflow 3 genai tracing
   - mlflow data quality monitoring
   - ai observability mlflow
+  - mlflow 3 features
+  - mlflow 3 genai tracing
   - model lineage data pipeline
 ---
 
@@ -18,7 +18,7 @@ tags:
 
 The boundary between data engineering and ML engineering has always been somewhat artificial. A model degrades in production. Is it a model problem? The data feeding it changed. Is it a data pipeline problem? The features it receives don't match what it was trained on. Is it a feature store problem? These questions point to the same underlying issue: the observability tools for data pipelines and the observability tools for ML models are separate, making cross-boundary diagnosis difficult.
 
-MLflow 3, released in 2025, moved toward addressing this by expanding its scope beyond experiment tracking into GenAI tracing, agent evaluation, and closer integration with data quality monitoring. Databricks' Data Quality Monitoring feature provides a framework for applying model-style monitoring—drift detection, statistical distribution tracking—to datasets and pipeline outputs, not just model inference results.
+MLflow 3, released in 2025, moved toward addressing this by expanding its scope beyond experiment tracking into GenAI tracing, agent evaluation, and closer integration with data quality monitoring. Databricks' Data Quality Monitoring feature provides a framework for applying model-style monitoring, drift detection, statistical distribution tracking, to datasets and pipeline outputs, not just model inference results.
 
 Together, these capabilities push toward a vision where data lineage, feature freshness, model performance, and inference quality are visible through a single observability surface rather than four separate tools.
 
@@ -95,7 +95,7 @@ Now when investigating a model degradation, you can trace the MLflow run for the
 
 Databricks' Data Quality Monitoring applies model-style monitoring to datasets: statistical distribution tracking across time windows, drift detection against a baseline, and alerting when distributions change beyond a threshold.
 
-For ML platform teams, this means data quality metrics and model performance metrics can be tracked in the same observability framework. A drop in model AUC correlates with a detected distribution drift in the `user_recency` feature—the data quality monitor fired three days before the model quality dropped, which is the right time to investigate and retrain.
+For ML platform teams, this means data quality metrics and model performance metrics can be tracked in the same observability framework. A drop in model AUC correlates with a detected distribution drift in the `user_recency` feature, the data quality monitor fired three days before the model quality dropped, which is the right time to investigate and retrain.
 
 ```python
 # Databricks Data Quality Monitor configuration (Python SDK)
@@ -119,7 +119,7 @@ client.quality_monitors.create(
 )
 ```
 
-The generated quality metrics—column-level drift scores, null rate changes, distribution summaries—are written to a Unity Catalog table. They can be joined with MLflow experiment data to correlate data quality events with model performance changes.
+The generated quality metrics, column-level drift scores, null rate changes, distribution summaries, are written to a Unity Catalog table. They can be joined with MLflow experiment data to correlate data quality events with model performance changes.
 
 ---
 
@@ -155,7 +155,7 @@ With unified observability:
 
 **The model is not broken.** Reverting the session window computation restores the feature to expected distribution, and model performance recovers. A full model retrain was not necessary.
 
-This scenario—data pipeline bug causing model degradation that looks like model drift—is common enough that teams without integrated observability routinely retrain models unnecessarily. The retrain is expensive (compute cost, team time, validation process) and doesn't fix the underlying data pipeline issue.
+This scenario, data pipeline bug causing model degradation that looks like model drift, is common enough that teams without integrated observability routinely retrain models unnecessarily. The retrain is expensive (compute cost, team time, validation process) and doesn't fix the underlying data pipeline issue.
 
 ```python
 # Example: correlate data quality alerts with model metrics
@@ -231,7 +231,7 @@ def validate_and_promote_model(run_id: str, min_auc: float = 0.90) -> bool:
     return True
 ```
 
-The CI pipeline calls `validate_and_promote_model()` after each training run. If the model passes, it enters Staging for integration testing. Human approval then promotes it to Production—MLflow's stage transitions support this workflow directly.
+The CI pipeline calls `validate_and_promote_model()` after each training run. If the model passes, it enters Staging for integration testing. Human approval then promotes it to Production, MLflow's stage transitions support this workflow directly.
 
 ---
 
@@ -274,19 +274,19 @@ with DAG("ml_retraining_pipeline", schedule_interval="@daily") as dag:
     check_drift >> retrain
 ```
 
-This pattern—drift-triggered retraining with MLflow experiment logging—creates a self-maintaining ML system that responds to data pipeline changes without manual intervention from the ML team.
+This pattern, drift-triggered retraining with MLflow experiment logging, creates a self-maintaining ML system that responds to data pipeline changes without manual intervention from the ML team.
 
 ---
 
 ## The MLflow Model Registry and Production Deployment
 
-MLflow's Model Registry is where experimentation transitions to production. The registry tracks model versions, their lifecycle stage (Staging, Production, Archived), and the training metadata—runs, datasets, and lineage—associated with each version.
+MLflow's Model Registry is where experimentation transitions to production. The registry tracks model versions, their lifecycle stage (Staging, Production, Archived), and the training metadata, runs, datasets, and lineage, associated with each version.
 
-The lifecycle stage system enables controlled promotions. A data scientist trains a new model version that achieves better performance on validation metrics. They register it in the Model Registry, and it enters the Staging stage. A model review process—which might include automated evaluation against a holdout dataset, human review of the training data and feature set, and comparison against the current production model—gates the promotion to Production.
+The lifecycle stage system enables controlled promotions. A data scientist trains a new model version that achieves better performance on validation metrics. They register it in the Model Registry, and it enters the Staging stage. A model review process, which might include automated evaluation against a holdout dataset, human review of the training data and feature set, and comparison against the current production model, gates the promotion to Production.
 
 For regulated industries, this controlled promotion process with full MLflow run metadata creates the audit trail that compliance teams require: exactly which training data snapshot, which code version, and which hyperparameter configuration produced the model that was promoted to production.
 
-MLflow's Model Registry also integrates with feature stores. When a model is registered, the registry can record which feature view and which point-in-time cutoff was used to generate training features. This integration is critical for detecting training-serving skew—if the feature engineering logic changes between training and serving, the model inputs no longer match what the model was trained on, often causing silent performance degradation without triggering obvious errors.
+MLflow's Model Registry also integrates with feature stores. When a model is registered, the registry can record which feature view and which point-in-time cutoff was used to generate training features. This integration is critical for detecting training-serving skew, if the feature engineering logic changes between training and serving, the model inputs no longer match what the model was trained on, often causing silent performance degradation without triggering obvious errors.
 
 ---
 
@@ -296,9 +296,9 @@ Individual experiment tracking is straightforward. Experiment tracking across a 
 
 The key decisions for team-scale experiment tracking:
 
-**Experiment and run naming conventions.** MLflow organizes runs within experiments. Without naming conventions, experiments become "Untitled" and runs become "run_1234"—unintelligible after a week. Standardize experiment names as `{project}/{model_type}/{feature_set}` and run names as `{date}_{developer}_{brief_description}`.
+**Experiment and run naming conventions.** MLflow organizes runs within experiments. Without naming conventions, experiments become "Untitled" and runs become "run_1234", unintelligible after a week. Standardize experiment names as `{project}/{model_type}/{feature_set}` and run names as `{date}_{developer}_{brief_description}`.
 
-**Hyperparameter tagging.** Log all hyperparameters—not just the ones you're tuning—to enable filtering runs by architecture, optimizer, or data configuration months later. Teams frequently revisit experiments to understand why a particular approach was abandoned. Complete parameter logging makes this retrospective possible.
+**Hyperparameter tagging.** Log all hyperparameters, not just the ones you're tuning, to enable filtering runs by architecture, optimizer, or data configuration months later. Teams frequently revisit experiments to understand why a particular approach was abandoned. Complete parameter logging makes this retrospective possible.
 
 **Model performance baselines.** Track a `baseline_metric` tag on all runs that records the current production model's performance on the same evaluation set. This makes every experiment run immediately interpretable: is this run better or worse than what's deployed today?
 

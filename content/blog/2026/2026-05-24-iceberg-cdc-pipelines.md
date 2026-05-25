@@ -8,9 +8,9 @@ bannerImage: "./images/iceberg-cdc-pipelines/deletion-vectors-vs-positional-dele
 tags:
   - iceberg version 3
   - iceberg row lineage
+  - cdc lakehouse pipeline
   - iceberg deletion vectors
   - iceberg cdc pipeline
-  - cdc lakehouse pipeline
 ---
 
 # What Iceberg V3 Advances Mean for CDC Pipelines
@@ -23,7 +23,7 @@ Iceberg format version 3, ratified in 2024 and moving to full production stabili
 
 ## The Core Problem with Iceberg V2 and CDC
 
-In Iceberg V2, updating or deleting a row doesn't rewrite the original data file. Instead, the engine writes a separate delete file—either a positional delete file that records the file path and row offset of each deleted row, or an equality delete file that records key values to be matched and removed at query time.
+In Iceberg V2, updating or deleting a row doesn't rewrite the original data file. Instead, the engine writes a separate delete file, either a positional delete file that records the file path and row offset of each deleted row, or an equality delete file that records key values to be matched and removed at query time.
 
 This design was an improvement over full copy-on-write rewrites for individual row mutations. But it introduced a different problem: delete file accumulation. Every streaming CDC commit adds more delete files. A high-churn table receiving thousands of updates per second can accumulate thousands of delete files per hour. Queries must scan all relevant delete files and apply them to data files before returning results. Planning time increases with delete file count, not with data volume.
 
@@ -33,11 +33,11 @@ The remediation is compaction. Running `RewriteDataFiles` with the binpack strat
 
 ## Iceberg V3: Deletion Vectors
 
-The binary deletion vector (DV) mechanism in Iceberg V3 addresses the delete file accumulation problem at the format level. Instead of writing a separate delete file for each mutation, the engine writes a compact binary bitmap—stored in a Puffin statistics file—that marks which row positions in a data file are deleted.
+The binary deletion vector (DV) mechanism in Iceberg V3 addresses the delete file accumulation problem at the format level. Instead of writing a separate delete file for each mutation, the engine writes a compact binary bitmap, stored in a Puffin statistics file, that marks which row positions in a data file are deleted.
 
 ![Architecture comparison showing Iceberg V2 creating separate positional delete Avro files for each delete operation versus Iceberg V3 using compact binary bitmaps stored in Puffin files alongside data files](./images/iceberg-cdc-pipelines/deletion-vectors-vs-positional-deletes.png)
 
-A Puffin file is Iceberg's extensible statistics file format. In V3, it also serves as the container for deletion vector bitmaps. Each data file has at most one associated DV bitmap. When a row is deleted, the engine sets the corresponding bit in the bitmap. When multiple rows in the same data file are deleted in separate commits, the bitmaps are merged—OR-ing the bits—rather than creating new files.
+A Puffin file is Iceberg's extensible statistics file format. In V3, it also serves as the container for deletion vector bitmaps. Each data file has at most one associated DV bitmap. When a row is deleted, the engine sets the corresponding bit in the bitmap. When multiple rows in the same data file are deleted in separate commits, the bitmaps are merged, OR-ing the bits, rather than creating new files.
 
 The operational implications are significant:
 
@@ -118,7 +118,7 @@ The backward compatibility story is solid. V3 tables can still be read by engine
 
 Iceberg V3 doesn't eliminate the need for compaction. Deletion vector bitmaps reduce the number of separate files per partition, but data files still fragment from streaming writes. Compaction remains necessary to merge small data files and rewrite deletion vector bitmaps into fully materialized clean files. The difference is that compaction frequency can be lower because bitmaps accumulate more gracefully than separate delete files.
 
-V3 also doesn't change the upgrade path complexity. Tables must be explicitly upgraded from V2 to V3. In environments with many active tables, this requires a coordinated migration plan—you can't upgrade all tables simultaneously without testing engine compatibility and validating query results.
+V3 also doesn't change the upgrade path complexity. Tables must be explicitly upgraded from V2 to V3. In environments with many active tables, this requires a coordinated migration plan, you can't upgrade all tables simultaneously without testing engine compatibility and validating query results.
 
 ---
 
@@ -126,7 +126,7 @@ V3 also doesn't change the upgrade path complexity. Tables must be explicitly up
 
 Iceberg V3's deletion vectors and row lineage features are the most significant improvements to the format's CDC story since the introduction of merge-on-read semantics. Deletion vectors replace the separate delete file design that caused metadata bloat in high-mutation streaming environments. Row lineage provides a portable, engine-independent mechanism for incremental reads and audit trails.
 
-For CDC pipeline teams, the practical step is to test V3 deletion vectors on your most write-heavy tables, validate that your downstream query engines support V3 reads, and plan an incremental migration. Don't upgrade everything at once—start with the tables where delete file accumulation is currently causing compaction pressure and measure the improvement before rolling out broadly.
+For CDC pipeline teams, the practical step is to test V3 deletion vectors on your most write-heavy tables, validate that your downstream query engines support V3 reads, and plan an incremental migration. Don't upgrade everything at once, start with the tables where delete file accumulation is currently causing compaction pressure and measure the improvement before rolling out broadly.
 
 ---
 
@@ -136,7 +136,7 @@ Getting a Debezium-to-Iceberg CDC pipeline working in practice involves several 
 
 **Choosing the Kafka topic structure.** Each Debezium connector produces events for a specific database table. The event schema includes the before and after row images and the operation type. For Iceberg pipelines, the most common pattern is one Kafka topic per source table, with a Flink consumer reading each topic and writing to a corresponding Iceberg table.
 
-**Snapshot mode.** The first time Debezium connects to a source database, it takes a full snapshot of existing data before streaming CDC events. For large tables (millions of rows), the snapshot can take hours. The Iceberg target table must be empty or handle idempotent writes from the snapshot before receiving streaming events. The `snapshot.mode` configuration in Debezium controls this behavior—`initial` snapshots first and then streams, while `never` only streams ongoing changes.
+**Snapshot mode.** The first time Debezium connects to a source database, it takes a full snapshot of existing data before streaming CDC events. For large tables (millions of rows), the snapshot can take hours. The Iceberg target table must be empty or handle idempotent writes from the snapshot before receiving streaming events. The `snapshot.mode` configuration in Debezium controls this behavior, `initial` snapshots first and then streams, while `never` only streams ongoing changes.
 
 ```json
 {
@@ -157,7 +157,7 @@ Getting a Debezium-to-Iceberg CDC pipeline working in practice involves several 
 }
 ```
 
-The `heartbeat.interval.ms` setting is important for tables with low write volume. Without heartbeats, a replication slot in PostgreSQL can accumulate WAL logs indefinitely if no changes occur—potentially filling disk. Regular heartbeat events keep the replication slot position advancing.
+The `heartbeat.interval.ms` setting is important for tables with low write volume. Without heartbeats, a replication slot in PostgreSQL can accumulate WAL logs indefinitely if no changes occur, potentially filling disk. Regular heartbeat events keep the replication slot position advancing.
 
 ---
 
@@ -171,7 +171,7 @@ One of the most operationally challenging aspects of CDC pipelines is handling s
 4. The Iceberg target table must be updated with the new column
 5. Historical rows in the Iceberg table will have NULL for the new column
 
-Iceberg's schema evolution makes step 4 non-destructive. Adding a new optional column to an Iceberg table is metadata-only—no data files are rewritten, and the column shows as NULL for all historical rows. This is the same guarantee that enables the CDC schema migration flow to be automated.
+Iceberg's schema evolution makes step 4 non-destructive. Adding a new optional column to an Iceberg table is metadata-only, no data files are rewritten, and the column shows as NULL for all historical rows. This is the same guarantee that enables the CDC schema migration flow to be automated.
 
 ```python
 # Automatically apply schema changes from Debezium to Iceberg
@@ -191,13 +191,13 @@ with table.update_schema() as update:
     )
 ```
 
-This automated schema migration pattern—detecting DDL changes from Debezium, applying them to the Iceberg schema via the PyIceberg API—allows the CDC pipeline to self-heal after schema changes without manual intervention.
+This automated schema migration pattern, detecting DDL changes from Debezium, applying them to the Iceberg schema via the PyIceberg API, allows the CDC pipeline to self-heal after schema changes without manual intervention.
 
 ---
 
 ## Flink Checkpoint Configuration for CDC Reliability
 
-Flink checkpointing is the mechanism that makes CDC pipelines resumable after failures. Without proper checkpoint configuration, a Flink job failure requires reprocessing from the beginning of the Kafka topic—which for high-volume tables means hours of catch-up processing.
+Flink checkpointing is the mechanism that makes CDC pipelines resumable after failures. Without proper checkpoint configuration, a Flink job failure requires reprocessing from the beginning of the Kafka topic, which for high-volume tables means hours of catch-up processing.
 
 The critical Flink checkpoint settings for Iceberg CDC pipelines:
 
@@ -212,7 +212,7 @@ state.backend.incremental: true                 # Incremental RocksDB checkpoint
 state.checkpoints.dir: s3://checkpoints/flink/  # Checkpoint storage in S3
 ```
 
-The Iceberg Flink connector commits data files to the Iceberg catalog at checkpoint time. This means that exactly-once semantics in the pipeline correspond to checkpoint frequency—a 60-second checkpoint interval means the pipeline can be at most 60 seconds behind the latest committed snapshot in Iceberg. This is typically acceptable for analytical workloads but may need tuning for near-real-time requirements.
+The Iceberg Flink connector commits data files to the Iceberg catalog at checkpoint time. This means that exactly-once semantics in the pipeline correspond to checkpoint frequency, a 60-second checkpoint interval means the pipeline can be at most 60 seconds behind the latest committed snapshot in Iceberg. This is typically acceptable for analytical workloads but may need tuning for near-real-time requirements.
 
 ---
 

@@ -20,7 +20,7 @@ For the past decade, data engineering was synonymous with distributed clusters. 
 
 Recently, the data engineering landscape has experienced a single-node renaissance. Rather than scaling out to distributed clusters, teams are scaling up on single machines. Modern laptops ship with 12 or more CPU cores, fast NVMe SSDs capable of multi-gigabyte-per-second read throughput, and up to 128 GB of RAM. Cloud providers offer single virtual machines with hundreds of cores and terabytes of memory for a fraction of the cost of a Kubernetes or Spark cluster.
 
-This physical hardware evolution is only half the story. The true catalyst is a new generation of data technologies built on Apache Arrow, vectorized execution, and out-of-core memory management. Tools like DuckDB, Apache Arrow DataFusion, Polars, and LakeSail enable a single laptop or VM to process hundreds of gigabytes—and even terabytes—of data. You can now execute complex analytical pipelines locally or on a single node without the overhead of a distributed JVM runtime.
+This physical hardware evolution is only half the story. The true catalyst is a new generation of data technologies built on Apache Arrow, vectorized execution, and out-of-core memory management. Tools like DuckDB, Apache Arrow DataFusion, Polars, and LakeSail enable a single laptop or VM to process hundreds of gigabytes (and even terabytes) of data. You can now execute complex analytical pipelines locally or on a single node without the overhead of a distributed JVM runtime.
 
 ![Architecture diagram showing the single-node data engineering ecosystem from local laptops to single-node engines querying S3](./images/single-node-laptop/single-node-ecosystem.png)
 

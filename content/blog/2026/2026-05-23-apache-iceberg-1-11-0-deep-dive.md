@@ -219,7 +219,7 @@ Partition Pruning Step
 
 With this change, the query planner matches the query filter predicates against partition bounds before executing deletion vector checks. If a partition is pruned out, the engine skips validating the deletion vectors for the files in that partition. This change reduces planning CPU cycles and improves scan startup times for partitioned tables.
 
-For a detailed look at how hidden partitioning helps the query engine perform partition pruning and reduce metadata scan sizes, refer to the [Apache Iceberg Hidden Partitioning Post](/2026/2026-04-ib-05-hidden-partitioning-how-iceberg-eliminates-accidental-full-t/).
+For a detailed look at how hidden partitioning helps the query engine perform partition pruning and reduce metadata scan sizes, refer to the [Apache Iceberg Hidden Partitioning Post](/blog/apache-iceberg-hidden-partitioning-reduces-full-scans/).
 
 ![Diagram showing deletion vector validation pruning skipping skipped partitions during planning](./images/apache-iceberg-1-11/deletion-vector-pruning.png)
 
@@ -414,7 +414,7 @@ Before planning your migration to V3, review the engine compatibility changes in
 
 Make sure all query engines and toolchains in your lakehouse deployment support Iceberg V3 and Java 17 before upgrading production tables.
 
-For more on managing query performance optimizations and table format versions inside Dremio, refer to the [Dremio Autonomous Performance Blog](/2025/2025-09-agentic-ai-dremio-apache-iceberg/).
+For more on managing query performance optimizations and table format versions inside Dremio, refer to the [Dremio Autonomous Performance Blog](/blog/autonomous-performance-dremio-agentic-analytics/).
 
 ![Table upgrade timeline showing migration SQL and deprecated connector support list](./images/apache-iceberg-1-11/table-upgrade-path.png)
 

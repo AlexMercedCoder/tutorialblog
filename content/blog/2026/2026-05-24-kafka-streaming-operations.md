@@ -6,16 +6,16 @@ author: "Alex Merced"
 category: "Data Engineering"
 bannerImage: "./images/kafka-streaming-operations/kafka-40-migration-roadmap.png"
 tags:
-  - kafka kraft
   - zookeeper removal kafka
-  - kip-848 consumer rebalance
-  - kafka 4.0 upgrade
   - kafka migration guide
+  - kafka 4.0 upgrade
+  - kip-848 consumer rebalance
+  - kafka kraft
 ---
 
 # Kafka 4.0 Changes Streaming Platform Operations
 
-Apache Kafka 4.0 shipped on March 18, 2025, and it made one thing official: ZooKeeper is gone. Not deprecated, not optional—removed. Every new Kafka 4.0 cluster runs in KRaft mode. If your team still runs ZooKeeper-based brokers, you cannot do an in-place upgrade to 4.0. That's the short version of what changed.
+Apache Kafka 4.0 shipped on March 18, 2025, and it made one thing official: ZooKeeper is gone. Not deprecated, not optional, removed. Every new Kafka 4.0 cluster runs in KRaft mode. If your team still runs ZooKeeper-based brokers, you cannot do an in-place upgrade to 4.0. That's the short version of what changed.
 
 The longer version is more interesting. Kafka 4.0 also marks two other operational milestones. The new consumer rebalance protocol (KIP-848) is now generally available, replacing the "stop-the-world" rebalance behavior that has caused consumer lag spikes for years. And Queues for Kafka (KIP-932), which enables point-to-point messaging semantics on top of Kafka topics, entered early access.
 
@@ -70,7 +70,7 @@ One more constraint: Kafka 4.0 raises the minimum Java version requirements. Bro
 
 The second major change in Kafka 4.0 is the general availability of the new consumer rebalance protocol, KIP-848. To understand why this matters, you need to understand what was wrong with the old one.
 
-The classic rebalance protocol is sometimes called "stop-the-world" because that's what it does. When a consumer joins or leaves a group—or when a consumer's heartbeat times out—the group coordinator triggers a full group rebalance. Every consumer in the group stops processing, revokes its current partition assignments, and waits for the group leader (a client-side process) to compute a new assignment and distribute it to all members through the coordinator. Only after all members acknowledge the new assignment does processing resume.
+The classic rebalance protocol is sometimes called "stop-the-world" because that's what it does. When a consumer joins or leaves a group, or when a consumer's heartbeat times out, the group coordinator triggers a full group rebalance. Every consumer in the group stops processing, revokes its current partition assignments, and waits for the group leader (a client-side process) to compute a new assignment and distribute it to all members through the coordinator. Only after all members acknowledge the new assignment does processing resume.
 
 For a consumer group with ten members, adding an eleventh member pauses all ten existing members for the duration of the rebalance. In practice, this can pause processing for seconds to tens of seconds, depending on the number of partitions, the complexity of the assignment strategy, and network round-trip times between consumers and the broker.
 
@@ -124,7 +124,7 @@ Kafka Connect workers are largely unaffected by the KRaft transition. Connect us
 
 Schema Registry, ksqlDB, and other Confluent Platform components that store metadata in Kafka topics (rather than ZooKeeper) are also mostly unaffected from an operational standpoint. Check version compatibility tables for each component before upgrading the broker.
 
-The clearest near-term win from 4.0 for most teams is not the architectural change but the operational simplification. Running one fewer distributed system—with its own leader election, connection pooling, Jute serialization format, and 4-letter word commands—reduces the number of things that can fail at 2 a.m.
+The clearest near-term win from 4.0 for most teams is not the architectural change but the operational simplification. Running one fewer distributed system, with its own leader election, connection pooling, Jute serialization format, and 4-letter word commands, reduces the number of things that can fail at 2 a.m.
 
 ---
 
@@ -167,7 +167,7 @@ The `enable.idempotence=true` setting ensures that retried producer sends don't 
 
 ## Consumer Lag Monitoring in Production
 
-Consumer lag—the gap between the latest offset in a Kafka partition and the consumer group's current committed offset—is the most important operational metric for streaming platforms. Growing consumer lag means the pipeline is falling behind incoming data. Without monitoring and alerting on consumer lag, you may not discover a falling pipeline until business logic downstream has been starved for hours.
+Consumer lag, the gap between the latest offset in a Kafka partition and the consumer group's current committed offset, is the most important operational metric for streaming platforms. Growing consumer lag means the pipeline is falling behind incoming data. Without monitoring and alerting on consumer lag, you may not discover a falling pipeline until business logic downstream has been starved for hours.
 
 The standard tools for consumer lag monitoring:
 
@@ -205,7 +205,7 @@ def estimate_catchup_time(current_lag_messages, consumer_throughput_msgs_per_sec
     return current_lag_messages / net_catchup_rate  # Returns seconds to catch up
 ```
 
-If `estimate_catchup_time()` returns infinity (the consumer isn't keeping up with the producer even without the backlog), the issue isn't lag—it's consumer throughput. Adding more consumer instances or optimizing the processing logic is the correct intervention, not simply monitoring the lag number.
+If `estimate_catchup_time()` returns infinity (the consumer isn't keeping up with the producer even without the backlog), the issue isn't lag, it's consumer throughput. Adding more consumer instances or optimizing the processing logic is the correct intervention, not simply monitoring the lag number.
 
 ---
 
@@ -222,7 +222,7 @@ Understanding which component is the bottleneck at each scale level helps teams 
 - **Iceberg commit limited:** Increase checkpoint intervals, reduce micro-batch frequency, tune file sizes
 - **S3/GCS I/O limited:** Use multipart uploads, tune buffer sizes, consider S3 Tables for managed I/O
 
-Operational observability across this entire stack is what OpenLineage (for lineage) and Prometheus/Grafana (for metrics) enable—providing a unified view of where the streaming pipeline stands at any given moment.
+Operational observability across this entire stack is what OpenLineage (for lineage) and Prometheus/Grafana (for metrics) enable, providing a unified view of where the streaming pipeline stands at any given moment.
 
 ---
 

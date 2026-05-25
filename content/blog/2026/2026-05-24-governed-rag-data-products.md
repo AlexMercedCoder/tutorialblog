@@ -7,17 +7,17 @@ category: "Data Engineering"
 bannerImage: "./images/governed-rag-data-products/governed-rag-architecture.png"
 tags:
   - governed rag enterprise data products
-  - data product rag
   - semantic layer rag
-  - ai guardrails data
-  - rag access control
-  - enterprise rag architecture
   - governed retrieval augmented generation
+  - enterprise rag architecture
+  - data product rag
+  - rag access control
+  - ai guardrails data
 ---
 
 # Designing Governed RAG on Data Products
 
-The first generation of enterprise RAG deployments had a serious trust problem. Organizations gave AI assistants access to the data warehouse—or to a vector store filled with documents scraped from internal wikis and Confluence—and discovered that the answers came back authoritative-sounding but frequently wrong, stale, or based on data the querying user wasn't supposed to see.
+The first generation of enterprise RAG deployments had a serious trust problem. Organizations gave AI assistants access to the data warehouse, or to a vector store filled with documents scraped from internal wikis and Confluence, and discovered that the answers came back authoritative-sounding but frequently wrong, stale, or based on data the querying user wasn't supposed to see.
 
 The "give the model warehouse access" approach conflates two separate problems: retrieval (finding relevant context) and governance (ensuring the retrieved context is accurate, fresh, and appropriate for the user). When these problems aren't separated architecturally, you get an AI system that confidently answers questions using data it shouldn't have accessed, or that retrieves stale snapshots from a document store that hasn't been updated in six months.
 
@@ -31,11 +31,11 @@ Governed RAG on data products separates these concerns. The retrieval layer enfo
 
 The architecture has three layers:
 
-**The retrieval layer** handles unstructured context: documents, policies, runbooks, product documentation. It uses a vector store indexed from data products—governed, SLA-backed datasets—rather than open-ended document crawls. Access policies at the retrieval layer filter returned chunks to those the requesting user is authorized to see.
+**The retrieval layer** handles unstructured context: documents, policies, runbooks, product documentation. It uses a vector store indexed from data products, governed, SLA-backed datasets, rather than open-ended document crawls. Access policies at the retrieval layer filter returned chunks to those the requesting user is authorized to see.
 
 **The structured query layer** handles precise, quantitative questions that require SQL: "what was our revenue in Q1?", "how many active users do we have?", "what's the churn rate by region?". This layer routes through a semantic layer (dbt Semantic Layer, Snowflake Cortex Analyst, or similar) that generates deterministic SQL using governed metric definitions, not ad-hoc LLM-generated SQL against raw schema.
 
-**The governance layer** enforces access control at both retrieval paths. A user asking about EMEA revenue who only has access to EMEA data gets EMEA metrics—not because the LLM magically knows the constraint, but because the policy check at the retrieval layer filtered the context and the row filter on the warehouse query enforced the regional restriction.
+**The governance layer** enforces access control at both retrieval paths. A user asking about EMEA revenue who only has access to EMEA data gets EMEA metrics, not because the LLM magically knows the constraint, but because the policy check at the retrieval layer filtered the context and the row filter on the warehouse query enforced the regional restriction.
 
 ---
 
@@ -131,7 +131,7 @@ The freshness gate is particularly important. Stale context is a common source o
 
 ## Routing Quantitative Questions Through the Semantic Layer
 
-Questions that require precise calculation—revenue, user counts, conversion rates—should not be answered from retrieved document chunks. They should route to the semantic layer for deterministic SQL generation.
+Questions that require precise calculation, revenue, user counts, conversion rates, should not be answered from retrieved document chunks. They should route to the semantic layer for deterministic SQL generation.
 
 ```python
 from openai import OpenAI
@@ -202,12 +202,12 @@ with mlflow.start_run():
 
 ## Snowflake Horizon AI Guardrails
 
-Snowflake Horizon extends its governance framework to AI workloads through AI guardrails—policies that restrict what AI systems can access when using Cortex and AI-native features. For organizations using Snowflake as the data product backing for RAG, Horizon's AI guardrails add a policy layer limiting which subsets of authorized data can be included in AI context.
+Snowflake Horizon extends its governance framework to AI workloads through AI guardrails, policies that restrict what AI systems can access when using Cortex and AI-native features. For organizations using Snowflake as the data product backing for RAG, Horizon's AI guardrails add a policy layer limiting which subsets of authorized data can be included in AI context.
 
-A sensitive financial table might be accessible to ANALYST role for SQL queries but excluded from AI context by guardrail policy—defense in depth that goes beyond standard role-based access.
+A sensitive financial table might be accessible to ANALYST role for SQL queries but excluded from AI context by guardrail policy, defense in depth that goes beyond standard role-based access.
 
 ```sql
--- Restrict AI access to non-PII columns
+-- Restrict AI access to non-PII columns  
 CREATE OR REPLACE AI USAGE POLICY restrict_ai_pii
     BLOCK ENTITIES sensitive_columns_table
     ON COLUMN email, phone, ssn;
@@ -229,7 +229,7 @@ The governed RAG architecture enables this audit trail by design:
 3. **SQL query log:** For structured queries routed to the semantic layer, generated SQL and warehouse execution plan are logged alongside the natural language question.
 4. **LLM trace:** MLflow tracing captures the full prompt, context, and response for each generation.
 
-This four-layer audit trail satisfies most enterprise audit requirements—far more complete than what an ungoverned RAG system can provide.
+This four-layer audit trail satisfies most enterprise audit requirements, far more complete than what an ungoverned RAG system can provide.
 
 ---
 
@@ -249,7 +249,7 @@ For most enterprise RAG deployments starting from scratch, the choice comes down
 
 ## Conclusion
 
-Governed RAG on data products is the enterprise-grade version of retrieval-augmented generation. It's not the easiest path to a working demo—ungoverned RAG is faster to build. But it's the only version that produces responses an organization can trust, audit, and stand behind when someone asks how the AI came to a particular conclusion.
+Governed RAG on data products is the enterprise-grade version of retrieval-augmented generation. It's not the easiest path to a working demo, ungoverned RAG is faster to build. But it's the only version that produces responses an organization can trust, audit, and stand behind when someone asks how the AI came to a particular conclusion.
 
 The key disciplines: source retrieval from data products with explicit ownership and freshness SLAs, enforce access policies at the retrieval layer (not in LLM prompts), route quantitative questions through a governed semantic layer, evaluate response quality against faithfulness and relevance metrics, and maintain a four-layer audit trail for accountability. This architecture makes AI assistants into reliable tools rather than plausible-sounding liability generators.
 
@@ -257,15 +257,15 @@ The key disciplines: source retrieval from data products with explicit ownership
 
 ## Chunking Strategy: The Hidden RAG Variable
 
-Retrieval quality in RAG systems is heavily influenced by how documents are chunked before embedding. The chunking strategy determines the granularity of retrieval—too coarse, and the retrieved chunks contain irrelevant content that adds noise to the LLM prompt; too fine, and the chunks lack sufficient context for the LLM to reason effectively.
+Retrieval quality in RAG systems is heavily influenced by how documents are chunked before embedding. The chunking strategy determines the granularity of retrieval, too coarse, and the retrieved chunks contain irrelevant content that adds noise to the LLM prompt; too fine, and the chunks lack sufficient context for the LLM to reason effectively.
 
-**Fixed-size chunking** divides documents into equal-length windows (e.g., 512 tokens) with optional overlap. It's simple but semantically arbitrary—a chunk boundary might fall in the middle of a sentence or concept.
+**Fixed-size chunking** divides documents into equal-length windows (e.g., 512 tokens) with optional overlap. It's simple but semantically arbitrary, a chunk boundary might fall in the middle of a sentence or concept.
 
 **Semantic chunking** uses embedding similarity to detect natural breakpoints where the semantic content shifts. Chunks within the same section tend to have high cosine similarity; the similarity drops at section boundaries. This produces chunks that align with the document's conceptual structure rather than its character count.
 
 **Hierarchical chunking** creates a two-level index: large parent chunks for broad context and small child chunks for precise retrieval. Retrieval uses the small chunks for semantic similarity search, but the LLM receives the full parent chunk as context. This preserves retrieval precision while giving the model adequate context window content.
 
-For enterprise document corpora—policy documents, technical manuals, internal knowledge bases—hierarchical chunking consistently outperforms fixed-size chunking on faithfulness metrics. The implementation requires storing parent-child chunk relationships in the vector store metadata:
+For enterprise document corpora, policy documents, technical manuals, internal knowledge bases, hierarchical chunking consistently outperforms fixed-size chunking on faithfulness metrics. The implementation requires storing parent-child chunk relationships in the vector store metadata:
 
 ```python
 def hierarchical_chunk(document: str, parent_size: int = 1500, child_size: int = 300) -> list[dict]:
@@ -352,7 +352,7 @@ Production RAG systems serving enterprise users typically benefit from separatin
 
 This dual-pipeline design means the vector store and the SQL execution engine scale independently. When the volume of quantitative queries grows (because more users are asking "what's my team's budget status this quarter"), compute scales on the SQL path. When document corpus grows, storage and indexing scales on the vector path.
 
-The routing logic is itself a classification model—either a fine-tuned classifier or a smaller, fast LLM that categorizes the incoming question before routing:
+The routing logic is itself a classification model, either a fine-tuned classifier or a smaller, fast LLM that categorizes the incoming question before routing:
 
 ```python
 def route_query(query: str) -> str:

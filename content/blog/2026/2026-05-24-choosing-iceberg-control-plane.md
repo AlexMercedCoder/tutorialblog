@@ -6,11 +6,11 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 bannerImage: "./images/choosing-iceberg-control-plane/catalog-selection-flowchart.png"
 tags:
-  - apache polaris
-  - lakehouse interoperability
-  - iceberg rest catalog
   - apache iceberg catalog
+  - lakehouse interoperability
+  - apache polaris
   - unity catalog iceberg
+  - iceberg rest catalog
 ---
 
 # Choosing the Right Iceberg Control Plane: Polaris vs. Unity Catalog vs. Cloud REST

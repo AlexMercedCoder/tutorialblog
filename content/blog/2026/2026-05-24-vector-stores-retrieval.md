@@ -7,12 +7,12 @@ category: "Data Engineering"
 bannerImage: "./images/vector-stores-retrieval/vector-store-selection-guide.png"
 tags:
   - pgvector hnsw
-  - enterprise rag vector store
   - lancedb multimodal
-  - choosing vector database
+  - enterprise rag vector store
   - vector store comparison retrieval workloads
-  - milvus hybrid search
+  - choosing vector database
   - weaviate bm25
+  - milvus hybrid search
 ---
 
 # Choosing Vector Stores for Retrieval Workloads
@@ -21,7 +21,7 @@ Vector retrieval has become a standard component in data platform architectures,
 
 The vector store market has matured rapidly. pgvector brings approximate nearest neighbor (ANN) search to PostgreSQL. Milvus provides a purpose-built distributed vector database designed for billions of vectors. Weaviate integrates hybrid dense and sparse search with a multi-modal retrieval model. LanceDB uses the Lance columnar format for disk-native vector retrieval optimized for ML workflows.
 
-Each of these tools makes different tradeoffs that matter in practice. This guide is about those tradeoffs—not which tool markets itself best, but which tool fits specific workload and operational requirements.
+Each of these tools makes different tradeoffs that matter in practice. This guide is about those tradeoffs, not which tool markets itself best, but which tool fits specific workload and operational requirements.
 
 ---
 
@@ -45,15 +45,21 @@ pgvector extends PostgreSQL with vector data types, indexes, and similarity sear
 
 ```sql
 -- Enable pgvector extension
-CREATE EXTENSION vector;—Create a table with a vector column
+CREATE EXTENSION vector;
+
+-- Create a table with a vector column
 CREATE TABLE documents (
     id BIGSERIAL PRIMARY KEY,
     content TEXT,
-    embedding vector(1536),—OpenAI text-embedding-3-small dimensions
+    embedding vector(1536),  -- OpenAI text-embedding-3-small dimensions
     created_at TIMESTAMPTZ DEFAULT NOW()
-);—Create an HNSW index for fast approximate nearest neighbor search
+);
+
+-- Create an HNSW index for fast approximate nearest neighbor search
 CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops)
-WITH (m = 16, ef_construction = 64);—Semantic similarity search
+WITH (m = 16, ef_construction = 64);
+
+-- Semantic similarity search
 SELECT id, content, 
        1 - (embedding <=> $1::vector) AS similarity
 FROM documents
@@ -64,7 +70,7 @@ LIMIT 10;
 
 pgvector's operational advantage is zero new infrastructure. Your existing PostgreSQL setup, backup procedures, replication topology, and tooling all apply to vector columns without modification. The limitation is scale: HNSW indexes must fit in RAM, which practically limits pgvector to datasets of millions of vectors on typical server configurations.
 
-For hybrid search—combining dense vector similarity with keyword (BM25) relevance—pgvector uses PostgreSQL's native `tsvector` full-text search in combination with vector search, joined by RRF (Reciprocal Rank Fusion) or similar fusion scoring. This requires more manual implementation than Milvus or Weaviate's native hybrid search capabilities.
+For hybrid search, combining dense vector similarity with keyword (BM25) relevance, pgvector uses PostgreSQL's native `tsvector` full-text search in combination with vector search, joined by RRF (Reciprocal Rank Fusion) or similar fusion scoring. This requires more manual implementation than Milvus or Weaviate's native hybrid search capabilities.
 
 ---
 
@@ -148,7 +154,7 @@ Weaviate's `alpha` parameter controls the blend between sparse and dense retriev
 
 ## LanceDB: Disk-Native for ML Workflows
 
-LanceDB uses the Lance columnar format—a format designed for efficient random access alongside columnar scan performance. Unlike HNSW-based stores that require indexes in RAM, LanceDB's IVF-PQ index is disk-native, making it practical for large-scale ML datasets that don't fit in memory.
+LanceDB uses the Lance columnar format, a format designed for efficient random access alongside columnar scan performance. Unlike HNSW-based stores that require indexes in RAM, LanceDB's IVF-PQ index is disk-native, making it practical for large-scale ML datasets that don't fit in memory.
 
 ```python
 import lancedb
@@ -168,7 +174,7 @@ results = table.search(query_vector) \
     .to_pandas()
 ```
 
-LanceDB integrates with DuckDB for SQL-based analytics on the same dataset—you can run aggregation queries and vector similarity searches against the same Lance table without data movement. This is particularly useful for ML workflows where you need both analytical queries (row counts by label, feature statistics) and retrieval queries (find similar training examples).
+LanceDB integrates with DuckDB for SQL-based analytics on the same dataset, you can run aggregation queries and vector similarity searches against the same Lance table without data movement. This is particularly useful for ML workflows where you need both analytical queries (row counts by label, feature statistics) and retrieval queries (find similar training examples).
 
 ---
 
@@ -189,15 +195,15 @@ All four options support cloud-managed deployments, reducing the operational bur
 
 ## Embedding Model Choice and Dimension Tradeoffs
 
-The vector store choice is only half of the retrieval architecture decision. The embedding model determines vector dimensionality, quality of semantic similarity, and encoding latency—all of which affect the operational characteristics of the vector store.
+The vector store choice is only half of the retrieval architecture decision. The embedding model determines vector dimensionality, quality of semantic similarity, and encoding latency, all of which affect the operational characteristics of the vector store.
 
 **OpenAI text-embedding-3-small:** 1536 dimensions. Good general-purpose text retrieval quality with low cost. Works well with all four vector stores.
 
-**OpenAI text-embedding-3-large:** 3072 dimensions. Higher quality at higher cost and storage. Memory requirements for HNSW indexes scale with dimensionality—moving from 1536 to 3072 dimensions approximately doubles the HNSW index size.
+**OpenAI text-embedding-3-large:** 3072 dimensions. Higher quality at higher cost and storage. Memory requirements for HNSW indexes scale with dimensionality, moving from 1536 to 3072 dimensions approximately doubles the HNSW index size.
 
 **Cohere embed-v3:** 1024 dimensions with strong multilingual performance. Lower dimensionality reduces storage and memory costs while maintaining competitive retrieval quality for multilingual content.
 
-**BGE-M3 (BAAI):** Produces both dense embeddings and sparse representations in a single model pass. This is the foundation for Milvus hybrid search—dense and sparse representations from the same model, enabling highly effective hybrid retrieval without running separate embedding and BM25 pipelines.
+**BGE-M3 (BAAI):** Produces both dense embeddings and sparse representations in a single model pass. This is the foundation for Milvus hybrid search, dense and sparse representations from the same model, enabling highly effective hybrid retrieval without running separate embedding and BM25 pipelines.
 
 Dimensionality matters operationally because HNSW indexes must fit in RAM. For a 1-million-vector dataset with 1536 dimensions using float32 encoding:
 
@@ -207,7 +213,7 @@ HNSW graph overhead ≈ 30-40 additional bytes per vector × 1,000,000 = 30-40 M
 Total index memory ≈ 6.1 GB + graph overhead
 ```
 
-For a server with 16 GB RAM, this is feasible. For 10 million vectors at 3072 dimensions, the math exceeds 120 GB—requiring IVFFlat (which can use less RAM at the cost of recall), DiskANN, or LanceDB's IVF-PQ disk-native approach.
+For a server with 16 GB RAM, this is feasible. For 10 million vectors at 3072 dimensions, the math exceeds 120 GB, requiring IVFFlat (which can use less RAM at the cost of recall), DiskANN, or LanceDB's IVF-PQ disk-native approach.
 
 ---
 
@@ -215,7 +221,7 @@ For a server with 16 GB RAM, this is feasible. For 10 million vectors at 3072 di
 
 Hybrid search combines dense vector retrieval (semantic similarity) with sparse keyword retrieval (BM25/TF-IDF term matching). The intuition is that dense retrieval handles paraphrase and synonym matches well but can miss precise technical terms; sparse retrieval handles exact term matching well but misses semantic equivalents.
 
-For domain-specific retrieval—internal documentation, legal texts, medical literature—hybrid search typically outperforms either approach alone by 10-20% on NDCG@10 benchmarks.
+For domain-specific retrieval, internal documentation, legal texts, medical literature, hybrid search typically outperforms either approach alone by 10-20% on NDCG@10 benchmarks.
 
 The fusion strategy combines results from both retrievers. Reciprocal Rank Fusion (RRF) is the most common:
 
@@ -252,17 +258,21 @@ Each index type has tunable parameters that trade recall for speed and memory:
 -- pgvector HNSW with tuned parameters
 CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops)
 WITH (
-    m = 16,—Max connections per layer (higher = better recall, more memory)
-    ef_construction = 64—Build-time candidate set size (higher = better quality, slower build)
-);—At query time, increase ef_search for higher recall (at latency cost)
+    m = 16,              -- Max connections per layer (higher = better recall, more memory)
+    ef_construction = 64  -- Build-time candidate set size (higher = better quality, slower build)
+);
+
+-- At query time, increase ef_search for higher recall (at latency cost)
 SET hnsw.ef_search = 200;
 ```
 
 **IVFFlat tuning (pgvector fallback):**
 ```sql
 CREATE INDEX ON documents USING ivfflat (embedding vector_cosine_ops)
-WITH (lists = 1000);—More lists = lower recall per probe, fewer lists = more memory scanned—Query-time: increase probes for higher recall
-SET ivfflat.probes = 50;—Query 50 out of 1000 lists
+WITH (lists = 1000);  -- More lists = lower recall per probe, fewer lists = more memory scanned
+
+-- Query-time: increase probes for higher recall
+SET ivfflat.probes = 50;  -- Query 50 out of 1000 lists
 ```
 
 The recall-latency tradeoff is real and measurable. For production deployments, establish a minimum recall threshold (often 95% recall at top-10) and tune ef_search or probes to meet that threshold with the lowest latency at expected QPS.
@@ -285,25 +295,25 @@ Vector stores require different monitoring than traditional databases. Beyond st
 
 ## Security Considerations for Vector Stores
 
-Enterprise vector stores present security challenges that are different from traditional databases. The primary concern is what has been called "embedding inversion"—the theoretical and practical ability to reconstruct the original text from an embedding vector.
+Enterprise vector stores present security challenges that are different from traditional databases. The primary concern is what has been called "embedding inversion", the theoretical and practical ability to reconstruct the original text from an embedding vector.
 
-For most practical enterprise deployments, embedding inversion is not a realistic attack vector against the embedding vectors themselves. Current embedding models produce high-dimensional representations where reconstruction is computationally impractical. However, the threat model matters: if vectors are stored in a system accessible to untrusted parties, the combination of vector similarity search and inference can reveal membership information—whether a specific document is in the database—even if the document text itself isn't returned.
+For most practical enterprise deployments, embedding inversion is not a realistic attack vector against the embedding vectors themselves. Current embedding models produce high-dimensional representations where reconstruction is computationally impractical. However, the threat model matters: if vectors are stored in a system accessible to untrusted parties, the combination of vector similarity search and inference can reveal membership information, whether a specific document is in the database, even if the document text itself isn't returned.
 
 The practical security controls for enterprise vector stores:
 
-**Access control at the retrieval layer.** Vector search results should go through the same access control checks as any other data retrieval. For multi-tenant deployments where different user groups should only retrieve documents from their namespace, enforce namespace isolation in the query filter—never retrieve across tenants and filter after the fact.
+**Access control at the retrieval layer.** Vector search results should go through the same access control checks as any other data retrieval. For multi-tenant deployments where different user groups should only retrieve documents from their namespace, enforce namespace isolation in the query filter, never retrieve across tenants and filter after the fact.
 
 **Encryption at rest.** All four vector stores discussed in this post support encrypted storage. For compliance-sensitive environments (HIPAA, SOC 2 Type II), verify that encryption applies to both the vector data and the associated metadata fields.
 
 **Audit logging for similarity search queries.** Unlike SQL queries, similarity search queries don't have a natural human-readable representation in audit logs. Log the query embedding (or a hash of it), the number of results returned, the user identity, and the timestamp. The embedding itself can be stored encrypted for forensic purposes without being readable in normal audit review.
 
-**Tokenization and content filtering.** For RAG applications serving external users, the content retrieved by vector search should pass through a content filter before inclusion in the LLM prompt. Adversarial documents in the corpus can attempt to manipulate the LLM's behavior through retrieval—a technique called "indirect prompt injection." Filtering retrieved content against a predefined allowlist of acceptable content patterns reduces this risk.
+**Tokenization and content filtering.** For RAG applications serving external users, the content retrieved by vector search should pass through a content filter before inclusion in the LLM prompt. Adversarial documents in the corpus can attempt to manipulate the LLM's behavior through retrieval, a technique called "indirect prompt injection." Filtering retrieved content against a predefined allowlist of acceptable content patterns reduces this risk.
 
 ---
 
 ## Evaluating Retrieval Quality: Beyond "Does It Return Results"
 
-One of the most underinvested areas in production RAG and retrieval systems is systematic evaluation of retrieval quality. Teams often measure whether the system returns results, but rarely measure whether it returns the right results—and whether retrieval quality is stable over time as the document corpus and query distribution evolve.
+One of the most underinvested areas in production RAG and retrieval systems is systematic evaluation of retrieval quality. Teams often measure whether the system returns results, but rarely measure whether it returns the right results, and whether retrieval quality is stable over time as the document corpus and query distribution evolve.
 
 **Recall@K** is the primary retrieval quality metric: given a query for which the ground-truth relevant documents are known, what fraction of those relevant documents appear in the top K results? A Recall@10 of 0.85 means the system returns 8-9 of 10 relevant documents in its first page of results.
 
