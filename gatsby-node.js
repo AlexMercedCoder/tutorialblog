@@ -222,6 +222,14 @@ exports.onPostBuild = async ({ graphql }) => {
   const fullPath = path.join(__dirname, 'public', 'llms-full.txt');
   fs.writeFileSync(fullPath, llmsFullContent);
   console.log('Successfully generated full index llms-full.txt for AEO.');
+
+  // Generate OG images
+  try {
+    const { execSync } = require('child_process');
+    execSync('node scripts/generate-og-images.mjs', { stdio: 'inherit' });
+  } catch (err) {
+    console.error('OG image generation failed:', err.message);
+  }
 };
 
 exports.createSchemaCustomization = ({ actions }) => {

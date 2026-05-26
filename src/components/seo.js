@@ -110,9 +110,12 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
 
 
   // Dynamic OG image fallback — generate branded card when no bannerImage is set
+  const ogSlug = pathname
+    ? pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-').replace(/\.html$/, '')
+    : 'default';
   const ogImageUrl = image
     ? `${siteUrl}${image}`
-    : `${cleanSiteUrl}/og?title=${encodeURIComponent(title)}`
+    : `${cleanSiteUrl}/og/${ogSlug}.png`
 
   return (
     <>
