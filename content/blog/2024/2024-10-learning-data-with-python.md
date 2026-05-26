@@ -4,7 +4,6 @@ date: "2024-10-07"
 description: "Learning to work with Python to ingest and query data"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

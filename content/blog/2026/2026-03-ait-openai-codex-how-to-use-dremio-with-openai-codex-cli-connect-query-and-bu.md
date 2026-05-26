@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "OpenAI Codex CLI is a terminal-based coding agent built in Rust. It reads your codebase, writes files, executes commands, and supports MCP for connecting to ..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/openai-codex/codex-dremio-mcp-architecture.png"
 tags:
   - AI coding tools
   - dremio

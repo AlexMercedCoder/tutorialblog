@@ -4,7 +4,6 @@ date: "2024-01-08"
 description: "Nessie is the only open-source catalog implementation specifically for Apache Iceberg."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

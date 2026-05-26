@@ -4,7 +4,6 @@ date: "2022-11-22"
 description: "How to configure Spark for using Apache Iceberg"
 author: "Alex Merced"
 category: "data"
-bannerImage: "/images/postbanner/2022/5reasonsdremio.png"
 tags:
   - Apache Iceberg
   - data

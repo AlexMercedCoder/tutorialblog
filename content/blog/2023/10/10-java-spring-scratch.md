@@ -6,7 +6,6 @@ author: "Alex Merced"
 title: "How to build a Java Spring JSON API from scratch"
 date: "2023-10-01T12:12:03.284Z"
 category: "java"
-bannerImage: "https://i.imgur.com/nc4bdok.png"
 ---
 
 ## Step 1: Set Up the Maven Project

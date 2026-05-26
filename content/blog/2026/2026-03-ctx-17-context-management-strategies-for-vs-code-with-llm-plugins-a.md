@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Visual Studio Code is the most widely used code editor in the world, and its extensibility means you can integrate AI capabilities through a growing ecosyste..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

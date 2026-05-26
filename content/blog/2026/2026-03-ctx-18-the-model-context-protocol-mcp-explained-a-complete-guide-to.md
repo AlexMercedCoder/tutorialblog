@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "The Model Context Protocol (MCP) has become the universal standard for connecting AI models to external tools, data sources, and services. Originally open-so..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

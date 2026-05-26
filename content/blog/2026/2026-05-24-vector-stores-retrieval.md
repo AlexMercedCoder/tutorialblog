@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "pgvector, Milvus, Weaviate, and LanceDB each make different tradeoffs on index type, hybrid search, scale, and operational complexity. Learn which fits your retrieval workload."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/vector-stores-retrieval/vector-store-selection-guide.png"
 tags:
   - pgvector hnsw
   - lancedb multimodal

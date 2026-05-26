@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Best practices documents are easy to write and hard to use. They list principles without context, advice without prioritization, and rules without explaining..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/10/de-checklist.png"
 tags:
   - data engineering
   - best practices

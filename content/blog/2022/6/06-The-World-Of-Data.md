@@ -4,7 +4,6 @@ date: "2022-06-20"
 description: "An accessible high-level guide for data and non-data professionals"
 author: "Alex Merced"
 category: "data"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - data
   - database

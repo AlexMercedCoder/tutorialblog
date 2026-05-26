@@ -4,7 +4,6 @@ date: "2023-12-18"
 description: "Convert XLS/CSV Files without having to write python"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Engineering
   - Excel

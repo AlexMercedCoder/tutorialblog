@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "GitHub Copilot is the most widely adopted AI coding assistant, integrated into VS Code, JetBrains IDEs, and the GitHub platform. Its agent mode allows Copilo..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/github-copilot/copilot-dremio-architecture.png"
 tags:
   - AI coding tools
   - dremio

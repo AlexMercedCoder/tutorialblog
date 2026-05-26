@@ -4,7 +4,6 @@ date: "2024-10-30"
 description: "How to Model Events and Entities"
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Cursor is an AI-native code editor built as a fork of VS Code. It integrates AI directly into the editing experience with features like Chat, Composer (multi..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/cursor/cursor-dremio-architecture.png"
 tags:
   - AI coding tools
   - dremio

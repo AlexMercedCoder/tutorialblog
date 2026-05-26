@@ -4,7 +4,6 @@ date: "2025-01-02"
 description: "A personal story of how I built Pangolin Catalog over a holiday break using an AI-powered IDE."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

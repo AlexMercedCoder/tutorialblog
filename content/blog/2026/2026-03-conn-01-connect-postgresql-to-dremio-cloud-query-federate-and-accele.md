@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "PostgreSQL powers more production applications than almost any other open-source database. It's where your customer records, transaction logs, product catalo..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/01/banner.png"
 tags:
   - dremio
   - data integration

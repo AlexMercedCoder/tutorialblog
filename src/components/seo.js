@@ -43,7 +43,6 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
   }
 
   const canonical = pathname ? `${cleanSiteUrl}${cleanPathname}` : null
-  const twitterCard = image ? "summary_large_image" : "summary"
 
   // Schema.org/WebSite
   const webSiteSchema = {
@@ -110,6 +109,11 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
   }
 
 
+  // Dynamic OG image fallback — generate branded card when no bannerImage is set
+  const ogImageUrl = image
+    ? `${siteUrl}${image}`
+    : `${cleanSiteUrl}/og?title=${encodeURIComponent(title)}`
+
   return (
     <>
       <html lang={lang} />
@@ -121,12 +125,12 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={article ? "article" : "website"} />
-      {image && <meta property="og:image" content={`${siteUrl}${image}`} />}
-      <meta name="twitter:card" content={twitterCard} />
+      <meta property="og:image" content={ogImageUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
-      {image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
+      <meta name="twitter:image" content={ogImageUrl} />
       {meta.map((m, i) => (
         <meta key={i} {...m} />
       ))}

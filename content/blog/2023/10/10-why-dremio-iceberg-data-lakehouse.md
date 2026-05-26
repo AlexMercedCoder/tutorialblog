@@ -6,7 +6,6 @@ author: "Alex Merced"
 title: "Overview of the Open Lakehouse: Why Dremio?"
 date: "2023-10-11T12:12:03.284Z"
 category: "data lakehouse"
-bannerImage: "https://i.imgur.com/no75OFq.png"
 ---
 
 ## Pain Points

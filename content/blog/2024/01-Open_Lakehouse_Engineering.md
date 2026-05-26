@@ -4,7 +4,6 @@ date: "2024-01-19"
 description: "Resources for learning how to Engineer an Open Data Lakehouse"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

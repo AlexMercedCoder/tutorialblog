@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Iceberg tables degrade through small files, orphan files, metadata bloat, sort order decay, and partition skew. Here is how to..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/09/health-diagnosis-checklist.png"
 tags:
   - apache iceberg
   - data lakehouse

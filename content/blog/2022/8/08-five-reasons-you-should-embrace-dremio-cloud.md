@@ -4,7 +4,6 @@ date: "2022-08-09"
 description: "How your data lakehouse can expand what's possible with Dremio Cloud."
 author: "Alex Merced"
 category: "data lakehouse"
-bannerImage: "/images/postbanner/2022/5reasonsdremio.png"
 tags:
   - data engineering
   - data lake

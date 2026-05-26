@@ -4,7 +4,6 @@ date: "2026-01-15"
 description: "An in-depth guide to understanding, choosing, and using AI-assisted coding tools effectively."
 author: "Alex Merced"
 category: "Software Development"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - ai coding
   - developer tools

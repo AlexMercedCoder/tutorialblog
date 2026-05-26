@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "Overview of File Encryption Algorithms for Everyone"
 date: "2023-06-21T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "/images/postbanner/2023/dremio-arch.png"
 
 ---
 

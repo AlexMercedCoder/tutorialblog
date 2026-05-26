@@ -4,7 +4,6 @@ date: "2022-07-18"
 description: "Engineer a Data Lakehouse with Apache Iceberg"
 author: "Alex Merced"
 category: "frontend"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - data engineering
   - data lake

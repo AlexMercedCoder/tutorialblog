@@ -4,7 +4,6 @@ date: "2024-09-22"
 description: "Building a Deploying Data Apps Easily"
 author: "Alex Merced"
 category: "Data Analytics"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data apps
   - streamlit

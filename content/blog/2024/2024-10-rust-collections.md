@@ -4,7 +4,6 @@ date: "2024-10-14"
 description: "Rust Arrays, Vectors and more!"
 author: "Alex Merced"
 category: "rust"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - rust
   - collections

@@ -4,7 +4,6 @@ date: "2026-01-10"
 description: Recursive Language Models (RLMs) are a new class of language models that can call themselves to break down complex tasks into manageable parts. This article explores how RLMs work, the problems they solve, and why they represent a significant shift in language model capabilities.
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - artificial intelligence
   - language models

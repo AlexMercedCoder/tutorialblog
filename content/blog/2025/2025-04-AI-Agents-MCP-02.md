@@ -4,7 +4,6 @@ date: "2025-04-06"
 description: "How LLMs Work — Embeddings, Vectors, and Context Windows"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

@@ -4,7 +4,6 @@ date: "2022-05-13"
 description: "Learning Structured Query Language"
 author: "Alex Merced"
 category: "database"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - backend
   - SQL

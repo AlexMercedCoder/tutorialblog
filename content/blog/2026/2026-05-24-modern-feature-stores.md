@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Feature stores like Feast now support streaming feature views from Kafka and Kinesis alongside batch pipelines. Learn how to build real-time features that maintain training-serving consistency."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/modern-feature-stores/feature-store-offline-online-architecture.png"
 tags:
   - kubeflow feast
   - feature store streaming real-time ml

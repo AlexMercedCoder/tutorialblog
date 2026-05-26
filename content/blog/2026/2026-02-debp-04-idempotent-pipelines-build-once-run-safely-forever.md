@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "A pipeline runs, processes 100,000 records, and loads them into the target table. Then it fails on a downstream step. The orchestrator retries the entire job..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/04/idempotent-antipatterns.png"
 tags:
   - data engineering
   - best practices

@@ -4,7 +4,6 @@ date: "2024-11-05"
 description: "Getting Started with Cargo and cargo.toml"
 author: "Alex Merced"
 category: "rust"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - rust
 ---

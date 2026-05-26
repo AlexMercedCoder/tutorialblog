@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Google BigQuery is Google Cloud's serverless data warehouse. If your organization uses Google Cloud Platform, BigQuery is where your analytics data, marketin..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/10/banner.png"
 tags:
   - dremio
   - data integration

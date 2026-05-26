@@ -4,7 +4,6 @@ date: "2025-09-23"
 description: "What is the Data Lakehouse and the Data Lakehouse Ecosystem? This comprehensive guide covers everything you need to know about the Data Lakehouse architecture, open table formats like Apache Iceberg, Delta Lake, Apache Hudi, and Apache Paimon, and the modern data ecosystem that supports them."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

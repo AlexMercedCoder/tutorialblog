@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "A bad data model doesn't announce itself. It hides behind slow dashboards, conflicting numbers, confused analysts, and AI agents that generate wrong SQL. By ..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/10/best-practices-checklist.png"
 tags:
   - data modeling
   - data engineering

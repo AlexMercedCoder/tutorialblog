@@ -4,7 +4,6 @@ date: "2022-06-11"
 description: "Popular formats for configuration"
 author: "Alex Merced"
 category: "devops"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - devop
 ---

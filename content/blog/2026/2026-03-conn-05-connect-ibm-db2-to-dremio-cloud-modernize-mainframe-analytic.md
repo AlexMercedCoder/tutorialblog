@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "IBM Db2 is the relational database that powers critical applications across banking, insurance, government, healthcare, and manufacturing. For organizations ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/05/banner.png"
 tags:
   - dremio
   - data integration

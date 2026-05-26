@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Hash partitioning distributes data evenly. Range partitioning enables fast range scans. Both create tradeoffs. Here is how databases..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/08/data-skew-problem.png"
 tags:
   - query engines
   - databases

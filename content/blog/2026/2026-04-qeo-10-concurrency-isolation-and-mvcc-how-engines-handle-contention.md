@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Databases handle concurrent access using locks, MVCC, or optimistic concurrency control. Here is how each approach works and what..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/10/isolation-levels.png"
 tags:
   - query engines
   - databases

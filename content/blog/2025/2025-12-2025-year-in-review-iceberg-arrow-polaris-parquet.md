@@ -4,7 +4,6 @@ date: "2025-12-29"
 description: "A look back at key developments in Apache Iceberg, Polaris, Parquet, and Arrow in 2025."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

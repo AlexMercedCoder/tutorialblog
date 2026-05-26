@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Dimensional modeling works well when your source systems are stable and your business questions are predictable. But what happens when sources change constan..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/09/data-vault-overview.png"
 tags:
   - data modeling
   - data engineering

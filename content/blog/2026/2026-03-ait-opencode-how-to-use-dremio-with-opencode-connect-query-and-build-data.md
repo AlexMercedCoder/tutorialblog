@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "OpenCode is an open-source, terminal-based AI coding agent released under the MIT license. It provides a TUI with split panes, uses the Language Server Proto..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/opencode/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

@@ -4,7 +4,6 @@ date: "2025-01-20"
 description: "What is Apache Iceberg, How it Works, and Why it Matters!"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - apache iceberg

@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "An Approach to Architecting a Lower Cost, Fast and Self-Service Data Lakehouse"
 date: "2023-09-22T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "/images/postbanner/2023/arch-lakehouse.png"
 
 ---
 

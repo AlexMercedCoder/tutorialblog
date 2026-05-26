@@ -4,7 +4,6 @@ date: "2024-10-05"
 description: "Apache Iceberg Education, Tutorials and more!"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

@@ -4,7 +4,6 @@ date: "2024-07-20"
 description: "Come see me talk live at these events"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

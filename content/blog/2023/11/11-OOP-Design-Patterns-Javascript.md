@@ -4,7 +4,6 @@ date: "2023-11-26"
 description: "An overview of OOP Design Patterns in Spark"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/5reasonsdremio.png"
 tags:
   - Javascript
   - OOP

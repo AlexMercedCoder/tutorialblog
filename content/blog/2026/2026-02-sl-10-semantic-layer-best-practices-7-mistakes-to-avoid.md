@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Semantic layers don't fail because the technology is wrong. They fail because of design decisions made in the first two weeks — choices that seem reasonabl..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/10/best-practices.png"
 tags:
   - semantic layer
   - data governance

@@ -4,7 +4,6 @@ date: "2022-04-19"
 description: "Building A Full Stack Application with ExpressJS"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - backend
   - javascript

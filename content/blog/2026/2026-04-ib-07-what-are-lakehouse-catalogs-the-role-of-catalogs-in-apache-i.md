@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Lakehouse catalogs store metadata pointers, manage namespaces, and enforce access control. Here is the complete catalog landscape..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/07/catalog-landscape.png"
 tags:
   - apache iceberg
   - data lakehouse

@@ -4,7 +4,6 @@ date: "2024-09-25"
 description: "Combining Centralization and Decentralization for Data at Scale"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

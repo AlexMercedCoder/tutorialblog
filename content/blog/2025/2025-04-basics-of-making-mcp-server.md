@@ -4,7 +4,6 @@ date: "2025-04-04"
 description: "The Basics of Building a Basic MCP Server"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

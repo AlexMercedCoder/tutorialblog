@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Zed is a high-performance code editor built in Rust that prioritizes speed, simplicity, and real-time collaboration. Its AI integration is designed to be fas..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

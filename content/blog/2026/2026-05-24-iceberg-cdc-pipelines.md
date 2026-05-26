@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Apache Iceberg V3 brings deletion vectors and row lineage that reshape CDC pipeline design. Learn what these features mean for your streaming data architecture."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/iceberg-cdc-pipelines/deletion-vectors-vs-positional-deletes.png"
 tags:
   - iceberg version 3
   - iceberg row lineage

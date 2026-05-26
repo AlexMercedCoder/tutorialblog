@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Iceberg lets you change partition schemes without rewriting data. Here is how partition evolution works internally and why Hive-style..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/04/hive-partition-directories.png"
 tags:
   - apache iceberg
   - data lakehouse

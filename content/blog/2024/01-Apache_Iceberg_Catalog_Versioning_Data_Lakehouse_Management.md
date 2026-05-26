@@ -4,7 +4,6 @@ date: "2024-01-03"
 description: "This is where the combined power of Dremio’s Lakehouse Management features and Project Nessie's catalog-level versioning comes into play."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

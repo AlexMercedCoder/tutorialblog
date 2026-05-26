@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Apache Druid is a real-time analytics database designed for sub-second queries on high-ingestion-rate event data. Clickstream analytics, application monitori..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

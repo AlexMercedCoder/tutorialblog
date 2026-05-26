@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Claude CoWork represents a fundamentally different approach to AI context management. Unlike chat interfaces where you send messages and receive responses, C..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

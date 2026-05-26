@@ -4,7 +4,6 @@ date: "2024-02-12"
 description: "Deep Dive in Data Lake Table Partitioning"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Apache Hive

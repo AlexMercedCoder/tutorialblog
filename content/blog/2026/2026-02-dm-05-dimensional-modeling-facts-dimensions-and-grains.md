@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Dimensional modeling is the most widely used approach for organizing analytics data. Developed by Ralph Kimball, it structures data into two types of tables:..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/05/conformed-dimensions.png"
 tags:
   - data modeling
   - data engineering

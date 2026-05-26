@@ -4,7 +4,6 @@ date: "2024-07-31"
 description: "Learn about the new open source Iceberg Catalog in Town"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

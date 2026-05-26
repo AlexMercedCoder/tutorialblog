@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "MySQL runs more web applications, SaaS platforms, and e-commerce backends than any other database. It's fast for transactional reads and writes, but it becom..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/02/banner.png"
 tags:
   - dremio
   - data integration

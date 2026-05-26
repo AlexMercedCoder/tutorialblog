@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Gemini CLI is Google's open-source terminal-based AI agent. It runs directly in your terminal, powered by Gemini models with a 1-million token context window..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/gemini-cli/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

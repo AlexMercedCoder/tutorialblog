@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Unstructured text is the most underused data in most organizations. Customer emails sit in inboxes. Contract notes live in text fields. Meeting summaries exi..."
 author: "Alex Merced"
 category: "AI Features"
-bannerImage: "./images/AI_FEATURE_BLOGS/03/banner.png"
 tags:
   - dremio
   - AI

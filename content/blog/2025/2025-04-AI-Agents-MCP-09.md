@@ -4,7 +4,6 @@ date: "2025-04-13"
 description: "Tools in MCP — Giving LLMs the Power to Act"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

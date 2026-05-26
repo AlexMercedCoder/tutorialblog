@@ -4,7 +4,6 @@ date: "2025-10-14"
 description: "What's Coming in Apache Iceberg v4: A Deep Dive into the Future of Open Table Formats"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

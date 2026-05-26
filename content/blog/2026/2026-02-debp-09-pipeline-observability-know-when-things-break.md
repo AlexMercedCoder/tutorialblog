@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "An analyst messages you on Slack - The revenue numbers look wrong. Is the pipeline broken? You check the orchestrator - all green. You check the target table..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/09/alert-levels.png"
 tags:
   - data engineering
   - best practices

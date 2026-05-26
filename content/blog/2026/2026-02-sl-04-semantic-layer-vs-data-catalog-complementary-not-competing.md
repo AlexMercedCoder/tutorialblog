@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "We already have a data catalog, so we don't need a semantic layer. This is one of the most common misconceptions in modern data architecture."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/04/catalog-architecture.png"
 tags:
   - semantic layer
   - data governance

@@ -4,7 +4,6 @@ date: "2024-03-09"
 description: "Understanding how catalogs work and which one to choose"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

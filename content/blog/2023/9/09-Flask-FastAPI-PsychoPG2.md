@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "Building Full CRUD Rest API's with Flask & FastAPI using PsychoPG2"
 date: "2023-09-10T12:12:03.284Z"
 category: "web development"
-bannerImage: "https://i.imgur.com/nc4bdok.png"
 ---
 
 ## Introduction

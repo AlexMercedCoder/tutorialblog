@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Windsurf is an AI-powered IDE built on the VS Code foundation that introduces the concept of Flows, a paradigm where the AI maintains deep awareness of your ..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

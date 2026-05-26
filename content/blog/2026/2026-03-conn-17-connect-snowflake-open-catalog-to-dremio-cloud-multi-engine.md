@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Snowflake Open Catalog is Snowflake's managed implementation of the Apache Iceberg REST catalog specification, based on the open-source Apache Polaris projec..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

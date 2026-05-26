@@ -4,7 +4,6 @@ date: "2025-09-24"
 description: "Understanding Iceberg, Delta Lake, Hudi, Paimon, and DuckLake"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

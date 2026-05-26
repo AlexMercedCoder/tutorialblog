@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Here is exactly how an engine writes to an Iceberg table, step by step, from data files through the atomic commit that makes ACID..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/06/atomic-commit-pointer-swap.png"
 tags:
   - apache iceberg
   - data lakehouse

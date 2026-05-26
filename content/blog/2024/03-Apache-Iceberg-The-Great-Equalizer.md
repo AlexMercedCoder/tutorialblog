@@ -4,7 +4,6 @@ date: "2024-03-06"
 description: "Disrupting the Snowflake/Databricks status quo"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

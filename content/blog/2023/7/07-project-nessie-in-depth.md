@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "Project Nessie: A Look in the Depths"
 date: "2023-07-10T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "/images/postbanner/2023/dremio-arch.png"
 
 ---
 

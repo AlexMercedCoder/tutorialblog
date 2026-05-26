@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Zed is an open-source, GPU-accelerated code editor written in Rust. It is designed for speed and collaboration, with a built-in AI assistant that supports mu..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/zed/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

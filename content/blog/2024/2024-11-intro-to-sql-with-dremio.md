@@ -4,7 +4,6 @@ date: "2024-11-08"
 description: "Intro to SQL using Apache Iceberg and Dremio"
 author: "Alex Merced"
 category: "sql"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - sql
   - apache iceberg

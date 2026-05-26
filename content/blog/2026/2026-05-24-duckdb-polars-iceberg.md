@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "DuckDB 1.4 LTS and Polars streaming engine now both support reading and writing Apache Iceberg tables. Learn how to use them for lakehouse analytics in 2025."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/duckdb-polars-iceberg/duckdb-vs-polars-feature-comparison.png"
 tags:
   - polars cloud remote execution
   - polars iceberg sink

@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "Dremio and Modern Data Architecture: Data Lakes, Data Lakehouses and Data Mesh"
 date: "2023-06-02T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "/images/postbanner/2023/dremio-arch.png"
 
 ---
 

@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Most data teams jump straight from a stakeholder request to creating database tables. They skip the planning steps that prevent misalignment, redundancy, and..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/02/data-model-stakeholders.png"
 tags:
   - data modeling
   - data engineering

@@ -4,7 +4,6 @@ date: "2024-08-05"
 description: "The Who, What and Why of Data Lakehouses"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

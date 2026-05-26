@@ -4,7 +4,6 @@ date: "2024-10-19"
 description: "Advanced GitHub Actions for Data Engineering"
 author: "Alex Merced"
 category: "DevOps"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - devOps
   - Continuous Integration

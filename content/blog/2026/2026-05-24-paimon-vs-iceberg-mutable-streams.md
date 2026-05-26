@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Apache Paimon uses LSM-Tree storage for native CDC upserts without restart. Learn when Paimon outperforms Iceberg for high-churn mutable streaming workloads."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/paimon-vs-iceberg-mutable-streams/paimon-vs-iceberg-workload-decision-matrix.png"
 tags:
   - changelog stream paimon
   - paimon vs iceberg

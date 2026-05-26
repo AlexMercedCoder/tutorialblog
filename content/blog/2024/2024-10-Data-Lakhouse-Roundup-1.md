@@ -4,7 +4,6 @@ date: "2024-10-16"
 description: "What's Going on in the Data Lakehouse Space"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

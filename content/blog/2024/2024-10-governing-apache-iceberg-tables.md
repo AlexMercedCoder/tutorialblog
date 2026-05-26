@@ -4,7 +4,6 @@ date: "2024-10-07"
 description: "Controlling Access to your Apache Iceberg Tables"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

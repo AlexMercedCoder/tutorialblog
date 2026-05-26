@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Most organizations have a data governance policy. It lives in a Confluence page. It defines who owns what data, what terms mean, and who should have access. ..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/06/governance-enforcement.png"
 tags:
   - semantic layer
   - data governance

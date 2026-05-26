@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "The FOCUS 1.3 specification and native warehouse cost views make real-time cost attribution practical. Learn how to build a FinOps pipeline for Snowflake, BigQuery, and multi-cloud environments."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/finops-warehouse-cost/warehouse-cost-attribution-by-team.png"
 tags:
   - snowflake cost management
   - chargeback showback analytics

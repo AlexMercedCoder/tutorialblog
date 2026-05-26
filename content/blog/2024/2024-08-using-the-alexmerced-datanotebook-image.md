@@ -4,7 +4,6 @@ date: "2024-08-30"
 description: "Setting up a quick and easy data environment for data science and analytics"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

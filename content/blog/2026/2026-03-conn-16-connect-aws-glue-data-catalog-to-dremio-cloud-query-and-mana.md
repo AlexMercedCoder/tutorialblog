@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "AWS Glue Data Catalog is AWS's managed metadata service for data lakes. It stores table definitions, schemas, partition information, and statistics for data ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

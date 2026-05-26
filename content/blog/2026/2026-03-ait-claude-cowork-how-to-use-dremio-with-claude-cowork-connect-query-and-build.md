@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Claude CoWork is Anthropic's desktop agentic assistant. Unlike Claude Code (a terminal coding agent), CoWork operates as a general-purpose autonomous agent t..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/claude-cowork/cowork-dremio-architecture.png"
 tags:
   - AI coding tools
   - dremio

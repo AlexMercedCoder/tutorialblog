@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Amazon Kiro is an agentic AI IDE from AWS that introduces spec-driven development to the coding workflow. Instead of jumping straight to code, Kiro helps you..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/amazon-kiro/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

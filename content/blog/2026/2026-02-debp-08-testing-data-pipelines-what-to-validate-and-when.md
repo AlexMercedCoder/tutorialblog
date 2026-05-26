@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Ask an application developer how they test their code and they'll describe unit tests, integration tests, CI/CD pipelines, and coverage metrics. Ask a data e..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/08/regression-testing.png"
 tags:
   - data engineering
   - best practices

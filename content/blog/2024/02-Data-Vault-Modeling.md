@@ -4,7 +4,6 @@ date: "2024-02-02"
 description: "Understanding the Data Vault Style of Data Warehouse Modeling"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

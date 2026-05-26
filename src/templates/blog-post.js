@@ -182,7 +182,6 @@ export const Head = ({ data, location }) => {
       title={post.frontmatter.title}
       description={post.frontmatter.description || post.excerpt}
       pathname={location.pathname}
-      image={post.frontmatter.bannerImage}
       article={true}
       datePublished={post.frontmatter.isoDate}
       dateModified={post.frontmatter.isoDate}
@@ -217,7 +216,6 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         description
-        bannerImage
         tags
       }
     }

@@ -4,7 +4,6 @@ date: "2024-09-14"
 description: "Strings in Rust"
 author: "Alex Merced"
 category: "Rust"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - programming
   - rust

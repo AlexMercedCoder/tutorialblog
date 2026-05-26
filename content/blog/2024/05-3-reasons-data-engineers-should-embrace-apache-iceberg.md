@@ -4,7 +4,6 @@ date: "2024-05-15"
 description: "Benefits of Apache Iceberg"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

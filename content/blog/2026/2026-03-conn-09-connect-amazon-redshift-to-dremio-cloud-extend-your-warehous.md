@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Amazon Redshift is AWS's managed data warehouse, designed for petabyte-scale analytics. If your organization chose Redshift for analytical workloads, you've ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/09/banner.png"
 tags:
   - dremio
   - data integration

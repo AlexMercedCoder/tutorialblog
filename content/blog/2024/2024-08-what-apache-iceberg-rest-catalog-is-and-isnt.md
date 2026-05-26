@@ -4,7 +4,6 @@ date: "2024-08-18"
 description: "Understanding Iceberg Catalog Interoperability"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

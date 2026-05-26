@@ -4,7 +4,6 @@ date: "2026-05-23"
 description: "Apache Iceberg 1.11.0 delivers manifest list encryption, the new pluggable File Format API, credential lifecycle refreshes, and Spark/Flink improvements."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/apache-iceberg-1-11/release-pillar-overview.png"
 tags:
   - apache iceberg
   - data engineering

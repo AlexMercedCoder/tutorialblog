@@ -4,7 +4,6 @@ date: "2026-02-13"
 description: "An updated introduction to Apache Iceberg"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

@@ -4,7 +4,6 @@ date: "2022-03-23"
 description: "Where to store data in the users browser"
 author: "Alex Merced"
 category: "oltp"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - web storage
   - oltp

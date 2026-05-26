@@ -4,7 +4,6 @@ date: "2024-06-26"
 description: "Introductory Course to Data Engineering for Apache Iceberg Lakehouses"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Apache Iceberg
   - Data Engineering

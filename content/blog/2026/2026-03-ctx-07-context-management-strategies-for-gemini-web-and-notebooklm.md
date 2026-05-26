@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Google's AI ecosystem for knowledge work consists of two deeply integrated tools: Gemini (the conversational AI at gemini.google.com) and NotebookLM (the res..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

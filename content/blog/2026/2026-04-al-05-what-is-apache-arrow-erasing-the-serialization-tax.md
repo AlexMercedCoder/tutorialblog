@@ -4,7 +4,6 @@ date: "2026-04-13"
 description: "Read the complete Open Source and the Lakehouse series:"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/apache-lakehouse/05/arrow-flight-rpc.png"
 tags:
   - apache
   - lakehouse

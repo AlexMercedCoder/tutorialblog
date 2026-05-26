@@ -4,7 +4,6 @@ date: "2025-04-07"
 description: "Boosting LLM Performance — Fine-Tuning, Prompt Engineering, and RAG"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

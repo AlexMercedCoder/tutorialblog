@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Learn how to build a real-time lakehouse with Apache Flink 2.1 and the Dynamic Iceberg Sink, covering schema evolution, exactly-once delivery, and compaction."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/real-time-lakehouse-flink/flink-static-vs-dynamic-sink-comparison.png"
 tags:
   - kafka to iceberg
   - dynamic iceberg sink

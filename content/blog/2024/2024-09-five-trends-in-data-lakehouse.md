@@ -4,7 +4,6 @@ date: "2024-09-01"
 description: "The Evolving Data Lakehouse World"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

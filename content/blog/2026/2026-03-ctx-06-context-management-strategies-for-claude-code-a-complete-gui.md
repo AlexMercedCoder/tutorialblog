@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Claude Code is a terminal-native agentic coding assistant that lives in your command line and operates directly on your codebase. Unlike chat-based interface..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

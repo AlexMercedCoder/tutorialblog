@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "The Apache Iceberg REST Catalog specification defines a standard HTTP API for managing Iceberg table metadata. Any catalog implementation that conforms to th..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

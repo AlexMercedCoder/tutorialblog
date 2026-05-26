@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "SAP HANA is the in-memory database platform that powers SAP S/4HANA, SAP BW/4HANA, and custom enterprise applications across finance, manufacturing, logistic..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/06/banner.png"
 tags:
   - dremio
   - data integration

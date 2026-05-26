@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Windsurf is an AI-native code editor built as a fork of VS Code. Its standout feature is Cascade, an agentic AI system that plans and executes multi-step cod..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/windsurf/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

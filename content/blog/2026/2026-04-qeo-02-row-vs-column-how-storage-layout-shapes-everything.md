@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Row stores keep records together for fast transactions. Column stores keep field values together for fast analytics. Here is how each..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/02/io-comparison-row-vs-column.png"
 tags:
   - query engines
   - databases

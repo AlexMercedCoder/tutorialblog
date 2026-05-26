@@ -4,7 +4,6 @@ date: "2026-05-25"
 description: "Hermes Agent is a free, open-source AI agent from Nous Research. Connect it to DeepSeek V4 for zero-cost inference and Slack for anywhere access. Here is how to set it up in 10 minutes."
 author: "Alex Merced"
 category: "AI Tools & Software Development"
-bannerImage: "./images/hermes-agent-deepseek-setup/hermes-agent-banner.png"
 tags:
   - hermes agent
   - deepseek

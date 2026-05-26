@@ -4,7 +4,6 @@ date: "2024-06-13"
 description: "Working with Sorting Algorithms in Javascript"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - javascript
   - algorithms

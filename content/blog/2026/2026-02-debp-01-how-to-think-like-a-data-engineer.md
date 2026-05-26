@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "The median lifespan of a popular data tool is about three years. The tool you master today may be deprecated or replaced by the time your next project ships...."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/01/data-engineer-mindset.png"
 tags:
   - data engineering
   - best practices

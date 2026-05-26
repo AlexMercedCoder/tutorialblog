@@ -4,7 +4,6 @@ date: "2024-11-25"
 description: "What is cool about Apache Iceberg's Future"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - apache iceberg

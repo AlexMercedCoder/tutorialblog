@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Every data team knows documentation is important. And almost every data team has a backlog of undocumented tables, unlabeled columns, and outdated descriptio..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/09/ai-doc-generation.png"
 tags:
   - semantic layer
   - data governance

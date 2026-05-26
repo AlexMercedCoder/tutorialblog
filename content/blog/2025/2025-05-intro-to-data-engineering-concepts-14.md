@@ -4,7 +4,6 @@ date: "2025-05-02"
 description: "Introduction to the terms in data engineering"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Engineering
   - Databases

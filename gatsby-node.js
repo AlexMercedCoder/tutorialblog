@@ -234,7 +234,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       date: Date @dateformat
-      bannerImage: String
       tags: [String]
       category: String
       author: String

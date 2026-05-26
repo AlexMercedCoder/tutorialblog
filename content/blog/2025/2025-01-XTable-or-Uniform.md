@@ -4,7 +4,6 @@ date: 2025-01-07
 description: "A Guide on when to use Apache Xtable or Delta Lake Uniform for Data Lakehouse Interoperability"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - apache iceberg

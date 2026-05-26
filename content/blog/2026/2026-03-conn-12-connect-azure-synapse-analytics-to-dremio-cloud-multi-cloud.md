@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Microsoft Azure Synapse Analytics combines big data analytics and enterprise data warehousing into a single Azure-integrated platform. If your organization h..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

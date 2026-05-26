@@ -4,7 +4,6 @@ date: "2024-02-02"
 description: "Understanding how to choose a table format"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

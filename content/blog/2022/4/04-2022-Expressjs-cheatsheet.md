@@ -4,7 +4,6 @@ date: "2022-04-06"
 description: "Creating backend applications with Nodejs"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - backend
   - javascript

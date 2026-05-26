@@ -4,7 +4,6 @@ date: "2024-04-20"
 description: "Currying, Monad and Memos, Oh my!"
 author: "Alex Merced"
 category: "Javascript"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Javascript
   - Functional Programming

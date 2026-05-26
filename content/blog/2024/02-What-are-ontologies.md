@@ -4,7 +4,6 @@ date: "2024-02-24"
 description: "What are ontologies and why they matter"
 author: "Alex Merced"
 category: "Data Architecture"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Data Modeling

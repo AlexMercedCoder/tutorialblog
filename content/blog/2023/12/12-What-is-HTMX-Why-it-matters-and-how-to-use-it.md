@@ -4,7 +4,6 @@ date: "2023-11-30"
 description: "The framework that is getting all the buzz about reducing the javascript you need to write"
 author: "Alex Merced"
 category: "HTML"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - HTML
   - Javascript

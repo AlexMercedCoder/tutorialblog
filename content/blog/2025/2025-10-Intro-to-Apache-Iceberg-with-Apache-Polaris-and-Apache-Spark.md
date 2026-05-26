@@ -4,7 +4,6 @@ date: "2025-10-16"
 description: "Learn how to leverage Apache Iceberg with Apache Polaris and Apache Spark to build scalable and efficient data lakehouses."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

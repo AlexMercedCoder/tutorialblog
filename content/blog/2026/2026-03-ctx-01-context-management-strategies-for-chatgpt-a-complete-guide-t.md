@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Getting consistently useful results from ChatGPT requires more than writing good prompts. The real differentiator is how you manage context: the background i..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

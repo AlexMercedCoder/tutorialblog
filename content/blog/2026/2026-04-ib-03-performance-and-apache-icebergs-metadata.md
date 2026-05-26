@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Iceberg's three-layer metadata tree eliminates directory listing and enables multi-level data skipping. Here is how scan planning..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/03/per-file-statistics.png"
 tags:
   - apache iceberg
   - data lakehouse

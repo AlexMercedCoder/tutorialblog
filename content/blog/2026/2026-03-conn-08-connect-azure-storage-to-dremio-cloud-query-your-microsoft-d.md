@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Azure Storage is Microsoft's cloud storage platform, spanning Blob Storage, Azure Data Lake Storage Gen2 (ADLS Gen2), and Azure Files. If your organization u..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/08/banner.png"
 tags:
   - dremio
   - data integration

@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Migrate to Iceberg from Hive, data warehouses, or raw files using in-place migration, full rewrite, or the zero-downtime view swap..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/15/migration-decision-tree.png"
 tags:
   - apache iceberg
   - data lakehouse

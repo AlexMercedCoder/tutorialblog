@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Most pipeline failures aren't caused by bad code. They're caused by no architecture. A script that reads from an API, transforms JSON, and writes to a databa..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/02/failure-patterns.png"
 tags:
   - data engineering
   - best practices

@@ -4,7 +4,6 @@ date: "2024-02-03"
 description: "The Fundamentals of Data Systems"
 author: "Alex Merced"
 category: "Javascript"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Database
 ---

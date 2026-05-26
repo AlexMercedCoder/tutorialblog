@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "JetBrains AI Assistant is built into IntelliJ IDEA, PyCharm, DataGrip, and every JetBrains IDE. It provides AI chat, inline code generation, multi-file refac..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/jetbrains-ai/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Keep Iceberg tables fast with compaction, snapshot expiry, orphan cleanup, and manifest rewriting. Here is when and how to run each..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/10/auto-vs-manual-maintenance.png"
 tags:
   - apache iceberg
   - data lakehouse

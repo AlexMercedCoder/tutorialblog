@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Every database, data warehouse, and data lakehouse starts with the same question: how should this data be organized? Data modeling answers that question by c..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/01/data-model-downstream.png"
 tags:
   - data modeling
   - data engineering

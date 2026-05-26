@@ -1,10 +1,9 @@
 ---
 title: "Connect MongoDB to Dremio Cloud: SQL Analytics on Document Data"
 date: "2026-03-01"
-description: "MongoDB is the most popular NoSQL document database. It stores data in flexible JSON-like documents, making it ideal for applications with evolving schemas â..."
+description: "MongoDB is the most popular NoSQL document database. It stores data in flexible JSON-like documents, making it ideal for applications with evolving schemas ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

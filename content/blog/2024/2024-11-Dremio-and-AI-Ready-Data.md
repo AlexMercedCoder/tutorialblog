@@ -4,7 +4,6 @@ date: "2024-11-05"
 description: "The Role of Dremio and Apache Iceberg in AI-Ready Data"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

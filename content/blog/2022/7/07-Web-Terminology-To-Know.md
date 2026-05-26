@@ -4,7 +4,6 @@ date: "2022-07-16"
 description: "The words you need to know as a web professional"
 author: "Alex Merced"
 category: "frontend"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - web development
 ---

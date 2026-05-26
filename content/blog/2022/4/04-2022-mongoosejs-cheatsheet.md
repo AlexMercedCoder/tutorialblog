@@ -4,7 +4,6 @@ date: "2022-04-19"
 description: "Details on working with MongooseJS"
 author: "Alex Merced"
 category: "database"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - backend
   - javascript

@@ -4,7 +4,6 @@ date: "2024-10-04"
 description: "Handling Synching Changing Data Across Systems"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

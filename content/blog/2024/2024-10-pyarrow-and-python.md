@@ -4,7 +4,6 @@ date: "2024-10-15"
 description: "Learning to work with PyArrow to run analytics"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

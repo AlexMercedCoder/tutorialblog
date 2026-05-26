@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "MLflow 3 extends observability from classic ML experiments to GenAI tracing and data pipeline lineage. Learn how to connect data quality monitoring with model performance tracking."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/mlflow-data-pipelines/mlflow3-training-to-inference-lineage.png"
 tags:
   - mlflow data pipeline observability
   - mlflow data quality monitoring

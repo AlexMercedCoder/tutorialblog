@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Most teams start building a semantic layer the wrong way: they open their BI tool, create a few calculated fields, and call it done. Six months later, three ..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/02/build-semantic-layer.png"
 tags:
   - semantic layer
   - data governance

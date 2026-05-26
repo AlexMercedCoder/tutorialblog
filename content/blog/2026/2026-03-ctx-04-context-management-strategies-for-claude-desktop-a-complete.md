@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Claude Desktop takes everything available in Claude Web and adds three capabilities that fundamentally change how you manage context: MCP server connections ..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

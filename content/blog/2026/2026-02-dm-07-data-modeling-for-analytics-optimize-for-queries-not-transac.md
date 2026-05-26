@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "The data model that runs your production application is almost never the right model for analytics. Transactional systems are designed for fast writes — in..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/07/analytics-architecture.png"
 tags:
   - data modeling
   - data engineering

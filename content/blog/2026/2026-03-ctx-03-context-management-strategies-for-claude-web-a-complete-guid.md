@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Claude's web interface at claude.ai combines one of the largest context windows in the industry with a structured Project system that makes it genuinely usef..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

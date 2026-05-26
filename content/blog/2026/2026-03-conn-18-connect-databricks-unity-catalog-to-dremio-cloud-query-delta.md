@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Databricks Unity Catalog is Databricks' governance layer for data and AI assets. It manages Delta Lake tables, machine learning models, feature stores, and o..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

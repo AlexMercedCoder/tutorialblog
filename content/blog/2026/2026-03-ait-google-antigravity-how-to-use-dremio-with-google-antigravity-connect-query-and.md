@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Google Antigravity is an agent-first IDE built by Google DeepMind. Its autonomous agents plan multi-step tasks, write code, browse documentation, and iterate..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/google-antigravity/antigravity-dremio-mcp-architecture.png"
 tags:
   - AI coding tools
   - dremio

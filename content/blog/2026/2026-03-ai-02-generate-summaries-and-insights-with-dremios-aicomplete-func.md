@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Every data team has a version of this problem: a table full of raw data that needs human-readable summaries, translations, or narrative descriptions. Product..."
 author: "Alex Merced"
 category: "AI Features"
-bannerImage: "./images/AI_FEATURE_BLOGS/02/banner.png"
 tags:
   - dremio
   - AI

@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Databases structure data on disk as heap files, sorted files, or LSM trees, then wrap it in formats like Parquet with metadata that..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/03/parquet-file-anatomy.png"
 tags:
   - query engines
   - databases

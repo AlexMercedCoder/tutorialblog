@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Stream data into Iceberg with Spark Structured Streaming, Flink, or Kafka Connect. Here is how each works and the trade-offs between..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/13/latency-vs-maintenance.png"
 tags:
   - apache iceberg
   - data lakehouse

@@ -4,7 +4,6 @@ date: "2024-10-09"
 description: "Process Data from Raw to Clean Aggregated Data"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

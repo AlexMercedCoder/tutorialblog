@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Learn how Databricks Predictive Optimization, AWS S3 Tables, and Iceberg native actions automate compaction and snapshot management before small files degrade performance."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/automating-table-maintenance/manual-vs-automated-maintenance-comparison.png"
 tags:
   - databricks predictive optimization
   - s3 tables maintenance

@@ -6,7 +6,6 @@ author: "Alex Merced"
 title: "How to write a JSON API in Scala with Play from scratch"
 date: "2023-10-01T12:12:03.284Z"
 category: "scala"
-bannerImage: "https://i.imgur.com/nc4bdok.png"
 ---
 
 ## Step 1: Create a Blank SBT Project

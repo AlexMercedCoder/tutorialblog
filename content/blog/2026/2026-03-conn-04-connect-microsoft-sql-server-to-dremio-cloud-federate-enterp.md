@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Microsoft SQL Server is one of the most widely deployed enterprise databases in the world. ERP systems, CRM platforms, financial applications, and custom bus..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/04/banner.png"
 tags:
   - dremio
   - data integration

@@ -5,7 +5,6 @@ author: "Alex Merced"
 title: "How to effectively learn software development"
 date: "2023-10-15T12:12:03.284Z"
 category: "software development"
-bannerImage: "https://i.imgur.com/no75OFq.png"
 ---
 
 # Getting Started

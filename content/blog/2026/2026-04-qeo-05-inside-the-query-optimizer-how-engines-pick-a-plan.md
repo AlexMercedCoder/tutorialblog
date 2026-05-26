@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Query optimizers transform SQL into execution plans using rule-based rewrites, cost-based search, and adaptive runtime adjustments...."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/05/adaptive-query-execution.png"
 tags:
   - query engines
   - databases

@@ -4,7 +4,6 @@ date: "2024-09-21"
 description: "A Comprehensive Guide to Docker Compose"
 author: "Alex Merced"
 category: "Devops"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - docker
   - devops

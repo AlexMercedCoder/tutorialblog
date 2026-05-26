@@ -4,7 +4,6 @@ date: "2025-04-12"
 description: "Resources in MCP — Serving Relevant Data Securely to LLMs"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

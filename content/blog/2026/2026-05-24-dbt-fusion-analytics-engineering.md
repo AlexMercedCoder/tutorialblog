@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "dbt Fusion entered public beta in May 2025 with a Rust-powered runtime that changes how analytics engineers develop, validate, and deploy SQL models. Here's what changed."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/dbt-fusion-analytics-engineering/dbt-fusion-rust-lifecycle.png"
 tags:
   - analytics engineering 2025
   - dbt state-aware orchestration

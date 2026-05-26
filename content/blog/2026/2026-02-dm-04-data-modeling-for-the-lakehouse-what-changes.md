@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Traditional data modeling assumed you controlled the database. You defined schemas up front, enforced foreign keys at write time, and optimized with indexes...."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/04/lakehouse-data-modeling.png"
 tags:
   - data modeling
   - data engineering

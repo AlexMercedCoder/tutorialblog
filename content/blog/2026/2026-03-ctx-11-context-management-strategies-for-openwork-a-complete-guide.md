@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "OpenWork is a desktop-native AI agent framework designed for local, multi-step task execution on your computer. Unlike browser-based AI tools or terminal age..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

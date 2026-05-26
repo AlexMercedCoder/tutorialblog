@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Normalization is the first rule taught in database design. Eliminate redundancy. Store each fact once. Use foreign keys. It's the right rule for transactiona..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/08/denormalization-overview.png"
 tags:
   - data modeling
   - data engineering

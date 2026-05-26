@@ -4,7 +4,6 @@ date: "2024-01-25"
 description: "The Future of Data Platforms"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

@@ -4,7 +4,6 @@ date: "2025-07-03"
 description: "Guide on How to Be Part of the Lakehouse Community"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

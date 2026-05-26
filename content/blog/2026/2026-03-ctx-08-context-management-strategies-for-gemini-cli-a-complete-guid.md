@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Gemini CLI is an open-source terminal agent powered by Gemini models that operates directly in your command line. It brings Google's AI capabilities into the..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

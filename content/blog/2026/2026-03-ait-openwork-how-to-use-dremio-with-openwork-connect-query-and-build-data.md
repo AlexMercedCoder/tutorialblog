@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "OpenWork is an open-source desktop AI agent built on the OpenCode engine. It runs entirely on your machine with your own API keys, giving you full control ov..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/openwork/four-integration-approaches.png"
 tags:
   - AI coding tools
   - dremio

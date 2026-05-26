@@ -4,7 +4,6 @@ date: "2024-08-25"
 description: "Continuing the Understand Apache Iceberg series, this article delves into the Manifest List, a critical component of Apache Iceberg's architecture."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Amazon S3 is the default landing zone for data in the cloud. Log files, Parquet datasets, CSV exports, JSON events, IoT telemetry, and raw data dumps — it ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/07/banner.png"
 tags:
   - dremio
   - data integration

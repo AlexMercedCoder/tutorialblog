@@ -4,7 +4,6 @@ date: "2022-05-15"
 description: "Different Patterns of Making Multiple API Calls"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - javascript
 ---

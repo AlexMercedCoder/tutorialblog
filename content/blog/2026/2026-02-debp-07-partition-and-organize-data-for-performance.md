@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "A table with 500 million rows takes 45 seconds to query. After partitioning it by date, the same query — filtering on a single day — returns in 2 seconds..."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/debp/07/partition-mistakes.png"
 tags:
   - data engineering
   - best practices

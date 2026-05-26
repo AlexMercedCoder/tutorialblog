@@ -4,7 +4,6 @@ date: "2025-04-08"
 description: "What Are AI Agents — And Why They're the Future of LLM Applications"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

@@ -4,7 +4,6 @@ date: "2024-02-21"
 description: "Having a better understanding of git pull and git push"
 author: "Alex Merced"
 category: "Javascript"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - git
 ---

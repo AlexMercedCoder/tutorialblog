@@ -4,7 +4,6 @@ date: "2024-12-09"
 description: "A Comprehensive Guide to Building a Data Lakehouse with Apache Iceberg"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - apache iceberg

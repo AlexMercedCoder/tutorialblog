@@ -4,7 +4,6 @@ date: "2024-11-01"
 description: "Using Features like Pattern Matching and Comprehensions for Data Analytics"
 author: "Alex Merced"
 category: "python"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - python
   - data analytics

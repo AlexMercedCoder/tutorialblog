@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Both star schemas and snowflake schemas are dimensional models. They both organize data into fact tables (measurable events) and dimension tables (context ab..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/03/snowflake-schema-detail.png"
 tags:
   - data modeling
   - data engineering

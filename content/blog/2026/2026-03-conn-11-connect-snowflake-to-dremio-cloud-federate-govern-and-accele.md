@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Snowflake is a popular cloud data warehouse known for its separation of storage and compute, near-zero maintenance, and broad ecosystem. Many organizations h..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - dremio
   - data integration

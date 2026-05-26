@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "OpenLineage provides a standard API for collecting pipeline lineage across Airflow, Spark, Flink, and dbt. Learn how it powers blast radius analysis and incident triage."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/openlineage-observability/openlineage-integration-ecosystem.png"
 tags:
   - openlineage airflow
   - marquez lineage

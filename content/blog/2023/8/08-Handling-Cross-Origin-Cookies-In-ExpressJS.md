@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "Handling Cross-Origin Cookies with ExpressJS"
 date: "2023-08-23T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "https://i.imgur.com/nc4bdok.png"
 
 ---
 

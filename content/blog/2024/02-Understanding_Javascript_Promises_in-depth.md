@@ -4,7 +4,6 @@ date: "2024-02-03"
 description: "Understanding Javascript Promises and Asynchronous Code"
 author: "Alex Merced"
 category: "Javascript"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Javascript
 ---

@@ -4,7 +4,6 @@ date: "2024-02-24"
 description: "Learning the Standard SQL Syntax"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Lake

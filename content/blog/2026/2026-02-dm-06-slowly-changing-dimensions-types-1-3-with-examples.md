@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Dimensions change. A customer moves cities. A product gets reclassified. An employee changes departments. How your data model handles these changes determine..."
 author: "Alex Merced"
 category: "Data Modeling"
-bannerImage: "./images/data_modeling/06/scd-decision-guide.png"
 tags:
   - data modeling
   - data engineering

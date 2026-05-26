@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Your organization uses Tableau for executive dashboards, Power BI for operational reports, and Python notebooks for data science. Revenue is defined in Table..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/08/composable-analytics.png"
 tags:
   - semantic layer
   - data governance

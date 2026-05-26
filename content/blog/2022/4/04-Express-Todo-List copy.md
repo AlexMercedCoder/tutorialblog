@@ -4,7 +4,6 @@ date: "2022-04-09"
 description: "Easy reference for using express"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/batch-streaming.png"
 tags:
   - backend
   - javascript

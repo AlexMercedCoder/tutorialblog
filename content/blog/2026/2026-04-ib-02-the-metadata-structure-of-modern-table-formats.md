@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Iceberg uses a metadata tree, Delta Lake uses a transaction log, Hudi uses a timeline. Here is exactly how each format organizes..."
 author: "Alex Merced"
 category: "Apache Iceberg"
-bannerImage: "./images/apache-iceberg-masterclass/02/delta-lake-transaction-log.png"
 tags:
   - apache iceberg
   - data lakehouse

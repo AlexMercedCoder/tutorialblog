@@ -4,7 +4,6 @@ date: "2024-08-15"
 description: "What are ACID Guarantees? WHy do they matter?"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

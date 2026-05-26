@@ -4,7 +4,6 @@ date: "2024-10-19"
 author: "Alex Merced"
 description: "Learning about GitHub Actions"
 category: "DevOps"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - devOps
   - Continuous Integration

@@ -4,7 +4,6 @@ date: "2024-05-03"
 description: "How to run SQL on your Excel files easily"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

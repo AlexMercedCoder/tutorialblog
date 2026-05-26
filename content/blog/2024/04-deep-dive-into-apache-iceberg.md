@@ -4,7 +4,6 @@ date: "2024-04-04"
 description: "Learning about Apache Iceberg"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

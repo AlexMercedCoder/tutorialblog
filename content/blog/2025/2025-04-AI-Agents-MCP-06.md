@@ -4,7 +4,6 @@ date: "2025-04-10"
 description: "Enter the Model Context Protocol (MCP) — The Interoperability Layer for AI Agents"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

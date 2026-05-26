@@ -4,7 +4,6 @@ date: "2025-02-19"
 description: "A Guide on when to use Helm Charts for Kubernetes Deployment"
 author: "Alex Merced"
 category: "DevOps"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - DevOps
   - Helm

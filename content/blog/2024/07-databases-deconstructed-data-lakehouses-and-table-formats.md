@@ -4,7 +4,6 @@ date: "2024-07-12"
 description: "Building up the Data Lakehouse"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

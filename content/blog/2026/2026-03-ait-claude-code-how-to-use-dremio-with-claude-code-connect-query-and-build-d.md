@@ -4,7 +4,6 @@ date: "2026-03-05"
 description: "Claude Code is Anthropic's terminal-based coding agent. It reads your files, writes code, runs commands, and maintains context across a session. Dremio is a ..."
 author: "Alex Merced"
 category: "AI Coding Tools"
-bannerImage: "./images/aitoolblogs/claude-code/claude-code-dremio-mcp-architecture.png"
 tags:
   - AI coding tools
   - dremio

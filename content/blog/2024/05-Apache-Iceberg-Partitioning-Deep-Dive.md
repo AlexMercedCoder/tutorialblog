@@ -4,7 +4,6 @@ date: "2024-05-29"
 description: "Benefits of Apache Iceberg Partition Evolution and Hidden Partitioning"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

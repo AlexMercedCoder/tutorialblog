@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "OpenAI Codex is not a chatbot. It is an autonomous software engineering agent that runs tasks in isolated cloud sandboxes, operates across a browser interfac..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

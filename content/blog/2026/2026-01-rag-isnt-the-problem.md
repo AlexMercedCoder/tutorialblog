@@ -4,7 +4,6 @@ date: "2025-01-06"
 description: "Why retrieval-augmented generation systems fail in enterprises—and what to do about it."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data engineering
   - retrieval-augmented generation

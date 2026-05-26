@@ -4,7 +4,6 @@ date: "2025-04-14"
 description: "Sampling and Prompts in MCP — Making Agent Workflows Smarter and Safer"
 author: "Alex Merced"
 category: "AI"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI
   - ML

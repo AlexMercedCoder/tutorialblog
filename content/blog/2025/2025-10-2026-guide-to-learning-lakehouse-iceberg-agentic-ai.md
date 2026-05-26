@@ -4,7 +4,6 @@ date: "2025-10-23"
 description: "A curated guide to mastering Apache Iceberg, data lakehouse architectures, and the emerging field of Agentic AI for data professionals."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

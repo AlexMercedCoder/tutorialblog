@@ -4,7 +4,6 @@ date: "2024-08-21"
 description: "The role and content of the metadata.json"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

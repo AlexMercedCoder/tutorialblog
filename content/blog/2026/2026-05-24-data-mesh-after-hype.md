@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Three years after Zhamak Dehghani's original papers, data mesh has proven valuable in specific organizational contexts and impractical in others. Here's what the practical implementations look like."
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "./images/data-mesh-after-hype/data-mesh-product-thinking-maturity.png"
 tags:
   - zhamak dehghani data mesh
   - data mesh reality check

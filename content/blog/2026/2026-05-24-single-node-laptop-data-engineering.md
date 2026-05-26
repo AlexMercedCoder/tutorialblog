@@ -4,7 +4,6 @@ date: "2026-05-24"
 description: "Optimize single-node data engineering with DuckDB, DataFusion, Polars, and LakeSail. Compare architectures and learn when to transition to Dremio MPP."
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "./images/single-node-laptop/single-node-ecosystem.png"
 tags:
   - data engineering
   - duckdb

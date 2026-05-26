@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: The Volcano model processes one row at a time. Vectorized execution processes batches with SIMD. Code generation fuses operators into..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/06/execution-model-comparison.png"
 tags:
   - query engines
   - databases

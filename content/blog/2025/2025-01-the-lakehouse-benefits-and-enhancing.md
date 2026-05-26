@@ -4,7 +4,6 @@ date: "2025-01-31"
 description: "Understanding the value of a lakehouse and how to get that value faster"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - apache iceberg

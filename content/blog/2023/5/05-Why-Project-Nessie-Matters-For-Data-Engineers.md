@@ -7,7 +7,6 @@ author: "Alex Merced"
 title: "What is Nessie and Why as a Data Engineer or Architect you should care?"
 date: "2023-05-30T12:12:03.284Z"
 category: "data engineering"
-bannerImage: "/images/postbanner/2023/nessie-matters.png"
 
 ---
 

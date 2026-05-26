@@ -4,7 +4,6 @@ date: "2024-02-21"
 description: "Understanding the Value of the Data Lakehouse"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

@@ -4,7 +4,6 @@ date: "2026-02-19"
 description: "Both terms appear in every modern data architecture diagram. They're used interchangeably in conference talks, Slack threads, and vendor marketing. And almos..."
 author: "Alex Merced"
 category: "Semantic Layer"
-bannerImage: "./images/semantic_layer_seo/03/metrics-subset.png"
 tags:
   - semantic layer
   - data governance

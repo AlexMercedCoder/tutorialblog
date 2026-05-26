@@ -5,7 +5,6 @@ date: "2024-10-21"
 description: "All about the Apache Parquet File Format"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

@@ -4,7 +4,6 @@ date: "2024-02-23"
 description: "An overview of Python for beginners"
 author: "Alex Merced"
 category: "Python"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - python
 ---

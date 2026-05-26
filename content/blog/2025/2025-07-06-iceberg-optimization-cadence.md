@@ -10,7 +10,6 @@ tags:
   - Snapshot Expiration
   - Data Engineering
 category: "Apache Iceberg"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 ---
 
 - **[Free Apache Iceberg Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=optimization_blogs&utm_content=alexmerced&utm_term=external_blog)**  

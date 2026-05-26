@@ -4,7 +4,6 @@ date: "2025-09-05"
 description: "Unlocking the Power of Agentic AI with Apache Iceberg and Dremio"
 author: "Alex Merced"
 category: "Data Engineering"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Lakehouse
   - Data Engineering

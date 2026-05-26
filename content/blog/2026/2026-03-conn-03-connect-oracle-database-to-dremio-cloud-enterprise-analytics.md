@@ -4,7 +4,6 @@ date: "2026-03-01"
 description: "Oracle Database runs the most critical enterprise applications in the world — ERP systems, financial ledgers, supply chain management, and HR platforms. Th..."
 author: "Alex Merced"
 category: "Dremio Connectors"
-bannerImage: "./images/connector-blogs/03/banner.png"
 tags:
   - dremio
   - data integration

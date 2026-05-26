@@ -6,7 +6,6 @@ author: "Alex Merced"
 title: "An In-Depth Overview of Open Lakehouse Tech: Apache Iceberg & Nessie"
 date: "2023-10-28T12:12:03.284Z"
 category: "data lakehouse"
-bannerImage: "https://i.imgur.com/no75OFq.png"
 ---
 
 # Unleashing the Power of Open Lakehouse Technologies: Apache Iceberg and Project Nessie

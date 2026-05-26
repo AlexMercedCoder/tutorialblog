@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Cursor is an AI-native code editor built on the VS Code foundation that integrates AI deeply into every aspect of the development workflow. Its context manag..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

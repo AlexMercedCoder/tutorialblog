@@ -4,7 +4,6 @@ date: "2024-10-31"
 description: "How to get hands-on with Apache Iceberg"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - data lakehouse
   - data engineering

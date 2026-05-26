@@ -4,7 +4,6 @@ date: "2022-11-26"
 description: "Seeing the Power of the latest javascript meta-framework"
 author: "Alex Merced"
 category: "javascript"
-bannerImage: "/images/postbanner/2022/5reasonsdremio.png"
 tags:
   - frontend
   - backend

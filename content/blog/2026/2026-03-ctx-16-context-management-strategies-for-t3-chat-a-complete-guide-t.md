@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "T3 Chat is a modern web-based AI chat interface that gives you access to multiple AI models through a single unified platform. Its primary value proposition ..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management

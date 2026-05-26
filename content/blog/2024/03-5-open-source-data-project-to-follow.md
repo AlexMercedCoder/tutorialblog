@@ -4,7 +4,6 @@ date: "2024-03-19"
 description: "Apache Iceberg, Apache Arrow, Nessie, Ibis, Substrait"
 author: "Alex Merced"
 category: "Data Lakehouse"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - Data Architecture
   - Apache Iceberg

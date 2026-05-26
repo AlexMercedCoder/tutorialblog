@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: Every database is a collection of engineering tradeoffs. Learn the 9 design decisions that shape how query engines store, index, and..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/01/oltp-olap-spectrum.png"
 tags:
   - query engines
   - databases

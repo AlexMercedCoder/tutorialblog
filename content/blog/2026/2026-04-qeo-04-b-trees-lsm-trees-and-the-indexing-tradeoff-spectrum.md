@@ -4,7 +4,6 @@ date: "2026-04-29"
 description: "<!-- Meta Description: B-trees balance reads and writes for OLTP. LSM trees maximize write throughput. Bitmap indexes accelerate OLAP filtering. Here is..."
 author: "Alex Merced"
 category: "Query Engines"
-bannerImage: "./images/query-engine-optimization/04/btree-structure.png"
 tags:
   - query engines
   - databases

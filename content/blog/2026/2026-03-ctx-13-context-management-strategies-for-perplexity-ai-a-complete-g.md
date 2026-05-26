@@ -4,7 +4,6 @@ date: "2026-03-07"
 description: "Perplexity AI occupies a unique position in the AI landscape: it is a research-first tool that combines conversational AI with real-time web search to produc..."
 author: "Alex Merced"
 category: "AI Context Management"
-bannerImage: "https://i.imgur.com/cpoMZQ8.png"
 tags:
   - AI coding tools
   - context management
