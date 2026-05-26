@@ -1,5 +1,5 @@
 import { createElement as h } from 'react';
-import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import satori from 'satori';
@@ -178,10 +178,14 @@ async function main() {
     const slug = slugify(file);
     const outPath = join(outDir, `${slug}.png`);
 
-    // Skip if already exists
+    // Skip if already exists and source hasn't changed
     if (existsSync(outPath)) {
-      skipped++;
-      continue;
+      const srcStat = statSync(fullPath);
+      const outStat = statSync(outPath);
+      if (srcStat.mtimeMs < outStat.mtimeMs) {
+        skipped++;
+        continue;
+      }
     }
 
     const fullPath = join(blogDir, file);
