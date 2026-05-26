@@ -18,22 +18,8 @@ const URL_TEXT = 'tuts.alexmercedcoder.dev';
 const WIDTH = 1200;
 const HEIGHT = 630;
 
-async function loadFont() {
-  // Fetch CSS from Google Fonts API to get the actual font file URL
-  const cssUrl = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700';
-  const cssRes = await fetch(cssUrl);
-  const cssText = await cssRes.text();
-
-  // Extract the TTF URL from the CSS
-  const urlMatch = cssText.match(/url\(([^)]+\.ttf)\)/);
-  if (!urlMatch) {
-    throw new Error('Could not find font URL in Google Fonts CSS response');
-  }
-  const fontUrl = urlMatch[1];
-
-  const res = await fetch(fontUrl);
-  const buffer = await res.arrayBuffer();
-  return buffer;
+function loadFont() {
+  return readFileSync(join(__dirname, 'inter-regular.ttf')).buffer;
 }
 
 function slugify(relativePath) {
@@ -150,7 +136,7 @@ async function main() {
 
   // Load font
   console.log('Loading Inter font...');
-  const fontData = await loadFont();
+  const fontData = loadFont();
   const fontRegular = { name: 'Inter', data: fontData, weight: 400, style: 'normal' };
   const fontBold = { name: 'Inter', data: fontData, weight: 700, style: 'normal' };
 
