@@ -174,7 +174,7 @@ Now that we have everything needed to store and track our data, we just need a t
 - **SQL Query Engine:** An SQL query engine with industry-leading price/performance that can federate queries across all these data sources, featuring a semantic layer to track and define data models and metrics for fast reporting and business intelligence (BI).
 - **Lakehouse Management:** Dremio has deep integrations with Nessie catalogs and an integrated lakehouse catalog that allows you to automate the maintenance of Iceberg tables, ensuring your data lakehouse runs smoothly.
 
-Dremio becomes a powerful tool for unifying and organizing your data into data products for your users. Since your data is in a lakehouse, several tools can be part of the picture. For example, you can use Upsolver, Fivetran, or Airbyte to ingest data into your lakehouse, run graph queries on your lakehouse with Puppygraph, and explore many other possibilities—all without needing multiple copies of your data.
+Dremio becomes a powerful tool for unifying and organizing your data into data products for your users. Since your data is in a lakehouse, several tools can be part of the picture. For example, you can use Upsolver, Fivetran, or Airbyte to ingest data into your lakehouse, run graph queries on your lakehouse with Puppygraph, and explore many other possibilities: all without needing multiple copies of your data.
 
 ## Conclusion
 

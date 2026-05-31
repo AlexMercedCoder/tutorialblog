@@ -15,7 +15,7 @@ Once upon a time, in the mystical realm of data lakes, there was a growing probl
 Project Nessie is a version control system for data lakes, designed to bring the power of Git-like operations to data. Just as Nessie (the monster) is the guardian of the Loch, Project Nessie (the tool) is the guardian of your data lake, ensuring that all changes are tracked, organized, and accessible.
 
 What is the Problem?
-The problem Nessie solves is akin to trying to find a specific grain of sand on a beach. In the world of data, changes happen at a rapid pace. Tables are updated, schemas are altered, and without a system to track these changes, it’s like trying to catch a fish with your bare hands — slippery and frustrating.
+The problem Nessie solves is akin to trying to find a specific grain of sand on a beach. In the world of data, changes happen at a rapid pace. Tables are updated, schemas are altered, and without a system to track these changes, it’s like trying to catch a fish with your bare hands : slippery and frustrating.
 
 Nessie steps in as your data lifeguard. It keeps an eye on all the changes happening in your data lake. With Nessie, you can take a snapshot of your data at any point in time, allowing you to dive back into that exact state whenever you want. It’s like having a time machine for your data, and who wouldn’t want that?
 

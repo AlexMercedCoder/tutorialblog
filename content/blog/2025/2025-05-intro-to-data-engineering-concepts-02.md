@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-Before we can analyze, model, or visualize data, we first need to get it into our systems. This step—often taken for granted—is known as data ingestion. It’s the bridge between the outside world and the internal data infrastructure, and it plays a critical role in how data is shaped from day one.
+Before we can analyze, model, or visualize data, we first need to get it into our systems. This step: often taken for granted, is known as data ingestion. It’s the bridge between the outside world and the internal data infrastructure, and it plays a critical role in how data is shaped from day one.
 
 In this post, we’ll break down the types of data sources you’ll encounter, the ingestion strategies available, and what trade-offs to consider when designing ingestion workflows.
 
@@ -32,7 +32,7 @@ Relational databases like MySQL or PostgreSQL are common sources in transactiona
 
 APIs are another rich source of data, especially in modern SaaS environments. From financial data to social media feeds, APIs expose endpoints where structured (often JSON-formatted) data can be requested in real-time or on a schedule.
 
-Then there are flat files—CSV, JSON, XML—often used in data exports, logs, and external data sharing. While simple, they can carry critical context or fill gaps that structured sources miss.
+Then there are flat files: CSV, JSON, XML, often used in data exports, logs, and external data sharing. While simple, they can carry critical context or fill gaps that structured sources miss.
 
 Sensor data, clickstreams, mobile apps, third-party tools, and message queues all add to the landscape, each bringing its own cadence and complexity.
 
@@ -44,7 +44,7 @@ Once you identify your sources, the next question becomes: **how** will you inge
 
 Batch processes tend to be simpler and easier to maintain. They can rely on traditional extract-transform-load (ETL) workflows and are often orchestrated using tools like Apache Airflow or simple cron jobs.
 
-**Streaming ingestion**, on the other hand, handles data in motion. As new records are created—say, a customer clicks a link or a sensor detects a temperature change—they’re ingested immediately. This method is crucial for use cases that require low-latency or real-time processing, such as fraud detection or live recommendation engines.
+**Streaming ingestion**, on the other hand, handles data in motion. As new records are created: say, a customer clicks a link or a sensor detects a temperature change, they’re ingested immediately. This method is crucial for use cases that require low-latency or real-time processing, such as fraud detection or live recommendation engines.
 
 Apache Kafka is a popular tool for enabling streaming pipelines. It allows systems to publish and subscribe to streams of records, ensuring data flows continuously with minimal delay.
 
@@ -60,7 +60,7 @@ Unstructured data includes images, videos, PDFs, and raw text. These formats typ
 
 ## Considerations in Designing Ingestion Pipelines
 
-Data ingestion isn’t just about moving bytes—it’s about doing so reliably, efficiently, and with the future in mind.
+Data ingestion isn’t just about moving bytes - it’s about doing so reliably, efficiently, and with the future in mind.
 
 Latency requirements play a major role. Does the business need data as it happens, or is yesterday’s data good enough? That determines your choice between batch and streaming.
 
@@ -68,10 +68,10 @@ Scalability is another concern. What works for 10,000 records a day might break 
 
 Error handling is essential. What happens if a source API goes down? What if a file arrives with missing fields? Designing retry logic, alerts, and fallback mechanisms helps ensure ingestion pipelines are robust.
 
-Finally, schema evolution can’t be overlooked. Data changes over time—columns get added, data types shift. Your ingestion pipeline must be flexible enough to adapt without breaking downstream systems.
+Finally, schema evolution can’t be overlooked. Data changes over time - columns get added, data types shift. Your ingestion pipeline must be flexible enough to adapt without breaking downstream systems.
 
 ## Looking Ahead
 
 Getting data into the system is just the beginning. Once it’s ingested, it often needs to be transformed to fit the analytical or business context.
 
-In the next post, we’ll explore the concepts of ETL and ELT—two core paradigms for moving and transforming data—and look at how they differ in practice and purpose.
+In the next post, we’ll explore the concepts of ETL and ELT: two core paradigms for moving and transforming data, and look at how they differ in practice and purpose.

@@ -1,7 +1,7 @@
 ---
 title: "Connect Amazon S3 to Dremio Cloud: Query Your Data Lake with SQL, Federation, and AI"
 date: "2026-03-01"
-description: "Amazon S3 is the default landing zone for data in the cloud. Log files, Parquet datasets, CSV exports, JSON events, IoT telemetry, and raw data dumps — it ..."
+description: "Amazon S3 is the default landing zone for data in the cloud. Log files, Parquet datasets, CSV exports, JSON events, IoT telemetry, and raw data dumps : it ..."
 author: "Alex Merced"
 category: "Dremio Connectors"
 tags:
@@ -12,17 +12,17 @@ tags:
   - federated queries
 ---
 
-Amazon S3 is the default landing zone for data in the cloud. Log files, Parquet datasets, CSV exports, JSON events, IoT telemetry, and raw data dumps — it all ends up in S3 buckets. But S3 is storage, not an analytics engine. You can't run SQL against S3 natively. To query it, you need Amazon Athena (per-TB pricing), AWS Glue ETL jobs (cluster management), or a data warehouse that imports the data. All add cost, complexity, and latency.
+Amazon S3 is the default landing zone for data in the cloud. Log files, Parquet datasets, CSV exports, JSON events, IoT telemetry, and raw data dumps : it all ends up in S3 buckets. But S3 is storage, not an analytics engine. You can't run SQL against S3 natively. To query it, you need Amazon Athena (per-TB pricing), AWS Glue ETL jobs (cluster management), or a data warehouse that imports the data. All add cost, complexity, and latency.
 
 Dremio Cloud connects directly to S3 and lets you query files in place using standard SQL. Dremio reads Parquet, CSV, JSON, Delta Lake, and Apache Iceberg table formats. It pushes projection and filter operations into its vectorized query engine and caches frequently accessed data on local NVMe drives (Columnar Cloud Cache, or C3) for near-instantaneous repeat queries.
 
-For organizations with hundreds or thousands of S3 buckets accumulated over years, data lake sprawl is a major challenge. Data lands in S3 from application logs, CDC pipelines, third-party integrations, and manual uploads — often without consistent naming conventions, schemas, or documentation. Dremio provides the organizational layer: connect S3 buckets, create views that standardize column names and types, build a semantic layer with wiki descriptions, and expose clean datasets to analysts and AI tools. This turns an unstructured "data swamp" into a governed, queryable data lake.
+For organizations with hundreds or thousands of S3 buckets accumulated over years, data lake sprawl is a major challenge. Data lands in S3 from application logs, CDC pipelines, third-party integrations, and manual uploads : often without consistent naming conventions, schemas, or documentation. Dremio provides the organizational layer: connect S3 buckets, create views that standardize column names and types, build a semantic layer with wiki descriptions, and expose clean datasets to analysts and AI tools. This turns an unstructured "data swamp" into a governed, queryable data lake.
 
 ## Why S3 Users Need Dremio
 
 ### SQL on Your Data Lake Without Athena Costs
 
-Athena charges per terabyte of data scanned. For large datasets queried frequently — dashboards refreshing every 15 minutes, analysts exploring data, scheduled reports — costs grow unpredictably. Dremio's Reflections pre-compute results so repeated queries don't re-scan S3. C3 caching further reduces S3 GET requests. You pay for Dremio compute time, not per-TB scanned.
+Athena charges per terabyte of data scanned. For large datasets queried frequently : dashboards refreshing every 15 minutes, analysts exploring data, scheduled reports,  costs grow unpredictably. Dremio's Reflections pre-compute results so repeated queries don't re-scan S3. C3 caching further reduces S3 GET requests. You pay for Dremio compute time, not per-TB scanned.
 
 ### Format Flexibility
 
@@ -34,18 +34,18 @@ Your event data is in S3, but your customer data is in PostgreSQL, your financia
 
 ### Apache Iceberg Table Management
 
-Create Iceberg tables in Dremio's Open Catalog (backed by S3 or Dremio-managed storage) with full DML support. Dremio automatically handles compaction (merging small files), manifest rewriting, clustering, and vacuuming — no manual `OPTIMIZE` jobs needed.
+Create Iceberg tables in Dremio's Open Catalog (backed by S3 or Dremio-managed storage) with full DML support. Dremio automatically handles compaction (merging small files), manifest rewriting, clustering, and vacuuming : no manual `OPTIMIZE` jobs needed.
 
 ### AI on S3 Data
 
-Dremio's AI Agent, MCP Server, and AI SQL Functions make your raw S3 files queryable by business users and external AI tools — no data engineering required.
+Dremio's AI Agent, MCP Server, and AI SQL Functions make your raw S3 files queryable by business users and external AI tools : no data engineering required.
 
 ## Prerequisites
 
 - **AWS Account** with S3 access
 - **IAM Role or Access Key/Secret Key** with `s3:GetObject`, `s3:ListBucket`, and `s3:GetBucketLocation` permissions
 - **Bucket names** or specific paths you want to query
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-amazon-s3-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-amazon-s3-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect S3 to Dremio Cloud
 
@@ -204,7 +204,7 @@ For frequently queried S3 data, Dremio provides two layers of acceleration:
 4. Select columns and set the refresh interval
 5. Click **Save**
 
-**C3 (Columnar Cloud Cache)** automatically caches frequently accessed file data on local NVMe drives. C3 works transparently — no configuration needed. When Dremio reads S3 files, it caches the columnar data locally. Subsequent reads of the same files come from NVMe instead of S3, eliminating S3 GET request costs and latency.
+**C3 (Columnar Cloud Cache)** automatically caches frequently accessed file data on local NVMe drives. C3 works transparently : no configuration needed. When Dremio reads S3 files, it caches the columnar data locally. Subsequent reads of the same files come from NVMe instead of S3, eliminating S3 GET request costs and latency.
 
 Together, Reflections and C3 mean that frequently executed queries against S3 data run in milliseconds, not seconds.
 
@@ -272,12 +272,12 @@ This creates an Iceberg table from CSV data, giving you columnar storage, automa
 
 Organize your S3 bucket with a medallion architecture:
 
-- **`raw/`** — Landing zone for incoming data (CSV, JSON, Parquet from external sources)
-- **`bronze/`** — Cleaned, typed versions of raw data (Iceberg tables)
-- **`silver/`** — Joined, deduplicated, enriched datasets
-- **`gold/`** — Business-ready views and aggregations for the semantic layer
+- **`raw/`** : Landing zone for incoming data (CSV, JSON, Parquet from external sources)
+- **`bronze/`** : Cleaned, typed versions of raw data (Iceberg tables)
+- **`silver/`** : Joined, deduplicated, enriched datasets
+- **`gold/`** : Business-ready views and aggregations for the semantic layer
 
-Dremio's SQL engine handles the transformations between layers using `CREATE TABLE AS SELECT` and `MERGE` statements — no external ETL tools needed.
+Dremio's SQL engine handles the transformations between layers using `CREATE TABLE AS SELECT` and `MERGE` statements : no external ETL tools needed.
 
 ## When to Use S3 vs. Other Storage
 
@@ -285,7 +285,7 @@ Dremio's SQL engine handles the transformations between layers using `CREATE TAB
 
 **Use managed databases when:** Your data requires real-time OLTP operations, your applications need row-level transactions, your data model is heavily relational.
 
-Dremio federates across both — S3 for your data lake and databases for operational data, in a single query.
+Dremio federates across both : S3 for your data lake and databases for operational data, in a single query.
 
 ## Get Started
 

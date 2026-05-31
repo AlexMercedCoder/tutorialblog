@@ -20,7 +20,7 @@ Apache Iceberg remains at the forefront of innovation, redefining how we think a
 
 ## 1. Scan Planning Endpoint in the Iceberg REST Catalog Specification
 
-One of the most anticipated updates in the Iceberg ecosystem for 2025 is the addition of a "Scan Planning" endpoint to the Iceberg REST Catalog specification. This enhancement will allow query engines to delegate scan planning—the process of reading metadata to determine which files are needed for a query—to the catalog itself. This new capability opens the door to several exciting possibilities:
+One of the most anticipated updates in the Iceberg ecosystem for 2025 is the addition of a "Scan Planning" endpoint to the Iceberg REST Catalog specification. This enhancement will allow query engines to delegate scan planning: the process of reading metadata to determine which files are needed for a query, to the catalog itself. This new capability opens the door to several exciting possibilities:
 
 - **Optimized Scan Planning with Caching**: By handling scan planning at the catalog level, frequently submitted queries can benefit from cached scan plans. This optimization reduces redundant metadata reads and accelerates query execution, irrespective of the engine used to submit the query.
 

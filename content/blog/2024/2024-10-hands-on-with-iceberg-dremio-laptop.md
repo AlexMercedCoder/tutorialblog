@@ -27,7 +27,7 @@ By the end of this tutorial, you’ll be ready to set up a local lakehouse envir
 
 ## Environment Setup
 
-Before diving into the data lakehouse setup, let’s ensure your environment is ready. We’ll use **Docker**, a tool that allows you to run applications in isolated environments called "containers." If you’re new to Docker, don’t worry—this guide will walk you through each step!
+Before diving into the data lakehouse setup, let’s ensure your environment is ready. We’ll use **Docker**, a tool that allows you to run applications in isolated environments called "containers." If you’re new to Docker, don’t worry: this guide will walk you through each step!
 
 ### Step 1: Install Docker
 
@@ -460,7 +460,7 @@ Branching and merging in Nessie allows you to safely experiment with data modifi
 
 ## Tagging Important States with Nessie: Creating Data Snapshots
 
-In addition to branching, Nessie also offers the ability to tag specific states of your data, making it easy to create snapshots at critical moments. Tags allow you to mark key data versions—such as a quarterly report cutoff or pre-migration data state—so you can refer back to them if needed.
+In addition to branching, Nessie also offers the ability to tag specific states of your data, making it easy to create snapshots at critical moments. Tags allow you to mark key data versions: such as a quarterly report cutoff or pre-migration data state, so you can refer back to them if needed.
 
 In this section, we’ll walk through creating tags in Nessie to capture the current state of the data and explore how to use tags for historical analysis or recovery.
 
@@ -619,7 +619,7 @@ Iceberg metadata tables in Dremio provide a wealth of information on table struc
 
 ## Conclusion
 
-Congratulations! You’ve just set up a powerful data lakehouse environment on your laptop with Apache Iceberg, Dremio, and Nessie, and explored hands-on techniques for managing and analyzing data. By leveraging the strengths of these open-source tools, you now have the flexibility of data lakes with the performance and reliability of data warehouses—right on your local machine.
+Congratulations! You’ve just set up a powerful data lakehouse environment on your laptop with Apache Iceberg, Dremio, and Nessie, and explored hands-on techniques for managing and analyzing data. By leveraging the strengths of these open-source tools, you now have the flexibility of data lakes with the performance and reliability of data warehouses - right on your local machine.
 
 From creating and querying Iceberg tables to managing branches and snapshots with Nessie’s Git-like controls, you’ve seen how this stack can simplify complex data workflows. Using Dremio’s intuitive interface, you connected sources, ran queries, explored metadata, and learned how to use Iceberg's versioning and partitioning capabilities for powerful insights. Iceberg metadata tables also provide detailed information on data structure, making it easy to track changes, optimize storage, and even run time-travel queries.
 

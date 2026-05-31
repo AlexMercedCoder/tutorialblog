@@ -16,7 +16,7 @@ tags:
 
 A bad data model doesn't announce itself. It hides behind slow dashboards, conflicting numbers, confused analysts, and AI agents that generate wrong SQL. By the time someone identifies the model as the root cause, the team has already built dozens of reports on top of it.
 
-Here are seven modeling mistakes that create downstream pain — and how to avoid each one.
+Here are seven modeling mistakes that create downstream pain : and how to avoid each one.
 
 ## Mistake 1: No Defined Grain
 
@@ -96,6 +96,6 @@ In Dremio, Fine-Grained Access Control enforces row and column-level policies, L
 
 ![Iterative data modeling cycle: design, document, measure, improve](images/data_modeling/10/modeling-cycle.png)
 
-Pick one of these seven mistakes. Check whether your current data model has it. Fix it. Then move to the next one. Data modeling is iterative — no team gets it perfect on the first pass. The goal is not perfection but continuous improvement: clearer names, better documentation, tighter governance, and models that match what your consumers actually need.
+Pick one of these seven mistakes. Check whether your current data model has it. Fix it. Then move to the next one. Data modeling is iterative : no team gets it perfect on the first pass. The goal is not perfection but continuous improvement: clearer names, better documentation, tighter governance, and models that match what your consumers actually need.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

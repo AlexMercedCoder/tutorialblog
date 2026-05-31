@@ -20,7 +20,7 @@ Zero-ETL federation is the answer: the query engine reaches the data where it li
 
 ## Why Batch ETL Limits Agentic Analytics
 
-Traditional ETL follows a fixed cadence. Data lands in the analytical system hours or days after it was created in the operational system. That gap is the latency floor — the minimum time between an event happening and an agent being able to analyze it.
+Traditional ETL follows a fixed cadence. Data lands in the analytical system hours or days after it was created in the operational system. That gap is the latency floor : the minimum time between an event happening and an agent being able to analyze it.
 
 For retrospective analysis (what happened last quarter), batch ETL is fine. The latency floor doesn't matter when the questions are about history.
 
@@ -30,19 +30,19 @@ For agentic analytics focused on current business conditions, batch ETL creates 
 
 **Incomplete cross-system joins:** When a customer churn prediction agent needs to join support ticket data (from a real-time source) with purchase history (in the lakehouse), a batch ETL approach requires either waiting for the next batch or running two separate analyses that can't be easily joined.
 
-**Decision lag:** Agents supporting operational decisions — sales prioritization, inventory allocation, customer routing — need current data to produce actionable recommendations. A 12-hour lag in the underlying data produces recommendations that are 12 hours behind reality.
+**Decision lag:** Agents supporting operational decisions : sales prioritization, inventory allocation, customer routing,  need current data to produce actionable recommendations. A 12-hour lag in the underlying data produces recommendations that are 12 hours behind reality.
 
 ## The Federation Architecture
 
-Zero-ETL federation routes queries directly to source systems at query time. The query engine acts as the router — it receives a SQL query from an AI agent, identifies which tables come from which sources, sends source-specific subqueries to each source, and assembles the results.
+Zero-ETL federation routes queries directly to source systems at query time. The query engine acts as the router : it receives a SQL query from an AI agent, identifies which tables come from which sources, sends source-specific subqueries to each source, and assembles the results.
 
 Dremio's federation architecture connects to sources through source-specific connectors:
 
-- **Relational databases:** PostgreSQL, MySQL, Oracle, SQL Server — queried via JDBC with predicate pushdown
-- **Cloud warehouses:** Snowflake, BigQuery, Redshift — queried through their native query APIs
-- **Object storage:** S3, GCS, ADLS — Iceberg or raw Parquet, queried directly
-- **SaaS systems:** Salesforce, Zendesk, HubSpot — queried through API-based connectors
-- **Streaming systems:** Kafka, Kinesis — queried through streaming-to-SQL adapters
+- **Relational databases:** PostgreSQL, MySQL, Oracle, SQL Server : queried via JDBC with predicate pushdown
+- **Cloud warehouses:** Snowflake, BigQuery, Redshift : queried through their native query APIs
+- **Object storage:** S3, GCS, ADLS : Iceberg or raw Parquet, queried directly
+- **SaaS systems:** Salesforce, Zendesk, HubSpot : queried through API-based connectors
+- **Streaming systems:** Kafka, Kinesis : queried through streaming-to-SQL adapters
 
 Each source appears in Dremio's unified namespace. An agent queries the namespace without needing to know which underlying system holds which data.
 
@@ -60,8 +60,8 @@ Without pushdown:
 - Apply filters in Dremio's memory
 
 With pushdown:
-- Send to Salesforce: `SELECT * FROM opportunities WHERE created_date > '2026-05-21' AND region = 'NA'` — returns thousands of rows
-- Send to Iceberg: `SELECT * FROM revenue WHERE date > '2026-05-21' AND region = 'NA'` — reads only matching partitions
+- Send to Salesforce: `SELECT * FROM opportunities WHERE created_date > '2026-05-21' AND region = 'NA'` : returns thousands of rows
+- Send to Iceberg: `SELECT * FROM revenue WHERE date > '2026-05-21' AND region = 'NA'` : reads only matching partitions
 - Join the small result sets in Dremio's memory
 
 Predicate pushdown can reduce the data volume transferred by 99%+ for well-filtered queries. The query runs in seconds instead of minutes.
@@ -128,7 +128,7 @@ Hybrid architectures are the norm: real-time federation for current operational 
 
 For agentic analytics, federation is the mechanism that makes the AI agent a real-time analytical system rather than a historical one. The agent's ability to answer "what is happening right now" depends on federation reaching current operational systems. Its ability to answer "what happened in the past" depends on the historical lakehouse.
 
-Dremio's [query federation](https://www.dremio.com/blog/why-agentic-analytics-requires-federation-virtualization-and-the-lakehouse-how-dremio-delivers/) connects both layers through the same interface, with the same semantic layer providing business context for both real-time and historical data. The agent doesn't need to know which source has which data — the unified namespace handles that routing.
+Dremio's [query federation](https://www.dremio.com/blog/why-agentic-analytics-requires-federation-virtualization-and-the-lakehouse-how-dremio-delivers/) connects both layers through the same interface, with the same semantic layer providing business context for both real-time and historical data. The agent doesn't need to know which source has which data : the unified namespace handles that routing.
 
 The era of zero-ETL federation means AI agents can answer business questions about current conditions and historical context in a single investigation, without waiting for a batch pipeline to complete.
 

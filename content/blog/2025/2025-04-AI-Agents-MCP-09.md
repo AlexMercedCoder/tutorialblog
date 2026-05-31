@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 9 - Tools in MCP — Giving LLMs the Power to Act
+title: A Journey from AI to LLMs and MCP - 9 - Tools in MCP : Giving LLMs the Power to Act
 date: "2025-04-13"
-description: "Tools in MCP — Giving LLMs the Power to Act"
+description: "Tools in MCP : Giving LLMs the Power to Act"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -37,7 +37,7 @@ Let’s dive in.
 
 ## What Are Tools in MCP?
 
-**Tools** are executable functions that an LLM (or the user) can call via the MCP client. Unlike resources—which are passive data—**tools are active operations**.
+**Tools** are executable functions that an LLM (or the user) can call via the MCP client. Unlike resources: which are passive data, **tools are active operations**.
 
 Examples include:
 - Running a shell command
@@ -51,7 +51,7 @@ Each tool includes:
 - A **description** (for UI/model understanding)
 - An **input schema** (JSON schema describing expected parameters)
 
-> Tools allow models to interact with the world beyond natural language—under user oversight.
+> Tools allow models to interact with the world beyond natural language - under user oversight.
 
 ## Discovering Tools
 
@@ -126,7 +126,7 @@ Tools are designed to be invoked by models automatically. The host mediates this
 
 This is what enables “agentic behavior.” For example:
 
-Claude sees a CSV file and decides to call analyze_csv to compute averages—without a user explicitly requesting it.
+Claude sees a CSV file and decides to call analyze_csv to compute averages - without a user explicitly requesting it.
 
 ### Tool Design Patterns
 Let’s look at some common and powerful tool types:
@@ -232,7 +232,7 @@ async def get_weather(city: str) -> str:
 This tool will automatically appear in the tools/list response and can be invoked by the LLM or user.
 
 ### Why Tools Matter for Agents
-Agents aren’t just chatbots—they're interactive systems. Tools give them the ability to:
+Agents aren’t just chatbots - they're interactive systems. Tools give them the ability to:
 
 - Take real-world actions
 
@@ -254,10 +254,10 @@ Combined with resources, prompts, and sampling, tools make LLMs feel like collab
 | Use case examples   | Shell commands, API calls, code generation, analysis         |
 | Security guidelines | Validate input, log usage, gate sensitive actions            |
 
-### Coming Up Next: Sampling and Prompts — Letting the Server Ask the Model for Help
+### Coming Up Next: Sampling and Prompts : Letting the Server Ask the Model for Help
 In the final two posts of this series, we’ll explore:
 
-✅ Sampling — How servers can request completions from the LLM during workflows
-✅ Prompts — Reusable templates for user-driven or model-driven actions
+✅ Sampling : How servers can request completions from the LLM during workflows
+✅ Prompts : Reusable templates for user-driven or model-driven actions
 
 Tools give LLMs the power to act. With proper controls and schemas, they become safe, composable building blocks for real-world automation.

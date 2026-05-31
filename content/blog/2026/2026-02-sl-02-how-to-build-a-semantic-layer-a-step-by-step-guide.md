@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-![Building a semantic layer — Bronze, Silver, and Gold tiers](images/semantic_layer_seo/02/build-semantic-layer.png)
+![Building a semantic layer : Bronze, Silver, and Gold tiers](images/semantic_layer_seo/02/build-semantic-layer.png)
 
 Most teams start building a semantic layer the wrong way: they open their BI tool, create a few calculated fields, and call it done. Six months later, three dashboards define "churn" differently, nobody trusts the numbers, and the data team is debugging metric discrepancies instead of building new features.
 
@@ -90,7 +90,7 @@ Gold views are pre-aggregated for specific consumers. A BI dashboard gets `month
 
 Gold views don't add new business logic. They aggregate and reshape Silver views for performance and usability.
 
-## Document Everything — or Let AI Help
+## Document Everything : or Let AI Help
 
 An undocumented semantic layer is a semantic layer nobody uses. Every table and every column should have a description that explains:
 - What the data represents

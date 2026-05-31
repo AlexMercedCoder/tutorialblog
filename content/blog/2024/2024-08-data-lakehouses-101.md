@@ -12,7 +12,7 @@ tags:
 - [Sign-up for this free Apache Iceberg Crash Course](https://bit.ly/am-2024-iceberg-live-crash-course-1)
 - [Get a free copy of Apache Iceberg the Definitive Guide](https://bit.ly/am-iceberg-book)
 
-The scale of data is growing every day, with storage now reaching petabyte and exabyte levels that need to be utilized in increasingly diverse ways. This evolution's cost and practicality make the old paradigm—using data lakes to store both structured and unstructured data, then moving portions of that structured data into data warehouses for reporting, analytics, dashboards, and more—full of friction. The friction arises from storing multiple copies of data for each system used, keeping this data in sync and consistent, and delivering it at the high speeds modern data needs demand. Addressing these challenges is where a new architecture called data lakehouses comes into play.
+The scale of data is growing every day, with storage now reaching petabyte and exabyte levels that need to be utilized in increasingly diverse ways. This evolution's cost and practicality make the old paradigm: using data lakes to store both structured and unstructured data, then moving portions of that structured data into data warehouses for reporting, analytics, dashboards, and more, full of friction. The friction arises from storing multiple copies of data for each system used, keeping this data in sync and consistent, and delivering it at the high speeds modern data needs demand. Addressing these challenges is where a new architecture called data lakehouses comes into play.
 
 ## WHAT is a Data Lakehouse?
 

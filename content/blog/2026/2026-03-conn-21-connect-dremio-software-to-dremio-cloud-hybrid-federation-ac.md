@@ -20,7 +20,7 @@ This connector is designed for organizations that have existing Dremio Software 
 
 ### Hybrid Federation
 
-Your Dremio Software instance manages on-premises data sources — Oracle databases, SQL Server, network-attached file storage, and internal data lakes. Dremio Cloud manages cloud-native sources — S3, BigQuery, Snowflake, and cloud-hosted databases. By connecting Dremio Software to Dremio Cloud, you can write a single SQL query that joins on-premises data (through Dremio Software) with cloud data (through Dremio Cloud).
+Your Dremio Software instance manages on-premises data sources : Oracle databases, SQL Server, network-attached file storage, and internal data lakes. Dremio Cloud manages cloud-native sources,  S3, BigQuery, Snowflake, and cloud-hosted databases. By connecting Dremio Software to Dremio Cloud, you can write a single SQL query that joins on-premises data (through Dremio Software) with cloud data (through Dremio Cloud).
 
 ```sql
 -- Join on-premises data via Dremio Software with cloud data in Dremio Cloud
@@ -62,7 +62,7 @@ Users access both on-premises and cloud data through Dremio Cloud's interface. D
   - Public endpoint with TLS
   - VPN/VPC peering
   - AWS PrivateLink or equivalent
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-dremio-to-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-dremio-to-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Dremio Software to Dremio Cloud
 
@@ -183,7 +183,7 @@ FROM (
 Cross-network queries between Dremio Cloud and on-premises Dremio Software add network latency. Optimize by:
 
 - Using Reflections to cache frequently accessed on-premises data in Dremio Cloud
-- Creating aggregated views on the Dremio Software side that pre-compute common metrics — transfer summarized data rather than raw tables
+- Creating aggregated views on the Dremio Software side that pre-compute common metrics : transfer summarized data rather than raw tables
 - Minimizing the amount of raw data transferred across the network
 
 ### Cloud Egress Costs
@@ -228,12 +228,12 @@ Dremio Cloud's Fine-Grained Access Control (FGAC) applies governance to the fede
 
 BI tools connected to Dremio Cloud via Arrow Flight access both cloud and on-premises data through a single connection:
 
-- **Tableau:** Dremio connector — one connection serves data from both deployments
+- **Tableau:** Dremio connector : one connection serves data from both deployments
 - **Power BI:** Dremio ODBC driver or native connector
 - **Python/Pandas:** `pyarrow.flight` client for programmatic access
 - **dbt:** `dbt-dremio` adapter for transformation workflows
 
-All queries benefit from Reflections, governance, and the semantic layer — regardless of where the source data resides.
+All queries benefit from Reflections, governance, and the semantic layer : regardless of where the source data resides.
 
 ## VS Code Copilot Integration
 
@@ -247,18 +247,18 @@ Create Reflections on hybrid views to cache cross-deployment query results:
 2. Create Reflections on those views
 3. Set refresh intervals based on how frequently the underlying on-premises data changes
 
-After creation, dashboard queries that span both deployments are served from Dremio Cloud's Reflection cache — eliminating network latency for repeat queries.
+After creation, dashboard queries that span both deployments are served from Dremio Cloud's Reflection cache , eliminating network latency for repeat queries.
 
 ## Migration Planning: Software to Cloud
 
 Use the Dremio-to-Dremio connector as a migration bridge:
 
-1. **Phase 1 — Federation:** Connect Dremio Software to Dremio Cloud. All existing Software views remain accessible from Cloud.
-2. **Phase 2 — Parallel Development:** Build new views and Reflections in Dremio Cloud while continuing to maintain Software views.
-3. **Phase 3 — Source Migration:** Gradually move individual data sources (PostgreSQL, Oracle, S3) from Software connections to Cloud connections. Update views to reference Cloud-native sources.
-4. **Phase 4 — Decommission:** Once all sources are connected to Cloud, remove the Dremio Software connection.
+1. **Phase 1 : Federation:** Connect Dremio Software to Dremio Cloud. All existing Software views remain accessible from Cloud.
+2. **Phase 2 : Parallel Development:** Build new views and Reflections in Dremio Cloud while continuing to maintain Software views.
+3. **Phase 3 : Source Migration:** Gradually move individual data sources (PostgreSQL, Oracle, S3) from Software connections to Cloud connections. Update views to reference Cloud-native sources.
+4. **Phase 4 : Decommission:** Once all sources are connected to Cloud, remove the Dremio Software connection.
 
-During the migration, users experience no disruption — they continue querying through Dremio Cloud while the underlying sources are being transitioned.
+During the migration, users experience no disruption : they continue querying through Dremio Cloud while the underlying sources are being transitioned.
 
 ## Common Deployment Architectures
 
@@ -295,8 +295,8 @@ Maximize hybrid performance with these strategies:
 
 ## Get Started
 
-Organizations can seamlessly federate across Dremio deployments, enable AI analytics on combined on-premises and cloud data, and migrate incrementally to the cloud — all while maintaining unified governance. The Dremio-to-Dremio connector is the bridge that makes hybrid lakehouse analytics practical.
+Organizations can seamlessly federate across Dremio deployments, enable AI analytics on combined on-premises and cloud data, and migrate incrementally to the cloud : all while maintaining unified governance. The Dremio-to-Dremio connector is the bridge that makes hybrid lakehouse analytics practical.
 
-Whether you're running a single Dremio Software instance in one data center or managing multiple Software installations across global facilities, Dremio Cloud provides a unified analytical interface. Combine the raw data processing power of on-premises Dremio Software with the AI capabilities, Reflections, and managed infrastructure of Dremio Cloud. The result is a truly hybrid analytics platform that grows with your cloud migration at whatever pace your organization requires. No rip-and-replace, no big-bang migration — just a gradual, governed transition that protects your existing investments.
+Whether you're running a single Dremio Software instance in one data center or managing multiple Software installations across global facilities, Dremio Cloud provides a unified analytical interface. Combine the raw data processing power of on-premises Dremio Software with the AI capabilities, Reflections, and managed infrastructure of Dremio Cloud. The result is a truly hybrid analytics platform that grows with your cloud migration at whatever pace your organization requires. No rip-and-replace, no big-bang migration : just a gradual, governed transition that protects your existing investments.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-dremio-to-dremio-cloud&utm_content=alexmerced) and connect your existing Dremio Software instances.

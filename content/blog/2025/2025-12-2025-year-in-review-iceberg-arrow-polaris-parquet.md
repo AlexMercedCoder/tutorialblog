@@ -125,6 +125,6 @@ Arrow’s 2025 work reinforced that direction: fast, portable, and deeply integr
 
 Apache Iceberg, Polaris, Parquet, and Arrow all pushed forward in 2025. Each project focused on practical features that improve performance, governance, or compatibility. Together, they form a foundation for a warehouse experience on open data.
 
-This year’s progress wasn’t about experimentation. It was about consolidation. The features that shipped—from deletion vectors to vectorized reads to Flight SQL—are already in production. They make it easier to build, operate, and scale lakehouse systems.
+This year’s progress wasn’t about experimentation. It was about consolidation. The features that shipped: from deletion vectors to vectorized reads to Flight SQL, are already in production. They make it easier to build, operate, and scale lakehouse systems.
 
 In 2026, expect the conversation to shift from format maturity to engine convergence. With multi-engine catalogs, index-aware tables, and in-memory interoperability in place, the future looks a lot more accessible. And a lot faster.

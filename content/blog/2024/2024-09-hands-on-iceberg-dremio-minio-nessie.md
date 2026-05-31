@@ -31,7 +31,7 @@ Apache Iceberg and the Data Lakehouse architecture have garnered significant att
 
 Traditional database and data warehouse systems typically bundle together several core components, such as storage, table format, cataloging, and query processing, into a single tool. While this approach is convenient, it comes with challenges. Each system implements these features differently, which can lead to issues when scaling, transferring data across platforms, or achieving seamless interoperability. As organizations grow and evolve, these limitations become more apparent, especially in terms of flexibility and performance.
 
-Data Lakes, on the other hand, serve as a centralized repository where all types of data land in various forms, from structured to unstructured. Given this role, it makes sense to leverage the data lake as the storage foundation while decoupling the other functions—table metadata, cataloging, and query processing—into separate, specialized tools. This decoupled architecture forms the essence of the Data Lakehouse. It combines the flexibility and scalability of a Data Lake with the management features of a Data Warehouse, providing a unified solution for handling large-scale data storage, organization, and analytics.
+Data Lakes, on the other hand, serve as a centralized repository where all types of data land in various forms, from structured to unstructured. Given this role, it makes sense to leverage the data lake as the storage foundation while decoupling the other functions: table metadata, cataloging, and query processing, into separate, specialized tools. This decoupled architecture forms the essence of the Data Lakehouse. It combines the flexibility and scalability of a Data Lake with the management features of a Data Warehouse, providing a unified solution for handling large-scale data storage, organization, and analytics.
 
 ## Data Lakehouse Technologies
 
@@ -63,7 +63,7 @@ Dremio is a lakehouse platform designed to connect all your data in one place, e
 
 ## Setting Up the Environment with Docker Compose
 
-Docker is a platform that allows you to package and run applications in isolated containers, ensuring that they run consistently across different environments. Containers bundle an application with all of its dependencies, making it easy to manage and deploy complex setups. Docker Compose is a tool specifically designed to handle multi-container applications, enabling you to define and run multiple services using a simple configuration file. By using Docker Compose, we can quickly set up an environment with all the necessary components for our data lakehouse—such as Spark, Dremio, Minio, and Nessie—without worrying about manual installation or configuration. This approach not only saves time but ensures that our setup is portable and easy to replicate across different systems.
+Docker is a platform that allows you to package and run applications in isolated containers, ensuring that they run consistently across different environments. Containers bundle an application with all of its dependencies, making it easy to manage and deploy complex setups. Docker Compose is a tool specifically designed to handle multi-container applications, enabling you to define and run multiple services using a simple configuration file. By using Docker Compose, we can quickly set up an environment with all the necessary components for our data lakehouse: such as Spark, Dremio, Minio, and Nessie, without worrying about manual installation or configuration. This approach not only saves time but ensures that our setup is portable and easy to replicate across different systems.
 
 ### Understanding the Docker Compose File
 
@@ -275,7 +275,7 @@ Dremio’s role in this setup is to serve as the query engine for your data lake
 
 ### Spinning Up and Down the Environment with Docker Compose
 
-Once your Docker Compose file is configured, you can easily spin up and down the entire environment using simple Docker Compose commands. This process launches all the necessary services—Nessie, Minio, Spark, and Dremio—allowing them to work together as a cohesive data lakehouse environment.
+Once your Docker Compose file is configured, you can easily spin up and down the entire environment using simple Docker Compose commands. This process launches all the necessary services: Nessie, Minio, Spark, and Dremio, allowing them to work together as a cohesive data lakehouse environment.
 
 #### Spinning Up the Environment
 
@@ -418,7 +418,7 @@ Example response:
 
 This confirms that Nessie is responding and ready to track the Iceberg tables you will create.
 
-By completing these steps, you can ensure that all the services—Jupyter, Dremio, Minio, and Nessie—are running smoothly and are ready for use in your data lakehouse environment.
+By completing these steps, you can ensure that all the services: Jupyter, Dremio, Minio, and Nessie, are running smoothly and are ready for use in your data lakehouse environment.
 
 ## Ingesting Data into Iceberg with Apache Spark
 
@@ -1061,7 +1061,7 @@ WHERE customer_id IS NOT NULL
 - Name the view sales_data_silver, and choose the location under the Nessie catalog.
 
 ### Step 4: Generating Metrics from the Silver View (Gold Metrics)
-With the Silver view cleaned up, we can now generate "Gold" metrics—higher-level aggregated data that provides business insights.
+With the Silver view cleaned up, we can now generate "Gold" metrics - higher-level aggregated data that provides business insights.
 
 #### Create a New Query on the Silver View:
 
@@ -1213,7 +1213,7 @@ We’ve walked through the steps of setting up a complete data lakehouse environ
 
 With powerful integrations like **Arrow Flight** for high-performance data access and flexible options for querying and visualizing your data, the Data Lakehouse model empowers data teams to handle increasingly complex and large-scale datasets, unlocking the full potential of modern analytics.
 
-This hands-on guide is just the beginning—feel free to experiment with different datasets, configurations, and optimizations to see how this powerful architecture can meet your unique data needs. Whether you're running analytics or building scalable data pipelines, the lakehouse architecture provides the flexibility and performance required for the data-driven future.
+This hands-on guide is just the beginning - feel free to experiment with different datasets, configurations, and optimizations to see how this powerful architecture can meet your unique data needs. Whether you're running analytics or building scalable data pipelines, the lakehouse architecture provides the flexibility and performance required for the data-driven future.
 
 
 - [Apache Iceberg 101](https://www.dremio.com/lakehouse-deep-dives/apache-iceberg-101/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=introiceberg&utm_content=alexmerced&utm_term=external_blog)

@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-When working with large-scale data systems, it's not just what data you store that matters—it's how you store it. The choice of storage format and compression strategy can make a significant difference in performance, cost, and usability. These decisions affect how quickly you can query data, how much storage space you need, and even how compatible your data is with various processing tools.
+When working with large-scale data systems, it's not just what data you store that matters - it's how you store it. The choice of storage format and compression strategy can make a significant difference in performance, cost, and usability. These decisions affect how quickly you can query data, how much storage space you need, and even how compatible your data is with various processing tools.
 
 In this post, we’ll explore the most common data storage formats, the role of compression, and how these choices impact modern data engineering workflows.
 
@@ -30,7 +30,7 @@ Raw data often arrives in simple formats like CSV or JSON, and for small volumes
 
 Text-based formats like CSV are easy to read and parse, but they lack schema enforcement, are verbose, and are slow to process in distributed systems. JSON adds some flexibility by allowing nested structures, but it can still be quite large and inefficient when stored at scale.
 
-Columnar formats, by contrast, are designed for analytics. Instead of storing data row by row, they store values column by column. This layout enables faster queries and better compression—especially for workloads that scan only a few columns at a time.
+Columnar formats, by contrast, are designed for analytics. Instead of storing data row by row, they store values column by column. This layout enables faster queries and better compression - especially for workloads that scan only a few columns at a time.
 
 Imagine a table with hundreds of columns, but your query only needs five. With a row-based format, the system must read everything. With a columnar format, it reads just what’s needed. This is a game-changer for performance and cost in systems like data lakes and warehouses.
 
@@ -68,12 +68,12 @@ For example, if you're building a data lake on S3 and using Apache Spark for pro
 
 If you’re using Kafka or other message queues, Avro is a common format due to its compactness and schema registry support.
 
-It’s also worth considering schema evolution—how well a format handles changes in the data structure over time. Avro and Parquet both support schema evolution, which allows you to add or remove fields without breaking downstream systems. This is crucial in agile environments where data changes frequently.
+It’s also worth considering schema evolution - how well a format handles changes in the data structure over time. Avro and Parquet both support schema evolution, which allows you to add or remove fields without breaking downstream systems. This is crucial in agile environments where data changes frequently.
 
 ## Putting It All Together
 
-The best storage strategy balances performance, flexibility, and compatibility. There’s no one-size-fits-all answer, but understanding the characteristics of each format—and how compression affects storage and query speed—allows you to make informed choices.
+The best storage strategy balances performance, flexibility, and compatibility. There’s no one-size-fits-all answer, but understanding the characteristics of each format: and how compression affects storage and query speed, allows you to make informed choices.
 
 As data engineers, our job is to pick the right tools for the job, not just default to what’s familiar. Thoughtful decisions at the storage layer can ripple across the entire data stack, affecting cost, speed, and scalability.
 
-In the next post, we’ll turn our attention to data quality and validation—because no matter how well your data is stored, it’s only as good as it is accurate, complete, and trustworthy.
+In the next post, we’ll turn our attention to data quality and validation - because no matter how well your data is stored, it’s only as good as it is accurate, complete, and trustworthy.

@@ -20,18 +20,18 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-Artificial Intelligence (AI) has become the defining technology of the decade. From chatbots to code generators, from self-driving cars to predictive text—AI systems are everywhere. But before we dive into the cutting-edge world of large language models (LLMs), let’s rewind and understand where this all began.
+Artificial Intelligence (AI) has become the defining technology of the decade. From chatbots to code generators, from self-driving cars to predictive text - AI systems are everywhere. But before we dive into the cutting-edge world of large language models (LLMs), let’s rewind and understand where this all began.
 
 This post kicks off our 10-part series exploring how AI evolved into LLMs, how to enhance their capabilities, and how the **Model Context Protocol (MCP)** is shaping the future of intelligent, modular agents.
 
 ## 🧠 A Brief History of AI
 
-The term "Artificial Intelligence" was coined in 1956, but the idea has been around even longer—think mechanical automatons and Alan Turing’s famous question: *"Can machines think?"*
+The term "Artificial Intelligence" was coined in 1956, but the idea has been around even longer - think mechanical automatons and Alan Turing’s famous question: *"Can machines think?"*
 
 AI development has gone through several distinct waves:
 
 ### 1. **Symbolic AI (1950s–1980s)**
-Also known as "Good Old-Fashioned AI," symbolic systems were rule-based. Think expert systems, logic programming, and hand-coded decision trees. These systems could play chess or diagnose medical conditions—if you wrote enough rules.
+Also known as "Good Old-Fashioned AI," symbolic systems were rule-based. Think expert systems, logic programming, and hand-coded decision trees. These systems could play chess or diagnose medical conditions - if you wrote enough rules.
 
 **Limitations**: Rigid, brittle, and poor at handling ambiguity.
 
@@ -55,7 +55,7 @@ And that brings us to the latest evolution...
 
 ## 🧬 Enter LLMs: The Rise of Language-First AI
 
-Large Language Models (LLMs) like GPT-4, Claude, and Gemini aren’t just another step in AI—they represent a leap. Trained on massive text corpora using **transformer architectures**, these models can:
+Large Language Models (LLMs) like GPT-4, Claude, and Gemini aren’t just another step in AI - they represent a leap. Trained on massive text corpora using **transformer architectures**, these models can:
 - Write essays and poems
 - Generate and debug code
 - Translate between languages
@@ -84,7 +84,7 @@ Popular LLMs:
 
 ## 🧩 What LLMs Can (and Can’t) Do
 
-LLMs are versatile and impressive—but they're not magic. Their strengths come with real limitations:
+LLMs are versatile and impressive - but they're not magic. Their strengths come with real limitations:
 
 ### ✅ What they’re great at:
 - Text generation and summarization
@@ -103,17 +103,17 @@ This is where the next evolution comes in: **augmenting LLMs** with context, too
 
 ## 🔮 The Road Ahead: From Models to Modular AI Agents
 
-We’ve gone from rules to learning, from deep learning to LLMs—but we’re not done yet. The future of AI lies in making LLMs *do more than just talk*. We need to:
+We’ve gone from rules to learning, from deep learning to LLMs - but we’re not done yet. The future of AI lies in making LLMs *do more than just talk*. We need to:
 
 - Give them memory
 - Let them interact with data
 - Enable them to call tools, services, and APIs
 - Help them make decisions and reason through complex tasks
 
-This brings us to the idea of **AI Agents**—autonomous systems built on LLMs that can perceive, decide, and act.
+This brings us to the idea of **AI Agents** - autonomous systems built on LLMs that can perceive, decide, and act.
 
 ### 🧭 Coming Up Next
 
-In our next post, we’ll explore **how LLMs actually work** under the hood—digging into embeddings, vector spaces, and how models “understand” language.
+In our next post, we’ll explore **how LLMs actually work** under the hood - digging into embeddings, vector spaces, and how models “understand” language.
 
 Stay tuned.

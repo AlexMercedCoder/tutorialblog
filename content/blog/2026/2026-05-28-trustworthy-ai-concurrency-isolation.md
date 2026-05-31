@@ -10,7 +10,7 @@ tags:
 
 # Trustworthy AI in the Agentic Lakehouse: Reconciling Concurrency and Isolation Contracts
 
-A single AI agent querying your lakehouse is manageable. A hundred AI agents — running automated monitoring, answering stakeholder questions, generating reports, and powering agentic workflows — create concurrency and isolation problems that traditional data architectures weren't designed for.
+A single AI agent querying your lakehouse is manageable. A hundred AI agents : running automated monitoring, answering stakeholder questions, generating reports, and powering agentic workflows,  create concurrency and isolation problems that traditional data architectures weren't designed for.
 
 Human analysts are slow. They ask questions sequentially, pause to think, and rarely trigger more than a handful of concurrent queries against the same table. AI agents are fast and relentless. They can run dozens of queries per minute, issue transactions that interleave with other agents' writes, and hit edge cases in concurrency control that human query patterns never surface.
 
@@ -22,7 +22,7 @@ This post covers how Iceberg's optimistic concurrency control handles multi-agen
 
 Apache Iceberg uses optimistic concurrency control (OCC) rather than pessimistic locking. In a pessimistic model, a writer acquires an exclusive lock before starting a write. In an optimistic model, the writer proceeds without a lock and validates at commit time that no conflicting write has occurred since it started.
 
-The mechanics: every Iceberg table has a current snapshot ID. When an agent begins a write operation, it reads the current snapshot ID. When it's ready to commit, it attempts to update the table metadata to point to a new snapshot — but only if the current snapshot ID still matches what it read at the start. If another agent committed a conflicting change in the interim, the commit fails with a conflict error.
+The mechanics: every Iceberg table has a current snapshot ID. When an agent begins a write operation, it reads the current snapshot ID. When it's ready to commit, it attempts to update the table metadata to point to a new snapshot : but only if the current snapshot ID still matches what it read at the start. If another agent committed a conflicting change in the interim, the commit fails with a conflict error.
 
 The key insight: not all concurrent writes conflict. Iceberg's conflict detection is partition-aware. Two agents writing to different partitions of the same table can both succeed without conflict. Two agents writing to the same partition conflict if their changes can't be merged safely.
 
@@ -48,17 +48,17 @@ AI agents should have the minimum access necessary to perform their function. An
 
 Dremio's fine-grained access control (FGAC) enforces these restrictions consistently across all agent connections. An agent's service principal is bound to a role, and that role defines exactly which tables the agent can read, which columns are visible, and which rows fall within its authorized scope.
 
-**Column masking for AI agents:** When an agent with an analyst role queries a table containing SSNs, the SSN column returns masked values (`****-**-1234`). The agent can't request unmasked data even if it generates SQL that directly references the SSN column — the masking is enforced by the query engine before results are returned.
+**Column masking for AI agents:** When an agent with an analyst role queries a table containing SSNs, the SSN column returns masked values (`****-**-1234`). The agent can't request unmasked data even if it generates SQL that directly references the SSN column : the masking is enforced by the query engine before results are returned.
 
 **Row-level filtering:** An agent responsible for North America operations sees only North American rows, even if it generates a query without a regional filter. The filter is applied automatically based on the agent's role context.
 
-**Time-limited access tokens:** Agent credentials should expire frequently — hourly or more often for high-privilege agents. Long-lived tokens that are compromised or leaked provide extended unauthorized access. Dremio's token-based authentication supports short-lived credentials appropriate for agent workloads.
+**Time-limited access tokens:** Agent credentials should expire frequently : hourly or more often for high-privilege agents. Long-lived tokens that are compromised or leaked provide extended unauthorized access. Dremio's token-based authentication supports short-lived credentials appropriate for agent workloads.
 
 ## Guardrail Policies for Autonomous SQL Access
 
 Governance policies for AI agents need to anticipate behaviors that don't occur with human analysts:
 
-**Query cost limits:** AI agents can generate unexpectedly expensive queries — full table scans without filters, recursive CTEs with large intermediate result sets, or aggregations across billions of rows that a human analyst wouldn't attempt interactively. Implement query cost estimation limits that reject or queue queries above a compute budget threshold.
+**Query cost limits:** AI agents can generate unexpectedly expensive queries : full table scans without filters, recursive CTEs with large intermediate result sets, or aggregations across billions of rows that a human analyst wouldn't attempt interactively. Implement query cost estimation limits that reject or queue queries above a compute budget threshold.
 
 **Write operation restrictions:** Most AI agents should be read-only. An agent that can write to production tables can modify data, drop snapshots, or corrupt table state if it generates incorrect write SQL. Use read-only service principals for analytics agents. Restrict write access to pipeline agents with tightly defined write patterns.
 
@@ -72,13 +72,13 @@ Governance policies for AI agents need to anticipate behaviors that don't occur 
 
 When hundreds of agents run concurrently, isolation means each agent sees a consistent view of the data, unaffected by other agents' concurrent writes.
 
-Iceberg's snapshot-based reads provide this automatically. When an agent starts a read, it reads from the current snapshot. Concurrent writes by other agents create new snapshots. The reading agent continues reading from its starting snapshot until its query completes — it never sees partial data from an in-progress write.
+Iceberg's snapshot-based reads provide this automatically. When an agent starts a read, it reads from the current snapshot. Concurrent writes by other agents create new snapshots. The reading agent continues reading from its starting snapshot until its query completes : it never sees partial data from an in-progress write.
 
 This is the same isolation guarantee that makes Iceberg safe for concurrent human users. It extends naturally to AI agents, regardless of concurrency level.
 
 The edge case: an agent that starts a long-running investigation (10 minutes) and then writes a derived result to a results table may be writing based on data that's 10 minutes old. Other agents that have written in the interim have created newer snapshots. The result the long-running agent writes is consistent with its starting state but may not reflect the latest committed data.
 
-For most analytical workloads, this is acceptable — a 10-minute-old result is still a valid analytical result. For operational dashboards requiring the latest data, keep investigation tasks short enough that the staleness is within tolerance.
+For most analytical workloads, this is acceptable : a 10-minute-old result is still a valid analytical result. For operational dashboards requiring the latest data, keep investigation tasks short enough that the staleness is within tolerance.
 
 ![Multi-agent isolation snapshot model diagram](/images/2026/may28seo/multi-agent-isolation-snapshots.png)
 

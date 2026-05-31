@@ -13,7 +13,7 @@ tags:
 - [Free Copy of Apache Iceberg: The Definitive Guide](https://hello.dremio.com/wp-apache-iceberg-the-definitive-guide-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=deletefileblog&utm_content=alexmerced&utm_term=external_blog)
 - [Free Apache Iceberg Crash Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=deletefileblog&utm_content=alexmerced&utm_term=external_blog)
 
-Apache Iceberg is a powerful open-source table format for large-scale, distributed data storage. It enables complex data management tasks like schema evolution, time travel, and efficient query execution on massive datasets. An important feature of Iceberg is its ability to handle data deletions efficiently without requiring expensive rewrites of entire datasets when a table is "merge-on-read". This capability is made possible by **delete files**—specialized files that track row-level deletions in an Iceberg table.
+Apache Iceberg is a powerful open-source table format for large-scale, distributed data storage. It enables complex data management tasks like schema evolution, time travel, and efficient query execution on massive datasets. An important feature of Iceberg is its ability to handle data deletions efficiently without requiring expensive rewrites of entire datasets when a table is "merge-on-read". This capability is made possible by **delete files** - specialized files that track row-level deletions in an Iceberg table.
 
 We'll dive deep into the role of delete files in Apache Iceberg. We'll explore delete files, how they work, and why they are essential for maintaining data consistency and optimizing query performance in a data lakehouse environment. By the end of this post, you'll have a solid understanding of how delete files function within Iceberg and how they can be leveraged to enhance your data management strategies.
 
@@ -55,7 +55,7 @@ Iceberg supports two types of delete files:
 
 ### Importance of Delete Files
 
-By separating deletion metadata from the data files, Iceberg ensures that data deletions are handled efficiently when fast writes with many row-level changes are needed. This separation also allows Iceberg to maintain the ACID properties—Atomicity, Consistency, Isolation, and Durability—essential for reliable data management in distributed systems.
+By separating deletion metadata from the data files, Iceberg ensures that data deletions are handled efficiently when fast writes with many row-level changes are needed. This separation also allows Iceberg to maintain the ACID properties: Atomicity, Consistency, Isolation, and Durability, essential for reliable data management in distributed systems.
 
 ## The Role of Delete Files
 

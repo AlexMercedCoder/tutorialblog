@@ -21,7 +21,7 @@ category: "Apache Iceberg"
 
 # Avoiding Metadata Bloat with Snapshot Expiration and Rewriting Manifests
 
-As your Apache Iceberg tables evolve—through continuous writes, schema changes, and compaction jobs—they generate a growing amount of **metadata**. While metadata is a powerful feature in Iceberg, enabling time travel and auditability, **unchecked metadata growth** can lead to:
+As your Apache Iceberg tables evolve: through continuous writes, schema changes, and compaction jobs, they generate a growing amount of **metadata**. While metadata is a powerful feature in Iceberg, enabling time travel and auditability, **unchecked metadata growth** can lead to:
 
 - Slower planning and query times
 - Increased storage costs
@@ -113,7 +113,7 @@ These insights can help you determine when cleanup is needed.
 ## Tradeoffs and Cautions
 - Snapshot expiration is irreversible: Make sure you don’t need the old snapshots for recovery or audit.
 
-- Manifests rewrites are safe but can be compute-intensive on large tables—schedule wisely.
+- Manifests rewrites are safe but can be compute-intensive on large tables - schedule wisely.
 
 - Storage GC may require coordination with your catalog to clean up unreferenced files.
 

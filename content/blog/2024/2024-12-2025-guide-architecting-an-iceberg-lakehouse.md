@@ -40,7 +40,7 @@ With these developments in mind, it's the perfect time to reflect on how to arch
 
 Before we dive into the *how*, let’s take a moment to reflect on the *why*. A lakehouse leverages open table formats like **Iceberg**, **Delta Lake**, **Hudi**, and **Paimon** to create data warehouse-like tables directly on your data lake. The key advantage of these tables is that they provide the transactional guarantees of a traditional data warehouse without requiring data duplication across platforms or teams. 
 
-This value proposition is a major reason to consider Apache Iceberg in particular. In a world where different teams rely on different tools, Iceberg stands out with the largest ecosystem of tools for reading, writing, and—most importantly—managing Iceberg tables. 
+This value proposition is a major reason to consider Apache Iceberg in particular. In a world where different teams rely on different tools, Iceberg stands out with the largest ecosystem of tools for reading, writing, and: most importantly, managing Iceberg tables. 
 
 Additionally, recent advancements in portable governance through catalog technologies amplify the benefits of adopting Iceberg. Features like **hidden partitioning** and **partition evolution** further enhance Iceberg’s appeal by maximizing flexibility and simplifying partition management. These qualities ensure that you can optimize your data lakehouse architecture for both performance and cost.
 
@@ -49,7 +49,7 @@ Additionally, recent advancements in portable governance through catalog technol
 Before we begin architecting your Apache Iceberg Lakehouse, it’s essential to perform a self-audit to clearly define your requirements. Document answers to the following questions:
 
 1. **Where is my data currently?**  
-   Understanding where your data resides—whether on-premises, in the cloud, or across multiple locations—helps you plan for migration, integration, and governance challenges.
+   Understanding where your data resides: whether on-premises, in the cloud, or across multiple locations, helps you plan for migration, integration, and governance challenges.
 
 2. **Which of my data is the most accessed by different teams?**  
    Identifying the most frequently accessed datasets ensures you prioritize optimizing performance for these critical assets.
@@ -64,7 +64,7 @@ Before we begin architecting your Apache Iceberg Lakehouse, it’s essential to 
    Service-level agreements (SLAs) dictate the performance, availability, and recovery time objectives your architecture must support.
 
 6. **What tools are accessing my data, and which of those are non-negotiables?**  
-   Understanding the tools your teams rely on—especially non-negotiable ones—ensures that the ecosystem around your Iceberg lakehouse remains compatible and functional.
+   Understanding the tools your teams rely on: especially non-negotiable ones, ensures that the ecosystem around your Iceberg lakehouse remains compatible and functional.
 
 7. **What are my regulatory barriers?**  
    Compliance with industry regulations or organizational policies must be factored into your architecture to avoid potential risks.
@@ -74,7 +74,7 @@ By answering these questions, you can determine which platforms align with your 
 
 ## The Components of an Apache Iceberg Lakehouse
 
-When moving to an Apache Iceberg lakehouse, certain fundamentals are a given—most notably that your data will be stored as **Parquet files** with **Iceberg metadata**. However, building a functional lakehouse requires several additional components to be carefully planned and implemented.
+When moving to an Apache Iceberg lakehouse, certain fundamentals are a given - most notably that your data will be stored as **Parquet files** with **Iceberg metadata**. However, building a functional lakehouse requires several additional components to be carefully planned and implemented.
 
 ### Key Components of an Apache Iceberg Lakehouse
 
@@ -266,7 +266,7 @@ Choosing the right ingestion strategy is essential for ensuring your Iceberg lak
 
 ## Data Integration: Bridging the Gap for a Unified Lakehouse Experience
 
-Not all your data will migrate to Apache Iceberg immediately—or ever. Moving existing workloads to Iceberg requires thoughtful planning and a phased approach. However, you can still deliver the "Iceberg Lakehouse experience" to your end-users upfront, even if not all your data resides in Iceberg. This is where data integration, data virtualization, or a unified lakehouse platform like **Dremio** becomes invaluable.
+Not all your data will migrate to Apache Iceberg immediately - or ever. Moving existing workloads to Iceberg requires thoughtful planning and a phased approach. However, you can still deliver the "Iceberg Lakehouse experience" to your end-users upfront, even if not all your data resides in Iceberg. This is where data integration, data virtualization, or a unified lakehouse platform like **Dremio** becomes invaluable.
 
 - [How Dremio Enhances the Iceberg Journey](https://www.dremio.com/blog/why-dremio-and-apache-iceberg/)
 - [3 Reasons Dremio is Best Query Engine for Apache Iceberg](https://www.dremio.com/blog/dremio-best-sql-engine-for-apache-iceberg/)
@@ -278,7 +278,7 @@ Not all your data will migrate to Apache Iceberg immediately—or ever. Moving e
    Dremio allows you to connect and query all your data sources in one place. Even if your datasets haven’t yet migrated to Iceberg, you can combine them with Iceberg tables seamlessly. Dremio’s fast query engine ensures performant analytics, regardless of where your data resides.
 
 2. **Built-In Semantic Layer for Consistency**  
-   Dremio includes a built-in semantic layer to define commonly used datasets across teams. This layer ensures consistent and accurate data usage for your entire organization. Since the semantic layer is based on SQL views, transitioning data from its original source to an Iceberg table is seamless—simply update the SQL definition of the views. Your end-users won’t even notice the change, yet they’ll immediately benefit from the migration.
+   Dremio includes a built-in semantic layer to define commonly used datasets across teams. This layer ensures consistent and accurate data usage for your entire organization. Since the semantic layer is based on SQL views, transitioning data from its original source to an Iceberg table is seamless - simply update the SQL definition of the views. Your end-users won’t even notice the change, yet they’ll immediately benefit from the migration.
 
 3. **Performance Boost with Iceberg-Based Reflections**  
    Dremio’s **Reflections** feature accelerates queries on your data. When your data is natively in Iceberg, reflections are refreshed incrementally and updated automatically when the underlying dataset changes. This results in faster query performance and reduced maintenance effort. Learn more about reflections in [this blog post](https://www.dremio.com/blog/iceberg-lakehouses-and-dremio-reflections/).
@@ -327,10 +327,10 @@ By enabling data consumers with tools they already know and use, your Iceberg la
 
 ## Conclusion: Your Journey to a Seamless Iceberg Lakehouse
 
-Architecting an Iceberg Lakehouse is not just about adopting a new technology; it’s about transforming how your organization stores, governs, integrates, and consumes data. This guide has walked you through the essential components—from storage and catalogs to ingestion, integration, and consumption—highlighting the importance of thoughtful planning and the tools available to support your journey.
+Architecting an Iceberg Lakehouse is not just about adopting a new technology; it’s about transforming how your organization stores, governs, integrates, and consumes data. This guide has walked you through the essential components: from storage and catalogs to ingestion, integration, and consumption, highlighting the importance of thoughtful planning and the tools available to support your journey.
 
 Apache Iceberg’s open table format, with its unique features like hidden partitioning, partition evolution, and broad ecosystem support, provides a solid foundation for a modern data lakehouse. By leveraging tools like **Dremio** for integration and query acceleration, you can deliver the "Iceberg Lakehouse experience" to your teams immediately, even as you transition existing workloads over time.
 
 As 2025 unfolds, the Apache Iceberg ecosystem will continue to grow, bringing new innovations and opportunities to refine your architecture further. By taking a structured approach and selecting the right tools for your needs, you can build a flexible, performant, and cost-efficient lakehouse that empowers your organization to make data-driven decisions at scale.
 
-Let this guide be the starting point for your Iceberg Lakehouse journey—designed for today and ready for the future.
+Let this guide be the starting point for your Iceberg Lakehouse journey - designed for today and ready for the future.

@@ -15,7 +15,7 @@ I’m excited to kick off a new series called "Data Lakehouse Roundup," where I�
 
 ## Trends
 
-Data lakehouses are an emerging trend that help organizations achieve the best of both worlds—offering the structured, queryable data of a data warehouse while decoupling storage from compute. This shift allows organizations to model their data and define business-critical assets as structured tables, but instead of being tied to a compute system, the data is stored independently on a distributed storage system like Object Storage or HDFS. This modular and composable architecture reduces the need for excessive data movement, cutting down on time and resource costs. 
+Data lakehouses are an emerging trend that help organizations achieve the best of both worlds, offering the structured, queryable data of a data warehouse while decoupling storage from compute. This shift allows organizations to model their data and define business-critical assets as structured tables, but instead of being tied to a compute system, the data is stored independently on a distributed storage system like Object Storage or HDFS. This modular and composable architecture reduces the need for excessive data movement, cutting down on time and resource costs. 
 
 Two key abstractions make this possible. First, table formats enable datasets saved in groups of Parquet files to be recognized as singular tables, while maintaining the same transactional guarantees as an integrated data warehouse or database system. Second, catalogs serve as directories for lakehouse assets like tables, namespaces, and views. These catalogs allow any tool to connect and view assets on the lakehouse in a way similar to how one would interact with data warehouse assets. The result is a composable system that behaves much like traditional, tightly coupled systems.
 
@@ -33,7 +33,7 @@ Given this level of community adoption, Apache Iceberg is quickly becoming the i
 
 ### Streaming
 
-While using Hudi or Paimon and converting to Delta or Iceberg is an option, this conversion can cause a loss of benefits provided by formats like Iceberg—such as partition evolution and hidden partitioning, which optimize how data is organized and written. Native Iceberg streaming pipelines can be built with open-source tools like Kafka Connect, Flink, and Spark Streaming. Additionally, managed streaming services from companies like Upsolver and Estuary are emerging, making it easier to stream data into Iceberg tables with high performance.
+While using Hudi or Paimon and converting to Delta or Iceberg is an option, this conversion can cause a loss of benefits provided by formats like Iceberg - such as partition evolution and hidden partitioning, which optimize how data is organized and written. Native Iceberg streaming pipelines can be built with open-source tools like Kafka Connect, Flink, and Spark Streaming. Additionally, managed streaming services from companies like Upsolver and Estuary are emerging, making it easier to stream data into Iceberg tables with high performance.
 
 - [A Guide to Apache Iceberg CDC](https://www.dremio.com/blog/cdc-with-apache-iceberg/?utm_medium=influencer&utm_content=alexmerced&utm_source=ev_external_blog&utm_term=evolutions1)
 - [Streaming to Apache Iceberg with Upsolver](https://www.dremio.com/blog/streaming-and-batch-data-lakehouses-with-apache-iceberg-dremio-and-upsolver/?utm_medium=influencer&utm_content=alexmerced&utm_source=ev_external_blog&utm_term=evolutions1)

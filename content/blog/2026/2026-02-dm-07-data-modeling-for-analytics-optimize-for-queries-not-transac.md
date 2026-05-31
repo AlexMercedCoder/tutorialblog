@@ -1,7 +1,7 @@
 ---
 title: "Data Modeling for Analytics: Optimize for Queries, Not Transactions"
 date: "2026-02-19"
-description: "The data model that runs your production application is almost never the right model for analytics. Transactional systems are designed for fast writes — in..."
+description: "The data model that runs your production application is almost never the right model for analytics. Transactional systems are designed for fast writes : in..."
 author: "Alex Merced"
 category: "Data Modeling"
 tags:
@@ -14,15 +14,15 @@ tags:
 
 ![OLTP normalized model vs. OLAP denormalized model side by side](images/data_modeling/07/analytics-data-modeling.png)
 
-The data model that runs your production application is almost never the right model for analytics. Transactional systems are designed for fast writes — inserting orders, updating inventory, processing payments. Analytics systems are designed for fast reads — scanning millions of rows, aggregating across dimensions, filtering by date ranges.
+The data model that runs your production application is almost never the right model for analytics. Transactional systems are designed for fast writes : inserting orders, updating inventory, processing payments. Analytics systems are designed for fast reads,  scanning millions of rows, aggregating across dimensions, filtering by date ranges.
 
 Using a transactional model for analytics is like using a filing cabinet when you need a search engine. The data is there, but finding answers takes too long.
 
 ## Transactions vs. Analytics: Two Different Problems
 
-Transactional (OLTP) workloads process many small operations: insert one order, update one account balance, delete one expired session. These models are normalized to Third Normal Form (3NF) or beyond —  every piece of data stored once, redundancy eliminated, consistency enforced through constraints.
+Transactional (OLTP) workloads process many small operations: insert one order, update one account balance, delete one expired session. These models are normalized to Third Normal Form (3NF) or beyond : every piece of data stored once, redundancy eliminated, consistency enforced through constraints.
 
-Analytical (OLAP) workloads process few large operations: scan all orders for the last year, aggregate revenue by region and product category, calculate year-over-year growth. These models are denormalized — data is pre-joined, attributes are flattened, and the structure is optimized for scans rather than updates.
+Analytical (OLAP) workloads process few large operations: scan all orders for the last year, aggregate revenue by region and product category, calculate year-over-year growth. These models are denormalized : data is pre-joined, attributes are flattened, and the structure is optimized for scans rather than updates.
 
 | Aspect | OLTP Model | OLAP Model |
 |---|---|---|
@@ -39,9 +39,9 @@ A normalized 3NF model might have 15 tables involved in answering "What was reve
 
 ![Chain of joins through normalized tables versus one wide scan through a denormalized table](images/data_modeling/07/normalized-vs-denormalized-query.png)
 
-Each join adds latency. Each join also adds a point of failure — wrong join condition, missing foreign key, ambiguous column name. An AI agent generating SQL against a 15-table normalized model has far more opportunities to make a mistake than against a 4-table star schema.
+Each join adds latency. Each join also adds a point of failure : wrong join condition, missing foreign key, ambiguous column name. An AI agent generating SQL against a 15-table normalized model has far more opportunities to make a mistake than against a 4-table star schema.
 
-The fix is not to abandon normalization. Keep your OLTP model normalized for your application. But create a separate analytical model — denormalized, structured for queries, with pre-built joins and business-friendly column names — for reporting and analytics.
+The fix is not to abandon normalization. Keep your OLTP model normalized for your application. But create a separate analytical model : denormalized, structured for queries, with pre-built joins and business-friendly column names,  for reporting and analytics.
 
 ## Designing for Read Performance
 
@@ -66,7 +66,7 @@ Common patterns:
 
 The tradeoff is maintenance. Every summary table needs a refresh pipeline, and stale summaries produce outdated numbers.
 
-Platforms like [Dremio](https://www.dremio.com/blog/5-ways-dremio-reflections-outsmart-traditional-materialized-views/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced) handle this automatically with Reflections — pre-computed aggregations and materializations that the query optimizer uses transparently. Users query the logical views; Dremio substitutes the fastest Reflection without the user knowing. No manual summary table management required.
+Platforms like [Dremio](https://www.dremio.com/blog/5-ways-dremio-reflections-outsmart-traditional-materialized-views/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced) handle this automatically with Reflections : pre-computed aggregations and materializations that the query optimizer uses transparently. Users query the logical views; Dremio substitutes the fastest Reflection without the user knowing. No manual summary table management required.
 
 ## Columnar Storage and Physical Layout
 
@@ -85,6 +85,6 @@ Physical layout decisions that matter:
 
 ![Analytics model with wide tables, pre-aggregations, and columnar storage feeding dashboards](images/data_modeling/07/analytics-architecture.png)
 
-Find your slowest dashboard. Look at the queries behind it. Count the joins, measure the scan size, and check whether the model is normalized 3NF or denormalized for analytics. If it's still using the transactional model, create an analytical view layer on top — a denormalized star schema with pre-computed columns, clear naming, and a date dimension. The dashboard performance improvement is usually immediate and significant.
+Find your slowest dashboard. Look at the queries behind it. Count the joins, measure the scan size, and check whether the model is normalized 3NF or denormalized for analytics. If it's still using the transactional model, create an analytical view layer on top : a denormalized star schema with pre-computed columns, clear naming, and a date dimension. The dashboard performance improvement is usually immediate and significant.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

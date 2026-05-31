@@ -1,7 +1,7 @@
 ---
 title: "Semantic Layer Best Practices: 7 Mistakes to Avoid"
 date: "2026-02-19"
-description: "Semantic layers don't fail because the technology is wrong. They fail because of design decisions made in the first two weeks — choices that seem reasonabl..."
+description: "Semantic layers don't fail because the technology is wrong. They fail because of design decisions made in the first two weeks : choices that seem reasonabl..."
 author: "Alex Merced"
 category: "Semantic Layer"
 tags:
@@ -12,9 +12,9 @@ tags:
   - data lakehouse
 ---
 
-![Semantic layer best practices checklist — checks and mistakes](images/semantic_layer_seo/10/best-practices.png)
+![Semantic layer best practices checklist : checks and mistakes](images/semantic_layer_seo/10/best-practices.png)
 
-Semantic layers don't fail because the technology is wrong. They fail because of design decisions made in the first two weeks — choices that seem reasonable at the time and create compounding problems for months afterward.
+Semantic layers don't fail because the technology is wrong. They fail because of design decisions made in the first two weeks : choices that seem reasonable at the time and create compounding problems for months afterward.
 
 Here are the seven mistakes that kill semantic layer projects, and how to avoid each one.
 
@@ -26,11 +26,11 @@ Here are the seven mistakes that kill semantic layer projects, and how to avoid 
 
 **The fix**: Every metric gets exactly one canonical definition in the semantic layer. All downstream tools query that definition. No exceptions. When someone needs Revenue, they query `business.revenue`, not their own formula.
 
-This principle extends to AI agents. If your AI generates its own metric formulas instead of referencing the semantic layer, you've just added another source of truth — the least trustworthy one.
+This principle extends to AI agents. If your AI generates its own metric formulas instead of referencing the semantic layer, you've just added another source of truth : the least trustworthy one.
 
 ## Mistake 2: Skipping the Bronze Layer
 
-**What happens**: A data engineer creates a Silver view that joins raw source tables directly, mixing data cleanup (type casting, column renaming) with business logic (filters, calculations) in a single query. When the source schema changes — a column is renamed, a type is modified — the Silver view breaks.
+**What happens**: A data engineer creates a Silver view that joins raw source tables directly, mixing data cleanup (type casting, column renaming) with business logic (filters, calculations) in a single query. When the source schema changes : a column is renamed, a type is modified,  the Silver view breaks.
 
 **Why it's common**: The Bronze layer feels redundant. It's just a 1:1 mapping of the source. Why add a layer that doesn't change anything?
 
@@ -40,11 +40,11 @@ Bronze views also standardize data formats. Timestamps normalized to UTC. String
 
 ## Mistake 3: Using SQL Reserved Words as Column Names
 
-![Bad vs. good naming conventions — cryptic abbreviations vs. clear business names](images/semantic_layer_seo/10/naming-conventions.png)
+![Bad vs. good naming conventions : cryptic abbreviations vs. clear business names](images/semantic_layer_seo/10/naming-conventions.png)
 
 **What happens**: A Bronze view exposes a column called `Date`. Now every downstream query must reference `"Date"` with double quotes. Analysts forget. AI agents don't quote it at all. Queries break intermittently. Debugging is frustrating because the error messages are cryptic.
 
-**Why it's common**: Source systems often use generic names. `Date`, `Timestamp`, `Order`, `Group`, `Role` — all are SQL reserved words. Bronze views that don't rename them propagate the problem to every consumer.
+**Why it's common**: Source systems often use generic names. `Date`, `Timestamp`, `Order`, `Group`, `Role` : all are SQL reserved words. Bronze views that don't rename them propagate the problem to every consumer.
 
 **The fix**: Rename early. In the Bronze layer, map `Date` to `TransactionDate`, `Timestamp` to `EventTimestamp`, `Order` to `CustomerOrder`. Use domain-specific prefixes that are unambiguous and never conflict with SQL keywords.
 
@@ -62,7 +62,7 @@ This step feels slow. It's the fastest path to adoption. A semantic layer that u
 
 ## Mistake 5: Treating Documentation as Optional
 
-**What happens**: Views are created with no Wikis, no column descriptions, no Labels. The semantic layer works for the person who built it. Everyone else — analysts, AI agents, new team members — can't figure out what the views mean.
+**What happens**: Views are created with no Wikis, no column descriptions, no Labels. The semantic layer works for the person who built it. Everyone else : analysts, AI agents, new team members,  can't figure out what the views mean.
 
 **Why it's common**: Documentation takes time. Deadlines are tight. Teams plan to "add documentation later." Later never comes.
 
@@ -81,13 +81,13 @@ Undocumented views are invisible to AI agents. If the Wiki is empty, the AI agen
 
 **Why it's common**: BI tools make it easy to apply filters and security rules. Data platforms require more setup. Teams take the easy path.
 
-**The fix**: Enforce access policies at the semantic layer, not the BI layer. Row-level security and column masking should be applied on the virtual datasets (views). Every query path — dashboard, notebook, API, AI agent — inherits the same rules.
+**The fix**: Enforce access policies at the semantic layer, not the BI layer. Row-level security and column masking should be applied on the virtual datasets (views). Every query path : dashboard, notebook, API, AI agent,  inherits the same rules.
 
 Dremio implements this through Fine-Grained Access Control (FGAC): policies defined as UDFs at the view level. A regional manager queries `business.revenue` and automatically sees only their region, regardless of how they access the data. No security gaps between tools.
 
 ## Mistake 7: Trying to Model Everything at Once
 
-![Incremental growth — from a small core to a comprehensive semantic layer](images/semantic_layer_seo/10/incremental-growth.png)
+![Incremental growth : from a small core to a comprehensive semantic layer](images/semantic_layer_seo/10/incremental-growth.png)
 
 **What happens**: The team commits to building a complete semantic layer covering every source, every table, and every metric. The project takes six months. By the time it launches, requirements have changed, stakeholder interest has waned, and half the views are out of date.
 
@@ -95,7 +95,7 @@ Dremio implements this through Fine-Grained Access Control (FGAC): policies defi
 
 **The fix**: Start with 3-5 core metrics that the organization actively debates (usually Revenue, Active Users, Churn). Build one Bronze → Silver → Gold pipeline per metric. Validate that the same question produces the same answer across two different tools.
 
-Once those metrics are stable, expand incrementally. Add new sources, new views, new metrics — one at a time. Each addition is low-risk because the layered architecture isolates changes. A new Gold view doesn't affect existing Silver views.
+Once those metrics are stable, expand incrementally. Add new sources, new views, new metrics : one at a time. Each addition is low-risk because the layered architecture isolates changes. A new Gold view doesn't affect existing Silver views.
 
 The fastest semantic layers reach 80% organizational coverage not by modeling everything up front, but by proving value quickly and expanding from momentum.
 

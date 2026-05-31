@@ -14,7 +14,7 @@ When organizations first try connecting an LLM to their data lakehouse, the expe
 
 The failure isn't the LLM. The failure is the data architecture.
 
-A traditional lakehouse was designed for human analysts who bring implicit knowledge to every query session. Column named `amt_q3_fy24_usd`? A human analyst asks a colleague what that means. An AI agent does not — it guesses, and its guess is based on statistical patterns from its training data, not the actual business definition at your company.
+A traditional lakehouse was designed for human analysts who bring implicit knowledge to every query session. Column named `amt_q3_fy24_usd`? A human analyst asks a colleague what that means. An AI agent does not : it guesses, and its guess is based on statistical patterns from its training data, not the actual business definition at your company.
 
 ![Traditional lakehouse vs agentic lakehouse for AI agents](/images/2026/may28seo/traditional-vs-agentic-lakehouse.png)
 
@@ -46,19 +46,19 @@ P(query correct) ≈ 0.80^10 ≈ 0.107
 
 That's roughly a 10% chance the full query is interpreted correctly. For complex analytical queries with 20+ column references across multiple tables, the probability approaches zero.
 
-This is the mathematical case for why putting an AI agent directly on top of a traditional lakehouse produces unreliable results. The agent isn't making single mistakes — it's making compounding probabilistic errors across every ambiguous element it encounters.
+This is the mathematical case for why putting an AI agent directly on top of a traditional lakehouse produces unreliable results. The agent isn't making single mistakes : it's making compounding probabilistic errors across every ambiguous element it encounters.
 
 ## The Semantic Barrier in Practice
 
 Three specific failure modes appear repeatedly when AI agents encounter traditional lakehouses:
 
-**Metric inconsistency:** Your marketing team defined "active user" as anyone who logged in this month. Your analytics team defined it as anyone who placed an order this month. The lakehouse has tables from both teams. The agent picks one definition arbitrarily and uses it consistently — consistently wrong for half of your stakeholders.
+**Metric inconsistency:** Your marketing team defined "active user" as anyone who logged in this month. Your analytics team defined it as anyone who placed an order this month. The lakehouse has tables from both teams. The agent picks one definition arbitrarily and uses it consistently : consistently wrong for half of your stakeholders.
 
 **Stale table selection:** The lakehouse has both `orders_v1` and `orders_v2` tables. v2 replaced v1 eight months ago. Without documentation indicating which is current, the agent sometimes uses v1 (which still has more historical data), producing counts that include duplicate records from the migration period.
 
 **Type coercion errors:** A column defined as VARCHAR actually contains dates in `YYYY-MM-DD` format. The agent generates a date filter without explicit CAST, which works in some SQL dialects and silently returns all rows in others.
 
-Each of these produces a confident, wrong answer. The agent doesn't know it's wrong — it didn't hallucinate from nowhere, it made a reasonable inference from the context available. The context was insufficient.
+Each of these produces a confident, wrong answer. The agent doesn't know it's wrong : it didn't hallucinate from nowhere, it made a reasonable inference from the context available. The context was insufficient.
 
 ## What an Agentic Lakehouse Provides
 
@@ -78,7 +78,7 @@ Dremio's [Agentic Lakehouse](https://www.dremio.com/blog/the-ai-foundation-of-th
 
 Returning to the probabilistic model: a semantic layer with rich, accurate documentation changes the per-column correctness probabilities dramatically.
 
-For columns exposed through well-documented virtual datasets, P(correct) approaches 0.99 — because the column name corresponds to a canonical business definition the agent can look up.
+For columns exposed through well-documented virtual datasets, P(correct) approaches 0.99 : because the column name corresponds to a canonical business definition the agent can look up.
 
 For a 10-column query where every column comes from documented virtual datasets:
 
@@ -86,11 +86,11 @@ For a 10-column query where every column comes from documented virtual datasets:
 P(query correct) ≈ 0.99^10 ≈ 0.904
 ```
 
-That's a move from ~10% to ~90% reliability for complex queries — achieved not by improving the LLM, but by improving the data layer it operates on.
+That's a move from ~10% to ~90% reliability for complex queries : achieved not by improving the LLM, but by improving the data layer it operates on.
 
 ![Semantic layer probability improvement for AI agent accuracy](/images/2026/may28seo/semantic-layer-accuracy-improvement.png)
 
-The model is simplified — real correctness probabilities depend on many factors — but the directional effect is real. The investment in semantic layer documentation pays directly in AI agent accuracy.
+The model is simplified : real correctness probabilities depend on many factors,  but the directional effect is real. The investment in semantic layer documentation pays directly in AI agent accuracy.
 
 ## Starting the Transition
 

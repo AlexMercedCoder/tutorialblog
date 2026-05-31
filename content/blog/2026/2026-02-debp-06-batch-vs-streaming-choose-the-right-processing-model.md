@@ -14,11 +14,11 @@ tags:
 
 ![Batch processing in scheduled groups vs streaming in continuous flow](images/debp/06/batch-vs-streaming.png)
 
-"We need real-time data." This is one of the most expensive sentences in data engineering — because it's rarely true, and implementing it when it's not needed multiplies complexity, cost, and operational burden.
+"We need real-time data." This is one of the most expensive sentences in data engineering : because it's rarely true, and implementing it when it's not needed multiplies complexity, cost, and operational burden.
 
 The question isn't "should we use streaming?" The question is "how fresh does the data actually need to be, and what are we willing to pay for that freshness?"
 
-## The Question Isn't "Real-Time or Not" — It's "How Fresh?"
+## The Question Isn't "Real-Time or Not" : It's "How Fresh?"
 
 Freshness requirements exist on a spectrum:
 
@@ -35,11 +35,11 @@ Batch processing is the default choice. Choose it unless you have a specific, ju
 
 **Simpler failure recovery.** A batch job fails at 3 AM. You fix the bug, rerun the job, and it reprocesses the same bounded dataset. Recovery is predictable and testable.
 
-**Easier testing.** Given input dataset X, the output should be Y. You can version test datasets, run them locally, and assert exact outputs. Streaming test scenarios require simulating time, ordering, and late-arriving events — dramatically harder.
+**Easier testing.** Given input dataset X, the output should be Y. You can version test datasets, run them locally, and assert exact outputs. Streaming test scenarios require simulating time, ordering, and late-arriving events : dramatically harder.
 
 **Lower operational cost.** Batch jobs run on schedule, consume resources during execution, and release them when done. Streaming jobs run continuously, consuming resources 24/7 even during low-volume periods.
 
-**Better tooling maturity.** SQL-based transformations, orchestrators with DAG visualization, version-controlled dbt models — the batch ecosystem is deeper and more mature for most data warehouse workloads.
+**Better tooling maturity.** SQL-based transformations, orchestrators with DAG visualization, version-controlled dbt models : the batch ecosystem is deeper and more mature for most data warehouse workloads.
 
 **When to use:** Daily/hourly analytics, data warehouse loading, ML training data, compliance reporting, historical backfills.
 
@@ -61,7 +61,7 @@ Streaming processing is the right choice when latency is measured in seconds and
 
 ## The Micro-Batch Middle Ground
 
-Micro-batch processing runs batch jobs at very short intervals — every 1, 5, or 15 minutes. It captures most of the value of streaming with the simplicity of batch.
+Micro-batch processing runs batch jobs at very short intervals : every 1, 5, or 15 minutes. It captures most of the value of streaming with the simplicity of batch.
 
 **Same tools, shorter intervals.** Your existing batch infrastructure (SQL transformations, orchestrators, testing frameworks) works unchanged. You just schedule runs more frequently.
 

@@ -14,7 +14,7 @@ tags:
 
 ![Comprehensive data engineering checklist organized by categories with status indicators](images/debp/10/de-checklist.png)
 
-Best practices documents are easy to write and hard to use. They list principles without context, advice without prioritization, and rules without explaining when to break them. This one is different. It's a practical, tool-agnostic checklist organized by the categories that matter most — with each item tied to a specific outcome.
+Best practices documents are easy to write and hard to use. They list principles without context, advice without prioritization, and rules without explaining when to break them. This one is different. It's a practical, tool-agnostic checklist organized by the categories that matter most : with each item tied to a specific outcome.
 
 Use this as a recurring audit. Run through it quarterly. Any unchecked item is either a technical debt item or a conscious tradeoff. Know which is which.
 
@@ -38,7 +38,7 @@ Use this as a recurring audit. Run through it quarterly. Any unchecked item is e
 
 ## Reliability and Idempotency
 
-- [ ] **Make every pipeline idempotent.** Running the same job twice produces the same result. Use partition overwrite or MERGE — never blind INSERT.
+- [ ] **Make every pipeline idempotent.** Running the same job twice produces the same result. Use partition overwrite or MERGE : never blind INSERT.
 - [ ] **Implement retry with backoff.** Transient failures (network, API limits) resolve themselves. Retry 3-5 times with exponential backoff before alerting.
 - [ ] **Use dead-letter queues.** Records that can't be processed go to a queue for inspection, not to /dev/null.
 - [ ] **Checkpoint progress.** After processing each batch or partition, record what's done. On failure, resume from the last checkpoint.
@@ -72,6 +72,6 @@ Use this as a recurring audit. Run through it quarterly. Any unchecked item is e
 
 ## What to Do Next
 
-Print this checklist. Walk through it with your team in a 30-minute meeting. Check what's already in place, identify the three highest-impact unchecked items, and schedule them as engineering work — not aspirational goals on a wiki page. Best practices only matter when they're implemented.
+Print this checklist. Walk through it with your team in a 30-minute meeting. Check what's already in place, identify the three highest-impact unchecked items, and schedule them as engineering work : not aspirational goals on a wiki page. Best practices only matter when they're implemented.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

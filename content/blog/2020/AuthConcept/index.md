@@ -39,7 +39,7 @@ Regardless of your language, your web application must have a web server that in
 
 If you enable sessions on your web server, when the first request to the server is made, a cookie is placed on the client's computer identifying a unique "session." Each time a user requests the same session, the webserver will see the cookie and find an identifier to pull information from a database (Redis & Mongo is popular for this use) with data associated with that session.
 
-So when the user logs in, we can add data like the user's username or a boolean that they are logged in to the session data—from now on, during requests, the server can check to see if that data is on that session object to determine if the user is logged in.
+So when the user logs in, we can add data like the user's username or a boolean that they are logged in to the session data - from now on, during requests, the server can check to see if that data is on that session object to determine if the user is logged in.
 
 When a user clicks a logout button, that session is destroyed and that info removed. So future requests will not see the user as logged in.
 

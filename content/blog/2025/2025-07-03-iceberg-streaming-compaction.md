@@ -21,7 +21,7 @@ category: "Apache Iceberg"
 
 # Optimizing Compaction for Streaming Workloads in Apache Iceberg
 
-In traditional batch pipelines, compaction jobs can run in large windows during idle periods. But in streaming workloads, data is written continuously—often in small increments—leading to rapid small file accumulation and tight freshness requirements.
+In traditional batch pipelines, compaction jobs can run in large windows during idle periods. But in streaming workloads, data is written continuously: often in small increments, leading to rapid small file accumulation and tight freshness requirements.
 
 So how do we compact Iceberg tables without interfering with ingestion and latency-sensitive reads? This post explores how to **design efficient, incremental compaction jobs** that preserve performance without disrupting your streaming pipelines.
 
@@ -109,4 +109,4 @@ To maintain performance in streaming Iceberg pipelines:
 
 - Leverage orchestration and branching when available
 
-With the right setup, you can keep query performance and data freshness high—without sacrificing one for the other.
+With the right setup, you can keep query performance and data freshness high - without sacrificing one for the other.

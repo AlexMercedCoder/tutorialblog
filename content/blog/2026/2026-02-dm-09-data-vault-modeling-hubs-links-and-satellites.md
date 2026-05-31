@@ -16,7 +16,7 @@ tags:
 
 Dimensional modeling works well when your source systems are stable and your business questions are predictable. But what happens when sources change constantly, new systems get added every quarter, and regulatory requirements demand a full audit trail of every attribute change?
 
-Data Vault modeling was designed for exactly this scenario. Created by Dan Linstedt, it separates data into three distinct table types — Hubs, Links, and Satellites — each handling a different concern: identity, relationships, and descriptive context.
+Data Vault modeling was designed for exactly this scenario. Created by Dan Linstedt, it separates data into three distinct table types : Hubs, Links, and Satellites,  each handling a different concern: identity, relationships, and descriptive context.
 
 ## What Problem Data Vault Solves
 
@@ -30,7 +30,7 @@ Data Vault solves this by decomposing entities into independent components that 
 
 ### Hubs: Business Identity
 
-A Hub stores unique business keys — the identifiers that define a business entity regardless of which source system provides them.
+A Hub stores unique business keys : the identifiers that define a business entity regardless of which source system provides them.
 
 ```sql
 CREATE TABLE hub_customer (
@@ -47,7 +47,7 @@ Hubs are immutable. Once a business key is loaded, it never changes. A customer 
 
 ![Hubs connected by Link tables representing relationships between business entities](images/data_modeling/09/hub-link-relationship.png)
 
-A Link stores relationships between Hubs. Every relationship — customer-to-order, order-to-product, employee-to-department — gets its own Link table.
+A Link stores relationships between Hubs. Every relationship : customer-to-order, order-to-product, employee-to-department,  gets its own Link table.
 
 ```sql
 CREATE TABLE link_customer_order (
@@ -78,7 +78,7 @@ CREATE TABLE sat_customer_details (
 );
 ```
 
-Every time an attribute changes, a new Satellite row is inserted. This is equivalent to SCD Type 2 — full history is preserved without modifying existing rows. Different source systems can feed different Satellites for the same Hub, allowing attributes to arrive independently.
+Every time an attribute changes, a new Satellite row is inserted. This is equivalent to SCD Type 2 : full history is preserved without modifying existing rows. Different source systems can feed different Satellites for the same Hub, allowing attributes to arrive independently.
 
 ## How a Data Vault Query Works
 
@@ -100,13 +100,13 @@ WHERE s.effective_date = (
 );
 ```
 
-This is more complex than querying `dim_customers` directly. That complexity is the primary criticism of Data Vault. In practice, teams build a presentation layer — star schema views on top of the vault — for business users and BI tools.
+This is more complex than querying `dim_customers` directly. That complexity is the primary criticism of Data Vault. In practice, teams build a presentation layer : star schema views on top of the vault,  for business users and BI tools.
 
 Platforms like [Dremio](https://www.dremio.com/blog/agentic-analytics-semantic-layer/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced) make this practical. The raw vault tables live in the Bronze layer. Silver-layer views reconstruct business entities by joining Hubs, Links, and Satellites. Gold-layer views present dimensional star schemas for dashboards and AI agents. Users never query the vault tables directly.
 
 ## When Data Vault Fits
 
-**Multiple source systems that change frequently.** Adding a new source means adding new Satellites — not redesigning existing tables. The Hub and Link structure remains stable.
+**Multiple source systems that change frequently.** Adding a new source means adding new Satellites : not redesigning existing tables. The Hub and Link structure remains stable.
 
 **Regulated industries requiring full audit trails.** Financial services, healthcare, and government often need to prove what data looked like at any point in time. Satellites provide that out of the box.
 

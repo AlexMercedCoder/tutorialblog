@@ -150,7 +150,7 @@ Python's standard libraries offer a vast array of functions and modules that fac
 In the next section, we'll explore Python's built-in data structures, which are essential for storing and manipulating data in your programs.
 
 ## Data Structures
-Python includes several built-in data structures that are essential for storing and manipulating data in your programs. Understanding these data structures—lists, tuples, dictionaries, and sets—will enable you to choose the right one for your specific needs, making your code more efficient and readable.
+Python includes several built-in data structures that are essential for storing and manipulating data in your programs. Understanding these data structures: lists, tuples, dictionaries, and sets, will enable you to choose the right one for your specific needs, making your code more efficient and readable.
 
 ### Lists
 **Definition:** Lists are ordered collections of items (which can be of different types) and are one of the most versatile data structures in Python.

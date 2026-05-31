@@ -14,7 +14,7 @@ tags:
 
 ![Data quality checks enforced at the pipeline validation stage before data reaches consumers](images/debp/03/data-quality-pipeline.png)
 
-When an analyst finds null values in a revenue column, the typical response is to add a calculated field in the BI tool: `IF revenue IS NULL THEN 0`. That "fix" doesn't fix anything. It masks a problem at the source — and every downstream consumer has to independently discover and patch the same issue.
+When an analyst finds null values in a revenue column, the typical response is to add a calculated field in the BI tool: `IF revenue IS NULL THEN 0`. That "fix" doesn't fix anything. It masks a problem at the source : and every downstream consumer has to independently discover and patch the same issue.
 
 Data quality is a pipeline problem. It should be enforced where data enters your system, not where it exits as a chart.
 
@@ -36,11 +36,11 @@ Not all quality problems are the same. Categorizing them helps you build targete
 
 **Consistency.** Do the same facts agree across sources? If your CRM says a customer is in Texas and your billing system says California, you have a consistency problem.
 
-**Timeliness.** Did the data arrive when expected? A daily feed that arrives 6 hours late might still be correct — but any dashboards refreshed before it arrived showed stale numbers.
+**Timeliness.** Did the data arrive when expected? A daily feed that arrives 6 hours late might still be correct : but any dashboards refreshed before it arrived showed stale numbers.
 
 **Uniqueness.** Are there duplicate records? Double-counted revenue is worse than no revenue. Deduplication on business keys (order ID, event ID) is essential.
 
-**Validity.** Do values conform to expected formats and ranges? Dates in the future, negative quantities, email addresses without @ signs — structural validation catches these before they corrupt downstream logic.
+**Validity.** Do values conform to expected formats and ranges? Dates in the future, negative quantities, email addresses without @ signs : structural validation catches these before they corrupt downstream logic.
 
 ![Six dimensions: completeness, accuracy, consistency, timeliness, uniqueness, validity](images/debp/03/quality-dimensions.png)
 
@@ -48,7 +48,7 @@ Not all quality problems are the same. Categorizing them helps you build targete
 
 Add a validation stage between ingestion and transformation. This stage checks every record against defined quality rules and routes failures to a quarantine table.
 
-**Schema validation.** Check column names, data types, and required vs. optional fields. If the source adds or removes a column, catch it here — not when a transformation SQL query fails.
+**Schema validation.** Check column names, data types, and required vs. optional fields. If the source adds or removes a column, catch it here : not when a transformation SQL query fails.
 
 **Range and format checks.** Ensure numeric values fall within expected ranges (0 ≤ price ≤ 1,000,000). Validate date formats, email patterns, and enum values against allowed lists.
 
@@ -84,7 +84,7 @@ Build quality metrics into your monitoring dashboards:
 
 ![Quality monitoring: pass/fail ratios, trend lines, and SLA tracking alongside pipeline metrics](images/debp/03/quality-monitoring.png)
 
-Alert on quality regressions the same way you alert on pipeline failures. A pipeline that runs successfully but produces 30% invalid records is worse than one that fails outright — because it's silently wrong.
+Alert on quality regressions the same way you alert on pipeline failures. A pipeline that runs successfully but produces 30% invalid records is worse than one that fails outright : because it's silently wrong.
 
 ## What to Do Next
 

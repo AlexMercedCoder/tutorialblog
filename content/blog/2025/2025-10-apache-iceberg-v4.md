@@ -24,7 +24,7 @@ tags:
 
 ---
 
-Apache Iceberg has come a long way since its early days of bringing reliable ACID transactions and schema evolution to the data lake. It helped teams move beyond brittle Hive tables and built the foundation for modern lakehouse architectures. But with wider adoption came new challenges—especially as workloads shifted from batch-heavy pipelines to streaming ingestion, faster commits, and more interactive use cases.
+Apache Iceberg has come a long way since its early days of bringing reliable ACID transactions and schema evolution to the data lake. It helped teams move beyond brittle Hive tables and built the foundation for modern lakehouse architectures. But with wider adoption came new challenges - especially as workloads shifted from batch-heavy pipelines to streaming ingestion, faster commits, and more interactive use cases.
 
 That pressure has exposed some cracks in the foundation. Write-heavy applications hit metadata bottlenecks. Query planners struggle with inefficient stats. Teams managing large tables face complex migrations due to rigid path references.
 
@@ -44,11 +44,11 @@ The proposals in Iceberg v4 address these shifts head-on. Together, they aim to:
 - **Improve query planning** by making metadata easier to scan and use
 - **Simplify operations** like moving, cloning, or backing up tables
 
-In short, Iceberg is being re-tuned for modern workloads—ones that demand both speed and flexibility. The v4 changes aren’t just about performance. They’re about making Iceberg easier to run, easier to optimize, and better suited for the next generation of data systems.
+In short, Iceberg is being re-tuned for modern workloads - ones that demand both speed and flexibility. The v4 changes aren’t just about performance. They’re about making Iceberg easier to run, easier to optimize, and better suited for the next generation of data systems.
 
 ## Proposal 1: Single-File Commits – Cutting Down Metadata Overhead
 
-Every commit to an Iceberg table today creates at least two new metadata files: one for the updated manifest list, and another for any changed manifests. In fast-moving environments—like streaming ingestion or micro-batch pipelines—this adds up quickly.
+Every commit to an Iceberg table today creates at least two new metadata files: one for the updated manifest list, and another for any changed manifests. In fast-moving environments: like streaming ingestion or micro-batch pipelines, this adds up quickly.
 
 The result? Write amplification. For every small data change, there’s a burst of I/O to update metadata. Over time, this leads to thousands of small metadata files, bloated storage, and a slowdown in commit throughput. Teams often have to schedule compaction jobs to clean up the data.
 
@@ -62,7 +62,7 @@ By minimizing I/O and simplifying commit logic, this change unlocks faster inges
 
 ## Proposal 2: Parquet for Metadata – Smarter Query Planning
 
-Today, Iceberg stores metadata files—like manifests and manifest lists—in **Apache Avro**, a row-based format. While this made sense early on, it’s become a bottleneck for query performance.
+Today, Iceberg stores metadata files: like manifests and manifest lists, in **Apache Avro**, a row-based format. While this made sense early on, it’s become a bottleneck for query performance.
 
 Why? Because most query engines don’t need every field in the metadata. For example, if a planner wants to filter files based on a column’s min and max values, it only needs that one field. But with Avro, it has to read and deserialize entire rows just to access a few columns.
 
@@ -72,11 +72,11 @@ The proposed change in Iceberg v4 is to **use Parquet instead of Avro** for meta
 - Skip over irrelevant parts of the file
 - Load metadata faster and use less memory
 
-This shift isn’t just about speed—it enables smarter planning. Engines can project just the stats they care about, sort and filter more effectively, and better optimize execution plans. It’s a small architectural change with a big ripple effect across the query lifecycle.
+This shift isn’t just about speed - it enables smarter planning. Engines can project just the stats they care about, sort and filter more effectively, and better optimize execution plans. It’s a small architectural change with a big ripple effect across the query lifecycle.
 
 ## Proposal 3: Column Statistics Overhaul – Better Skipping, Smarter Queries
 
-Metadata isn't just about file paths—it's also about understanding what’s inside each file. Iceberg uses column-level statistics to help query engines skip files that don’t match filter conditions. But the current stats format has limitations that hold back performance.
+Metadata isn't just about file paths - it's also about understanding what’s inside each file. Iceberg uses column-level statistics to help query engines skip files that don’t match filter conditions. But the current stats format has limitations that hold back performance.
 
 Right now, statistics are:
 - Flat and untyped, with no indication of data type
@@ -90,13 +90,13 @@ The v4 spec proposes a **redesigned statistics format** with:
 - Projectable structures for selective reads
 - Support for more detailed metrics, including null counts and nested fields
 
-This richer structure enables more precise file pruning and better cost-based optimization. Engines can make smarter decisions about which files to read and which filters to push down—leading to faster queries, less I/O, and improved overall performance.
+This richer structure enables more precise file pruning and better cost-based optimization. Engines can make smarter decisions about which files to read and which filters to push down - leading to faster queries, less I/O, and improved overall performance.
 
 ## Proposal 4: Relative Paths – Making Tables Portable Again
 
-In current versions of Iceberg, metadata files store **absolute file paths**. That might seem fine at first—until you try to move a table.
+In current versions of Iceberg, metadata files store **absolute file paths**. That might seem fine at first - until you try to move a table.
 
-If you change storage accounts, rename a bucket, or migrate between environments, every path in every metadata file becomes invalid. Fixing that means scanning and rewriting all metadata—an expensive, error-prone operation that often requires a distributed job.
+If you change storage accounts, rename a bucket, or migrate between environments, every path in every metadata file becomes invalid. Fixing that means scanning and rewriting all metadata: an expensive, error-prone operation that often requires a distributed job.
 
 The v4 proposal introduces support for **relative paths** in metadata. Instead of locking a table to a fixed storage location, file references are stored relative to a base URI defined in the table metadata.
 
@@ -109,7 +109,7 @@ Relative paths decouple the logical structure of a table from its physical locat
 
 ## Iceberg’s Direction: Toward Operational Simplicity
 
-Taken together, these proposals reflect a clear shift in how the Iceberg community is thinking about the format—not just as a technical layer, but as an operational foundation for modern data platforms.
+Taken together, these proposals reflect a clear shift in how the Iceberg community is thinking about the format - not just as a technical layer, but as an operational foundation for modern data platforms.
 
 Here’s what’s changing:
 
@@ -119,18 +119,18 @@ Here’s what’s changing:
 
 This is Iceberg growing up.
 
-The format has always prioritized correctness and openness. Now it’s doubling down on speed, scalability, and ease of use—especially for teams managing hundreds or thousands of tables across dynamic environments.
+The format has always prioritized correctness and openness. Now it’s doubling down on speed, scalability, and ease of use - especially for teams managing hundreds or thousands of tables across dynamic environments.
 
 Whether you're building AI pipelines, federated queries, or traditional dashboards, these changes aim to reduce the friction and complexity of working with large-scale tables. It’s about making Iceberg not just powerful, but practical.
 
 ## A Glimpse Ahead: v4 in Context
 
-Just a few months ago, Apache Iceberg v3 was approved—bringing meaningful improvements to the table format. That release introduced new data types, deletion vectors, and other enhancements that expanded what Iceberg can represent and how it supports evolving workloads.
+Just a few months ago, Apache Iceberg v3 was approved, bringing meaningful improvements to the table format. That release introduced new data types, deletion vectors, and other enhancements that expanded what Iceberg can represent and how it supports evolving workloads.
 
 Right now, the ecosystem is heads-down implementing v3 features across engines, catalogs, and query layers. You’ll see more engines support features like row-level deletes and richer data modeling as v3 adoption matures.
 
-The proposals for v4 aren’t intended to replace that momentum—they build on it.
+The proposals for v4 aren’t intended to replace that momentum - they build on it.
 
-Think of v3 as expanding what Iceberg can do. V4 focuses on how efficiently and cleanly it can perform the task. These early discussions around v4 offer a forward-looking roadmap for how Iceberg will continue to evolve—toward higher throughput, better portability, and more brilliant query performance.
+Think of v3 as expanding what Iceberg can do. V4 focuses on how efficiently and cleanly it can perform the task. These early discussions around v4 offer a forward-looking roadmap for how Iceberg will continue to evolve - toward higher throughput, better portability, and more brilliant query performance.
 
 While these changes are still in the design and discussion phase, they signal where Iceberg is heading. For data teams investing in the lakehouse stack today, it’s reassuring that the foundation will only get stronger over time.

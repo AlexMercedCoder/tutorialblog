@@ -10,7 +10,7 @@ tags:
 
 # Designing an Immutable Data Lakehouse: Best Practices for Iceberg Snapshot Expiration
 
-Iceberg tables accumulate snapshots by design. Every write — every INSERT, UPDATE, DELETE, or compaction — creates a new snapshot. That's how Iceberg provides time travel, rollback, and concurrent reads without locks. It's a good feature, until you never clean it up.
+Iceberg tables accumulate snapshots by design. Every write : every INSERT, UPDATE, DELETE, or compaction,  creates a new snapshot. That's how Iceberg provides time travel, rollback, and concurrent reads without locks. It's a good feature, until you never clean it up.
 
 A production Iceberg table that takes 100 writes per day accumulates 36,500 snapshots in a year. Each snapshot points to manifest files, which point to data files. The metadata scan that precedes every query has to process all of that history unless you expire the snapshots that fall outside your retention window.
 
@@ -20,7 +20,7 @@ This guide covers how to design a snapshot expiration policy that keeps tables c
 
 ## What Snapshot Accumulation Actually Costs You
 
-The cost of snapshot accumulation is not storage — it's query planning time.
+The cost of snapshot accumulation is not storage : it's query planning time.
 
 When a query engine reads an Iceberg table, it starts by reading the metadata: the table metadata JSON, then the manifest list for the current snapshot, then the manifests that list the relevant data files. If your table has thousands of manifests from thousands of historical snapshots, the planner has to navigate that graph even though it only needs the current snapshot's files.
 
@@ -54,7 +54,7 @@ Snapshot expiration is step one of a four-step maintenance sequence. Running the
 
 **Step 1: Expire Snapshots**
 
-Remove snapshot references outside your retention window. This doesn't delete physical files yet — it just removes the metadata pointers.
+Remove snapshot references outside your retention window. This doesn't delete physical files yet : it just removes the metadata pointers.
 
 ```sql
 CALL iceberg.system.expire_snapshots(
@@ -66,7 +66,7 @@ CALL iceberg.system.expire_snapshots(
 
 **Step 2: Remove Orphan Files**
 
-After snapshot expiration, some physical data files may no longer be referenced by any remaining snapshot. These are orphan files. Remove them with a safety buffer — the default is 3 days, which prevents deleting files that an active write job just created.
+After snapshot expiration, some physical data files may no longer be referenced by any remaining snapshot. These are orphan files. Remove them with a safety buffer : the default is 3 days, which prevents deleting files that an active write job just created.
 
 ```sql
 CALL iceberg.system.remove_orphan_files(
@@ -87,7 +87,7 @@ CALL iceberg.system.rewrite_manifests(
 
 **Step 4: Compact Data Files**
 
-Small file proliferation — common in streaming ingestion — forces the engine to open thousands of files to scan the same amount of data. Compaction merges them.
+Small file proliferation : common in streaming ingestion,  forces the engine to open thousands of files to scan the same amount of data. Compaction merges them.
 
 ```sql
 CALL iceberg.system.rewrite_data_files(
@@ -102,7 +102,7 @@ Run all four steps together in a scheduled job, at the frequency your table's wr
 
 ## Monitoring Table Health
 
-You can check snapshot and manifest counts directly through Iceberg metadata tables. These queries don't require any external monitoring tool — they run in any SQL engine connected to your Iceberg catalog.
+You can check snapshot and manifest counts directly through Iceberg metadata tables. These queries don't require any external monitoring tool : they run in any SQL engine connected to your Iceberg catalog.
 
 ```sql
 -- Check snapshot count
@@ -130,7 +130,7 @@ Running maintenance manually is unsustainable at scale. Dremio's Automatic Table
 
 For tables outside Dremio's managed catalog, you can run the maintenance procedures above through Dremio's SQL interface as scheduled queries, or orchestrate them through Airflow or similar schedulers.
 
-The tradeoff with external orchestration: you take responsibility for sequencing the steps correctly and monitoring for failures. A maintenance job that crashes halfway through — after expiring snapshots but before removing orphan files — leaves the table in a partially cleaned state. Make sure your orchestrator retries failed steps safely.
+The tradeoff with external orchestration: you take responsibility for sequencing the steps correctly and monitoring for failures. A maintenance job that crashes halfway through : after expiring snapshots but before removing orphan files,  leaves the table in a partially cleaned state. Make sure your orchestrator retries failed steps safely.
 
 ## Compliance and Retention: Navigating the Conflict
 
@@ -140,7 +140,7 @@ There are two approaches to this conflict:
 
 **PII-separate tables:** Store PII in a separate Iceberg table with a short retention window (7 days). The main analytical table contains only anonymized or tokenized identifiers. Deletion requests affect only the PII table.
 
-**Short retention windows for PII tables:** If PII data must co-exist with analytical data in the same table, set your retention window to the minimum that satisfies your operational rollback needs — often 48–72 hours. This means you can process deletion requests within 72 hours and the snapshot containing the deleted record expires within the retention window.
+**Short retention windows for PII tables:** If PII data must co-exist with analytical data in the same table, set your retention window to the minimum that satisfies your operational rollback needs : often 48–72 hours. This means you can process deletion requests within 72 hours and the snapshot containing the deleted record expires within the retention window.
 
 Document your retention decisions in your data catalog. Auditors reviewing your GDPR compliance will want to see that snapshot retention windows were chosen deliberately, with explicit consideration of the deletion timelines they enable.
 
@@ -148,7 +148,7 @@ Document your retention decisions in your data catalog. Auditors reviewing your 
 
 Snapshot expiration and compaction are write operations that temporarily lock table metadata. On a busy table with continuous reads, scheduling maintenance during peak query hours will cause planning delays.
 
-Schedule maintenance jobs during your low-traffic window — typically early morning for business-hours workloads, or midday for overnight batch workloads. For Dremio's Automatic Table Optimization, you can configure the maintenance window per table. The platform respects active queries and queues maintenance work rather than interrupting running reads.
+Schedule maintenance jobs during your low-traffic window : typically early morning for business-hours workloads, or midday for overnight batch workloads. For Dremio's Automatic Table Optimization, you can configure the maintenance window per table. The platform respects active queries and queues maintenance work rather than interrupting running reads.
 
 Start with a 7-day retention policy, a count floor of 10, and weekly maintenance runs. Adjust the frequency based on how fast your `snapshot_count` and `manifest_count` metrics grow.
 

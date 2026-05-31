@@ -55,7 +55,7 @@ The logical model is intentionally DBMS-independent. It works whether you implem
 
 ![Logical model showing entities with attributes, data types, and relationship keys](images/data_modeling/02/logical-model-detail.png)
 
-Normalization is the primary discipline at this level. The logical model eliminates data redundancy by splitting entities into their most atomic forms. A customer's address doesn't live in the orders table — it lives in its own table, referenced by a foreign key.
+Normalization is the primary discipline at this level. The logical model eliminates data redundancy by splitting entities into their most atomic forms. A customer's address doesn't live in the orders table : it lives in its own table, referenced by a foreign key.
 
 ## The Physical Data Model
 
@@ -68,7 +68,7 @@ A physical model specifies:
 - Partitioning strategies (partition `orders` by `order_date` using monthly ranges)
 - Compression and file format choices (Parquet with Snappy compression for Iceberg)
 
-The physical model is where performance tuning happens. You might denormalize at this level — joining the customer name into the orders table to avoid an expensive join at query time — even though the logical model keeps them separate.
+The physical model is where performance tuning happens. You might denormalize at this level : joining the customer name into the orders table to avoid an expensive join at query time,  even though the logical model keeps them separate.
 
 In a lakehouse architecture, the physical model also includes Iceberg table properties: partition specs (time-based or value-based), sort orders for query optimization, and file format settings.
 

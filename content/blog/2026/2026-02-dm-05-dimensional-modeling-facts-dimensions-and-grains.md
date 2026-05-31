@@ -45,20 +45,20 @@ Every analysis query joins a fact table to one or more dimension tables. "Revenu
 
 ## Declaring the Grain
 
-![Grain declaration as the foundation — one row per transaction per line item](images/data_modeling/05/grain-declaration.png)
+![Grain declaration as the foundation : one row per transaction per line item](images/data_modeling/05/grain-declaration.png)
 
 The grain is the most important decision in dimensional modeling. It declares what one row in your fact table represents.
 
-- "One row per order line item" — each product within an order gets its own row
-- "One row per daily customer session" — each customer's daily activity is aggregated into one row
-- "One row per monthly account balance" — snapshot taken once per month
+- "One row per order line item" : each product within an order gets its own row
+- "One row per daily customer session" : each customer's daily activity is aggregated into one row
+- "One row per monthly account balance" : snapshot taken once per month
 
 **Getting the grain right matters because:**
 - Too coarse: You lose detail. If your grain is "one row per order" you can't analyze individual line items.
 - Too fine: You create an enormous table that's expensive to query. If your grain is "one row per page view" in a high-traffic application, the table grows by billions of rows per month.
 - Inconsistent: If some rows represent individual items and others represent aggregated totals, every calculation produces wrong results.
 
-Declare the grain first. Then identify which dimensions apply at that grain, and which numeric measures belong in the fact table. This order is not optional — skip it, and the model breaks down.
+Declare the grain first. Then identify which dimensions apply at that grain, and which numeric measures belong in the fact table. This order is not optional : skip it, and the model breaks down.
 
 ## Designing Fact Tables
 
@@ -72,7 +72,7 @@ Three types of fact tables handle different analytical patterns:
 
 Best practices for fact tables:
 - Keep facts additive when possible (SUM-able across dimensions)
-- Avoid storing text in fact tables — that belongs in dimensions
+- Avoid storing text in fact tables , that belongs in dimensions
 - Use surrogate keys (integers) for dimension references, not natural keys
 - Never mix grains in one fact table
 
@@ -80,17 +80,17 @@ Best practices for fact tables:
 
 Well-designed dimensions follow predictable patterns:
 
-**Denormalize.** Include all descriptive attributes in one table. Product name, category, subcategory, brand, manufacturer, department — all in dim_products. This eliminates joins and makes queries readable.
+**Denormalize.** Include all descriptive attributes in one table. Product name, category, subcategory, brand, manufacturer, department : all in dim_products. This eliminates joins and makes queries readable.
 
 **Use surrogate keys.** Assign an integer key (product_key) that acts as the primary key. Keep the natural business key (product_sku) as a regular attribute. Surrogate keys insulate your model from source system key changes.
 
-**Add audit columns.** Include effective_date, expiry_date, and is_current flag for tracking changes over time (Slowly Changing Dimensions — covered in a separate article).
+**Add audit columns.** Include effective_date, expiry_date, and is_current flag for tracking changes over time (Slowly Changing Dimensions : covered in a separate article).
 
 **Include "junk" dimensions.** Low-cardinality flags and indicators (is_promotional, is_online, payment_type) can be combined into a single "junk dimension" instead of cluttering the fact table.
 
 ## Conformed Dimensions
 
-A conformed dimension is shared across multiple fact tables. The best example is the Date dimension — every fact table references dates, and they should all use the same date dimension to ensure consistent filtering and grouping.
+A conformed dimension is shared across multiple fact tables. The best example is the Date dimension : every fact table references dates, and they should all use the same date dimension to ensure consistent filtering and grouping.
 
 Other conformed dimensions: Customer, Product, Employee, Geography. When Sales and Support both reference the same dim_customers table, you can analyze customer behavior across both domains without reconciling different customer definitions.
 
@@ -102,6 +102,6 @@ Platforms like [Dremio](https://www.dremio.com/blog/agentic-analytics-semantic-l
 
 ![Conformed dimensions shared across multiple fact tables in a unified model](images/data_modeling/05/conformed-dimensions.png)
 
-Start your dimensional model with one business process — the one your team queries most. Declare the grain. Identify the dimensions. Build the fact table. Then expand: pick the next business process, reuse the conformed dimensions, and add new ones as needed.
+Start your dimensional model with one business process : the one your team queries most. Declare the grain. Identify the dimensions. Build the fact table. Then expand: pick the next business process, reuse the conformed dimensions, and add new ones as needed.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

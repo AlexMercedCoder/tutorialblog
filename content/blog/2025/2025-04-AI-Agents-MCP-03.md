@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 3 - Boosting LLM Performance — Fine-Tuning, Prompt Engineering, and RAG
+title: A Journey from AI to LLMs and MCP - 3 - Boosting LLM Performance : Fine-Tuning, Prompt Engineering, and RAG
 date: "2025-04-07"
-description: "Boosting LLM Performance — Fine-Tuning, Prompt Engineering, and RAG"
+description: "Boosting LLM Performance : Fine-Tuning, Prompt Engineering, and RAG"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-In our last post, we explored how LLMs process text using embeddings and vector spaces within limited context windows. While LLMs are powerful out-of-the-box, they aren’t perfect—and in many real-world scenarios, we need to push them further.
+In our last post, we explored how LLMs process text using embeddings and vector spaces within limited context windows. While LLMs are powerful out-of-the-box, they aren’t perfect - and in many real-world scenarios, we need to push them further.
 
 That’s where enhancement techniques come in.
 
@@ -30,9 +30,9 @@ In this post, we’ll walk through the three most popular and practical ways to 
 2. Prompt engineering  
 3. Retrieval-Augmented Generation (RAG)
 
-Each approach has its strengths, trade-offs, and ideal use cases. By the end, you’ll know when to use each—and how they work under the hood.
+Each approach has its strengths, trade-offs, and ideal use cases. By the end, you’ll know when to use each - and how they work under the hood.
 
-## 1. Fine-Tuning — Teaching the Model New Tricks
+## 1. Fine-Tuning : Teaching the Model New Tricks
 
 **Fine-tuning** is the process of training an existing LLM on custom datasets to improve its behavior on specific tasks.
 
@@ -55,11 +55,11 @@ Think of it like giving the model a focused education after it’s graduated fro
 | Reduces prompt complexity         | Risk of overfitting or forgetting |
 | Works well offline or locally     | Not ideal for frequently changing data |
 
-> Fine-tuning is powerful, but it’s not always the first choice—especially when you need flexibility or real-time knowledge.
+> Fine-tuning is powerful, but it’s not always the first choice - especially when you need flexibility or real-time knowledge.
 
-## 2. Prompt Engineering — Speaking the Model’s Language
+## 2. Prompt Engineering : Speaking the Model’s Language
 
-Sometimes, you don’t need to retrain the model—you just need to *talk to it better*.
+Sometimes, you don’t need to retrain the model - you just need to *talk to it better*.
 
 **Prompt engineering** is the art of crafting inputs that guide the model to behave the way you want. It’s fast, flexible, and doesn’t require model access.
 
@@ -89,9 +89,9 @@ Sometimes, you don’t need to retrain the model—you just need to *talk to it 
 | Doesn’t require model access     | Can be brittle or unpredictable      |
 | Great for prototyping            | Doesn’t scale well for complex logic |
 
-> Prompt engineering is like UX for AI—small changes in input can completely change the output.
+> Prompt engineering is like UX for AI - small changes in input can completely change the output.
 
-## 3. Retrieval-Augmented Generation (RAG) — Give the Model Real-Time Knowledge
+## 3. Retrieval-Augmented Generation (RAG) : Give the Model Real-Time Knowledge
 
 RAG is a game-changer for context-aware applications.
 
@@ -103,7 +103,7 @@ Instead of cramming all your knowledge into a model, **RAG retrieves relevant in
 3. Top-matching documents are inserted into the prompt
 4. The LLM generates a response using both query + retrieved context
 
-This gives you **dynamic, real-time access** to external knowledge—without retraining.
+This gives you **dynamic, real-time access** to external knowledge - without retraining.
 
 ### Typical RAG architecture:
 ```
@@ -122,7 +122,7 @@ User → Query → Vector Search (Embeddings) → Top K Documents → LLM Prompt
 | No need to retrain the model          | Requires infrastructure (DB + search) |
 | Keeps context windows lean            | Needs good chunking & ranking logic   |
 
-> With RAG, your LLM becomes a smart interface to *your* data—not just the internet.
+> With RAG, your LLM becomes a smart interface to *your* data - not just the internet.
 
 ## Choosing the Right Enhancement Technique
 
@@ -139,7 +139,7 @@ Often, the best systems **combine** these techniques:
 - With prompt templates
 - And external knowledge via RAG
 
-This is exactly what advanced AI agent systems are starting to do—and it’s where we’re heading next.
+This is exactly what advanced AI agent systems are starting to do - and it’s where we’re heading next.
 
 ## Recap: Boosting LLMs Is All About Context and Control
 
@@ -151,7 +151,7 @@ This is exactly what advanced AI agent systems are starting to do—and it’s w
 
 ---
 
-## Up Next: What Are AI Agents — And Why They’re the Future
+## Up Next: What Are AI Agents : And Why They’re the Future
 
 Now that we’ve learned how to enhance individual LLMs, the next evolution is combining them with tools, memory, and logic to create **AI Agents**.
 

@@ -41,7 +41,7 @@ By focusing on current states and clearly defined relationships, entity modeling
 
 Event-based modeling is beneficial when you need to track activities over time. Events provide a record of actions and changes, allowing for deeper insights into patterns, trends, and user behaviors. Here are some scenarios when event modeling works well:
 
-1. **Customer Journey Tracking**: By recording each action a customer takes—such as logging in, browsing products, or making a purchase—you can build a comprehensive view of their journey and behavior patterns.
+1. **Customer Journey Tracking**: By recording each action a customer takes: such as logging in, browsing products, or making a purchase, you can build a comprehensive view of their journey and behavior patterns.
 2. **Real-Time Analytics**: In scenarios like fraud detection or monitoring application performance, a continuous stream of events allows for timely insights and anomaly detection.
 3. **System Monitoring**: Capturing logs, metrics, and performance indicators from systems helps in monitoring health, diagnosing issues, and improving performance through historical trends.
 
@@ -99,4 +99,4 @@ Both events and entities have unique roles in data modeling, and understanding w
 
 In many cases, a hybrid approach that combines events and entities will offer the most value, providing a snapshot of the present state alongside a timeline of interactions. This dual perspective not only strengthens operational reporting but also deepens insights into user behaviors and business processes.
 
-By understanding these fundamental modeling strategies and applying best practices, you can design a data model that is both adaptable and insightful—one that meets the analytical needs of today and scales with the demands of tomorrow.
+By understanding these fundamental modeling strategies and applying best practices, you can design a data model that is both adaptable and insightful - one that meets the analytical needs of today and scales with the demands of tomorrow.

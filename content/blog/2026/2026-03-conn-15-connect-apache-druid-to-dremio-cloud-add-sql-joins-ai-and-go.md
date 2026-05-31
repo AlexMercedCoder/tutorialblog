@@ -16,7 +16,7 @@ Apache Druid is a real-time analytics database designed for sub-second queries o
 
 Dremio Cloud connects to Druid as a federated data source, giving you the ability to join Druid event data with relational databases, data lakes, and cloud warehouses. Dremio adds governance (column masking, row-level filtering), Reflection-based acceleration, and AI capabilities (AI Agent, MCP Server, AI SQL Functions) that Druid doesn't provide natively.
 
-Druid excels at one thing: fast aggregation queries on time-series event data. But production analytics rarely involve just one data source. When a product manager asks "Show me user engagement metrics correlated with support ticket volume and revenue impact," that query requires joining Druid's event data with a CRM database and a financial system. Druid can't do these joins natively — it doesn't support standard SQL JOINs. Dremio bridges this gap by reading Druid data and joining it with any other source in a single SQL query.
+Druid excels at one thing: fast aggregation queries on time-series event data. But production analytics rarely involve just one data source. When a product manager asks "Show me user engagement metrics correlated with support ticket volume and revenue impact," that query requires joining Druid's event data with a CRM database and a financial system. Druid can't do these joins natively : it doesn't support standard SQL JOINs. Dremio bridges this gap by reading Druid data and joining it with any other source in a single SQL query.
 
 But Druid has fundamental limitations that become painful as analytics needs grow. It doesn't support traditional SQL joins between datasources. It doesn't connect to external databases. Its query model is optimized for aggregations on its own ingested segments, not for the kind of cross-source, enriched analytics modern organizations need.
 
@@ -28,7 +28,7 @@ Dremio Cloud connects to Apache Druid and queries it alongside relational databa
 
 Druid doesn't support traditional SQL joins between datasources. If you want to answer "What is the conversion rate by customer segment in the last hour?" you need the real-time event data from Druid and the customer segment data from your CRM database. Without Dremio, you'd need to either pre-join the data before ingesting into Druid (losing flexibility) or build application code that queries both systems and merges results in memory.
 
-Dremio queries Druid for its real-time aggregations and joins the results with PostgreSQL customer data, S3 behavior logs, Snowflake revenue data, or any other connected source — all in a single SQL query.
+Dremio queries Druid for its real-time aggregations and joins the results with PostgreSQL customer data, S3 behavior logs, Snowflake revenue data, or any other connected source : all in a single SQL query.
 
 ### Enrich Real-Time Metrics with Business Context
 
@@ -38,7 +38,7 @@ Dremio's federation provides that enrichment without duplicating dimensional dat
 
 ### Historical Analysis Across Time Ranges
 
-Druid is optimized for recent data (hot segments). Historical analysis across months or years — trend analysis, year-over-year comparisons — often hits cold segments that are slower to query. Dremio's Reflections cache aggregated historical results, providing fast access to time-series trends without depending on Druid's tiered storage.
+Druid is optimized for recent data (hot segments). Historical analysis across months or years : trend analysis, year-over-year comparisons,  often hits cold segments that are slower to query. Dremio's Reflections cache aggregated historical results, providing fast access to time-series trends without depending on Druid's tiered storage.
 
 ### Unified Governance
 
@@ -46,10 +46,10 @@ Druid has basic authentication but limited access control. There's no column mas
 
 ## Prerequisites
 
-- **Druid Broker hostname or IP address** — the Broker node handles query routing
-- **Port** — typically `8082` for the Broker HTTP API
+- **Druid Broker hostname or IP address** : the Broker node handles query routing
+- **Port** : typically `8082` for the Broker HTTP API
 - **Network access** from Dremio Cloud to the Druid Broker
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-apache-druid-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-apache-druid-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Druid to Dremio Cloud
 
@@ -152,7 +152,7 @@ Navigate to the **Catalog**, click **Edit** (pencil icon), and **Generate Wiki**
 
 The AI Agent lets users ask questions about real-time event data in plain English. Instead of writing complex time-window SQL, a product manager asks "Which pages are trending in the last 6 hours?" or "What's the average engagement per visitor for enterprise users today?" The Agent reads your wiki descriptions and generates accurate SQL.
 
-This is particularly valuable for Druid data because time-series queries can be complex — date truncation, windowing, and aggregation syntax varies. The AI Agent handles this complexity automatically.
+This is particularly valuable for Druid data because time-series queries can be complex : date truncation, windowing, and aggregation syntax varies. The AI Agent handles this complexity automatically.
 
 ### Dremio MCP Server
 
@@ -202,7 +202,7 @@ For historical aggregations over Druid data, create Reflections:
 1. Build a view that aggregates Druid data by day/hour/week
 2. Navigate to the view in the **Catalog** and click the **Reflections** tab
 3. Choose **Raw Reflection** or **Aggregation Reflection**
-4. Select columns and set the **Refresh Interval** — for real-time data, hourly; for historical trends, daily
+4. Select columns and set the **Refresh Interval** : for real-time data, hourly; for historical trends, daily
 5. Click **Save**
 
 Dashboard queries for "last 30 days" or "year-over-year" hit the Reflection instead of scanning Druid's cold segments. Real-time queries for "last hour" still go directly to Druid for sub-second latency.
@@ -245,13 +245,13 @@ For active Druid data, create manual Reflections with refresh schedules that bal
 
 Combine Druid's real-time capabilities with Dremio's historical analysis:
 
-### Tier 1: Real-Time (Druid — 0 to 24 hours)
+### Tier 1: Real-Time (Druid : 0 to 24 hours)
 Druid ingests and serves sub-second queries on live event data. Dremio queries Druid directly for "last hour" or "last 6 hours" dashboards.
 
-### Tier 2: Recent Historical (Iceberg — 1 to 90 days)
+### Tier 2: Recent Historical (Iceberg : 1 to 90 days)
 Daily batch jobs move yesterday's data from Druid into Iceberg tables in Dremio's Open Catalog. Analytical queries for "last 30 days" hit Iceberg tables with Autonomous Reflections.
 
-### Tier 3: Long-Term Archive (Iceberg — 90+ days)
+### Tier 3: Long-Term Archive (Iceberg : 90+ days)
 Older data stays in Iceberg cold storage (S3 Infrequent Access). Compliance and audit queries use time travel against archived snapshots.
 
 ```sql
@@ -277,6 +277,6 @@ Common Druid deployment patterns that work with Dremio:
 
 ## Get Started
 
-Apache Druid users can extend their real-time analytics with cross-source joins, AI-powered insights, enterprise governance, and Reflection-based acceleration — all through Dremio Cloud.
+Apache Druid users can extend their real-time analytics with cross-source joins, AI-powered insights, enterprise governance, and Reflection-based acceleration : all through Dremio Cloud.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-apache-druid-dremio-cloud&utm_content=alexmerced) and connect your Druid cluster.

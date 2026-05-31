@@ -16,9 +16,9 @@ tags:
 
 Ask an application developer how they test their code and they'll describe unit tests, integration tests, CI/CD pipelines, and coverage metrics. Ask a data engineer the same question and the most common answer is: "we check the dashboard."
 
-Data pipelines are software. They have inputs, logic, and outputs. They can have bugs. They can break silently. And unlike application bugs that trigger error pages, data bugs produce numbers that look plausible — until someone makes a business decision based on them.
+Data pipelines are software. They have inputs, logic, and outputs. They can have bugs. They can break silently. And unlike application bugs that trigger error pages, data bugs produce numbers that look plausible : until someone makes a business decision based on them.
 
-## Pipelines Are Software — They Need Tests
+## Pipelines Are Software : They Need Tests
 
 The bar for data pipeline testing shouldn't be lower than for application code. If anything, it should be higher. Application bugs are usually visible (broken UI, failed request). Data bugs are invisible (wrong aggregation, missing rows, stale values) and their impact compounds over time.
 
@@ -40,7 +40,7 @@ Run more tests at the base (they're cheap and fast) and fewer at the top (they'r
 
 Schema tests are the simplest and most impactful place to start. After every pipeline run, verify:
 
-**Column existence.** Every expected column is present in the output. If a transformation accidentally drops a column, you want to know immediately — not when a downstream query fails.
+**Column existence.** Every expected column is present in the output. If a transformation accidentally drops a column, you want to know immediately : not when a downstream query fails.
 
 **Data types.** Columns have their expected types. A revenue column that silently became a string will pass a NULL check but break calculations.
 
@@ -72,7 +72,7 @@ Schema tests verify structure. Data validation tests verify content. Run these a
 
 **Referential integrity.** Foreign keys reference existing records. An order with `product_id = 12345` should correspond to a row in the products table. Missing references indicate either missing data or a pipeline timing issue.
 
-**Freshness checks.** The most recent event timestamp is within the expected window. If a daily pipeline's output contains no events from today, something went wrong — even if the job succeeded.
+**Freshness checks.** The most recent event timestamp is within the expected window. If a daily pipeline's output contains no events from today, something went wrong : even if the job succeeded.
 
 **Volume checks.** Row counts fall within historical norms. A daily feed that normally produces 50,000 rows but arrives with 500 should trigger an alert. Use percentage thresholds (±20% from the trailing 7-day average) to avoid false positives.
 

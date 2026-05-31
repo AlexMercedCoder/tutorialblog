@@ -14,7 +14,7 @@ tags:
 
 ![Data pipeline architecture with four layers flowing from ingestion through staging, transformation, and serving](images/debp/02/pipeline-architecture.png)
 
-Most pipeline failures aren't caused by bad code. They're caused by no architecture. A script that reads from an API, transforms JSON, and writes to a database works fine on day one. On day ninety it fails at 3 AM because the API changed its response format, and the only way to recover is to rerun the entire pipeline from scratch — hoping that reprocessing three months of data doesn't create duplicates.
+Most pipeline failures aren't caused by bad code. They're caused by no architecture. A script that reads from an API, transforms JSON, and writes to a database works fine on day one. On day ninety it fails at 3 AM because the API changed its response format, and the only way to recover is to rerun the entire pipeline from scratch : hoping that reprocessing three months of data doesn't create duplicates.
 
 Reliable pipelines are designed, not debugged into existence.
 
@@ -35,7 +35,7 @@ Every well-designed pipeline has four distinct layers, even if they run in the s
 
 **Ingestion.** Pull raw data from sources and land it unchanged. Don't transform here. Don't filter. Don't join. Store the raw data exactly as it arrived, with metadata (timestamp, source, batch ID). This gives you a replayable audit trail.
 
-**Staging.** Validate the raw data. Check for schema compliance, null values in required fields, duplicate records, and data type mismatches. Records that fail validation go to a quarantine table or dead-letter queue — they don't silently disappear.
+**Staging.** Validate the raw data. Check for schema compliance, null values in required fields, duplicate records, and data type mismatches. Records that fail validation go to a quarantine table or dead-letter queue : they don't silently disappear.
 
 **Transformation.** Apply business logic: joins, aggregations, calculations, enrichments. This is where raw events become metrics, where customer records merge across sources, where timestamps convert to business periods. Keep business logic in one layer, not spread across ingestion and loading scripts.
 
@@ -47,7 +47,7 @@ Every well-designed pipeline has four distinct layers, even if they run in the s
 
 A script runs steps in order: step 1, step 2, step 3. If step 2 fails, you rerun from step 1. If step 3 needs a new input, you rewrite the script.
 
-A directed acyclic graph (DAG) models dependencies explicitly. Step 3 depends on step 2 and step 4. Step 2 and step 4 can run in parallel. If step 2 fails, you rerun step 2 — not steps 1, 4, or 3.
+A directed acyclic graph (DAG) models dependencies explicitly. Step 3 depends on step 2 and step 4. Step 2 and step 4 can run in parallel. If step 2 fails, you rerun step 2 : not steps 1, 4, or 3.
 
 DAG-based thinking gives you:
 
@@ -65,7 +65,7 @@ Implicit dependencies are the most common source of pipeline fragility. "This pi
 Make dependencies explicit:
 
 - **Declare data dependencies.** If stage B reads the output of stage A, model that relationship in your orchestration. Don't rely on timing ("A usually finishes by 6 AM").
-- **Use sensors or triggers.** Wait for data to arrive before starting a stage. Check for a file, a partition, or a row count — don't check the clock.
+- **Use sensors or triggers.** Wait for data to arrive before starting a stage. Check for a file, a partition, or a row count : don't check the clock.
 - **Version your interfaces.** When a producer changes its output schema, consumers should detect the change before they process stale or malformed data.
 - **Document ownership.** Every dataset should have an owner. When you depend on someone else's table, you should know who to contact when it changes.
 

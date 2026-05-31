@@ -21,7 +21,7 @@ tags:
 
 ### Overview of CDC
 
-Change Data Capture (CDC) is the process of identifying and capturing changes made to data within a database. It's a critical technique in modern data architectures, enabling systems to stay synchronized, whether for analytical purposes, replication, or near-real-time data streaming. CDC helps minimize the need to reprocess entire datasets by focusing on only the incremental changes—new inserts, updates, and deletions.
+Change Data Capture (CDC) is the process of identifying and capturing changes made to data within a database. It's a critical technique in modern data architectures, enabling systems to stay synchronized, whether for analytical purposes, replication, or near-real-time data streaming. CDC helps minimize the need to reprocess entire datasets by focusing on only the incremental changes - new inserts, updates, and deletions.
 
 ### Challenges with Systems Lacking Native CDC
 

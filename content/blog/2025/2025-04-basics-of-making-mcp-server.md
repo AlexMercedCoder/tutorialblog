@@ -20,9 +20,9 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)**  
 
-If you’ve ever wished you could ask an AI model like Claude to interact with your local files or run custom code—good news: **you can.** That’s exactly what the **Model Context Protocol (MCP)** makes possible.
+If you’ve ever wished you could ask an AI model like Claude to interact with your local files or run custom code - good news: **you can.** That’s exactly what the **Model Context Protocol (MCP)** makes possible.
 
-In this tutorial, we’ll walk you through building a beginner-friendly **MCP server** that acts as a simple template for future projects. You don’t need to be an expert in AI or server development—we’ll explain each part as we go.
+In this tutorial, we’ll walk you through building a beginner-friendly **MCP server** that acts as a simple template for future projects. You don’t need to be an expert in AI or server development - we’ll explain each part as we go.
 
 Here’s what we’ll build:
 
@@ -45,7 +45,7 @@ This blog is perfect for you if:
 
 We’ll use plain Python and some common libraries like `pandas`, with no web frameworks or deployment complexity. Everything will run locally on your machine.
 
-By the end, you’ll have a fully working **local MCP server** and a better understanding of how to make AI tools that go beyond text prediction—and actually do useful work.
+By the end, you’ll have a fully working **local MCP server** and a better understanding of how to make AI tools that go beyond text prediction - and actually do useful work.
 
 Let’s get started!
 
@@ -55,7 +55,7 @@ Let’s break this down before we start writing code.
 
 **MCP** stands for **Model Context Protocol**. It’s a way to let apps like Claude for Desktop securely interact with **external data** and **custom tools** that you define.
 
-Think of it like building your own mini API—but instead of exposing it to the whole internet, you’re exposing it to an AI assistant on your machine.
+Think of it like building your own mini API - but instead of exposing it to the whole internet, you’re exposing it to an AI assistant on your machine.
 
 With MCP, you can:
 
@@ -63,7 +63,7 @@ With MCP, you can:
 - Create tools that do useful things (like summarize a dataset or fetch an API)
 - Add reusable prompts to guide how Claude behaves in certain tasks
 
-For this project, we’re focusing on **tools**—the part of MCP that lets you write small Python functions the AI can call.
+For this project, we’re focusing on **tools**: the part of MCP that lets you write small Python functions the AI can call.
 
 ### What We’re Building
 
@@ -78,9 +78,9 @@ Let’s start by setting up your project.
 
 ## Project Setup (Step-by-Step)
 
-We’ll use [**uv**](https://github.com/astral-sh/uv)—a fast, modern Python project manager—to create and manage our environment. It handles dependencies, virtual environments, and script execution, all in one place.
+We’ll use [**uv**](https://github.com/astral-sh/uv): a fast, modern Python project manager, to create and manage our environment. It handles dependencies, virtual environments, and script execution, all in one place.
 
-> If you’ve used `pip` or `virtualenv` before, uv is like both of those combined—but much faster and more ergonomic.
+> If you’ve used `pip` or `virtualenv` before, uv is like both of those combined - but much faster and more ergonomic.
 
 ### Step 1: Install `uv`
 
@@ -159,7 +159,7 @@ mkdir data tools utils
 touch server.py
 ```
 
-Your environment is now ready. In the next section, we’ll create a couple of small data files to work with—a CSV and a Parquet file—and use them to power our tools.
+Your environment is now ready. In the next section, we’ll create a couple of small data files to work with: a CSV and a Parquet file, and use them to power our tools.
 
 ## Creating Sample Data Files
 
@@ -168,7 +168,7 @@ To build our first tools, we need something for them to work with. In this secti
 - A **CSV file** (great for spreadsheets and tabular data)
 - A **Parquet file** (a more efficient format used in data engineering)
 
-Both files will contain the same mock dataset—a short list of users. You’ll use these files later when building tools that summarize their contents.
+Both files will contain the same mock dataset: a short list of users. You’ll use these files later when building tools that summarize their contents.
 
 ### Step 1: Create the `data/` Folder
 
@@ -198,7 +198,7 @@ id,name,email,signup_date
 5,Eva Brown,eva@example.com,2023-05-30
 ```
 
-This file gives us structured, readable data—perfect for a tool to analyze.
+This file gives us structured, readable data - perfect for a tool to analyze.
 
 ### Step 3: Convert the CSV to Parquet
 We’ll now create a Parquet version of the same data using Python. This shows how easily you can support both file types in your tools.
@@ -239,7 +239,7 @@ data/
 
 Supporting both formats makes your tools more flexible, and this example shows how little extra effort it takes.
 
-Next, we’ll write some reusable utility functions that can read these files and return a quick summary of their contents—ready to be wrapped as MCP tools.
+Next, we’ll write some reusable utility functions that can read these files and return a quick summary of their contents - ready to be wrapped as MCP tools.
 
 ## Writing Utility Functions to Read CSV and Parquet Files
 
@@ -313,9 +313,9 @@ Both functions return a simple string like:
 CSV file 'sample.csv' has 5 rows and 4 columns.
 ```
 
-This is all the logic our tools will need to start with. Later, if you want to add more advanced summaries—like listing column names or detecting null values—you can expand these functions.
+This is all the logic our tools will need to start with. Later, if you want to add more advanced summaries: like listing column names or detecting null values, you can expand these functions.
 
-With our utilities ready, we can now expose them as MCP tools—so Claude can actually use them!
+With our utilities ready, we can now expose them as MCP tools - so Claude can actually use them!
 
 ## Wrapping File Readers as MCP Tools
 
@@ -323,7 +323,7 @@ Now that we’ve written the logic to read and summarize our data files, it’s 
 
 ### What’s an MCP Tool?
 
-An **MCP tool** is a Python function you register with your MCP server that the AI can call when it needs to take action—like reading a file, querying an API, or performing a calculation.
+An **MCP tool** is a Python function you register with your MCP server that the AI can call when it needs to take action - like reading a file, querying an API, or performing a calculation.
 
 To register a tool, you decorate the function with `@mcp.tool()`. Behind the scenes, MCP generates a definition that the AI can see and interact with.
 
@@ -449,7 +449,7 @@ In your project root (where `server.py` lives), run:
 ```bash
 uv run main.py
 ```
-This starts your MCP server using the tools you defined. You won’t see much output in the terminal just yet—that’s normal. Your server is now waiting for a connection from a client like Claude.
+This starts your MCP server using the tools you defined. You won’t see much output in the terminal just yet, that’s normal. Your server is now waiting for a connection from a client like Claude.
 
 ### Step 2: Install Claude for Desktop (If You Haven’t Already)
 You’ll need Claude for Desktop installed to connect to your server.
@@ -518,7 +518,7 @@ Now try asking Claude something like:
 - "Summarize the CSV file named sample.csv."
 - "How many rows are in sample.parquet?"
 
-Claude will detect the appropriate tool, call your server, and respond with the results—powered by the very Python code you wrote.
+Claude will detect the appropriate tool, call your server, and respond with the results - powered by the very Python code you wrote.
 
 ### Troubleshooting Tips
 If things don’t work right away, here are a few things to check:
@@ -535,7 +535,7 @@ You now have a working local AI toolchain powered by MCP! In the final section, 
 
 ## Recap and Next Steps
 
-Congratulations—you just built your first MCP server!
+Congratulations - you just built your first MCP server!
 
 Let’s take a moment to review what you’ve accomplished.
 
@@ -577,7 +577,7 @@ Use `@mcp.resource()` to expose static or dynamic data that Claude can pull into
 Create reusable interaction templates with `@mcp.prompt()` to guide how Claude asks or responds.
 
 #### 4. **Add Async Logic**
-If you’re pulling data from APIs or databases, consider making your tools async using `async def`—fully supported by FastMCP.
+If you’re pulling data from APIs or databases, consider making your tools async using `async def` - fully supported by FastMCP.
 
 #### 5. **Build Your Own Client**
 Not using Claude? You can write your own MCP-compatible client using the SDK’s `ClientSession` interface.
@@ -586,4 +586,4 @@ Not using Claude? You can write your own MCP-compatible client using the SDK’s
 
 You now have a **template** you can reuse for future projects. If you publish it on GitHub, others can fork it, extend it, and learn from it too.
 
-This isn’t just a demo—it’s the foundation of a toolchain where you can define your own AI-powered workflows and expose them to LLMs in a controlled, modular way.
+This isn’t just a demo - it’s the foundation of a toolchain where you can define your own AI-powered workflows and expose them to LLMs in a controlled, modular way.

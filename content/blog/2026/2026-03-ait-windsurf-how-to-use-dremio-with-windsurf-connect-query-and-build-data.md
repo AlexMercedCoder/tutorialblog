@@ -16,7 +16,7 @@ Windsurf is an AI-native code editor built as a fork of VS Code. Its standout fe
 
 Connecting them gives Cascade the context it needs to write accurate Dremio SQL, generate data pipelines, and build applications against your lakehouse. Without this connection, Cascade treats Dremio like a generic database. With it, the agent knows your schemas, business logic encoded in views, and the correct Dremio SQL dialect.
 
-Windsurf's Cascade is especially well-suited for data projects because it can chain together discovery, querying, code generation, and testing in a single autonomous flow. Ask it to explore your Dremio catalog, identify relevant tables, write a pipeline, and generate tests — all in one prompt.
+Windsurf's Cascade is especially well-suited for data projects because it can chain together discovery, querying, code generation, and testing in a single autonomous flow. Ask it to explore your Dremio catalog, identify relevant tables, write a pipeline, and generate tests : all in one prompt.
 
 This post covers four approaches, ordered from quickest setup to most customizable.
 

@@ -13,7 +13,7 @@ Apache Iceberg has become a prominent name in the data world, with numerous plat
 
 ## What are ACID Guarantees?
 
-ACID is an acronym that outlines the key guarantees a data system should provide—guarantees that are typically offered by most SQL-based databases and data warehouses. These guarantees include:
+ACID is an acronym that outlines the key guarantees a data system should provide - guarantees that are typically offered by most SQL-based databases and data warehouses. These guarantees include:
 
 - **Atomicity**: This ensures that when a change is made, it either completes successfully or doesn't occur at all. This prevents partial changes, which can be difficult and time-consuming to resolve. If a change doesn't succeed, you can simply retry it without worry.
   

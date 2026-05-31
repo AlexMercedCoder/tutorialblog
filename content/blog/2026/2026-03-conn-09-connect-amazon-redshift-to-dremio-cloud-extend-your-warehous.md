@@ -16,23 +16,23 @@ Amazon Redshift is AWS's managed data warehouse, designed for petabyte-scale ana
 
 Dremio Cloud connects to Redshift and queries it alongside every other data source in your organization. Instead of moving all your data into Redshift, or exporting Redshift data out, Dremio federates across sources and accelerates repeated queries with Reflections so your Redshift cluster handles less load.
 
-Redshift's concurrency scaling feature helps handle burst query volumes, but it charges per-second of additional cluster time. By routing repeated dashboard queries through Dremio Reflections, you reduce the need for concurrency scaling entirely — cached results are served without any Redshift cluster involvement. This difference is particularly impactful for organizations running dozens of auto-refreshing dashboards.
+Redshift's concurrency scaling feature helps handle burst query volumes, but it charges per-second of additional cluster time. By routing repeated dashboard queries through Dremio Reflections, you reduce the need for concurrency scaling entirely : cached results are served without any Redshift cluster involvement. This difference is particularly impactful for organizations running dozens of auto-refreshing dashboards.
 
 ### Redshift Data Sharing vs. Dremio Federation
 
-Redshift Data Sharing allows sharing data between Redshift clusters. But it only works within the Redshift ecosystem — you can't share Redshift data with Snowflake, BigQuery, or PostgreSQL through Data Sharing. Dremio's federation provides a broader solution: join Redshift data with any connected source. Data Sharing works for Redshift-to-Redshift use cases; Dremio handles everything else.
+Redshift Data Sharing allows sharing data between Redshift clusters. But it only works within the Redshift ecosystem : you can't share Redshift data with Snowflake, BigQuery, or PostgreSQL through Data Sharing. Dremio's federation provides a broader solution: join Redshift data with any connected source. Data Sharing works for Redshift-to-Redshift use cases; Dremio handles everything else.
 
 ### Redshift Serverless Consideration
 
-With Redshift Serverless, you pay per RPU-second consumed. Every query, including repeated dashboard queries, consumes RPUs. Dremio Reflections eliminate RPU consumption for cached queries — a direct and measurable cost reduction. For Serverless users, the ROI from Reflections is immediately visible in the AWS billing dashboard.
+With Redshift Serverless, you pay per RPU-second consumed. Every query, including repeated dashboard queries, consumes RPUs. Dremio Reflections eliminate RPU consumption for cached queries : a direct and measurable cost reduction. For Serverless users, the ROI from Reflections is immediately visible in the AWS billing dashboard.
 
-Redshift's RA3 instances introduced compute-storage separation using Managed Storage backed by S3. While this improved scalability, all queries still consume RA3 compute resources. Dremio provides a complementary compute layer: Reflections handle repetitive analytical workloads while RA3 focuses on the data transformations and ingestion pipelines that require Redshift's native capabilities. This architectural separation — Redshift for data engineering, Dremio for analytics serving — maximizes the value of both platforms.
+Redshift's RA3 instances introduced compute-storage separation using Managed Storage backed by S3. While this improved scalability, all queries still consume RA3 compute resources. Dremio provides a complementary compute layer: Reflections handle repetitive analytical workloads while RA3 focuses on the data transformations and ingestion pipelines that require Redshift's native capabilities. This architectural separation : Redshift for data engineering, Dremio for analytics serving,  maximizes the value of both platforms.
 
 ## Why Redshift Users Need Dremio
 
 ### Extend Redshift Without Spectrum Costs
 
-Redshift Spectrum charges per TB scanned against S3. Dremio's federation queries S3 data directly through its own engine without per-TB charges. You still get SQL joins between Redshift and S3 data — Dremio handles the federation transparently.
+Redshift Spectrum charges per TB scanned against S3. Dremio's federation queries S3 data directly through its own engine without per-TB charges. You still get SQL joins between Redshift and S3 data : Dremio handles the federation transparently.
 
 ### Reduce Redshift Cluster Costs
 
@@ -52,12 +52,12 @@ Dremio's semantic layer, AI Agent, MCP Server, and AI SQL Functions add natural 
 
 ## Prerequisites
 
-- **Redshift cluster endpoint** (hostname) — from the Redshift console
-- **Port** — default `5439`
-- **Database name** — your Redshift database
-- **Username and password** — Redshift database user with SELECT permissions
-- **Network access** — Redshift cluster must be publicly accessible, or configure VPC peering with Dremio Cloud
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-amazon-redshift-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Redshift cluster endpoint** (hostname) : from the Redshift console
+- **Port** : default `5439`
+- **Database name** : your Redshift database
+- **Username and password** : Redshift database user with SELECT permissions
+- **Network access** : Redshift cluster must be publicly accessible, or configure VPC peering with Dremio Cloud
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-amazon-redshift-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Redshift to Dremio Cloud
 
@@ -207,7 +207,7 @@ Create Reflections on Redshift views for dashboard acceleration:
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** (full dataset cache) or **Aggregation Reflection** (pre-computed SUM/COUNT/AVG)
 4. Select columns and aggregations
-5. Set the **Refresh Interval** — balance freshness against Redshift cluster load
+5. Set the **Refresh Interval** : balance freshness against Redshift cluster load
 6. Click **Save**
 
 BI tools connected via Arrow Flight get sub-second responses from Reflections instead of waiting for Redshift cluster processing. A Tableau dashboard refreshing every 15 minutes generates zero Redshift cluster load after the Reflection is built.
@@ -218,7 +218,7 @@ Dremio's Fine-Grained Access Control (FGAC) adds governance capabilities that wo
 
 - **Column masking:** Mask sensitive revenue data or PII from specific roles. A marketing analyst sees conversion rates but not individual customer records.
 - **Row-level filtering:** Restrict data visibility based on user roles. Regional managers see only their region's sales data.
-- **Unified policies:** The same governance applies to Redshift, PostgreSQL, S3, and all other sources — no per-database security configuration.
+- **Unified policies:** The same governance applies to Redshift, PostgreSQL, S3, and all other sources : no per-database security configuration.
 
 These policies apply across all access methods: SQL Runner, BI tools, AI Agent, MCP Server, and Arrow Flight clients.
 
@@ -232,7 +232,7 @@ Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC for BI tools:
 - **Looker:** Connect via JDBC
 - **dbt:** Use `dbt-dremio` for transformation workflows
 
-All queries benefit from Reflections, governance, and the semantic layer — whether the underlying data comes from Redshift or any other source.
+All queries benefit from Reflections, governance, and the semantic layer : whether the underlying data comes from Redshift or any other source.
 
 ## VS Code Copilot Integration
 
@@ -253,7 +253,7 @@ For data that stays in Redshift, create manual Reflections to reduce cluster loa
 | Model | How It's Priced | Dremio's Impact |
 |---|---|---|
 | **RA3 Provisioned** | Per-node-hour + managed storage | Reflections reduce node utilization, enabling cluster downsizing |
-| **DC2 Provisioned** | Per-node-hour, SSD storage included | Same as RA3 — lower utilization means fewer nodes needed |
+| **DC2 Provisioned** | Per-node-hour, SSD storage included | Same as RA3 : lower utilization means fewer nodes needed |
 | **Serverless** | Per RPU-hour (compute consumed) | Reflections eliminate RPU consumption for cached queries |
 | **Spectrum** | Per TB scanned in S3 | Dremio queries S3 directly without per-TB charges |
 
@@ -265,8 +265,8 @@ A typical dashboard workload might include:
 - Weekly scheduled reports generating 100+ queries
 
 With Dremio Reflections, only the Reflection refresh queries hit Redshift. If Reflections refresh hourly:
-- Dashboard queries drop from 1,920/day to 24/day (hourly Reflection refresh × 24 hours) — a **98.7% reduction**
-- Ad-hoc queries matching Reflection patterns are served from cache — zero Redshift load
+- Dashboard queries drop from 1,920/day to 24/day (hourly Reflection refresh × 24 hours) : a **98.7% reduction**
+- Ad-hoc queries matching Reflection patterns are served from cache : zero Redshift load
 - Scheduled reports matching Reflections run instantly
 
 ### Migration Strategy

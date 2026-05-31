@@ -20,13 +20,13 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-The cloud has transformed how organizations approach data engineering. What once required physical servers, manual provisioning, and heavyweight infrastructure can now be spun up in minutes with managed, scalable services. But with this convenience comes complexity—deciding how to compose the right mix of tools and platforms for your data workflows.
+The cloud has transformed how organizations approach data engineering. What once required physical servers, manual provisioning, and heavyweight infrastructure can now be spun up in minutes with managed, scalable services. But with this convenience comes complexity - deciding how to compose the right mix of tools and platforms for your data workflows.
 
 In this post, we’ll explore what defines the modern data stack, how cloud platforms like AWS, GCP, and Azure fit into the picture, and what principles guide the design of flexible, cloud-native data architectures.
 
 ## Moving Beyond On-Premise
 
-In traditional, on-premise data systems, teams had to manage everything themselves—hardware, networking, databases, storage, and backups. Scaling required buying more servers. Upgrades were slow, and experimentation was costly.
+In traditional, on-premise data systems, teams had to manage everything themselves - hardware, networking, databases, storage, and backups. Scaling required buying more servers. Upgrades were slow, and experimentation was costly.
 
 Cloud platforms shifted this model. Infrastructure became elastic. Managed services replaced self-hosted databases and batch processing engines. What used to take weeks could now be done in hours. This shift enabled data engineers to focus more on business logic and less on infrastructure maintenance.
 
@@ -34,7 +34,7 @@ But while the cloud solved many problems, it also introduced new decisions. With
 
 ## What Is the Modern Data Stack?
 
-The modern data stack refers to a collection of tools—often cloud-native—that work together to support the full data lifecycle: ingestion, transformation, storage, orchestration, and analysis.
+The modern data stack refers to a collection of tools: often cloud-native, that work together to support the full data lifecycle: ingestion, transformation, storage, orchestration, and analysis.
 
 Typically, this stack includes:
 
@@ -58,7 +58,7 @@ On **AWS**, services like S3 (storage), Glue (ETL), Redshift (warehousing), and 
 
 **Microsoft Azure** provides tools like Synapse Analytics, Data Factory, and Event Hubs. It often appeals to enterprise environments already invested in Microsoft’s ecosystem, offering deep integration with Active Directory, Power BI, and other services.
 
-Each platform brings its own pricing models, performance characteristics, and operational trade-offs. Choosing one often comes down to organizational context—existing infrastructure, skillsets, and vendor relationships.
+Each platform brings its own pricing models, performance characteristics, and operational trade-offs. Choosing one often comes down to organizational context - existing infrastructure, skillsets, and vendor relationships.
 
 ## Designing for Agility
 
@@ -72,10 +72,10 @@ Observability and governance also become more important in a distributed cloud e
 
 ## The Cloud is Not Just a Hosting Model
 
-Adopting cloud data platforms is not just about moving infrastructure off-premise—it’s about rethinking how teams operate. Cloud-native architectures prioritize scalability, flexibility, and automation.
+Adopting cloud data platforms is not just about moving infrastructure off-premise - it’s about rethinking how teams operate. Cloud-native architectures prioritize scalability, flexibility, and automation.
 
-They allow you to treat data as a product, with well-defined interfaces, quality guarantees, and ownership. They enable collaboration across roles—engineers, analysts, and scientists—by providing shared platforms and standardized workflows.
+They allow you to treat data as a product, with well-defined interfaces, quality guarantees, and ownership. They enable collaboration across roles: engineers, analysts, and scientists, by providing shared platforms and standardized workflows.
 
 Ultimately, the modern data stack is not a fixed set of tools, but a mindset. It's about building systems that are composable, observable, and adaptable. It’s about enabling fast iteration without sacrificing reliability.
 
-In the next post, we’ll shift into the final phase of this series and explore the evolution toward data lakehouse architectures—what they are, why they matter, and how they unify the best of both lakes and warehouses.
+In the next post, we’ll shift into the final phase of this series and explore the evolution toward data lakehouse architectures - what they are, why they matter, and how they unify the best of both lakes and warehouses.

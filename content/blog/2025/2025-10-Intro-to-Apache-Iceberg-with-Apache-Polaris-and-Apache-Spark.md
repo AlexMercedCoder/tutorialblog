@@ -89,7 +89,7 @@ docker ps
 
 Once they’re up, open the Jupyter Notebook interface by visiting `http://localhost:8888`. Create a new Python notebook and copy the contents of `bootstrap.py` from the repository into a cell. Running this script will bootstrap Polaris by:
 
-- Creating two catalogs—`lakehouse` and `warehouse`—that point to MinIO buckets.
+- Creating two catalogs: `lakehouse` and `warehouse`, that point to MinIO buckets.
 
 - Defining a principal with access credentials.
 
@@ -149,7 +149,7 @@ This creates a new Iceberg table tracked by Polaris. You can confirm its existen
 ```python
 spark.sql("SHOW TABLES IN polaris.db").show()
 ```
-Now open the MinIO console at `http://localhost:9001` (admin/password are the credentials) and explore the lakehouse bucket—you’ll see a new folder structure created for your table. This directory contains the Parquet data files and the metadata that Polaris manages.
+Now open the MinIO console at `http://localhost:9001` (admin/password are the credentials) and explore the lakehouse bucket - you’ll see a new folder structure created for your table. This directory contains the Parquet data files and the metadata that Polaris manages.
 
 ### Partitioned Tables
 Partitioning helps improve performance by organizing data into logical groups. Iceberg’s partition transforms let you define flexible strategies without depending on directory names.
@@ -198,7 +198,7 @@ PARTITIONED BY (bucket(8, user_id))
 """)
 ```
 
-Each strategy changes how Iceberg organizes data, but all are tracked as metadata—not directories—making future changes safe and reversible.
+Each strategy changes how Iceberg organizes data, but all are tracked as metadata: not directories, making future changes safe and reversible.
 
 After creating your tables, return to the MinIO console to explore the results. You’ll notice new directories and metadata files representing the structure of each table. These files are created and tracked automatically by Polaris, ensuring that every write, update, and schema change remains consistent across all engines that connect to the catalog.
 
@@ -345,7 +345,7 @@ This feature makes partition evolution seamless. You can adapt to new data patte
 
 ## Metadata Tables and Time Travel
 
-Apache Iceberg doesn’t just store data—it stores the entire history of your data. Every write operation creates a new snapshot, and every snapshot is tracked in the table’s metadata. These metadata tables give you full visibility into how your data changes over time. Because Polaris manages the catalog, you can query these tables from any engine that connects to it, ensuring a unified and governed view of your data lifecycle.
+Apache Iceberg doesn’t just store data - it stores the entire history of your data. Every write operation creates a new snapshot, and every snapshot is tracked in the table’s metadata. These metadata tables give you full visibility into how your data changes over time. Because Polaris manages the catalog, you can query these tables from any engine that connects to it, ensuring a unified and governed view of your data lifecycle.
 
 ### Exploring Metadata Tables
 
@@ -389,7 +389,7 @@ spark.read.option("as-of-timestamp", "2025-10-10T12:00:00").table("polaris.db.sa
 This ability to reproduce historical states makes Iceberg ideal for debugging ETL processes, reproducing analytics, or auditing compliance-related datasets.
 
 ### Seeing It in MinIO
-Each time you insert, update, or delete data, Iceberg records a new snapshot. Open the lakehouse bucket in MinIO and navigate through your table directories—you’ll notice subdirectories under metadata/ representing each snapshot and manifest. Every change to your data produces new metadata and data files, which together describe the complete history of your table.
+Each time you insert, update, or delete data, Iceberg records a new snapshot. Open the lakehouse bucket in MinIO and navigate through your table directories - you’ll notice subdirectories under metadata/ representing each snapshot and manifest. Every change to your data produces new metadata and data files, which together describe the complete history of your table.
 
 Iceberg’s metadata and time travel capabilities, combined with Polaris’s catalog management, give you full traceability and reproducibility. In the next section, you’ll learn how to keep your tables healthy by compacting small files and expiring old snapshots.
 
@@ -461,7 +461,7 @@ Maintenance operations like compaction and snapshot expiration help keep your Ic
 
 ## Writing Efficiently to Apache Iceberg with Spark
 
-When working with Apache Iceberg tables in Spark, how you write data has a major impact on performance, metadata growth, and maintenance frequency. Iceberg is designed for incremental writes and schema evolution, but inefficient write patterns—like frequent small updates or poor partitioning—can lead to excessive snapshots and small files. By tuning Spark and table-level settings, you can reduce the need for costly compaction and keep your tables query-ready.
+When working with Apache Iceberg tables in Spark, how you write data has a major impact on performance, metadata growth, and maintenance frequency. Iceberg is designed for incremental writes and schema evolution, but inefficient write patterns: like frequent small updates or poor partitioning, can lead to excessive snapshots and small files. By tuning Spark and table-level settings, you can reduce the need for costly compaction and keep your tables query-ready.
 
 
 ### Optimize File Size and Shuffle Configuration
@@ -510,7 +510,7 @@ ALTER TABLE polaris.db.sales SET TBLPROPERTIES (
 );
 ```
 
-Setting appropriate table properties ensures consistent behavior across all engines—Spark, Dremio, or Flink—that share your Polaris catalog.
+Setting appropriate table properties ensures consistent behavior across all engines: Spark, Dremio, or Flink, that share your Polaris catalog.
 
 ### Batch and Append Data Strategically
 Each write in Iceberg creates a new snapshot. If your application writes too frequently (e.g., per record or small microbatch), metadata grows quickly and queries slow down. Instead, buffer data into larger batches before committing:
@@ -565,13 +565,13 @@ ALTER TABLE polaris.db.sales SET TBLPROPERTIES (
 ```
 These settings help large concurrent writers (for example, in Spark and Flink) commit safely to the same table without conflicts.
 
-Efficient Iceberg write patterns come from tuning Spark and table properties together. Use larger file targets, consistent partitioning, and controlled batch sizes to minimize small files and snapshot churn. By applying these strategies, your Iceberg tables will stay lean and performant—reducing the need for manual compaction or cleanup. Combined with Apache Polaris, your catalog enforces consistent governance, authentication, and metadata management across every compute engine in your lakehouse.
+Efficient Iceberg write patterns come from tuning Spark and table properties together. Use larger file targets, consistent partitioning, and controlled batch sizes to minimize small files and snapshot churn. By applying these strategies, your Iceberg tables will stay lean and performant, reducing the need for manual compaction or cleanup. Combined with Apache Polaris, your catalog enforces consistent governance, authentication, and metadata management across every compute engine in your lakehouse.
 
 ## 12. Understanding How Polaris Manages Your Iceberg Tables
 
-Once you have optimized your write strategy, it’s worth understanding what happens behind the scenes when you write data into Iceberg tables through Apache Polaris. Polaris acts as a centralized catalog—responsible for managing all metadata about your tables, snapshots, and permissions—ensuring that every write or read operation is consistent across tools like Spark, Dremio, Trino, and Flink.
+Once you have optimized your write strategy, it’s worth understanding what happens behind the scenes when you write data into Iceberg tables through Apache Polaris. Polaris acts as a centralized catalog: responsible for managing all metadata about your tables, snapshots, and permissions, ensuring that every write or read operation is consistent across tools like Spark, Dremio, Trino, and Flink.
 
-When Spark writes to an Iceberg table using Polaris, the process goes beyond simply saving files to MinIO or S3. Each commit updates a **snapshot**—a precise record of table state including data files, manifests, and partition metadata. Polaris stores the metadata pointers, enforces ACID guarantees, and validates that every write operation maintains table consistency.
+When Spark writes to an Iceberg table using Polaris, the process goes beyond simply saving files to MinIO or S3. Each commit updates a **snapshot**: a precise record of table state including data files, manifests, and partition metadata. Polaris stores the metadata pointers, enforces ACID guarantees, and validates that every write operation maintains table consistency.
 
 ### Coordinating Metadata and Commits
 
@@ -581,13 +581,13 @@ Each write to an Iceberg table involves several steps:
 3. The Iceberg REST client, through Polaris, updates the catalog’s metadata location and commits the new snapshot.
 4. Polaris enforces isolation and conflict detection to ensure concurrent writers don’t overwrite each other’s work.
 
-Because Polaris manages these metadata transactions centrally, it becomes the single source of truth for all engines. This makes cross-engine interoperability reliable—Spark can write data, and Dremio or Trino can query it immediately without any manual refresh.
+Because Polaris manages these metadata transactions centrally, it becomes the single source of truth for all engines. This makes cross-engine interoperability reliable - Spark can write data, and Dremio or Trino can query it immediately without any manual refresh.
 
 ### Governance and Security
 
 Polaris also introduces a security layer around Iceberg. Instead of embedding access keys or S3 credentials in your Spark jobs, Polaris can **vend temporary credentials** that enforce fine-grained access control. Each principal and catalog role determines what operations are allowed, ensuring that users and jobs interact only with the tables they are permitted to modify or query.
 
-This approach decouples data governance from compute infrastructure. You can manage permissions, audit access, and rotate credentials—all directly through Polaris—while still using open data lakehouse standards like Apache Iceberg.
+This approach decouples data governance from compute infrastructure. You can manage permissions, audit access, and rotate credentials: all directly through Polaris, while still using open data lakehouse standards like Apache Iceberg.
 
 ### Automatic Table Optimization in Dremio
 
@@ -599,7 +599,7 @@ With this understanding, you now have a complete end-to-end view of how Apache S
 
 ## Next Steps and Expanding Your Lakehouse
 
-Now that you’ve successfully set up Apache Polaris with Spark and Iceberg on your local machine, you’ve built a foundation for exploring the broader lakehouse ecosystem. This environment not only lets you understand Iceberg’s core table mechanics but also shows how a catalog like Polaris centralizes governance, metadata, and access control—key components of an interoperable lakehouse architecture.
+Now that you’ve successfully set up Apache Polaris with Spark and Iceberg on your local machine, you’ve built a foundation for exploring the broader lakehouse ecosystem. This environment not only lets you understand Iceberg’s core table mechanics but also shows how a catalog like Polaris centralizes governance, metadata, and access control - key components of an interoperable lakehouse architecture.
 
 ### Connect More Compute Engines
 
@@ -633,7 +633,7 @@ You can also automate your setup and maintenance workflows:
 
 ### Prepare for Cloud or Hybrid Deployment
 
-The setup you’ve built locally with MinIO can easily extend to real cloud storage systems. Replace your MinIO endpoint with S3, GCS, or Azure Blob credentials, and Polaris will manage your Iceberg tables just as before—using the same metadata model and APIs.
+The setup you’ve built locally with MinIO can easily extend to real cloud storage systems. Replace your MinIO endpoint with S3, GCS, or Azure Blob credentials, and Polaris will manage your Iceberg tables just as before, using the same metadata model and APIs.
 
 This local-to-cloud continuity is one of the greatest advantages of Iceberg and Polaris: your data architecture can scale from a personal laptop demo to a full production lakehouse without refactoring or vendor lock-in.
 
@@ -645,4 +645,4 @@ You’ve now seen how Apache Iceberg, Apache Polaris, and Apache Spark work toge
 - Manage metadata, catalogs, and access through Polaris.  
 - Explore advanced Iceberg features safely and efficiently.
 
-For larger-scale deployments—or if you want automated optimization, integrated governance, and performance acceleration—explore **Dremio’s Intelligent Lakehouse Platform**, which builds directly on Apache Polaris and Iceberg to deliver a unified, self-service analytics experience.
+For larger-scale deployments: or if you want automated optimization, integrated governance, and performance acceleration, explore **Dremio’s Intelligent Lakehouse Platform**, which builds directly on Apache Polaris and Iceberg to deliver a unified, self-service analytics experience.

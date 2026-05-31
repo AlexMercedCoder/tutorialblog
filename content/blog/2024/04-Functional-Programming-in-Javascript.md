@@ -213,7 +213,7 @@ console.log(result.toString()); // Outputs: Maybe(HELLO, WORLD!)
 ```
 
 ### Monad Laws and Structure:
-Monads must follow three core laws—identity, associativity, and unit—to ensure that they behave predictably:
+Monads must follow three core laws: identity, associativity, and unit, to ensure that they behave predictably:
 
 - **Identity:** Applying a function directly or passing it through the monad should yield the same result.
 - **Associativity:** The order in which operations are performed (chained) does not affect the result.

@@ -12,13 +12,13 @@ tags:
   - federated queries
 ---
 
-Snowflake is a popular cloud data warehouse known for its separation of storage and compute, near-zero maintenance, and broad ecosystem. Many organizations have made Snowflake their primary analytics platform. But as data ecosystems mature, limitations emerge: Snowflake credits are consumed on every query, connecting Snowflake data to non-Snowflake sources requires data sharing agreements or ETL, and running all workloads in Snowflake means paying Snowflake prices for everything — including repetitive dashboard queries and ad-hoc exploration.
+Snowflake is a popular cloud data warehouse known for its separation of storage and compute, near-zero maintenance, and broad ecosystem. Many organizations have made Snowflake their primary analytics platform. But as data ecosystems mature, limitations emerge: Snowflake credits are consumed on every query, connecting Snowflake data to non-Snowflake sources requires data sharing agreements or ETL, and running all workloads in Snowflake means paying Snowflake prices for everything : including repetitive dashboard queries and ad-hoc exploration.
 
 Dremio Cloud connects to Snowflake as a federated data source. You can query Snowflake tables directly, join them with PostgreSQL, S3, MongoDB, BigQuery, and any other connected source in a single SQL query, and accelerate repeated queries with Reflections so they don't burn Snowflake credits on every execution.
 
 Snowflake's native Iceberg Tables feature allows managing Iceberg-formatted data within Snowflake. However, this still keeps your compute costs within Snowflake's pricing model. By combining Dremio Cloud with Snowflake (and potentially Snowflake's Open Catalog for shared Iceberg access), organizations can use Snowflake for data engineering while leveraging Dremio for cost-optimized analytical serving. This hybrid approach gives you Snowflake's data engineering strengths without paying Snowflake credit rates for every analytical query.
 
-The cost concern is real: organizations regularly report that 40-60% of their Snowflake spend comes from dashboards, scheduled reports, and ad-hoc queries — workloads that are fundamentally repetitive and ideal for Reflection-based caching.
+The cost concern is real: organizations regularly report that 40-60% of their Snowflake spend comes from dashboards, scheduled reports, and ad-hoc queries : workloads that are fundamentally repetitive and ideal for Reflection-based caching.
 
 ## Why Snowflake Users Need Dremio
 
@@ -30,7 +30,7 @@ Dremio's Reflections create pre-computed materializations of frequently executed
 
 ### Federation Beyond Snowflake
 
-Snowflake's data sharing works between Snowflake accounts. But what about your PostgreSQL application database, your S3 data lake, your MongoDB user profiles, or your on-premises Oracle ERP? Joining these with Snowflake data requires ETL pipelines — extracting from each source, transforming, and loading into Snowflake. Dremio queries each source in place and joins the results in its own engine. No data movement, no Snowflake ingestion costs.
+Snowflake's data sharing works between Snowflake accounts. But what about your PostgreSQL application database, your S3 data lake, your MongoDB user profiles, or your on-premises Oracle ERP? Joining these with Snowflake data requires ETL pipelines : extracting from each source, transforming, and loading into Snowflake. Dremio queries each source in place and joins the results in its own engine. No data movement, no Snowflake ingestion costs.
 
 ### Unified Governance
 
@@ -38,16 +38,16 @@ Snowflake has robust access controls within Snowflake. But governing data across
 
 ### AI Analytics Across All Sources
 
-Snowflake has AI/ML features within its ecosystem (Cortex). Dremio adds AI capabilities that span your entire data estate, not just Snowflake — including an AI Agent for natural language queries, an MCP Server for external AI tools, and SQL-level AI functions.
+Snowflake has AI/ML features within its ecosystem (Cortex). Dremio adds AI capabilities that span your entire data estate, not just Snowflake : including an AI Agent for natural language queries, an MCP Server for external AI tools, and SQL-level AI functions.
 
 ## Prerequisites
 
 - **Snowflake account URL** (e.g., `myaccount.snowflakecomputing.com`)
 - **Username and password** (or OAuth/key pair authentication)
-- **Warehouse name** — the compute resource Snowflake uses for queries
-- **Database name** — the Snowflake database you want to connect
+- **Warehouse name** : the compute resource Snowflake uses for queries
+- **Database name** : the Snowflake database you want to connect
 - **Network access** from Dremio Cloud to your Snowflake instance
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-snowflake-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-snowflake-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Snowflake to Dremio Cloud
 
@@ -139,7 +139,7 @@ Click **Edit** (pencil icon) in the Catalog, then **Generate Wiki** and **Genera
 
 ### Dremio AI Agent
 
-Users ask questions in plain English: "Which product categories are growing fastest?" The AI Agent reads your wiki descriptions and generates accurate SQL. The semantic layer you've built is the foundation — better descriptions mean better AI responses.
+Users ask questions in plain English: "Which product categories are growing fastest?" The AI Agent reads your wiki descriptions and generates accurate SQL. The semantic layer you've built is the foundation : better descriptions mean better AI responses.
 
 ### Dremio MCP Server
 
@@ -184,14 +184,14 @@ Create Reflections on frequently queried Snowflake views to offload repeated que
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** (full dataset cache) or **Aggregation Reflection** (pre-computed SUM/COUNT/AVG)
 4. Select the columns and aggregations to include
-5. Set the **Refresh Interval** — balance between data freshness and Snowflake credit consumption
+5. Set the **Refresh Interval** : balance between data freshness and Snowflake credit consumption
 6. Click **Save**
 
 After creation, Dremio's query optimizer automatically routes matching queries to the Reflection. Dashboard queries and scheduled reports hit the cache instead of consuming Snowflake credits. BI tools connected via Arrow Flight get sub-second response times.
 
 ### Example: Dashboard Acceleration
 
-A Tableau dashboard that refreshes every 15 minutes queries `product_health`. Without Reflections, that's 96 Snowflake queries per day. With a Reflection that refreshes every 2 hours, Dremio serves 84 of those queries from cache — an 87.5% reduction in Snowflake credit consumption for that dashboard alone. Multiply that across 50 dashboards and the savings become significant.
+A Tableau dashboard that refreshes every 15 minutes queries `product_health`. Without Reflections, that's 96 Snowflake queries per day. With a Reflection that refreshes every 2 hours, Dremio serves 84 of those queries from cache : an 87.5% reduction in Snowflake credit consumption for that dashboard alone. Multiply that across 50 dashboards and the savings become significant.
 
 ## Governance Across Snowflake and Other Sources
 
@@ -199,7 +199,7 @@ Dremio's Fine-Grained Access Control (FGAC) provides governance capabilities tha
 
 - **Column masking:** Mask sensitive customer data (PII, financial details) from specific user roles. A marketing analyst sees `customer_name` but not `social_security_number`. An auditor sees both.
 - **Row-level filtering:** Automatically filter data based on the querying user's role. A regional manager sees only their region's data across all sources.
-- **Unified policies:** The same governance rules apply whether data comes from Snowflake, PostgreSQL, S3, or any other source — no per-source policy management.
+- **Unified policies:** The same governance rules apply whether data comes from Snowflake, PostgreSQL, S3, or any other source : no per-source policy management.
 
 These policies apply across all access methods: SQL Runner, BI tools, AI Agent, MCP Server, and Arrow Flight clients.
 
@@ -217,7 +217,7 @@ All queries benefit from Reflections, governance, and semantic layer context.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Snowflake data from their IDE. Ask Copilot "Show me product health metrics from Snowflake" and it generates SQL using your semantic layer — without switching to the Dremio console or Snowflake's Worksheets.
+Dremio's VS Code extension with Copilot integration lets developers query Snowflake data from their IDE. Ask Copilot "Show me product health metrics from Snowflake" and it generates SQL using your semantic layer : without switching to the Dremio console or Snowflake's Worksheets.
 
 ## External Queries
 
@@ -247,11 +247,11 @@ For data that stays in Snowflake, create manual Reflections to reduce credit con
 
 | Warehouse Size | Credits/Hour | Dremio Reflection Impact |
 |---|---|---|
-| X-Small | 1 | Reflections serve cached queries — warehouse suspends faster |
-| Small | 2 | Same pattern — faster auto-suspend reduces credit burn |
-| Medium | 4 | Dashboard workloads offloaded — downsize to Small |
-| Large | 8 | Interactive + scheduled workloads offloaded — significant savings |
-| X-Large | 16 | Heavy analytical workloads cached — potential 50%+ reduction |
+| X-Small | 1 | Reflections serve cached queries : warehouse suspends faster |
+| Small | 2 | Same pattern : faster auto-suspend reduces credit burn |
+| Medium | 4 | Dashboard workloads offloaded : downsize to Small |
+| Large | 8 | Interactive + scheduled workloads offloaded : significant savings |
+| X-Large | 16 | Heavy analytical workloads cached : potential 50%+ reduction |
 
 ### Quantifying Credit Savings
 
@@ -263,7 +263,7 @@ Example calculation for a medium-sized analytics team:
 
 ### Snowflake Data Cloud Integration
 
-Dremio doesn't replace Snowflake's Data Cloud capabilities — it complements them:
+Dremio doesn't replace Snowflake's Data Cloud capabilities : it complements them:
 
 - **Data Sharing:** Continue sharing datasets via Snowflake Data Sharing with other Snowflake accounts
 - **Marketplace:** Access Snowflake Marketplace datasets alongside your own, but federate them with non-Snowflake sources through Dremio
@@ -272,7 +272,7 @@ Dremio doesn't replace Snowflake's Data Cloud capabilities — it complements th
 
 ## Get Started
 
-Snowflake users can reduce credit consumption, federate beyond Snowflake's ecosystem, and add AI analytics — all through Dremio Cloud. The combination of Reflections (offloading repetitive dashboard and report queries), federation (joining Snowflake with PostgreSQL, S3, MongoDB, and other sources without ETL), and AI capabilities (Agent, MCP Server, SQL Functions) makes Dremio a natural complement to any Snowflake deployment.
+Snowflake users can reduce credit consumption, federate beyond Snowflake's ecosystem, and add AI analytics : all through Dremio Cloud. The combination of Reflections (offloading repetitive dashboard and report queries), federation (joining Snowflake with PostgreSQL, S3, MongoDB, and other sources without ETL), and AI capabilities (Agent, MCP Server, SQL Functions) makes Dremio a natural complement to any Snowflake deployment.
 
 Start by connecting Snowflake to Dremio Cloud, creating Reflections on your most-queried views, and monitoring the reduction in Snowflake credit consumption. Most organizations see measurable savings within the first week as dashboard queries shift to Dremio's Reflection cache. The setup takes minutes and the ROI is immediate.
 

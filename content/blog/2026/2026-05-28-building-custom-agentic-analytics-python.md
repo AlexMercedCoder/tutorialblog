@@ -87,7 +87,7 @@ agent = create_sql_agent(
 
 Setting `temperature=0` is important for SQL generation. Higher temperatures introduce randomness that produces creative but often invalid SQL. For schema exploration and analytical reasoning, determinism is preferable.
 
-`max_iterations=15` prevents runaway loops. An investigation that hasn't converged in 15 steps likely won't converge at all — either the question can't be answered with available data, or the agent is stuck in an error cycle.
+`max_iterations=15` prevents runaway loops. An investigation that hasn't converged in 15 steps likely won't converge at all : either the question can't be answered with available data, or the agent is stuck in an error cycle.
 
 ## Prompt Configuration for Your Schema
 

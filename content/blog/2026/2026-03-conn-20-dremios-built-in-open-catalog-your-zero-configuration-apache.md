@@ -1,7 +1,7 @@
 ---
 title: "Dremio's Built-in Open Catalog: Your Zero-Configuration Apache Iceberg Lakehouse"
 date: "2026-03-01"
-description: "Every Dremio Cloud account starts with a built-in Open Catalog — a fully managed Apache Iceberg catalog with integrated storage. When you create a Dremio C..."
+description: "Every Dremio Cloud account starts with a built-in Open Catalog : a fully managed Apache Iceberg catalog with integrated storage. When you create a Dremio C..."
 author: "Alex Merced"
 category: "Dremio Connectors"
 tags:
@@ -12,11 +12,11 @@ tags:
   - federated queries
 ---
 
-Every Dremio Cloud account starts with a built-in Open Catalog — a fully managed Apache Iceberg catalog with integrated storage. When you create a Dremio Cloud project, you immediately have a catalog where you can create namespaces (folders), tables, and views without connecting any external sources, configuring storage, or setting up credentials.
+Every Dremio Cloud account starts with a built-in Open Catalog : a fully managed Apache Iceberg catalog with integrated storage. When you create a Dremio Cloud project, you immediately have a catalog where you can create namespaces (folders), tables, and views without connecting any external sources, configuring storage, or setting up credentials.
 
 This isn't a bare-bones starting point. The built-in Open Catalog is a production-grade Iceberg catalog with automated performance management, Autonomous Reflections, time travel, branching, and full DML support. It's the fastest path from "sign up" to "running analytics."
 
-Organizations typically spend days or weeks setting up external catalogs — provisioning S3 buckets, configuring IAM roles, debugging credential chains, and testing connectivity. With the built-in Open Catalog, you skip all of that. Your first `CREATE TABLE` runs minutes after account creation.
+Organizations typically spend days or weeks setting up external catalogs : provisioning S3 buckets, configuring IAM roles, debugging credential chains, and testing connectivity. With the built-in Open Catalog, you skip all of that. Your first `CREATE TABLE` runs minutes after account creation.
 
 The Open Catalog is particularly powerful for teams adopting a lakehouse architecture for the first time. Instead of evaluating AWS Glue, Unity Catalog, and Snowflake Open Catalog (each with different setup complexity, vendor dependencies, and pricing models), start with the built-in catalog. You can always connect external catalogs later and federate across them.
 
@@ -43,7 +43,7 @@ These features enable data engineering workflows where teams can test transforma
 
 ### Zero Configuration
 
-External catalogs (Glue, Unity, Snowflake Open Catalog) require AWS IAM roles, network configuration, credential management, and catalog-specific setup. The built-in Open Catalog requires nothing — it's already configured when your project is created. Create a folder, write SQL, and start working.
+External catalogs (Glue, Unity, Snowflake Open Catalog) require AWS IAM roles, network configuration, credential management, and catalog-specific setup. The built-in Open Catalog requires nothing : it's already configured when your project is created. Create a folder, write SQL, and start working.
 
 ### Automated Performance Management
 
@@ -109,7 +109,7 @@ WHEN NOT MATCHED THEN INSERT (customer_id, total_spend) VALUES (source.customer_
 
 ## Getting Started: Create Your First Tables
 
-When you query items in the built-in catalog, you don't include a source name prefix — just the folder path and table/view name:
+When you query items in the built-in catalog, you don't include a source name prefix : just the folder path and table/view name:
 
 ```sql
 -- Create namespace structure
@@ -237,7 +237,7 @@ Dremio's Fine-Grained Access Control (FGAC) provides enterprise-grade governance
 
 - **Column masking:** Mask sensitive columns (customer PII, financial details) from specific roles. A data analyst sees `customer_name` but not `social_security_number`.
 - **Row-level filtering:** Automatically restrict data visibility based on user roles. A regional manager querying `revenue_summary` sees only their region.
-- **Unified policies:** The same governance policies apply across Open Catalog tables, external catalogs, and database sources — one set of rules for all data.
+- **Unified policies:** The same governance policies apply across Open Catalog tables, external catalogs, and database sources : one set of rules for all data.
 
 These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent queries, and MCP Server interactions.
 
@@ -255,7 +255,7 @@ All queries benefit from Autonomous Reflections, governance, and the semantic la
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Open Catalog data from their IDE. Ask Copilot "Show me this week's revenue by product category" and it generates SQL using your semantic layer — without switching to the Dremio console.
+Dremio's VS Code extension with Copilot integration lets developers query Open Catalog data from their IDE. Ask Copilot "Show me this week's revenue by product category" and it generates SQL using your semantic layer : without switching to the Dremio console.
 
 ## Data Lifecycle Management
 
@@ -266,7 +266,7 @@ The Open Catalog supports a complete data lifecycle:
 3. **Gold layer:** Create analytical views with business logic for the semantic layer
 4. **Archival:** Use `DELETE` with time-based conditions to remove old data; use time travel to access historical snapshots before deletion
 
-This medallion architecture runs entirely within Dremio — no external ETL tools, Spark clusters, or scheduled scripts needed.
+This medallion architecture runs entirely within Dremio : no external ETL tools, Spark clusters, or scheduled scripts needed.
 
 ### Incremental Loading Patterns
 
@@ -314,7 +314,7 @@ WHERE current_data.segment <> old_data.segment;
 
 Every Dremio Cloud account includes the Open Catalog, ready to go. No setup, no configuration, no external dependencies. Create your first table in under a minute.
 
-The Open Catalog isn't just for prototyping — it's production-grade from day one. Organizations run terabyte-scale analytical workloads on the built-in catalog with automated performance management handling compaction, vacuuming, and Reflection optimization in the background. Start small with a few tables, then scale to hundreds of tables and dozens of users as your lakehouse grows. The same zero-configuration promise holds at scale.
+The Open Catalog isn't just for prototyping : it's production-grade from day one. Organizations run terabyte-scale analytical workloads on the built-in catalog with automated performance management handling compaction, vacuuming, and Reflection optimization in the background. Start small with a few tables, then scale to hundreds of tables and dozens of users as your lakehouse grows. The same zero-configuration promise holds at scale.
 
 For teams new to the lakehouse concept, the Open Catalog is the lowest-friction entry point available. Data engineers familiar with SQL can build a complete medallion architecture (bronze → silver → gold) in a single afternoon, with AI capabilities and governance ready to activate immediately.
 

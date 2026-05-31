@@ -16,7 +16,7 @@ tags:
 
 Apache Iceberg is an open lakehouse table format designed to take datasets in distributed file systems and turn them into database like tables. It has gained popularity for its ability to handle complex data engineering challenges, such as ensuring data consistency, enabling schema evolution, and supporting efficient query execution. One of the critical components that make this possible is its robust metadata management.
 
-We will focus on a crucial aspect of Iceberg's metadata architecture—the **Manifest List** file. The Manifest List plays a pivotal role in Iceberg's snapshot mechanism, helping to track changes across the dataset and optimize query performance. Understanding the purpose of the Manifest List, the details it contains, and how query engines utilize it to plan which data files to scan is essential for data engineers looking to maximize the efficiency of their data lakehouses.
+We will focus on a crucial aspect of Iceberg's metadata architecture: the **Manifest List** file. The Manifest List plays a pivotal role in Iceberg's snapshot mechanism, helping to track changes across the dataset and optimize query performance. Understanding the purpose of the Manifest List, the details it contains, and how query engines utilize it to plan which data files to scan is essential for data engineers looking to maximize the efficiency of their data lakehouses.
 
 ## What is a Manifest List?
 
@@ -52,7 +52,7 @@ Here are the essential fields you’ll find inside a Manifest List file:
 
 - **`sequence_number` and `min_sequence_number`**: These fields are part of Iceberg's versioning system. The `sequence_number` represents when the manifest was added to the table, while `min_sequence_number` provides the earliest sequence number of all files tracked by this manifest. These fields are crucial for understanding the evolution of data and for implementing time-travel queries.
 
-- **`added_files_count`, `existing_files_count`, `deleted_files_count`**: These fields provide a count of the files in different states within the manifest—added, existing, or deleted. This metadata helps query engines decide if a manifest is relevant for a particular operation, potentially skipping manifests that contain only deleted files or files outside the scope of the query.
+- **`added_files_count`, `existing_files_count`, `deleted_files_count`**: These fields provide a count of the files in different states within the manifest - added, existing, or deleted. This metadata helps query engines decide if a manifest is relevant for a particular operation, potentially skipping manifests that contain only deleted files or files outside the scope of the query.
 
 - **Partition Summaries**: The Manifest List can also include summaries of partition fields, such as `lower_bound` and `upper_bound` for partition values, `contains_null`, and `contains_nan`. These summaries are incredibly useful for partition pruning during query planning, as they allow the query engine to skip entire manifests that do not contain relevant data based on the query’s filter conditions.
 

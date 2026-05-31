@@ -92,7 +92,7 @@ When working with Parquet files, optimizing the structure of your files based on
 
 ## Conclusion
 
-The hierarchical structure of Parquet files—organized into row groups, columns, and pages—enables efficient storage and fast data access. By organizing data this way, Parquet minimizes unnecessary reads and maximizes the potential for parallel processing and compression.
+The hierarchical structure of Parquet files: organized into row groups, columns, and pages, enables efficient storage and fast data access. By organizing data this way, Parquet minimizes unnecessary reads and maximizes the potential for parallel processing and compression.
 
 Understanding how these components interact helps you optimize your data storage and querying processes, ensuring that your data pipelines run as efficiently as possible.
 

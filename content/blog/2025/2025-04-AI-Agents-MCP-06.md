@@ -1,7 +1,7 @@
 ---
-title:  Journey from AI to LLMs and MCP - 6 - Enter the Model Context Protocol (MCP) — The Interoperability Layer for AI Agents
+title:  Journey from AI to LLMs and MCP - 6 - Enter the Model Context Protocol (MCP) : The Interoperability Layer for AI Agents
 date: "2025-04-10"
-description: "Enter the Model Context Protocol (MCP) — The Interoperability Layer for AI Agents"
+description: "Enter the Model Context Protocol (MCP) : The Interoperability Layer for AI Agents"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-We’ve spent the last few posts exploring the growing power of AI agents—how they can reason, plan, and take actions across complex tasks. And we’ve looked at the frameworks that help us build these agents. But if you’ve worked with them, you’ve likely hit a wall:
+We’ve spent the last few posts exploring the growing power of AI agents - how they can reason, plan, and take actions across complex tasks. And we’ve looked at the frameworks that help us build these agents. But if you’ve worked with them, you’ve likely hit a wall:
 
 - Hardcoded toolchains
 - Limited to a specific LLM provider
@@ -32,7 +32,7 @@ What if we had a **standard** that let **any agent talk to any data source or to
 That’s exactly what the **Model Context Protocol (MCP)** brings to the table.
 
 And if you’re from the data engineering world, MCP is to AI agents what the **Apache Iceberg REST protocol** is to analytics:  
-> A universal, pluggable interface that enables many clients to interact with many servers—without tight coupling.
+> A universal, pluggable interface that enables many clients to interact with many servers - without tight coupling.
 
 ## What Is the Model Context Protocol (MCP)?
 
@@ -65,7 +65,7 @@ Let’s draw the parallel:
 
 Just as Iceberg REST made it possible for **Dremio** to talk to a table created in **Snowflake**, MCP allows a tool exposed in **Python on your laptop** to be used by an LLM in **Claude Desktop**, a VS Code agent, or even a web-based chatbot.
 
-## 🔁 MCP in Action — A Real-World Use Case
+## 🔁 MCP in Action : A Real-World Use Case
 
 Imagine this workflow:
 1. You’re coding in an IDE powered by an AI assistant
@@ -78,7 +78,7 @@ With MCP:
 - The AI assistant (client) calls your custom “tail logs” tool
 - The results are streamed back, all through the **standardized protocol**
 
-And tomorrow, you could replace that assistant with a different model or switch to a browser-based environment—and everything would still work.
+And tomorrow, you could replace that assistant with a different model or switch to a browser-based environment - and everything would still work.
 
 ## The Core Components of MCP
 
@@ -110,7 +110,7 @@ Servers can live anywhere: locally on your machine, behind an API, or running in
 
 ## Why This Matters
 
-With MCP, we finally get **interoperability in the AI stack**—a shared interface layer between:
+With MCP, we finally get **interoperability in the AI stack**: a shared interface layer between:
 - LLMs and tools
 - Agents and environments
 - Models and real-world data

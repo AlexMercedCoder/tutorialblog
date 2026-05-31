@@ -30,7 +30,7 @@ Apache Iceberg changes the equation because it stores data in open Parquet files
 
 **Layer 1: Open Storage**
 
-Data lives in object storage — S3, Azure Data Lake Storage, GCS — in Parquet files organized by the Iceberg spec. The storage tier is the cheapest and the most portable. Moving from one object store to another is an infrastructure-level operation, not an application-level one.
+Data lives in object storage : S3, Azure Data Lake Storage, GCS,  in Parquet files organized by the Iceberg spec. The storage tier is the cheapest and the most portable. Moving from one object store to another is an infrastructure-level operation, not an application-level one.
 
 **Layer 2: Open Table Format**
 
@@ -42,7 +42,7 @@ The catalog tracks which Iceberg tables exist, where their metadata files live, 
 
 **Layer 4: Query Federation**
 
-The query engine reads from the catalog, finds file locations, reads Parquet data from object storage, and returns results. Dremio's query federation connects to multiple catalogs and data sources — from different cloud environments — and executes cross-source SQL queries without moving data. Predicate pushdown reduces how much data crosses the network.
+The query engine reads from the catalog, finds file locations, reads Parquet data from object storage, and returns results. Dremio's query federation connects to multiple catalogs and data sources : from different cloud environments,  and executes cross-source SQL queries without moving data. Predicate pushdown reduces how much data crosses the network.
 
 ## Zero-ETL Federation: What It Means in Practice
 
@@ -56,7 +56,7 @@ The tradeoff: federated queries that span many sources depend on network latency
 
 When you separate compute from storage using Iceberg, you can route different workloads to different compute environments without migrating the data.
 
-Batch ELT runs on spot Spark clusters in the cloud region where the data is stored — no egress. Interactive queries for a business unit in Europe run through a Dremio cluster in an EU region, accessing an EU Iceberg table directly. Global reporting that needs to join EU and US datasets runs through a central Dremio instance with federated connections to both regions.
+Batch ELT runs on spot Spark clusters in the cloud region where the data is stored : no egress. Interactive queries for a business unit in Europe run through a Dremio cluster in an EU region, accessing an EU Iceberg table directly. Global reporting that needs to join EU and US datasets runs through a central Dremio instance with federated connections to both regions.
 
 Each layer is independently scalable. You don't pay for idle compute in regions where no active queries are running. You don't pay for data movement when you can push the query to the data instead.
 
@@ -76,7 +76,7 @@ The unified data architecture is also the prerequisite for reliable agentic anal
 
 All three are properties of the unified architecture described above. The federated query engine provides the single SQL interface. The Open Catalog's wiki and virtual dataset documentation provides the semantic layer. The RBAC policies enforced by the catalog define the agent's access scope.
 
-Without this architecture, AI agents working on multi-cloud data face the same fragmentation problem that human analysts do — needing to switch contexts between tools, manually joining data from separate sources, or relying on ETL pipelines that are always slightly out of date.
+Without this architecture, AI agents working on multi-cloud data face the same fragmentation problem that human analysts do : needing to switch contexts between tools, manually joining data from separate sources, or relying on ETL pipelines that are always slightly out of date.
 
 Dremio's [MCP server](https://docs.dremio.com/current/developer/mcp-server/) exposes the unified catalog to external AI clients, including Claude, ChatGPT, and custom LangChain agents. The agent connects once, sees all authorized sources through a single namespace, and queries across cloud boundaries using standard SQL. The architecture that makes multi-cloud data manageable for human analysts makes it reliable for AI agents.
 
@@ -86,9 +86,9 @@ Multi-cloud lakehouse projects fail in predictable ways. Understanding them upfr
 
 **Over-federating without Reflections:** Federation handles flexible, one-off queries well. For high-frequency dashboard queries that join several large tables, pure federation is too slow. Teams that don't plan for materialization end up with dashboards that time out or force a return to ETL. Build your Reflections strategy before you roll out dashboards.
 
-**Ignoring egress costs during design:** Federated queries avoid data movement in normal operation, but some patterns still trigger egress — cross-region joins where both datasets are large, queries that can't push predicates effectively, or Reflections that refresh across cloud boundaries. Map your query patterns to egress scenarios before choosing your compute placement strategy.
+**Ignoring egress costs during design:** Federated queries avoid data movement in normal operation, but some patterns still trigger egress : cross-region joins where both datasets are large, queries that can't push predicates effectively, or Reflections that refresh across cloud boundaries. Map your query patterns to egress scenarios before choosing your compute placement strategy.
 
-**Skipping the semantic layer:** The unified architecture solves the data access problem but doesn't solve the data understanding problem. If your catalog is not documented — no wikis, no column labels, no canonical virtual datasets — your users (human and AI) will query the wrong tables, use inconsistent metric definitions, and lose confidence in results. Build the semantic layer in parallel with the connectivity layer, not after.
+**Skipping the semantic layer:** The unified architecture solves the data access problem but doesn't solve the data understanding problem. If your catalog is not documented : no wikis, no column labels, no canonical virtual datasets,  your users (human and AI) will query the wrong tables, use inconsistent metric definitions, and lose confidence in results. Build the semantic layer in parallel with the connectivity layer, not after.
 
 **Treating the catalog as optional:** Teams that deploy Dremio for query federation but skip the Open Catalog setup lose the governance and semantic benefits. The catalog is what converts a query engine into a governed data platform. It's not optional infrastructure for production deployments.
 

@@ -12,7 +12,7 @@ tags:
   - federated queries
 ---
 
-Vertica is a columnar analytics database engineered for fast aggregate queries on large datasets. It was built from the ground up for analytical workloads — column-oriented storage, massively parallel processing, and automatic database design optimization. Organizations running Vertica typically have years of investment in analytics infrastructure: curated schemas, optimized projections, and sophisticated workloads that depend on Vertica's high-performance query engine.
+Vertica is a columnar analytics database engineered for fast aggregate queries on large datasets. It was built from the ground up for analytical workloads : column-oriented storage, massively parallel processing, and automatic database design optimization. Organizations running Vertica typically have years of investment in analytics infrastructure: curated schemas, optimized projections, and sophisticated workloads that depend on Vertica's high-performance query engine.
 
 But Vertica has limitations that become more painful as data ecosystems grow. Licensing costs scale with data volume. Federation with non-Vertica sources requires complex ETL. And connecting Vertica data to modern cloud tools, AI platforms, and cross-cloud architectures requires exporting data or building custom connectors.
 
@@ -26,7 +26,7 @@ Vertica's licensing model ties cost to data volume and node count. Every analyti
 
 ### Federate with Cloud Sources
 
-Vertica excels at analytical queries on its own data, but your organization's data lives in many places: S3 data lakes, PostgreSQL application databases, Snowflake cloud warehouses, MongoDB document stores. Without a federation layer, combining these with Vertica data requires ETL pipelines that extract from each source, transform, and load into Vertica. Dremio queries each source in place and joins the results — no data movement needed.
+Vertica excels at analytical queries on its own data, but your organization's data lives in many places: S3 data lakes, PostgreSQL application databases, Snowflake cloud warehouses, MongoDB document stores. Without a federation layer, combining these with Vertica data requires ETL pipelines that extract from each source, transform, and load into Vertica. Dremio queries each source in place and joins the results : no data movement needed.
 
 ### Modernize Without a Big-Bang Migration
 
@@ -38,12 +38,12 @@ Vertica has its own access control, but it doesn't extend to your other data sou
 
 ## Prerequisites
 
-- **Vertica hostname or IP address** — the coordinator node of your Vertica cluster
-- **Port** — Vertica defaults to `5433`
+- **Vertica hostname or IP address** : the coordinator node of your Vertica cluster
+- **Port** : Vertica defaults to `5433`
 - **Database name**
-- **Username and password** — a Vertica user with `SELECT` privileges on the tables you want to query
-- **Network access** — port 5433 must be reachable from Dremio Cloud
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-vertica-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Username and password** : a Vertica user with `SELECT` privileges on the tables you want to query
+- **Network access** : port 5433 must be reachable from Dremio Cloud
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-vertica-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Vertica to Dremio Cloud
 
@@ -148,7 +148,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) extends AI capabil
 2. Configure redirect URLs for your AI client
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}`
 
-Now your team can ask Claude "Analyze our web engagement trends from Vertica data this quarter" and get accurate, governed results — without writing SQL or accessing Vertica directly.
+Now your team can ask Claude "Analyze our web engagement trends from Vertica data this quarter" and get accurate, governed results : without writing SQL or accessing Vertica directly.
 
 ### AI SQL Functions
 
@@ -180,10 +180,10 @@ Create Reflections on your most frequently queried views:
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** (full cache) or **Aggregation Reflection** (pre-computed metrics)
 4. Select columns and aggregations
-5. Set the **Refresh Interval** — for Vertica data that updates daily, daily refresh works; for real-time dashboards, match the refresh to your SLA
+5. Set the **Refresh Interval** : for Vertica data that updates daily, daily refresh works; for real-time dashboards, match the refresh to your SLA
 6. Click **Save**
 
-BI tools connected via Arrow Flight or ODBC get sub-second response times from Reflections, even though the underlying data lives in Vertica. A conversion analytics dashboard that queries Vertica 96 times per day with a daily Reflection refresh consumes Vertica resources only once — a 99% reduction in cluster load.
+BI tools connected via Arrow Flight or ODBC get sub-second response times from Reflections, even though the underlying data lives in Vertica. A conversion analytics dashboard that queries Vertica 96 times per day with a daily Reflection refresh consumes Vertica resources only once : a 99% reduction in cluster load.
 
 ## Governance Across Vertica and Other Sources
 
@@ -191,7 +191,7 @@ Dremio's Fine-Grained Access Control (FGAC) provides governance that extends bey
 
 - **Column masking:** Mask conversion rates, revenue data, or user identifiers from specific roles. A product manager sees engagement metrics but not raw revenue.
 - **Row-level filtering:** Restrict data visibility based on user roles. Regional teams see only their region's data automatically.
-- **Unified policies:** Same governance applies across Vertica, PostgreSQL, S3, BigQuery, and all other sources — no per-database policy management.
+- **Unified policies:** Same governance applies across Vertica, PostgreSQL, S3, BigQuery, and all other sources : no per-database policy management.
 
 These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, MCP Server, and Arrow Flight clients.
 
@@ -209,7 +209,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Vertica data from their IDE. Ask Copilot "Show me conversion rates by device type from web analytics" and get SQL generated from your semantic layer — without switching to the Dremio console.
+Dremio's VS Code extension with Copilot integration lets developers query Vertica data from their IDE. Ask Copilot "Show me conversion rates by device type from web analytics" and get SQL generated from your semantic layer : without switching to the Dremio console.
 
 ## When to Keep Data in Vertica vs. Migrate to Iceberg
 
@@ -224,18 +224,18 @@ For data that stays in Vertica, create manual Reflections to reduce query load. 
 Vertica has two deployment modes, both compatible with Dremio:
 
 ### Enterprise Mode (On-Premises)
-Traditional deployment with local storage. Dremio connects via JDBC and pushes SQL operations to Vertica's engine when possible. Reflections are particularly valuable here — they offload analytical queries and reduce the on-premises compute needed.
+Traditional deployment with local storage. Dremio connects via JDBC and pushes SQL operations to Vertica's engine when possible. Reflections are particularly valuable here : they offload analytical queries and reduce the on-premises compute needed.
 
 ### EON Mode (Cloud-Optimized)
-Vertica's compute-storage separation architecture on AWS, Azure, or GCP. Dremio connects the same way, but EON mode's elastic compute makes Reflections' cost-saving impact even more significant — when Dremio serves cached results, EON subclusters can scale down.
+Vertica's compute-storage separation architecture on AWS, Azure, or GCP. Dremio connects the same way, but EON mode's elastic compute makes Reflections' cost-saving impact even more significant , when Dremio serves cached results, EON subclusters can scale down.
 
 ## Vertica-Specific SQL Considerations
 
 Dremio handles most Vertica SQL natively. For Vertica-specific syntax:
 
-- **Projections:** Vertica projections are transparent to Dremio — Vertica automatically uses optimal projections for queries pushed down
-- **Flex tables:** Dremio reads flex table columns as VARCHAR — cast to appropriate types in your Dremio views
-- **COPY LOCAL:** Not available through Dremio — use Dremio's own CREATE TABLE AS SELECT for data loading
+- **Projections:** Vertica projections are transparent to Dremio : Vertica automatically uses optimal projections for queries pushed down
+- **Flex tables:** Dremio reads flex table columns as VARCHAR : cast to appropriate types in your Dremio views
+- **COPY LOCAL:** Not available through Dremio : use Dremio's own CREATE TABLE AS SELECT for data loading
 - **Vertica ML functions:** Use external queries for Vertica-specific ML functions: `SELECT * FROM TABLE("vertica-analytics".EXTERNAL_QUERY('SELECT PREDICT_LINEAR...'))`
 
 ## Migration ROI Example
@@ -249,6 +249,6 @@ A mid-sized organization with 50TB in Vertica Enterprise:
 
 ## Get Started
 
-Vertica users can reduce licensing pressure, federate with cloud sources, modernize incrementally, and add AI analytics — all through Dremio Cloud. Connect your Vertica cluster to Dremio, create Reflections on your most-queried tables, and start tracking the reduction in Vertica query load as Dremio serves cached results.
+Vertica users can reduce licensing pressure, federate with cloud sources, modernize incrementally, and add AI analytics : all through Dremio Cloud. Connect your Vertica cluster to Dremio, create Reflections on your most-queried tables, and start tracking the reduction in Vertica query load as Dremio serves cached results.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-vertica-dremio-cloud&utm_content=alexmerced) and connect your Vertica cluster alongside your other data sources.

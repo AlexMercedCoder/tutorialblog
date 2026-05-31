@@ -15,7 +15,7 @@ tags:
 - [Lakehouse Catalog Course](https://hello.dremio.com/webcast-an-in-depth-exploration-on-the-world-of-data-lakehouse-catalogs-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=dremioaireadydata&utm_content=alexmerced&utm_term=external_blog)
 - [Iceberg Lakehouse Engineering Video Playlist](https://www.youtube.com/watch?v=SIriNcVIGJQ&list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe) 
 
-AI models, whether for machine learning or deep learning, require vast amounts of data to train, validate, and test. But not just any data will do—this data must be accessible, scalable, and optimized for efficient processing. This is where the concept of "AI-ready data" comes into play. 
+AI models, whether for machine learning or deep learning, require vast amounts of data to train, validate, and test. But not just any data will do: this data must be accessible, scalable, and optimized for efficient processing. This is where the concept of "AI-ready data" comes into play. 
 
 "AI-ready data" refers to data that meets specific criteria to support the demands of AI development: it must be accessible for easy access, scalable for large volumes, and governed to ensure compliance. Ensuring data meets these criteria can be challenging, especially with the complexity of modern data landscapes that include data lakes, databases, warehouses, and more.
 
@@ -31,7 +31,7 @@ For data to be truly AI-ready, it must meet several key requirements. Here’s a
 
 3. **Transformability**: AI models often require data in a particular structure or with certain attributes. AI-ready data should support complex transformations to fit the needs of different models, whether it’s feature engineering, data normalization, or other preprocessing steps.
 
-4. **Governance**: Ensuring compliance is crucial, especially when working with sensitive data. Governance controls, such as access rules and audit trails, ensure that data usage aligns with privacy policies and regulatory requirements. Governance is also important for model accuracy—making sure the model isn’t trained on irrelevant or unauthorized data.
+4. **Governance**: Ensuring compliance is crucial, especially when working with sensitive data. Governance controls, such as access rules and audit trails, ensure that data usage aligns with privacy policies and regulatory requirements. Governance is also important for model accuracy, making sure the model isn’t trained on irrelevant or unauthorized data.
 
 Preparing data that meets these criteria can be difficult, particularly when handling vast amounts of structured and unstructured data across multiple systems. However, with tools like Apache Iceberg and Dremio, data teams can address these challenges and streamline structured data preparation for AI workloads.
 

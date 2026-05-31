@@ -12,9 +12,9 @@ tags:
   - federated queries
 ---
 
-AWS Glue Data Catalog is AWS's managed metadata service for data lakes. It stores table definitions, schemas, partition information, and statistics for data stored in Amazon S3. If you've built your data lake on AWS using Apache Spark (on EMR), AWS Glue ETL jobs, or Amazon Athena, your table metadata lives in Glue. But Glue is just a catalog — a registry of what's where. To actually query the data, you need Athena (per-TB pricing), EMR clusters (infrastructure management), or Redshift Spectrum (additional cost).
+AWS Glue Data Catalog is AWS's managed metadata service for data lakes. It stores table definitions, schemas, partition information, and statistics for data stored in Amazon S3. If you've built your data lake on AWS using Apache Spark (on EMR), AWS Glue ETL jobs, or Amazon Athena, your table metadata lives in Glue. But Glue is just a catalog : a registry of what's where. To actually query the data, you need Athena (per-TB pricing), EMR clusters (infrastructure management), or Redshift Spectrum (additional cost).
 
-Dremio Cloud connects to your Glue Data Catalog and queries the underlying Iceberg tables with full read and write support. You get enterprise-grade SQL, Reflections for query acceleration, governance, and AI analytics — all on top of your existing Glue-managed lakehouse.
+Dremio Cloud connects to your Glue Data Catalog and queries the underlying Iceberg tables with full read and write support. You get enterprise-grade SQL, Reflections for query acceleration, governance, and AI analytics : all on top of your existing Glue-managed lakehouse.
 
 ## Why Glue Users Need Dremio
 
@@ -24,7 +24,7 @@ Athena charges per terabyte of data scanned, regardless of whether the query is 
 
 ### Full Read and Write on Iceberg Tables
 
-Dremio supports full DML (INSERT, UPDATE, DELETE, MERGE) on Glue-cataloged Iceberg tables. Create tables, run transformations, build data pipelines, and maintain your lakehouse entirely through Dremio's SQL engine — no need to spin up EMR clusters or Glue ETL jobs for simple transformations.
+Dremio supports full DML (INSERT, UPDATE, DELETE, MERGE) on Glue-cataloged Iceberg tables. Create tables, run transformations, build data pipelines, and maintain your lakehouse entirely through Dremio's SQL engine : no need to spin up EMR clusters or Glue ETL jobs for simple transformations.
 
 ### Federate Glue with Non-AWS Sources
 
@@ -32,7 +32,7 @@ Your Glue-managed data lake covers AWS data, but your application database is on
 
 ### Automated Iceberg Maintenance
 
-Dremio automatically compacts small files into optimally sized ones, rewrites manifests for faster metadata reads, and clusters data based on query patterns — all on Glue-cataloged Iceberg tables. This eliminates the need for manual `OPTIMIZE` jobs or scheduled Glue ETL maintenance tasks.
+Dremio automatically compacts small files into optimally sized ones, rewrites manifests for faster metadata reads, and clusters data based on query patterns : all on Glue-cataloged Iceberg tables. This eliminates the need for manual `OPTIMIZE` jobs or scheduled Glue ETL maintenance tasks.
 
 ### Credential Vending
 
@@ -43,7 +43,7 @@ Dremio uses Glue's credential vending to securely access the underlying S3 data 
 - **AWS Account** with Glue Data Catalog configured
 - **IAM Role** with permissions: `glue:GetDatabase`, `glue:GetTable`, `glue:GetTables`, `glue:GetPartitions`, and S3 read/write permissions for underlying data
 - **AWS Region** where your Glue catalog is deployed
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-aws-glue-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-aws-glue-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Glue to Dremio Cloud
 
@@ -195,7 +195,7 @@ Create Reflections on product performance and daily summary views to cache resul
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** to cache the full view or **Aggregation Reflection** to pre-compute specific SUM/COUNT/AVG aggregations
 4. Select columns to include in the Reflection
-5. Set the **Refresh Interval** — how often Dremio re-queries the underlying Iceberg tables to update the cache
+5. Set the **Refresh Interval** : how often Dremio re-queries the underlying Iceberg tables to update the cache
 6. Click **Save**
 
 Dashboard queries from Tableau, Power BI, or Looker connected via Arrow Flight hit the Reflection instead of re-reading S3 Iceberg files, providing sub-second response times even for complex aggregations.
@@ -233,7 +233,7 @@ Dremio's Fine-Grained Access Control (FGAC) adds governance capabilities that Gl
 - **Row-level filtering:** Automatically filter data based on the querying user's role. A regional manager sees only their region's data. A global admin sees everything.
 - **Unified policies:** The same governance policies apply whether data comes from Glue, PostgreSQL, Snowflake, or any other connected source.
 
-These policies apply across all access methods — SQL Runner, BI tools via Arrow Flight/ODBC, AI Agent queries, and MCP Server interactions.
+These policies apply across all access methods : SQL Runner, BI tools via Arrow Flight/ODBC, AI Agent queries, and MCP Server interactions.
 
 ## Connect BI Tools via Arrow Flight
 
@@ -248,7 +248,7 @@ All queries from these tools benefit from Reflections, governance, and the seman
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Glue-cataloged data directly from their IDE. Ask Copilot "Show me product inventory trends from the Glue catalog" and it generates SQL using Dremio's semantic layer — all without leaving your development environment.
+Dremio's VS Code extension with Copilot integration lets developers query Glue-cataloged data directly from their IDE. Ask Copilot "Show me product inventory trends from the Glue catalog" and it generates SQL using Dremio's semantic layer : all without leaving your development environment.
 
 ## Glue vs. Athena vs. Dremio: When to Use Each
 
@@ -270,7 +270,7 @@ Glue is the metadata catalog. Athena is a query engine with per-TB pricing. Drem
 
 **Use Dremio's Open Catalog:** New analytical tables, data created through Dremio transformations, datasets where you want zero-configuration automatic maintenance (compaction, vacuuming, Autonomous Reflections).
 
-You can use both simultaneously — Glue for your existing AWS lakehouse, Dremio's Open Catalog for new analytical workloads.
+You can use both simultaneously : Glue for your existing AWS lakehouse, Dremio's Open Catalog for new analytical workloads.
 
 ## Dremio vs. Athena for Querying Glue-Managed Tables
 
@@ -297,10 +297,10 @@ AWS Lake Formation provides fine-grained access control for Glue-managed tables.
 - **Dremio FGAC** adds additional governance layers (column masking, row-level filtering) on top of Lake Formation
 - **Both layers work together:** Lake Formation controls what Dremio can see; Dremio FGAC controls what individual users see
 
-This dual-layer governance model gives you AWS-native access control at the storage level and Dremio-managed access control at the query level — comprehensive governance without compromising on either side.
+This dual-layer governance model gives you AWS-native access control at the storage level and Dremio-managed access control at the query level : comprehensive governance without compromising on either side.
 
 ## Get Started
 
-AWS Glue Data Catalog users can query, write, optimize, and AI-enrich their Iceberg tables through Dremio Cloud — with federation, governance, and performance acceleration that Athena and EMR don't provide.
+AWS Glue Data Catalog users can query, write, optimize, and AI-enrich their Iceberg tables through Dremio Cloud : with federation, governance, and performance acceleration that Athena and EMR don't provide.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-aws-glue-dremio-cloud&utm_content=alexmerced) and connect your Glue catalog.

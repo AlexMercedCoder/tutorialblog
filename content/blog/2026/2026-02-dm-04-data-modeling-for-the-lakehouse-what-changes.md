@@ -20,7 +20,7 @@ Data lives in open file formats on object storage. Schemas evolve without rewrit
 
 ## What's Different About a Lakehouse
 
-A lakehouse stores data as files — typically Parquet — on object storage like S3 or Azure Blob. An open table format like Apache Iceberg adds structure: schema definitions, partition metadata, snapshot history, and transactional guarantees.
+A lakehouse stores data as files : typically Parquet,  on object storage like S3 or Azure Blob. An open table format like Apache Iceberg adds structure: schema definitions, partition metadata, snapshot history, and transactional guarantees.
 
 This architecture gives you more flexibility than a traditional RDBMS, but also more responsibility. There are no foreign key constraints enforced at write time. No triggers. No stored procedures. Referential integrity is your problem to solve in pipelines and views, not something the storage engine handles for you.
 
@@ -32,7 +32,7 @@ The tradeoff is worth it: open formats, engine portability, cheap storage, and t
 
 In a traditional warehouse, you define the schema before writing data (schema-on-write). Every row must conform to the schema or the insert fails. This guarantees consistency but makes changes expensive. Adding a column means an ALTER TABLE. Changing a data type might require rewriting the entire table.
 
-In a lakehouse, you can also store data first and apply structure at query time (schema-on-read). Iceberg supports schema evolution natively — add columns, rename columns, widen data types, and reorder fields without rewriting underlying files.
+In a lakehouse, you can also store data first and apply structure at query time (schema-on-read). Iceberg supports schema evolution natively : add columns, rename columns, widen data types, and reorder fields without rewriting underlying files.
 
 This flexibility changes how you model:
 - **Bronze layer**: Accept data as-is from sources. Apply minimal typing. Don't reject records that don't match a rigid schema.
@@ -60,7 +60,7 @@ The Medallion Architecture (Bronze → Silver → Gold) is the most common data 
 **Gold (Application):**
 - Tailored views for specific use cases
 - Executive dashboards, Sales reports, AI agent context
-- Minimal transformation — mostly selecting from Silver views
+- Minimal transformation : mostly selecting from Silver views
 - Documented with business-friendly names and descriptions
 
 In [Dremio](https://www.dremio.com/blog/agentic-analytics-semantic-layer/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced), these layers are implemented as virtual datasets (SQL views) organized in Spaces. Each view is documented with Wikis, tagged with Labels, and governed with Fine-Grained Access Control. The logical model lives in the platform, not in scattered dbt files or tribal knowledge.
@@ -69,7 +69,7 @@ In [Dremio](https://www.dremio.com/blog/agentic-analytics-semantic-layer/?utm_so
 
 When you do create physical Iceberg tables (as opposed to views), the modeling considerations differ from traditional RDBMS:
 
-**Partitioning matters more than indexing.** Iceberg uses partition pruning instead of traditional B-tree indexes. Choose partition columns based on your most common query filters — typically date columns. Iceberg's hidden partitioning means users don't need to know the partition scheme to write efficient queries.
+**Partitioning matters more than indexing.** Iceberg uses partition pruning instead of traditional B-tree indexes. Choose partition columns based on your most common query filters : typically date columns. Iceberg's hidden partitioning means users don't need to know the partition scheme to write efficient queries.
 
 **Sort order affects scan performance.** Within each partition, Iceberg can sort data by specified columns. Sorting by a frequently filtered column (like `customer_id` or `region`) enables min/max pruning that skips irrelevant files.
 
@@ -89,6 +89,6 @@ When you do create physical Iceberg tables (as opposed to views), the modeling c
 
 ![Layered view architecture from raw data through business logic to consumption-ready outputs](images/data_modeling/04/medallion-architecture.png)
 
-If you're moving from a traditional warehouse to a lakehouse, start by recreating your most-used tables as Iceberg tables and your most-used transformations as SQL views. Organize those views into Bronze, Silver, and Gold layers. Measure whether query performance meets your SLAs — and if it doesn't, add Reflections to optimize the heavy queries without changing the logical model.
+If you're moving from a traditional warehouse to a lakehouse, start by recreating your most-used tables as Iceberg tables and your most-used transformations as SQL views. Organize those views into Bronze, Silver, and Gold layers. Measure whether query performance meets your SLAs : and if it doesn't, add Reflections to optimize the heavy queries without changing the logical model.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

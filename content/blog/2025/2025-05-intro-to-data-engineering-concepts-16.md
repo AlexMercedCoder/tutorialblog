@@ -34,11 +34,11 @@ This led to a common problem: organizations had access to a lot of data, but not
 
 ## What is a Lakehouse?
 
-A lakehouse is a single data architecture that combines the scalability and cost-efficiency of a data lake with the data management features of a warehouse. Instead of maintaining separate systems for raw and curated data, a lakehouse enables you to store all data in one place—typically an object store like S3 or ADLS—while layering in transactional guarantees, schema enforcement, and performance optimizations.
+A lakehouse is a single data architecture that combines the scalability and cost-efficiency of a data lake with the data management features of a warehouse. Instead of maintaining separate systems for raw and curated data, a lakehouse enables you to store all data in one place: typically an object store like S3 or ADLS, while layering in transactional guarantees, schema enforcement, and performance optimizations.
 
 The core idea is to treat the lake as the foundation, and then build capabilities on top that make it feel like a warehouse: support for SQL queries, fine-grained access controls, data versioning, and support for BI tools.
 
-With a lakehouse, you can ingest raw data, apply transformations, and serve both data scientists and business analysts from the same platform—without having to move or duplicate data between systems.
+With a lakehouse, you can ingest raw data, apply transformations, and serve both data scientists and business analysts from the same platform - without having to move or duplicate data between systems.
 
 ## Key Capabilities
 
@@ -46,7 +46,7 @@ A few innovations make the lakehouse model possible:
 
 First, **table formats** like Apache Iceberg and Delta Lake introduce ACID transactions to files stored in data lakes. This means you can safely update, insert, and delete records with consistency, even across distributed systems.
 
-Second, **query engines** like Dremio, Trino, and Starburst have matured to the point where they can run fast, complex SQL queries directly against files in the lake—especially when using efficient columnar formats like Parquet.
+Second, **query engines** like Dremio, Trino, and Starburst have matured to the point where they can run fast, complex SQL queries directly against files in the lake - especially when using efficient columnar formats like Parquet.
 
 Third, metadata and cataloging layers have improved, enabling better schema management, lineage tracking, and discovery across lakehouse tables.
 
@@ -58,14 +58,14 @@ One of the most compelling benefits of a lakehouse is **simplification**. Instea
 
 Lakehouses are also **cost-effective**. Object storage is cheaper and more scalable than traditional databases. And by avoiding the need to load data into separate warehouses, you eliminate redundant storage and computation.
 
-From a flexibility standpoint, the lakehouse supports a wide range of use cases—from batch analytics to interactive SQL to machine learning—all from the same underlying data.
+From a flexibility standpoint, the lakehouse supports a wide range of use cases: from batch analytics to interactive SQL to machine learning, all from the same underlying data.
 
 Importantly, the lakehouse model supports **open standards**. With formats like Iceberg, you’re not locked into a single vendor’s ecosystem. Your data remains portable, and you can build your stack using best-of-breed components.
 
 ## A New Foundation for the Future
 
-The data lakehouse is more than a marketing term—it represents a practical response to the needs of modern data teams. As data volumes continue to grow, and as organizations seek faster, more reliable insights, the need for unified, scalable architectures becomes clear.
+The data lakehouse is more than a marketing term - it represents a practical response to the needs of modern data teams. As data volumes continue to grow, and as organizations seek faster, more reliable insights, the need for unified, scalable architectures becomes clear.
 
-By combining the raw power of data lakes with the structure and performance of data warehouses, the lakehouse offers a way to do more with less—less duplication, less movement, and less friction.
+By combining the raw power of data lakes with the structure and performance of data warehouses, the lakehouse offers a way to do more with less - less duplication, less movement, and less friction.
 
 In the next post, we’ll dig deeper into the technologies that make the lakehouse possible, starting with Apache Iceberg, Apache Arrow, and Apache Polaris. These tools form the foundation of many modern analytic platforms and help bring the lakehouse vision to life.

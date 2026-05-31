@@ -82,7 +82,7 @@ Before running any upgrade command, confirm that every engine writing to the tab
 |---|---|---|
 | Apache Spark (with Iceberg 1.11.0) | Yes | Yes |
 | Trino | Check your version | Check your version |
-| Flink | Partial — verify 1.11.0 support | Partial |
+| Flink | Partial : verify 1.11.0 support | Partial |
 | Dremio | Yes | Yes (via Open Catalog) |
 | Snowflake | Interop via REST catalog | Check release notes |
 
@@ -95,7 +95,7 @@ ALTER TABLE my_catalog.my_schema.my_table
 SET TBLPROPERTIES ('format-version' = '3');
 ```
 
-This is a metadata-only operation. Your existing data files stay in their current format. The engine will write new files in v3 format going forward. Old files remain readable — they just don't use v3 features like deletion vectors for their existing data.
+This is a metadata-only operation. Your existing data files stay in their current format. The engine will write new files in v3 format going forward. Old files remain readable : they just don't use v3 features like deletion vectors for their existing data.
 
 After upgrading, run these validations:
 

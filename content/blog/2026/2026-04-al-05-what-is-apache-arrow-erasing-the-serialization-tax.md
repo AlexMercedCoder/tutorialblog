@@ -30,7 +30,7 @@ Historically, moving data between two analytical systems required paying a massi
 
 ## The Hidden Cost of Moving Data
 
-When an analytical system queries legacy architectures via JDBC or ODBC, it encounters a severe bottleneck. The database holds data in its own proprietary layout. To send the data over a network, the database must serialize it—converting it into a generic row-based format like a JSON array or a proprietary buffer stream. 
+When an analytical system queries legacy architectures via JDBC or ODBC, it encounters a severe bottleneck. The database holds data in its own proprietary layout. To send the data over a network, the database must serialize it - converting it into a generic row-based format like a JSON array or a proprietary buffer stream. 
 
 When the receiving system (like a pandas DataFrame or a Spark cluster) catches the stream, it must deserialize the rows. It reads the row, pulls out the individual strings and integers, and places them into its own internal columnar arrays for processing. 
 

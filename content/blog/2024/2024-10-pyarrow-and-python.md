@@ -421,7 +421,7 @@ paf.write_feather(table, 'output_data.feather')
 
 ### Summary
 
-PyArrow’s support for various file formats—such as JSON, CSV, and Feather—makes it a versatile tool for data analytics. Whether you're working with structured CSVs, exchanging JSON data, or aiming for faster performance with Feather files, PyArrow simplifies the process of reading and writing these formats. This flexibility allows you to handle a wide range of data tasks, from data ingestion to efficient storage and retrieval.
+PyArrow’s support for various file formats: such as JSON, CSV, and Feather, makes it a versatile tool for data analytics. Whether you're working with structured CSVs, exchanging JSON data, or aiming for faster performance with Feather files, PyArrow simplifies the process of reading and writing these formats. This flexibility allows you to handle a wide range of data tasks, from data ingestion to efficient storage and retrieval.
 
 ## Section 5: Using Apache Arrow Flight with PyArrow
 

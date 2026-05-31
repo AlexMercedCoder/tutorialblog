@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 4 - What Are AI Agents — And Why They're the Future of LLM Applications
+title: A Journey from AI to LLMs and MCP - 4 - What Are AI Agents : And Why They're the Future of LLM Applications
 date: "2025-04-08"
-description: "What Are AI Agents — And Why They're the Future of LLM Applications"
+description: "What Are AI Agents : And Why They're the Future of LLM Applications"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-We’ve explored how Large Language Models (LLMs) work, and how we can improve their performance with fine-tuning, prompt engineering, and retrieval-augmented generation (RAG). These enhancements are powerful—but they’re still fundamentally *stateless* and reactive.
+We’ve explored how Large Language Models (LLMs) work, and how we can improve their performance with fine-tuning, prompt engineering, and retrieval-augmented generation (RAG). These enhancements are powerful - but they’re still fundamentally *stateless* and reactive.
 
 To build systems that act with purpose, adapt over time, and accomplish multi-step goals, we need something more.
 
@@ -67,7 +67,7 @@ This is where agents shine. They can:
 ### 5. **Context Manager**
 Decides what information (memory, documents, tool results) gets included in each LLM prompt.
 
-## LLM vs AI Agent — Key Differences
+## LLM vs AI Agent : Key Differences
 
 | Capability         | LLM                  | AI Agent                          |
 |--------------------|----------------------|------------------------------------|
@@ -129,7 +129,7 @@ Unlike plain LLMs, agents can:
 
 - Reschedule if needed
 
-That’s not a single LLM prompt—that’s an intelligent system managing an evolving task.
+That’s not a single LLM prompt, that’s an intelligent system managing an evolving task.
 
 
 ## How Are Agents Built Today?
@@ -141,7 +141,7 @@ A number of popular **AI agent frameworks** have emerged:
 - **Semantic Kernel**: Microsoft’s framework for embedding LLMs into software
 - **CrewAI / MetaGPT**: Multi-agent systems with defined roles
 
-These frameworks let developers prototype powerful workflows, but they come with challenges—especially around complexity, tool integration, and portability.
+These frameworks let developers prototype powerful workflows, but they come with challenges - especially around complexity, tool integration, and portability.
 
 We’ll explore those challenges in the next post.
 
@@ -154,12 +154,12 @@ While agents are promising, current frameworks have some limitations:
 - **Security and control**: risk of unsafe tool access
 - **Hard to debug**: agents can go rogue or get stuck in loops
 
-To address these, we need **standardization**—a modular way to plug in data, tools, and models securely and flexibly.
+To address these, we need **standardization**: a modular way to plug in data, tools, and models securely and flexibly.
 
 That’s where the **Model Context Protocol (MCP)** enters the picture.
 
 
-## Coming Up Next: AI Agent Frameworks — Benefits and Limitations
+## Coming Up Next: AI Agent Frameworks : Benefits and Limitations
 
 In our next post, we’ll explore:
 - How modern agent frameworks work

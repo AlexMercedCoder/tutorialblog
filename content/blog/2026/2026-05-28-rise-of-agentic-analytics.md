@@ -10,7 +10,7 @@ tags:
 
 # The Rise of Agentic Analytics: Shifting BI from Passive Dashboards to Goal-Directed Action
 
-Dashboards have a fundamental design problem: they answer the question the designer anticipated, not the question the business needs answered today. A revenue dashboard shows you revenue is down 12% this month. It doesn't tell you which product line, which region, which customer segment, which sales motion — unless someone thought to build that drill-down when they designed the dashboard six months ago.
+Dashboards have a fundamental design problem: they answer the question the designer anticipated, not the question the business needs answered today. A revenue dashboard shows you revenue is down 12% this month. It doesn't tell you which product line, which region, which customer segment, which sales motion : unless someone thought to build that drill-down when they designed the dashboard six months ago.
 
 The analyst fills the gap. They open the dashboard, see the anomaly, download the CSV, write Python or SQL, iterate through hypotheses, and two hours later produce an answer. Sometimes the answer prompts another question. The cycle repeats.
 
@@ -22,7 +22,7 @@ Agentic analytics replaces the human iteration cycle with an autonomous agent th
 
 Traditional BI is reactive and passive. A user asks a question; the system returns a fixed result. The query runs, the chart renders, and the session ends. The system holds no state between queries. It doesn't remember what was asked before or adjust its behavior based on what it learned.
 
-An agentic analytics system is goal-directed and iterative. You give it a business objective — "identify the cause of the 12% revenue drop this month" — and it runs a reasoning loop to pursue that objective. The loop looks like this:
+An agentic analytics system is goal-directed and iterative. You give it a business objective : "identify the cause of the 12% revenue drop this month",  and it runs a reasoning loop to pursue that objective. The loop looks like this:
 
 1. Decompose the objective into a sequence of hypotheses
 2. Write SQL to test the first hypothesis
@@ -51,11 +51,11 @@ The failure mode is well-documented: give an LLM direct access to raw data files
 
 Three things fix this:
 
-**Semantic context:** Your data catalog needs human-readable documentation at the table and column level. What does this table contain? What does this column measure? What business term does it map to? This context is what allows the agent to translate a business question into correct SQL. Dremio's [semantic layer](https://www.dremio.com/blog/agentic-analytics-semantic-layer/) — built from virtual datasets, wikis, and labels — provides exactly this context.
+**Semantic context:** Your data catalog needs human-readable documentation at the table and column level. What does this table contain? What does this column measure? What business term does it map to? This context is what allows the agent to translate a business question into correct SQL. Dremio's [semantic layer](https://www.dremio.com/blog/agentic-analytics-semantic-layer/) : built from virtual datasets, wikis, and labels,  provides exactly this context.
 
 **Consistent metric definitions:** "Active user" should mean the same thing everywhere. Define canonical metrics as virtual datasets in your catalog. The agent uses the virtual dataset, not the raw table, when answering questions about active users. Consistency eliminates the class of errors where different queries answer the "same" question with different logic.
 
-**Broad data access without data movement:** An agentic analytics system that can only see data in one warehouse answers only the questions that warehouse can answer. Dremio's query federation connects the agent to all your data sources — operational databases, cloud warehouses, data lakes, SaaS APIs — through a unified semantic layer. The agent can join Salesforce opportunity data with Snowflake revenue data with Iceberg transaction history in a single investigation.
+**Broad data access without data movement:** An agentic analytics system that can only see data in one warehouse answers only the questions that warehouse can answer. Dremio's query federation connects the agent to all your data sources : operational databases, cloud warehouses, data lakes, SaaS APIs,  through a unified semantic layer. The agent can join Salesforce opportunity data with Snowflake revenue data with Iceberg transaction history in a single investigation.
 
 ## Goal-Directed Search vs. Single-Query Response
 
@@ -88,7 +88,7 @@ Dremio's [Agentic Lakehouse platform](https://www.dremio.com/blog/the-future-of-
 
 The rise of agentic analytics doesn't eliminate the analyst role. It changes it.
 
-Manual query writing, dashboard maintenance, and stakeholder interview cycles become a smaller part of the job. System design — defining the semantic layer, configuring the agent's investigation patterns, reviewing outputs, and catching errors the agent makes — becomes a larger part.
+Manual query writing, dashboard maintenance, and stakeholder interview cycles become a smaller part of the job. System design : defining the semantic layer, configuring the agent's investigation patterns, reviewing outputs, and catching errors the agent makes,  becomes a larger part.
 
 Analysts who adapt will handle 10x the analytical throughput with the same team size. The shift requires learning to evaluate agent-generated analysis rather than generating it directly, and learning to define the context that makes agent outputs trustworthy.
 

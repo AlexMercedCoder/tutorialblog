@@ -14,13 +14,13 @@ tags:
 
 ![Pipeline running multiple times and converging to the same result](images/debp/04/idempotent-pipeline.png)
 
-A pipeline runs, processes 100,000 records, and loads them into the target table. Then it fails on a downstream step. The orchestrator retries the entire job. Now the table has 200,000 records — 100,000 of them duplicates. Revenue reports double. Dashboards misfire. Someone spends the next four hours manually deduplicating records and explaining to stakeholders why the numbers were wrong.
+A pipeline runs, processes 100,000 records, and loads them into the target table. Then it fails on a downstream step. The orchestrator retries the entire job. Now the table has 200,000 records : 100,000 of them duplicates. Revenue reports double. Dashboards misfire. Someone spends the next four hours manually deduplicating records and explaining to stakeholders why the numbers were wrong.
 
 This is the cost of not building idempotent pipelines.
 
 ## What Idempotency Means for Pipelines
 
-An idempotent operation produces the same result no matter how many times you execute it. For data pipelines, that means: running the same job twice — or ten times — leaves the target data in the exact same state as running it once.
+An idempotent operation produces the same result no matter how many times you execute it. For data pipelines, that means: running the same job twice : or ten times,  leaves the target data in the exact same state as running it once.
 
 This property matters because retries are inevitable. Orchestrators retry failed tasks. Backfill jobs reprocess historical data. Network glitches cause at-least-once delivery. Engineers manually rerun jobs during debugging. Without idempotency, every one of these events risks data corruption.
 
@@ -41,7 +41,7 @@ INSERT INTO target_table
 SELECT * FROM staging_table WHERE event_date = '2024-01-15';
 ```
 
-If the job reruns, it deletes and recreates the same partition — resulting in the same data. Many table formats support INSERT OVERWRITE or REPLACE PARTITION as an atomic operation, which is even safer because it avoids a window where the partition is empty.
+If the job reruns, it deletes and recreates the same partition : resulting in the same data. Many table formats support INSERT OVERWRITE or REPLACE PARTITION as an atomic operation, which is even safer because it avoids a window where the partition is empty.
 
 **When to use it:** Daily, hourly, or other time-partitioned batch pipelines. This covers the majority of data warehouse loading patterns.
 
@@ -49,7 +49,7 @@ If the job reruns, it deletes and recreates the same partition — resulting in 
 
 ## The Upsert/MERGE Pattern
 
-For data that doesn't partition cleanly — or for change data capture (CDC) workloads — use MERGE (also called upsert):
+For data that doesn't partition cleanly : or for change data capture (CDC) workloads,  use MERGE (also called upsert):
 
 ```sql
 MERGE INTO target_table t
@@ -85,7 +85,7 @@ FROM incoming_events
 WHERE event_id NOT IN (SELECT event_id FROM events);
 ```
 
-**Windowed deduplication.** For high-volume streams, maintain dedup state only for a window (e.g., last 24 hours). Events outside the window are assumed to be unique — a practical tradeoff between memory usage and dedup completeness.
+**Windowed deduplication.** For high-volume streams, maintain dedup state only for a window (e.g., last 24 hours). Events outside the window are assumed to be unique : a practical tradeoff between memory usage and dedup completeness.
 
 ## Anti-Patterns That Break Idempotency
 

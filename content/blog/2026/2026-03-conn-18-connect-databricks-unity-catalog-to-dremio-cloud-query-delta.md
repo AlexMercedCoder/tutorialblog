@@ -14,13 +14,13 @@ tags:
 
 Databricks Unity Catalog is Databricks' governance layer for data and AI assets. It manages Delta Lake tables, machine learning models, feature stores, and other data objects across Databricks workspaces. If your data engineering team uses Databricks for ETL and ML, your curated analytical datasets likely live in Unity Catalog as Delta Lake tables.
 
-With UniForm, Databricks generates Iceberg-compatible metadata for Delta Lake tables, making them readable by non-Databricks engines without data conversion. This is where Dremio Cloud enters the picture: connect to Unity Catalog through the UniForm Iceberg compatibility layer and query your Delta Lake tables alongside every other data source in your organization — with federation, governance, AI analytics, and performance acceleration that Databricks alone doesn't provide.
+With UniForm, Databricks generates Iceberg-compatible metadata for Delta Lake tables, making them readable by non-Databricks engines without data conversion. This is where Dremio Cloud enters the picture: connect to Unity Catalog through the UniForm Iceberg compatibility layer and query your Delta Lake tables alongside every other data source in your organization : with federation, governance, AI analytics, and performance acceleration that Databricks alone doesn't provide.
 
 ## Why Unity Catalog Users Need Dremio
 
 ### Multi-Engine Analytics Beyond Databricks
 
-Unity Catalog centralizes governance for Databricks. But your data consumers use tools beyond Databricks notebooks — Tableau, Power BI, custom Python applications, and business analysts who work in SQL. Dremio provides a high-performance SQL layer that serves all these tools via Arrow Flight (10-100x faster than JDBC/ODBC) or standard ODBC connections.
+Unity Catalog centralizes governance for Databricks. But your data consumers use tools beyond Databricks notebooks : Tableau, Power BI, custom Python applications, and business analysts who work in SQL. Dremio provides a high-performance SQL layer that serves all these tools via Arrow Flight (10-100x faster than JDBC/ODBC) or standard ODBC connections.
 
 Instead of provisioning Databricks SQL warehouses for BI workloads (which consume Databricks Units), route those queries through Dremio where Reflections cache results and Autonomous Reflections automatically optimize query performance.
 
@@ -28,7 +28,7 @@ Instead of provisioning Databricks SQL warehouses for BI workloads (which consum
 
 Your Delta Lake tables in Unity Catalog contain curated, processed analytics data. But your operational databases (PostgreSQL, SQL Server, Oracle) live outside Databricks. Your cloud warehouses (Snowflake, Redshift) hold other analytical datasets. Your raw files (S3, Azure Storage) contain event logs and unstructured data. Without a federation layer, combining these with Delta Lake data requires Databricks ingestion pipelines for each source.
 
-Dremio queries each source in place and joins them in a single SQL statement — no ingestion required.
+Dremio queries each source in place and joins them in a single SQL statement : no ingestion required.
 
 ### Unified Governance Beyond Databricks
 
@@ -36,19 +36,19 @@ Unity Catalog governs data within Databricks. Dremio's Fine-Grained Access Contr
 
 ### AI Analytics on Delta Lake Data
 
-Dremio's semantic layer, AI Agent, MCP Server, and AI SQL Functions add capabilities that Databricks' Genie doesn't replicate — particularly for cross-source analytics and integration with external AI clients like Claude and ChatGPT.
+Dremio's semantic layer, AI Agent, MCP Server, and AI SQL Functions add capabilities that Databricks' Genie doesn't replicate : particularly for cross-source analytics and integration with external AI clients like Claude and ChatGPT.
 
 ### Credential Vending
 
-Unity Catalog supports credential vending across AWS, Azure, and GCS. This means Dremio doesn't need separate S3 or Azure Storage credentials to access the underlying data files — the catalog provides temporary, scoped credentials automatically.
+Unity Catalog supports credential vending across AWS, Azure, and GCS. This means Dremio doesn't need separate S3 or Azure Storage credentials to access the underlying data files : the catalog provides temporary, scoped credentials automatically.
 
 ## Prerequisites
 
-- **Databricks workspace URL** — your Databricks deployment URL (e.g., `https://mycompany.cloud.databricks.com`)
+- **Databricks workspace URL** : your Databricks deployment URL (e.g., `https://mycompany.cloud.databricks.com`)
 - **Personal Access Token (PAT)** or OAuth credentials for Databricks
 - **UniForm enabled** on the Delta Lake tables you want to query (this generates Iceberg-compatible metadata)
-- **Storage configuration** — AWS, Azure, or GCS (credential vending handles this if configured)
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-unity-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Storage configuration** : AWS, Azure, or GCS (credential vending handles this if configured)
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-unity-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ### Enabling UniForm on Delta Lake Tables
 
@@ -164,7 +164,7 @@ FROM "unity-catalog".ml_models.customer_predictions uc
 JOIN "postgres-crm".public.customers pg ON uc.customer_id = pg.customer_id;
 ```
 
-Navigate to the **Catalog**, click **Edit** (pencil icon), and **Generate Wiki** and **Generate Tags**. This creates business descriptions like "customer_risk_dashboard: Contains one row per customer combining ML churn predictions from Databricks with CRM account details" — context that powers AI features.
+Navigate to the **Catalog**, click **Edit** (pencil icon), and **Generate Wiki** and **Generate Tags**. This creates business descriptions like "customer_risk_dashboard: Contains one row per customer combining ML churn predictions from Databricks with CRM account details" : context that powers AI features.
 
 ## AI-Powered Analytics on Delta Lake Data
 
@@ -182,7 +182,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects Claude, C
 2. Configure redirect URLs (e.g., `https://claude.ai/api/mcp/auth_callback` for Claude, `https://chatgpt.com/connector_platform_oauth_redirect` for ChatGPT)
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}` (US) or `mcp.eu.dremio.cloud/mcp/{project_id}` (EU)
 
-A customer success manager can ask Claude "Show me all high-risk enterprise customers with contracts ending in the next 90 days" and get accurate, governed results from your Unity Catalog ML predictions — without knowing SQL.
+A customer success manager can ask Claude "Show me all high-risk enterprise customers with contracts ending in the next 90 days" and get accurate, governed results from your Unity Catalog ML predictions : without knowing SQL.
 
 ### AI SQL Functions
 
@@ -228,7 +228,7 @@ Create Reflections on Unity Catalog views to cache results and serve dashboard q
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** or **Aggregation Reflection**
 4. Select columns and aggregations
-5. Set the **Refresh Interval** — balance between data freshness and compute cost
+5. Set the **Refresh Interval** : balance between data freshness and compute cost
 6. Click **Save**
 
 BI tools connected to Dremio get sub-second response times from Reflections. This eliminates the need for Databricks SQL warehouses for read-heavy BI workloads.
@@ -247,7 +247,7 @@ These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, 
 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC. For Delta Lake data:
 
-- **Tableau:** Dremio connector — avoids Databricks SQL warehouse costs for BI
+- **Tableau:** Dremio connector : avoids Databricks SQL warehouse costs for BI
 - **Power BI:** Dremio ODBC or native connector
 - **Python/Pandas:** `pyarrow.flight` for programmatic access to ML model outputs
 - **Looker:** Connect via JDBC
@@ -257,7 +257,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot lets developers query Unity Catalog data from their IDE. Ask Copilot "Show me high-risk enterprise customers from the churn model" and get SQL from your semantic layer — without switching to Databricks notebooks or SQL warehouses.
+Dremio's VS Code extension with Copilot lets developers query Unity Catalog data from their IDE. Ask Copilot "Show me high-risk enterprise customers from the churn model" and get SQL from your semantic layer : without switching to Databricks notebooks or SQL warehouses.
 
 ## When to Use Dremio vs. Databricks SQL
 
@@ -265,7 +265,7 @@ Dremio's VS Code extension with Copilot lets developers query Unity Catalog data
 
 **Use Databricks SQL when:** You need write-heavy workloads on Delta Lake, you're running Databricks-native jobs (streaming, ML training), your queries use Databricks-specific SQL extensions.
 
-Both can coexist — Databricks for data engineering and ML, Dremio for federated analytics, AI, and BI serving.
+Both can coexist : Databricks for data engineering and ML, Dremio for federated analytics, AI, and BI serving.
 
 ## Delta Lake Tables in Dremio
 
@@ -284,13 +284,13 @@ Databricks pricing is based on Databricks Units (DBUs) consumed by SQL warehouse
 
 - **BI serving:** Instead of running a Databricks SQL warehouse 24/7 for dashboards, create Reflections in Dremio. Dashboard queries hit Dremio, SQL warehouse auto-stops.
 - **Ad-hoc exploration:** Analysts query Dremio's cached Reflections instead of waking Databricks clusters. Less start/stop overhead.
-- **Cross-source queries:** Joining Delta Lake with PostgreSQL or S3 doesn't require moving all data into Databricks — Dremio federates in place.
+- **Cross-source queries:** Joining Delta Lake with PostgreSQL or S3 doesn't require moving all data into Databricks : Dremio federates in place.
 
 For organizations spending $50K+/month on Databricks, routing read-heavy analytical workloads through Dremio can reduce DBU consumption by 30-50% on those workloads.
 
 ## Get Started
 
-Unity Catalog users can extend their Databricks investment with Dremio's federation, AI analytics, and performance acceleration — without moving data out of Delta Lake. Dremio and Databricks are complementary: Databricks handles data engineering, ML training, and streaming workloads on Delta Lake tables, while Dremio serves analytical queries, BI dashboards, and AI-powered natural language access across your entire data estate.
+Unity Catalog users can extend their Databricks investment with Dremio's federation, AI analytics, and performance acceleration : without moving data out of Delta Lake. Dremio and Databricks are complementary: Databricks handles data engineering, ML training, and streaming workloads on Delta Lake tables, while Dremio serves analytical queries, BI dashboards, and AI-powered natural language access across your entire data estate.
 
 Connect your Unity Catalog to Dremio Cloud, build Reflections on frequently queried tables, and enable the AI Agent for business users who need answers without writing SQL.
 

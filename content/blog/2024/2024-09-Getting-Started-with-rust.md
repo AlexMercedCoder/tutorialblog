@@ -176,7 +176,7 @@ One of Rust's most unique and powerful features is its **borrow checker**, which
 
 ### Explanation of Ownership and Borrowing
 
-At the heart of Rust’s memory model is the concept of **ownership**. Every value in Rust has a single owner, and when the owner goes out of scope, the value is automatically cleaned up. This ensures that memory is managed automatically and safely. However, there are times when you might want to reference a value without taking ownership of it—this is where **borrowing** comes in.
+At the heart of Rust’s memory model is the concept of **ownership**. Every value in Rust has a single owner, and when the owner goes out of scope, the value is automatically cleaned up. This ensures that memory is managed automatically and safely. However, there are times when you might want to reference a value without taking ownership of it: this is where **borrowing** comes in.
 
 Borrowing allows you to access data via references (`&T` for immutable and `&mut T` for mutable references) without transferring ownership of that data. Rust enforces strict rules to ensure that:
 
@@ -314,7 +314,7 @@ Rust’s error handling system encourages explicit and safe handling of failures
 
 ## Conclusion
 
-Rust offers a unique blend of performance, safety, and expressiveness, making it an attractive option for systems programming and beyond. Its key innovations—such as the ownership and borrowing model, the borrow checker, and the absence of a garbage collector—allow developers to write memory-safe code without sacrificing performance.
+Rust offers a unique blend of performance, safety, and expressiveness, making it an attractive option for systems programming and beyond. Its key innovations: such as the ownership and borrowing model, the borrow checker, and the absence of a garbage collector, allow developers to write memory-safe code without sacrificing performance.
 
 ### Why Learn Rust?
 

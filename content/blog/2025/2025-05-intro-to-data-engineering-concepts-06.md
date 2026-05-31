@@ -30,7 +30,7 @@ When data arrives from source systems, it’s often raw and optimized for transa
 
 A data model reshapes that data to make it usable. Good models reduce complexity, improve performance, and minimize errors. Poor models, on the other hand, lead to slow queries, redundant data, and confusion about what numbers really mean.
 
-Modeling is both a technical and a collaborative process. It requires not just understanding how data is structured, but also how the business thinks about that data—what questions need answering, how metrics are defined, and what trade-offs are acceptable.
+Modeling is both a technical and a collaborative process. It requires not just understanding how data is structured, but also how the business thinks about that data - what questions need answering, how metrics are defined, and what trade-offs are acceptable.
 
 ## OLTP vs OLAP: Two Worlds, Two Purposes
 
@@ -38,7 +38,7 @@ Before diving into specific modeling techniques, it’s important to distinguish
 
 **OLTP (Online Transaction Processing)** systems are built for real-time operations. Think of point-of-sale systems, user authentication services, or banking apps. These systems are optimized for high-throughput reads and writes, handling thousands of small transactions per second. Their schemas are typically highly normalized to avoid data duplication and to keep updates fast and consistent.
 
-**OLAP (Online Analytical Processing)** systems, on the other hand, are designed for analysis. These platforms support complex queries over large volumes of historical data. Performance here is about aggregating, filtering, and summarizing—not handling rapid transactions. Because of this, OLAP models often trade strict normalization for faster access to pre-joined or denormalized data.
+**OLAP (Online Analytical Processing)** systems, on the other hand, are designed for analysis. These platforms support complex queries over large volumes of historical data. Performance here is about aggregating, filtering, and summarizing - not handling rapid transactions. Because of this, OLAP models often trade strict normalization for faster access to pre-joined or denormalized data.
 
 Understanding whether your system is OLTP or OLAP helps determine how you model your data. The techniques and trade-offs are different depending on the system’s purpose.
 
@@ -56,7 +56,7 @@ That’s where **denormalization** comes in. In OLAP models, it’s common to st
 
 Two common modeling patterns in OLAP systems are the **star schema** and the **snowflake schema**.
 
-A **star schema** organizes data around a central fact table. This table holds measurable events—like sales transactions—with keys that reference surrounding dimension tables, which contain descriptive attributes such as product names, customer demographics, or store locations.
+A **star schema** organizes data around a central fact table. This table holds measurable events: like sales transactions, with keys that reference surrounding dimension tables, which contain descriptive attributes such as product names, customer demographics, or store locations.
 
 In a star schema, the dimension tables are typically denormalized. This makes queries straightforward and fast: one central join connects the fact table to all the attributes needed for analysis.
 
@@ -68,14 +68,14 @@ The choice between star and snowflake schemas depends on your performance needs,
 
 Good data models are designed with change in mind. New columns will be added, relationships will evolve, and new metrics will be needed. A rigid model can become a bottleneck, while a flexible one supports ongoing development.
 
-One best practice is to favor additive metrics when possible. These are measures you can safely sum across time or groups—like revenue or quantity sold. Additive metrics work better with aggregations and are easier to model consistently.
+One best practice is to favor additive metrics when possible. These are measures you can safely sum across time or groups - like revenue or quantity sold. Additive metrics work better with aggregations and are easier to model consistently.
 
 It’s also important to consider slowly changing dimensions. For example, if a customer’s email address or a product’s price changes, do you want to reflect the latest value, or keep historical versions? Modeling for this kind of change requires thought about versioning and historical accuracy.
 
 ## The Road Ahead
 
-Data modeling sits at the intersection of technical design and business logic. It’s not just about tables and keys—it’s about making data intuitive and useful for the people who depend on it.
+Data modeling sits at the intersection of technical design and business logic. It’s not just about tables and keys - it’s about making data intuitive and useful for the people who depend on it.
 
 As data engineers, our role is to create models that strike a balance between performance, maintainability, and expressiveness. Doing this well requires not just technical skill, but ongoing communication with analysts, stakeholders, and subject matter experts.
 
-In the next post, we’ll take a closer look at data warehousing—how these models are stored, queried, and optimized in systems built for analytics at scale.
+In the next post, we’ll take a closer look at data warehousing - how these models are stored, queried, and optimized in systems built for analytics at scale.

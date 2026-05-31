@@ -1,5 +1,5 @@
 ---
-title: The Endgame — Building an Autonomous Optimization Pipeline for Apache Iceberg
+title: The Endgame : Building an Autonomous Optimization Pipeline for Apache Iceberg
 date: "2025-09-16"
 author: Alex Merced
 description: Learn how to automate compaction, snapshot expiration, and layout optimization in Apache Iceberg using metadata-driven triggers and orchestration tools for a self-healing lakehouse.
@@ -20,11 +20,11 @@ category: "Apache Iceberg"
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-# The Endgame — Building an Autonomous Optimization Pipeline for Apache Iceberg
+# The Endgame : Building an Autonomous Optimization Pipeline for Apache Iceberg
 
 Over the past nine posts, we’ve walked through the strategies, techniques, and tools you can use to keep your Apache Iceberg tables optimized for performance, cost, and reliability. Now, it’s time to put it all together.
 
-In this final post of the series, we’ll explore how to build an **autonomous optimization pipeline**—a system that intelligently monitors your Iceberg tables and triggers the right actions automatically, without manual intervention.
+In this final post of the series, we’ll explore how to build an **autonomous optimization pipeline**: a system that intelligently monitors your Iceberg tables and triggers the right actions automatically, without manual intervention.
 
 ## What Does Autonomous Optimization Look Like?
 
@@ -36,7 +36,7 @@ An autonomous pipeline for Iceberg optimization should:
 - Recover gracefully from failure
 - Integrate seamlessly with ingestion and query operations
 
-This makes your lakehouse **self-healing**, scalable, and easier to maintain—especially across many datasets.
+This makes your lakehouse **self-healing**, scalable, and easier to maintain - especially across many datasets.
 
 ## Core Components of the Pipeline
 
@@ -145,7 +145,7 @@ Iceberg's flexibility and rich metadata layer make it uniquely suited to autonom
 
 - Catalog-aware execution
 
-You can build a lakehouse that optimizes itself—freeing your data team to focus on innovation, not maintenance.
+You can build a lakehouse that optimizes itself - freeing your data team to focus on innovation, not maintenance.
 
 ## Where to Go from Here
 If you’ve followed this series from the beginning, you now have:
@@ -156,5 +156,5 @@ If you’ve followed this series from the beginning, you now have:
 
 - The blueprint for a modern, self-tuning optimization pipeline
 
-Thanks for reading—and keep building faster, cleaner, and smarter Iceberg lakehouses.
+Thanks for reading - and keep building faster, cleaner, and smarter Iceberg lakehouses.
 

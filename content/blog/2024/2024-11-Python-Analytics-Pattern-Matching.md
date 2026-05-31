@@ -15,7 +15,7 @@ tags:
 - [Lakehouse Catalog Course](https://hello.dremio.com/webcast-an-in-depth-exploration-on-the-world-of-data-lakehouse-catalogs-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=pymatching&utm_content=alexmerced&utm_term=external_blog)
 - [Iceberg Lakehouse Engineering Video Playlist](https://www.youtube.com/watch?v=SIriNcVIGJQ&list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe) 
 
-Python stands out as a powerful and versatile tool. Known for its simplicity and readability, Python provides an array of built-in features that make it an ideal language for data manipulation, analysis, and visualization. Among these features, two capabilities—pattern matching and comprehensions—offer significant advantages for transforming and structuring data efficiently.
+Python stands out as a powerful and versatile tool. Known for its simplicity and readability, Python provides an array of built-in features that make it an ideal language for data manipulation, analysis, and visualization. Among these features, two capabilities: pattern matching and comprehensions, offer significant advantages for transforming and structuring data efficiently.
 
 Pattern matching, introduced in Python 3.10, allows for more intuitive and readable conditional logic by enabling the matching of complex data structures with minimal code. This feature is particularly useful in data analytics when dealing with diverse data formats, nested structures, or when applying multiple conditional transformations. On the other hand, comprehensions (list, set, and dictionary comprehensions) allow for concise, readable expressions that can filter, transform, and aggregate data on the fly, making repetitive data tasks faster and less error-prone.
 
@@ -25,7 +25,7 @@ Let's explore how these two features can help data analysts and engineers write 
 
 Pattern matching, introduced with the `match` and `case` syntax in Python 3.10 (PEP 634), enables cleaner and more readable conditional logic, particularly when handling complex data structures. Unlike traditional `if-else` chains, pattern matching lets you define specific patterns that Python will match against, simplifying code that deals with various data formats and nested structures.
 
-With pattern matching, data analysts can write expressive code to handle different data transformations and formats with minimal boilerplate. For instance, when working with datasets that contain multiple types of values—like dictionaries, nested lists, or JSON objects—pattern matching can help categorize, transform, or validate data based on structure and content.
+With pattern matching, data analysts can write expressive code to handle different data transformations and formats with minimal boilerplate. For instance, when working with datasets that contain multiple types of values: like dictionaries, nested lists, or JSON objects, pattern matching can help categorize, transform, or validate data based on structure and content.
 
 ### Pattern Matching Use Cases in Data Analytics
 

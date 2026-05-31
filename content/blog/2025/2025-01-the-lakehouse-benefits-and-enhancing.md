@@ -30,7 +30,7 @@ In this article, I aim to **clarify the key benefits of a lakehouse**, highlight
 
 Traditionally, running analytics directly on **operational databases (OLTP systems)** is neither performant nor efficient, as it creates **resource contention** with transactional workloads that power enterprise operations. The standard solution has been to **offload this data into a data warehouse**, which optimizes storage for analytics, manages data efficiently, and provides a processing layer for analytical queries.  
 
-However, not all data is structured or fits neatly into a data warehouse. Additionally, storing **all structured data in a data warehouse can be cost-prohibitive**. As a result, an intermediate layer—a **data lake**—is often introduced, where copies of data are stored for **ad hoc analysis** on **distributed storage systems** like **Amazon S3, ADLS, MinIO, NetApp StorageGRID, Vast Data, Pure Storage, Nutanix, and others**.  
+However, not all data is structured or fits neatly into a data warehouse. Additionally, storing **all structured data in a data warehouse can be cost-prohibitive**. As a result, an intermediate layer: a **data lake**, is often introduced, where copies of data are stored for **ad hoc analysis** on **distributed storage systems** like **Amazon S3, ADLS, MinIO, NetApp StorageGRID, Vast Data, Pure Storage, Nutanix, and others**.  
 
 In large enterprises, different business units often choose **different data warehouses**, leading to **multiple copies** of the same data, inconsistently modeled across departments. This fragmentation introduces several challenges:  
 
@@ -64,7 +64,7 @@ This is where the **data lakehouse** emerges as a **solution**.
 
 **Data warehouses** provide essential **data management** capabilities and **ACID guarantees**, ensuring **consistency and reliability** in analytics. However, these features have traditionally been **absent from data lakes**, as data lakes are not inherently data platforms but **repositories of raw data stored on open storage**.  
 
-If we **bring data management and ACID transactions** to the **data lake**, organizations can work with **a single canonical copy** directly within the lake, eliminating the need to replicate data across **multiple data warehouses**. This transformation turns the **data lake into a data warehouse**—hence the term **data lakehouse**.  
+If we **bring data management and ACID transactions** to the **data lake**, organizations can work with **a single canonical copy** directly within the lake, eliminating the need to replicate data across **multiple data warehouses**. This transformation turns the **data lake into a data warehouse** - hence the term **data lakehouse**.  
 
 This is achieved by adopting:  
 - **Lakehouse Table Formats** like **Apache Iceberg, Apache Hudi, Delta Lake, or Apache Paimon**, enabling **Parquet files** to act as **structured, ACID-compliant tables** optimized for analytics.  
@@ -133,7 +133,7 @@ Dremio provides that **missing piece** with:
 ✅ **Automated query acceleration**  
 ✅ **A fully managed lakehouse catalog**  
 
-With **Dremio**, organizations **don’t just implement a lakehouse**—they **enhance it**, unlocking its **full potential** for faster insights, better decision-making, and long-term cost savings.  
+With **Dremio**, organizations **don’t just implement a lakehouse** - they **enhance it**, unlocking its **full potential** for faster insights, better decision-making, and long-term cost savings.  
 
 
 ## Free Resources  

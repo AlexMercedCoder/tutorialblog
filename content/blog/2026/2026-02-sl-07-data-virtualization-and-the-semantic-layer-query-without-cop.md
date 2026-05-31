@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-![Data virtualization — connecting sources to a unified semantic layer without copying](images/semantic_layer_seo/07/data-virtualization.png)
+![Data virtualization : connecting sources to a unified semantic layer without copying](images/semantic_layer_seo/07/data-virtualization.png)
 
 Every data pipeline you build to move data from one system to another costs you three things: time to build it, money to run it, and freshness you lose while waiting for the next sync. Most analytics architectures accept this cost as unavoidable. It isn't.
 
@@ -28,7 +28,7 @@ This model made sense when compute was expensive and storage was local. In a clo
 
 ## What Data Virtualization Does
 
-![ETL pipelines vs. data virtualization — physical movement vs. lightweight connections](images/semantic_layer_seo/07/etl-vs-virtual.png)
+![ETL pipelines vs. data virtualization : physical movement vs. lightweight connections](images/semantic_layer_seo/07/etl-vs-virtual.png)
 
 Data virtualization lets you query data where it lives. Instead of copying data to a central location, you connect to each source and issue queries directly. A virtualization engine translates your SQL into the source's native protocol (JDBC for databases, S3 API for object storage, REST for SaaS), retrieves the data, and combines results from multiple sources into a single result set.
 
@@ -71,7 +71,7 @@ A semantic layer without virtualization covers only the data that's been moved t
 [Dremio](https://www.dremio.com/blog/why-agentic-analytics-requires-federation-virtualization-and-the-lakehouse-how-dremio-delivers/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced) is built on this architecture natively. It combines a high-performance virtualization engine (supporting 30+ source types including S3, ADLS, PostgreSQL, MySQL, MongoDB, Snowflake, and Redshift) with a full semantic layer (virtual datasets, Wikis, Labels, Fine-Grained Access Control).
 
 A practical query flow:
-1. An analyst queries `business.revenue_by_region` — a virtual dataset (view)
+1. An analyst queries `business.revenue_by_region` : a virtual dataset (view)
 2. Dremio's optimizer determines that this view joins data from PostgreSQL (customer records) and S3/Iceberg (order transactions)
 3. Predicate pushdowns push filter logic to each source (e.g., date range filters applied at the source)
 4. Results are combined using Apache Arrow's columnar format (zero serialization overhead)

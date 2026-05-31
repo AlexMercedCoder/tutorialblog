@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-![Self-documenting semantic layer — AI generating descriptions and labels automatically](images/semantic_layer_seo/09/self-documenting.png)
+![Self-documenting semantic layer : AI generating descriptions and labels automatically](images/semantic_layer_seo/09/self-documenting.png)
 
 Every data team knows documentation is important. And almost every data team has a backlog of undocumented tables, unlabeled columns, and outdated descriptions that nobody has time to fix. The problem isn't motivation. It's that manual documentation doesn't scale.
 
@@ -90,7 +90,7 @@ The impact on data team productivity is measurable:
 | Schema change updates | Manually check and update | AI re-scans and flags changes |
 | New table onboarding | Create from scratch | AI generates baseline immediately |
 
-The net effect: documentation coverage goes from 30% (what the team could manage manually) to 80-90% (AI baseline + human refinement). The team spends hours instead of weeks on documentation. And the documentation stays current because the AI can re-scan when schemas change — flagging outdated descriptions instead of waiting for someone to notice.
+The net effect: documentation coverage goes from 30% (what the team could manage manually) to 80-90% (AI baseline + human refinement). The team spends hours instead of weeks on documentation. And the documentation stays current because the AI can re-scan when schemas change : flagging outdated descriptions instead of waiting for someone to notice.
 
 For AI agents, this improvement is material. A richer, more accurate semantic layer means the AI generates better SQL, hallucinates less, and requires fewer corrections. Self-documentation isn't just a productivity feature. It's an AI accuracy feature.
 

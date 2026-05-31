@@ -550,11 +550,11 @@ Spice AI positions itself as an **operational data lakehouse** tailored for real
 While formats like Iceberg, Delta, and Hudi advanced the lakehouse by bringing ACID transactions to data lakes, they also introduced operational complexity: JSON manifests, Avro metadata files, separate catalog services, and eventual consistency challenges. **DuckLake** takes a fresh approach by asking a simple question: *what if the entire metadata layer was just stored in a relational database?*
 
 ### What is DuckLake?
-DuckLake is a new open table format developed by the DuckDB team. Its core idea is to **move all catalog and table metadata into a SQL database**, while keeping table data as Parquet files in object storage or local filesystems. This means no manifest lists, no Hive Metastore, and no extra catalog API services—just SQL tables that track schemas, snapshots, and file pointers.
+DuckLake is a new open table format developed by the DuckDB team. Its core idea is to **move all catalog and table metadata into a SQL database**, while keeping table data as Parquet files in object storage or local filesystems. This means no manifest lists, no Hive Metastore, and no extra catalog API services - just SQL tables that track schemas, snapshots, and file pointers.
 
 ### Architecture
 DuckLake splits the lakehouse into two layers:
-- **Catalog Database:** Any ACID-compliant database (DuckDB, SQLite, Postgres, MySQL, or even MotherDuck) stores all metadata—schemas, table versions, statistics, and transactions.
+- **Catalog Database:** Any ACID-compliant database (DuckDB, SQLite, Postgres, MySQL, or even MotherDuck) stores all metadata - schemas, table versions, statistics, and transactions.
 - **Data Layer:** Standard Parquet files (and optional delete files) stored in directories or S3 buckets hold the actual table data.
 
 This design yields **fast commits** (a single SQL transaction to update metadata), **strong consistency** (no reliance on eventually consistent file stores), and **simpler operations** (just back up or replicate the metadata DB). It also enables advanced features like **multi-table transactions**, **time travel**, and **transactional schema changes** without a complex stack.

@@ -12,15 +12,15 @@ tags:
   - federated queries
 ---
 
-The Apache Iceberg REST Catalog specification defines a standard HTTP API for managing Iceberg table metadata. Any catalog implementation that conforms to this specification — Apache Polaris, Amazon S3 Tables, Confluent Tableflow, Tabular, Apache Gravitino, and custom-built services — can connect to Dremio Cloud through a single connector type.
+The Apache Iceberg REST Catalog specification defines a standard HTTP API for managing Iceberg table metadata. Any catalog implementation that conforms to this specification : Apache Polaris, Amazon S3 Tables, Confluent Tableflow, Tabular, Apache Gravitino, and custom-built services,  can connect to Dremio Cloud through a single connector type.
 
-This is the most flexible catalog connector Dremio offers. Instead of needing a purpose-built connector for every catalog vendor, the Iceberg REST Catalog connector works with any compliant implementation. As new catalogs emerge — and they're emerging rapidly in the open lakehouse ecosystem — this connector ensures Dremio supports them from day one.
+This is the most flexible catalog connector Dremio offers. Instead of needing a purpose-built connector for every catalog vendor, the Iceberg REST Catalog connector works with any compliant implementation. As new catalogs emerge : and they're emerging rapidly in the open lakehouse ecosystem,  this connector ensures Dremio supports them from day one.
 
 The Iceberg REST specification is becoming the universal standard for lakehouse catalog interoperability. AWS launched Amazon S3 Tables (a fully managed Iceberg catalog with REST API) in late 2024, Confluent released Tableflow for streaming-to-Iceberg ingestion, and Apache Gravitino provides multi-catalog governance. All of these work with Dremio's REST Catalog connector without any Dremio-side code changes.
 
 ### Credential Vending Advantage
 
-Many REST catalogs support credential vending — the ability to issue temporary, scoped storage credentials to clients. When configured, Dremio receives short-lived tokens that grant access only to the specific data files needed for a query. This eliminates the need to store long-lived S3 access keys or Azure storage keys in Dremio's connection configuration, significantly reducing the security surface area. One REST catalog connection replaces what would otherwise require separate storage credentials for every S3 bucket, Azure container, or GCS bucket containing your Iceberg tables.
+Many REST catalogs support credential vending : the ability to issue temporary, scoped storage credentials to clients. When configured, Dremio receives short-lived tokens that grant access only to the specific data files needed for a query. This eliminates the need to store long-lived S3 access keys or Azure storage keys in Dremio's connection configuration, significantly reducing the security surface area. One REST catalog connection replaces what would otherwise require separate storage credentials for every S3 bucket, Azure container, or GCS bucket containing your Iceberg tables.
 
 ## Why Iceberg REST Catalog Users Need Dremio
 
@@ -37,7 +37,7 @@ The Iceberg REST Catalog connector works with any catalog implementation that co
 | Apache Gravitino | Open source | Varies |
 | Custom REST implementations | Self-hosted | Varies |
 
-You're not locked into specific catalog vendors. Deploy Apache Polaris today, consider S3 Tables tomorrow — the same Dremio connector works for both.
+You're not locked into specific catalog vendors. Deploy Apache Polaris today, consider S3 Tables tomorrow : the same Dremio connector works for both.
 
 ### Read and Write Support
 
@@ -45,11 +45,11 @@ Dremio supports full DML (INSERT, UPDATE, DELETE, MERGE) on Iceberg tables manag
 
 ### Multi-Catalog Federation
 
-Connect multiple REST catalogs alongside databases (PostgreSQL, MySQL, Oracle), object storage (S3, Azure), cloud warehouses (Snowflake, BigQuery), and other catalogs (Glue, Unity) — then query across all of them in a single SQL statement.
+Connect multiple REST catalogs alongside databases (PostgreSQL, MySQL, Oracle), object storage (S3, Azure), cloud warehouses (Snowflake, BigQuery), and other catalogs (Glue, Unity) : then query across all of them in a single SQL statement.
 
 ### Automated Iceberg Maintenance
 
-Dremio automatically compacts small files, rewrites manifests for faster metadata reads, and clusters data based on query patterns — even for tables managed by external REST catalogs.
+Dremio automatically compacts small files, rewrites manifests for faster metadata reads, and clusters data based on query patterns : even for tables managed by external REST catalogs.
 
 ### Multiple Authentication Methods
 
@@ -61,10 +61,10 @@ Some REST catalogs vend temporary storage credentials (short-lived S3/Azure/GCS 
 
 ## Prerequisites
 
-- **REST Catalog endpoint URL** — the base URL of the catalog API (e.g., `https://my-polaris.example.com/api/catalog`)
-- **Authentication credentials** — Bearer token, OAuth client ID/secret, or custom headers depending on the catalog
-- **Storage access** — either through credential vending (catalog provides temporary tokens) or direct storage credentials (S3, Azure, GCS)
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-iceberg-rest-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **REST Catalog endpoint URL** : the base URL of the catalog API (e.g., `https://my-polaris.example.com/api/catalog`)
+- **Authentication credentials** : Bearer token, OAuth client ID/secret, or custom headers depending on the catalog
+- **Storage access** : either through credential vending (catalog provides temporary tokens) or direct storage credentials (S3, Azure, GCS)
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-iceberg-rest-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect to Dremio Cloud
 
@@ -224,7 +224,7 @@ Create Reflections on views to cache results and serve BI dashboards with sub-se
 
 **Use Dremio's Open Catalog when:** You want zero-configuration automatic table maintenance, Autonomous Reflections, and no external catalog setup.
 
-You can use multiple catalogs simultaneously — for example, REST Catalog for cross-engine shared tables and Dremio's Open Catalog for Dremio-specific analytical workloads.
+You can use multiple catalogs simultaneously : for example, REST Catalog for cross-engine shared tables and Dremio's Open Catalog for Dremio-specific analytical workloads.
 
 ## Governance on REST Catalog Data
 
@@ -278,7 +278,7 @@ The Iceberg REST specification defines standard endpoints for catalog operations
 | Drop table | `DELETE /v1/namespaces/{ns}/tables/{table}` | ✅ |
 | Get config | `GET /v1/config` | ✅ |
 
-Dremio uses these endpoints to discover tables, read metadata, perform DML operations, and manage table lifecycle — all through standard HTTP.
+Dremio uses these endpoints to discover tables, read metadata, perform DML operations, and manage table lifecycle : all through standard HTTP.
 
 ### Multi-Catalog Architecture
 
@@ -301,8 +301,8 @@ JOIN "glue-catalog".warehouse.inventory i ON o.product_id = i.product_id;
 
 ## Get Started
 
-Iceberg REST Catalog users can query, write, federate, and AI-enrich their Iceberg tables through Dremio Cloud — with governance, Reflections, and AI capabilities that no compute engine provides natively. The REST Catalog connector is the most future-proof choice for organizations adopting Iceberg: as new catalog implementations emerge (and the Iceberg ecosystem is expanding rapidly), this single connector supports them all.
+Iceberg REST Catalog users can query, write, federate, and AI-enrich their Iceberg tables through Dremio Cloud : with governance, Reflections, and AI capabilities that no compute engine provides natively. The REST Catalog connector is the most future-proof choice for organizations adopting Iceberg: as new catalog implementations emerge (and the Iceberg ecosystem is expanding rapidly), this single connector supports them all.
 
-Start by connecting your REST catalog to Dremio Cloud, building a semantic layer over your most important tables, and enabling the AI Agent for natural language querying. The same views and Reflections work regardless of which REST catalog implementation you use — Apache Polaris today, S3 Tables tomorrow, or a custom catalog next year.
+Start by connecting your REST catalog to Dremio Cloud, building a semantic layer over your most important tables, and enabling the AI Agent for natural language querying. The same views and Reflections work regardless of which REST catalog implementation you use : Apache Polaris today, S3 Tables tomorrow, or a custom catalog next year.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-iceberg-rest-catalog-dremio-cloud&utm_content=alexmerced) and connect your REST catalog.

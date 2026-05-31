@@ -12,7 +12,7 @@ tags:
   - federated queries
 ---
 
-IBM Db2 is the relational database that powers critical applications across banking, insurance, government, healthcare, and manufacturing. For organizations running Db2 — particularly on IBM Z (mainframes) or IBM i — the database holds decades of transactional data: account balances, policy records, claim histories, manufacturing workflows, and government records. This data is enormously valuable for analytics but notoriously difficult to access outside the Db2/IBM ecosystem.
+IBM Db2 is the relational database that powers critical applications across banking, insurance, government, healthcare, and manufacturing. For organizations running Db2 : particularly on IBM Z (mainframes) or IBM i,  the database holds decades of transactional data: account balances, policy records, claim histories, manufacturing workflows, and government records. This data is enormously valuable for analytics but notoriously difficult to access outside the Db2/IBM ecosystem.
 
 Traditional approaches to Db2 analytics involve CDC tools (IBM InfoSphere DataStage, Attunity), batch exports, or data replication to a separate analytics warehouse. These approaches are expensive, complex, and create stale copies of data that diverge from the source of truth.
 
@@ -24,7 +24,7 @@ Dremio Cloud connects directly to Db2 (Linux, UNIX, and Windows editions) and qu
 
 ### Access Db2 Data Without IBM Middleware
 
-Accessing Db2 analytically typically requires IBM DataStage, IBM Cognos, or custom JDBC applications. These tools are expensive, require specialized skills, and create vendor lock-in. Dremio provides a vendor-neutral SQL layer that connects Db2 to any BI tool (Tableau, Power BI, Looker) via Arrow Flight or ODBC — no IBM middleware needed.
+Accessing Db2 analytically typically requires IBM DataStage, IBM Cognos, or custom JDBC applications. These tools are expensive, require specialized skills, and create vendor lock-in. Dremio provides a vendor-neutral SQL layer that connects Db2 to any BI tool (Tableau, Power BI, Looker) via Arrow Flight or ODBC : no IBM middleware needed.
 
 ### Federate Mainframe Data with Cloud Sources
 
@@ -40,16 +40,16 @@ IBM mainframe MIPS pricing means every Db2 query consumes expensive compute capa
 
 ### AI on Legacy Data
 
-Db2 holds decades of institutional data — customer histories, transaction patterns, risk assessments. Dremio's AI capabilities make this data accessible to non-technical users and external AI tools, unlocking insights trapped in mainframe systems.
+Db2 holds decades of institutional data : customer histories, transaction patterns, risk assessments. Dremio's AI capabilities make this data accessible to non-technical users and external AI tools, unlocking insights trapped in mainframe systems.
 
 ## Prerequisites
 
-- **Db2 LUW hostname or IP address** — the Db2 server
-- **Port** — default `50000` for Db2 LUW
-- **Database name** — the Db2 database you want to connect
-- **Username and password** — Db2 user with SELECT privileges on the schemas/tables to query
-- **Network access** — port 50000 reachable from Dremio Cloud
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-ibm-db2-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Db2 LUW hostname or IP address** : the Db2 server
+- **Port** : default `50000` for Db2 LUW
+- **Database name** : the Db2 database you want to connect
+- **Username and password** : Db2 user with SELECT privileges on the schemas/tables to query
+- **Network access** : port 50000 reachable from Dremio Cloud
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-ibm-db2-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Db2 to Dremio Cloud
 
@@ -129,7 +129,7 @@ LEFT JOIN "s3-support".tickets.customer_tickets s3 ON a.customer_id = s3.custome
 ORDER BY a.current_balance DESC;
 ```
 
-Mainframe banking data joins with cloud application data in a single query — no CDC, no data extraction.
+Mainframe banking data joins with cloud application data in a single query : no CDC, no data extraction.
 
 ## Build a Semantic Layer
 
@@ -170,7 +170,7 @@ Connect [Claude or ChatGPT](https://github.com/dremio/dremio-mcp) to your Db2 da
 2. Configure redirect URLs for your AI client
 3. Connect via `mcp.dremio.cloud/mcp/{project_id}`
 
-A compliance officer asks Claude "Show me all accounts with balances over $100K and no transactions in 60 days for our dormancy review" and gets a governed, accurate report from Db2 — without knowing Db2 table structures.
+A compliance officer asks Claude "Show me all accounts with balances over $100K and no transactions in 60 days for our dormancy review" and gets a governed, accurate report from Db2 : without knowing Db2 table structures.
 
 ### AI SQL Functions
 
@@ -208,7 +208,7 @@ Every query against Db2 on a mainframe consumes MIPS. Create Reflections to cach
 1. Navigate to the view in the **Catalog**
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** or **Aggregation Reflection**
-4. Select columns and set the **Refresh Interval** — hourly for active accounts, daily for historical analysis
+4. Select columns and set the **Refresh Interval** : hourly for active accounts, daily for historical analysis
 5. Click **Save**
 
 Dashboard and reporting queries hit Reflections instead of Db2, significantly reducing mainframe compute consumption. A compliance dashboard that refreshes every 15 minutes generates zero Db2 MIPS after the Reflection is built.
@@ -218,17 +218,17 @@ Dashboard and reporting queries hit Reflections instead of Db2, significantly re
 Banking, insurance, and government organizations have strict data governance requirements. Dremio's Fine-Grained Access Control (FGAC) extends Db2 security to every connected source:
 
 - **Column masking:** Mask account balances, SSNs, and transaction amounts from specific roles. A marketing analyst sees customer segments but not financial data.
-- **Row-level filtering:** Branch-level access control — a branch manager sees only their branch's accounts.
+- **Row-level filtering:** Branch-level access control : a branch manager sees only their branch's accounts.
 - **Unified policies:** Same governance applies across Db2, PostgreSQL, S3, and all other connected sources.
 
-These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, and MCP Server — meeting regulatory requirements for data access control.
+These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, and MCP Server : meeting regulatory requirements for data access control.
 
 ## Connect BI Tools via Arrow Flight
 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC:
 
 - **Tableau:** Dremio connector for direct Arrow Flight access to mainframe data
-- **Power BI:** Dremio ODBC driver or native connector — no IBM middleware
+- **Power BI:** Dremio ODBC driver or native connector : no IBM middleware
 - **Python/Pandas:** `pyarrow.flight` for programmatic access to Db2 data
 - **Looker:** Connect via JDBC
 - **dbt:** `dbt-dremio` for SQL-based transformations on Db2 data
@@ -237,7 +237,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Db2 data from their IDE. Ask Copilot "Show me dormant high-value accounts from Db2" and get SQL generated using your semantic layer — without knowing Db2 table schemas or COBOL naming conventions.
+Dremio's VS Code extension with Copilot integration lets developers query Db2 data from their IDE. Ask Copilot "Show me dormant high-value accounts from Db2" and get SQL generated using your semantic layer : without knowing Db2 table schemas or COBOL naming conventions.
 
 ## When to Keep Data in Db2 vs. Migrate
 
@@ -251,10 +251,10 @@ For data staying in Db2, create manual Reflections to reduce MIPS consumption. F
 
 Db2 uses EBCDIC encoding on mainframes and ASCII/UTF-8 on LUW platforms. When connecting through Dremio:
 
-- **EBCDIC to UTF-8:** Db2 for LUW handles character conversion automatically — Dremio receives standard Unicode data
+- **EBCDIC to UTF-8:** Db2 for LUW handles character conversion automatically : Dremio receives standard Unicode data
 - **GRAPHIC/VARGRAPHIC:** Double-byte character columns map to VARCHAR in Dremio
 - **DECIMAL/NUMERIC:** Db2's fixed-point types map to Dremio's DECIMAL with matching precision/scale
-- **DATE/TIME/TIMESTAMP:** Standard mapping — Db2 timestamps map to Dremio TIMESTAMP
+- **DATE/TIME/TIMESTAMP:** Standard mapping : Db2 timestamps map to Dremio TIMESTAMP
 
 ## Regulatory Compliance Patterns
 
@@ -262,7 +262,7 @@ Banking, insurance, and government organizations have strict data retention and 
 
 | Requirement | Dremio Feature |
 |---|---|
-| Data residency | Query data in place — no cross-border data movement |
+| Data residency | Query data in place : no cross-border data movement |
 | Access auditing | Query logs track who queried what data |
 | Column-level security | FGAC column masking hides sensitive fields |
 | Row-level security | FGAC row filtering restricts data by user role |
@@ -277,10 +277,10 @@ Use Dremio as the bridge in a multi-year mainframe modernization:
 3. **Phase 3 (Months 7-12):** Identify high-value datasets for migration to Iceberg. Use `CREATE TABLE AS SELECT` to migrate.
 4. **Phase 4 (Year 2+):** Gradually migrate remaining datasets as mainframe contracts renew. Db2 focus narrows to core OLTP.
 
-Throughout the process, users experience no disruption — they continue using the same semantic layer views. Only the underlying data sources change.
+Throughout the process, users experience no disruption : they continue using the same semantic layer views. Only the underlying data sources change.
 
 ## Get Started
 
-Db2 users can modernize analytics without migrating off the mainframe — federate, govern, accelerate, and AI-enable decades of institutional data through Dremio Cloud. Start with Reflections to offload analytical queries from Db2, then progressively build a semantic layer that makes legacy data accessible to modern AI tools and business users.
+Db2 users can modernize analytics without migrating off the mainframe : federate, govern, accelerate, and AI-enable decades of institutional data through Dremio Cloud. Start with Reflections to offload analytical queries from Db2, then progressively build a semantic layer that makes legacy data accessible to modern AI tools and business users.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-ibm-db2-dremio-cloud&utm_content=alexmerced) and connect your Db2 databases.

@@ -10,7 +10,7 @@ tags:
 
 # Decoupling Storage and Compute in Apache Iceberg: A Cost Optimization Deep Dive
 
-Most proprietary data warehouses bundle their storage and compute into a single product. You buy the system, and you get both — at a price the vendor sets. Apache Iceberg breaks that model by treating storage and compute as separate, independently scalable concerns. That separation is the technical foundation for most of the cost advantages people attribute to data lakehouses.
+Most proprietary data warehouses bundle their storage and compute into a single product. You buy the system, and you get both : at a price the vendor sets. Apache Iceberg breaks that model by treating storage and compute as separate, independently scalable concerns. That separation is the technical foundation for most of the cost advantages people attribute to data lakehouses.
 
 This post explains exactly how Iceberg achieves that decoupling, what it costs to maintain (because there are real operational requirements), and how to route workloads across engines to get the best cost-to-performance ratio.
 
@@ -20,7 +20,7 @@ This post explains exactly how Iceberg achieves that decoupling, what it costs t
 
 Traditional warehouses store data in proprietary formats tied to their internal engine. If you want to run Spark, you copy the data. If you want Snowflake and BigQuery on the same dataset, you maintain two copies. That's expensive, and keeping them in sync requires pipelines that add latency.
 
-Iceberg stores data in open file formats — primarily Parquet — on commodity object storage (S3, GCS, Azure Data Lake Storage). The Iceberg spec defines a metadata layer on top of those files. Every engine that reads the metadata understands the table structure, partition layout, schema history, and file locations. Spark, Trino, Flink, Dremio, and Snowflake can all read the same Iceberg tables without any data movement.
+Iceberg stores data in open file formats : primarily Parquet,  on commodity object storage (S3, GCS, Azure Data Lake Storage). The Iceberg spec defines a metadata layer on top of those files. Every engine that reads the metadata understands the table structure, partition layout, schema history, and file locations. Spark, Trino, Flink, Dremio, and Snowflake can all read the same Iceberg tables without any data movement.
 
 The metadata layer is what makes this work. It tracks:
 
@@ -76,7 +76,7 @@ To compare an Iceberg-based lakehouse against a proprietary warehouse, measure t
 
 **Engineering cost:** Multiple engines mean multiple areas of expertise. A team that already knows Spark and SQL has lower engineering overhead than a team learning three new systems.
 
-For most teams running at over 5 TB of data with a mix of batch, streaming, and interactive workloads, the Iceberg-based approach is cheaper over a 3-year period. The breakeven depends heavily on how much of your workload is interactive — interactive queries are where purpose-built engines like Dremio earn their cost through speed, not raw compute cheapness.
+For most teams running at over 5 TB of data with a mix of batch, streaming, and interactive workloads, the Iceberg-based approach is cheaper over a 3-year period. The breakeven depends heavily on how much of your workload is interactive : interactive queries are where purpose-built engines like Dremio earn their cost through speed, not raw compute cheapness.
 
 ## Using Dremio as the Interactive Layer
 
@@ -88,9 +88,9 @@ The result is sub-second query response on data stored in your own S3 bucket at 
 
 Storage-compute decoupling delivers real cost advantages at scale, but there are scenarios where the tradeoffs don't work in your favor.
 
-**Small datasets under 500 GB:** The operational overhead of running Iceberg maintenance, configuring multiple engines, and managing catalog infrastructure is a fixed cost. At small data volumes, a managed cloud warehouse often costs less in total — especially when engineering time is factored in. Iceberg decoupling starts showing ROI at the terabyte scale.
+**Small datasets under 500 GB:** The operational overhead of running Iceberg maintenance, configuring multiple engines, and managing catalog infrastructure is a fixed cost. At small data volumes, a managed cloud warehouse often costs less in total : especially when engineering time is factored in. Iceberg decoupling starts showing ROI at the terabyte scale.
 
-**Single-engine shops:** If your entire workload is interactive SQL queries run by business analysts, you don't need multi-engine routing. You pay for one engine, and that engine handles everything. The decoupling benefit — routing different workloads to different engines — doesn't apply. In this case, evaluate whether the Iceberg format still makes sense for future flexibility, but don't architect for multi-engine routing you won't use.
+**Single-engine shops:** If your entire workload is interactive SQL queries run by business analysts, you don't need multi-engine routing. You pay for one engine, and that engine handles everything. The decoupling benefit : routing different workloads to different engines,  doesn't apply. In this case, evaluate whether the Iceberg format still makes sense for future flexibility, but don't architect for multi-engine routing you won't use.
 
 **Teams without operational capacity:** Running Iceberg without automated maintenance requires someone who understands the metadata model and can monitor table health. If no one on your team has Iceberg expertise, factor in the learning curve and operational risk before committing to the architecture.
 
@@ -100,7 +100,7 @@ The honest summary: Iceberg storage-compute decoupling is a powerful cost tool a
 
 One practical complication of multi-engine Iceberg deployments: different engines may enforce access control differently. Spark reads the Iceberg catalog but applies its own security model. Trino has its own authentication layer. Dremio enforces RBAC through the Open Catalog.
 
-If you run multiple engines on the same tables, verify that your access control is enforced at the catalog level — not just at the engine level. Catalog-level RBAC through Apache Polaris means that no engine can read a restricted table, regardless of which tool the user connects with.
+If you run multiple engines on the same tables, verify that your access control is enforced at the catalog level : not just at the engine level. Catalog-level RBAC through Apache Polaris means that no engine can read a restricted table, regardless of which tool the user connects with.
 
 Dremio's credential vending model integrates tightly with Polaris RBAC: when any engine requests file locations for a table, the catalog checks the caller's permissions before returning signed access credentials. The data files themselves are inaccessible without those credentials, so even a direct S3 API call won't work for unauthorized users.
 

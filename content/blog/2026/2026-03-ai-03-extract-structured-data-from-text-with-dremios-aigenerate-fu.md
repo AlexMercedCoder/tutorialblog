@@ -30,9 +30,9 @@ By the end of this tutorial, you'll have:
 
 ## Prerequisites
 
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-generate-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
-- **AI enabled** — go to Admin → Project Settings → Preferences → AI section and enable AI features
-- **Model Provider configured** — Dremio provides a hosted LLM by default, or connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI)
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-generate-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **AI enabled** : go to Admin → Project Settings → Preferences → AI section and enable AI features
+- **Model Provider configured** : Dremio provides a hosted LLM by default, or connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI)
 
 > **Note:** Tables in the built-in Open Catalog use `folder.subfolder.table_name` without a catalog prefix. External sources use `source_name.schema.table_name`.
 
@@ -50,10 +50,10 @@ AI_GENERATE(
 ```
 
 **Parameters:**
-- **model_name** (optional) — specify a model like `'openai.gpt-4o'`. Format is `modelProvider.modelName`.
-- **prompt** — the extraction instruction telling the LLM what fields to find in the target data.
-- **target_data** — the unstructured text column to process. This is usually a column from your table containing emails, notes, descriptions, or document content.
-- **WITH SCHEMA** (optional but recommended) — defines the output structure as a ROW type with named, typed columns. Without it, `AI_GENERATE` returns a `VARCHAR` (plain text). With it, you get a `ROW` that you can expand using dot notation.
+- **model_name** (optional) : specify a model like `'openai.gpt-4o'`. Format is `modelProvider.modelName`.
+- **prompt** : the extraction instruction telling the LLM what fields to find in the target data.
+- **target_data** : the unstructured text column to process. This is usually a column from your table containing emails, notes, descriptions, or document content.
+- **WITH SCHEMA** (optional but recommended) : defines the output structure as a ROW type with named, typed columns. Without it, `AI_GENERATE` returns a `VARCHAR` (plain text). With it, you get a `ROW` that you can expand using dot notation.
 
 The `WITH SCHEMA` clause is what makes `AI_GENERATE` different from `AI_COMPLETE`. Instead of getting free-form text back, you get a typed row where each field is a column you defined, ready for filtering, joining, and aggregating.
 
@@ -523,10 +523,10 @@ Extracted data stored as Iceberg tables benefits from automated performance mana
 
 ## Next Steps
 
-1. **Connect your real data sources** — replace simulated tables with federated connections to your email system, CRM, and document storage
-2. **Connect an S3 or Azure source** — enable `LIST_FILES` processing on your actual unstructured file repositories
-3. **Add FGAC** — mask extracted PII fields (emails, phone numbers, names) for downstream consumers who shouldn't see personal data
-4. **Build Reflections** — create Reflections on CTAS-materialized extraction tables for fast dashboard queries at zero LLM cost
+1. **Connect your real data sources** : replace simulated tables with federated connections to your email system, CRM, and document storage
+2. **Connect an S3 or Azure source** : enable `LIST_FILES` processing on your actual unstructured file repositories
+3. **Add FGAC** : mask extracted PII fields (emails, phone numbers, names) for downstream consumers who shouldn't see personal data
+4. **Build Reflections** : create Reflections on CTAS-materialized extraction tables for fast dashboard queries at zero LLM cost
 
 If your organization has unstructured text trapped in database columns or files sitting unanalyzed in object storage, `AI_GENERATE` turns that text into structured, queryable, governed data. Define a schema, write a prompt, and run a query. The extraction happens inside your lakehouse with the same access controls and governance that apply to all your other data.
 

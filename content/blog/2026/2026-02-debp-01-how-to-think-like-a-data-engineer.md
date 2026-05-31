@@ -18,9 +18,9 @@ The median lifespan of a popular data tool is about three years. The tool you ma
 
 Thinking like a data engineer means solving problems at the systems level, not the tool level. It means asking "what could go wrong?" before asking "what framework should I use?"
 
-## Tools Change — Principles Don't
+## Tools Change : Principles Don't
 
-Every year brings a new orchestrator, a new streaming framework, a new columnar format. Teams that build their expertise around a specific tool struggle when the landscape shifts. Teams that build expertise around principles — idempotency, schema contracts, data quality at the source, composable stages — adopt new tools without starting over.
+Every year brings a new orchestrator, a new streaming framework, a new columnar format. Teams that build their expertise around a specific tool struggle when the landscape shifts. Teams that build expertise around principles : idempotency, schema contracts, data quality at the source, composable stages,  adopt new tools without starting over.
 
 The question is never "How do I do this in Tool X?" The question is "What problem am I solving, and what properties does the solution need to have?" Once you answer that, the tool choice becomes a constraint-matching exercise.
 
@@ -36,7 +36,7 @@ Before designing any pipeline, answer five questions:
 
 **3. What transformations are needed?** Map the gap between source shape and consumer shape. This includes cleaning (nulls, duplicates, encoding), enriching (joining lookup data), and aggregating (daily summaries, running totals).
 
-**4. What can go wrong?** List failure modes: late data, schema changes in the source, duplicate events, null values in required fields, API rate limits, network partitions, out-of-order events. For each failure mode, define the expected behavior — skip, retry, alert, or quarantine.
+**4. What can go wrong?** List failure modes: late data, schema changes in the source, duplicate events, null values in required fields, API rate limits, network partitions, out-of-order events. For each failure mode, define the expected behavior : skip, retry, alert, or quarantine.
 
 **5. How will you know if it's working?** Define observability: row counts in vs. row counts out, freshness checks, schema validation, anomaly detection. If you can't answer this question before building the pipeline, you'll be debugging in production.
 
@@ -48,7 +48,7 @@ Thinking in systems means:
 
 **Composability.** Break pipelines into discrete stages that can be developed, tested, and monitored independently. An ingestion stage should not also handle transformation and loading. When a stage fails, you restart that stage, not the entire pipeline.
 
-**Contracts.** Define what each stage produces: column names, data types, value ranges, freshness guarantees. When a producer changes its output, the contract violation is caught immediately — not three stages downstream when a dashboard shows wrong numbers.
+**Contracts.** Define what each stage produces: column names, data types, value ranges, freshness guarantees. When a producer changes its output, the contract violation is caught immediately : not three stages downstream when a dashboard shows wrong numbers.
 
 **State management.** Track what has been processed. Know where to resume after a failure. Avoid reprocessing data unnecessarily by maintaining checkpoints, watermarks, or change data capture (CDC) positions.
 
@@ -61,7 +61,7 @@ The default assumption should be: every component will fail. Networks drop. APIs
 Practical failure-first design:
 
 - **Retry with backoff.** Transient errors (network timeouts, API rate limits) often resolve themselves. Retry with exponential backoff before alerting.
-- **Dead-letter queues.** Records that can't be processed (malformed, unexpected schema) go to a separate queue for inspection — not dropped silently.
+- **Dead-letter queues.** Records that can't be processed (malformed, unexpected schema) go to a separate queue for inspection : not dropped silently.
 - **Idempotent writes.** Running a pipeline job twice should produce the same end-state. Use upserts, deduplication, or transaction-based writes instead of blind appends.
 - **Circuit breakers.** If a downstream system is unresponsive, stop sending data after N failures instead of filling up buffers and crashing.
 

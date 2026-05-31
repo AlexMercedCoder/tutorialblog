@@ -12,7 +12,7 @@ tags:
   - federated queries
 ---
 
-MongoDB is the most popular NoSQL document database. It stores data in flexible JSON-like documents, making it ideal for applications with evolving schemas — user profiles, product catalogs, IoT sensor data, and content management systems. But MongoDB's document model creates analytics challenges: you can't run SQL joins natively, aggregation pipelines are complex, and connecting MongoDB data to relational sources requires custom application code or ETL.
+MongoDB is the most popular NoSQL document database. It stores data in flexible JSON-like documents, making it ideal for applications with evolving schemas : user profiles, product catalogs, IoT sensor data, and content management systems. But MongoDB's document model creates analytics challenges: you can't run SQL joins natively, aggregation pipelines are complex, and connecting MongoDB data to relational sources requires custom application code or ETL.
 
 Dremio Cloud connects to MongoDB and exposes its collections as SQL-queryable tables. Nested documents appear as structured columns, and you can join MongoDB data with relational databases, data lakes, and cloud warehouses using standard SQL.
 
@@ -31,11 +31,11 @@ Dremio Cloud connects to MongoDB and exposes its collections as SQL-queryable ta
 ## Prerequisites
 
 - **MongoDB hostname or IP address** (or MongoDB Atlas connection string)
-- **Port** — default `27017`
-- **Database name(s)** — MongoDB databases you want to query
+- **Port** : default `27017`
+- **Database name(s)** : MongoDB databases you want to query
 - **Username and password** (with `read` role on target databases)
-- **Network access** — port 27017 open to Dremio Cloud. For MongoDB Atlas, add Dremio's IP range to the Atlas IP Access List
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-mongodb-dremio-cloud&utm_content=alexmerced)
+- **Network access** : port 27017 open to Dremio Cloud. For MongoDB Atlas, add Dremio's IP range to the Atlas IP Access List
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-mongodb-dremio-cloud&utm_content=alexmerced)
 
 ## Connect MongoDB to Dremio Cloud
 
@@ -124,13 +124,13 @@ SELECT
 FROM "mongo-users".app.users m;
 ```
 
-Navigate to the **Catalog**, click **Edit** (pencil icon), go to the **Details** tab, and click **Generate Wiki** and **Generate Tags**. Dremio's generative AI samples the view schema and data to produce descriptions like: "customer_profile: Contains one row per user combining profile data from MongoDB with subscription tier classification." Review and refine these descriptions — add business context like "Premium subscribers qualify for the dedicated support tier and priority feature access."
+Navigate to the **Catalog**, click **Edit** (pencil icon), go to the **Details** tab, and click **Generate Wiki** and **Generate Tags**. Dremio's generative AI samples the view schema and data to produce descriptions like: "customer_profile: Contains one row per user combining profile data from MongoDB with subscription tier classification." Review and refine these descriptions : add business context like "Premium subscribers qualify for the dedicated support tier and priority feature access."
 
 These wikis and labels are the context that powers Dremio's AI capabilities.
 
 ## AI-Powered Analytics on MongoDB Data
 
-MongoDB's flexible document model makes it notoriously difficult for AI tools to query directly — nested objects, variable schemas, and BSON types create barriers. Dremio's semantic layer solves this by creating structured, well-documented views over MongoDB data that AI tools can understand and query accurately.
+MongoDB's flexible document model makes it notoriously difficult for AI tools to query directly : nested objects, variable schemas, and BSON types create barriers. Dremio's semantic layer solves this by creating structured, well-documented views over MongoDB data that AI tools can understand and query accurately.
 
 ### Dremio AI Agent
 
@@ -146,7 +146,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) extends AI capabil
 2. Configure redirect URLs (e.g., `https://claude.ai/api/mcp/auth_callback` for Claude, `https://chatgpt.com/connector_platform_oauth_redirect` for ChatGPT)
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}` (US) or `mcp.eu.dremio.cloud/mcp/{project_id}` (EU)
 
-Now your team can ask Claude "Show me user growth trends by subscription tier from MongoDB data" and get governed, accurate results — without knowing MongoDB query syntax or SQL.
+Now your team can ask Claude "Show me user growth trends by subscription tier from MongoDB data" and get governed, accurate results : without knowing MongoDB query syntax or SQL.
 
 ### AI SQL Functions
 
@@ -189,11 +189,11 @@ MongoDB isn't designed for heavy analytical workloads. Running 50 dashboard quer
 2. Create a Reflection with the columns and aggregations used most
 3. Set the refresh interval (e.g., every 30 minutes for near-real-time, hourly for daily reporting)
 
-BI tools connected to Dremio via Arrow Flight or ODBC get sub-second response times from Reflections — MongoDB handles zero analytical load.
+BI tools connected to Dremio via Arrow Flight or ODBC get sub-second response times from Reflections : MongoDB handles zero analytical load.
 
 ## MongoDB-Specific Considerations
 
-**Schema sampling.** MongoDB is schema-less — each document can have different fields. Dremio samples documents to infer the schema. If your documents have highly variable schemas, some fields might not appear until more documents are sampled. You can increase the sample size in the source configuration.
+**Schema sampling.** MongoDB is schema-less : each document can have different fields. Dremio samples documents to infer the schema. If your documents have highly variable schemas, some fields might not appear until more documents are sampled. You can increase the sample size in the source configuration.
 
 **Read preference.** For MongoDB replica sets, use `secondaryPreferred` to route analytical queries to secondary replicas, avoiding impact on your primary node's CRUD operations.
 
@@ -223,7 +223,7 @@ These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, 
 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC:
 
-- **Tableau:** Dremio connector — turns MongoDB documents into tabular data for Tableau
+- **Tableau:** Dremio connector : turns MongoDB documents into tabular data for Tableau
 - **Power BI:** Dremio ODBC driver or native connector
 - **Python/Pandas:** `pyarrow.flight` for programmatic access to flattened MongoDB data
 - **Looker:** Connect via JDBC
@@ -233,7 +233,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query MongoDB data from their IDE. Ask Copilot "Show me user signup trends from MongoDB" and get SQL generated using your semantic layer — no aggregation pipeline knowledge needed.
+Dremio's VS Code extension with Copilot integration lets developers query MongoDB data from their IDE. Ask Copilot "Show me user signup trends from MongoDB" and get SQL generated using your semantic layer : no aggregation pipeline knowledge needed.
 
 ## Schema Flattening and Nested Documents
 
@@ -276,7 +276,7 @@ Dremio provides a broader analytical platform, while Atlas Data Federation is sp
 
 Optimize how MongoDB data flows into analytics:
 
-1. **Source layer:** Dremio reads MongoDB collections directly — no ETL
+1. **Source layer:** Dremio reads MongoDB collections directly : no ETL
 2. **Flattened views:** Create SQL views that flatten nested documents into tabular format
 3. **Enrichment:** Join flattened MongoDB data with relational and data lake sources
 4. **Semantic layer:** Create business-ready views with wiki descriptions for AI
@@ -285,6 +285,6 @@ This pipeline runs entirely in SQL, eliminating the need for custom Python/Node.
 
 ## Get Started
 
-MongoDB users can query their document data with SQL, flatten nested structures, join MongoDB with relational databases and data lakes, and enable AI analytics — all without ETL pipelines or learning MongoDB's aggregation framework.
+MongoDB users can query their document data with SQL, flatten nested structures, join MongoDB with relational databases and data lakes, and enable AI analytics : all without ETL pipelines or learning MongoDB's aggregation framework.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-mongodb-dremio-cloud&utm_content=alexmerced) and connect your MongoDB instances.

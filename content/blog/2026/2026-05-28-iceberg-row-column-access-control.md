@@ -12,7 +12,7 @@ tags:
 
 Apache Iceberg handles table format, schema evolution, and metadata management. What it doesn't handle is access control. The spec defines how data is structured and stored, not who can see which rows or whether a phone number column gets masked for certain users.
 
-That gap isn't a flaw — it's a design choice. Security belongs in the catalog and query engine layer, not in the file format. But it means you need to understand which layer does which job before you assume your Iceberg tables are actually secured.
+That gap isn't a flaw : it's a design choice. Security belongs in the catalog and query engine layer, not in the file format. But it means you need to understand which layer does which job before you assume your Iceberg tables are actually secured.
 
 ![Apache Iceberg governance stack showing catalog and engine layers](/images/2026/may28seo/iceberg-governance-stack.png)
 
@@ -22,7 +22,7 @@ Iceberg manages everything about the physical table: file layout, schema history
 
 If you give a compute engine direct read access to the Parquet files in your S3 bucket, that engine reads all rows and all columns. The Iceberg metadata tells it where the files are; nothing in the spec prevents it from reading the full content.
 
-Row-level security and column masking must be enforced at the catalog level, the engine level, or both. The catalog-level approach is more reliable because it applies consistently regardless of which engine connects. Engine-level policies work but are engine-specific — a policy you configure in Trino doesn't automatically apply when the same table is queried through Spark.
+Row-level security and column masking must be enforced at the catalog level, the engine level, or both. The catalog-level approach is more reliable because it applies consistently regardless of which engine connects. Engine-level policies work but are engine-specific : a policy you configure in Trino doesn't automatically apply when the same table is queried through Spark.
 
 ## Apache Polaris RBAC: The Catalog Layer Foundation
 
@@ -32,7 +32,7 @@ The key security feature in Polaris is credential vending. When a compute engine
 
 This means even if a compromised compute engine tries to scan your full S3 bucket, it gets credentials that only cover the paths Polaris has authorized. The storage policy is enforced at the catalog level, not just at the bucket IAM level.
 
-What Polaris doesn't do natively is row-level filtering or column masking. A catalog role either grants access to a table or it doesn't. For finer-grained control — different rows visible to different roles, or SSN columns masked for analysts — you need the query engine layer.
+What Polaris doesn't do natively is row-level filtering or column masking. A catalog role either grants access to a table or it doesn't. For finer-grained control : different rows visible to different roles, or SSN columns masked for analysts,  you need the query engine layer.
 
 ## Row-Level Security Through Query Engine Policies
 
@@ -44,7 +44,7 @@ Most Iceberg-compatible engines implement RLS through a policy layer that rewrit
 
 **Dremio** implements RLS and column masking through user-defined functions (UDFs) applied to virtual datasets. A virtual dataset (VDS) is a SQL view defined in Dremio's semantic layer. You define the masking or filtering logic once in the VDS, and every query against that virtual dataset goes through the access control logic. Users querying through Dremio can't bypass the VDS to reach the raw table unless they have direct table permissions.
 
-The UDF-based approach in Dremio is flexible. You can write masking functions that partially expose data — showing the last four digits of a credit card number, or replacing an email domain with `***.***` — rather than fully hiding the column. The function gets the user's role from the session context and applies the appropriate transformation.
+The UDF-based approach in Dremio is flexible. You can write masking functions that partially expose data : showing the last four digits of a credit card number, or replacing an email domain with `***.***`,  rather than fully hiding the column. The function gets the user's role from the session context and applies the appropriate transformation.
 
 ```sql
 -- Example Dremio column masking UDF
@@ -59,7 +59,7 @@ AS IF user_role IN ('admin', 'compliance') THEN email
 
 ## Column-Level Masking for PII Compliance
 
-PII masking at the column level requires the engine to substitute values based on user identity before returning results. The mask applies transparently — the analyst runs a normal SELECT and gets masked values without needing to know the masking rule exists.
+PII masking at the column level requires the engine to substitute values based on user identity before returning results. The mask applies transparently : the analyst runs a normal SELECT and gets masked values without needing to know the masking rule exists.
 
 Effective PII masking in an Iceberg environment requires:
 
@@ -88,13 +88,13 @@ Start by centralizing access through a single query engine for internal users. E
 
 ## AI Agents and Access Control
 
-AI agents querying your Iceberg tables are subject to the same access control requirements as human analysts — they need to be scoped to the data they're authorized to see, and their queries need to appear in your audit log.
+AI agents querying your Iceberg tables are subject to the same access control requirements as human analysts : they need to be scoped to the data they're authorized to see, and their queries need to appear in your audit log.
 
 The critical question for any AI agent deployment: what identity does the agent run as? An agent that runs with admin-level credentials is a governance gap, not a governed tool. Give AI agents their own service principal in Polaris, assign that principal to a role with specific table permissions, and review what that role can access before deploying the agent to production.
 
 Dremio's [MCP server](https://docs.dremio.com/current/developer/mcp-server/) issues queries on behalf of the connected agent using the session credentials the agent presents. An agent connected with an analyst-role PAT gets analyst-level access through the same masking policies that apply to human analysts. The agent literally cannot see more data than an analyst in the same role.
 
-This is the architecture that makes AI-driven analytics safe for regulated data environments — not because the AI is inherently trustworthy, but because the access control system enforces the same policies regardless of whether the requester is human or automated.
+This is the architecture that makes AI-driven analytics safe for regulated data environments : not because the AI is inherently trustworthy, but because the access control system enforces the same policies regardless of whether the requester is human or automated.
 
 ## Testing Your Access Control Setup
 

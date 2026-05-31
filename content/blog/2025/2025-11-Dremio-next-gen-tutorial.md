@@ -26,11 +26,11 @@ Dremio is a Data Lakehouse Platform for the AI Era, let's explore what this mean
 
 A data lakehouse is an architecture that uses your data lake (object storage or Hadoop) as the primary data store for flexibility and openness, then adds two layers to operationalize it like a data warehouse:
 
-- A table format such as Apache Iceberg, Delta Lake, Apache Hudi, or Apache Paimon. These formats allow structured datasets stored in Apache Parquet files to be treated as individual tables with ACID guarantees, snapshot isolation, time travel, and more—rather than just a collection of files without these capabilities.
+- A table format such as Apache Iceberg, Delta Lake, Apache Hudi, or Apache Paimon. These formats allow structured datasets stored in Apache Parquet files to be treated as individual tables with ACID guarantees, snapshot isolation, time travel, and more - rather than just a collection of files without these capabilities.
 
 - A lakehouse catalog that tracks your lakehouse tables and other assets. It serves as the central access point for data discovery and access control.
 
-Dremio is designed to unify these modular lakehouse components into a seamless experience. Unlike platforms that treat Iceberg as an add-on to proprietary formats, Dremio is built to be natively Iceberg-first—delivering a warehouse-like experience without vendor lock-in.
+Dremio is designed to unify these modular lakehouse components into a seamless experience. Unlike platforms that treat Iceberg as an add-on to proprietary formats, Dremio is built to be natively Iceberg-first, delivering a warehouse-like experience without vendor lock-in.
 
 **The Challenges of the Data Lakehouse**
 
@@ -54,7 +54,7 @@ Dremio simplifies many of these challenges with a platform that makes your lakeh
     - Automatically optimizes Iceberg table storage, eliminating manual tuning  
     - Provides governance for both Iceberg tables and SQL views with role-based and fine-grained access controls  
 
-- **End-to-End Performance Management**: Managing query performance can be time-consuming. Dremio reduces this burden by automatically clustering Iceberg tables and applying multiple layers of caching. One key feature is Autonomous Reflections, which accelerate queries behind the scenes based on actual usage patterns—improving performance before users even notice a problem.
+- **End-to-End Performance Management**: Managing query performance can be time-consuming. Dremio reduces this burden by automatically clustering Iceberg tables and applying multiple layers of caching. One key feature is Autonomous Reflections, which accelerate queries behind the scenes based on actual usage patterns, improving performance before users even notice a problem.
 
 - **Semantic and Context Layer**: Dremio includes a built-in semantic layer where you can define business concepts using SQL views, track lineage, and write documentation. This structure not only supports consistent usage across teams but also provides valuable context to AI systems for more accurate analysis.
 
@@ -173,7 +173,7 @@ So let's say I run the supply chain example, I could prompt the AI Agent with a 
 The AI Agent will pull the list of tables your particular user has access to and see if it finds the dataset I loosely referred to. It will then pull the schema and other data from the semantic layer to better understand the dataset before deciding how to best visualize it. But of course my prompt was vague and the AI agent decides to confirm some details with me:
 
 ```
-I can create that bar chart — quick clarifying questions before I run the query
+I can create that bar chart : quick clarifying questions before I run the query
 I inspected your gold layer and found the view dremio.supply_chain.gold.daily_supplier_delivery_kpis with these columns:
 
 supplier_id (string)
@@ -190,7 +190,7 @@ To produce the bar chart I need to know which metric and timeframe you want visu
 Average OTIF per supplier (bar per supplier showing average “otif_rate” across the dataset)
 Average gross fill rate per supplier (bar per supplier showing average “gross_fill_rate”)
 Total lines received per supplier for a specific date or date range (sum of “lines_received”)
-Side-by-side bars per supplier showing two metrics (e.g., OTIF and gross_fill_rate) — I can produce grouped bars if you confirm.
+Side-by-side bars per supplier showing two metrics (e.g., OTIF and gross_fill_rate) : I can produce grouped bars if you confirm.
 Suggested defaults (if you don’t specify):
 
 Metric: avg(otif_rate)
@@ -198,7 +198,7 @@ Timeframe: all available dates
 Chart: vertical bar, supplier on x-axis, metric on y-axis, ordered by metric desc
 If that works, I will run this SQL against the gold view and build the bar chart:
 
-SELECT “supplier_id”, AVG(“otif_rate”) AS “avg_otif_rate”, AVG(“gross_fill_rate”) AS “avg_gross_fill_rate” FROM “first-project”.“dremio”.“supply_chain”.“gold”.“daily_supplier_delivery_kpis” — optionally add: WHERE “receipt_date” BETWEEN DATE ‘2025-08-01’ AND DATE ‘2025-08-31’ GROUP BY “supplier_id” ORDER BY “avg_otif_rate” DESC
+SELECT “supplier_id”, AVG(“otif_rate”) AS “avg_otif_rate”, AVG(“gross_fill_rate”) AS “avg_gross_fill_rate” FROM “first-project”.“dremio”.“supply_chain”.“gold”.“daily_supplier_delivery_kpis” : optionally add: WHERE “receipt_date” BETWEEN DATE ‘2025-08-01’ AND DATE ‘2025-08-31’ GROUP BY “supplier_id” ORDER BY “avg_otif_rate” DESC
 
 Please confirm:
 
@@ -432,10 +432,10 @@ print("✅ Tables created and sample data inserted.")
 
 ## Conclusion
 
-Dremio Next Gen Cloud represents a major leap forward in making the data lakehouse experience seamless, powerful, and accessible. Whether you're just beginning your lakehouse journey or modernizing a complex data environment, Dremio gives you the tools to work faster and smarter—with native Apache Iceberg support, AI-powered features, and a fully integrated catalog.
+Dremio Next Gen Cloud represents a major leap forward in making the data lakehouse experience seamless, powerful, and accessible. Whether you're just beginning your lakehouse journey or modernizing a complex data environment, Dremio gives you the tools to work faster and smarter - with native Apache Iceberg support, AI-powered features, and a fully integrated catalog.
 
-From federated queries across diverse sources to autonomous performance tuning, Dremio abstracts away the operational headaches so you can focus on delivering insights. And with built-in AI capabilities, you're not just managing data—you’re unlocking its full potential.
+From federated queries across diverse sources to autonomous performance tuning, Dremio abstracts away the operational headaches so you can focus on delivering insights. And with built-in AI capabilities, you're not just managing data - you’re unlocking its full potential.
 
-If you haven’t already, [sign up for your free trial](https://www.dremio.com/get-started/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=pag&utm_term=nextgencloudtut&utm_content=alexmerced) and start building your lakehouse—no infrastructure or credit card required.
+If you haven’t already, [sign up for your free trial](https://www.dremio.com/get-started/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=pag&utm_term=nextgencloudtut&utm_content=alexmerced) and start building your lakehouse: no infrastructure or credit card required.
 
 The next generation of analytics is here. Time to explore what’s possible.

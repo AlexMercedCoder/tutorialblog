@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 2 - How LLMs Work — Embeddings, Vectors, and Context Windows
+title: A Journey from AI to LLMs and MCP - 2 - How LLMs Work : Embeddings, Vectors, and Context Windows
 date: "2025-04-06"
-description: "How LLMs Work — Embeddings, Vectors, and Context Windows"
+description: "How LLMs Work : Embeddings, Vectors, and Context Windows"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -20,11 +20,11 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-In our last post, we explored the evolution of AI—from rule-based systems to deep learning—and how **Large Language Models (LLMs)** like GPT-4 and Claude represent a transformative leap in capability.
+In our last post, we explored the evolution of AI: from rule-based systems to deep learning, and how **Large Language Models (LLMs)** like GPT-4 and Claude represent a transformative leap in capability.
 
 But how do these models *actually* work?
 
-In this post, we’ll peel back the curtain on the inner workings of LLMs. We’ll explore the fundamental concepts that make these models tick: **embeddings**, **vector spaces**, and **context windows**. You’ll walk away with a clearer understanding of how LLMs “understand” language—and what their limits are.
+In this post, we’ll peel back the curtain on the inner workings of LLMs. We’ll explore the fundamental concepts that make these models tick: **embeddings**, **vector spaces**, and **context windows**. You’ll walk away with a clearer understanding of how LLMs “understand” language - and what their limits are.
 
 ## How LLMs Think: It’s All Math Underneath
 
@@ -32,7 +32,7 @@ Despite their fluent text output, LLMs don’t truly "understand" language in th
 
 The key mechanism behind this: **transformers**.
 
-Transformers revolutionized NLP by allowing models to weigh the relevance of each word in a sentence—**attention mechanisms**—instead of processing words one-by-one like RNNs.
+Transformers revolutionized NLP by allowing models to weigh the relevance of each word in a sentence: **attention mechanisms**, instead of processing words one-by-one like RNNs.
 
 Here’s the simplified flow:
 1. Text is **tokenized** (split into chunks)
@@ -72,7 +72,7 @@ For example:
 - Query: "How do I fix a leaking pipe?"
 - Match: "Plumbing repair for minor water leaks"
 
-Even though the words don’t overlap, the **meaning** does—and that’s what embeddings capture.
+Even though the words don’t overlap, the **meaning** does - and that’s what embeddings capture.
 
 This is the foundation for many powerful AI techniques like:
 - **Document similarity**
@@ -81,7 +81,7 @@ This is the foundation for many powerful AI techniques like:
 
 ## Context Windows: The Model’s Working Memory
 
-Another crucial concept in LLMs is the **context window**—the maximum number of tokens the model can “see” at once.
+Another crucial concept in LLMs is the **context window**: the maximum number of tokens the model can “see” at once.
 
 Every input to an LLM gets broken into **tokens**, and the model has a limited capacity for how many tokens it can process per request.
 
@@ -109,7 +109,7 @@ Even though LLMs are powerful, they come with trade-offs:
 
 ### Context window limitations:
 - Long documents may get truncated or ignored
-- Memory is *not* persistent—everything resets after a session unless you manually re-include previous context
+- Memory is *not* persistent - everything resets after a session unless you manually re-include previous context
 - More tokens = higher latency and cost
 
 These limits are precisely why so much effort goes into **enhancing** LLMs through fine-tuning, retrieval systems, and smarter prompt engineering.
@@ -132,4 +132,4 @@ In our next post, we’ll show how to **enhance LLM performance** using proven t
 - Prompt engineering
 - Retrieval-Augmented Generation (RAG)
 
-These strategies help you move beyond limitations—and get the most out of your models.
+These strategies help you move beyond limitations - and get the most out of your models.

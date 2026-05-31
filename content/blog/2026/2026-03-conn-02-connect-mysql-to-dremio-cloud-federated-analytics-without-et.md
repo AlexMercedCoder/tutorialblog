@@ -20,7 +20,7 @@ This guide covers everything from prerequisites to federated queries across MySQ
 
 ## Why MySQL Users Need Dremio
 
-**Analytics compete with application traffic.** MySQL was built for OLTP (Online Transaction Processing) — fast inserts, updates, and single-row lookups. Analytical queries that scan millions of rows, compute aggregations, or join large tables create lock contention and slow down application responses. Dremio's Reflections solve this: after the first query, analytical workloads hit Dremio's pre-computed cache instead of MySQL.
+**Analytics compete with application traffic.** MySQL was built for OLTP (Online Transaction Processing) : fast inserts, updates, and single-row lookups. Analytical queries that scan millions of rows, compute aggregations, or join large tables create lock contention and slow down application responses. Dremio's Reflections solve this: after the first query, analytical workloads hit Dremio's pre-computed cache instead of MySQL.
 
 **Data is siloed.** Your order data is in MySQL, customer engagement data is in MongoDB, and marketing attribution data is in S3. Joining these requires building ETL pipelines that extract, transform, and load data into a central warehouse. Dremio eliminates this by querying each source in place and joining the results in its query engine. One SQL query, multiple sources.
 
@@ -33,10 +33,10 @@ This guide covers everything from prerequisites to federated queries across MySQ
 Before connecting MySQL to Dremio Cloud, confirm you have:
 
 - **MySQL hostname or IP address**
-- **Port number** — MySQL defaults to `3306`
-- **Username and password** — a MySQL user with `SELECT` privileges on the tables you want to query
-- **Network access** — port `3306` must be reachable from Dremio Cloud. Open the port in your AWS Security Group, Azure NSG, or firewall configuration
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-mysql-dremio-cloud&utm_content=alexmerced)
+- **Port number** : MySQL defaults to `3306`
+- **Username and password** : a MySQL user with `SELECT` privileges on the tables you want to query
+- **Network access** : port `3306` must be reachable from Dremio Cloud. Open the port in your AWS Security Group, Azure NSG, or firewall configuration
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-mysql-dremio-cloud&utm_content=alexmerced)
 
 ## Step-by-Step: Connect MySQL to Dremio Cloud
 
@@ -90,7 +90,7 @@ WHERE order_date >= '2024-06-01'
 ORDER BY total_amount DESC;
 ```
 
-Dremio pushes the date filter, status filter, and sort to MySQL — only the matching rows are transferred.
+Dremio pushes the date filter, status filter, and sort to MySQL : only the matching rows are transferred.
 
 ## Federate MySQL with Other Sources
 
@@ -197,7 +197,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects external 
 2. Configure redirect URLs (e.g., `https://claude.ai/api/mcp/auth_callback` for Claude)
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}`
 
-An e-commerce manager asks Claude "What's our average order value by region this quarter from MySQL?" and gets governed, accurate results — no SQL required.
+An e-commerce manager asks Claude "What's our average order value by region this quarter from MySQL?" and gets governed, accurate results : no SQL required.
 
 ### AI SQL Functions
 
@@ -236,7 +236,7 @@ LIMIT 12;
 
 ## Reflections for Performance
 
-MySQL is optimized for OLTP — row-level reads and writes. Analytical aggregation queries compete with application workloads. Dremio's Reflections offload these:
+MySQL is optimized for OLTP : row-level reads and writes. Analytical aggregation queries compete with application workloads. Dremio's Reflections offload these:
 
 1. Navigate to the view in the **Catalog**
 2. Click the **Reflections** tab

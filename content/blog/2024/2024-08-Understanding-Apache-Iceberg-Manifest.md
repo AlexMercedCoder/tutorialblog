@@ -55,7 +55,7 @@ Here are some of the critical fields you’ll find inside a manifest file:
 
 - **`value_counts`, `null_value_counts`, `nan_value_counts`**: These fields are metrics that provide detailed statistics about the data in the file. `value_counts` gives the total number of values in each column, `null_value_counts` tracks the number of null values, and `nan_value_counts` records the number of NaN (Not a Number) values. These metrics are invaluable for query optimization, as they help the query engine determine whether a file should be scanned based on the presence or absence of relevant data.
 
-- **`lower_bounds` and `upper_bounds`**: These fields store the minimum and maximum values for each column in the data file. Query engines use these bounds to perform min/max pruning—skipping over data files that do not match the query’s filter criteria. For example, if a query is looking for data within a specific date range, and the `lower_bounds` and `upper_bounds` of a data file fall outside, the query engine can skip reading that file entirely.
+- **`lower_bounds` and `upper_bounds`**: These fields store the minimum and maximum values for each column in the data file. Query engines use these bounds to perform min/max pruning - skipping over data files that do not match the query’s filter criteria. For example, if a query is looking for data within a specific date range, and the `lower_bounds` and `upper_bounds` of a data file fall outside, the query engine can skip reading that file entirely.
 
 ### How These Fields Work Together
 

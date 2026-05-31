@@ -28,17 +28,17 @@ In this post, we’ll explore what a data lake is, how it compares to a data war
 
 A data lake is a centralized repository designed to store data in its raw form. Whether the data is structured like CSV files, semi-structured like JSON, or unstructured like text or images, the lake accepts it all. It acts as a catch-all layer for every piece of data an organization might want to use for analysis, training models, or historical archiving.
 
-Unlike a data warehouse, which expects a predefined schema and consistent structure, a data lake embraces flexibility. The idea is to collect the data first and figure out how to use it later—a principle often referred to as schema-on-read.
+Unlike a data warehouse, which expects a predefined schema and consistent structure, a data lake embraces flexibility. The idea is to collect the data first and figure out how to use it later: a principle often referred to as schema-on-read.
 
 This approach enables data engineers and scientists to access and experiment with data that hasn’t yet been modeled or cleaned. It fosters innovation by removing upfront constraints about how data should look.
 
 ## Key Characteristics
 
-At its core, a data lake is built on inexpensive, scalable storage—typically object storage like Amazon S3, Azure Data Lake Storage, or Google Cloud Storage. These systems offer the capacity to store petabytes of data without the overhead of traditional database systems.
+At its core, a data lake is built on inexpensive, scalable storage - typically object storage like Amazon S3, Azure Data Lake Storage, or Google Cloud Storage. These systems offer the capacity to store petabytes of data without the overhead of traditional database systems.
 
 Because lakes deal with raw data, they don’t enforce strict schemas when data is written. Instead, structure is applied at query time. This allows different teams to interpret the same data in different ways, depending on the analysis they want to perform.
 
-This flexibility is powerful, but it comes with a cost: governance becomes more challenging. Without strong metadata management and data cataloging, lakes can quickly turn into what’s often called a “data swamp”—a cluttered repository that’s hard to navigate or trust.
+This flexibility is powerful, but it comes with a cost: governance becomes more challenging. Without strong metadata management and data cataloging, lakes can quickly turn into what’s often called a “data swamp”: a cluttered repository that’s hard to navigate or trust.
 
 ## Data Lakes vs Data Warehouses
 
@@ -66,4 +66,4 @@ A data lake makes the most sense when you’re dealing with large volumes of div
 
 However, if you need consistent, curated data for business reporting, a warehouse may be the better choice. Data lakes and warehouses serve different needs, and understanding how they complement each other is key to building a balanced architecture.
 
-In the next post, we’ll look at storage formats and compression—essential building blocks for making data lakes and warehouses efficient, scalable, and cost-effective.
+In the next post, we’ll look at storage formats and compression - essential building blocks for making data lakes and warehouses efficient, scalable, and cost-effective.

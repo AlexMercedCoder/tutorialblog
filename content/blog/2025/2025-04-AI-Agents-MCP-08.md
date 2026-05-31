@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 8 - Resources in MCP — Serving Relevant Data Securely to LLMs
+title: A Journey from AI to LLMs and MCP - 8 - Resources in MCP : Serving Relevant Data Securely to LLMs
 date: "2025-04-12"
-description: "Resources in MCP — Serving Relevant Data Securely to LLMs"
+description: "Resources in MCP : Serving Relevant Data Securely to LLMs"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-In the previous post, we explored the architecture of the **Model Context Protocol (MCP)**—a flexible, standardized way to connect LLMs to tools, data, and workflows. One of MCP’s most powerful capabilities is its ability to expose **resources** to language models in a structured, secure, and controllable way.
+In the previous post, we explored the architecture of the **Model Context Protocol (MCP)**: a flexible, standardized way to connect LLMs to tools, data, and workflows. One of MCP’s most powerful capabilities is its ability to expose **resources** to language models in a structured, secure, and controllable way.
 
 In this post, we’ll dive into:
 - What MCP resources are
@@ -29,7 +29,7 @@ In this post, we’ll dive into:
 - Dynamic templates and subscriptions
 - Best practices for implementation and security
 
-If you want to give LLMs real, relevant context from your systems—without compromising safety or control—**resources** are the foundation.
+If you want to give LLMs real, relevant context from your systems: without compromising safety or control, **resources** are the foundation.
 
 ## What Are Resources in MCP?
 
@@ -78,7 +78,7 @@ In addition to static lists, servers can expose URI templates using RFC 6570 syn
 }
 ```
 
-This allows dynamic access to parameterized content—great for APIs, time-based logs, or file hierarchies.
+This allows dynamic access to parameterized content - great for APIs, time-based logs, or file hierarchies.
 
 ### Reading a Resource
 To retrieve the content of a resource, clients use:
@@ -121,7 +121,7 @@ The server responds with the content in one of two formats:
 Clients can choose how and when to inject these into the model’s prompt, depending on MIME type and length.
 
 ### Real-Time Updates
-Resources aren’t static—they can change. MCP supports subscriptions to keep context fresh.
+Resources aren’t static - they can change. MCP supports subscriptions to keep context fresh.
 
 #### List Updates
 If the list of resources changes, the server can notify the client with:
@@ -209,7 +209,7 @@ LLMs are context-hungry. They reason better when they have:
 
 - API responses
 
-By serving these as resources, MCP gives agents the data they need—on demand, with full user control, and without bloating prompt templates.
+By serving these as resources, MCP gives agents the data they need - on demand, with full user control, and without bloating prompt templates.
 
 ### Recap: Resources at a Glance
 
@@ -220,7 +220,7 @@ By serving these as resources, MCP gives agents the data they need—on demand, 
 - Real-time updates	Subscriptions for changing content
 - Secure access patterns	URI validation, MIME filtering, whitelisting
 
-### Coming Up Next: Tools in MCP — Giving LLMs the Power to Act
+### Coming Up Next: Tools in MCP : Giving LLMs the Power to Act
 So far, we’ve shown how MCP feeds models with data. But what if we want the model to take action?
 
 In the next post, we’ll explore tools in MCP:

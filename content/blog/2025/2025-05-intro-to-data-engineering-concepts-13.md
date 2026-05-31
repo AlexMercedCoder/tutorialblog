@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-As data volumes increase and workflows grow more interconnected, the ability to build scalable data pipelines becomes essential. It's not enough for a pipeline to work—it needs to keep working as data grows from gigabytes to terabytes, as new sources are added, and as more users rely on the output for decision-making.
+As data volumes increase and workflows grow more interconnected, the ability to build scalable data pipelines becomes essential. It's not enough for a pipeline to work - it needs to keep working as data grows from gigabytes to terabytes, as new sources are added, and as more users rely on the output for decision-making.
 
 In this post, we’ll explore what makes a pipeline scalable, the principles behind designing for growth, and the tools and patterns that data engineers use to manage complexity at scale.
 
@@ -34,13 +34,13 @@ Scalability also involves cost efficiency. Throwing more resources at a slow pip
 
 ## Parallelism and Distribution
 
-One of the core principles behind scalability is parallelism—the ability to split work into independent chunks that can be processed simultaneously.
+One of the core principles behind scalability is parallelism: the ability to split work into independent chunks that can be processed simultaneously.
 
 In batch workflows, this might mean partitioning data by date or region and processing each partition in parallel. In streaming systems, it means dividing incoming data into partitions or shards that are consumed by multiple workers.
 
 Distributed computing frameworks like Apache Spark, Flink, and Dask are designed with this in mind. They break down data into smaller units, distribute them across a cluster of machines, and execute tasks in parallel, tracking dependencies and ensuring consistency across the system.
 
-But parallelism introduces its own challenges. Data skew—when one partition is significantly larger than others—can lead to uneven workloads and poor performance. Effective partitioning strategies and thoughtful job configuration are key to maintaining balance.
+But parallelism introduces its own challenges. Data skew: when one partition is significantly larger than others, can lead to uneven workloads and poor performance. Effective partitioning strategies and thoughtful job configuration are key to maintaining balance.
 
 ## Minimizing Data Movement
 
@@ -64,7 +64,7 @@ Tuning batch sizes, controlling concurrency, and using backpressure mechanisms i
 
 ## Designing for Change
 
-Scalability isn’t just about today’s workload—it’s about tomorrow’s. Data pipelines should be designed to evolve.
+Scalability isn’t just about today’s workload - it’s about tomorrow’s. Data pipelines should be designed to evolve.
 
 This means avoiding hard-coded assumptions about schema, partitions, or file sizes. It means using configuration over code where possible, and abstracting logic into reusable modules that can be adapted as requirements shift.
 
@@ -78,4 +78,4 @@ Scalable pipelines don’t happen by accident. They’re the result of intention
 
 By embracing parallelism, minimizing data movement, managing resources effectively, and planning for change, data engineers can build pipelines that not only meet today’s demands but are ready for tomorrow’s challenges.
 
-In the next post, we’ll look at how DevOps principles apply to data engineering—covering CI/CD, infrastructure as code, and the tools that support reliable and automated data deployments.
+In the next post, we’ll look at how DevOps principles apply to data engineering - covering CI/CD, infrastructure as code, and the tools that support reliable and automated data deployments.

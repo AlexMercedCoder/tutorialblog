@@ -20,25 +20,25 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-As data systems grow more complex and interconnected, the principles of DevOps—long applied to software engineering—have become increasingly relevant to data engineering. Continuous integration, infrastructure as code, testing, and automation aren’t just for deploying apps anymore. They’re essential for delivering reliable, maintainable, and scalable data pipelines.
+As data systems grow more complex and interconnected, the principles of DevOps: long applied to software engineering, have become increasingly relevant to data engineering. Continuous integration, infrastructure as code, testing, and automation aren’t just for deploying apps anymore. They’re essential for delivering reliable, maintainable, and scalable data pipelines.
 
 In this post, we’ll explore how DevOps practices translate into the world of data engineering, why they matter, and what tools and techniques help bring them to life in modern data teams.
 
 ## Bridging the Gap Between Code and Data
 
-At the heart of DevOps is the idea that development and operations should be integrated. In traditional software development, this means automating the steps from writing code to running it in production. For data engineering, the challenge is similar—but the output isn't always a user-facing app. Instead, it's pipelines, transformations, and datasets that power reports, dashboards, and machine learning models.
+At the heart of DevOps is the idea that development and operations should be integrated. In traditional software development, this means automating the steps from writing code to running it in production. For data engineering, the challenge is similar - but the output isn't always a user-facing app. Instead, it's pipelines, transformations, and datasets that power reports, dashboards, and machine learning models.
 
 The core question becomes: how do we ensure that changes to data workflows are tested, deployed, and monitored with the same rigor as application code?
 
-The answer lies in adopting DevOps-inspired practices like version control, automated testing, continuous deployment, and infrastructure automation—all tailored to the specifics of data systems.
+The answer lies in adopting DevOps-inspired practices like version control, automated testing, continuous deployment, and infrastructure automation: all tailored to the specifics of data systems.
 
 ## Version Control for Pipelines and Configurations
 
-Just like in software engineering, all code that defines your data infrastructure—SQL queries, transformation logic, orchestration DAGs, and even schema definitions—should live in version-controlled repositories.
+Just like in software engineering, all code that defines your data infrastructure: SQL queries, transformation logic, orchestration DAGs, and even schema definitions, should live in version-controlled repositories.
 
 This makes it easier to collaborate, review changes, and roll back when something breaks. Tools like Git, combined with platforms like GitHub or GitLab, provide the foundation. Branching strategies and pull requests help teams manage change in a structured, auditable way.
 
-Even configurations—such as data source definitions or schedule timings—can and should be versioned, ideally alongside the pipeline logic they support.
+Even configurations: such as data source definitions or schedule timings, can and should be versioned, ideally alongside the pipeline logic they support.
 
 ## Continuous Integration and Testing
 
@@ -50,11 +50,11 @@ Testing data workflows is more nuanced than testing application logic. It often 
 
 ## Infrastructure as Code
 
-Managing infrastructure manually—whether it’s a Spark cluster, an Airflow deployment, or a cloud storage bucket—doesn’t scale. Infrastructure as code (IaC) provides a way to define your environment in declarative files that can be versioned, reviewed, and deployed automatically.
+Managing infrastructure manually: whether it’s a Spark cluster, an Airflow deployment, or a cloud storage bucket, doesn’t scale. Infrastructure as code (IaC) provides a way to define your environment in declarative files that can be versioned, reviewed, and deployed automatically.
 
 Tools like Terraform, Pulumi, and CloudFormation allow data teams to define compute resources, networking, permissions, and even pipeline configurations as code. Combined with CI/CD, IaC enables repeatable deployments, easier disaster recovery, and consistent environments across dev, staging, and production.
 
-IaC also helps in tracking infrastructure changes over time. When something breaks, you can look at the exact commit that introduced the change—not just guess what might have gone wrong.
+IaC also helps in tracking infrastructure changes over time. When something breaks, you can look at the exact commit that introduced the change - not just guess what might have gone wrong.
 
 ## Continuous Deployment for Pipelines
 
@@ -62,7 +62,7 @@ Once code is tested and approved, it needs to be deployed. Continuous deployment
 
 In practice, this might mean updating DAGs in Airflow, deploying dbt models, or rolling out new configurations to a Kafka stream processor. The process should include validation steps, such as verifying schema compatibility or testing data output in a sandbox environment before it goes live.
 
-Feature flags and gradual rollouts—techniques borrowed from application development—can also be applied to data. They allow teams to test changes on a subset of data or users before promoting them system-wide.
+Feature flags and gradual rollouts: techniques borrowed from application development, can also be applied to data. They allow teams to test changes on a subset of data or users before promoting them system-wide.
 
 ## Monitoring and Incident Response
 
@@ -74,7 +74,7 @@ Just as importantly, incidents should feed back into improvement. Postmortems, r
 
 ## Shifting the Culture
 
-Adopting DevOps for data engineering is as much about culture as it is about tools. It means treating data workflows with the same discipline as software systems—building, testing, deploying, and monitoring them in automated, repeatable ways.
+Adopting DevOps for data engineering is as much about culture as it is about tools. It means treating data workflows with the same discipline as software systems - building, testing, deploying, and monitoring them in automated, repeatable ways.
 
 This cultural shift leads to faster iterations, fewer outages, and more confidence in the data products that teams rely on. It also reduces the operational load on engineers, freeing them to focus on value creation instead of firefighting.
 

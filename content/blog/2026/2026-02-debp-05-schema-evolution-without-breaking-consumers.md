@@ -22,9 +22,9 @@ Schema evolution is the practice of changing data structures without breaking th
 
 When an application team changes a REST API endpoint, they version it. They deprecate the old version. They give consumers time to migrate. They don't silently rename fields and hope nobody notices.
 
-Data schemas deserve the same discipline. Your columns are fields. Your tables are endpoints. Your downstream consumers — dashboards, ML pipelines, reports, other pipelines — are API clients. When you change the schema, you change the contract.
+Data schemas deserve the same discipline. Your columns are fields. Your tables are endpoints. Your downstream consumers : dashboards, ML pipelines, reports, other pipelines,  are API clients. When you change the schema, you change the contract.
 
-The difference: API changes are usually intentional and reviewed. Schema changes often happen accidentally — a source system updates its export format, an engineer renames a column for readability, a new data type is introduced. Without guardrails, these changes propagate downstream silently.
+The difference: API changes are usually intentional and reviewed. Schema changes often happen accidentally : a source system updates its export format, an engineer renames a column for readability, a new data type is introduced. Without guardrails, these changes propagate downstream silently.
 
 ## Safe vs. Breaking Changes
 
@@ -39,7 +39,7 @@ Not all schema changes carry the same risk:
 **Breaking changes:**
 - Removing a column that consumers reference
 - Renaming a column without maintaining the old name
-- Narrowing a data type (BIGINT to INT — values may overflow)
+- Narrowing a data type (BIGINT to INT : values may overflow)
 - Changing the semantic meaning of a column (e.g., `revenue` from gross to net)
 - Changing nullability (nullable to non-nullable breaks inserts with nulls)
 
@@ -58,7 +58,7 @@ When a column needs to be replaced:
 4. Once all consumers have migrated, mark the old column as deprecated
 5. Remove the old column only after a deprecation period (e.g., 90 days)
 
-This pattern is boring — and that's the point. Boring is reliable. Adding a column never breaks existing queries. Consumers that don't need the new column ignore it. Consumers that do need it can adopt it on their own schedule.
+This pattern is boring : and that's the point. Boring is reliable. Adding a column never breaks existing queries. Consumers that don't need the new column ignore it. Consumers that do need it can adopt it on their own schedule.
 
 **Tradeoff:** Table width grows over time. Schemas accumulate deprecated columns. This is an acceptable cost compared to production outages.
 

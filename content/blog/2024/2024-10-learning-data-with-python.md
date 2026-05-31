@@ -15,7 +15,7 @@ tags:
 - [Free Apache Iceberg Crash Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=alexmerced&utm_medium=external_blog&utm_campaign=pythondata)
 - [Iceberg Lakehouse Engineering Video Playlist](https://www.youtube.com/watch?v=SIriNcVIGJQ&list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe) 
 
-Data engineers and scientists often work with a variety of tools to handle different types of data operations—from large-scale distributed processing to in-memory data manipulation. The `alexmerced/spark35nb` Docker image simplifies this by offering a pre-configured environment where you can experiment with multiple popular data tools, including PySpark, Pandas, DuckDB, Polars, and DataFusion.
+Data engineers and scientists often work with a variety of tools to handle different types of data operations - from large-scale distributed processing to in-memory data manipulation. The `alexmerced/spark35nb` Docker image simplifies this by offering a pre-configured environment where you can experiment with multiple popular data tools, including PySpark, Pandas, DuckDB, Polars, and DataFusion.
 
 In this blog, we'll guide you through setting up this environment and demonstrate how to perform basic data operations such as writing data, loading data, and executing queries and aggregations using these tools. Whether you’re dealing with large datasets or just need to manipulate small, in-memory data, you'll see how these different libraries can complement each other.
 
@@ -42,7 +42,7 @@ Now that you have your environment set up, we can move on to performing some bas
 
 ### 2.1 What is PySpark?
 
-PySpark is the Python API for Apache Spark, an open-source engine designed for large-scale data processing and distributed computing. It allows you to work with big data by distributing data and computations across a cluster. While Spark is usually run in a distributed cluster, this setup allows you to run it locally on a single node—perfect for development and testing.
+PySpark is the Python API for Apache Spark, an open-source engine designed for large-scale data processing and distributed computing. It allows you to work with big data by distributing data and computations across a cluster. While Spark is usually run in a distributed cluster, this setup allows you to run it locally on a single node - perfect for development and testing.
 
 Using PySpark, you can perform data manipulation, SQL queries, machine learning, and more, all within a framework that handles big data efficiently. In this section, we'll walk through how to write and query data using PySpark in the JupyterLab environment.
 
@@ -397,7 +397,7 @@ Dremio's close relationship with Apache Arrow ensures that your queries are both
 
 ### Conclusion
 
-In this blog, we explored how to use a variety of powerful tools for data operations within a Python notebook environment. Starting with the `alexmerced/spark35nb` Docker image, we demonstrated how to set up a development environment that includes PySpark, Pandas, DuckDB, Polars, and DataFusion—each optimized for different data processing needs. We showcased basic operations like writing, querying, and aggregating data using each tool’s unique strengths.
+In this blog, we explored how to use a variety of powerful tools for data operations within a Python notebook environment. Starting with the `alexmerced/spark35nb` Docker image, we demonstrated how to set up a development environment that includes PySpark, Pandas, DuckDB, Polars, and DataFusion: each optimized for different data processing needs. We showcased basic operations like writing, querying, and aggregating data using each tool’s unique strengths.
 
 - **PySpark** enables scalable, distributed processing for large datasets, perfect for big data environments.
 - **Pandas** offers in-memory, easy-to-use data manipulation for smaller datasets, making it the go-to tool for quick data exploration.

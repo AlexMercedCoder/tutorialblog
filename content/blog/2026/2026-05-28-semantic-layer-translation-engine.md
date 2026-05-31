@@ -10,7 +10,7 @@ tags:
 
 # The Semantic Layer as a Translation Engine: Bridging Natural Language and SQL
 
-"What was our revenue last quarter?" is a five-word question. The SQL that correctly answers it might be 40 lines long — joining three tables, applying a canonical metric definition, filtering by the right date boundaries, excluding specific transaction types, and handling currency normalization for international transactions.
+"What was our revenue last quarter?" is a five-word question. The SQL that correctly answers it might be 40 lines long : joining three tables, applying a canonical metric definition, filtering by the right date boundaries, excluding specific transaction types, and handling currency normalization for international transactions.
 
 An AI agent bridging from that natural language question to that SQL has a translation problem. It needs to know what "revenue" means in your specific business context, what counts as "last quarter," which tables contain the relevant data, and how those tables relate to each other.
 
@@ -34,7 +34,7 @@ Without a semantic layer, the agent attempts steps 2 and 3 using only its genera
 
 ## Virtual Datasets: Encoding Business Logic as SQL
 
-The central artifact of the semantic layer is the virtual dataset (VDS) — a SQL view that encodes business logic as a reusable, named query.
+The central artifact of the semantic layer is the virtual dataset (VDS) : a SQL view that encodes business logic as a reusable, named query.
 
 A revenue VDS might look like this:
 
@@ -90,7 +90,7 @@ GROUP BY 1
 
 When the agent needs to answer "how many active users did we have last month," it finds the `monthly_active_users` metric definition in the catalog, uses it as the authoritative source, and generates a query against that metric rather than reinventing the definition from scratch.
 
-Metric consistency is the most practically important benefit of semantic layer documentation. Inconsistent metric definitions — different teams calculating "active user" differently — are the most common cause of business stakeholders losing confidence in a data platform. The semantic layer resolves this by making one definition authoritative.
+Metric consistency is the most practically important benefit of semantic layer documentation. Inconsistent metric definitions : different teams calculating "active user" differently,  are the most common cause of business stakeholders losing confidence in a data platform. The semantic layer resolves this by making one definition authoritative.
 
 ## Wikis and Labels: Context for the Agent
 
@@ -102,7 +102,7 @@ Not all business context can be encoded in SQL. The semantic layer also needs na
 
 **Column labels** classify columns by type: `PII: Email`, `Financial: Revenue`, `Operational: Timestamp`, `Key: Customer`. The agent uses these labels to understand the purpose of a column without reading its values.
 
-**Relationship annotations** describe how datasets connect: "`canonical_orders` joins to `customers` on `customer_id`. The relationship is many-to-one. Not all customers have orders — left join required for customer-level reporting that includes customers with zero orders."
+**Relationship annotations** describe how datasets connect: "`canonical_orders` joins to `customers` on `customer_id`. The relationship is many-to-one. Not all customers have orders : left join required for customer-level reporting that includes customers with zero orders."
 
 When the agent is uncertain, it queries these annotations directly. Dremio's MCP server exposes them as searchable metadata, so the agent can ask "what does the revenue_usd column in canonical_revenue represent?" and get the documented answer.
 
@@ -116,13 +116,13 @@ Build a test suite for your semantic layer's translation accuracy. The test suit
 | "Monthly active users this year" | `COUNT(DISTINCT customer_id)` monthly from `canonical_orders` | 15K-25K/month |
 | "Top 5 product categories by revenue" | Revenue by `product_category` with LIMIT 5 | Specific category names |
 
-Run the agent against each test question weekly. Track accuracy over time. When accuracy drops on a specific question type, it usually indicates a documentation gap — add more context to the relevant VDS or column wiki.
+Run the agent against each test question weekly. Track accuracy over time. When accuracy drops on a specific question type, it usually indicates a documentation gap : add more context to the relevant VDS or column wiki.
 
 ![Semantic layer accuracy test suite results](/images/2026/may28seo/semantic-layer-accuracy-testing.png)
 
 ## Where the Semantic Layer Lives in Dremio
 
-Dremio's semantic layer is part of the platform's Open Catalog, not a separate product. Every virtual dataset is a SQL view that can be queried directly, shared with BI tools, and documented with wikis. The same VDS that the AI agent uses is the same one that Tableau, Power BI, or Looker queries — ensuring that dashboards and AI answers are based on identical business logic.
+Dremio's semantic layer is part of the platform's Open Catalog, not a separate product. Every virtual dataset is a SQL view that can be queried directly, shared with BI tools, and documented with wikis. The same VDS that the AI agent uses is the same one that Tableau, Power BI, or Looker queries , ensuring that dashboards and AI answers are based on identical business logic.
 
 The [semantic layer documentation](https://www.dremio.com/blog/agentic-analytics-semantic-layer/) covers how to build a three-tier (bronze/silver/gold) semantic layer in Dremio. The gold tier is the agent's primary entry point for business questions. The silver tier supports more complex multi-step analyses. The bronze tier is restricted to pipeline agents and data engineers.
 

@@ -14,17 +14,17 @@ tags:
 
 Google BigQuery is Google Cloud's serverless data warehouse. If your organization uses Google Cloud Platform, BigQuery is where your analytics data, marketing attribution, Google Analytics exports, and machine learning model outputs live. BigQuery is powerful within Google's ecosystem, but it creates challenges when your data spans multiple clouds or when costs grow with usage.
 
-BigQuery's on-demand pricing charges per terabyte scanned. For organizations with large datasets queried frequently — especially by dashboards that refresh automatically — this can result in monthly bills that grow unpredictably. And connecting BigQuery data to non-Google tools and other cloud providers requires data exports, cross-cloud networking, or third-party ETL platforms.
+BigQuery's on-demand pricing charges per terabyte scanned. For organizations with large datasets queried frequently : especially by dashboards that refresh automatically,  this can result in monthly bills that grow unpredictably. And connecting BigQuery data to non-Google tools and other cloud providers requires data exports, cross-cloud networking, or third-party ETL platforms.
 
 Dremio Cloud connects to BigQuery and queries it alongside data from AWS, Azure, on-premises databases, and any other connected source. You get multi-cloud federation without data movement, AI-powered analytics, and cost optimization through Reflections.
 
-Data gravity is a real challenge for BigQuery users. Once data lands in BigQuery, Google's ecosystem encourages keeping everything there — Looker for BI, Vertex AI for ML, Cloud Dataflow for processing. But most enterprises aren't all-Google. They have data in AWS RDS, Azure SQL, S3 data lakes, and on-premises systems. Moving all that data into BigQuery is expensive (ingestion costs, ongoing storage) and creates vendor lock-in. Dremio's federation approach queries each source in place, avoiding the data gravity trap while still giving you unified analytics across your entire data estate.
+Data gravity is a real challenge for BigQuery users. Once data lands in BigQuery, Google's ecosystem encourages keeping everything there : Looker for BI, Vertex AI for ML, Cloud Dataflow for processing. But most enterprises aren't all-Google. They have data in AWS RDS, Azure SQL, S3 data lakes, and on-premises systems. Moving all that data into BigQuery is expensive (ingestion costs, ongoing storage) and creates vendor lock-in. Dremio's federation approach queries each source in place, avoiding the data gravity trap while still giving you unified analytics across your entire data estate.
 
 ## Why BigQuery Users Need Dremio
 
 ### Control BigQuery Costs with Reflections
 
-BigQuery's on-demand pricing charges per terabyte scanned, regardless of whether you've run the same query before. A dashboard that refreshes every 15 minutes, querying the same 500GB table, generates substantial costs. Dremio's Reflections solve this: after the first query execution, Dremio caches the results as a pre-computed materialization. Subsequent queries that match the Reflection pattern are served from cache — no BigQuery scan, no per-TB charge.
+BigQuery's on-demand pricing charges per terabyte scanned, regardless of whether you've run the same query before. A dashboard that refreshes every 15 minutes, querying the same 500GB table, generates substantial costs. Dremio's Reflections solve this: after the first query execution, Dremio caches the results as a pre-computed materialization. Subsequent queries that match the Reflection pattern are served from cache : no BigQuery scan, no per-TB charge.
 
 For organizations with heavy dashboard and reporting workloads, this can reduce BigQuery costs by 50-80% on those specific query patterns.
 
@@ -38,14 +38,14 @@ BigQuery has IAM policies and column-level security within Google Cloud. But tho
 
 ### The Semantic Layer for AI
 
-Raw BigQuery tables have technical column names and fragmented schemas. Dremio lets you create views that consolidate and rename these into business-friendly structures, then attach wiki descriptions and labels. This semantic layer makes your BigQuery data queryable by AI tools — both Dremio's built-in AI Agent and external AI clients through the MCP Server.
+Raw BigQuery tables have technical column names and fragmented schemas. Dremio lets you create views that consolidate and rename these into business-friendly structures, then attach wiki descriptions and labels. This semantic layer makes your BigQuery data queryable by AI tools : both Dremio's built-in AI Agent and external AI clients through the MCP Server.
 
 ## Prerequisites
 
-- **Google Cloud project ID** — the GCP project containing your BigQuery datasets
-- **Service Account JSON key** — a GCP service account with the BigQuery Data Viewer role (or custom role with `bigquery.tables.getData`, `bigquery.jobs.create` permissions)
-- **Network access** — Dremio Cloud connects to Google Cloud APIs over HTTPS
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-google-bigquery-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Google Cloud project ID** : the GCP project containing your BigQuery datasets
+- **Service Account JSON key** : a GCP service account with the BigQuery Data Viewer role (or custom role with `bigquery.tables.getData`, `bigquery.jobs.create` permissions)
+- **Network access** : Dremio Cloud connects to Google Cloud APIs over HTTPS
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-google-bigquery-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect BigQuery to Dremio Cloud
 
@@ -152,7 +152,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects Claude, C
 2. Configure redirect URLs (e.g., `https://claude.ai/api/mcp/auth_callback`)
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}`
 
-A marketing executive can ask Claude "Compare our Q1 campaign performance against Q2 using the BigQuery data" and get governed, accurate results — no SQL required.
+A marketing executive can ask Claude "Compare our Q1 campaign performance against Q2 using the BigQuery data" and get governed, accurate results : no SQL required.
 
 ### AI SQL Functions
 
@@ -210,7 +210,7 @@ These policies apply across SQL Runner, BI tools, AI Agent, MCP Server, and Arro
 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC:
 
-- **Looker:** Ideal for Google Cloud environments — connect via JDBC
+- **Looker:** Ideal for Google Cloud environments : connect via JDBC
 - **Tableau:** Dremio connector for direct Arrow Flight access
 - **Power BI:** Dremio ODBC driver or native connector
 - **Python/Pandas:** `pyarrow.flight` for programmatic data access
@@ -236,7 +236,7 @@ For data staying in BigQuery, create manual Reflections to eliminate per-TB scan
 
 | Model | How It's Priced | Dremio's Impact |
 |---|---|---|
-| **On-Demand** | $6.25 per TB scanned | Reflections eliminate repeat scans — 50-80% cost reduction |
+| **On-Demand** | $6.25 per TB scanned | Reflections eliminate repeat scans : 50-80% cost reduction |
 | **Editions (Standard/Enterprise/Enterprise Plus)** | Slot reservations (autoscaling) | Reflections reduce slot utilization, enabling lower commitments |
 | **Flat Rate** | Fixed slot reservations | Reflections free up slots for other workloads |
 

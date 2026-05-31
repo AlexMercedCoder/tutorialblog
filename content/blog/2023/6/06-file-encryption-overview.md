@@ -20,7 +20,7 @@ File encryption is like dressing up your data in a disguise that only the right 
 
 **AES (Advanced Encryption Standard)**:
 
-Meet the rockstar of encryption algorithms! AES is the Tom Hanks of the encryption world—trusted, respected, and loved by all. It comes in different key sizes—128, 192, and 256 bits—and is the go-to choice for many governments and security experts. It's like an impenetrable fortress that laughs at hackers' feeble attempts to crack its code.
+Meet the rockstar of encryption algorithms! AES is the Tom Hanks of the encryption world: trusted, respected, and loved by all. It comes in different key sizes, 128, 192, and 256 bits - and is the go-to choice for many governments and security experts. It's like an impenetrable fortress that laughs at hackers' feeble attempts to crack its code.
 
 **MD5 (Message Digest Algorithm 5)**:
 
@@ -46,7 +46,7 @@ Picking the right encryption algorithm is like finding your soulmate. You need t
 
 - **Performance**: Think of encryption algorithms as speed racers. Some are lightning-fast, while others might drag you down like a snail on tranquilizers. Consider the computational cost of the algorithm and choose one that doesn't make your device feel like it's stuck in molasses.
 
-- **Key Size**: Longer keys mean better security. It's like having a lock with more pins—it's harder to pick. So, choose an algorithm that supports key sizes that match your desired level of protection. Don't settle for a flimsy lock when you can have a mighty fortress!
+- **Key Size**: Longer keys mean better security. It's like having a lock with more pins - it's harder to pick. So, choose an algorithm that supports key sizes that match your desired level of protection. Don't settle for a flimsy lock when you can have a mighty fortress!
 
 - **Compatibility**: Imagine having a fancy encryption algorithm that only works on outdated floppy disks. Bummer! Make sure the algorithm plays well with your platforms and systems, so you don't end up in a digital love triangle drama.
 

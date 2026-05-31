@@ -30,9 +30,9 @@ By the end of this tutorial, you'll have:
 
 ## Prerequisites
 
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-complete-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
-- **AI enabled** — go to Admin → Project Settings → Preferences → AI section and enable AI features
-- **Model Provider configured** — Dremio provides a hosted LLM by default, or connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI)
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-complete-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **AI enabled** : go to Admin → Project Settings → Preferences → AI section and enable AI features
+- **Model Provider configured** : Dremio provides a hosted LLM by default, or connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI)
 
 > **Note:** Tables in the built-in Open Catalog use `folder.subfolder.table_name` without a catalog prefix. External sources use `source_name.schema.table_name`.
 
@@ -48,8 +48,8 @@ AI_COMPLETE(
 ```
 
 **Parameters:**
-- **model_name** (optional) — specify a model like `'openai.gpt-4o'`. Format is `modelProvider.modelName`. If omitted, Dremio uses your default model.
-- **prompt** — the text instruction for the LLM. Typically you concatenate a task description with column values to give the model both the instruction and the data context.
+- **model_name** (optional) : specify a model like `'openai.gpt-4o'`. Format is `modelProvider.modelName`. If omitted, Dremio uses your default model.
+- **prompt** : the text instruction for the LLM. Typically you concatenate a task description with column values to give the model both the instruction and the data context.
 
 The key difference from `AI_CLASSIFY` is that `AI_COMPLETE` returns free-text output. There's no array of allowed values. The LLM generates whatever text the prompt asks for: a summary, a translation, a paragraph, a sentence, or a structured response.
 
@@ -401,10 +401,10 @@ Your materialized summary tables are Apache Iceberg tables in the built-in Open 
 
 ## Next Steps
 
-1. **Connect your real product database** — replace simulated tables with federated connections to your actual catalog and CRM
-2. **Generate descriptions in multiple languages** — create additional Gold views with French, German, or Japanese translations
-3. **Add FGAC** — mask revenue numbers in generated summaries for roles that shouldn't see financial data
-4. **Build Reflections** — create Reflections on materialized tables to accelerate dashboard queries at zero LLM cost
+1. **Connect your real product database** : replace simulated tables with federated connections to your actual catalog and CRM
+2. **Generate descriptions in multiple languages** : create additional Gold views with French, German, or Japanese translations
+3. **Add FGAC** : mask revenue numbers in generated summaries for roles that shouldn't see financial data
+4. **Build Reflections** : create Reflections on materialized tables to accelerate dashboard queries at zero LLM cost
 
 If your team spends time manually writing product summaries, translating content, or creating executive briefings from raw data, `AI_COMPLETE` automates that work inside the same SQL engine where your data already lives. Write a prompt, run a query, and get your generated text in the same governed platform where everything else runs.
 

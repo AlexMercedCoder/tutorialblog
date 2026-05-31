@@ -16,17 +16,17 @@ Microsoft SQL Server is one of the most widely deployed enterprise databases in 
 
 Dremio Cloud connects directly to SQL Server and queries it alongside S3, PostgreSQL, Snowflake, BigQuery, MongoDB, and every other connected source in a single SQL query. You don't need to extract data from SQL Server, build staging tables, or manage nightly ETL jobs. Dremio reads SQL Server in place, applies governance, and accelerates repeated queries with Reflections.
 
-SQL Server licensing is notoriously expensive — Enterprise edition costs tens of thousands of dollars per core. Running analytical queries directly against production SQL Server instances consumes CPU capacity that's licensed for transactional workloads. Dremio's Reflections cache analytical results, offloading read-heavy queries from SQL Server and potentially allowing organizations to reduce their SQL Server core count or downgrade from Enterprise to Standard edition.
+SQL Server licensing is notoriously expensive : Enterprise edition costs tens of thousands of dollars per core. Running analytical queries directly against production SQL Server instances consumes CPU capacity that's licensed for transactional workloads. Dremio's Reflections cache analytical results, offloading read-heavy queries from SQL Server and potentially allowing organizations to reduce their SQL Server core count or downgrade from Enterprise to Standard edition.
 
 ## Why SQL Server Users Need Dremio
 
 ### Escape Linked Server Limitations
 
-SQL Server's linked servers provide basic federation, but they're limited: poor cross-platform support (try linking to MongoDB or BigQuery), no query optimization across links, no governance layer, and performance degrades with large result sets. Dremio's federation engine is purpose-built for cross-source queries — it pushes predicates to each source, optimizes join strategies, and handles large-scale data movement efficiently.
+SQL Server's linked servers provide basic federation, but they're limited: poor cross-platform support (try linking to MongoDB or BigQuery), no query optimization across links, no governance layer, and performance degrades with large result sets. Dremio's federation engine is purpose-built for cross-source queries : it pushes predicates to each source, optimizes join strategies, and handles large-scale data movement efficiently.
 
 ### Reduce SQL Server License Costs
 
-SQL Server Enterprise licensing is expensive — especially when analytical workloads compete with transactional OLTP operations for CPU and memory. Dremio's Reflections offload repeated analytical queries from SQL Server: dashboard refreshes, scheduled reports, and ad-hoc exploration hit cached Reflections instead of SQL Server. This can reduce the SQL Server resources dedicated to analytics, potentially allowing you to downgrade from Enterprise to Standard edition or reduce core counts.
+SQL Server Enterprise licensing is expensive : especially when analytical workloads compete with transactional OLTP operations for CPU and memory. Dremio's Reflections offload repeated analytical queries from SQL Server: dashboard refreshes, scheduled reports, and ad-hoc exploration hit cached Reflections instead of SQL Server. This can reduce the SQL Server resources dedicated to analytics, potentially allowing you to downgrade from Enterprise to Standard edition or reduce core counts.
 
 ### Multi-Cloud, Multi-Database Analytics
 
@@ -38,16 +38,16 @@ SQL Server has Windows Authentication and SQL Logins, but these don't apply to y
 
 ### AI Analytics on Enterprise Data
 
-SQL Server stores decades of business data — financial records, customer histories, inventory movements. Dremio's AI Agent, MCP Server, and AI SQL Functions make that historical data queryable by natural language and enrichable by AI, unlocking insights that would otherwise require a data analyst with deep institutional knowledge.
+SQL Server stores decades of business data : financial records, customer histories, inventory movements. Dremio's AI Agent, MCP Server, and AI SQL Functions make that historical data queryable by natural language and enrichable by AI, unlocking insights that would otherwise require a data analyst with deep institutional knowledge.
 
 ## Prerequisites
 
 - **SQL Server hostname or IP address**
-- **Port** — default `1433`
+- **Port** : default `1433`
 - **Database name**
-- **Username and password** (SQL Authentication) — user needs SELECT permissions on target schemas and tables
-- **Network access** — port 1433 must be reachable from Dremio Cloud. For on-premises SQL Server, configure VPN or firewall rules
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-sqlserver-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Username and password** (SQL Authentication) : user needs SELECT permissions on target schemas and tables
+- **Network access** : port 1433 must be reachable from Dremio Cloud. For on-premises SQL Server, configure VPN or firewall rules
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-sqlserver-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect SQL Server to Dremio Cloud
 
@@ -171,7 +171,7 @@ Connect [Claude or ChatGPT](https://github.com/dremio/dremio-mcp) to your SQL Se
 2. Configure redirect URLs for your AI client
 3. Connect via `mcp.dremio.cloud/mcp/{project_id}`
 
-A warehouse manager asks Claude "Show me all products that need reordering, sorted by how critical the shortage is" and gets actionable results from the semantic layer over SQL Server — no SQL, no SSMS.
+A warehouse manager asks Claude "Show me all products that need reordering, sorted by how critical the shortage is" and gets actionable results from the semantic layer over SQL Server : no SQL, no SSMS.
 
 ### AI SQL Functions
 
@@ -213,7 +213,7 @@ SQL Server Enterprise charges per-core licensing. Offloading analytical queries 
 1. Navigate to the view in the **Catalog**
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** or **Aggregation Reflection**
-4. Select columns and set the **Refresh Interval** — for ERP data updated throughout the day, hourly; for financial data, match to reporting cycles
+4. Select columns and set the **Refresh Interval** : for ERP data updated throughout the day, hourly; for financial data, match to reporting cycles
 5. Click **Save**
 
 BI tools get sub-second response times from Reflections. SQL Server focuses on transactional OLTP workloads. A financial dashboard refreshing every 15 minutes generates zero SQL Server load after the Reflection is built.
@@ -232,7 +232,7 @@ These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, 
 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC for SQL Server data:
 
-- **Power BI:** Dremio native connector — ideal for Microsoft-centric organizations
+- **Power BI:** Dremio native connector : ideal for Microsoft-centric organizations
 - **Tableau:** Dremio connector for direct Arrow Flight access
 - **Python/Pandas:** `pyarrow.flight` for programmatic data access
 - **Looker:** Connect via JDBC
@@ -277,7 +277,7 @@ These cross-source analytics are impossible with SQL Server alone and traditiona
 
 ## SQL Server Always Encrypted and SSL
 
-Dremio supports SSL/TLS connections to SQL Server. For databases using Always Encrypted columns, be aware that Dremio reads the encrypted values — decryption requires the Column Master Key, which is managed by the application. For analytical workloads, consider creating views on the SQL Server side that expose non-encrypted analytical summaries.
+Dremio supports SSL/TLS connections to SQL Server. For databases using Always Encrypted columns, be aware that Dremio reads the encrypted values : decryption requires the Column Master Key, which is managed by the application. For analytical workloads, consider creating views on the SQL Server side that expose non-encrypted analytical summaries.
 
 ## Get Started
 

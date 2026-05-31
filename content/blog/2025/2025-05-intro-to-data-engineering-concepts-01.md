@@ -57,7 +57,7 @@ In traditional environments, organizations relied heavily on ETL tools to move d
 
 With the rise of big data, open-source tools like Hadoop and Spark introduced new ways to process data at scale. More recently, cloud-native services and modern orchestration frameworks have enabled even more agility and scalability in data workflows.
 
-This evolution has led to concepts like the **modern data stack** and **data lakehouse**—topics we’ll cover later in this series.
+This evolution has led to concepts like the **modern data stack** and **data lakehouse** - topics we’ll cover later in this series.
 
 ## Why It Matters
 
@@ -72,4 +72,4 @@ In a world where data volumes and velocity are only increasing, the importance o
 
 ## What’s Next
 
-Now that we’ve outlined the role and importance of data engineering, the next step is to explore how data gets into a system in the first place. In the next post, we’ll dig into data sources and the ingestion process—how data flows from the outside world into your ecosystem.
+Now that we’ve outlined the role and importance of data engineering, the next step is to explore how data gets into a system in the first place. In the next post, we’ll dig into data sources and the ingestion process - how data flows from the outside world into your ecosystem.

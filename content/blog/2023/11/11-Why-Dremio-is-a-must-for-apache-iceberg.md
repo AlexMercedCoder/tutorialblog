@@ -42,7 +42,7 @@ Tables under Dremio's management also benefit from [automated optimization and m
 
 Dremio simplifies [data governance](https://docs.dremio.com/cloud/security/), offering a robust solution encompassing access control and [data documentation](https://docs.dremio.com/cloud/reference/api/catalog/wiki/). Effective governance involves a combination of explicit access rules to proactively prevent unauthorized data usage and comprehensive documentation to aid users in discovering and optimizing their access to available data. Dremio excels in delivering robust capabilities for both aspects.
 
-Dremio empowers you with fine-grained access controls, allowing you to implement role-based access controls, column-based access controls, and row-based access controls—all easily configurable through SQL. Additionally, Dremio's semantic layer incorporates an integrated wiki feature, enabling you to provide detailed documentation for each dataset. To enhance user-friendliness, Dremio even offers generative AI capabilities for automating the documentation process, making it more convenient.
+Dremio empowers you with fine-grained access controls, allowing you to implement role-based access controls, column-based access controls, and row-based access controls: all easily configurable through SQL. Additionally, Dremio's semantic layer incorporates an integrated wiki feature, enabling you to provide detailed documentation for each dataset. To enhance user-friendliness, Dremio even offers generative AI capabilities for automating the documentation process, making it more convenient.
 
 ## Acceleration without Sacrificing Self-Service
 

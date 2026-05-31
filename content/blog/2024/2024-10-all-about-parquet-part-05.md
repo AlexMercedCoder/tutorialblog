@@ -20,7 +20,7 @@ One of the key benefits of using the Parquet file format is its ability to compr
 
 Compression is crucial for managing large datasets. By reducing the size of the data on disk, compression not only saves storage space but also improves query performance by reducing the amount of data that needs to be read from disk and transferred over networks.
 
-Parquet’s columnar storage format further enhances the efficiency of compression by storing similar data together, which often results in higher compression ratios than row-based formats. But not all compression algorithms are created equal—different techniques have varying impacts on file size, read/write performance, and CPU usage.
+Parquet’s columnar storage format further enhances the efficiency of compression by storing similar data together, which often results in higher compression ratios than row-based formats. But not all compression algorithms are created equal - different techniques have varying impacts on file size, read/write performance, and CPU usage.
 
 ## Compression Algorithms Supported by Parquet
 

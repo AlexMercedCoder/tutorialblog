@@ -26,7 +26,7 @@ Although they may look similar at first glance, ETL and ELT represent fundamenta
 
 ## What is ETL?
 
-ETL stands for Extract, Transform, Load. It’s the traditional method used in many enterprise environments for years. The process starts by **extracting** data from source systems such as databases, APIs, or flat files. This raw data is then **transformed**—typically on a separate processing server or ETL engine—before it is finally **loaded** into a data warehouse or other destination system.
+ETL stands for Extract, Transform, Load. It’s the traditional method used in many enterprise environments for years. The process starts by **extracting** data from source systems such as databases, APIs, or flat files. This raw data is then **transformed**: typically on a separate processing server or ETL engine, before it is finally **loaded** into a data warehouse or other destination system.
 
 For example, imagine a retail company collecting daily sales data from multiple stores. In an ETL workflow, the system might extract those records at the end of the day, standardize formats, filter out corrupted rows, aggregate sales by region, and then load the clean, transformed dataset into a reporting warehouse like Snowflake or Redshift.
 
@@ -36,11 +36,11 @@ However, this approach also has limitations. Because the transformation happens 
 
 ## What is ELT?
 
-ELT reverses the order of the last two steps: Extract, Load, Transform. In this model, raw data is extracted from the source and immediately **loaded** into the target system—usually a cloud data warehouse that can scale horizontally. Once the data is in place, transformations are performed **within** the warehouse using SQL or warehouse-native tools.
+ELT reverses the order of the last two steps: Extract, Load, Transform. In this model, raw data is extracted from the source and immediately **loaded** into the target system - usually a cloud data warehouse that can scale horizontally. Once the data is in place, transformations are performed **within** the warehouse using SQL or warehouse-native tools.
 
 This approach takes advantage of the high compute power and scalability of modern cloud platforms. Instead of bottlenecking on a dedicated ETL server, the warehouse can handle complex joins, aggregations, and transformations at scale.
 
-Let’s go back to the retail example. With ELT, all sales data is loaded as-is into the warehouse. Analysts or data engineers can then write transformation scripts to reshape the data for various use cases—trend analysis, regional comparisons, or fraud detection—all without having to re-ingest or reload the source data.
+Let’s go back to the retail example. With ELT, all sales data is loaded as-is into the warehouse. Analysts or data engineers can then write transformation scripts to reshape the data for various use cases: trend analysis, regional comparisons, or fraud detection, all without having to re-ingest or reload the source data.
 
 ELT offers more flexibility for evolving requirements, supports broader self-service analytics, and enables faster time-to-insight. The trade-off is that it requires strong governance and monitoring. Because raw data is stored in the warehouse, the risk of exposing inconsistent or unclean data is higher if transformation logic isn’t managed carefully.
 
@@ -58,4 +58,4 @@ In practice, many organizations use a hybrid approach. Critical data may go thro
 
 ETL and ELT are just different roads to the same destination: getting data ready for use. As the modern data stack evolves, so do the tools and best practices for managing these flows. Whether you choose one approach or blend both, what matters most is building pipelines that are reliable, maintainable, and aligned with your organization’s goals.
 
-In the next post, we’ll focus on batch processing—the traditional foundation of many ETL workflows—and discuss how data engineers design, schedule, and optimize these processes for scale.
+In the next post, we’ll focus on batch processing: the traditional foundation of many ETL workflows, and discuss how data engineers design, schedule, and optimize these processes for scale.

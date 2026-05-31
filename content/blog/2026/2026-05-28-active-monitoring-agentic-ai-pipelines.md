@@ -12,13 +12,13 @@ tags:
 
 Static alert thresholds work until they don't. You configure a row count alert for your daily orders table: fire if today's count is more than 20% below yesterday's count. The threshold is reasonable on average, but on Mondays after long weekends, Tuesday after a sales spike, and the first of every month when batch reprocessing runs, it fires false positives. After three months of false alarms, the team stops responding to alerts promptly. Then a real failure goes undetected for six hours.
 
-The problem with static alerts is that they can't distinguish expected variation from genuine failure. Agentic monitoring systems can — because they reason about the cause of the deviation, not just the deviation itself.
+The problem with static alerts is that they can't distinguish expected variation from genuine failure. Agentic monitoring systems can : because they reason about the cause of the deviation, not just the deviation itself.
 
 ![Agentic data pipeline monitoring architecture](/images/2026/may28seo/agentic-pipeline-monitoring.png)
 
 ## Why Static Alerts Fail at Scale
 
-Enterprise data platforms with hundreds of pipelines generate thousands of alert candidates per day. Static threshold alerts — row count drops, latency spikes, error rate increases — are cheap to configure and cheap to ignore.
+Enterprise data platforms with hundreds of pipelines generate thousands of alert candidates per day. Static threshold alerts : row count drops, latency spikes, error rate increases,  are cheap to configure and cheap to ignore.
 
 The limitations:
 
@@ -36,7 +36,7 @@ An agentic monitoring system replaces static threshold checks with a reasoning a
 
 The architecture has three components:
 
-**Metric collection:** Regular execution of health check queries against each monitored table or pipeline. Row counts, null rates, maximum values, record freshness, processing latency. These run on a schedule — every 15 minutes for critical pipelines, hourly for less critical ones.
+**Metric collection:** Regular execution of health check queries against each monitored table or pipeline. Row counts, null rates, maximum values, record freshness, processing latency. These run on a schedule : every 15 minutes for critical pipelines, hourly for less critical ones.
 
 **Deviation detection:** Statistical comparison of current metrics against rolling baselines. Rather than fixed thresholds, the system uses learned baselines: the expected range for this hour of this day of the week, adjusted for recent trends. A 15% drop on Monday morning is different from a 15% drop on a Tuesday afternoon.
 
@@ -49,10 +49,10 @@ The agent's investigation output is structured: root cause identified, severity 
 When an agentic monitoring system detects a pipeline failure, the investigation follows a trace pattern from the symptom backward to the source.
 
 For a broken daily orders table, the agent traces:
-1. Check the staging table that feeds the orders table — did it receive records today?
-2. Check the source API extraction job log — did it complete successfully?
-3. Check the raw landing zone — are files present with today's timestamp?
-4. Check the extraction job error table — did any extraction attempts fail?
+1. Check the staging table that feeds the orders table : did it receive records today?
+2. Check the source API extraction job log : did it complete successfully?
+3. Check the raw landing zone : are files present with today's timestamp?
+4. Check the extraction job error table : did any extraction attempts fail?
 
 Each check is a SQL query against the relevant metadata or log table. The agent runs them in sequence, stopping when it finds where the chain broke.
 
@@ -60,11 +60,11 @@ This trace analysis takes 30–60 seconds in a well-configured system. A human e
 
 ## Automated Rollback and Recovery
 
-When the agentic system identifies a fixable failure — a stuck job, a missing file that needs to be re-fetched, a pipeline that needs a re-run from a checkpoint — it can take action without human intervention.
+When the agentic system identifies a fixable failure : a stuck job, a missing file that needs to be re-fetched, a pipeline that needs a re-run from a checkpoint,  it can take action without human intervention.
 
 **Automatic re-runs:** If the investigation confirms that the pipeline failed due to a transient network error and the source data is still available, the agent triggers a re-run. It monitors the re-run and confirms success.
 
-**Checkpoint rollback:** If a pipeline produced incorrect output (detected through data quality checks), the agent can roll back the Iceberg table to the last valid snapshot, remove the bad data, and trigger a corrective re-run. Iceberg's time travel capability makes the rollback operation safe — the previous valid state is available as a snapshot.
+**Checkpoint rollback:** If a pipeline produced incorrect output (detected through data quality checks), the agent can roll back the Iceberg table to the last valid snapshot, remove the bad data, and trigger a corrective re-run. Iceberg's time travel capability makes the rollback operation safe : the previous valid state is available as a snapshot.
 
 ```sql
 -- Rollback an Iceberg table to the last valid snapshot
@@ -92,7 +92,7 @@ The combination of Dremio's semantic layer (for understanding what the data shou
 
 Agentic auto-healing is not appropriate for all failure modes.
 
-When the root cause is external — a source system that changed its schema, a third-party API that returned corrupted data, a credential that expired — automatic recovery risks hiding the problem rather than fixing it. The pipeline re-runs, fails again, re-runs, and the cycle continues until human intervention.
+When the root cause is external : a source system that changed its schema, a third-party API that returned corrupted data, a credential that expired,  automatic recovery risks hiding the problem rather than fixing it. The pipeline re-runs, fails again, re-runs, and the cycle continues until human intervention.
 
 Configure your agentic monitoring to auto-heal only for specific, well-defined failure patterns where automatic recovery is safe. For everything else, use the agent for investigation and notification, but require human approval before executing recovery actions.
 
@@ -109,7 +109,7 @@ The knowledge base should contain:
 - **Recovery playbooks:** "If the Salesforce API returns 429 rate limit errors, wait 2 hours and retry. Do not trigger an immediate re-run." Documented playbooks prevent the agent from taking counterproductive recovery actions.
 - **Escalation contacts:** For each pipeline, who should be notified when auto-heal exhausts its retry limit.
 
-Store this knowledge base in structured form — a table in Dremio or a YAML file the agent loads at startup. The agent reads the knowledge base before investigating any anomaly and uses it to contextualize its analysis.
+Store this knowledge base in structured form : a table in Dremio or a YAML file the agent loads at startup. The agent reads the knowledge base before investigating any anomaly and uses it to contextualize its analysis.
 
 ## Measuring Monitoring System Quality
 

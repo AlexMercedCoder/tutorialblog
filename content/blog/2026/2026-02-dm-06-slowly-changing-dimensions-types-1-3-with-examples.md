@@ -16,7 +16,7 @@ tags:
 
 Dimensions change. A customer moves cities. A product gets reclassified. An employee changes departments. How your data model handles these changes determines whether your historical reports are accurate or misleading.
 
-Slowly Changing Dimensions (SCDs) are design patterns for managing dimension attribute changes over time. The three most common types — overwrite, track history, and track one change — each make a different tradeoff between simplicity and historical accuracy.
+Slowly Changing Dimensions (SCDs) are design patterns for managing dimension attribute changes over time. The three most common types : overwrite, track history, and track one change,  each make a different tradeoff between simplicity and historical accuracy.
 
 ## Why Dimensions Change
 
@@ -34,7 +34,7 @@ SET city = 'Chicago'
 WHERE customer_id = 1042;
 ```
 
-After this update, every historical fact associated with customer 1042 now appears under "Chicago" — including sales that happened when the customer was in New York.
+After this update, every historical fact associated with customer 1042 now appears under "Chicago" : including sales that happened when the customer was in New York.
 
 **When to use Type 1:**
 - Correcting errors (fixing a misspelled name)
@@ -117,6 +117,6 @@ Platforms like [Dremio](https://www.dremio.com/blog/agentic-analytics-semantic-l
 
 ![Choosing between SCD types based on reporting requirements and complexity tolerance](images/data_modeling/06/scd-decision-guide.png)
 
-Audit your dimension tables. For each one, decide: Does historical accuracy matter for this attribute? If yes, implement Type 2. If the attribute changes rarely and history doesn't matter, Type 1 is sufficient. Document your choice — when the next engineer encounters the dimension, they need to know whether they're looking at current state or historical versions.
+Audit your dimension tables. For each one, decide: Does historical accuracy matter for this attribute? If yes, implement Type 2. If the attribute changes rarely and history doesn't matter, Type 1 is sufficient. Document your choice , when the next engineer encounters the dimension, they need to know whether they're looking at current state or historical versions.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced)

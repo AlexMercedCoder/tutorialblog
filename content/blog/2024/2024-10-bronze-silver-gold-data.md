@@ -22,7 +22,7 @@ In this blog, we’ll explore the evolution of the three-tier data organization 
 
 ### Historical Terminologies
 
-Over the years, the three-tier data organization pattern has been referenced using different naming conventions. Each naming scheme reflects the progression of data through its lifecycle—from unprocessed to refined and actionable. Here are some common terminologies used:
+Over the years, the three-tier data organization pattern has been referenced using different naming conventions. Each naming scheme reflects the progression of data through its lifecycle - from unprocessed to refined and actionable. Here are some common terminologies used:
 
 - **Raw / Business / Application**: One of the earliest naming conventions, where the focus is on raw data, business logic, and application-specific outputs.
 - **Bronze / Silver / Gold**: A more modern take, especially in the context of data lakes and lakehouses. Bronze refers to raw data, Silver to cleaned or enriched data, and Gold to the most refined and consumable version of data.
@@ -149,7 +149,7 @@ One of the core objectives of the three-tier data organization pattern is to mov
 
 ### 3. Real-Time Data with Minimal Overhead
 
-The combination of Apache Iceberg’s efficient data partitioning and Dremio’s Live Reflections enables organizations to maintain real-time or near-real-time data freshness without the operational overhead typically associated with traditional batch processing. Live Reflections automatically update when new data arrives, ensuring that the entire pipeline—from raw to application-ready data—stays consistent and up-to-date.
+The combination of Apache Iceberg’s efficient data partitioning and Dremio’s Live Reflections enables organizations to maintain real-time or near-real-time data freshness without the operational overhead typically associated with traditional batch processing. Live Reflections automatically update when new data arrives, ensuring that the entire pipeline: from raw to application-ready data, stays consistent and up-to-date.
 
 - **Real-Time Updates:** Live Reflections ensure that every layer in the data pipeline reflects the most current state of the underlying data, which is essential for real-time analytics and decision-making.
 

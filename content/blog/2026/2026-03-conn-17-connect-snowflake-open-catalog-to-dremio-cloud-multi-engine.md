@@ -12,11 +12,11 @@ tags:
   - federated queries
 ---
 
-Snowflake Open Catalog is Snowflake's managed implementation of the Apache Iceberg REST catalog specification, based on the open-source Apache Polaris project. It serves as a centralized metadata catalog for Apache Iceberg tables, enabling multiple compute engines — including Dremio, Spark, Trino, and Flink — to read from and write to the same Iceberg tables without metadata conflicts.
+Snowflake Open Catalog is Snowflake's managed implementation of the Apache Iceberg REST catalog specification, based on the open-source Apache Polaris project. It serves as a centralized metadata catalog for Apache Iceberg tables, enabling multiple compute engines : including Dremio, Spark, Trino, and Flink,  to read from and write to the same Iceberg tables without metadata conflicts.
 
-Dremio Cloud connects to Snowflake Open Catalog as a first-class Iceberg data source. You get full read and write access to Iceberg tables, automatic table maintenance (compaction, manifest optimization, vacuuming), and the ability to federate catalog data with databases, object storage, cloud warehouses, and other catalogs — all through standard SQL.
+Dremio Cloud connects to Snowflake Open Catalog as a first-class Iceberg data source. You get full read and write access to Iceberg tables, automatic table maintenance (compaction, manifest optimization, vacuuming), and the ability to federate catalog data with databases, object storage, cloud warehouses, and other catalogs : all through standard SQL.
 
-For organizations already invested in Snowflake, the Open Catalog is a strategic choice for multi-engine interoperability. Unlike Snowflake's proprietary internal catalog (which is only accessible through Snowflake compute), the Open Catalog exposes Iceberg metadata via a standard REST API. This means you're not locked into Snowflake compute for every analytical query — Dremio can read the same tables at a fraction of the credit cost for repetitive workloads. Dremio also provides its federated engine, Reflections, governance, and AI capabilities — all without duplicating data or metadata.
+For organizations already invested in Snowflake, the Open Catalog is a strategic choice for multi-engine interoperability. Unlike Snowflake's proprietary internal catalog (which is only accessible through Snowflake compute), the Open Catalog exposes Iceberg metadata via a standard REST API. This means you're not locked into Snowflake compute for every analytical query : Dremio can read the same tables at a fraction of the credit cost for repetitive workloads. Dremio also provides its federated engine, Reflections, governance, and AI capabilities,  all without duplicating data or metadata.
 
 ## Why Snowflake Open Catalog Users Need Dremio
 
@@ -24,7 +24,7 @@ For organizations already invested in Snowflake, the Open Catalog is a strategic
 
 Snowflake Open Catalog is designed for multi-engine compatibility, which makes it an ideal complement to Dremio. By connecting Dremio to your Snowflake Open Catalog, you add a query engine that specializes in areas Snowflake doesn't:
 
-- **Federation:** Join catalog tables with PostgreSQL, MongoDB, S3, BigQuery, and any other Dremio-connected source in a single SQL query — something Snowflake can't do natively with non-Snowflake sources.
+- **Federation:** Join catalog tables with PostgreSQL, MongoDB, S3, BigQuery, and any other Dremio-connected source in a single SQL query : something Snowflake can't do natively with non-Snowflake sources.
 - **Autonomous performance management:** Dremio automatically compacts files, rewrites manifests, and builds Reflections based on query patterns for external catalog tables.
 - **AI-powered querying:** Dremio's AI Agent, MCP Server, and AI SQL Functions bring LLM capabilities to your catalog data.
 
@@ -34,7 +34,7 @@ Instead of running all workloads through Snowflake credits, offload analytical q
 
 ### Federate with Non-Snowflake Sources
 
-Snowflake's data sharing works within Snowflake. But what if you need to join your Snowflake Open Catalog data with PostgreSQL application data, MongoDB user profiles, or S3 raw event logs? Dremio's federation engine does exactly that — no ETL pipelines, no data duplication.
+Snowflake's data sharing works within Snowflake. But what if you need to join your Snowflake Open Catalog data with PostgreSQL application data, MongoDB user profiles, or S3 raw event logs? Dremio's federation engine does exactly that : no ETL pipelines, no data duplication.
 
 ### Credential Vending
 
@@ -48,11 +48,11 @@ Dremio can write to external Snowflake Open Catalogs, enabling you to create tab
 
 Before connecting to Snowflake Open Catalog, confirm you have:
 
-- **Snowflake Open Catalog account URL** — the endpoint for your catalog instance
-- **OAuth or Personal Access Token (PAT) credentials** — for authenticating to the catalog
-- **Catalog names** — the specific catalogs you want to access (internal read-only and/or external read-write)
-- **Storage configuration** — if credential vending isn't available for your setup, you'll need S3, Azure, or GCS credentials for the underlying data
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-snowflake-open-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Snowflake Open Catalog account URL** : the endpoint for your catalog instance
+- **OAuth or Personal Access Token (PAT) credentials** : for authenticating to the catalog
+- **Catalog names** : the specific catalogs you want to access (internal read-only and/or external read-write)
+- **Storage configuration** : if credential vending isn't available for your setup, you'll need S3, Azure, or GCS credentials for the underlying data
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-snowflake-open-catalog-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Snowflake Open Catalog to Dremio Cloud
 
@@ -69,7 +69,7 @@ In the Dremio console, click the **"+"** button in the left sidebar and select *
 ### 3. Select Catalogs
 
 Choose which catalogs to enable:
-- **Internal catalogs** are read-only from Dremio's perspective — you can query but not write.
+- **Internal catalogs** are read-only from Dremio's perspective : you can query but not write.
 - **External catalogs** support full read and write operations (INSERT, UPDATE, DELETE, MERGE).
 
 ### 4. Configure Advanced Settings
@@ -148,7 +148,7 @@ Navigate to the **Catalog**, click **Edit** (pencil icon) on this view, and **Ge
 
 ### Dremio AI Agent
 
-The AI Agent lets users ask questions in plain English. For example: "Who are our highest-spending enterprise customers?" The Agent reads your wiki descriptions and view definitions to generate the correct SQL. Better wikis produce better results — describe what "enterprise customer" and "monthly spend rate" mean in business terms.
+The AI Agent lets users ask questions in plain English. For example: "Who are our highest-spending enterprise customers?" The Agent reads your wiki descriptions and view definitions to generate the correct SQL. Better wikis produce better results : describe what "enterprise customer" and "monthly spend rate" mean in business terms.
 
 ### Dremio MCP Server
 
@@ -186,7 +186,7 @@ Create Reflections on frequently queried views to cache results:
 1. In the **Catalog**, select the view and click the **Reflections** tab
 2. Choose **Raw Reflection** (full cache) or **Aggregation Reflection** (pre-computed metrics)
 3. Select columns and aggregations to include
-4. Set the **Refresh Interval** — balance freshness against compute cost
+4. Set the **Refresh Interval** : balance freshness against compute cost
 5. Click **Save**
 
 BI tools connected via Arrow Flight or ODBC get sub-second responses from Reflections instead of re-reading Iceberg files from storage. This reduces Snowflake credit consumption for workloads routed through Dremio.
@@ -215,7 +215,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Snowflake Open Catalog data from their IDE. Ask Copilot "Show me customer churn risk from the catalog" and get SQL generated using your semantic layer — without switching tools.
+Dremio's VS Code extension with Copilot integration lets developers query Snowflake Open Catalog data from their IDE. Ask Copilot "Show me customer churn risk from the catalog" and get SQL generated using your semantic layer : without switching tools.
 
 ## When to Use Snowflake Open Catalog vs. Other Catalogs
 
@@ -231,11 +231,11 @@ You can connect multiple catalogs simultaneously. Many organizations use Snowfla
 
 Credential vending is a key feature of Snowflake Open Catalog that simplifies Dremio's access to underlying storage. Here's how it works:
 
-1. **You configure storage in Snowflake Open Catalog** — specify the S3, Azure, or GCS bucket where Iceberg data files live.
+1. **You configure storage in Snowflake Open Catalog** : specify the S3, Azure, or GCS bucket where Iceberg data files live.
 2. **When Dremio queries a table**, it requests access from the catalog API.
-3. **Snowflake Open Catalog returns temporary, scoped credentials** — short-lived tokens with permissions limited to the specific data files needed.
+3. **Snowflake Open Catalog returns temporary, scoped credentials** : short-lived tokens with permissions limited to the specific data files needed.
 4. **Dremio uses these credentials** to read (or write, for external catalogs) directly from storage.
-5. **Credentials expire automatically** — no long-lived keys to rotate or manage.
+5. **Credentials expire automatically** : no long-lived keys to rotate or manage.
 
 This means your Dremio Cloud connection needs only the catalog API credentials (OAuth), not separate storage credentials for every S3 bucket or Azure container. One connection, automatic credential management, reduced security surface area.
 
@@ -248,7 +248,7 @@ Snowflake Open Catalog enables a powerful multi-engine architecture:
 - **Apache Spark:** Large-scale data processing and ML model training
 - **Trino/Presto:** Ad-hoc query engine for open-source workflows
 
-All engines read from the same Iceberg tables managed by Snowflake Open Catalog — no data duplication, no metadata sync issues, no format conversion. Each engine reads the latest table metadata from the catalog and accesses data files via credential vending.
+All engines read from the same Iceberg tables managed by Snowflake Open Catalog : no data duplication, no metadata sync issues, no format conversion. Each engine reads the latest table metadata from the catalog and accesses data files via credential vending.
 
 Dremio's unique contribution to this architecture is federation (joining catalog tables with non-Iceberg sources), AI capabilities (Agent, MCP, SQL Functions), and Reflections (sub-second BI serving without re-reading storage).
 
@@ -268,7 +268,7 @@ If you use Snowflake's managed offering, you get turnkey catalog management. If 
 
 ## Get Started
 
-Snowflake Open Catalog users can build a truly multi-engine lakehouse — manage Iceberg metadata in Snowflake's infrastructure while querying with Dremio's federated engine, AI capabilities, and Reflection-based acceleration.
+Snowflake Open Catalog users can build a truly multi-engine lakehouse : manage Iceberg metadata in Snowflake's infrastructure while querying with Dremio's federated engine, AI capabilities, and Reflection-based acceleration.
 
 Connect your Snowflake Open Catalog to Dremio Cloud, build views over your Iceberg tables, and start leveraging AI Agent, MCP Server, and Reflections for cost-optimized analytical serving. The setup takes minutes and works immediately.
 

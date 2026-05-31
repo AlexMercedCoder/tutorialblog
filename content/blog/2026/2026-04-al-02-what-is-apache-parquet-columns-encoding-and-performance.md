@@ -52,7 +52,7 @@ Beyond encoding, columnar storage inherently improves compression. Algorithms li
 
 Perhaps Parquet's greatest distinct advantage is that its files are entirely self-describing. When a system writes Parquet data, it also computes and stores statistical metadata in the file's footer.
 
-The footer contains the minimum value, maximum value, and null counts for every column within every row group. When you issue a query with a filter—like `WHERE transaction_amount > 1000`—the query engine reads the footer first. This process is called Predicate Pushdown. 
+The footer contains the minimum value, maximum value, and null counts for every column within every row group. When you issue a query with a filter: like `WHERE transaction_amount > 1000`, the query engine reads the footer first. This process is called Predicate Pushdown. 
 
 ![Diagram of Predicate Pushdown showing the engine skipping a row group based on min/max stats](images/apache-lakehouse/02/./parquet-predicate-pushdown.png)
 

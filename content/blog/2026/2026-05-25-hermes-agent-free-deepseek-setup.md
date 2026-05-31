@@ -104,16 +104,16 @@ In the app settings, navigate to **Socket Mode** and toggle it on. You will be p
 ### Step 3: Add Bot Token Scopes
 
 Go to **OAuth & Permissions** and add these Bot Token Scopes:
-- `channels:history` — read channel messages
-- `channels:read` — see channel metadata
-- `chat:write` — send messages
+- `channels:history` : read channel messages
+- `channels:read` : see channel metadata
+- `chat:write` : send messages
 - `app_mentions:read` -- detect when the bot is @mentioned
 - `users:read` -- look up user info
 
 ### Step 4: Subscribe to Events
 
 Under **Event Subscriptions**, enable events. Then add these bot events:
-- `message.channels` — required for the bot to see messages in public channels
+- `message.channels` : required for the bot to see messages in public channels
 - `app_mention` -- respond to direct @mentions
 
 Without `message.channels`, the bot will only see messages in DMs.

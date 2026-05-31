@@ -28,17 +28,17 @@ PostgreSQL is an excellent transactional database, but it wasn't designed for th
 
 **Business context for AI.** Raw PostgreSQL tables have technical column names like `cust_id` and `txn_amt`. Dremio's semantic layer lets you create views that rename and restructure these columns with business logic, then attach wiki descriptions and labels. When your team asks Dremio's AI Agent "Who are our highest-value customers?", the Agent understands what "highest-value" means because you've defined it in the semantic layer.
 
-**Governance without modifying PostgreSQL.** Dremio's Fine-Grained Access Control (FGAC) lets you mask sensitive columns (Social Security numbers, email addresses) and filter rows based on user roles. You don't need to modify PostgreSQL permissions or create restricted database views — the governance layer lives in Dremio and applies across all tools and users.
+**Governance without modifying PostgreSQL.** Dremio's Fine-Grained Access Control (FGAC) lets you mask sensitive columns (Social Security numbers, email addresses) and filter rows based on user roles. You don't need to modify PostgreSQL permissions or create restricted database views : the governance layer lives in Dremio and applies across all tools and users.
 
 ## What You Need Before Connecting
 
 Before configuring the connection in Dremio, make sure you have:
 
-- **PostgreSQL hostname or IP address** — the network address of your database server
-- **Port number** — PostgreSQL defaults to `5432`
-- **Database name** — the specific database you want to connect
-- **Username and password** — credentials for a user with read access to the tables you want to query
-- **Network accessibility** — Dremio Cloud connects to your PostgreSQL instance over the public internet by default. Ensure port 5432 (or your custom port) is open in your AWS Security Group, Azure NSG, or firewall rules
+- **PostgreSQL hostname or IP address** : the network address of your database server
+- **Port number** : PostgreSQL defaults to `5432`
+- **Database name** : the specific database you want to connect
+- **Username and password** : credentials for a user with read access to the tables you want to query
+- **Network accessibility** : Dremio Cloud connects to your PostgreSQL instance over the public internet by default. Ensure port 5432 (or your custom port) is open in your AWS Security Group, Azure NSG, or firewall rules
 
 If your PostgreSQL instance is in a private subnet (common for production databases), you'll need to configure networking to allow Dremio Cloud to reach it. Check [Dremio's network connectivity documentation](https://docs.dremio.com/dremio-cloud/bring-data/connect/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-postgresql-dremio-cloud&utm_content=alexmerced) for options.
 
@@ -64,7 +64,7 @@ Fill in the connection details:
 
 Choose one of two authentication methods:
 
-**Master Authentication (default):** Provide a username and password directly. This is the simplest option — enter the credentials for a PostgreSQL user that has `SELECT` permissions on the tables you want to query.
+**Master Authentication (default):** Provide a username and password directly. This is the simplest option : enter the credentials for a PostgreSQL user that has `SELECT` permissions on the tables you want to query.
 
 **Secret Resource URL:** Instead of storing the password in Dremio, provide an AWS Secrets Manager ARN (e.g., `arn:aws:secretsmanager:us-west-2:123456789012:secret:my-rds-secret-VNenFy`). Dremio fetches the password from Secrets Manager at connection time. This is the preferred option for production deployments because it centralizes credential management and supports rotation.
 
@@ -169,7 +169,7 @@ Dremio doesn't download entire PostgreSQL tables and process them locally. When 
 - **String functions:** CONCAT, SUBSTR, LENGTH, LOWER, UPPER, TRIM, REPLACE, REVERSE
 - **Date functions:** DATE_ADD, DATE_SUB, DATE_TRUNC (day, hour, month, quarter, year), EXTRACT
 
-This means a query like `SELECT department, AVG(salary) FROM postgres.hr.employees WHERE hire_date > '2023-01-01' GROUP BY department` runs mostly on PostgreSQL — Dremio sends the filter, aggregation, and grouping to Postgres and only transfers the summarized result.
+This means a query like `SELECT department, AVG(salary) FROM postgres.hr.employees WHERE hire_date > '2023-01-01' GROUP BY department` runs mostly on PostgreSQL : Dremio sends the filter, aggregation, and grouping to Postgres and only transfers the summarized result.
 
 ## Accelerate PostgreSQL Queries with Reflections
 
@@ -180,7 +180,7 @@ For queries that run frequently, create Reflections to avoid hitting PostgreSQL 
 3. Choose the columns and aggregations to include.
 4. Set the refresh interval (how often Dremio re-queries PostgreSQL to update the Reflection).
 
-After the Reflection is built, Dremio's query optimizer automatically routes matching queries to the Reflection instead of PostgreSQL. Your analysts see the same tables and write the same SQL — the acceleration is transparent.
+After the Reflection is built, Dremio's query optimizer automatically routes matching queries to the Reflection instead of PostgreSQL. Your analysts see the same tables and write the same SQL : the acceleration is transparent.
 
 This is particularly valuable for dashboard queries. BI tools like Tableau or Power BI connected to Dremio via Arrow Flight/ODBC get sub-second response times from Reflections, even though the source data lives in PostgreSQL.
 
@@ -211,7 +211,7 @@ The built-in AI Agent lets users ask questions about PostgreSQL data in plain En
 
 ### Dremio MCP Server
 
-The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects external AI chat clients — Claude, ChatGPT, and others — to your PostgreSQL data through Dremio. The hosted MCP Server provides OAuth authentication that propagates user identity and authorization for every interaction:
+The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects external AI chat clients : Claude, ChatGPT, and others,  to your PostgreSQL data through Dremio. The hosted MCP Server provides OAuth authentication that propagates user identity and authorization for every interaction:
 
 1. Create a Native OAuth application in Dremio Cloud
 2. Configure redirect URLs for your AI client (e.g., `https://claude.ai/api/mcp/auth_callback`)

@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-![Semantic layer vs metrics layer — the metrics layer is a subset](images/semantic_layer_seo/03/semantic-vs-metrics.png)
+![Semantic layer vs metrics layer : the metrics layer is a subset](images/semantic_layer_seo/03/semantic-vs-metrics.png)
 
 Both terms appear in every modern data architecture diagram. They're used interchangeably in conference talks, Slack threads, and vendor marketing. And almost nobody defines them precisely.
 

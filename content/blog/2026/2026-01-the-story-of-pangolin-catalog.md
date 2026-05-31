@@ -28,7 +28,7 @@ tags:
 
 ## 1. Introduction: A Holiday, an Agent, and an Idea
 
-In December 2025, Google released something that changed how I code—**Antigravity IDE**. It wasn’t just another brilliant editor. It came packed with AI agents that could write code, test it, refactor it, and even debug alongside you. Naturally, I had to try it out.
+In December 2025, Google released something that changed how I code - **Antigravity IDE**. It wasn’t just another brilliant editor. It came packed with AI agents that could write code, test it, refactor it, and even debug alongside you. Naturally, I had to try it out.
 
 I didn’t jump right into building a big project. Instead, I used it to make some tooling for [Dremio](https://www.dremio.com) and [Apache Iceberg](https://iceberg.apache.org), both technologies I work with frequently. That experience set the foundation for something bigger: [**Pangolin**](https://pangolincatalog.org), an open-source, feature-rich lakehouse catalog.
 
@@ -53,13 +53,13 @@ Once I felt confident in that workflow, writing specs, prompting the agent, chal
 
 ## 3. Rethinking the Lakehouse Catalog
 
-Catalogs are central to the Iceberg ecosystem. They’re how engines discover, manage, and track tables. But most catalogs out there either focus on infrastructure or metadata—not both.
+Catalogs are central to the Iceberg ecosystem. They’re how engines discover, manage, and track tables. But most catalogs out there either focus on infrastructure or metadata - not both.
 
 Some great projects inspired Pangolin:
 
 - [**Project Nessie**](https://projectnessie.org): Created at Dremio, Nessie brought Git-like versioning to data catalogs. It’s a brilliant idea that still powers tools like [Bauplan](https://www.bauplanlabs.com). But Nessie doesn’t support features like multi-tenancy or catalog federation.
 - [**Apache Polaris**](https://polaris.apache.org): Polaris, co-created by Dremio and Snowflake and now an Apache Incubator project, is well on its way to becoming the open standard. It supports RBAC, catalog federation, generic assets, and upcoming table services that proxy metadata processing.
-- **Business metadata platforms (DataHub, Atlan, Collibra, etc.)**: These tools focus on discovery and access workflows, and some now support Iceberg. But they bolt onto a catalog—they don’t start as one.
+- **Business metadata platforms (DataHub, Atlan, Collibra, etc.)**: These tools focus on discovery and access workflows, and some now support Iceberg. But they bolt onto a catalog - they don’t start as one.
 
 That got me thinking: *What if a single open source catalog could do it all?*
 
@@ -83,17 +83,17 @@ Here’s what ended up on the list:
 - **Credential vending**, with built-in support for AWS, Azure, GCP, and S3-compatible systems.
 - **Pluggable backends**, starting with PostgreSQL and MongoDB for metadata persistence.
 
-That’s a lot. But I didn’t set out to build a polished product—I just wanted to see if it was possible.
+That’s a lot. But I didn’t set out to build a polished product - I just wanted to see if it was possible.
 
 ![The features I wanted for Pangolin Catalog](https://i.imgur.com/4hxzR01.png)
 
 ## 5. Choosing the Stack: Why Rust, Python, and Svelte
 
-With the feature list in hand, the next decision was the tech stack. I know Python and JavaScript like the back of my hand, which would’ve made it easy to move fast. But I wanted something that would scale better—and maybe be a little less error-prone.
+With the feature list in hand, the next decision was the tech stack. I know Python and JavaScript like the back of my hand, which would’ve made it easy to move fast. But I wanted something that would scale better - and maybe be a little less error-prone.
 
 I considered three languages for the backend: **Java**, **Go**, and **Rust**.
 
-- Java is the standard in the data world. But writing clean, scalable Java means understanding the JVM inside and out. I know it—but not enough to move quickly.
+- Java is the standard in the data world. But writing clean, scalable Java means understanding the JVM inside and out. I know it - but not enough to move quickly.
 
 - Go is simple and efficient. Rust is strict and safe. Between the two, I picked **Rust**.
 
@@ -102,7 +102,7 @@ Rust’s compiler errors are frustrating at first but turn into a superpower. Th
 For the rest of the stack:
 - **Rust** powers the backend and CLI.
 - **Python** powers the SDK and scripting layer.
-- **Svelte** powers the UI—lightweight and reactive, but more complex than I expected once the feature count grew.
+- **Svelte** powers the UI - lightweight and reactive, but more complex than I expected once the feature count grew.
 
 All in, I ended up with a full stack that balanced experimentation and real-world usability. The only problem was... building it all over a holiday break.
 
@@ -124,7 +124,7 @@ By the end, Pangolin had three real interfaces: a Rust CLI, a Python SDK, and a 
 
 ![100 hours developing Pangolin Catlaog](https://i.imgur.com/AwXP27Y.png)
 
-## 7. What Pangolin Is—and What It Isn’t
+## 7. What Pangolin Is - and What It Isn’t
 
 Pangolin exists. You can run it. You can click around, create catalogs, register assets, request access, and vend credentials across clouds.
 

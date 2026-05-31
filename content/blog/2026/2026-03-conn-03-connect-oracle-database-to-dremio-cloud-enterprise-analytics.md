@@ -1,7 +1,7 @@
 ---
 title: "Connect Oracle Database to Dremio Cloud: Enterprise Analytics Without Data Movement"
 date: "2026-03-01"
-description: "Oracle Database runs the most critical enterprise applications in the world — ERP systems, financial ledgers, supply chain management, and HR platforms. Th..."
+description: "Oracle Database runs the most critical enterprise applications in the world : ERP systems, financial ledgers, supply chain management, and HR platforms. Th..."
 author: "Alex Merced"
 category: "Dremio Connectors"
 tags:
@@ -12,7 +12,7 @@ tags:
   - federated queries
 ---
 
-Oracle Database runs the most critical enterprise applications in the world — ERP systems, financial ledgers, supply chain management, and HR platforms. These systems generate massive volumes of data that business teams want to analyze, but running analytical queries directly against Oracle is expensive (license costs scale with CPU usage), complex (Oracle-specific SQL dialects and tooling), and risky (heavy queries can impact transactional performance).
+Oracle Database runs the most critical enterprise applications in the world : ERP systems, financial ledgers, supply chain management, and HR platforms. These systems generate massive volumes of data that business teams want to analyze, but running analytical queries directly against Oracle is expensive (license costs scale with CPU usage), complex (Oracle-specific SQL dialects and tooling), and risky (heavy queries can impact transactional performance).
 
 Dremio Cloud connects to Oracle Database and queries it in place using standard SQL. You don't need to license additional Oracle tools, build ETL pipelines, or export data to a separate warehouse. Dremio pushes filters and aggregations to Oracle, fetches only the results, and lets you join Oracle data with every other source in your organization in a single query.
 
@@ -20,7 +20,7 @@ This guide walks through the complete setup, including Oracle-specific features 
 
 ## Why Oracle Users Need Dremio
 
-**Oracle licensing costs make analytics expensive.** Oracle licenses are typically tied to CPU cores. Running analytical workloads on your production Oracle instance consumes CPU, which means higher licensing costs. Dremio's Reflections create pre-computed copies of frequently queried Oracle data. After the initial query, subsequent analytics hit the Reflection — not Oracle — reducing CPU consumption and license exposure.
+**Oracle licensing costs make analytics expensive.** Oracle licenses are typically tied to CPU cores. Running analytical workloads on your production Oracle instance consumes CPU, which means higher licensing costs. Dremio's Reflections create pre-computed copies of frequently queried Oracle data. After the initial query, subsequent analytics hit the Reflection : not Oracle,  reducing CPU consumption and license exposure.
 
 **Cross-system analytics require ETL.** Your financial data is in Oracle, your CRM data is in PostgreSQL, and your marketing data is in S3. Without a federation layer, joining these requires building ETL pipelines that extract data from each source, transform it, and load it into a central warehouse. That's months of engineering work. Dremio federates across all three sources with a single SQL query.
 
@@ -33,11 +33,11 @@ This guide walks through the complete setup, including Oracle-specific features 
 Before connecting Oracle to Dremio Cloud, confirm you have:
 
 - **Oracle hostname or IP address**
-- **Port number** — Oracle defaults to `1521`
-- **Service name** — the Oracle service name (not the SID) for your database
-- **Username and password** — an Oracle user with `SELECT` privileges on the relevant schemas
-- **Network access** — port 1521 must be reachable from Dremio Cloud
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-oracle-dremio-cloud&utm_content=alexmerced)
+- **Port number** : Oracle defaults to `1521`
+- **Service name** : the Oracle service name (not the SID) for your database
+- **Username and password** : an Oracle user with `SELECT` privileges on the relevant schemas
+- **Network access** : port 1521 must be reachable from Dremio Cloud
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-oracle-dremio-cloud&utm_content=alexmerced)
 
 ## Step-by-Step: Connect Oracle to Dremio Cloud
 
@@ -206,7 +206,7 @@ The [Dremio MCP Server](https://github.com/dremio/dremio-mcp) connects Claude, C
 2. Configure redirect URLs (e.g., `https://claude.ai/api/mcp/auth_callback` for Claude, `https://chatgpt.com/connector_platform_oauth_redirect` for ChatGPT)
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}` (US) or `mcp.eu.dremio.cloud/mcp/{project_id}` (EU)
 
-A CFO asks Claude "Compare department headcount and budget utilization across our Oracle ERP" and gets governed, accurate results from Oracle data — without knowing SQL or Oracle table structures.
+A CFO asks Claude "Compare department headcount and budget utilization across our Oracle ERP" and gets governed, accurate results from Oracle data : without knowing SQL or Oracle table structures.
 
 ### AI SQL Functions
 
@@ -241,12 +241,12 @@ WHERE department_size = 'Large';
 
 ## Reflections for Performance
 
-Oracle Database licensing is expensive — especially Enterprise Edition with Analytics and Diagnostics Packs. Reflections offload analytical queries:
+Oracle Database licensing is expensive : especially Enterprise Edition with Analytics and Diagnostics Packs. Reflections offload analytical queries:
 
 1. Navigate to the view in the **Catalog**
 2. Click the **Reflections** tab
 3. Choose **Raw Reflection** or **Aggregation Reflection**
-4. Select columns and set the **Refresh Interval** — for HR data, daily; for financial data, match to reporting cycles
+4. Select columns and set the **Refresh Interval** : for HR data, daily; for financial data, match to reporting cycles
 5. Click **Save**
 
 BI tools get sub-second responses from Reflections. Oracle focuses on transactional workloads. A department performance dashboard with hourly refreshes generates zero Oracle CPU consumption after the Reflection is built.
@@ -256,7 +256,7 @@ BI tools get sub-second responses from Reflections. Oracle focuses on transactio
 Oracle has its own security model (Oracle Database Vault, VPD), but it doesn't extend to non-Oracle sources. Dremio's Fine-Grained Access Control (FGAC) provides unified governance:
 
 - **Column masking:** Mask salary data, employee SSNs, and performance ratings from specific roles. An HR generalist sees headcount but not compensation details.
-- **Row-level filtering:** Department-level access — a department manager sees only their department. Regional HR sees only their region.
+- **Row-level filtering:** Department-level access : a department manager sees only their department. Regional HR sees only their region.
 - **Unified policies:** Same governance applies across Oracle, PostgreSQL, S3, and all other sources.
 
 These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, and MCP Server.
@@ -266,7 +266,7 @@ These policies apply across SQL Runner, BI tools (Arrow Flight/ODBC), AI Agent, 
 Arrow Flight provides 10-100x faster data transfer than JDBC/ODBC:
 
 - **Tableau:** Dremio connector for direct Arrow Flight access
-- **Power BI:** Dremio ODBC driver or native connector — no Oracle client needed
+- **Power BI:** Dremio ODBC driver or native connector : no Oracle client needed
 - **Python/Pandas:** `pyarrow.flight` for programmatic data access
 - **Looker:** Connect via JDBC
 - **dbt:** `dbt-dremio` for SQL-based transformations
@@ -275,7 +275,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Oracle data from their IDE. Ask Copilot "Show me understaffed departments from Oracle HR" and get SQL generated from your semantic layer — without knowing Oracle schema conventions.
+Dremio's VS Code extension with Copilot integration lets developers query Oracle data from their IDE. Ask Copilot "Show me understaffed departments from Oracle HR" and get SQL generated from your semantic layer : without knowing Oracle schema conventions.
 
 ## When to Keep Data in Oracle vs. Migrate
 

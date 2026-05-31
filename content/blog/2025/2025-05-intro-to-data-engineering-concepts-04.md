@@ -20,7 +20,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-For many data engineering tasks, real-time insights aren’t necessary. In fact, a large portion of the data processed across organizations happens in scheduled intervals—daily sales reports, weekly data refreshes, monthly billing cycles. This is where batch processing comes in, and despite the growing popularity of streaming, batch remains the backbone of many data-driven workflows.
+For many data engineering tasks, real-time insights aren’t necessary. In fact, a large portion of the data processed across organizations happens in scheduled intervals - daily sales reports, weekly data refreshes, monthly billing cycles. This is where batch processing comes in, and despite the growing popularity of streaming, batch remains the backbone of many data-driven workflows.
 
 In this post, we’ll explore what batch processing is, how it works under the hood, and why it’s still a critical technique in the data engineer’s toolbox.
 
@@ -30,7 +30,7 @@ Batch processing is the execution of data workflows on a predefined schedule or 
 
 This approach is particularly useful when data arrives in large quantities but doesn’t need to be acted on immediately. For example, processing daily transactions from a point-of-sale system or generating overnight reports for executive dashboards.
 
-Batch jobs are often triggered at set times—say, every night at 2 a.m.—and are designed to run until completion, often without user interaction. They can run for seconds, minutes, or even hours depending on the volume of data and complexity of the transformations.
+Batch jobs are often triggered at set times: say, every night at 2 a.m., and are designed to run until completion, often without user interaction. They can run for seconds, minutes, or even hours depending on the volume of data and complexity of the transformations.
 
 ## Under the Hood: How Batch Jobs Work
 
@@ -38,7 +38,7 @@ The anatomy of a batch job usually includes several stages. First, the job ident
 
 Next comes the transformation phase. This is where data is cleaned, filtered, joined with other datasets, and reshaped to fit its target structure. This phase can include tasks like date formatting, currency conversion, null value imputation, or the calculation of derived fields.
 
-Finally, the job writes the transformed data to its destination—often a data warehouse, data lake, or downstream reporting system.
+Finally, the job writes the transformed data to its destination - often a data warehouse, data lake, or downstream reporting system.
 
 To manage all of this, engineers rely on workflow orchestration tools. These tools provide scheduling, error handling, and logging capabilities to ensure that jobs run in the right order and can recover gracefully from failure.
 
@@ -56,7 +56,7 @@ One of the biggest advantages of batch processing is its simplicity. Since data 
 
 Batch jobs are also cost-efficient when working with large volumes of data that don’t require immediate availability. Processing once per day means you can spin up compute resources only when needed, rather than keeping systems running continuously.
 
-However, the main limitation is latency. If something happens in your business—say, a spike in fraudulent transactions—you won’t know about it until after the next batch job runs. For use cases that require faster insights or real-time responsiveness, batch processing isn’t sufficient.
+However, the main limitation is latency. If something happens in your business: say, a spike in fraudulent transactions, you won’t know about it until after the next batch job runs. For use cases that require faster insights or real-time responsiveness, batch processing isn’t sufficient.
 
 There’s also the issue of windowing and completeness. Since batch jobs process data in slices, late-arriving records can fall outside the intended window unless carefully managed. This adds complexity to pipeline design and requires thoughtful handling of time-based logic.
 

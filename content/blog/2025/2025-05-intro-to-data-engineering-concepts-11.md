@@ -20,9 +20,9 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-As data systems grow more complex, understanding where your data came from, how it has changed, and who is responsible for it becomes just as critical as the data itself. It’s not enough to know that a dataset exists—you need to know how it was created, whether it’s trustworthy, and how it fits into the broader system.
+As data systems grow more complex, understanding where your data came from, how it has changed, and who is responsible for it becomes just as critical as the data itself. It’s not enough to know that a dataset exists - you need to know how it was created, whether it’s trustworthy, and how it fits into the broader system.
 
-In this post, we’ll break down three interconnected concepts—metadata, data lineage, and governance—and explore why they’re essential to building transparent, scalable, and compliant data infrastructure.
+In this post, we’ll break down three interconnected concepts: metadata, data lineage, and governance, and explore why they’re essential to building transparent, scalable, and compliant data infrastructure.
 
 ## What Is Metadata?
 
@@ -36,7 +36,7 @@ Without metadata, even high-quality data becomes hard to use. Teams end up dupli
 
 ## Understanding Data Lineage
 
-Data lineage is the history of how data moves and changes through your systems. It traces the path from the original source—say, a transactional database or API—all the way to its final destination in a dashboard, report, or machine learning model.
+Data lineage is the history of how data moves and changes through your systems. It traces the path from the original source: say, a transactional database or API, all the way to its final destination in a dashboard, report, or machine learning model.
 
 Lineage tells you not just where the data is now, but how it got there. Which tables did it pass through? What transformations were applied? Was any filtering, aggregation, or enrichment performed?
 
@@ -60,7 +60,7 @@ To manage metadata, lineage, and governance effectively, many organizations turn
 
 These platforms often integrate with processing engines and orchestration tools to automatically collect lineage. For example, if a pipeline built in Airflow or dbt modifies a dataset, the lineage graph is updated to reflect that change.
 
-But tools alone aren’t enough. Teams need practices that reinforce good habits—such as documenting changes, defining clear data ownership, and reviewing access permissions regularly.
+But tools alone aren’t enough. Teams need practices that reinforce good habits - such as documenting changes, defining clear data ownership, and reviewing access permissions regularly.
 
 Automation can help, especially in dynamic environments where datasets are frequently added or updated. But governance must also be embedded into the culture. Engineers, analysts, and stakeholders all play a part in maintaining data integrity and clarity.
 
@@ -68,6 +68,6 @@ Automation can help, especially in dynamic environments where datasets are frequ
 
 Metadata, lineage, and governance are not isolated concerns. Together, they create a foundation for transparency and trust. They help organizations understand what data they have, how it’s being used, and whether it can be relied upon.
 
-Without this foundation, even the best-engineered pipelines can become liabilities. But with it, data becomes a strategic asset—one that teams can build on confidently, securely, and efficiently.
+Without this foundation, even the best-engineered pipelines can become liabilities. But with it, data becomes a strategic asset - one that teams can build on confidently, securely, and efficiently.
 
 In the next post, we’ll explore how workflow orchestration ties these pieces together, enabling you to manage complex data pipelines reliably across diverse tools and systems.

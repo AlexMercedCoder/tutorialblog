@@ -76,7 +76,7 @@ Use this checklist when you compare offerings. It helps reveal trade-offs betwee
 
 ## Catalog Optimization: Native vs. Neutral Approaches
 
-Once your Iceberg tables are in place, keeping them fast and cost-effective becomes a daily concern. File sizes grow unevenly, delete files stack up, and query times creep higher. This is where table optimization comes in—and where catalog differences start to matter.
+Once your Iceberg tables are in place, keeping them fast and cost-effective becomes a daily concern. File sizes grow unevenly, delete files stack up, and query times creep higher. This is where table optimization comes in - and where catalog differences start to matter.
 
 Most commercial catalogs fall into two categories:  
 - **Native Optimization Available**  
@@ -148,13 +148,13 @@ NOTE: Apache Amoro offers an open source optimization tool if looking for an ope
 - Limited to major cloud object storage unless using Apache Amoro
 - Adds another vendor and billing model to your stack
 
-When native optimization isn’t available, the best path depends on your team’s appetite for operational work. DIY gives you control. Neutral services give you speed. Either way, optimization remains a critical layer—whether you manage it yourself or let someone else handle it.
+When native optimization isn’t available, the best path depends on your team’s appetite for operational work. DIY gives you control. Neutral services give you speed. Either way, optimization remains a critical layer - whether you manage it yourself or let someone else handle it.
 
 ## 5. The Interoperability Spectrum
 
-One of the key promises of Apache Iceberg is engine interoperability. The Iceberg REST Catalog API was designed so any compliant engine—whether it's Spark, Flink, Trino, or Dremio—can access tables the same way. But in practice, not all catalogs offer equal levels of interoperability.
+One of the key promises of Apache Iceberg is engine interoperability. The Iceberg REST Catalog API was designed so any compliant engine: whether it's Spark, Flink, Trino, or Dremio, can access tables the same way. But in practice, not all catalogs offer equal levels of interoperability.
 
-Some catalogs expose full **read/write access** to external engines using the REST API. Others allow only reads—or place restrictions on how writes must be performed. This creates a spectrum, where catalogs differ in how open or engine-specific they are.
+Some catalogs expose full **read/write access** to external engines using the REST API. Others allow only reads - or place restrictions on how writes must be performed. This creates a spectrum, where catalogs differ in how open or engine-specific they are.
 
 Here’s how several major catalogs compare:
 
@@ -234,7 +234,7 @@ Here, we explore common deployment patterns and their implications:
 
 - *Benefits:*
   - Built-in REST Catalog support directly within storage (MinIO AIStor).
-  - Simplifies deployment—no separate metadata layer deployment.
+  - Simplifies deployment: no separate metadata layer deployment.
   - High concurrency and transactional consistency at scale.
 - *Trade-offs:*
   - Tightly bound to object storage vendor.
@@ -255,7 +255,7 @@ Here, we explore common deployment patterns and their implications:
 
 **Recommended Platforms:** DataHub Iceberg Catalog (OSS or Cloud) or using an external catalog (Dremio Catalog, Apache Polaris) connected into Datahub.
 
-Each pattern has architectural trade-offs. Rather than seeking a perfect catalog, successful teams prioritize **alignment with workflow needs**: engine independence, optimization automation, governance, or real-time ingestion. In some cases, hybrid strategies, like dual catalogs or catalog, neutral optimization overlays—provide the best of both worlds.
+Each pattern has architectural trade-offs. Rather than seeking a perfect catalog, successful teams prioritize **alignment with workflow needs**: engine independence, optimization automation, governance, or real-time ingestion. In some cases, hybrid strategies, like dual catalogs or catalog, neutral optimization overlays - provide the best of both worlds.
 
 ## Optimization Strategy Trade-offs: Native, Manual, or Vendor-Neutral
 
@@ -276,7 +276,7 @@ Many commercial catalogs offer built-in optimization features tightly coupled wi
 Platforms like **Dremio**, **AWS Glue**, and **Databricks** provide SQL-native or automated processes (e.g., `OPTIMIZE TABLE`, auto-compaction) that manage these operations behind the scenes.
 
 - ✅ *Pros:*
-  - Zero setup—optimization is automatic or declarative.
+  - Zero setup - optimization is automatic or declarative.
   - Built-in cost and performance tuning.
   - Reduces engineering overhead.
 
@@ -287,10 +287,10 @@ Platforms like **Dremio**, **AWS Glue**, and **Databricks** provide SQL-native o
 
 ### 2. **Manual Optimization (Bring Your Own Engine)**
 
-Open-source Iceberg supports all required lifecycle management operations—compaction, snapshot cleanup, rewrite manifests—but leaves it up to users to implement these jobs using engines like **Apache Spark**, **Flink**, **Apache Amoro** or **Trino**.
+Open-source Iceberg supports all required lifecycle management operations: compaction, snapshot cleanup, rewrite manifests, but leaves it up to users to implement these jobs using engines like **Apache Spark**, **Flink**, **Apache Amoro** or **Trino**.
 
 - ✅ *Pros:*
-  - Total freedom—no vendor lock-in.
+  - Total freedom: no vendor lock-in.
   - Can be integrated into any data pipeline or orchestration framework (Airflow, dbt, Dagster).
 
 - ⚠️ *Cons:*
@@ -302,7 +302,7 @@ This model works well with catalogs like **Apache Polaris**, **OneLake**, or **S
 
 ### 3. **Catalog-Neutral Optimization Vendors (e.g., Ryft.io)**
 
-A newer middle ground is emerging with vendors like **Ryft.io**, which offer catalog-agnostic optimization as a service. These platforms connect to your existing Iceberg tables—via any REST-compliant catalog—and run automated optimization jobs externally.
+A newer middle ground is emerging with vendors like **Ryft.io**, which offer catalog-agnostic optimization as a service. These platforms connect to your existing Iceberg tables: via any REST-compliant catalog, and run automated optimization jobs externally.
 
 - ✅ *Pros:*
   - Centralized, automated optimization regardless of catalog.
@@ -326,7 +326,7 @@ There is no one-size-fits-all solution:
 | Manual (BYO Engine)  | Open source, full control        | Operational complexity                   |
 | Vendor-Neutral (Ryft)| Multi-cloud & multi-engine ops   | Added service dependency, still emerging |
 
-Choosing an optimization strategy is not just about performance—it’s a decision about **how much control you need**, **how much complexity you can absorb**, and **how much optionality you want to preserve** in your architecture.
+Choosing an optimization strategy is not just about performance - it’s a decision about **how much control you need**, **how much complexity you can absorb**, and **how much optionality you want to preserve** in your architecture.
 
 ## Architectural Patterns for Balancing Optimization and Interoperability
 
@@ -381,15 +381,15 @@ The modern Iceberg ecosystem isn’t about picking a single vendor. Instead, it�
 | Stream → Lakehouse | Confluent TableFlow | Fixed strategy (snapshots) | Limited |
 | Delta → Iceberg bridge | OneLake + XTable | Virtualized sync | High for reads |
 
-Designing an effective catalog strategy means embracing modularity—using REST interoperability as the glue while tailoring optimization and governance layers to the needs of your teams.
+Designing an effective catalog strategy means embracing modularity, using REST interoperability as the glue while tailoring optimization and governance layers to the needs of your teams.
 
 ### Conclusion: Choosing the Right Iceberg Catalog for Your Strategy
 
-The Apache Iceberg REST Catalog ecosystem has matured into a diverse landscape of offerings—each with its own balance of **interoperability**, **optimization capability**, and **vendor integration strategy**. From hyperscalers to open-source initiatives, every catalog presents unique strengths and trade-offs.
+The Apache Iceberg REST Catalog ecosystem has matured into a diverse landscape of offerings: each with its own balance of **interoperability**, **optimization capability**, and **vendor integration strategy**. From hyperscalers to open-source initiatives, every catalog presents unique strengths and trade-offs.
 
 At the heart of this evolution is a simple but profound architectural truth:
 
-> **Compute and metadata must decouple—but performance, governance, and interoperability must still align.**
+> **Compute and metadata must decouple - but performance, governance, and interoperability must still align.**
 
 #### 🧠 Key Takeaways
 

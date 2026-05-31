@@ -30,13 +30,13 @@ In this post, we'll explore what orchestration means in the context of data engi
 
 At the simplest level, scheduling is about running tasks at a certain time. A cron job that triggers a Python script every morning is a form of scheduling. For small pipelines with few dependencies, this can be enough.
 
-But modern data systems rarely involve just one job. Instead, they include chains of tasks—data extractions, file transformations, validation checks, and loads into various targets. These tasks have dependencies, need error handling, and often require conditional logic. This is where orchestration becomes essential.
+But modern data systems rarely involve just one job. Instead, they include chains of tasks - data extractions, file transformations, validation checks, and loads into various targets. These tasks have dependencies, need error handling, and often require conditional logic. This is where orchestration becomes essential.
 
-Workflow orchestration is the discipline of managing task execution across a defined sequence, ensuring that tasks run in the correct order, on time, and with awareness of success or failure. It's not just about launching scripts—it's about understanding how those scripts relate to one another, how they behave under different conditions, and how to recover when something goes wrong.
+Workflow orchestration is the discipline of managing task execution across a defined sequence, ensuring that tasks run in the correct order, on time, and with awareness of success or failure. It's not just about launching scripts - it's about understanding how those scripts relate to one another, how they behave under different conditions, and how to recover when something goes wrong.
 
 ## Directed Acyclic Graphs (DAGs)
 
-Most orchestration systems use the concept of a Directed Acyclic Graph (DAG) to represent workflows. In a DAG, each node represents a task, and edges represent dependencies. The "acyclic" part means there are no loops—each task runs once, and the flow moves in one direction.
+Most orchestration systems use the concept of a Directed Acyclic Graph (DAG) to represent workflows. In a DAG, each node represents a task, and edges represent dependencies. The "acyclic" part means there are no loops: each task runs once, and the flow moves in one direction.
 
 This structure allows you to define complex workflows declaratively. For example, you might define a pipeline where data is first extracted from an API, then validated, transformed, and finally loaded into a data warehouse. If any step fails, the system can stop the pipeline, alert the team, or retry the task based on configuration.
 
@@ -69,7 +69,7 @@ Another key practice is modularity. Instead of building large monolithic DAGs, b
 
 ## Observability and Alerting
 
-A well-orchestrated pipeline doesn’t just run—it tells you how it’s running. Observability is about surfacing the right information at the right time so that engineers can respond to issues quickly.
+A well-orchestrated pipeline doesn’t just run - it tells you how it’s running. Observability is about surfacing the right information at the right time so that engineers can respond to issues quickly.
 
 Good orchestration tools provide dashboards, logs, and metrics. But equally important are alerts that notify the right people when something goes wrong. Alerts should be actionable and avoid noise. A system that sends alerts on every minor warning will eventually be ignored.
 
@@ -77,6 +77,6 @@ Integrating with monitoring platforms like Prometheus, Grafana, or external aler
 
 ## Orchestration as the Backbone
 
-Workflow orchestration isn’t just a technical layer—it’s the backbone of operational data systems. It connects ingestion, transformation, validation, and delivery in a reliable and auditable way. When done well, it turns complex processes into predictable, repeatable workflows that teams can build on confidently.
+Workflow orchestration isn’t just a technical layer - it’s the backbone of operational data systems. It connects ingestion, transformation, validation, and delivery in a reliable and auditable way. When done well, it turns complex processes into predictable, repeatable workflows that teams can build on confidently.
 
 In the next post, we’ll explore how to build scalable pipelines, including how to think about performance, parallelism, and distribution when dealing with large or fast-growing datasets.

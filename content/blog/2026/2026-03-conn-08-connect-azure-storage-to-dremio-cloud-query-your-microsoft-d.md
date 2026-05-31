@@ -12,21 +12,21 @@ tags:
   - federated queries
 ---
 
-Azure Storage is Microsoft's cloud storage platform, spanning Blob Storage, Azure Data Lake Storage Gen2 (ADLS Gen2), and Azure Files. If your organization uses Microsoft Azure, your data lake almost certainly lives in Azure Storage — Parquet files from Azure Data Factory pipelines, CSV exports from Azure SQL Database, JSON event streams from Azure Event Hubs, and raw data from Azure IoT Hub all land in Azure Storage containers.
+Azure Storage is Microsoft's cloud storage platform, spanning Blob Storage, Azure Data Lake Storage Gen2 (ADLS Gen2), and Azure Files. If your organization uses Microsoft Azure, your data lake almost certainly lives in Azure Storage : Parquet files from Azure Data Factory pipelines, CSV exports from Azure SQL Database, JSON event streams from Azure Event Hubs, and raw data from Azure IoT Hub all land in Azure Storage containers.
 
 Dremio Cloud connects directly to Azure Storage and lets you query these files in place using standard SQL. You don't need Azure Synapse Analytics (DWU-based pricing), Azure Databricks (DBU costs), or HDInsight (cluster management) to run analytical queries against your data lake. Dremio reads the data, accelerates repeated queries with Reflections, and federates Azure Storage with every other source in your data ecosystem.
 
-Many Azure customers face a fragmented analytics experience: Synapse for warehouse workloads, Databricks for data engineering, Power BI for visualization, and Azure Data Explorer for log analytics — each with its own pricing model, access control, and query interface. Dremio consolidates the analytical layer by querying Azure Storage and other Azure (or non-Azure) services from a single SQL engine with unified governance and AI capabilities. Dremio reads Parquet, CSV, JSON, Delta Lake, and Apache Iceberg table formats from Azure Blob Storage and ADLS Gen2 containers. It pushes projection and filtering into its vectorized query engine and caches frequently accessed data on local NVMe drives (Columnar Cloud Cache, or C3) for near-instantaneous repeat queries.
+Many Azure customers face a fragmented analytics experience: Synapse for warehouse workloads, Databricks for data engineering, Power BI for visualization, and Azure Data Explorer for log analytics : each with its own pricing model, access control, and query interface. Dremio consolidates the analytical layer by querying Azure Storage and other Azure (or non-Azure) services from a single SQL engine with unified governance and AI capabilities. Dremio reads Parquet, CSV, JSON, Delta Lake, and Apache Iceberg table formats from Azure Blob Storage and ADLS Gen2 containers. It pushes projection and filtering into its vectorized query engine and caches frequently accessed data on local NVMe drives (Columnar Cloud Cache, or C3) for near-instantaneous repeat queries.
 
 ## Why Azure Storage Users Need Dremio
 
 ### SQL Without Azure Synapse Costs
 
-Azure Synapse serverless SQL charges per terabyte of data processed. For large datasets queried frequently — dashboard refreshes, ad-hoc exploration, scheduled reports — costs accumulate quickly. Dremio's Reflections eliminate repeat scans by caching pre-computed results. C3 caching further reduces Azure Storage API calls for frequently accessed files. Your first query scans Azure Storage; subsequent matching queries hit Dremio's cache.
+Azure Synapse serverless SQL charges per terabyte of data processed. For large datasets queried frequently : dashboard refreshes, ad-hoc exploration, scheduled reports,  costs accumulate quickly. Dremio's Reflections eliminate repeat scans by caching pre-computed results. C3 caching further reduces Azure Storage API calls for frequently accessed files. Your first query scans Azure Storage; subsequent matching queries hit Dremio's cache.
 
 ### Federation Beyond Azure
 
-Your Azure data lake holds event data and ETL outputs, but your operational database is in PostgreSQL on AWS, your marketing data is in Google BigQuery, and your CRM is in Salesforce (exported to S3). Dremio federates across all three cloud providers in a single SQL query — no ADF (Azure Data Factory) pipelines needed.
+Your Azure data lake holds event data and ETL outputs, but your operational database is in PostgreSQL on AWS, your marketing data is in Google BigQuery, and your CRM is in Salesforce (exported to S3). Dremio federates across all three cloud providers in a single SQL query : no ADF (Azure Data Factory) pipelines needed.
 
 ### Apache Iceberg Table Management
 
@@ -42,7 +42,7 @@ Dremio's AI Agent, MCP Server, and AI SQL Functions make your Azure data queryab
 - **Authentication:** Azure Active Directory OAuth 2.0, Shared Access Key, or Shared Access Signature (SAS) Token
 - **Container names** you want to query
 - **Network access** from Dremio Cloud to Azure Storage endpoints
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-azure-storage-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-azure-storage-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
 
 ## Step-by-Step: Connect Azure Storage to Dremio Cloud
 
@@ -145,7 +145,7 @@ Connect [Claude or ChatGPT](https://github.com/dremio/dremio-mcp) to your Azure 
 2. Configure redirect URLs
 3. Connect using `mcp.dremio.cloud/mcp/{project_id}`
 
-An operations team member can ask Claude "Show me a summary of our Azure sales data by region this month" — no SQL required.
+An operations team member can ask Claude "Show me a summary of our Azure sales data by region this month" : no SQL required.
 
 ### AI SQL Functions
 
@@ -207,7 +207,7 @@ These policies apply across SQL Runner, BI tools (via Arrow Flight/ODBC), AI Age
 
 Dremio's Arrow Flight connector provides 10-100x faster data transfer than JDBC/ODBC. After building views over your Azure data:
 
-- **Power BI:** Use Dremio's native connector or ODBC driver — ideal for Azure-centric organizations
+- **Power BI:** Use Dremio's native connector or ODBC driver : ideal for Azure-centric organizations
 - **Tableau:** Use the Dremio connector for direct Arrow Flight access
 - **Python/Pandas:** Use `pyarrow.flight` for high-speed data access
 - **dbt:** Use `dbt-dremio` adapter for SQL-based transformations
@@ -217,7 +217,7 @@ All queries benefit from Reflections, governance, and the semantic layer.
 
 ## VS Code Copilot Integration
 
-Dremio's VS Code extension with Copilot integration lets developers query Azure data directly from their IDE. Ask Copilot "Show me daily transaction trends from Azure storage" and it generates SQL using your semantic layer — without leaving your development environment.
+Dremio's VS Code extension with Copilot integration lets developers query Azure data directly from their IDE. Ask Copilot "Show me daily transaction trends from Azure storage" and it generates SQL using your semantic layer : without leaving your development environment.
 
 ## Reflections and C3 Caching
 
@@ -227,7 +227,7 @@ For frequently queried Azure Storage data, create Reflections to pre-compute res
 2. Click the **Reflections** tab and create a Raw or Aggregation Reflection
 3. Select columns and set the refresh interval
 
-C3 (Columnar Cloud Cache) automatically caches frequently accessed file data on local NVMe drives for sub-second access. You don't configure C3 manually — it works transparently.
+C3 (Columnar Cloud Cache) automatically caches frequently accessed file data on local NVMe drives for sub-second access. You don't configure C3 manually : it works transparently.
 
 ## When to Keep Data in Azure Storage vs. Migrate to Iceberg
 
@@ -243,10 +243,10 @@ Azure Storage offers multiple access tiers that affect query performance:
 
 | Tier | Access Latency | Cost | Dremio Recommendation |
 |---|---|---|---|
-| **Hot** | Milliseconds | Highest storage, lowest access | Active analytics data — best performance |
-| **Cool** | Milliseconds | Lower storage, higher access | Infrequent queries — still fast |
-| **Cold** | Milliseconds | Even lower storage, higher access | Archival analytics — acceptable latency |
-| **Archive** | Hours (rehydrate required) | Lowest storage, highest access | Not suitable for Dremio queries — rehydrate first |
+| **Hot** | Milliseconds | Highest storage, lowest access | Active analytics data : best performance |
+| **Cool** | Milliseconds | Lower storage, higher access | Infrequent queries : still fast |
+| **Cold** | Milliseconds | Even lower storage, higher access | Archival analytics : acceptable latency |
+| **Archive** | Hours (rehydrate required) | Lowest storage, highest access | Not suitable for Dremio queries : rehydrate first |
 
 For optimal Dremio performance, keep analytical data in Hot or Cool tiers. Use Azure lifecycle management policies to automatically transition data between tiers based on last access time.
 
@@ -286,6 +286,6 @@ This eliminates the need to load all Azure Storage data into Synapse, reducing S
 
 ## Get Started
 
-Azure Storage users can query their cloud data lake with SQL, federate with other sources, build a semantic layer, and enable AI analytics — all without data movement or ETL pipelines.
+Azure Storage users can query their cloud data lake with SQL, federate with other sources, build a semantic layer, and enable AI analytics : all without data movement or ETL pipelines.
 
 [Try Dremio Cloud free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=connector-azure-storage-dremio-cloud&utm_content=alexmerced) and connect your Azure Storage accounts alongside your other data sources.

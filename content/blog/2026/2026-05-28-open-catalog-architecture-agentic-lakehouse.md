@@ -52,7 +52,7 @@ Dremio's Open Catalog extends Apache Polaris in two important directions.
 
 **Federated sources:** Dremio's Open Catalog formula is: `Open Catalog = 1 Apache Polaris Catalog + Dremio Federated Sources`. A single Dremio catalog namespace can include Iceberg tables in S3, PostgreSQL schemas, Snowflake warehouses, MongoDB collections, and Kafka streams. All of these appear in the same unified namespace, accessible through the same SQL interface.
 
-For AI agents, this means the catalog is the single authoritative source of what data exists. The agent doesn't need to know whether "active_customers" is stored in Iceberg or PostgreSQL — it queries the catalog, which routes the query appropriately.
+For AI agents, this means the catalog is the single authoritative source of what data exists. The agent doesn't need to know whether "active_customers" is stored in Iceberg or PostgreSQL : it queries the catalog, which routes the query appropriately.
 
 **Semantic layer:** Every table in Dremio's Open Catalog can have wiki documentation, column labels, and linked virtual datasets. The AI agent can query the semantic layer directly: "What does this column mean? What business metric does this table support? Is this the authoritative source?"
 
@@ -60,7 +60,7 @@ Dremio's AI metadata generation creates initial wiki drafts automatically by sam
 
 ## Catalog-as-Agent-Context
 
-In a well-designed agentic lakehouse, the catalog doesn't just store metadata — it actively serves context to the agent at query time.
+In a well-designed agentic lakehouse, the catalog doesn't just store metadata : it actively serves context to the agent at query time.
 
 When an agent connects through Dremio's [MCP server](https://docs.dremio.com/current/developer/mcp-server/), it receives:
 - A description of available schemas and tables, with their wiki documentation
@@ -68,7 +68,7 @@ When an agent connects through Dremio's [MCP server](https://docs.dremio.com/cur
 - Metadata about which virtual datasets represent canonical business metrics
 - Access control context that determines which tables and columns the agent can query
 
-This catalog-as-context pattern means the agent doesn't need to explore the schema through multiple round-trips — the relevant context is provided upfront. Investigation still happens iteratively, but the agent starts with business-relevant context rather than generic database metadata.
+This catalog-as-context pattern means the agent doesn't need to explore the schema through multiple round-trips : the relevant context is provided upfront. Investigation still happens iteratively, but the agent starts with business-relevant context rather than generic database metadata.
 
 The quality of this context depends directly on the quality of the catalog documentation. Investing in documentation is investing in agent accuracy.
 

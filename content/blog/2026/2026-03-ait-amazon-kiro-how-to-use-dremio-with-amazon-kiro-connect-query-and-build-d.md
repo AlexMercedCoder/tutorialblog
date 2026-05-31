@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-Amazon Kiro is an agentic AI IDE from AWS that introduces spec-driven development to the coding workflow. Instead of jumping straight to code, Kiro helps you define structured specifications — requirements, technical designs, and task breakdowns — before writing a single line. It then generates code that follows those specs and keeps everything in sync as the project evolves. Dremio is a unified lakehouse platform that provides business context through its semantic layer, universal data access through query federation, and interactive speed through Reflections and Apache Arrow.
+Amazon Kiro is an agentic AI IDE from AWS that introduces spec-driven development to the coding workflow. Instead of jumping straight to code, Kiro helps you define structured specifications : requirements, technical designs, and task breakdowns,  before writing a single line. It then generates code that follows those specs and keeps everything in sync as the project evolves. Dremio is a unified lakehouse platform that provides business context through its semantic layer, universal data access through query federation, and interactive speed through Reflections and Apache Arrow.
 
 Connecting them gives Kiro's agent the context it needs to write accurate Dremio SQL, generate data pipelines, and build applications against your lakehouse. Kiro's spec-driven approach is especially well-suited for data projects: you can define your data model requirements in plain language, let Kiro generate the technical design, and then have it build the implementation with full traceability back to the original requirements.
 
@@ -29,7 +29,7 @@ If you do not already have Kiro installed:
 1. **Download Kiro** from [kiro.dev](https://kiro.dev/) (available for macOS, Linux, and Windows).
 2. **Sign in** with your AWS account, Google account, or GitHub account.
 3. **Open a project** by selecting File > Open Folder and pointing to your project directory.
-4. **Explore the interface** — Kiro includes a file explorer, an AI chat panel, a specs panel for viewing requirements/design/tasks, and a hooks panel for event-driven automations.
+4. **Explore the interface** : Kiro includes a file explorer, an AI chat panel, a specs panel for viewing requirements/design/tasks, and a hooks panel for event-driven automations.
 
 Kiro is built on the VS Code platform, so existing VS Code extensions and themes are compatible. It is free to use during the preview period.
 
@@ -76,7 +76,7 @@ Test by asking the AI chat: "What tables are available in Dremio?"
 
 ### Kiro Powers
 
-Kiro supports "Powers" — curated bundles of MCP servers, steering files, and hooks for specific development workflows. If an AWS or community Dremio Power becomes available, you can install it from the Powers panel to get a pre-configured Dremio development environment.
+Kiro supports "Powers" : curated bundles of MCP servers, steering files, and hooks for specific development workflows. If an AWS or community Dremio Power becomes available, you can install it from the Powers panel to get a pre-configured Dremio development environment.
 
 ### Self-Hosted Alternative
 
@@ -108,7 +108,7 @@ Tell Kiro to create specs for your data project:
 
 Kiro generates three spec files in `.kiro/specs/`:
 
-**requirements.md** — User stories in structured format:
+**requirements.md** : User stories in structured format:
 ```markdown
 1. As a data engineer, I want to ingest raw data from Dremio bronze tables
    so that I can process it through the pipeline.
@@ -118,9 +118,9 @@ Kiro generates three spec files in `.kiro/specs/`:
    so that I can build dashboards and reports.
 ```
 
-**design.md** — Technical design covering architecture, data flow, table schemas, and technology choices.
+**design.md** : Technical design covering architecture, data flow, table schemas, and technology choices.
 
-**tasks.md** — A breakdown of implementation tasks that Kiro tracks as you build.
+**tasks.md** : A breakdown of implementation tasks that Kiro tracks as you build.
 
 ### Adding Dremio Conventions to Specs
 
@@ -132,7 +132,7 @@ Kiro updates the design.md and tasks.md to reflect these conventions. All code g
 
 ### Steering Files
 
-Kiro also supports steering files — markdown documents that provide persistent context similar to `.cursorrules` or `CLAUDE.md`. Create a `.kiro/steering/dremio.md` file:
+Kiro also supports steering files : markdown documents that provide persistent context similar to `.cursorrules` or `CLAUDE.md`. Create a `.kiro/steering/dremio.md` file:
 
 ```markdown
 # Dremio Conventions
@@ -192,11 +192,11 @@ Kiro's hooks system offers a unique approach to maintaining data project consist
 
 Hooks are event-driven automations that trigger when files change. Create hooks that automatically validate Dremio SQL:
 
-**On SQL file save** — A hook that validates SQL syntax against Dremio conventions:
+**On SQL file save** : A hook that validates SQL syntax against Dremio conventions:
 
 > "Create a hook that triggers when any .sql file is saved. It should read the file, validate that it uses CREATE FOLDER IF NOT EXISTS instead of CREATE SCHEMA, checks for proper table path formatting, and flags any deprecated function names."
 
-**On pipeline code change** — A hook that updates tests:
+**On pipeline code change** : A hook that updates tests:
 
 > "Create a hook that triggers when any Python file in the pipelines/ directory changes. It should update the corresponding test file to match the new pipeline logic, using dremioframe mocking patterns."
 

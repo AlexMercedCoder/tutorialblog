@@ -53,7 +53,7 @@ Apache Iceberg is incredibly powerful, but it is not self-maintaining. Every tim
 
 The enterprise alternative to a DIY build is a managed, open platform. 
 
-Choosing a managed platform does not violate the "no vendor lock-in" mandate—provided the platform honors the open architecture. Dremio, for example, natively integrates all four of these Apache projects out of the box. 
+Choosing a managed platform does not violate the "no vendor lock-in" mandate - provided the platform honors the open architecture. Dremio, for example, natively integrates all four of these Apache projects out of the box. 
 
 When you deploy Dremio, you get a fully featured engine running Apache Arrow in its memory layer, querying Apache Iceberg tables stored in Apache Parquet formats, tracked by an internal Apache Polaris catalog. 
 

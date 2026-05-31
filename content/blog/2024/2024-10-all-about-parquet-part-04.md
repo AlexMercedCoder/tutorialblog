@@ -15,7 +15,7 @@ tags:
 - [Iceberg Lakehouse Engineering Video Playlist](https://www.youtube.com/watch?v=SIriNcVIGJQ&list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe)
 
 
- When working with large datasets, schema changes—whether it’s adding new fields, modifying data types, or removing columns—are inevitable. This is where **schema evolution** comes into play. In this post, we’ll dive into how Parquet handles schema changes and why this flexibility is essential in dynamic data environments. We’ll also explore how Parquet's schema evolution compares to other file formats and the practical implications for data engineers.
+ When working with large datasets, schema changes: whether it’s adding new fields, modifying data types, or removing columns, are inevitable. This is where **schema evolution** comes into play. In this post, we’ll dive into how Parquet handles schema changes and why this flexibility is essential in dynamic data environments. We’ll also explore how Parquet's schema evolution compares to other file formats and the practical implications for data engineers.
 
 ## What is Schema Evolution?
 

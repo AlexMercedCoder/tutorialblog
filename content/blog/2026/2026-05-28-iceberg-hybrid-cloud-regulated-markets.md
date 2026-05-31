@@ -18,7 +18,7 @@ Apache Iceberg resolves this by separating what the data is stored as from where
 
 ## The Data Residency Problem in Regulated Markets
 
-Japan's Act on the Protection of Personal Information (APPI) and the Financial Services Agency (FSA) guidelines restrict where personal and financial data can be processed. Germany's BAFIN guidelines and the EU's GDPR impose similar constraints. These regulations don't just limit storage — in some cases, they constrain which compute resources can access sensitive rows.
+Japan's Act on the Protection of Personal Information (APPI) and the Financial Services Agency (FSA) guidelines restrict where personal and financial data can be processed. Germany's BAFIN guidelines and the EU's GDPR impose similar constraints. These regulations don't just limit storage : in some cases, they constrain which compute resources can access sensitive rows.
 
 Proprietary cloud warehouses create a compliance problem because they bundle storage and compute into a single hosted system. Your data goes into their infrastructure. You may have some region selection options, but the catalog, access control, and audit logs all run in the vendor's cloud. For regulated Japanese institutions, that means customer data flowing through infrastructure they don't control.
 
@@ -28,7 +28,7 @@ The result is a two-system architecture that most regulated enterprises default 
 
 Iceberg tables store their data in Parquet files on object storage. That storage can be on-premises (using S3-compatible systems like MinIO or Ceph), in a private cloud, or in a public cloud region that meets residency requirements. The Iceberg table format itself doesn't dictate where the storage lives.
 
-The Iceberg catalog — which tracks table metadata, schema, and file locations — is also storage-agnostic. You can run an open-source Iceberg REST catalog entirely within your own data center. Compute engines connect to that catalog to discover tables and get file locations. No data ever leaves your controlled environment unless you explicitly configure an engine to move it.
+The Iceberg catalog : which tracks table metadata, schema, and file locations,  is also storage-agnostic. You can run an open-source Iceberg REST catalog entirely within your own data center. Compute engines connect to that catalog to discover tables and get file locations. No data ever leaves your controlled environment unless you explicitly configure an engine to move it.
 
 This creates an architecture where:
 
@@ -59,7 +59,7 @@ Not all data in a regulated institution is sensitive. General ledger aggregates,
 
 The challenge is joining sensitive on-premises tables with non-sensitive cloud tables in a single query. Iceberg's open catalog standard makes this possible through catalog federation. A query engine connected to both catalogs can reference tables from each in the same SQL statement. The engine plans the query, reads from each location according to the credentials it holds, and assembles the result.
 
-Dremio's query federation handles this pattern directly. It connects to multiple catalogs — one on-premises, one in the cloud — and presents them in a unified namespace. An analyst writes a single SQL query. Dremio handles the cross-environment execution, applying access control from each catalog at the appropriate step.
+Dremio's query federation handles this pattern directly. It connects to multiple catalogs : one on-premises, one in the cloud,  and presents them in a unified namespace. An analyst writes a single SQL query. Dremio handles the cross-environment execution, applying access control from each catalog at the appropriate step.
 
 The on-premises data never moves to the cloud. The cloud data never gets pulled into the on-premises system unnecessarily. Predicate pushdown filters data at the source before it crosses the network boundary.
 
@@ -81,7 +81,7 @@ Start with one regulated dataset, deploy an on-premises Polaris instance, and va
 
 Regulated institutions need to produce complete access records for auditors on demand. "Complete" means: who accessed which data, from which system, at what time, and what SQL they ran.
 
-An Iceberg deployment built on Apache Polaris and Dremio gives you this at two levels. The Polaris catalog log captures every metadata request — table schema lookups, file location requests, and access control checks. The Dremio audit log captures every SQL query, the user who ran it, the tables accessed, and the result row count.
+An Iceberg deployment built on Apache Polaris and Dremio gives you this at two levels. The Polaris catalog log captures every metadata request : table schema lookups, file location requests, and access control checks. The Dremio audit log captures every SQL query, the user who ran it, the tables accessed, and the result row count.
 
 Combined, these logs provide a chain of custody from the user request through catalog authorization to storage access. That's the audit trail BAFIN auditors and FSA examiners expect.
 
@@ -91,7 +91,7 @@ Store both log streams in your compliance-approved log management system, not ju
 
 One benefit of the Iceberg format that's easy to overlook: you can upgrade your query engine without migrating your data.
 
-With a proprietary warehouse, switching vendors means exporting every table, converting formats, and reloading. With Iceberg, your data stays in the same Parquet files on the same object storage. Upgrading from an older Trino version to a newer one, or switching from Spark to Dremio for interactive queries, requires only a catalog connection change — not a data migration.
+With a proprietary warehouse, switching vendors means exporting every table, converting formats, and reloading. With Iceberg, your data stays in the same Parquet files on the same object storage. Upgrading from an older Trino version to a newer one, or switching from Spark to Dremio for interactive queries, requires only a catalog connection change : not a data migration.
 
 For regulated institutions that move slowly on infrastructure changes (and most do), this matters. You can evaluate a new query engine against your production data before committing to a cutover. If the new engine produces different results on the same SQL, you investigate the discrepancy before you rely on the new system.
 

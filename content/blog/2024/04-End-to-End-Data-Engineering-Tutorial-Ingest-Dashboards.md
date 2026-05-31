@@ -383,7 +383,7 @@ Now, head to `localhost:9047` in your browser to set up your Dremio admin accoun
         - Key: fs.s3a.endpoint | Value: minio:9000
         - Key: dremio.s3.compat | Value: true
 
-Click on “Save,” and the source will be added to Dremio. You can then run full DDL and DML SQL against it. Dremio turns your data lake into a data warehouse—a data lakehouse!
+Click on “Save,” and the source will be added to Dremio. You can then run full DDL and DML SQL against it. Dremio turns your data lake into a data warehouse: a data lakehouse!
 
 Now we can connect superset and build BI dashboards over any data we have connected to Dremio which can not only include our data lake but many sources like Postgres, SQLServer, Mongo, ElasticSearch, Snowflake, Hadoop, ADLS, S3, AWS Glue, Hive and much more!
 

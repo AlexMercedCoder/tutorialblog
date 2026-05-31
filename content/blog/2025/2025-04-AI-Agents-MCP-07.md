@@ -1,7 +1,7 @@
 ---
-title: A Journey from AI to LLMs and MCP - 7 - Under the Hood — The Architecture of MCP and Its Core Components
+title: A Journey from AI to LLMs and MCP - 7 - Under the Hood : The Architecture of MCP and Its Core Components
 date: "2025-04-11"
-description: "Under the Hood — The Architecture of MCP and Its Core Components"
+description: "Under the Hood : The Architecture of MCP and Its Core Components"
 author: "Alex Merced"
 category: "AI"
 tags:
@@ -12,7 +12,7 @@ tags:
   - AI Agents
 ---
 
-# A Journey from AI to LLMs and MCP - 7 - Under the Hood — The Architecture of MCP and Its Core Components
+# A Journey from AI to LLMs and MCP - 7 - Under the Hood : The Architecture of MCP and Its Core Components
 
 ## Free Resources  
 - **[Free Apache Iceberg Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=AItoLLMS&utm_content=alexmerced&utm_term=external_blog)**  
@@ -22,7 +22,7 @@ tags:
 - **[Iceberg Lakehouse Engineering Video Playlist](https://youtube.com/playlist?list=PLsLAVBjQJO0p0Yq1fLkoHvt2lEJj5pcYe&si=WTSnqjXZv6Glkc3y)**  
 - **[Ultimate Apache Iceberg Resource Guide](https://medium.com/data-engineering-with-dremio/ultimate-directory-of-apache-iceberg-resources-e3e02efac62e)** 
 
-In our last post, we introduced the **Model Context Protocol (MCP)** as a standard way to connect AI models and agents to tools, data, and workflows—much like how the Apache Iceberg REST protocol brings interoperability to data engines.
+In our last post, we introduced the **Model Context Protocol (MCP)** as a standard way to connect AI models and agents to tools, data, and workflows - much like how the Apache Iceberg REST protocol brings interoperability to data engines.
 
 Now it’s time to open the black box.
 
@@ -111,7 +111,7 @@ Before communication starts:
 
 Each message is wrapped in a **transport layer** (more on that next).
 
-## Transport Layer — How Messages Move
+## Transport Layer : How Messages Move
 
 MCP supports multiple transport mechanisms:
 
@@ -185,7 +185,7 @@ By standardizing communication between LLMs and tools:
 - You can build servers once and use them across different LLM clients (Claude, custom, etc.)
 - You get **clear separation of concerns**: tools, data, and models are independently managed
 
-## 🔮 Coming Up Next: Resources in MCP — Serving Relevant Data Securely
+## 🔮 Coming Up Next: Resources in MCP : Serving Relevant Data Securely
 
 In the next post, we’ll zoom in on the **Resources** capability:
 - How to structure resources

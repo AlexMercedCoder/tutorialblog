@@ -28,9 +28,9 @@ By the end of this tutorial, you'll have:
 
 ## Prerequisites
 
-- **Dremio Cloud account** — [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-classify-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
-- **AI enabled** — go to Admin → Project Settings → Preferences → AI section and enable AI features
-- **Model Provider configured** — Dremio provides a hosted LLM by default, or you can connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI) under the AI preferences
+- **Dremio Cloud account** : [sign up free for 30 days](https://www.dremio.com/get-started?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=pag&utm_term=ai-classify-dremio-cloud&utm_content=alexmerced) with $400 in compute credits
+- **AI enabled** : go to Admin → Project Settings → Preferences → AI section and enable AI features
+- **Model Provider configured** : Dremio provides a hosted LLM by default, or you can connect your own (OpenAI, Anthropic, Google Gemini, AWS Bedrock, Azure OpenAI) under the AI preferences
 
 > **Note:** Tables in the built-in Open Catalog use `folder.subfolder.table_name` without a catalog prefix. External sources use `source_name.schema.table_name`.
 
@@ -47,9 +47,9 @@ AI_CLASSIFY(
 ```
 
 **Parameters:**
-- **model_name** (optional) — specify a particular model like `'gpt.4o'`. Format is `modelProvider.modelName`. If omitted, Dremio uses your default configured model.
-- **prompt** — the text you want classified. This is typically a column value or a concatenation of columns that gives the LLM enough context.
-- **categories** — an `ARRAY` of possible labels. The LLM must return one of these values. Supports `VARCHAR`, `INT`, `FLOAT`, and `BOOLEAN` types.
+- **model_name** (optional) : specify a particular model like `'gpt.4o'`. Format is `modelProvider.modelName`. If omitted, Dremio uses your default configured model.
+- **prompt** : the text you want classified. This is typically a column value or a concatenation of columns that gives the LLM enough context.
+- **categories** : an `ARRAY` of possible labels. The LLM must return one of these values. Supports `VARCHAR`, `INT`, `FLOAT`, and `BOOLEAN` types.
 
 The return type matches the array element type. If you pass `ARRAY['Positive', 'Negative', 'Neutral']`, you get a `VARCHAR` back. If you pass `ARRAY[1, 2, 3, 4, 5]`, you get an `INT`.
 
@@ -300,8 +300,8 @@ AI function queries are more resource-intensive than standard SQL. Dremio provid
 
 ```sql
 -- Dremio provides these routing functions for workload management:
--- query_calls_ai_functions() — returns true if the query uses AI functions
--- query_has_attribute('AI_FUNCTIONS') — same check, different syntax
+-- query_calls_ai_functions() : returns true if the query uses AI functions
+-- query_has_attribute('AI_FUNCTIONS') : same check, different syntax
 ```
 
 In your Dremio Cloud project settings, you can create engine routing rules that automatically direct queries containing AI functions to a dedicated engine. This prevents a large classification batch job from competing with your executive dashboards for compute resources. Set up a separate engine with appropriate scaling for AI workloads, and create a routing rule using `query_calls_ai_functions()` to send AI queries there automatically.
@@ -376,10 +376,10 @@ Run `AI_CLASSIFY` once via CTAS to materialize results. Build Reflections on the
 
 ## Next Steps
 
-1. **Connect real data sources** — replace the `feedback_data` folder with federated connections to your actual CRM, support platform, and review system
-2. **Add Fine-Grained Access Control (FGAC)** — mask customer names or PII in classified results so analysts see sentiment patterns without accessing personal data
-3. **Experiment with Boolean classification** — use `ARRAY[true, false]` for binary decisions like "Is this review about a security concern?" or "Does this ticket mention data loss?"
-4. **Scale with Reflections** — create Reflections on your materialized classification tables to accelerate dashboard queries
+1. **Connect real data sources** : replace the `feedback_data` folder with federated connections to your actual CRM, support platform, and review system
+2. **Add Fine-Grained Access Control (FGAC)** : mask customer names or PII in classified results so analysts see sentiment patterns without accessing personal data
+3. **Experiment with Boolean classification** : use `ARRAY[true, false]` for binary decisions like "Is this review about a security concern?" or "Does this ticket mention data loss?"
+4. **Scale with Reflections** : create Reflections on your materialized classification tables to accelerate dashboard queries
 
 If you're running manual classification processes today, whether it's tagging support tickets, scoring reviews, or categorizing feedback, `AI_CLASSIFY` replaces those workflows with a single SQL query. The classification runs inside the same platform where your data lives, governed by the same access controls, and immediately available to every BI tool and AI agent connected to Dremio.
 

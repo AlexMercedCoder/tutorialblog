@@ -52,7 +52,7 @@ Data lakes are often built on top of distributed processing frameworks like **Ap
 
 ### 5. **Partitioning and Predicate Pushdown**
 
-Parquet supports **partitioning**—a key feature in data lakes. Partitioning means that datasets are divided into smaller, more manageable chunks based on the values of certain columns (e.g., partitioning data by date). When queries are run on partitioned Parquet data, query engines can skip over entire partitions that do not match the query, drastically improving performance.
+Parquet supports **partitioning**: a key feature in data lakes. Partitioning means that datasets are divided into smaller, more manageable chunks based on the values of certain columns (e.g., partitioning data by date). When queries are run on partitioned Parquet data, query engines can skip over entire partitions that do not match the query, drastically improving performance.
 
 In addition to partitioning, Parquet’s **predicate pushdown** capability allows query engines to apply filters (predicates) directly at the file or row group level, avoiding the need to read unnecessary data. This is particularly useful in large-scale environments where minimizing data read is crucial to maintaining performance.
 

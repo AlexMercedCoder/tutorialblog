@@ -12,7 +12,7 @@ tags:
   - data lakehouse
 ---
 
-![Data catalog and semantic layer — complementary systems bridged together](images/semantic_layer_seo/04/catalog-vs-semantic.png)
+![Data catalog and semantic layer : complementary systems bridged together](images/semantic_layer_seo/04/catalog-vs-semantic.png)
 
 "We already have a data catalog, so we don't need a semantic layer." This is one of the most common misconceptions in modern data architecture. Catalogs and semantic layers both deal with metadata. They both improve data accessibility. But they solve fundamentally different problems.
 
@@ -35,7 +35,7 @@ A data catalog is fundamentally a **passive system**. You search it, browse it, 
 A semantic layer defines what data **means** and how to **use it correctly**. It's an active system that sits between your raw data and the tools querying it.
 
 Key functions:
-- **Metric definitions**: Revenue, Churn Rate, Active Users — calculated one way, everywhere
+- **Metric definitions**: Revenue, Churn Rate, Active Users : calculated one way, everywhere
 - **Query translation**: Converts business questions into optimized SQL
 - **Access enforcement**: Row-level security and column masking applied at query time
 - **Documentation**: Wikis and labels attached to views and columns
@@ -44,7 +44,7 @@ A semantic layer **actively participates** in every query. When a user asks "Wha
 
 ## Side-by-Side Comparison
 
-![Data catalog vs. semantic layer in action — search vs. query](images/semantic_layer_seo/04/catalog-vs-semantic-action.png)
+![Data catalog vs. semantic layer in action : search vs. query](images/semantic_layer_seo/04/catalog-vs-semantic-action.png)
 
 | Dimension | Data Catalog | Semantic Layer |
 |---|---|---|
@@ -69,7 +69,7 @@ The best architectures integrate both. The catalog handles discovery and lineage
 
 ![Catalog and semantic layer combined in an integrated architecture](images/semantic_layer_seo/04/catalog-architecture.png)
 
-An integrated system gives you a single interface where data discovery and business context exist side by side. You search the catalog to find a dataset. You see its semantic layer definition — the metric formulas, documentation, labels, and access policies — alongside the catalog metadata (lineage, quality, ownership).
+An integrated system gives you a single interface where data discovery and business context exist side by side. You search the catalog to find a dataset. You see its semantic layer definition : the metric formulas, documentation, labels, and access policies,  alongside the catalog metadata (lineage, quality, ownership).
 
 Dremio achieves this with its [Open Catalog](https://www.dremio.com/blog/5-ways-dremio-delivers-an-apache-iceberg-lakehouse-without-the-headaches/?utm_source=ev_buffer&utm_medium=influencer&utm_campaign=next-gen-dremio&utm_term=blog-021826-02-18-2026&utm_content=alexmerced) (built on Apache Polaris, the open-source Iceberg REST catalog standard) combined with its semantic layer features:
 

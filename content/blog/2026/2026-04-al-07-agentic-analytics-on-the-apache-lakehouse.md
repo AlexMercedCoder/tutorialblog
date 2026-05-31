@@ -48,7 +48,7 @@ When an AI agent receives a user prompt, it first reads these semantic Wikis. Th
 
 Agentic analytics creates a massive new compute burden. When executives and business lines can ask natural language questions, the volume of unpredictable SQL queries skyrockets. Human database administrators cannot manually tune indexes or write materialized views fast enough to support this scale.
 
-You need AI to accelerate AI. Dremio tackles this with Autonomous Reflections. The platform continuously monitors query patterns—originating from both humans and AI agents—over a seven-day rolling window. 
+You need AI to accelerate AI. Dremio tackles this with Autonomous Reflections. The platform continuously monitors query patterns: originating from both humans and AI agents, over a seven-day rolling window. 
 
 ![Autonomous Reflections lifecycle showing query monitoring, background creation, and query acceleration](images/apache-lakehouse/07/./autonomous-reflections.png)
 

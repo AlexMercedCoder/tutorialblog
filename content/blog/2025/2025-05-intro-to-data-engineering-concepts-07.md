@@ -26,7 +26,7 @@ In this post, we'll break down what makes a data warehouse different from other 
 
 ## The Role of a Data Warehouse
 
-At a high level, a data warehouse collects data from multiple operational systems and stores it in a way that makes analysis easy and consistent. Instead of digging through individual source systems—like sales platforms, CRM tools, or web analytics—users can query a centralized warehouse that’s been curated and modeled for insight.
+At a high level, a data warehouse collects data from multiple operational systems and stores it in a way that makes analysis easy and consistent. Instead of digging through individual source systems: like sales platforms, CRM tools, or web analytics, users can query a centralized warehouse that’s been curated and modeled for insight.
 
 This consolidation allows organizations to apply consistent definitions for metrics, reduce the risk of conflicting data interpretations, and dramatically improve performance for analytical workloads.
 
@@ -36,15 +36,15 @@ Where a transactional database is designed to handle lots of small, rapid reads 
 
 A traditional data warehouse is structured with a clear separation between compute and storage. In legacy on-premise systems like Teradata or Oracle, both functions were tightly coupled. In modern cloud-native systems like Snowflake or BigQuery, storage and compute are decoupled, which allows more flexible scaling.
 
-The core of a warehouse is the schema—the logical structure defining how data is organized into tables, relationships, and hierarchies. As discussed in the previous post, these tables often follow star or snowflake patterns, with fact tables surrounded by dimension tables that provide context.
+The core of a warehouse is the schema: the logical structure defining how data is organized into tables, relationships, and hierarchies. As discussed in the previous post, these tables often follow star or snowflake patterns, with fact tables surrounded by dimension tables that provide context.
 
 One of the key components of a warehouse is its query engine. This engine is built to efficiently execute SQL queries, taking advantage of indexing, partitioning, and columnar storage formats to return results quickly even when scanning billions of rows.
 
-Data warehouses also maintain metadata—information about data types, table relationships, and data lineage—that helps users navigate and trust the system. Many modern platforms also offer built-in tools for access control, versioning, and data classification to support governance.
+Data warehouses also maintain metadata: information about data types, table relationships, and data lineage, that helps users navigate and trust the system. Many modern platforms also offer built-in tools for access control, versioning, and data classification to support governance.
 
 ## Performance Optimization: Partitioning and Clustering
 
-As warehouses scale, query performance becomes a key concern. It’s not enough to simply store the data—you also need to retrieve it quickly and cost-effectively.
+As warehouses scale, query performance becomes a key concern. It’s not enough to simply store the data - you also need to retrieve it quickly and cost-effectively.
 
 One common optimization is **partitioning**, which breaks up large tables into smaller, manageable chunks based on a field like date, region, or product category. When a query specifies a filter on that field, the engine can skip over partitions that aren’t relevant, significantly reducing scan times.
 
@@ -56,7 +56,7 @@ Columnar storage is also key to performance. Unlike row-based storage, which kee
 
 Getting data into the warehouse is typically done through ETL or ELT processes. These pipelines extract data from source systems, apply transformations, and load the result into warehouse tables.
 
-Loading can happen in batches—say, every hour or once a day—or in micro-batches that simulate near-real-time ingestion. The right frequency depends on your business needs and the capabilities of your orchestration tools.
+Loading can happen in batches: say, every hour or once a day, or in micro-batches that simulate near-real-time ingestion. The right frequency depends on your business needs and the capabilities of your orchestration tools.
 
 Incremental loading is often preferred over full reloads. By only processing new or changed records, pipelines reduce load times and warehouse compute costs. This usually requires tracking change data through mechanisms like timestamps or change data capture (CDC).
 
@@ -74,7 +74,7 @@ Each of these platforms supports ANSI SQL, integrates with major BI tools, and o
 
 ## Wrapping Up
 
-A data warehouse isn’t just a place to store data—it’s the system of record for analytics. Its structure, performance, and accessibility determine how quickly stakeholders can make informed decisions.
+A data warehouse isn’t just a place to store data - it’s the system of record for analytics. Its structure, performance, and accessibility determine how quickly stakeholders can make informed decisions.
 
 Designing and maintaining an effective warehouse requires a thoughtful approach to modeling, data loading, and performance tuning. As your organization grows, so do the expectations placed on your warehouse to handle increasing complexity, scale, and demand for real-time insight.
 

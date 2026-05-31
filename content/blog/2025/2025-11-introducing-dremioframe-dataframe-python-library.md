@@ -10,9 +10,9 @@ tags:
   - Python
 ---
 
-If you're a data analyst or Python developer who prefers chaining expressive `.select()` and `.mutate()` calls over writing raw SQL, you're going to love `dremioframe` — the unofficial Python DataFrame library for Dremio (currently in Alpha).
+If you're a data analyst or Python developer who prefers chaining expressive `.select()` and `.mutate()` calls over writing raw SQL, you're going to love `dremioframe` : the unofficial Python DataFrame library for Dremio (currently in Alpha).
 
-Dremio has always made it easy to query across cloud and on-prem datasets using SQL. Some users prefer the ergonomics of DataFrame-style APIs, where transformations are composable, readable, and testable — especially when working in notebooks or building data pipelines in Python.
+Dremio has always made it easy to query across cloud and on-prem datasets using SQL. Some users prefer the ergonomics of DataFrame-style APIs, where transformations are composable, readable, and testable : especially when working in notebooks or building data pipelines in Python.
 
 That’s where `dremioframe` comes in. It bridges the gap between SQL and Python by letting you build Dremio queries using intuitive DataFrame methods like `.select()`, `.filter()`, `.mutate()`, and more. Under the hood, it still generates SQL and pushes down queries to Dremio, but you write it the way you're used to in Python.
 
@@ -20,7 +20,7 @@ That’s where `dremioframe` comes in. It bridges the gap between SQL and Python
 > You can [sign up for a free 30-day trial of Dremio Cloud](https://drmevn.fyi/am-get-started), which includes full access to Agentic AI features, native Apache Iceberg integration, and support for all Iceberg catalogs (e.g. AWS Glue, Nessie, Snowflake, Hive, etc.).  
 > Or if you'd rather run Dremio locally for free, check out the [Community Edition setup guide](https://www.dremio.com/blog/intro-to-dremio-nessie-and-apache-iceberg-on-your-laptop/). Community Edition doesn’t include Agentic AI or full catalog support, but still lets you run federated queries and work with some Iceberg catalogs like Glue and Nessie.
 
-In this post, we’ll walk through how to get started with `dremioframe`—from installing the library and configuring authentication, to writing powerful queries using SQL, DataFrame chaining, and expression builders. We’ll wrap up with a look at some of the more advanced features it unlocks for analytics, ingestion, and administration.
+In this post, we’ll walk through how to get started with `dremioframe` - from installing the library and configuring authentication, to writing powerful queries using SQL, DataFrame chaining, and expression builders. We’ll wrap up with a look at some of the more advanced features it unlocks for analytics, ingestion, and administration.
 
 Let’s dive in.
 
@@ -137,11 +137,11 @@ pdf = df.toPandas()
 
 **Tip:** Dremio optimizes and accelerates this query under the hood, especially when you're on [Dremio Cloud](https://drmevn.fyi/am-get-started), where features like autonomous reflection caching are automatic and don't need manual usage.
 
-If you prefer a hybrid approach, dremioframe allows mixing SQL and DataFrame APIs freely—which we'll explore next.
+If you prefer a hybrid approach, dremioframe allows mixing SQL and DataFrame APIs freely, which we'll explore next.
 
 ## Querying with `.select()` and SQL Functions
 
-The real power of `dremioframe` comes from its expressive, Pandas-like query builder. You can use `.select()` to pick columns and include SQL expressions, just like in raw SQL — but with the clarity and structure of method chaining.
+The real power of `dremioframe` comes from its expressive, Pandas-like query builder. You can use `.select()` to pick columns and include SQL expressions, just like in raw SQL : but with the clarity and structure of method chaining.
 
 Let’s say we want to select a few fields and apply a SQL function like `UPPER()` to transform the state name:
 
@@ -170,7 +170,7 @@ Want to experiment yourself? Spin up a [free Dremio Cloud workspace](https://drm
 
 ## Transforming Data with `.mutate()`
 
-While `.select()` is great for choosing and computing columns in one go, `.mutate()` lets you **add new derived columns** to an existing selection — much like `mutate()` in R or `.assign()` in Pandas.
+While `.select()` is great for choosing and computing columns in one go, `.mutate()` lets you **add new derived columns** to an existing selection : much like `mutate()` in R or `.assign()` in Pandas.
 
 Let’s take the same query from before and add a new column that calculates population density by dividing population by a fictional land area (just for demo purposes):
 
@@ -201,7 +201,7 @@ Try experimenting with your own columns! If you’re using [Dremio Cloud](https:
 
 ## Building Queries Programmatically with the Function API
 
-For more complex or dynamic queries, `dremioframe` provides a powerful **function builder API** through the `F` module — similar to how PySpark or dplyr work. This lets you construct expressions programmatically rather than writing raw SQL strings.
+For more complex or dynamic queries, `dremioframe` provides a powerful **function builder API** through the `F` module : similar to how PySpark or dplyr work. This lets you construct expressions programmatically rather than writing raw SQL strings.
 
 Let’s rewrite the previous example using `F`:
 
@@ -235,7 +235,7 @@ print(df)
 
 - Arithmetic operations like / can be done using Python operators.
 
-This method is especially useful when building queries dynamically — for instance, choosing which fields to include or filter based on user input.
+This method is especially useful when building queries dynamically : for instance, choosing which fields to include or filter based on user input.
 
 **Tip:** You can mix function objects with standard strings if needed. Just make sure each expression passed to `.select()` or `.mutate()` is either a string or an `F` object.
 
@@ -334,7 +334,7 @@ With just a few lines of code, you can:
 
 By using `dremioframe`, you get the best of both worlds: the expressiveness of Python and the performance of Dremio’s SQL engine.
 
-> Don’t forget — you can [sign up for a free 30-day trial of Dremio Cloud](https://drmevn.fyi/am-get-started) to experience all the advanced features like Agentic AI and native support for all Iceberg catalogs.  
+> Don’t forget : you can [sign up for a free 30-day trial of Dremio Cloud](https://drmevn.fyi/am-get-started) to experience all the advanced features like Agentic AI and native support for all Iceberg catalogs.  
 > Or, if you're experimenting locally, [try Community Edition](https://www.dremio.com/blog/intro-to-dremio-nessie-and-apache-iceberg-on-your-laptop/) to run federated queries and interact with Glue or Nessie-based Iceberg tables.
 
 The `dremioframe` project is still evolving, but it’s already a powerful toolkit for building readable, maintainable, and scalable data workflows in Python. Give it a try and let us know what you build.
