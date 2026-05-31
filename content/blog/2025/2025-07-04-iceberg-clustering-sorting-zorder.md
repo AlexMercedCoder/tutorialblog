@@ -1,5 +1,5 @@
 ---
-title: Smarter Data Layout : Sorting and Clustering Iceberg Tables
+title: Smarter Data Layout  – Sorting and Clustering Iceberg Tables
 date: "2025-08-05"
 author: Alex Merced
 description: Improve query performance in Apache Iceberg by organizing your data layout with sorting and Z-order clustering. Learn how to reduce scan cost and improve filter effectiveness.

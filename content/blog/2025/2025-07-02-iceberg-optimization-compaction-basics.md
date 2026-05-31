@@ -1,5 +1,5 @@
 ---
-title: The Basics of Compaction : Bin Packing Your Data for Efficiency
+title: The Basics of Compaction  – Bin Packing Your Data for Efficiency
 date: "2025-07-22"
 author: Alex Merced
 description: Learn how standard compaction works in Apache Iceberg and why bin packing your data files is essential for maintaining query performance and cost efficiency.

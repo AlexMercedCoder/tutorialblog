@@ -1,5 +1,5 @@
 ---
-title: A Journey from AI to LLMs and MCP - 8 - Resources in MCP : Serving Relevant Data Securely to LLMs
+title: A Journey from AI to LLMs and MCP - 8 - Resources in MCP  – Serving Relevant Data Securely to LLMs
 date: "2025-04-12"
 description: "Resources in MCP : Serving Relevant Data Securely to LLMs"
 author: "Alex Merced"

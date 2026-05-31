@@ -1,5 +1,5 @@
 ---
-title: A Journey from AI to LLMs and MCP - 3 - Boosting LLM Performance : Fine-Tuning, Prompt Engineering, and RAG
+title: A Journey from AI to LLMs and MCP - 3 - Boosting LLM Performance  – Fine-Tuning, Prompt Engineering, and RAG
 date: "2025-04-07"
 description: "Boosting LLM Performance : Fine-Tuning, Prompt Engineering, and RAG"
 author: "Alex Merced"

@@ -1,5 +1,5 @@
 ---
-title: A Journey from AI to LLMs and MCP - 2 - How LLMs Work : Embeddings, Vectors, and Context Windows
+title: A Journey from AI to LLMs and MCP - 2 - How LLMs Work  – Embeddings, Vectors, and Context Windows
 date: "2025-04-06"
 description: "How LLMs Work : Embeddings, Vectors, and Context Windows"
 author: "Alex Merced"

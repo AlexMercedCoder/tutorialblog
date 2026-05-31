@@ -1,5 +1,5 @@
 ---
-title: Hidden Pitfalls : Compaction and Partition Evolution in Apache Iceberg
+title: Hidden Pitfalls  – Compaction and Partition Evolution in Apache Iceberg
 date: "2025-09-02"
 author: Alex Merced
 description: Partition evolution in Apache Iceberg is a powerful feature, but if not managed carefully, it can introduce fragmentation and impact compaction performance. Learn how to handle it effectively.

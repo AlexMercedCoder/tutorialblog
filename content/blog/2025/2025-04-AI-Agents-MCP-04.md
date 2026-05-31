@@ -1,5 +1,5 @@
 ---
-title: A Journey from AI to LLMs and MCP - 4 - What Are AI Agents : And Why They're the Future of LLM Applications
+title: A Journey from AI to LLMs and MCP - 4 - What Are AI Agents  – And Why They're the Future of LLM Applications
 date: "2025-04-08"
 description: "What Are AI Agents : And Why They're the Future of LLM Applications"
 author: "Alex Merced"

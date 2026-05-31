@@ -1,5 +1,5 @@
 ---
-title:  Journey from AI to LLMs and MCP - 6 - Enter the Model Context Protocol (MCP) : The Interoperability Layer for AI Agents
+title:  Journey from AI to LLMs and MCP - 6 - Enter the Model Context Protocol (MCP)  – The Interoperability Layer for AI Agents
 date: "2025-04-10"
 description: "Enter the Model Context Protocol (MCP) : The Interoperability Layer for AI Agents"
 author: "Alex Merced"

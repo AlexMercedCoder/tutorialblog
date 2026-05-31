@@ -1,5 +1,5 @@
 ---
-title: A Journey from AI to LLMs and MCP - 9 - Tools in MCP : Giving LLMs the Power to Act
+title: A Journey from AI to LLMs and MCP - 9 - Tools in MCP  – Giving LLMs the Power to Act
 date: "2025-04-13"
 description: "Tools in MCP : Giving LLMs the Power to Act"
 author: "Alex Merced"
