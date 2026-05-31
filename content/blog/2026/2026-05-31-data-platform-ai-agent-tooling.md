@@ -140,7 +140,7 @@ The hybrid search capability combines SQL filtering with full-text search and ve
 
 Spice AI's data acceleration layer caches query results and pre-computes aggregations. For agent workloads with repeated access patterns, this avoids hitting the source database for every query. Spice detects access patterns and optimizes the cache automatically.
 
-Bauplan Labs
+## Bauplan Labs
 
 Bauplan is the most unusual entry on this list. It does not provide an AI agent. It provides infrastructure where AI agents build data pipelines safely.
 
