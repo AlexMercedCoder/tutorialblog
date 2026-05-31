@@ -148,11 +148,13 @@ Anthropic's desktop app wraps Claude Code in a graphical interface. You get the 
 
 Claude Desktop integrates with your local file system and runs code directly on your machine. It is simpler than Cursor or Windsurf, but that simplicity is the point. You do not need to learn a new IDE to use it.
 
+Claude Desktop includes **Dispatch**, a feature that lets you hand off long-running tasks to run in the background while you keep working. You tell Dispatch what needs done, and Claude picks up from where it left off whenever you reopen the app. It is not quite a 24/7 agent, but it is the closest thing to one that runs on your local machine. Close the laptop, reopen it later, and Dispatch resumes the task without you needing to re-explain anything.
+
 ### Codex Desktop
 
 OpenAI's desktop application mirrors Claude Desktop but for the GPT-5 series models. It runs on macOS and Windows and lets non-engineers dispatch coding tasks through a chat interface. The cloud sandbox executes code remotely, so you do not need a development environment.
 
-The agent can autonomously explore your codebase, make changes, and open pull requests. For teams already on ChatGPT Pro ($200 per month), Codex Desktop is effectively free.
+Codex Desktop has its own version of background execution. You can kick off a task -- refactor a module, add tests, update documentation -- and switch to other work while the agent keeps running in the cloud. The results appear as a pull request when done. Combined with the ChatGPT Pro subscription, this makes Codex Desktop a strong contender for teams that want async coding without managing infrastructure.
 
 ### GitHub Copilot in VS Code
 
@@ -467,3 +469,5 @@ The agentic coding tool landscape in 2026 is defined by diversity and choice. Fo
 Start with one category. If you live in the terminal, try Claude Code or OpenCode. If you prefer a GUI, Cursor or Windsurf. If you want to delegate background work, OpenClaw or Hermes Agent. Connect everything through OpenRouter or LiteLLM for model routing.
 
 Stick with that stack for a month. See what works, what frustrates you, and what you wish the tools did differently. The ecosystem is moving fast enough that a gap today might be a feature next month. That pace is exciting, but it also means the best setup is the one you actually use.
+
+If this deep dive got you thinking about how agentic systems fit into the bigger picture of data architecture and AI workflows, I have written extensively on both topics. Check out my books on data architecture and agentic AI at [books.alexmerced.com](http://books.alexmerced.com).
