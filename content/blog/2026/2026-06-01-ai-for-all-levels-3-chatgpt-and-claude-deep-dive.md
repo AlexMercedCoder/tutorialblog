@@ -16,9 +16,9 @@ Part 2 of this series covered the extensive free AI tools Google offers through 
 
 This is Part 3 of "Catching Up with Using AI for All Levels." If you are just joining, start with Part 1 for the fundamentals of how AI works and Part 2 for the free tools. This post covers the paid side: what each service charges, what you get at each tier, the desktop apps and advanced features, and practical examples of how to use everything for daily productivity.
 
-**Return to Part 1: What AI Is and Isnt**
+[Return to Part 1: What AI Is and Isnt](/2026/2026-06-01-ai-for-all-levels-1-what-ai-is-and-isnt/)
 
-**Return to Part 2: Getting Started for Free**
+[Return to Part 2: Getting Started for Free](/2026/2026-06-01-ai-for-all-levels-2-getting-started-for-free/)
 
 [Skip to Part 4: Specialized AI Tools for Creation](/2026/2026-06-01-ai-for-all-levels-4-specialized-ai-tools/)
 
@@ -252,6 +252,6 @@ Part 4 of this series moves beyond text assistants into specialized AI tools. We
 
 [Return to Part 2: Getting Started for Free](/2026/2026-06-01-ai-for-all-levels-2-getting-started-for-free/)
 
-**[Continue to Part 4: Specialized AI Tools for Creation]**
+[Continue to Part 4: Specialized AI Tools for Creation](/2026/2026-06-01-ai-for-all-levels-4-specialized-ai-tools/)
 
 [Skip to Part 5: Going Advanced: Open Source, Local Models, and Agent Tools](/2026/2026-06-01-ai-for-all-levels-5-going-advanced/)
