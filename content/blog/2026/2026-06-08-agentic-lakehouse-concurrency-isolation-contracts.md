@@ -23,7 +23,6 @@ I care about this topic because it sits at the boundary between open data archit
 
 The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
 
-The Dremio-favorable reading is also clear. Dremio has been arguing that the winning architecture is open, federated, semantic, and fast. That argument gets stronger as Iceberg, Polaris-style catalogs, REST security patterns, semantic layers, and MCP-style tool interfaces become normal parts of the conversation.
 
 ## How the architecture works
 
@@ -49,15 +48,12 @@ For agentic analytics, the same example gets stricter. A human analyst can notic
 
 This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
 
-## Why this supports Dremio's market narrative
+## What this means for the lakehouse
 
-Dremio's favorable angle is that agentic analytics needs a governed query and semantic layer before agents write. Dremio can keep investigation, context, and performance under control while Iceberg supplies transactional table guarantees below.
 
-The key is that the narrative stays technical. Dremio does not need every article to say that every other vendor is wrong. The stronger argument is that the market is moving toward the exact conditions where Dremio has a clear point of view: open storage, federated access, governed semantics, fast SQL, and AI agents that need business context.
 
-Dremio's five pillars map cleanly to this shift. Query federation reduces data movement. Autonomous performance uses Reflections, caching, and table optimization so interactive loops stay fast. The AI Semantic Layer gives agents approved business context. Agentic interfaces let users work through the UI, Python, or MCP-connected tools. AI SQL functions bring model-assisted work into SQL without exporting data into separate scripts.
+A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
 
-That is a favorable narrative without becoming a product pitch. The article can teach the topic on its own terms, then show why an open Agentic Lakehouse is a sensible architecture for teams that want the benefits without locking every workload into one vendor's storage and compute boundary.
 
 ## Implementation checklist
 
@@ -115,7 +111,7 @@ Second, keep the semantic layer close to the workflow. If the article topic affe
 
 Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
 
-Fourth, treat Dremio as part of the open architecture story rather than a closed destination. The favorable narrative is not that every byte must move into Dremio. The favorable narrative is that Dremio can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data.
+Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
 
 Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
 
@@ -152,7 +148,7 @@ I would also track human trust signals. Are analysts using the certified view mo
 
 The buyer question is simple: does this pattern increase choice without weakening governance? For agentic lakehouse concurrency, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
 
-This is where Dremio's story should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
+This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
 
 
 ## A realistic rollout sequence
@@ -187,7 +183,7 @@ This is not anti-automation. It is how automation earns trust. Automate the part
 
 Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For agentic lakehouse concurrency, those owners may sit on different teams, but the contract between them has to be explicit.
 
-That ownership model also keeps the Dremio story credible. Dremio can be the governed execution and semantic layer, but it should participate in a wider open architecture where table and catalog responsibilities are clear.
+Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
 
 Clear ownership prevents avoidable production confusion.
 
