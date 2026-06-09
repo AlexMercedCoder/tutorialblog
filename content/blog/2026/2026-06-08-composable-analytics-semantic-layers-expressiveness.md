@@ -1,213 +1,121 @@
 ---
 title: "Composable Analytics Beats Metric Catalogs"
 date: "2026-06-08"
-description: "Metric catalogs tell agents what terms mean. Composable analytics tells agents how to reason with those terms safely."
+description: "Metric catalogs define what terms mean. Composable analytics defines how terms combine, transform, and relate. For AI agents, composability is what turns definitions into reasoning."
 author: "Alex Merced"
 category: "Data Architecture"
 tags:
   - "composable analytics"
-  - "semantic layers"
+  - "semantic layer expressiveness"
+  - "AI analytics maturity"
   - "metric catalogs"
-  - "data architecture"
+  - "Cube Metricflow Dremio"
 ---
 
-Metric catalogs tell agents what terms mean. Composable analytics tells agents how to reason with those terms safely. That is the useful lens for composable analytics in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The Definition Trap
 
-![composable analytics architecture diagram](/images/june8batch/composable-analytics-semantic-layers-expressiveness-diagram-1.png)
+A metric catalog tells you that "Monthly Recurring Revenue" equals `SUM(recurring_charges) WHERE subscription_status = 'active'`. That is useful. It resolves the ambiguity between gross MRR and net MRR. It gives the AI agent one correct formula to use.
 
-## The market signal behind composable analytics
+But the agent's job is rarely "what is MRR." The agent's job is "why did MRR drop 12% in the West region last month, and which customer segments drove the decline?" That question requires composing multiple metrics, dimensions, filters, and time comparisons. A static catalog entry cannot answer it.
 
-A list of metric names is useful, but it is not enough for agentic analytics. Agents compare periods, exclude cohorts, segment behavior, generate follow-up questions, and combine operations that can quietly break a metric definition.
+This is the limitation of pure metric catalogs. They define vocabulary but not grammar. They tell you what the words mean but not how to combine them into sentences.
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+Composable analytics adds the grammar. It is a semantic layer where metrics, dimensions, relationships, and aggregation rules exist as composable objects. You can reference `total_revenue` in any query, join it with `customer_region`, filter by `subscription_tier`, and compare across time periods. The semantic layer understands the relationships and generates the correct SQL.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+For AI agents, the difference is material. An agent connected to a metric catalog knows what MRR means. An agent connected to a composable semantic layer can reason with MRR. It can ask follow-up questions, drill into dimensions, and combine metrics in ways the catalog author never anticipated.
 
+## Metric Catalogs Versus Composable Semantic Layers
 
-## How the architecture works
+A 2026 buyer's guide from Strategy Mosaic identified four types of semantic layer solutions. Platform-embedded layers (Snowflake Semantic Views, Databricks Metric Views) are convenient but locked to a single warehouse. Specialized layers focus on semantic modeling but have limited federation or performance. Comprehensive independent layers provide multi-source federation, in-memory caching, AI-assisted modeling, and MCP support. And metric catalogs provide definitions without composability.
 
-The first maturity level is raw text-to-SQL against tables.
+The distinction between the last two is critical for AI readiness. A metric catalog is a list of definitions. You look up a term, you get its formula. A composable semantic layer is a graph of definitions, relationships, aggregation rules, and access policies. You combine them freely within the rules of the graph.
 
-The second level is metric lookup, where the agent can find approved definitions.
+Promethium.ai's March 2026 guide on semantic layer tools reported that organizations implementing composable semantic layers achieve 4x faster time-to-insight and reduce warehouse query costs by 30-70%. More importantly for the AI context, internal testing showed LLM accuracy improved from approximately 40% without a semantic layer to over 83% when grounded in governed semantic definitions.
 
-The third level is composable operations, where joins, filters, time comparisons, cohorts, and aggregations carry semantic rules.
+The gap between 40% and 83% is the difference between an agent that guesses and an agent that knows. And the gap between a metric catalog and a composable semantic layer is the difference between a dictionary and a fluent speaker.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+## Cube: API-First Composable Semantics
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+Cube is the leading open-source semantic layer built for composability. Its architecture uses cubes (facts) and views (joins) defined in JavaScript or YAML. Each cube declares measures, dimensions, and joins. A view combines cubes into a unified model.
 
-![Operating model diagram](/images/june8batch/composable-analytics-semantic-layers-expressiveness-diagram-2.png)
+Cube exposes SQL (Postgres-compatible), REST, GraphQL, and MCP endpoints. An AI agent can query semantic metrics the same way it queries any Postgres database. The semantic layer handles the translation from business terms to optimized SQL, including pre-aggregation caching that reduces warehouse load.
 
-## A concrete operating example
+Brex chose Cube over the dbt Semantic Layer and LookML for building an embedded AI financial analyst. Their reasoning was instructive. They needed an API-first platform that could serve governed metrics to an AI agent running inside their application. dbt's MetricFlow required dbt Cloud and did not support pre-aggregation. LookML tied them to Looker. Cube gave them a decoupled semantic layer with caching, row-level security, and an MCP server for agent access.
 
-Customer churn sounds simple until the agent asks for churn among accounts that upgraded last quarter, excluding customers with open billing disputes, compared with the same quarter last year. A flat metric catalog cannot safely compose that answer by itself.
+Cube's 2026 positioning as an "agentic analytics platform" reflects this shift. The semantic layer is no longer just about consistent BI metrics. It is the foundation for AI agents that need to query business concepts safely.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+## dbt MetricFlow: Code-First Metric Governance
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+dbt's MetricFlow takes a code-first approach. Metrics are defined in YAML alongside dbt models, version-controlled in Git, and deployed through dbt Cloud. The architecture defines four primitives: metrics, dimensions, entities, and measures.
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+MetricFlow's strength is governance through code review. Every metric change goes through the same pull request process as every model change. The lineage from raw table to transformed metric is fully visible in dbt's DAG. For teams that already use dbt as their transformation layer, MetricFlow is the natural extension.
 
-## What this means for the lakehouse
+The limitation is architectural. MetricFlow is a middleware proxy that routes queries through dbt Cloud servers. It adds latency compared to a native database semantic layer. It does not support pre-aggregation caching. And it is metric-centric rather than offering a full composable model. Some teams model in dbt and then serve through Cube to get both code-governed definitions and API-first serving.
 
-A governed semantic layer uses views, wikis, labels, and catalog context to shape how agents generate SQL. The lakehouse needs an AI-ready semantic layer, not just more dashboards.
+The YAML-based metric definitions in MetricFlow and Snowflake Semantic Views share a common syntax heritage. Both use entities, measures, and dimensions. But where Snowflake stores semantic views as native database objects (no external infrastructure), MetricFlow requires dbt Cloud and generates SQL through its query engine.
 
+## Dremio's AI Semantic Layer: Federation Plus Semantics
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+Dremio's AI Semantic Layer combines semantic modeling with a query engine that federates across sources. This is a different architectural choice than Cube's API-first approach or dbt's code-first approach.
 
+The Dremio semantic layer does two things that matter for AI agents. First, it provides semantic search. Users and agents can discover data assets using natural language instead of browsing schema trees. This reduces data discovery time from days to seconds according to Dremio's benchmarks (source: HPCwire BigDataWire, 2025).
 
-## Implementation checklist
+Second, the semantic layer sits on top of Dremio's query engine, which can run SQL queries against Iceberg tables on S3, relational databases, and file stores without moving data. An AI agent asks about "total revenue by region in Q3." The semantic layer resolves "total revenue" to its metric definition. The query engine pushes the computation to the source systems. The agent gets the answer without knowing that revenue data lives in Snowflake and region data lives in a Postgres table.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+This federation-plus-semantics combination is rare. Most semantic layers define metrics but depend on the warehouse to execute queries. Dremio does both. The semantic catalog in Dremio (backed by Apache Polaris) and the query engine are coupled, which means metric definitions and query optimization can work together.
 
-My practical checklist for this topic is:
+## Why Composability Matters for AI Agents
 
-- Mark a small set of metrics as certified before expanding.
-- Test period comparisons, cohort filters, and exclusions explicitly.
-- Keep semantic definitions versioned.
-- Give agents only the semantic operations that have passed review.
+The fundamental reason composable analytics beats metric catalogs comes down to the way AI agents explore data.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+Human analysts follow a pattern. They ask a question, get an answer, then ask a follow-up that combines the previous answer with a new dimension or metric. The process is iterative and combinatorial. Each step builds on the last.
 
-![Implementation checklist diagram](/images/june8batch/composable-analytics-semantic-layers-expressiveness-diagram-3.png)
+AI agents operate the same way, but faster and with more parallel branches. A single agent conversation can explore dozens of metric-dimension combinations. A static metric catalog requires each combination to be pre-defined. A composable semantic layer allows any valid combination.
 
-## Failure modes worth respecting
+The ACL 2025 study by Ji et al. showed what happens without composable semantics. Frontier LLMs dropped from 95% accuracy on clean benchmarks to 39% on enterprise schemas with 4,000+ columns and abbreviated names. A composable semantic layer solves this by presenting the agent with a small, well-defined vocabulary of business concepts. The agent does not need to guess which of 4,000 columns represents revenue. The semantic layer tells it. And the agent can combine revenue with any dimension in the semantic model without needing a pre-defined query.
 
-Composable models require discipline. If the semantic layer is full of unreviewed shortcuts, agents will combine shortcuts and produce polished nonsense.
+Put concretely, a metric catalog answers "What is revenue QoQ?" A composable semantic layer answers "What is revenue QoQ for enterprise customers in the West region, segmented by product category, and compared to the same quarter last year, with the option to drill into the top 10 customers driving the change?" The first question is definitional. The second is analytical. AI agents need the second.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+## The Semantic Layer as the Agent's Business Vocabulary
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+Every AI agent needs a bounded vocabulary to operate correctly. Raw database schemas with 4,000 columns are unbounded. The agent has no way to know which columns matter for a given question. It has to guess.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+A semantic layer bounds the vocabulary. It defines 30 to 200 business metrics with clear formulas, allowed dimensions, and valid join paths. The agent operates within this bounded set. When it needs a metric not in the vocabulary, it asks the data team to add it. When it uses a metric in the vocabulary, it gets the same definition every time.
 
-## What I would do first
+This bounded vocabulary is also the governance boundary. Row-level security, column masking, and RBAC policies defined at the semantic layer apply to every agent query. An agent serving a regional sales manager cannot see national averages. An agent serving a CFO cannot expose PII. The semantic layer enforces this automatically. No custom code, no per-agent permissions, no audit gaps.
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+The 2026 Enterprise Semantic Layer Buyer's Guide from Strategy Mosaic reports that organizations see a 22% reduction in AI hallucinations and 28% faster AI deployment after implementing a semantic layer. These gains come directly from the bounded vocabulary. The agent spends less time guessing column meanings and more time analyzing actual data.
 
-For composable analytics, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+## AtScale: Enterprise Semantic Virtualization
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+AtScale takes a different approach from Cube and dbt. It provides a visual design canvas for drag-and-drop semantic modeling, with enterprise governance baked in. AtScale claims sub-second queries across billions of rows, with 80% of queries completing in under one second according to their 2026 benchmarks.
 
-## Final recommendation
+AtScale's unique feature is autonomous aggregate management. The platform monitors query patterns and automatically creates materialized aggregates for frequently accessed metric-dimension combinations. When a new query pattern emerges, AtScale builds the needed aggregate without manual intervention. For SaaS platforms with unpredictable query patterns from AI agents, this auto-tuning capability reduces warehouse costs by 30-70%.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+AtScale also supports MCP for AI agent connectivity. An agent can discover metrics through AtScale's MCP server and query them through the platform's multi-source federation layer. AtScale supports Snowflake, Databricks, BigQuery, and on-premises data sources through a single semantic model.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+The trade-off is complexity. AtScale is an additional infrastructure layer to deploy and manage. It is designed for enterprises with dedicated data platform teams. Small teams may find the operational overhead exceeds the benefits.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+## The Composable Analytics Maturity Model
 
-## Field notes for teams evaluating this now
+Strategy Mosaic's 2026 guide defines three levels of semantic layer maturity. They map directly to composability.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+**Level 1: Basic and Fragmented.** Metrics are duplicated across BI tools. Business logic is embedded in dashboard calculations and spreadsheet formulas. AI agents cannot access governed metrics at all. This describes most organizations in 2026, and it is where the 39% ACL accuracy numbers come from.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+**Level 2: Standardized.** Metrics have consistent definitions across major BI tools. A metric catalog or basic semantic layer exists. AI agents can query governed metrics through SQL or API endpoints, but composability is limited. Pre-defined metric combinations work. Ad-hoc compositions do not.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+**Level 3: Comprehensive and AI-Ready.** A composable semantic layer with multi-source federation, pre-aggregation caching, AI-assisted modeling, MCP support, and active governance. AI agents can compose metrics freely within governed boundaries. The semantic layer handles the translation, optimization, and security.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+Most organizations targeting Level 3 start with one platform. They deploy a composable semantic layer for their most contested KPI, prove the value in 6-8 weeks, then expand. The 2026 ROI study from UserEvidence reports an average net annual impact of $3.4M per deployment, with 551% average ROI and a 2-month payback period.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+## The Bottom Line
 
+Metric catalogs are table stakes. They resolve naming conflicts and give each metric one canonical definition. But they do not enable the kind of ad-hoc, combinatorial, multi-dimensional analysis that makes AI agents useful.
 
-## Identity and access review
+Composable analytics adds the grammar. Metrics combine with dimensions. Filters apply across sources. Time comparisons work automatically. The semantic layer becomes the agent's business vocabulary, giving it a bounded, governed, and composable set of concepts to reason with.
 
-For composable analytics, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+The difference shows up in the numbers. 40% LLM accuracy without a semantic layer. 83% with one. 22% fewer hallucination incidents. 28% faster AI deployment. $3.4M average annual impact. The metric catalog is a start. The composable semantic layer is the destination.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+---
 
-
-## Documentation that actually helps
-
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for composable analytics from that page, the architecture is still too implicit.
-
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For composable analytics, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If composable analytics is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For composable analytics, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For composable analytics, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that composable analytics helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For composable analytics, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of composable analytics that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For composable analytics, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For composable analytics, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either composable analytics has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For composable analytics, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
-
-
-## Test cases that matter
-
-Use test cases that reflect real business questions. For composable analytics, include at least one happy path, one denied-access path, one stale-data path, and one rollback path. Those tests reveal more than a generic demo query.
+**Ready to move beyond metric catalogs?** Dremio's AI Semantic Layer combines business context, semantic search, and automatic data discovery in a single platform. Query Iceberg tables across clouds and catalogs through a governed semantic layer that AI agents can access via SQL or MCP. [Learn more at dremio.com](https://www.dremio.com).

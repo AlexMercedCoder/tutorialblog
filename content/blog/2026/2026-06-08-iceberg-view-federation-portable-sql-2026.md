@@ -1,208 +1,145 @@
 ---
 title: "The 2026 Guide to Iceberg View Federation"
 date: "2026-06-08"
-description: "Portable views are the missing logic layer between open tables and multi-engine analytics."
+description: "Iceberg views standardize SQL view definitions across engines, enabling view federation across Polaris, Nessie, and Gravitino catalogs. How Snowflake Horizon, Databricks Unity Catalog, and open source catalogs handle portable SQL."
 author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
-  - "Iceberg views"
-  - "view federation"
-  - "portable SQL"
-  - "data federation"
+  - "Iceberg view federation portable SQL"
+  - "Iceberg views specification"
+  - "SQL view portability"
+  - "catalog federation"
+  - "Polaris views"
+  - "Snowflake Horizon views"
 ---
 
-Portable views are the missing logic layer between open tables and multi-engine analytics. That is the useful lens for Iceberg view federation in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+A view is the simplest and most powerful abstraction in data engineering. It is a saved SQL query that behaves like a table. Users query the view, not the underlying tables, and the engine resolves the SQL at query time. Every major query engine supports views. The problem is that each engine stores view metadata in a proprietary format. A view created in Trino cannot be read by Spark, even if they share the same Iceberg catalog and the same underlying data.
 
-![Iceberg view federation architecture diagram](/images/june8batch/iceberg-view-federation-portable-sql-2026-diagram-1.png)
+The Apache Iceberg View Specification solves this problem. It defines an open metadata format for SQL views, analogous to how Iceberg defines an open format for table metadata. A view stored in the Iceberg format can be created by one engine, read by any other Iceberg-compatible engine, and federated across catalogs. The view definition, schema, dialect, and version history are all stored in standard Iceberg metadata files, portable across the entire ecosystem.
 
-## The market signal behind Iceberg view federation
+This guide covers the Iceberg view specification, how Polaris, Nessie, and Gravitino handle views, the current state of cross-engine view portability, and practical guidance for deploying portable views in a multi-engine lakehouse.
 
-Open table formats solved a storage problem, not a business-logic problem. If Spark, Snowflake, Trino, and Dremio each define revenue or active customer differently, the lakehouse still produces inconsistent answers.
+## The Iceberg View Specification
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+The Iceberg view spec (format version 1) was adopted by the Apache Iceberg community and is available at [iceberg.apache.org/view-spec](https://iceberg.apache.org/view-spec/). It mirrors the structure of Iceberg table metadata: a versioned metadata file, atomic pointer swaps for consistency, and delegation to the catalog for namespace resolution.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+**View metadata file structure:**
 
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| view-uuid | required | UUID identifying the view, generated at creation |
+| format-version | required | Must be 1 |
+| location | required | Base path for view metadata files |
+| schemas | required | List of known schemas for the view output |
+| current-version-id | required | ID of the current version |
+| versions | required | List of all known versions |
+| version-log | required | History of version changes with timestamps |
+| properties | optional | String map for comments, settings |
 
-## How the architecture works
+Each version has its own representation. The spec currently supports only one representation type: `"sql"`. A SQL representation includes the SQL SELECT statement, the dialect identifier (e.g., `"trino"`, `"spark"`, `"snowflake"`), and the default catalog and namespace for resolving table references.
 
-Portable views aim to store logical definitions in a form multiple engines can understand.
+**SQL representation fields:**
 
-UDF proposals matter because business logic often lives in functions, not just plain SELECT statements.
+```json
+{
+  "type": "sql",
+  "sql": "SELECT COUNT(1), CAST(event_ts AS DATE) FROM events GROUP BY 2",
+  "dialect": "spark"
+}
+```
 
-View federation requires both syntax compatibility and policy compatibility. A view that runs everywhere but leaks restricted columns is not portable in any useful sense.
+A single view version can have multiple SQL representations, one per dialect. This is the spec's mechanism for cross-engine portability. When you create a view in Snowflake, it stores a Snowflake-dialect SQL representation. When you create the same view in Spark, it stores a Spark-dialect SQL representation. Both represent the same logical definition, and the engine selects the representation matching its dialect at query time.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+The default catalog and default namespace fields are important for federation. When a view references a table without a fully qualified name (e.g., `FROM orders` instead of `FROM prod.analytics.orders`), the engine uses the default catalog and namespace to resolve the reference. This allows views to be portable across catalog boundaries as long as the table references are qualified or the default catalog mapping is consistent.
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+## How Views Work in Polaris
 
-![Operating model diagram](/images/june8batch/iceberg-view-federation-portable-sql-2026-diagram-2.png)
+Apache Polaris (graduated to top-level Apache project in February 2026) treats views as first-class metadata objects. Polaris stores the full Iceberg view metadata tree: view UUID, schema, version history, and all SQL representations. When an engine queries a view through Polaris, the catalog returns the view metadata, and the engine resolves the SQL representation for its dialect.
 
-## A concrete operating example
+Polaris's principal-to-role-to-catalog-role access model applies to views as well as tables. You can grant SELECT on a view to a catalog role, and the catalog role inherits the underlying table permissions automatically. This is important: granting access to a view does not automatically grant access to the underlying tables, but Polaris enforces that the view creator has the necessary underlying permissions at view creation time. Subsequent queries through the view are checked against the view's permissions only, not re-checked against the base tables.
 
-A customer 360 view may join CRM, billing, product usage, and support data. The business wants that view to mean the same thing whether a human queries it in BI or an agent queries it through a tool.
+The key capability in Polaris is catalog federation for views. Polaris can register views from multiple backends (Hive Metastore, AWS Glue, other REST catalogs) as virtual entries in its namespace. A view defined in one catalog can reference tables in another catalog if the table references use fully qualified names. This is how Polaris enables enterprise-wide view federation without moving data.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+Polaris v1.4 (released April 2026) added credential vending support for views. When an engine queries a view, Polaris resolves the view's SQL, determines which underlying tables are needed, and vends storage credentials scoped to those tables. This ensures that credential scope matches the actual data accessed, even when the view joins tables across different storage locations.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+## How Views Work in Nessie
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+Project Nessie approaches views through its Git-like versioning model. A Nessie view is a versioned Iceberg view stored in the Nessie catalog. Each branch and tag has its own view state, and views are versioned atomically alongside tables.
 
-## What this means for the lakehouse
+Nessie stores Iceberg view metadata in its reference tree. When you create a view on a Nessie branch, it exists only on that branch until you merge it to the main branch. This enables data CI/CD workflows where a new view definition is tested on a branch before promoting to production.
 
-A semantic layer treats views, wikis, labels, and governed datasets as the AI context layer. Iceberg view federation makes the market more receptive to this: table formats are the base, but shared business logic is where trustworthy agentic analytics starts.
+The Nessie Iceberg REST API implementation exposes views through the standard Iceberg REST endpoints: `GET /namespaces/{namespace}/views`, `POST /namespaces/{namespace}/views`, `POST /views/{view}/rename`, and `DELETE /views/{view}`. Nessie 0.107.5 (April 2026) added support for the `default-catalog` field in view metadata, which enables cross-catalog view references when Nessie is used as a federation catalog.
 
+Nessie does not have built-in credential vending for views. The engine must authenticate to the underlying storage layer separately. This limits Nessie's capability for cross-engine view federation in environments where storage credentials must be centrally managed.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+## How Views Work in Gravitino
 
+Apache Gravitino models views as one type of metadata object in its unified catalog layer. Gravitino's architecture differs from Polaris and Nessie: it is a meta-catalog that federates multiple underlying catalogs behind a single API. A view in Gravitino can reference tables from any of its federated catalogs, as long as the table references use qualified names.
 
-## Implementation checklist
+Gravitino stores view definitions in its own metadata layer, not in Iceberg metadata files. This means a view created in Gravitino is portable across engines that use the Gravitino catalog, but it is not directly portable to a non-Gravitino catalog. Gravitino can export views in the Iceberg view format, but this is an explicit conversion step, not a native representation.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+The practical difference: if your architecture uses Gravitino as the single catalog layer for all engines, Gravitino views work uniformly. If you mix catalogs (Polaris for production, Glue for development), the view definitions are not automatically portable. This is the current limitation of all meta-catalog approaches: they provide a unified API but not a unified metadata format.
 
-My practical checklist for this topic is:
+## Snowflake Horizon Views vs Iceberg Native Views
 
-- Start with views that are important and relatively simple.
-- Build a cross-engine test suite for core metrics.
-- Document unsupported functions instead of hiding them.
-- Expose only certified views to AI agents.
+Snowflake Horizon Catalog supports two categories of views: native Snowflake views (stored in Snowflake's proprietary metadata) and Iceberg native views (stored using the Iceberg view spec). The distinction matters for portability.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+**Snowflake native views** are the default. They support Snowflake-specific syntax (e.g., Snowflake extensions to SQL, secure views, materialized views with Snowflake-specific refresh logic). A native Snowflake view cannot be read by an external engine through the Horizon Iceberg REST Catalog API. External engines see the underlying tables but not the Snowflake views defined on top of them.
 
-![Implementation checklist diagram](/images/june8batch/iceberg-view-federation-portable-sql-2026-diagram-3.png)
+**Iceberg native views** in Snowflake Horizon are stored using the Iceberg view spec. They are visible to external engines through the Horizon REST Catalog API. An external engine (Spark, Trino) can query the view, and Horizon returns the view metadata, including the SQL representation. The engine then resolves the SQL using its own dialect interpretation.
 
-## Failure modes worth respecting
+Snowflake Horizon's Iceberg native view support, announced at Snowflake Summit 2026, enables a critical multi-engine pattern: define business logic once as an Iceberg view in Snowflake, and let external engines query the same view definition with consistent results. The view definition is versioned, the schema is explicit, and the dialect-specific SQL representations are stored alongside each other.
 
-SQL dialects do not disappear. Date functions, null rules, case sensitivity, and permissions can still differ across engines. Portable views need compatibility tests, not blind faith.
+The Horizon Catalog uses Apache Polaris internally for the Iceberg REST catalog implementation. This means the view definition, access control, and credential vending all go through the same Polaris-powered API that external engines use. The governance is unified even though the query engines vary.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+## View Federation Across Catalogs
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+View federation is the ability to query a view defined in one catalog that references tables in another catalog. This is not yet a fully solved problem, but the Iceberg view spec and catalog implementations are converging on a solution.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+**The reference resolution problem:** A view defined in Polaris might reference `analytics.orders`. When an engine queries the view through Polaris, it resolves `analytics.orders` against Polaris's namespace. If the same view definition is ported to Unity Catalog, the engine resolves `analytics.orders` against Unity Catalog's namespace. The two catalogs might have different table structures, different access controls, or different naming conventions. The view definition is portable, but the resolution context is not.
 
-## What I would do first
+**The solution path:** Three approaches are emerging for cross-catalog view federation:
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+1. **Fully qualified references.** If the view SQL uses three-part names (catalog.namespace.table), the view definition is self-contained. The engine resolves `catalog.analytics.orders` directly, regardless of which catalog holds the view definition. This works as long as the engine can reach the referenced catalog.
 
-For Iceberg view federation, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+2. **Default catalog remapping.** The Iceberg view spec supports a `default-catalog` field. Catalogs can implement a remapping policy: when a view comes from catalog A with default catalog B, and the view is queried through catalog C, the system remaps catalog B to catalog C (or another matching catalog). This is what Polaris's catalog federation feature does.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+3. **Server-side view expansion.** The catalog resolves the view SQL on the server side, replacing view references with the underlying table references, and returns the expanded query to the engine. This is how the Iceberg REST Scan Plan API (v1.11+) works: the catalog plans the scan and returns only the file-level metadata with access credentials. View resolution happens entirely on the catalog side, invisible to the engine.
 
-## Final recommendation
+## Cross-Engine SQL Portability in Practice
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+Portable SQL means the same view definition produces the same results regardless of which engine runs it. Achieving this in practice requires discipline around SQL dialect features.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+**Portable:** Standard SQL SELECT, FROM, WHERE, GROUP BY, HAVING, JOIN (INNER, LEFT, RIGHT), subqueries, aggregate functions (COUNT, SUM, AVG, MIN, MAX), scalar functions (CAST, COALESCE, NULLIF), and window functions (ROW_NUMBER, RANK, LAG, LEAD).
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+**Not portable:** Engine-specific SQL extensions, table-valued functions, custom aggregate functions, engine-specific date/time arithmetic, variance in NULL handling across engines, query hints, query optimizer directives.
 
-## Field notes for teams evaluating this now
+The Iceberg view spec stores the dialect alongside each SQL representation. An engine reading a view with a dialect it does not support should either (a) try to interpret the SQL anyway (best-effort parsing), (b) look for an alternative representation with a supported dialect, or (c) fail with a clear error message stating the dialect mismatch.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+In practice, the safest approach for portable views is to use the dialect `"ANSI"` (a proposed extension to the spec that indicates standard SQL only) or to maintain two representations: one in `"spark"` dialect and one in `"trino"` dialect, both representing the same logical query.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+## Practical Deployment Guide
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+Deploying portable Iceberg views requires planning, but the effort is modest compared to the benefit of cross-engine view consistency.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+**Step 1: Choose a catalog.** Pick one catalog to be the primary home for your Iceberg views. Polaris is the natural choice for multi-engine architectures because it implements the full Iceberg REST spec and supports credential vending for both reads and writes. Nessie is a good choice if you need Git-like versioning and data CI/CD for view definitions.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+**Step 2: Use fully qualified table references.** Write view SQL with three-part names (catalog.schema.table) so the view definition is self-contained and does not depend on the calling engine's namespace resolution.
 
+**Step 3: Test on every engine.** For each view, create a test that queries the view from every engine you support. Verify that the results are identical. Document any engine-specific differences in a compatibility matrix.
 
-## Identity and access review
+**Step 4: Version your views.** Views can be versioned implicitly through the Iceberg spec's version tracking. When you update a view, the old version is preserved in the version log. You can query a specific version of a view, which is useful for rollback and for maintaining backward compatibility.
 
-For Iceberg view federation, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+**Step 5: Set permissions at the view level.** Grant SELECT on the view to the relevant roles. Do not grant direct SELECT on the underlying tables to the view consumers. This enforces the view as the access boundary and allows you to change the underlying tables without changing the consumer permissions.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+## The Bottom Line
 
+Iceberg views are a mature, standardized mechanism for portable SQL definitions across multi-engine lakehouses. The spec is complete, Polaris and Nessie implement it fully, and Snowflake Horizon supports Iceberg native views alongside its proprietary view layer.
 
-## Documentation that actually helps
+The practical value is straightforward: a view defined once in Polaris works in Snowflake, Databricks, Spark, and any engine that implements the Iceberg REST catalog client. The view definition, version history, and access control are centralized. The query engines compete on performance and features, not on data access.
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for Iceberg view federation from that page, the architecture is still too implicit.
+For teams running multiple query engines across a common Iceberg catalog, adopting Iceberg views is the single highest-impact step they can take toward portable, governed SQL. The alternative (duplicating view definitions in each engine) creates maintenance debt that grows with every schema change, every engine upgrade, and every new team member who needs to understand the data.
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+---
 
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For Iceberg view federation, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If Iceberg view federation is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For Iceberg view federation, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For Iceberg view federation, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that Iceberg view federation helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For Iceberg view federation, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of Iceberg view federation that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For Iceberg view federation, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For Iceberg view federation, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either Iceberg view federation has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For Iceberg view federation, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
+*For the full Iceberg view specification, visit [iceberg.apache.org/view-spec](https://iceberg.apache.org/view-spec/). To deploy Iceberg views in a governed, multi-engine lakehouse, start a free trial at [dremio.com/get-started](https://www.dremio.com/get-started).*

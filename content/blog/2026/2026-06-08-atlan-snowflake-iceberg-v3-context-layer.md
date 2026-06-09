@@ -1,208 +1,116 @@
 ---
 title: "Lakehouse Context Layers with Atlan and Iceberg v3"
 date: "2026-06-08"
-description: "The context layer explains what lakehouse data means, which is the part table formats do not solve alone."
+description: "Lakehouse context layers bridge the gap between raw Iceberg tables and AI agents that need business meaning. Atlan and Snowflake Horizon each take different approaches to the same problem."
 author: "Alex Merced"
-category: "Data Platforms"
+category: "Apache Iceberg"
 tags:
-  - "Atlan"
-  - "Snowflake"
-  - "Iceberg v3"
-  - "context layer"
-  - "data catalog"
+  - "lakehouse context layer"
+  - "Atlan Snowflake Iceberg"
+  - "Iceberg v3 lineage"
+  - "AI-ready metadata"
+  - "Snowflake Horizon"
+  - "context plane"
 ---
 
-The context layer explains what lakehouse data means, which is the part table formats do not solve alone. That is the useful lens for lakehouse context layer in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The Gap Between Table Formats and Business Meaning
 
-![lakehouse context layer architecture diagram](/images/june8batch/atlan-snowflake-iceberg-v3-context-layer-diagram-1.png)
+Apache Iceberg v3 went GA on Snowflake on May 7, 2026, bringing deletion vectors, row lineage, VARIANT types, and nanosecond timestamps to the open table format. These are real technical advances. Deletion vectors alone deliver up to 10x faster DML operations by replacing positional delete files with O(1) binary bitmap lookups (source: Atlan Knowledge Base, June 2026). Row lineage adds native CDC through `_row_id` and `_last_updated_sequence_number` fields that track every row change without external tooling.
 
-## The market signal behind lakehouse context layer
+But here is the problem. A faster table format does not tell an AI agent what a column means. It does not tell a data consumer whether `revenue` in table A means the same thing as `revenue` in table B. It does not explain that `ACCT_STAT_CD` maps to a lookup table from 2004 that nobody remembers.
 
-Iceberg v3 improves the raw table substrate with lineage-oriented features, but AI agents and business users still need owners, definitions, classifications, quality signals, and approved metric logic.
+A 2025 ACL study by Ji et al. quantified this gap dramatically. The same frontier LLM models that scored 94-95% accuracy on the standard BIRD text-to-SQL benchmark dropped to 39.1% on BIRD-Ent, an enterprise version with abbreviated column names, massive schemas over 4,000 columns, and scattered domain knowledge. The models did not get worse. The data got real.
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+This is where the context layer enters. A context layer sits above the table format layer. It enriches raw metadata with business meaning, relationships, governance policies, and usage patterns. It is what transforms an Iceberg table from a Parquet file with a metadata pointer into a governed business asset that AI agents can query without guessing.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+## What a Context Layer Actually Contains
 
+A production context layer has four distinct components that work together.
 
-## How the architecture works
+**Metadata management** is the foundation. This means catalog schemas, column types, partition specs, and snapshot histories. Atlan connects to 100+ systems including Snowflake, Databricks, Tableau, Power BI, dbt, and Fivetran. Its active metadata platform ingests technical metadata from every source and normalizes it into a unified graph. Without this breadth, a context layer is just a warehouse catalog with a new name.
 
-A metadata platform maps tables, columns, owners, lineage, classifications, and usage signals into a searchable context layer.
+**Semantic modeling** adds business meaning. In Snowflake, semantic views define TABLES, RELATIONSHIPS, FACTS, DIMENSIONS, and METRICS in DDL. You declare that `orders.sale_amount` is a fact and `total_revenue` is `SUM(orders.sale_amount)`. The semantic view becomes a schema-level object that Cortex Analyst, CoCo, and any SQL client can query. Snowflake's approach is warehouse-native. It costs nothing extra, but it only sees Snowflake data.
 
-Snowflake Horizon and Polaris-style catalogs make Iceberg metadata more visible to external tools.
+**Governance policies** enforce who can see what. Row-level security, column masking, and RBAC must travel with the context. Snowflake Horizon Context makes governance native to the semantic layer. A metric restricted to the finance team stays restricted in Power BI, in Salesforce, and in any AI agent that queries it. No sync drift between a separate governance engine and a separate semantic layer.
 
-Atlan-style integrations can enrich that metadata with business meaning, glossary terms, and stewardship workflows.
+**Lineage and provenance** track where data comes from and how it was transformed. Iceberg v3 row lineage helps at the table level. But full column-level lineage across ETL pipelines, BI dashboards, and manual SQL queries needs a context platform. Atlan ingests OpenLineage events, parses query logs, and maps column-level dependencies across systems.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+## Atlan versus Snowflake Horizon: Two Context Architectures
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+Snowflake Horizon Context, announced at Summit 2026, is Snowflake's bet on becoming the context control plane. It follows a collect-enrich-activate pattern. It collects metadata via connectors to PostgreSQL, MS SQL Server, Tableau, Power BI, and dbt. It enriches through column-level lineage, popularity scores from query logs, and AI-generated documentation. It activates through context search in CoCo, automatic semantic view discovery, and MCP interoperability for external agents like Claude and Cursor.
 
-![Operating model diagram](/images/june8batch/atlan-snowflake-iceberg-v3-context-layer-diagram-2.png)
+The Horizon Context approach has clear strengths. It is native to the Snowflake engine. Governance is baked in. Semantic View Autopilot, which reached GA on February 3, 2026, automates semantic view creation from query history and BI assets (source: Snowflake blog, February 2026). It uses clustering algorithms to identify consensus business logic. If 200 queries calculate active user as `user_engagement_score > 50 AND last_login_days < 30`, Autopilot proposes that filter.
 
-## A concrete operating example
+But Horizon Context is warehouse-bounded. It only sees Snowflake data. Most enterprises run 15 to 30 systems beyond Snowflake. A company using Snowflake for analytics, Databricks for ML, and Postgres for transactions needs context that spans all three.
 
-A column named `arr` may mean annual recurring revenue, adjusted response rate, or account risk rating. The table format can store the column. The context layer tells an agent which definition applies.
+Atlan takes the opposite approach. It positions itself as the context plane, not the format layer. Atlan ingests metadata from 100+ connectors, maps column-level lineage across systems, and publishes governed context through MCP servers for AI agents. Its Open Semantic Interchange (OSI) participation with 54 vendors means context definitions can travel across tools.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+The practical difference shows up in multi-system queries. An AI agent that needs to join Snowflake revenue data with Salesforce pipeline data and Zendesk customer sentiment needs a context layer that understands all three systems. Snowflake Horizon Context cannot help with the Salesforce or Zendesk portions. Atlan can.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+## Iceberg v3 as a Context Enabler
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+Iceberg v3 does not solve the context problem, but it makes some parts dramatically easier.
 
-## What this means for the lakehouse
+Row lineage is the clearest example. The `_row_id` field provides a unique identifier per row that never changes. The `_last_updated_sequence_number` field tracks which commit last modified the row. Together they enable CDC without Debezium, without Kafka connect workers, without any external infrastructure. A simple SQL query on `_last_updated_sequence_number` identifies every changed row in a commit window.
 
+For a context layer, this means lineage tracking can operate at row granularity instead of file granularity. When Atlan ingests Snowflake query logs enriched with row lineage, it can show exactly which rows contributed to a specific metric at a specific point in time. This closes the loop between metadata management and actual data.
 
+Deletion vectors also matter for context. In Iceberg v2, row-level deletes required positional delete files with O(log n) merge-join operations at read time. In v3, a single binary bitmap per data file per snapshot gives O(1) lookup. For context layers that need to track soft deletes and historical corrections, deletion vectors make time-travel semantics more reliable.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+The VARIANT type in v3 is another context enabler. In v2, semi-structured JSON data had to be stored as STRING, forcing full-payload parsing on every query. v3 VARIANT uses high-performance binary encoding with shredding for SQL filter pushdown. For context layers ingesting API event logs, IoT sensor data, or observability telemetry, VARIANT means the context layer can index and query semi-structured data directly instead of forcing a schema-on-write approach.
 
+Iceberg v3 metadata also helps. The `next-row-id` tracking property, mandatory for row lineage, provides a distributed counter that works across all writers. Multi-argument partition transforms enable bucketing on composite columns for more granular partition pruning. Default column values recorded in schema metadata eliminate NULL-versus-default logic downstream.
 
-## Implementation checklist
+## The Polaris Catalog and Metadata Federation
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+Snowflake Horizon Catalog is powered by Apache Polaris. Polaris provides the Iceberg REST Catalog interface that enables cross-engine metadata access. A single Polaris instance can serve metadata to Snowflake, Spark, Flink, Trino, and Dremio.
 
-My practical checklist for this topic is:
+For a context layer, Polaris solves the discovery problem. Instead of manually pointing each engine at an Iceberg table path, the catalog registers tables once and all authorized engines can discover them. Atlan integrates with Polaris to ingest metadata without needing direct database access.
 
-- Prioritize glossary terms for metrics agents actually use.
-- Map column-level lineage for sensitive and executive-facing datasets first.
-- Mark certified views clearly and hide experimental views from agent tools.
-- Review AI-generated descriptions before they enter the trusted catalog.
+The key architectural insight is that Polaris handles table-level metadata while the context layer handles column-level and business-level semantics. Polaris knows a table exists, where its files live, and what its current schema looks like. The context layer knows that the `total_revenue` metric sums `sale_amount` after subtracting returns, and that this metric is only visible to finance directors.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+This separation of concerns matters for performance. Catalog operations like listing namespaces and describing tables run at metadata speed. Context queries like "which metrics use the orders table" run through the context platform's graph. Neither one blocks the other.
 
-![Implementation checklist diagram](/images/june8batch/atlan-snowflake-iceberg-v3-context-layer-diagram-3.png)
+## AI Agents Need Business Context
 
-## Failure modes worth respecting
+The ACL study numbers frame the urgency. A 39% accuracy rate on enterprise schemas is not a small gap. It is a showstopper for any agentic workflow that crosses trust boundaries.
 
-Auto-generated metadata can be wrong with confidence. Human approval, ownership, and periodic review still matter. A stale glossary can mislead an agent as badly as a missing glossary.
+Consider what happens in a multi-agent system. Agent A extracts revenue numbers from Snowflake. Agent B calculates churn rate from Salesforce and Zendesk data. Agent C consolidates both into a board report. If each agent guesses at column meanings independently, the errors compound. Agent A might use gross revenue while Agent B uses net revenue. The board report gets a number that matches neither definition.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+A governed context layer prevents this cascade. It publishes one definition for revenue that all agents consume. When an agent queries through MCP, it receives the metric definition, the allowed dimensions, and the access policy together. The agent does not guess. It does not hallucinate. It reads.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+Atlan's MCP server is a concrete example. An Anthropic Claude agent connected to Atlan's MCP server can list catalogs, describe tables, read column-level lineage, and query semantic metrics. The agent receives business context alongside technical metadata. The result is SQL generation that uses governed metric names instead of raw column names.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+Snowflake Horizon Context takes a similar approach through CoCo. When CoCo answers a question, it auto-finds relevant semantic views and falls back to raw tables only when no semantic view exists. The context layer becomes the default pathway for AI interaction.
 
-## What I would do first
+## Context Layer Adoption Patterns
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+Teams adopting context layers follow one of three patterns.
 
-For lakehouse context layer, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+**Single-platform context** uses Snowflake Horizon or Databricks Unity Catalog as the sole context layer. This works when all analytical data lives in one warehouse. The setup is simple. Governance is native. But the context layer cannot extend to other systems.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+**Hub-and-spoke context** uses Atlan as the hub that ingests metadata from multiple platforms. Snowflake may be the primary warehouse, but Atlan also connects to Databricks, Tableau, and Salesforce. The context layer spans the entire data estate. Governance policies get defined in Atlan and enforced at each spoke.
 
-## Final recommendation
+## Hybrid context uses platform-native semantic layers for performance-critical queries and an external context platform for cross-system governance. Snowflake semantic views handle the core analytical metrics. Atlan handles the cross-system lineage and discovery. This pattern is emerging as the most common in 2026 enterprises.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+## The ACL Study and Why Context Matters
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+The 2025 ACL study by Ji et al. is worth examining closely because it quantifies the exact problem a context layer solves. The researchers created enterprise versions of the standard BIRD and Spider benchmarks. They renamed columns with abbreviations (CUST_NM, ORD_DT, ACCT_STAT_CD). They expanded schemas to over 4,000 columns. They removed the implicit semantic hints that clean benchmarks provide.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+The results were stark. Accuracy dropped from 95% to 39% on BIRD-Ent. The models did not get worse. The schemas got real. The lesson is that LLMs are exceptionally good at guessing meaning from well-named columns like `customer_name`. They are terrible at guessing meaning from `CUST_NM` or `revenue` when different systems define that term differently.
 
-## Field notes for teams evaluating this now
+A governed context layer eliminates the guessing. When an AI agent queries through MCP and the context layer returns "CUST_NM maps to customer.name with data type string and valid format [A-Za-z ]+", the agent does not guess. It knows. The column name becomes irrelevant. The context layer provides the meaning.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+This is why context layers are not optional for production agentic workflows. A 39% accuracy rate means the agent gets the answer wrong more often than it gets it right. No business can operate on those odds.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+## The Bottom Line
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+Iceberg v3 makes table-level operations faster and more traceable. Deletion vectors, row lineage, and VARIANT types are genuine improvements. But they solve the format problem, not the meaning problem.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+The context layer fills the gap between format and meaning. Whether you choose Snowflake Horizon's native approach, Atlan's multi-system platform, or a combination of both, the key is that your AI agents never touch raw schemas directly. Every column name, every metric definition, every join path goes through governed context first.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+The 2025 ACL study showed what happens without context. A 39% accuracy rate on real enterprise schemas is not a foundation for agentic workflows. With a proper context layer, that rate jumps above 83% according to enterprise benchmarks reported by Promethium.ai in 2026. The gap is not about model capability. It is about whether the data carries its own meaning.
 
+---
 
-## Identity and access review
-
-For lakehouse context layer, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
-
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
-
-
-## Documentation that actually helps
-
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for lakehouse context layer from that page, the architecture is still too implicit.
-
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For lakehouse context layer, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If lakehouse context layer is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For lakehouse context layer, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For lakehouse context layer, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that lakehouse context layer helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For lakehouse context layer, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of lakehouse context layer that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For lakehouse context layer, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For lakehouse context layer, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either lakehouse context layer has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For lakehouse context layer, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
+**Ready to build a context layer for your lakehouse?** Dremio's lakehouse platform combines Apache Iceberg-native storage with a built-in semantic layer and AI-powered semantic search. Teams use Dremio to query Iceberg tables across clouds and on-premises data without moving data, while the semantic layer ensures AI agents always get governed business context. [Learn more at dremio.com](https://www.dremio.com).

@@ -1,213 +1,179 @@
 ---
 title: "Securing Agent Identities in the Lakehouse"
 date: "2026-06-08"
-description: "Every lakehouse agent needs its own identity, scope, and audit trail."
+description: "How OAuth 2.0 token exchange, OAuth 2.1 device authorization grant, credential vending, and fine-grained access control secure AI agent identities in the Iceberg lakehouse."
 author: "Alex Merced"
-category: "Data Architecture"
+category: "Apache Iceberg"
 tags:
-  - "agent identities"
-  - "token exchange"
-  - "lakehouse security"
-  - "AI agents"
+  - "securing agent identities lakehouse"
+  - "OAuth token exchange AI agents"
+  - "Iceberg REST catalog authentication"
+  - "credential vending"
+  - "fine-grained access control agents"
+  - "OAuth 2.1 device grant"
 ---
 
-Every lakehouse agent needs its own identity, scope, and audit trail. That is the useful lens for agent identities lakehouse in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+An AI agent is not a human. It does not log in with a password. It does not close sessions at the end of the day. It does not notice when its credentials are stolen. Yet most data platforms in 2026 still authenticate agents the same way they authenticate humans: with long-lived tokens that grant broad access.
 
-![agent identities lakehouse architecture diagram](/images/june8batch/securing-agent-identities-lakehouse-token-exchange-diagram-1.png)
+The mismatch is dangerous. A human with a compromised token can do damage before the token is revoked. An agent with a compromised token can do damage thousands of times faster, because agents execute autonomously and at scale. The security model for agent identities must assume that tokens will be exfiltrated, that agents will be compromised, and that access must be revocable in seconds, not days.
 
-## The market signal behind agent identities lakehouse
+This article covers the authentication and authorization patterns that secure AI agent identities in the Iceberg lakehouse: OAuth 2.0 token exchange (RFC 8693) for deriving scoped tokens from agent session tokens, OAuth 2.1 device authorization grant for agent onboarding, Iceberg REST catalog authentication with credential vending, and fine-grained access control with short-lived, query-scoped credentials.
 
-The worst agent security pattern is one shared super-user token. It works during a demo and fails every serious governance review. Agent identities should map to the work they are allowed to perform.
+## Why Agent Authentication Is Different
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+OAuth 2.0 was designed for human-mediated authorization. A human user authenticates through a browser, grants consent, and receives a token that represents their identity for a session. The token is scoped to the user's permissions. If the token is compromised, the user can revoke it, and the damage is limited to what that user could do.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+AI agents break every assumption in that model.
 
+**Agents do not use browsers.** An agent cannot redirect to a login page, enter credentials, and grant consent programmatically. The authorization code flow, which is the standard for human authentication, requires browser interaction. Agents need non-interactive flows.
 
-## How the architecture works
+**Agents hold tokens for hours or days.** An agent's analytical workflow may run for hours, making thousands of tool calls. The token must remain valid for the entire workflow. Long token lifetimes increase the window of exposure if the token is stolen.
 
-A token exchange can convert a user or workload identity into a short-lived agent credential.
+**Agents multiply exposure.** One compromised human account is one incident. One compromised agent can spawn ten diagnostic sub-agents, each with their own tokens. One compromised agent token infrastructure can lead to hundreds of compromised tokens.
 
-Catalog roles define which tables, namespaces, and operations the agent can access.
+**Agents act on behalf of other identities.** A pricing agent might act on behalf of a pricing team. A customer-facing analytics agent might act on behalf of hundreds of customers. The agent's identity must be traceable to the authority that granted it, not just to the agent itself.
 
-Column masks, row filters, and tool allow lists reduce what the model can see or do even after authentication succeeds.
+OAuth 2.1 addresses some of these issues (removing the implicit grant, mandating PKCE, requiring refresh token rotation) but the core pattern remains human-centric. The industry response has been to layer additional protocols on top of OAuth 2.0: token exchange for scope derivation, device authorization for non-interactive onboarding, and credential vending for query-scoped access.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+## OAuth 2.0 Token Exchange for AI Agents
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+RFC 8693 defines the OAuth 2.0 Token Exchange protocol. It allows a security token service (STS) to accept one token (the input token) and issue a new token (the output token) with different scope, audience, or lifetime. For AI agents, token exchange is the mechanism for deriving capability tokens from agent session tokens.
 
-![Operating model diagram](/images/june8batch/securing-agent-identities-lakehouse-token-exchange-diagram-2.png)
+The flow works as follows:
 
-## A concrete operating example
+1. The agent authenticates with an identity provider (IdP) using a non-interactive flow (client credentials or device authorization grant).
+2. The IdP issues a session token scoped to the agent's identity. This token says "I am agent `pricing-agent-01` and I belong to the `pricing-team` group."
+3. When the agent needs to call a specific tool (for example, query the `monthly_revenue` table), it sends its session token to the STS with a token exchange request.
+4. The STS validates the session token, applies policy rules (does this agent have permission to call this tool?), and issues a capability token scoped to that specific tool.
+5. The agent uses the capability token for the tool call. The token expires after the tool call completes (typically 5 to 60 minutes).
 
-A revenue explanation agent may read certified finance views but not raw invoices, tax identifiers, or customer emails. A data-quality remediation agent may write quarantine records but not update revenue tables.
+The capability token has three critical properties:
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+- **Audience restriction.** The token is valid only for the specific tool or resource it was issued for. A token issued for `get_monthly_revenue` cannot be used to call `list_tables` or `run_sql`.
+- **Short lifetime.** Tokens expire in minutes, not hours. If a token is exfiltrated, the attacker has a narrow window to use it.
+- **Revocable by policy.** If the agent's session token is revoked, all capability tokens derived from it are invalidated, even before their natural expiration.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+This pattern is documented in detail by Supertokens and SecureW2's implementation guides for OAuth with AI agents. The key operational rule is: the session token is long-lived (hours to match the agent's workflow duration), but capability tokens are short-lived (minutes to limit exposure).
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+## OAuth 2.1 Device Authorization Grant for Agent Onboarding
 
-## What this means for the lakehouse
+The device authorization grant (RFC 8628), part of the OAuth 2.1 standard, provides a non-interactive authentication flow suitable for agents. It is the same flow used by smart TVs and CLI tools, adapted for agent workloads.
 
-A semantic layer, catalog permissions, and agent interfaces can preserve governance while making data accessible to AI. The point is not to give agents more power. It is to give them the right power with evidence.
+The flow for an agent:
 
+1. The agent initiates authentication by contacting the IdP's device authorization endpoint. It sends its client ID (the agent's identity) and the requested scope.
+2. The IdP returns a device code, a user code, and a verification URI. In the smart TV scenario, a human visits the URI and enters the user code. For agents, the flow is automated.
+3. The agent polls the token endpoint with the device code. If a human has approved the request, the IdP returns tokens. If not, the IdP returns `authorization_pending`.
+4. Once approved, the agent receives an access token (short-lived) and a refresh token (long-lived, but refresh is tied to the device code).
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+For agent onboarding, the device code is approved by a human administrator. The administrator's IdP session grants consent for the agent to act within defined scopes. The agent stores the refresh token and uses it to obtain new access tokens without human re-approval.
 
+The advantage of the device authorization grant over client credentials is auditability. Client credentials authenticate the agent as a service. Device authorization authenticates the agent plus the human who approved it. Every token issued includes the approving administrator's identity in the audit trail.
 
-## Implementation checklist
+LoginRadius documents this pattern in their OAuth 2.1 for AI agents guide. The device authorization grant is the recommended flow for production agent deployments where auditability is required.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+## Iceberg REST Catalog Authentication Models
 
-My practical checklist for this topic is:
+The Iceberg REST catalog specification defines three authentication models that map to different agent deployment patterns.
 
-- Ban shared super-user tokens for production agents.
-- Map every agent to a role, owner, and purpose.
-- Use short-lived credentials with explicit scopes.
-- Audit denied attempts as carefully as allowed attempts.
+**OAuth 2.0 token exchange (the default).** The client (query engine) presents a token to the catalog. The catalog validates the token, identifies the principal, and enforces access control. For agent workloads, the token presented to the catalog should be a capability token (short-lived, tool-scoped), not the agent's long-lived session token.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+Future versions of the Iceberg REST catalog specification will remove the built-in OAuth 2.0 token exchange in favor of requiring an external token service. The Iceberg project has documented this transition. For new deployments, use an external token service (Keycloak, Auth0, Okta) and configure the catalog to trust it.
 
-![Implementation checklist diagram](/images/june8batch/securing-agent-identities-lakehouse-token-exchange-diagram-3.png)
+**Bearer token.** The client includes a bearer token in the HTTP Authorization header. The catalog validates the token against its configured trust store. Bearer tokens are simple but have no built-in revocation mechanism. For agent workloads, bearer tokens should have a lifetime of no more than 15 minutes.
 
-## Failure modes worth respecting
+**Client credentials (direct).** The catalog accepts a client ID and client secret directly. This is the simplest pattern for development but risks credential exposure. The client secret must be stored securely and rotated regularly. Dremio's Auth Manager for Apache Iceberg handles this transparently: it stores credentials, obtains tokens, and refreshes them before expiry.
 
-Granular identity adds setup work. Teams need naming conventions, role reviews, rotation, and incident response procedures.
+For production agent deployments, use OAuth 2.0 token exchange with capability tokens. The agent's session token is exchanged for a catalog-specific token with each query. The catalog validates the token, applies scope restrictions, and vends storage credentials.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+## Credential Vending: Query-Scoped Storage Access
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+Credential vending is the mechanism that gives agents access to object storage without exposing storage credentials. It is defined by the Iceberg REST catalog specification and implemented by Apache Polaris, Dremio Open Catalog, Snowflake Horizon Catalog, and Databricks Unity Catalog.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+The flow:
 
-## What I would do first
+1. The query engine resolves a table reference through the catalog. The catalog returns the table metadata location in object storage.
+2. The engine requests credential vending from the catalog. The request includes the specific data files to be read (from the manifest files) and the operation type (read or write).
+3. The catalog validates the request against the principal's permissions. If permitted, the catalog vends temporary credentials scoped to the specific files.
+4. The engine uses the temporary credentials to read or write the data files directly.
+5. The credentials expire after a configurable interval (typically 5 to 60 minutes).
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+For agent workloads, credential vending provides two security properties that long-lived storage keys do not.
 
-For agent identities lakehouse, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+**File-scoped access.** The credentials are limited to the exact files needed for a single query. If an agent's query touches three Parquet files in a particular partition, the vended credentials grant access to only those three files. The agent cannot read other files in the same bucket.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+**Time-limited access.** The credentials expire after minutes. If the credentials are exfiltrated, the attacker must use them before expiry. Dremio's documentation recommends 15-minute token lifetimes for interactive agent queries and 60-minute lifetimes for batch analytical agents.
 
-## Final recommendation
+Google Cloud Lakehouse, Databricks Unity Catalog, and Dremio all support credential vending for Iceberg REST catalogs. The implementation details vary (AWS STS, Azure SAS, GCS short-lived tokens) but the pattern is identical.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+## Fine-Grained Access Control for Agents
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+Fine-grained access control for agents operates at three levels: catalog, engine, and storage.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+**Catalog level.** Apache Polaris defines privileges at the namespace and table level. An agent's catalog role can include:
 
-## Field notes for teams evaluating this now
+- `NAMESPACE_LIST`: List namespaces in a catalog.
+- `TABLE_READ_DATA`: Read data from a specific table.
+- `TABLE_WRITE_DATA`: Write data to a specific table.
+- `VIEW_SQL`: Read or create views.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+For agent workloads, the principle of least privilege means starting with `NAMESPACE_LIST` and `TABLE_READ_DATA` on the specific namespaces the agent needs. No agent gets `TABLE_WRITE_DATA` without a documented need and a human-approved policy.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+**Engine level.** The query engine can enforce row-level security (row filters) and column-level security (column masks). Row filters restrict which rows an agent can see based on the agent's identity or attributes. Column masks hide sensitive columns (PII, financial details) from certain agents.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+Row filters and column masks are transparent to the agent. The agent queries the table normally. The engine applies the filters and masks before returning results. The agent never sees the filtered rows or masked columns.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+**Storage level.** Credential vending is the primary storage-level control. Additionally, object storage policies (S3 bucket policies, Azure RBAC, GCS IAM) can restrict access to specific prefixes, but these are coarse-grained and rarely needed when credential vending is in place. The storage policy should be: only the catalog service has broad storage access. All other access goes through credential vending.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+## Token Lifetime Management
 
+Token lifetime management is the operational discipline that makes agent identity security work. Without it, tokens accumulate, expire silently, and cause hard-to-debug failures.
 
-## Identity and access review
+**Session token lifetime.** The agent's session token (obtained via client credentials or device authorization) should match the maximum expected duration of the agent's workflow. For a batch analytical agent that runs for 2 hours, the session token lifetime is 2 hours. For a real-time agent that runs continuously, the session token has a 1-hour lifetime with automatic refresh.
 
-For agent identities lakehouse, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+**Capability token lifetime.** Capability tokens (obtained via token exchange) should match the expected duration of a single tool call. For a SQL query that returns in under 5 seconds, the capability token lifetime is 60 seconds. For a complex analytical query that runs for 5 minutes, the capability token lifetime is 10 minutes.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+**Refresh token rotation.** OAuth 2.1 mandates refresh token rotation. Each time the agent uses a refresh token, the IdP issues a new refresh token and invalidates the old one. If an attacker steals the refresh token, the next legitimate use by the agent will fail (because the legitimate token has been rotated), and the attacker's token is already invalid. This is the recommended pattern for long-running agents.
 
+**Token revocation.** The IdP should expose a revocation endpoint that invalidates a token before its natural expiration. When an agent is decommissioned, its session token is revoked. All capability tokens derived from that session token are invalidated by the STS. Databricks and Snowflake both support token revocation for their Iceberg catalog integrations.
 
-## Documentation that actually helps
+## Practical Implementation: Agent Identity Setup
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for agent identities lakehouse from that page, the architecture is still too implicit.
+Here is a step-by-step implementation of agent identity security for a pricing agent that queries Iceberg tables through Dremio.
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+**Step 1: Register the agent as an OAuth client.** Register `pricing-agent-01` with the identity provider (Okta, Auth0, Keycloak). The client ID is `pricing-agent-01`. The client secret is stored in a secrets manager (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault).
 
+**Step 2: Create the catalog principal and role.** In Apache Polaris (or Dremio Open Catalog), create a principal for the pricing agent. Create a catalog role named `pricing_agent_read` with `NAMESPACE_LIST` on the `analytics` namespace and `TABLE_READ_DATA` on `analytics.gold.monthly_revenue`. Assign the principal to the catalog role.
 
-## How to keep agents in bounds
+**Step 3: Configure the MCP server.** The MCP server that the pricing agent calls is configured with OAuth 2.0 client credentials. On startup, the server obtains a session token from the IdP. When the agent calls a tool, the server exchanges the session token for a capability token scoped to the specific tool.
 
-Agents should not receive broad table access just because a human can ask broad questions. For agent identities lakehouse, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
+**Step 4: Set token lifetimes.** Session token: 2 hours (matches the pricing agent's batch window). Capability token: 5 minutes (each tool call completes in seconds). Refresh token rotation: enabled.
 
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
+**Step 5: Test end-to-end.** Verify that the pricing agent can query `monthly_revenue` but cannot query `customer_pii` or `raw_transactions`. Verify that the capability token is correctly scoped: if the agent calls `run_sql`, the capability token is scoped to the `run_sql` tool only. Verify that the token expires and the agent handles the 401 response gracefully.
 
+**Step 6: Monitor and rotate.** Monitor failed authentication attempts, token refresh failures, and expired tokens. Rotate the agent's client secret monthly. Audit the catalog roles quarterly to ensure that agents have only the permissions they need.
 
-## What to measure after launch
+## The Audit Trail: What Gets Logged
 
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If agent identities lakehouse is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
+For every agent action, the following should be logged:
 
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
+- Agent identity (client ID, principal name)
+- Session token ID (used to trace to the approving administrator)
+- Capability token ID (used to trace to the specific tool call)
+- Tool called (which MCP tool, which SQL query)
+- Timestamp (start and end of the tool call)
+- Rows returned or affected
+- Error (if any)
+- Tokens consumed (for LLM-based agents, the token count)
 
+The audit logs should be stored in an immutable Iceberg table with append-only access. No agent (including the auditing agent) can modify or delete audit logs. The retention period is driven by compliance requirements (typically 1 to 7 years).
 
-## A buyer question worth asking
+## Summary
 
-The buyer question is simple: does this pattern increase choice without weakening governance? For agent identities lakehouse, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
+Securing agent identities in the lakehouse requires a multi-layered approach. OAuth 2.0 token exchange lets agents derive short-lived capability tokens from long-lived session tokens. OAuth 2.1 device authorization grant enables auditable agent onboarding. Iceberg REST catalog authentication with credential vending provides query-scoped, time-limited storage access. Fine-grained access control at the catalog, engine, and storage levels ensures that agents operate within their permission boundaries.
 
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
+The common thread is short lifetimes and narrow scopes. An agent should never have a token that lasts longer than it needs or grants more access than the next action requires. Everything else follows from that principle.
 
+Dremio's Agentic Lakehouse platform implements this identity security model end-to-end: OAuth 2.0 with Dremio Auth Manager, credential vending through Iceberg REST catalogs, fine-grained access control through Polaris catalog roles, and audit logging through Iceberg system tables. For documentation, visit [dremio.com/blog/introducing-dremio-auth-manager-for-apache-iceberg](https://www.dremio.com/blog/introducing-dremio-auth-manager-for-apache-iceberg) or start a free trial at [dremio.com/get-started](https://www.dremio.com/get-started).
 
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For agent identities lakehouse, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that agent identities lakehouse helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For agent identities lakehouse, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of agent identities lakehouse that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For agent identities lakehouse, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For agent identities lakehouse, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either agent identities lakehouse has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For agent identities lakehouse, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
-
-
-## Test cases that matter
-
-Use test cases that reflect real business questions. For agent identities lakehouse, include at least one happy path, one denied-access path, one stale-data path, and one rollback path. Those tests reveal more than a generic demo query.
+*Sources: RFC 8693 OAuth 2.0 Token Exchange, RFC 8628 OAuth 2.0 Device Authorization Grant, Iceberg REST Catalog Specification (iceberg.apache.org), Stytch "AI Agent Authentication Methods" (stytch.com), SecureW2 "OAuth for AI Agents" (securew2.com), Supertokens "Authentication for AI Agents" (supertokens.com), Dremio "Introducing Dremio Auth Manager for Apache Iceberg" (dremio.com), Databricks "Unity Catalog Credential Vending" (databricks.com).*

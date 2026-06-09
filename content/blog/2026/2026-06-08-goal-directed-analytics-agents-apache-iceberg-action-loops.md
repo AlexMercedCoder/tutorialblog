@@ -1,208 +1,198 @@
 ---
 title: "Goal-Directed Analytics Agents on Apache Iceberg"
 date: "2026-06-08"
-description: "The next step after text-to-SQL is a governed action loop with checks before every external effect."
+description: "How goal-directed analytics agents decompose business questions into sub-tasks, execute action loops over Apache Iceberg tables, and use the lakehouse as both a data source and a state store for agent action logs."
 author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
-  - "goal-directed agents"
-  - "analytics agents"
-  - "Apache Iceberg"
+  - "goal-directed analytics agents"
   - "action loops"
+  - "OODA loop analytics"
+  - "Iceberg state store"
+  - "agent tool-use patterns"
+  - "analytics agent security"
 ---
 
-The next step after text-to-SQL is a governed action loop with checks before every external effect. That is the useful lens for goal-directed analytics agents in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+A prompt-response AI answers one question and stops. A goal-directed analytics agent holds a business objective, decomposes it into sub-tasks, executes each sub-task against live data, evaluates the result, and decides whether to continue or escalate. It does not stop after one query because one query is rarely enough to answer a real business question.
 
-![goal-directed analytics agents architecture diagram](/images/june8batch/goal-directed-analytics-agents-apache-iceberg-action-loops-diagram-1.png)
+Consider a goal like "Find out why Q3 revenue dropped by 8 percent compared to Q2." A prompt-response AI might execute a single SQL query and produce a plausible-sounding but factually incorrect answer. A goal-directed agent would decompose that goal into sub-tasks: check revenue by product category, check revenue by region, check for pricing changes, check for inventory issues, check for marketing campaign timing, check for competitor activity in the news. Each sub-task produces data that the next sub-task builds on. The agent loops until it has enough evidence to form a conclusion.
 
-## The market signal behind goal-directed analytics agents
+This article covers the architecture of goal-directed analytics agents, the action loop pattern (inspired by the OODA loop: observe, orient, decide, act), and how Apache Iceberg tables serve as both the data source and the durable state store for agent action logs.
 
-Chat interfaces are useful for exploration, but goal-directed agents need a loop: observe a signal, query the lakehouse, validate constraints, decide whether action is allowed, execute, and record what happened.
+## Goal Decomposition: From Business Question to Query Plan
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+The first step in any goal-directed agent is decomposition. Given a natural language goal, the agent must produce a structured plan of sub-tasks. Each sub-task has a type (SQL query, semantic tool call, external data fetch, analysis step) and a dependency on previous sub-tasks.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+The decomposition is not a static plan. It is a dynamic tree. The agent executes one sub-task, examines the result, and decides which branch of the tree to explore next. This is different from a fixed pipeline where step 1 always feeds into step 2. The agent's LLM evaluates the output of each step and chooses the next action based on what it found.
 
+For an analytics agent, the sub-task types typically include:
 
-## How the architecture works
+- **Semantic query.** Call an MCP tool like `get_revenue(period, dimension)` that returns aggregated business data from a certified semantic view.
+- **SQL exploration.** Run a raw SQL query against an Iceberg table to check data distributions, null counts, or outliers. This sub-task type requires stricter governance (read-only, limited rows, limited runtime).
+- **Comparison.** Compare two data sets (current period vs prior period, region A vs region B) and summarize the difference.
+- **External lookup.** Fetch data from an external API (currency exchange rates, competitor pricing, weather data) that enriches the analysis.
+- **Summarization.** Produce a natural language summary of findings so far. This becomes the context for the next decision.
 
-Iceberg gives the agent a snapshot-based analytical record that can be queried and rolled back.
+Each sub-task is logged to a state store. If the agent crashes (API timeout, LLM error, infrastructure failure), it can recover by reading the last completed sub-task from the state store and continuing from there.
 
-The semantic layer gives the agent approved business definitions.
+## The Action Loop: Observe, Orient, Decide, Act
 
-The action layer constrains API calls, remediation jobs, notifications, and writebacks.
+The execution model for goal-directed analytics agents is the action loop, directly adapted from Colonel John Boyd's OODA loop (observe, orient, decide, act). In the agent context, the four phases are:
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+**Observe.** The agent reads data from the lakehouse. This might be a SQL query against an Iceberg table, a call to a semantic tool, or a scan of recent agent action logs in the state store. The observation phase produces raw data that feeds into orientation.
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+**Orient.** The agent analyzes the observation in the context of the original goal and previous observations. This is where the LLM does its reasoning. It interprets the data, identifies patterns, and frames hypotheses. Orientation is the most computationally expensive phase and the most prone to hallucination. The quality of orientation depends on the quality of the semantic layer: if the agent has business context (metric definitions, dimension hierarchies), orientation is grounded in real meaning.
 
-![Operating model diagram](/images/june8batch/goal-directed-analytics-agents-apache-iceberg-action-loops-diagram-2.png)
+**Decide.** Based on the orientation, the agent decides what to do next. The decision could be: execute another sub-task, form a provisional conclusion, escalate to a human, or abort the goal (if it is determined to be unanswerable with available data). The decision is logged with the reasoning that produced it.
 
-## A concrete operating example
+**Act.** The agent executes the decision. For most sub-tasks, this means calling a tool (MCP server, SQL engine, API). For escalation, this means sending a message to a human reviewer with the collected evidence and the agent's analysis.
 
-A pipeline-healing agent may detect a freshness breach, query Iceberg table history, confirm that only one source partition is stale, trigger a backfill job, and write an incident note with the snapshot IDs it inspected.
+The loop repeats until the agent reaches a terminal state (conclusion, escalation, or abort). Each iteration is self-contained and durable. If the agent crashes during the act phase, the next invocation reads the last logged decision from the state store and re-executes.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+This is a fundamental difference from prompt-response AI. The action loop is stateful, durable, and auditable. Every observation, orientation, decision, and action is written to the state store. A reviewer (human or automated) can replay the agent's entire reasoning chain.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+## Iceberg as the Agent Action State Store
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+The state store for agent action logs should be an Iceberg table. Specifically, a table partitioned by agent session and ordered by action timestamp.
 
-## What this means for the lakehouse
+The schema for an agent action log table looks like this:
 
-Fast governed SQL over open data, semantic context for business meaning, and MCP-style interfaces for external AI tools make the action loop auditable instead of improvised.
+```sql
+CREATE TABLE catalog.system.agent_action_log (
+    session_id VARCHAR,
+    action_id VARCHAR,
+    parent_action_id VARCHAR,       -- NULL for root actions
+    goal TEXT,                      -- The original business goal
+    sub_task_type VARCHAR,          -- semantic_query, sql_exploration, comparison, external_lookup, summarization
+    phase VARCHAR,                  -- observe, orient, decide, act
+    phase_started_at TIMESTAMP,
+    phase_completed_at TIMESTAMP,
+    input_data TEXT,                -- SQL query, tool call parameters, API request
+    output_data TEXT,               -- Query results, analysis, decision text
+    tokens_used INTEGER,
+    model_id VARCHAR,
+    status VARCHAR,                 -- completed, failed, escalated
+    error_message TEXT
+) PARTITIONED BY (date(phase_started_at))
+```
 
+Using Iceberg for this table gives you:
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+**Durable commit.** Every action log entry is an atomic Iceberg commit. If the agent crashes mid-log, the entries up to the crash point are already committed and visible.
 
+**Time travel.** You can query the action log as it existed at any point during the agent's execution. Debugging a confusing agent decision means time-traveling to the exact state the agent saw.
 
-## Implementation checklist
+**Schema evolution.** As you add new phases or sub-task types, the action log schema evolves without breaking existing queries. Old entries have NULL for new columns.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+**Partition pruning.** When reviewing a specific agent session, the query planner prunes to the single date partition of that session. Reviewing a 10,000-action session takes milliseconds.
 
-My practical checklist for this topic is:
+**Concurrent reads.** Multiple reviewers (human analysts, automated audit systems) can read the action log simultaneously without locks.
 
-- Start with read-only recommendations before automated writes.
-- Require constraint checks before any webhook or writeback.
-- Store snapshot IDs, query IDs, and tool-call IDs with every action.
-- Run action loops in shadow mode before production automation.
+The action log is the agent's audit trail, debugging interface, and recovery checkpoint all in one table.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+## Tool-Use Patterns for Analytics Agents
 
-![Implementation checklist diagram](/images/june8batch/goal-directed-analytics-agents-apache-iceberg-action-loops-diagram-3.png)
+The tools available to a goal-directed analytics agent define its capabilities and its constraints. A poorly designed tool set is either too broad (the agent can write arbitrary SQL, which is dangerous) or too narrow (the agent cannot answer most questions, which is useless).
 
-## Failure modes worth respecting
+The correct set of tools for an analytics agent, ranked from most constrained to most flexible:
 
-Every action loop needs stop conditions. Without thresholds, approval points, and rollback paths, an agent can make a bad assumption operationally expensive.
+1. **Certified metric tools.** `get_revenue(period, dimension)`, `get_customer_count(period, segment)`. These tools return pre-aggregated, certified data from gold-layer semantic views. They are the safest tools. The agent cannot construct an invalid query. The results are always correct by definition.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+2. **Schema discovery tools.** `list_catalogs()`, `list_schemas(catalog)`, `get_table_schema(catalog, schema, table)`. These tools let the agent discover what data is available. They return metadata only, no row data.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+3. **Scoped SQL tools.** `run_read_only_query(sql, max_rows, max_duration_seconds)`. This tool executes arbitrary SQL but enforces strict limits: no DML, no DDL, max 10,000 rows returned, max 30 seconds execution. The SQL is logged, validated (parsed to confirm read-only), and executed under a restricted catalog principal.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+4. **Comparison tools.** `compare_metrics(metric, period_a, period_b, dimensions)`. This tool computes a structured comparison between two time periods, highlighting changes and statistical significance.
 
-## What I would do first
+5. **External data tools.** `fetch_url(url)`, restricted to a whitelist of approved external APIs. The agent can enrich its analysis with external context without unrestricted web access.
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+6. **Escalation tools.** `send_for_review(analysis_text, evidence_snapshot)`. This tool submits the agent's finding to a human reviewer with a link to the action log snapshot.
 
-For goal-directed analytics agents, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+The agent should never have a tool that can modify Iceberg table metadata, delete files, or change catalog roles. Write access, when needed, should be through a separate "action agent" that is independently deployed, more restricted, and requires explicit human approval for non-append writes.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+## Security Boundaries for Analytics Agent Write Operations
 
-## Final recommendation
+The default assumption for a goal-directed analytics agent is read-only. The agent observes data, orients, decides, and acts by producing a report or escalating to a human. It does not modify the source tables.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+There are legitimate cases where an analytics agent needs write access. Creating a derived table for a forecast model. Writing back annotations to a source table. Inserting records into an action log. In each case, the write path must be isolated from the read path.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+The isolation pattern works as follows:
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+1. The agent authenticates with a read-only principal for 99 percent of its operations.
+2. When the agent decides it needs to write, it calls a special `request_write_capability(action_plan)` tool. This tool logs the request and returns a short-lived write token only if the action plan matches predefined patterns (append to specific tables, insert into approved log tables).
+3. The write token is valid for one commit and expires after 60 seconds.
+4. The agent uses the write token to perform the write. The token is invalidated after use.
+5. The write is logged to the agent_action_log table with the token ID and the action plan that was approved.
 
-## Field notes for teams evaluating this now
+This pattern prevents the agent from writing unless it explicitly reasons about why it needs to write and what it plans to write. It also ensures that writes are rare, audited, and reversible.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+## Practical Example: A Goal-Directed Agent Investigating Revenue Drop
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+Here is a walkthrough of a goal-directed analytics agent using the patterns described above.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+**Goal:** "Investigate why Q3 2026 revenue dropped 8 percent compared to Q2 2026."
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+**Action 1 (Observe):** Call `get_revenue(period='Q3-2026', dimension='product_category')`. Receive data showing the drop is concentrated in the Electronics and Home Goods categories.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+**Action 2 (Orient):** Analyze that two categories account for 80 percent of the decline.
 
+**Action 3 (Decide):** Decompose further. Check each category for price changes, volume changes, and regional effects.
 
-## Identity and access review
+**Action 4 (Act):** Call `get_revenue(period='Q3-2026', dimension='region')` filtered to Electronics. Observe that the Electronics drop is exclusively in the North America region.
 
-For goal-directed analytics agents, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+**Action 5 (Orient):** Form hypothesis that a specific product line or pricing change in North America Electronics is the cause.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+**Action 6 (Decide):** Need to check product-line-level data. This requires a scoped SQL tool because the semantic layer does not have a certified view at the product-line granularity.
 
+**Action 7 (Act):** Call `run_read_only_query("SELECT product_line, SUM(revenue) as rev FROM catalog.gold.revenue WHERE quarter = 'Q3-2026' AND region = 'North America' GROUP BY product_line ORDER BY rev")`.
 
-## Documentation that actually helps
+**Action 8 (Orient):** Identify that the "Premium Laptops" product line dropped 40 percent quarter over quarter.
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for goal-directed analytics agents from that page, the architecture is still too implicit.
+**Action 9 (Decide):** Need external data to understand why. Check news for product recalls or competitor launches.
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+**Action 10 (Act):** Call `fetch_url(whitelist='news_api')` with query "premium laptop recall North America Q3 2026."
 
+**Action 11 (Orient):** Discover a major battery recall for the top-selling premium laptop model, announced in early Q3.
 
-## How to keep agents in bounds
+**Action 12 (Decide):** Enough evidence. Conclude that the Q3 revenue drop is caused by a battery recall affecting Premium Laptops in North America.
 
-Agents should not receive broad table access just because a human can ask broad questions. For goal-directed analytics agents, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
+**Action 13 (Act):** Call `send_for_review(analysis_text, evidence_snapshot=snapshot_id)`.
 
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
+The entire trajectory is recorded in the agent_action_log table. A human reviewer can open the evidence snapshot (a time-travel query at the exact snapshot the agent used) and verify every claim. If the agent hallucinated the battery recall, the evidence trail makes it trivially discoverable.
 
+## Recovering from Failure
 
-## What to measure after launch
+Goals and Sub-Tasks are not always possible to complete. The action log makes partial recovery practical.
 
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If goal-directed analytics agents is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
+If the agent crashes during Action 7 (the SQL query), the next invocation reads the action log and sees that Actions 1 through 6 are complete. It resumes from Action 7. The agent does not re-query for revenue by category or region. It continues from the last durable checkpoint.
 
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
+If the agent crashes during Action 10 (the external lookup), and the external API is temporarily unavailable, the agent retries with exponential backoff (logged as additional orient/decide/act cycles). After three retries, the agent marks the external lookup as failed and decides whether to proceed with incomplete external data or escalate.
 
+This resilience is possible only because every action is durably committed to an Iceberg table. An in-memory state store would lose the agent's state on crash. A relational database would work, but Iceberg provides the same durability plus time travel, schema evolution, and concurrent read access for debugging.
 
-## A buyer question worth asking
+## Metrics for Goal-Directed Analytics Agent Performance
 
-The buyer question is simple: does this pattern increase choice without weakening governance? For goal-directed analytics agents, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
+Measuring agent performance requires metrics beyond simple pass/fail rates. The action log enables these measurements:
 
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
+- **Goal completion rate.** What percentage of goals result in a conclusion (versus escalation or abort).
+- **Average actions per goal.** How many sub-tasks a typical goal requires. This measures the agent's efficiency.
+- **Average goal duration.** Wall-clock time from goal submission to conclusion.
+- **Tool call distribution.** Which tools are used most often. A high ratio of SQL exploration tools to certified metric tools indicates gaps in the semantic layer.
+- **Restart rate.** How often the agent recovers from a crash. A high restart rate indicates infrastructure instability or flaky external APIs.
+- **Escalation rate.** How often the agent sends findings to a human. A low escalation rate means the agent is confident. A high escalation rate means the agent lacks sufficient data or tool access.
 
+These metrics are queryable from the agent_action_log table. A dashboard built on top of Iceberg can show live agent performance across all sessions.
 
-## A realistic rollout sequence
+## Summary
 
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For goal-directed analytics agents, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
+Goal-directed analytics agents represent a shift from question-answering to objective-achieving. They decompose business goals into sub-tasks, execute an OODA-inspired action loop against Iceberg tables, and log every action to a durable state store.
 
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
+The action loop pattern (observe, orient, decide, act) provides a structured framework for agent reasoning that is auditable, debuggable, and crash-resistant. Iceberg's durability, time travel, and schema evolution make it the ideal state store for agent action logs.
 
+The security model for analytics agents defaults to read-only. Write access, when required, is short-lived, narrowly scoped, and explicitly reasoned about. The semantic layer provides certified tools for common business questions. Raw SQL tools are available but restricted.
 
-## How this should sound to executives
+The result is an agent that can investigate complex business questions across multiple data sources and reasoning steps, producing a fully auditable chain of evidence that a human can verify. That is the production standard for analytics AI, and it is achievable with the combination of goal-directed agents and the Iceberg lakehouse.
 
-The executive version should avoid implementation trivia, but it should not become vague. Say that goal-directed analytics agents helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
+For more on building analytics agents with governed data access, explore Dremio's Agentic Lakehouse platform at [dremio.com/agenticai](https://www.dremio.com/agenticai) or try the open-source Dremio MCP server at [github.com/dremio/dremio-mcp](https://github.com/dremio/dremio-mcp).
 
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For goal-directed analytics agents, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of goal-directed analytics agents that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For goal-directed analytics agents, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For goal-directed analytics agents, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either goal-directed analytics agents has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For goal-directed analytics agents, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
+*Sources: Dremio Blog "AI Agents for Analytics" (dremio.com), OODA Loop Reference (thedecisionlab.com), ArXiv "The Evolution of Agentic AI Software Architecture" (arxiv.org), LakeOps "Iceberg Lakehouse with AI Agents" (lakeops.dev), IBM "What Are AI Agents" (ibm.com).*

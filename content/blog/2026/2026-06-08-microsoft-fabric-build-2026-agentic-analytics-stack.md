@@ -1,202 +1,112 @@
 ---
 title: "Microsoft Fabric Build 2026 Agentic Analytics Stack"
 date: "2026-06-08"
-description: "Microsoft's Fabric direction shows that agentic analytics is becoming a platform architecture, not a chat feature."
+description: "Microsoft Build 2026 revealed an agentic analytics stack built on Fabric IQ, OneLake Iceberg support, and semantic models. The architecture shows how Microsoft competes with open lakehouse platforms."
 author: "Alex Merced"
 category: "Data Platforms"
 tags:
-  - "Microsoft Fabric"
-  - "agentic analytics"
-  - "Build 2026"
-  - "data platform"
+  - "Microsoft Fabric agentic analytics"
+  - "Fabric IQ"
+  - "Copilot analytics"
+  - "OneLake agents"
+  - "Microsoft Build 2026"
+  - "Iceberg OneLake"
 ---
 
-Microsoft's Fabric direction shows that agentic analytics is becoming a platform architecture, not a chat feature. That is the useful lens for Microsoft Fabric agentic analytics in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The Build 2026 Data Story
 
-![Microsoft Fabric agentic analytics architecture diagram](/images/june8batch/microsoft-fabric-build-2026-agentic-analytics-stack-diagram-1.png)
+Microsoft Build 2026, held June 2-4, marked a clear shift in the company's data strategy. The theme was agentic applications, and the data foundation was Microsoft Fabric. The opening blog post by the Azure Database team put it directly: "The challenge is no longer model capability, but consistent, shared data context across the business" (source: Microsoft Azure Blog, June 2026).
 
-## The market signal behind Microsoft Fabric agentic analytics
+This framing is significant. Microsoft is positioning Fabric as the shared context layer for AI agents. The company is not competing on model quality (it has OpenAI partnerships for that). It is competing on data integration, governance, and semantic consistency.
 
-Build 2026 put more weight behind agents, context, Copilot, and Fabric IQ. The important part is not that Microsoft added more AI branding. The important part is the architecture: agents need governed data, shared semantics, and a storage layer they can trust.
+The announcements fell into three categories: a new application backend framework called Rayfin, a new PostgreSQL-compatible database called HorizonDB, and a set of Fabric IQ capabilities that unify data, semantics, and AI. Taken together, they form Microsoft's answer to the question "what infrastructure do AI agents need to operate on enterprise data?"
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+## Fabric IQ: Three Layers of Agent Context
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+Fabric IQ is the centerpiece of Microsoft's agentic data strategy. It operates through three integrated layers.
 
+**Unified Data** is OneLake, Microsoft's multi-cloud data lake. OneLake stores data in Delta Lake format by default, but Microsoft added Iceberg support through metadata virtualization. When you write or create a shortcut to an Iceberg table folder, OneLake automatically generates virtual Delta Lake metadata for the table, enabling its use with Fabric workloads. Conversely, Delta Lake tables get virtual Iceberg metadata for Iceberg readers.
 
-## How the architecture works
+This bidirectional format conversion is the key architectural choice. Microsoft is betting that customers will store data in OneLake regardless of format preference, because OneLake can speak both Delta and Iceberg to any engine. The conversion is not a one-time migration. It is a virtual metadata layer that stays current as data changes.
 
-OneLake gives Fabric a shared storage substrate for analytical data.
+**Semantic Models** are the second layer. Fabric IQ includes semantic models that define business metrics, dimensions, and relationships. These models feed Copilot for Microsoft Fabric, which generates natural language answers to business questions. The semantic models also feed AI agents through the MCP protocol, meaning external agents like Claude and Cursor can access governed Fabric metrics.
 
-Semantic models and Fabric IQ provide context that agents can use when planning queries and explaining results.
+**Intelligent Actions** are the third layer. Copilot in Fabric can trigger actions based on data changes. When a sales metric crosses a threshold, Copilot can draft an email, create a Power BI alert, or start a Teams conversation. The agent does not just answer. It acts.
 
-Copilot-style interfaces become more useful when they operate over governed business objects instead of raw tables alone.
+Microsoft IQ brings four IQ capabilities together. Work IQ understands how work happens. Fabric IQ understands how the business operates. Foundry IQ helps agents discover and reuse knowledge. Web IQ provides real-time global context from the web (new at Build 2026). Fabric IQ handles the analytical data portion.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+## Rayfin: From Prompt to Production Backend
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+Rayfin is an open-source SDK and CLI that lets developers describe what to build and get an enterprise-grade application backend. It deploys to Microsoft Fabric, meaning the app gets enterprise security, scale, and data landing in OneLake.
 
-![Operating model diagram](/images/june8batch/microsoft-fabric-build-2026-agentic-analytics-stack-diagram-2.png)
+The developer workflow is GitHub-based. You define data models, backend logic, and access policies entirely in code. Rayfin generates the database schema, authentication layer, and API endpoints. The code lives in your repository. The infrastructure runs in your Fabric tenant.
 
-## A concrete operating example
+Rayfin's partnership with Replit is the most interesting aspect. Replit CEO Amjad Masad said at Build 2026: "Rayfin unlocks a new development model for our users. Agents write the code. Fabric ships it quickly and safely. Together, we are giving developers a path from idea to enterprise-grade production that is measured in hours, not months."
 
-An agent that answers why revenue fell in the Northeast has to know the approved revenue metric, the sales territory hierarchy, the time comparison rule, and which datasets are certified. That is a semantic problem before it is a model problem.
+For the agentic analytics stack, Rayfin closes the loop. An AI agent can query Fabric data through Copilot. It can also build a new application on top of that data through Rayfin. The same semantic models that power the query experience also power the application backend. There is no separate modeling layer for apps versus analytics.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+## OneLake Iceberg Support: The Open Format Strategy
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+Microsoft's Iceberg support in OneLake is pragmatic but limited. OneLake can read Iceberg tables through metadata virtualization. It generates virtual Delta Lake metadata for Iceberg folders, and virtual Iceberg metadata for Delta Lake folders. This means data stored in either format is accessible from engines that support the other format.
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+The implementation works with any Iceberg table using Parquet-formatted data files. You can create a shortcut in a Fabric lakehouse that points to an Iceberg table on S3, ADLS, or GCS. The table appears as a Delta Lake table ready for Fabric workloads. Conversely, Snowflake can read Delta Lake tables stored in OneLake by accessing the virtual Iceberg metadata.
 
-## What this means for the lakehouse
+Current limitations are significant. OneLake only supports Iceberg v2. V3 support is not available. Only the most recent table metadata version is converted. Data type mapping has issues, especially with Snowflake INT64, double, and Decimal types. And metadata storage is not portable because it uses absolute path references.
 
+The v3 gap matters. Iceberg v3 features like deletion vectors, row lineage, and VARIANT types are available on Snowflake and Databricks but not in OneLake. For Microsoft Fabric users who need v3 features, the path is to store data in Delta Lake format (which has its own deletion vector implementation) rather than Iceberg.
 
+## GPU-Accelerated Analytics in Fabric
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+A quieter but important Build 2026 announcement was GPU-accelerated analytics in Fabric. UNC Health reported up to 5x improvement in query speeds using the GPU-accelerated data warehouse (source: Microsoft Azure Blog, June 2026).
 
+The GPU acceleration applies to the Fabric data warehouse workload within OneLake. It accelerates large-scale scans and aggregations by running Parquet decoding and filter evaluation on GPU cores instead of CPU cores. For AI agent workloads where agents frequently scan large historical datasets, GPU acceleration can reduce query latency by 3-5x.
 
-## Implementation checklist
+This puts Fabric in an interesting competitive position. Most cloud data warehouses run on CPU. Snowflake's compute layer uses CPU-bound virtual warehouses. Databricks' Photon engine uses CPU with some SIMD optimization. Microsoft's GPU-accelerated warehouse offers a different performance profile for scan-heavy workloads.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+## Semantic Models for Agents
 
-My practical checklist for this topic is:
+Microsoft's semantic models in Fabric IQ mirror the semantic view concept in Snowflake and the metric view concept in Databricks. They define business metrics, dimensions, and relationships that Copilot and AI agents use for natural language querying.
 
-- Inventory certified semantic models before exposing agents.
-- Measure agent answers against known BI reports.
-- Separate model evaluation from data-contract evaluation.
-- Keep an open exit path for core data and metadata.
+The key difference is Microsoft's MCP support. Fabric IQ connects to the Model Context Protocol, meaning agents built with Claude, Cursor, or any MCP-compatible framework can query Fabric semantic models directly. The agent talks to Fabric IQ through MCP, receives the semantic model definition, and generates queries using governed business terms.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+This is the same MCP integration that Snowflake Horizon Context and Atlan offer. The industry is converging on MCP as the standard protocol for agent-data interaction. The semantic layer publishes its vocabulary through MCP. The agent discovers and uses that vocabulary. The database executes the query.
 
-![Implementation checklist diagram](/images/june8batch/microsoft-fabric-build-2026-agentic-analytics-stack-diagram-3.png)
+Fabric IQ's differentiation is the breadth of the IQ ecosystem. Work IQ understands work patterns through Microsoft 365 data. Foundry IQ connects to Azure AI Foundry for model discovery. Web IQ provides real-time context from Bing. An agent using Fabric IQ can potentially combine internal sales data with external market trends and internal communication patterns in a single query. Whether this integration is practical in production depends on the agent's design and the user's governance policies.
 
-## Failure modes worth respecting
+## Comparison with Dremio's Open Lakehouse Approach
 
-A platform-owned agent stack can become too closed if customers cannot bring open engines, catalogs, and tools. Buyers should ask how far the semantics travel outside one vendor's workspace.
+Microsoft Fabric and Dremio take different paths to the same destination: making Iceberg data queryable by AI agents.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+Microsoft's path is a managed platform. OneLake stores the data. Fabric runs the compute. Copilot provides the AI interface. Semantic models define the business vocabulary. Everything runs in Microsoft's tenant. The advantage is simplicity. One vendor, one bill, one support team. The trade-off is lock-in. Moving data out of OneLake means rewriting pipelines, reformatting tables, and rebuilding semantic models.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+Dremio's path is open federation. Iceberg tables stay in your cloud storage (S3, ADLS, GCS). Dremio queries them in place. The semantic layer sits on top of the query engine without requiring data movement. The Polaris catalog handles metadata across engines. The advantage is portability. You can switch query engines without migrating data. The trade-off is that you manage more infrastructure choices.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+For organizations already deep in the Microsoft ecosystem, Fabric IQ is the natural choice. For organizations that want an open, multi-cloud, multi-engine lakehouse, Dremio's approach offers more flexibility. Both platforms converge on the same core belief: AI agents need governed semantic context to query data safely.
 
-## What I would do first
+## The Path to Production Agentic Analytics
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+Microsoft's Build 2026 announcements lay out a clear path for teams building agentic analytics on Fabric.
 
-For Microsoft Fabric agentic analytics, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+Start with OneLake as the unified data store. Ingest data from operational systems through built-in mirroring or Azure Database for PostgreSQL connectors. Enable Iceberg format conversion so external engines can read the same data. Then build semantic models on top of the OneLake tables. Define the metrics, dimensions, and relationships that matter to your business. Connect Copilot for Microsoft Fabric to the semantic models for natural language querying. Finally, expose the semantic models through MCP for external AI agents.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+The Fabric IQ architecture handles the rest. Data refresh is continuous through mirroring. Query optimization is automatic through GPU acceleration. Governance is baked in through Microsoft Entra ID and Fabric RBAC. The agent sees governed metrics, not raw tables.
 
-## Final recommendation
+## HorizonDB and the Database Hub
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+Azure HorizonDB, announced in public preview at Build 2026, represents Microsoft's vision for AI-native transactional databases. It is a fully managed, PostgreSQL-compatible database with elastic storage up to 128 TB, scale-out compute up to 3,072 vCores, and sub-millisecond multi-zone commit latency.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+For the agentic analytics stack, HorizonDB fills the transactional gap. Fabric IQ provides analytical context through OneLake and semantic models. HorizonDB provides operational context through its PostgreSQL-compatible query surface, vector search, and integrated AI model management. An AI agent can query Fabric IQ for "what was last quarter's revenue by region" and HorizonDB for "what are the current inventory levels for those regions' top products."
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+The Database Hub in Fabric (private preview) unifies these capabilities. It provides a central management interface for Microsoft databases and mirrors operational data into OneLake for analytical queries. The mirroring is continuous and zero-ETL. Data written to HorizonDB appears in OneLake within seconds, available for Fabric IQ queries.
 
-## Field notes for teams evaluating this now
+This tight integration between transactional and analytical databases is Microsoft's competitive advantage over point-solution vendors. Snowflake and Databricks offer analytical querying but do not manage transactional databases. Microsoft offers both, connected through OneLake.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+## The Bottom Line
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+Microsoft Fabric at Build 2026 is a platform designed for the agentic era. Rayfin turns prompts into production backends. OneLake bridges Delta Lake and Iceberg formats. Fabric IQ provides three layers of agent context from unified data to semantic models to intelligent actions.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+The Iceberg v2 limitation is the main gap for teams that need v3 features like row lineage or deletion vectors. But for teams already in the Microsoft ecosystem, Fabric IQ offers the shortest path from data to agentic applications. The platform handles integration, governance, and AI connectivity in one stack. The trade-off is the lock-in. For teams that value open formats and multi-engine flexibility, a federated approach with Dremio may be a better fit.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+---
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
-
-
-## Identity and access review
-
-For Microsoft Fabric agentic analytics, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
-
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
-
-
-## Documentation that actually helps
-
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for Microsoft Fabric agentic analytics from that page, the architecture is still too implicit.
-
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For Microsoft Fabric agentic analytics, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If Microsoft Fabric agentic analytics is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For Microsoft Fabric agentic analytics, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For Microsoft Fabric agentic analytics, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that Microsoft Fabric agentic analytics helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For Microsoft Fabric agentic analytics, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of Microsoft Fabric agentic analytics that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For Microsoft Fabric agentic analytics, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For Microsoft Fabric agentic analytics, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either Microsoft Fabric agentic analytics has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
+**Building an agentic analytics stack on open Iceberg tables?** Dremio's lakehouse platform queries Iceberg tables across clouds and catalogs without data movement, while the AI Semantic Layer provides governed business context for AI agents. No lock-in, no format conversion tricks. [Learn more at dremio.com](https://www.dremio.com).

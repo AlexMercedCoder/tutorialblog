@@ -1,204 +1,250 @@
 ---
 title: "Modern Python Tooling for Apache Iceberg"
 date: "2026-06-08"
-description: "Python has become a practical Iceberg control plane for metadata work, catalog automation, and smaller operational workflows."
+description: "PyIceberg, IceFrame, and the Iceberg CLI form a complete Python toolchain for Iceberg table management. Each tool targets a different workflow from metadata inspection to data engineering."
 author: "Alex Merced"
 category: "Open Source"
 tags:
-  - "Python"
+  - "Python Apache Iceberg tooling"
   - "PyIceberg"
   - "IceFrame"
-  - "Iceberg CLI"
-  - "Apache Iceberg"
+  - "iceberg-cli"
+  - "Spark-free Iceberg"
+  - "Iceberg Python ecosystem"
 ---
 
-Python has become a practical Iceberg control plane for metadata work, catalog automation, and smaller operational workflows. That is the useful lens for Python Apache Iceberg tooling in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The Python Iceberg Ecosystem in 2026
 
-![Python Apache Iceberg tooling architecture diagram](/images/june8batch/python-tooling-apache-iceberg-pyiceberg-iceframe-iceberg-cli-diagram-1.png)
+Apache Iceberg started as a Java project. The table format specification, the core libraries, and the major query engines all ran on the JVM. Python users who wanted to work with Iceberg tables had two options. Install PySpark and use the Spark Iceberg integration, or write raw HTTP calls against the Iceberg REST Catalog API.
 
-## The market signal behind Python Apache Iceberg tooling
+Neither option was satisfying. PySpark is a 500MB dependency that takes minutes to start. Raw HTTP calls work but skip all the metadata handling that makes Iceberg useful.
 
-Spark is still important for distributed processing, but not every Iceberg task deserves a Spark cluster. Python tools can inspect schemas, snapshots, manifests, catalogs, and table properties quickly enough for developer workflows and agent tools.
+The Python ecosystem around Iceberg has matured rapidly. PyIceberg, the official Apache Python client, now sees over 500,000 daily PyPI downloads according to PyPI download statistics. IceFrame provides a pandas-like DataFrame interface built on top of PyIceberg. The PyIceberg CLI gives command-line access to table metadata and properties.
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+These three tools form a complete Python toolchain for Iceberg table management. Each targets a different workflow. Together they cover metadata inspection, catalog automation, data engineering, and AI agent integration. None of them require a JVM.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+## PyIceberg: The Foundation
 
+PyIceberg is the official Apache Python library for Iceberg. It provides programmatic access to Iceberg table metadata and data without needing Java or Spark. The library works with any Iceberg REST catalog, including Apache Polaris, AWS Glue, and Databricks Unity Catalog.
 
-## How the architecture works
+PyIceberg's architecture mirrors the Iceberg specification. It handles catalog operations (listing namespaces, creating tables), metadata operations (reading snapshots, schema evolution), and data operations (appending files, reading table data). The library uses PyArrow for columnar data handling and supports Parquet, Avro, and ORC file formats.
 
-PyIceberg gives Python applications a native way to load catalogs, inspect tables, and work with Iceberg metadata.
+A typical PyIceberg workflow looks like this:
 
-CLI tooling is useful for operators who need repeatable checks in CI, release scripts, or support runbooks.
+```python
+from pyiceberg.catalog import load_catalog
 
-Higher-level Python helpers can wrap common tasks such as schema review, snapshot inspection, table health checks, and metadata audits.
+catalog = load_catalog(
+    "default",
+    **{
+        "uri": "https://catalog.example.com/api/iceberg",
+        "warehouse": "my_warehouse",
+    }
+)
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+table = catalog.load_table("sales.transactions")
+for snapshot in table.snapshots():
+    print(f"Snapshot {snapshot.snapshot_id}: "
+          f"{snapshot.operation}, "
+          f"{snapshot.timestamp_ms}")
+```
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+This code connects to an Iceberg REST catalog, loads a table, and iterates its snapshots. No Spark context, no JVM startup, no Hadoop configuration. The entire operation runs in Python.
 
-![Operating model diagram](/images/june8batch/python-tooling-apache-iceberg-pyiceberg-iceframe-iceberg-cli-diagram-2.png)
+PyIceberg also supports schema evolution, partition pruning, time travel, and branch operations. You can add a column, roll back to a previous snapshot, or create a write-audit-publish branch. All through Python APIs.
 
-## A concrete operating example
+The library's daily download count of 500,000+ reflects its adoption beyond the data engineering community. ML engineers use PyIceberg to read training data from Iceberg tables directly into PyArrow or pandas DataFrames. Platform engineers use it to automate catalog operations. AI agents use it through MCP servers for governed data access.
 
-A data platform team can run a CI check that loads a table through the REST catalog, validates required properties, confirms the current format version, and fails the pull request if a schema change removes an approved business column.
+## PyIceberg CLI: Command-Line Metadata Management
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+The PyIceberg CLI ships with the `pyiceberg` package. No extra installation needed. It provides commands for listing namespaces and tables, describing table metadata, managing properties, and inspecting file layouts.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+Common CLI workflows:
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+```bash
+# List all namespaces in the catalog
+pyiceberg list
 
-## What this means for the lakehouse
+# List tables in a namespace
+pyiceberg list nyc
 
-Agentic analytics needs programmable, governed interfaces. SQL, Python libraries, and MCP-oriented patterns give teams the tools they need. Python Iceberg tooling provides a lower-level inspection layer that pairs well with a higher-level semantic and query layer.
+# Describe a table
+pyiceberg describe nyc.taxis
 
+# Get table schema
+pyiceberg schema nyc.taxis
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+# List all files in a table
+pyiceberg files nyc.taxis
+```
 
+The `--output json` flag enables programmatic consumption. Combined with `jq`, you can extract table metadata in pipelines without writing Python code:
 
-## Implementation checklist
+```bash
+pyiceberg --output json describe nyc.taxis | jq '.metadata.current-snapshot-id'
+```
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+This makes the CLI useful in CI/CD scripts, monitoring dashboards, and incident response workflows. When a pipeline fails because of a schema mismatch, a quick `pyiceberg schema` command shows the current state without opening a notebook or a database console.
 
-My practical checklist for this topic is:
+Property management is another CLI strength. You can set Iceberg table properties like `write.metadata.delete-after-commit.enabled` directly from the command line:
 
-- Use Python for catalog inspection, schema checks, and snapshot audits.
-- Keep large scans on Dremio, Spark, Flink, Trino, or another execution engine built for that work.
-- Store catalog configuration outside code and rotate credentials like any other production secret.
-- Wrap agent-facing Python tools with validation and explicit allow lists.
+```bash
+pyiceberg properties set table nyc.taxis \
+    write.metadata.delete-after-commit.enabled true
+```
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+This is useful for maintenance operations that need to run across many tables. A shell loop can apply the same property to every table in a namespace, something that would require separate code in PyIceberg or Spark.
 
-![Implementation checklist diagram](/images/june8batch/python-tooling-apache-iceberg-pyiceberg-iceframe-iceberg-cli-diagram-3.png)
+## IceFrame: Pandas-Like Iceberg Operations
 
-## Failure modes worth respecting
+IceFrame is a newer library that provides a DataFrame-like interface for Iceberg operations. Created by Alex Merced and available on GitHub, IceFrame builds on PyIceberg, PyArrow, and Polars to provide simplified table management.
 
-Python tooling is not a replacement for a distributed engine on heavy scans. Treat it as metadata automation and targeted operations unless you have measured the workload.
+The key difference from PyIceberg is abstraction level. PyIceberg exposes the Iceberg metadata model directly. You work with `Table`, `Snapshot`, `ManifestFile` objects. IceFrame wraps these into a higher-level API:
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+```python
+from iceframe import IceFrame
+from iceframe.utils import load_catalog_config_from_env
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+config = load_catalog_config_from_env()
+ice = IceFrame(config)
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+# Create a table with a simple schema
+schema = {"id": "long", "name": "string", "created_at": "timestamp"}
+ice.create_table("my_table", schema)
 
-## What I would do first
+# Append data from a Polars DataFrame
+import polars as pl
+data = pl.DataFrame({
+    "id": [1, 2, 3],
+    "name": ["Alice", "Bob", "Charlie"],
+    "created_at": [pl.datetime(2024, 1, 1),
+                   pl.datetime(2024, 1, 2),
+                   pl.datetime(2024, 1, 3)]
+})
+ice.append_to_table("my_table", data)
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+# Read data back
+df = ice.read_table("my_table")
+print(df)
+```
 
-For Python Apache Iceberg tooling, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+IceFrame includes a Query Builder API for filtering, grouping, and aggregating:
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+```python
+from iceframe.expressions import col
+from iceframe.functions import sum
 
-## Final recommendation
+result = (ice.query("my_table")
+          .select("name", sum(col("id")).alias("total_id"))
+          .group_by("name")
+          .execute())
+```
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+For AI agent workflows, IceFrame provides an MCP server that exposes Iceberg operations through the Model Context Protocol. An agent can create tables, write data, and query results through standardized MCP tools.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+IceFrame's maintenance features are also notable. The `bin_pack` and `sort` compaction strategies use Polars for efficient data rewriting. The `GarbageCollector` removes orphan files. The `rollback_to_timestamp` method handles point-in-time recovery. These operations typically require Spark or custom scripts. IceFrame runs them locally using PyArrow and Polars.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+Current status is alpha. The library has 24 GitHub stars and a single contributor as of June 2026. The API may change. But the design direction is clear: make Iceberg as easy to use as pandas, without requiring a cluster.
 
-## Field notes for teams evaluating this now
+## When to Use Each Tool
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+The three tools serve different workflow patterns.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+**Use PyIceberg directly** when you need fine-grained control over Iceberg metadata. Schema evolution, snapshot management, partition operations, and direct catalog integration all work best through the core library. PyIceberg is also the right choice when you are building automation tools that other teams will consume, because it is the standard Apache library with no abstraction overhead.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+**Use the PyIceberg CLI** for ad-hoc metadata inspection and property management. When you need to check a table schema during an incident, apply a property change across many tables, or integrate Iceberg checks into a CI/CD pipeline, the CLI is faster than writing Python code. It is also the most accessible tool for operations teams who may not write Python regularly.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+**Use IceFrame** when you want a pandas-like experience for Iceberg operations. Data scientists and ML engineers who are comfortable with DataFrames may find IceFrame's API more natural than PyIceberg's metadata-object model. IceFrame is also a good choice for small to medium-scale ETL workflows where the overhead of Spark or Flink is not justified.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+All three tools run without a JVM. This is the unifying advantage. A Python-based Iceberg toolchain means you can manage Iceberg tables in the same environment where you train ML models, run web applications, or operate CI/CD pipelines. No separate Spark cluster, no infrastructure coordination.
 
+## Practical Workflow: Automated Table Maintenance
 
-## Identity and access review
+A common production workflow combines all three tools. Consider a maintenance script that runs daily on an Iceberg table.
 
-For Python Apache Iceberg tooling, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+First, the script uses the CLI to check the table's current partition layout and snapshot count:
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+```bash
+SNAPSHOT_COUNT=$(pyiceberg --output json describe \
+    sales.transactions | jq '.metadata.snapshots | length')
+if [ "$SNAPSHOT_COUNT" -gt 100 ]; then
+    echo "Need to expire old snapshots"
+fi
+```
 
+If maintenance is needed, a Python script using PyIceberg expires old snapshots and removes orphan files:
 
-## Documentation that actually helps
+```python
+from pyiceberg.catalog import load_catalog
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for Python Apache Iceberg tooling from that page, the architecture is still too implicit.
+catalog = load_catalog("default", **config)
+table = catalog.load_table("sales.transactions")
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+# Expire snapshots older than 7 days
+table.expire_snapshots(
+    timestamp_ms=int(time.time()) * 1000 - 7 * 86400 * 1000
+)
 
+# Remove orphan files
+table.remove_orphan_files(retention_threshold=datetime.timedelta(days=3))
+```
 
-## How to keep agents in bounds
+Finally, IceFrame compacts small files if the data file count exceeds a threshold:
 
-Agents should not receive broad table access just because a human can ask broad questions. For Python Apache Iceberg tooling, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
+```python
+from iceframe import IceFrame
 
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
+ice = IceFrame(config)
+table_stats = ice.get_table_stats("sales.transactions")
 
+if table_stats["data_file_count"] > 1000:
+    ice.compact_table("sales.transactions",
+                      strategy="bin_pack",
+                      target_file_size_mb=128)
+```
 
-## What to measure after launch
+This three-tool workflow handles the complete maintenance cycle without Spark, without a Java environment, and without custom infrastructure.
 
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If Python Apache Iceberg tooling is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
+## AI Agent Integration Through Python
 
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
+The Python Iceberg ecosystem connects to AI agents through two patterns. The first is direct library calls. An agent running in a Python environment can import PyIceberg or IceFrame and interact with Iceberg tables programmatically. This is the pattern for automated data engineering agents that need full control over table operations.
 
+The second pattern is MCP. An agent using the Model Context Protocol connects to an MCP server that wraps Iceberg operations. PyIceberg and IceFrame both support MCP server implementations. The agent discovers tables, reads schemas, and queries data through standardized MCP tools.
 
-## A buyer question worth asking
+The MCP pattern is safer for general-purpose AI agents because the server controls which operations are allowed. A typical MCP server for Iceberg might expose `list_tables`, `describe_table`, and `run_select_query` tools while blocking `drop_table` and `alter_schema`. The agent never gets direct catalog credentials.
 
-The buyer question is simple: does this pattern increase choice without weakening governance? For Python Apache Iceberg tooling, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
+Both patterns benefit from the JVM-free Python stack. An agent container can include PyIceberg and IceFrame without the multi-gigabyte Spark dependency. Startup times are measured in milliseconds instead of minutes. Resource usage stays proportional to the data being processed, not the cluster being started.
 
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
+## Iceberg Branching and Time Travel in Python
 
+Iceberg's branching feature, inspired by Git, lets you create isolated copies of a table for development, testing, or audit purposes. PyIceberg provides full branch and tag support through its Python API.
 
-## A realistic rollout sequence
+A typical branching workflow looks like this. You create a branch for a data quality experiment. You run transformations on the branch without affecting the main table. If the results look good, you fast-forward the main branch to include the changes. If the experiment fails, you delete the branch and the main table remains unchanged.
 
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For Python Apache Iceberg tooling, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
+PyIceberg supports this through its snapshot management API:
 
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
+```python
+table = catalog.load_table("analytics.revenue")
+# Create a branch for experimentation
+table.create_branch("quality-checks")
+# Check the current state
+refs = table.list_refs()
+for ref_name, ref in refs.items():
+    print(f"{ref_name}: snapshot {ref.snapshot_id}")
+```
 
+IceFrame adds convenience methods for the same operations. The `create_branch`, `fast_forward`, and `rollback_to_timestamp` methods handle common branching patterns with fewer lines of code.
 
-## How this should sound to executives
+Time travel is available in both PyIceberg (via snapshot selection) and the CLI (via `iceberg_timestamp_ms` setting in ClickHouse queries). An agent that needs to compare current data with a previous state can use time travel to query both snapshots in a single session.
 
-The executive version should avoid implementation trivia, but it should not become vague. Say that Python Apache Iceberg tooling helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
+## The Bottom Line
 
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
+The Python Iceberg ecosystem in 2026 is mature enough for production use. PyIceberg handles core metadata and data operations with 500,000+ daily downloads and a growing community. The PyIceberg CLI provides command-line access for operations teams and CI/CD workflows. IceFrame offers a higher-level DataFrame experience for data scientists and smaller-scale ETL.
 
+All three tools share the critical advantage of running without a JVM. Teams can manage Iceberg tables in the same Python environments where they train models, run web applications, and deploy agents. The Spark requirement, once the biggest barrier to Python-based Iceberg adoption, is no longer necessary for most Iceberg operations.
 
-## How this should sound to engineers
+The remaining gap is write support for complex transformation pipelines. PyIceberg supports appending data and overwriting partitions, but full-fledged ETL with multi-table joins, window functions, and CDC still benefits from Spark or Flink. For metadata management, catalog automation, maintenance operations, and AI agent integration, the Python toolchain is ready.
 
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
+---
 
-For Python Apache Iceberg tooling, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of Python Apache Iceberg tooling that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For Python Apache Iceberg tooling, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For Python Apache Iceberg tooling, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either Python Apache Iceberg tooling has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
+**Building data pipelines on Apache Iceberg?** Dremio's lakehouse platform provides a SQL query engine and semantic layer for Iceberg tables across any cloud or catalog. Pair it with PyIceberg and IceFrame for a complete Python-to-Iceberg workflow. [Learn more at dremio.com](https://www.dremio.com).

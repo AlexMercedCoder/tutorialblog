@@ -1,213 +1,117 @@
 ---
 title: "SaaS Buyers Now Inspect Your Semantic Layer"
 date: "2026-06-08"
-description: "Enterprise SaaS buyers increasingly want machine-readable data contracts, not only dashboards."
+description: "Enterprise SaaS procurement in 2026 evaluates how platforms expose data to AI agents. Semantic layers have become a decision criterion alongside dashboards and APIs."
 author: "Alex Merced"
 category: "Data Architecture"
 tags:
-  - "SaaS procurement"
-  - "semantic layer"
-  - "data governance"
-  - "data architecture"
+  - "SaaS semantic layer procurement"
+  - "machine-readable schemas"
+  - "MCP for SaaS"
+  - "data as an API"
+  - "enterprise AI data readiness"
 ---
 
-Enterprise SaaS buyers increasingly want machine-readable data contracts, not only dashboards. That is the useful lens for SaaS semantic layer procurement in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The New Procurement Question
 
-![SaaS semantic layer procurement architecture diagram](/images/june8batch/saas-procurement-semantic-layer-over-dashboards-diagram-1.png)
+In 2024, enterprise SaaS buyers asked about dashboards, SLAs, and API rate limits. In 2026, they ask a different question: "How do your AI agents get context from my data?"
 
-## The market signal behind SaaS semantic layer procurement
+The shift reflects a change in how enterprises consume software. Organizations are deploying AI agents that need governed access to business data. When a procurement team evaluates a new SaaS platform, they are not just buying a tool for human users. They are buying a data source for their agent ecosystem.
 
-Dashboards still matter, but buyers now have internal agents that need governed access to product data. A vendor that can expose a clean semantic layer is easier to integrate into that buyer's AI workflow.
+The 2026 Enterprise Semantic Layer Buyer's Guide from Strategy Mosaic surveyed 100 senior data leaders and found that 42% cite inconsistent metrics as a top barrier to AI adoption. Another 61% blame overly complex infrastructure. The solution that 95% of respondents identified as critical is a governed semantic layer (source: CIO Dive Studio, 2026).
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+For SaaS vendors, this means the semantic layer is no longer a nice-to-have feature. It is a procurement requirement. Buyers inspect how you define metrics, how you expose them to external agents, and how you enforce governance across consumption patterns.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+## The Shift from Dashboard-First to Semantic-First
 
+Traditional SaaS procurement followed a dashboard-first pattern. The vendor showed a beautiful BI dashboard with revenue trends, user growth, and engagement metrics. The buyer evaluated whether the dashboards answered their business questions. If the dashboards looked good, the deal moved forward.
 
-## How the architecture works
+The dashboard-first model is collapsing for two reasons.
 
-Machine-readable schemas let customer-side agents discover available objects.
+First, dashboards serve human eyes. AI agents cannot consume visualizations. An agent cannot look at a bar chart and extract the exact numbers. It needs machine-readable data in a governed format. If the only way to get data from a SaaS platform is through visual dashboards, the platform is invisible to agents.
 
-MCP-style tool interfaces can expose safe actions and data retrieval paths.
+Second, dashboards define metrics once, inside the visualization tool. Every dashboard may use a slightly different calculation for the same metric. An agent that reads data from multiple dashboards gets inconsistent definitions. The same question yields different answers depending on which dashboard the agent queried.
 
-Semantic contracts explain metrics, dimensions, grain, freshness, and permission boundaries.
+The semantic-first model solves both problems. The SaaS platform defines metrics in a semantic layer that both dashboards and agents consume. One definition for "Monthly Recurring Revenue" powers the executive dashboard, the churn analysis tool, and the AI agent. All consumers get the same number.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+Strategy Mosaic's 2026 buyer's guide reports that organizations implementing semantic-first procurement see a 44% reduction in redundant metrics and models, with a 2-month average payback period on the investment (source: UserEvidence 2026 ROI Study).
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+## What Buyers Actually Inspect
 
-![Operating model diagram](/images/june8batch/saas-procurement-semantic-layer-over-dashboards-diagram-2.png)
+Enterprise SaaS procurement teams in 2026 inspect three dimensions of a semantic layer.
 
-## A concrete operating example
+**Metric definition clarity.** Does the platform define metrics in a machine-readable format with explicit formulas? Can the buyer see the calculation for every published metric? Are dimensions and relationships documented? A semantic layer that hides its definitions behind proprietary interfaces fails the inspection.
 
-A procurement team evaluating a customer-success platform may ask whether their internal agent can query renewal risk by segment, account owner, and product usage without exporting CSVs or scraping dashboards.
+**MCP and API exposure.** Does the platform expose its semantic layer through the Model Context Protocol (MCP)? External agents need a standardized protocol to discover and query semantic definitions. MCP has become the industry standard for agent-data interaction, with support from Anthropic, OpenAI, Microsoft, and the open source community. A SaaS platform without MCP support is invisible to most AI agents.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+**Governance across consumption channels.** Does a single access policy apply to BI dashboards, API consumers, and AI agents? Can the buyer enforce row-level security on an MCP query the same way they enforce it on a Power BI report? SaaS platforms that maintain separate governance models for different consumption channels create security gaps that procurement teams flag.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+The toughest buyer questions test these dimensions in real scenarios. Strategy Mosaic's guide recommends questions like: "If we change warehouses or BI tools, what needs to be rebuilt?" and "If an AI agent makes a request that the user's permissions would deny, what happens? Show the full audit log entry."
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+## MCP as the Procurement Standard
 
-## What this means for the lakehouse
+The Model Context Protocol has become the default standard for agent-data connectivity in 2026. Every major data platform published an MCP server. Snowflake Horizon Context supports MCP for external agents. Atlan's MCP server connects agents to its context graph. Cube exposes its semantic layer through MCP. Dremio's semantic layer offers MCP connectivity. ClickHouse released an official MCP server in November 2024.
 
-The market is moving value from static dashboards toward governed data access. The Agentic Lakehouse, semantic layer, and MCP-style interfaces align with what buyers are starting to ask vendors to provide.
+For SaaS procurement, MCP support is table stakes. A procurement team evaluating a new platform will check whether the platform publishes an MCP server and what tools that server exposes. A platform that only exposes REST APIs is at a disadvantage because the buyer must build custom agent integrations.
 
+The MCP server for a SaaS platform typically exposes three categories of tools. Discovery tools list available semantic models and their entities. Definition tools describe individual metrics with their formulas and dimensions. Query tools execute governed queries against the semantic layer and return results in a structured format.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+A well-designed MCP server does not expose raw database access. It routes every query through the semantic layer. The agent cannot bypass governance by issuing arbitrary SQL. Every query is governed, audited, and rate-limited.
 
+## The Onboarding Audit: Can Your Semantic Layer Prove Itself?
 
-## Implementation checklist
+Savvy procurement teams run a 6-8 week proof of value before signing. The POV focuses on the buyer's most contested KPI. If the buyer's finance and sales teams cannot agree on a single number for "net dollar retention," that is the KPI the POV tests.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+The POV process reveals whether the vendor's semantic layer can handle real-world complexity. Can it define metrics with multiple aggregation levels? Can it handle time zone differences across global teams? Can it enforce different access policies for different user roles?
 
-My practical checklist for this topic is:
+Strategy Mosaic's 2026 guide reports that the most common POV failure is not technology but undocumented legacy logic. The buyer's team has years of spreadsheet formulas, tribal knowledge, and unpublished assumptions embedded in their current metrics. Migrating to a semantic layer requires documenting all of that logic first.
 
-- Publish a semantic contract for your highest-value product data.
-- Expose read-only tools before write-capable tools.
-- Give each customer tenant scoped credentials and audit trails.
-- Treat semantic correctness as part of the product SLA.
+Vendors that pass the POV demonstrate three capabilities. First, they ingest the buyer's existing metric definitions without losing nuance. Second, they show the buyer exactly how each metric is calculated. Third, they provide a migration path that does not require the buyer to rebuild everything from scratch.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+## AI Agent Readiness as a Procurement Criterion
 
-![Implementation checklist diagram](/images/june8batch/saas-procurement-semantic-layer-over-dashboards-diagram-3.png)
+The 2026 CIO Dive survey found that 66% of data leaders consider the ability to switch BI tools without rebuilding definitions an important evaluation criterion. But the same survey found that AI agent readiness is now more important than BI tool portability.
 
-## Failure modes worth respecting
+Buyers evaluate AI agent readiness across four dimensions.
 
-Opening semantic access creates support obligations. A vendor must define rate limits, scopes, audit logs, data retention, and escalation paths.
+**Bounded vocabulary.** How many semantic metrics does the platform expose? Are they organized into domains? Can an agent discover the right metric without browsing 4,000 columns? Platforms with 30-200 well-documented metrics score higher than platforms with thousands of undocumented columns.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+**Granular permissions.** Can the platform enforce row-level security on agent queries? Can it restrict which metrics an agent can access? Can it audit every agent interaction? These capabilities are not optional when agents operate autonomously.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+**Latency tolerance.** Agent workflows generate bursty query patterns. A single agent conversation can trigger 5-20 queries in seconds. The semantic layer must handle this burst without degrading performance. Platforms with pre-aggregation caching and query optimization score higher.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+**Multi-platform support.** Enterprises run 15-30 different systems. A semantic layer that only covers one platform is useful but limited. Procurement teams increasingly demand semantic layers that span multiple platforms, providing a unified vocabulary across the entire data estate.
 
-## What I would do first
+## The Semantic Layer Pricing Question
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+Procurement teams also evaluate pricing models. Platform-native semantic layers (Snowflake Semantic Views, Databricks Metric Views) are included in the existing warehouse contract. They cost nothing extra, which makes them attractive for budget-constrained teams. The trade-off is that platform-native layers only work within that one platform.
 
-For SaaS semantic layer procurement, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+Independent semantic layers (Cube, AtScale, Dremio) have separate pricing. Cube offers an open-source core with a managed cloud tier. AtScale is enterprise-priced. Dremio's semantic layer is included with its lakehouse platform. The cost is higher than platform-native, but the coverage is broader.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+The procurement calculation depends on the enterprise's data architecture. A Snowflake-only shop gets more value from Snowflake Semantic Views at zero marginal cost. A multi-platform enterprise with Snowflake, Databricks, and Postgres gets more value from an independent semantic layer that covers all three, even at additional cost.
 
-## Final recommendation
+The UserEvidence 2026 ROI study provides a useful benchmark. Organizations implementing independent semantic layers report $3.4M average net annual impact with 551% ROI and a 2-month payback period. The ROI calculation includes reduced metric reconciliation time, faster AI deployment, and lower warehouse query costs through pre-aggregation caching.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+## Real-World Buying Patterns
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+The 2026 market shows distinct buying patterns by company size and industry.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+Large enterprises (10,000+ employees) prefer comprehensive independent semantic layers that span multiple platforms. They have the budget for dedicated infrastructure and the team scale to manage it. These buyers prioritize governance, auditability, and multi-platform support above ease of setup.
 
-## Field notes for teams evaluating this now
+Mid-market companies (500-5,000 employees) prefer platform-native semantic layers that integrate with their existing warehouse. They are typically on Snowflake or Databricks and want the semantic layer to be included in their existing contract. These buyers prioritize ease of setup and zero additional infrastructure.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+AI-native companies (startups building AI products) prefer API-first semantic layers like Cube that serve as a platform for embedded analytics and agent integration. Their agents are customer-facing, which means the semantic layer must handle multi-tenant access and high query concurrency.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+Across all segments, the MCP requirement is universal. A platform without MCP support is evaluated as not AI-ready. The question is no longer "do you have a semantic layer?" The question is "does your semantic layer speak MCP?"
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+## The Bottom Line
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+SaaS procurement has changed. The dashboard is no longer the primary artifact buyers evaluate. They want to see your semantic layer. They want to know how your platform defines metrics, how it exposes them to AI agents, and how it enforces governance across all consumption channels.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+The procurement teams that run the best evaluations use the 2026 criteria from Strategy Mosaic's buyer's guide. They test MCP support. They run a 6-8 week POV on their most contested KPI. They ask tough questions about governance across consumption channels.
 
+For SaaS vendors, the message is clear. Your semantic layer is your product's AI readiness score. Invest in metric definition clarity. Publish an MCP server. Enforce governance at the semantic layer, not just the database layer. The buyers are inspecting. Make sure you pass.
 
-## Identity and access review
+---
 
-For SaaS semantic layer procurement, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
-
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
-
-
-## Documentation that actually helps
-
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for SaaS semantic layer procurement from that page, the architecture is still too implicit.
-
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For SaaS semantic layer procurement, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If SaaS semantic layer procurement is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For SaaS semantic layer procurement, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For SaaS semantic layer procurement, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that SaaS semantic layer procurement helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For SaaS semantic layer procurement, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of SaaS semantic layer procurement that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For SaaS semantic layer procurement, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For SaaS semantic layer procurement, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either SaaS semantic layer procurement has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For SaaS semantic layer procurement, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
-
-
-## Test cases that matter
-
-Use test cases that reflect real business questions. For SaaS semantic layer procurement, include at least one happy path, one denied-access path, one stale-data path, and one rollback path. Those tests reveal more than a generic demo query.
+**Building an AI-ready SaaS platform?** Dremio's semantic layer provides governed metric definitions, MCP connectivity for AI agents, and multi-source federation. Expose your Iceberg data to any agent through a single, governed API. [Learn more at dremio.com](https://www.dremio.com).

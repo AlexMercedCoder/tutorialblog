@@ -1,203 +1,142 @@
 ---
 title: "Bidirectional Iceberg Writes with Horizon Catalog"
 date: "2026-06-08"
-description: "Bidirectional Iceberg interoperability changes managed Iceberg from a read surface into a shared write contract."
+description: "Snowflake Horizon Catalog enables bidirectional Iceberg writes from external engines like Spark and Trino, powered by Apache Polaris. Deep dive into REST Scan Plan API, governance, and Snowflake Summit 2026 announcements."
 author: "Alex Merced"
-category: "Data Platforms"
+category: "Apache Iceberg"
 tags:
-  - "Snowflake"
-  - "Horizon Catalog"
-  - "bidirectional writes"
-  - "Apache Iceberg"
+  - "Snowflake Horizon Catalog bidirectional Iceberg writes"
+  - "Polaris-powered catalog"
+  - "external engine writes"
+  - "REST Scan Plan API"
+  - "Open Catalog vs Horizon"
+  - "Snowflake Summit 2026"
 ---
 
-Bidirectional Iceberg interoperability changes managed Iceberg from a read surface into a shared write contract. That is the useful lens for bidirectional Iceberg interoperability in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+For years, the limitation of Snowflake's Iceberg support was direction. You could read Iceberg tables managed by external catalogs (AWS Glue, Polaris, Unity Catalog) from Snowflake. You could write Iceberg tables through Snowflake and read them in Snowflake. But you could not write to a Snowflake-managed Iceberg table from an external engine. If your Spark pipeline needed to update a table that Snowflake also owned, you either ran the pipeline inside Snowflake or you accepted a multi-copy architecture where the two engines maintained separate tables.
 
-![bidirectional Iceberg interoperability architecture diagram](/images/june8batch/snowflake-horizon-catalog-bidirectional-iceberg-writes-diagram-1.png)
+That limitation ended in March 2026, when Snowflake announced public preview of external writes to Snowflake-managed Iceberg tables through the Horizon Catalog. At Snowflake Summit 2026 (June 2026), the company confirmed that bidirectional Iceberg interoperability is now a core capability of the platform, powered by Apache Polaris (which graduated to Apache top-level project in February 2026).
 
-## The market signal behind bidirectional Iceberg interoperability
+The architecture is straightforward: the Horizon Catalog implements the Iceberg REST catalog specification (including credential vending, server-side commit coordination, and the Scan Plan API) and uses Apache Polaris internally for metadata management and governance. External engines connect to the Horizon Catalog's REST endpoint, authenticate through Snowflake's identity layer, receive vended storage credentials, and write data directly to Snowflake's Iceberg storage. The catalog coordinates commits, enforces access controls, and maintains the single source of truth for the table's metadata.
 
-Snowflake's Horizon Catalog announcement matters because external engines historically had limited ability to operate on Snowflake-managed data. Polaris-backed catalog access changes that conversation by giving engines a standards-based path to read and write governed Iceberg tables.
+This article covers the technical architecture, the governance model, the REST Scan Plan API integration, what was announced at Snowflake Summit 2026, and how Horizon Catalog compares to the open-source Polaris deployment model.
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+## The Bidirectional Architecture
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+Bidirectional interoperability means two directions of data flow:
 
+**Inbound (external to Snowflake):** An external engine (Spark, Trino, PyIceberg) reads or writes an Iceberg table whose metadata is managed by the Horizon Catalog. The engine connects to the Horizon Catalog's Iceberg REST API endpoint, authenticates, and performs operations exactly as it would with any Iceberg REST catalog. The catalog vends storage credentials scoped to the table's storage path and coordinates the commit to ensure ACID consistency.
 
-## How the architecture works
+**Outbound (Snowflake to external):** Snowflake reads or writes an Iceberg table whose metadata is managed by an external catalog (Polaris, Unity Catalog, AWS Glue). Snowflake connects to the external catalog's REST API endpoint, authenticates using the configured catalog integration, and performs operations. The table appears in Snowflake as a native Iceberg table, queryable through standard SQL.
 
-The catalog becomes the shared authority. Spark, Flink, Snowflake, and other engines need one place to resolve metadata, commit snapshots, and enforce table-level rules.
+The inbound direction was the missing piece before March 2026. Snowflake had supported external reads (inbound reads) since late 2024, but writes required the external pipeline to run inside Snowflake's compute boundaries. The key change in the March 2026 release is that the Horizon Catalog now supports the Iceberg REST catalog's write operations: `POST /v1/namespaces/{namespace}/tables/{table}/commit` and the related endpoints for committing new snapshots from external writers.
 
-Apache Polaris matters because it gives the market an open catalog implementation tied to the Iceberg REST catalog pattern instead of a private API.
+The commit flow for an external write works as follows:
 
-Bidirectional access is more than file visibility. It requires commit coordination, table version compatibility, conflict handling, and consistent security semantics.
+1. The external engine requests table metadata and write credentials from the Horizon Catalog.
+2. The catalog authenticates the engine, checks write permissions, and returns vended storage credentials scoped to the table's data directory.
+3. The engine writes new data files and manifest files directly to cloud storage using the vended credentials.
+4. The engine builds a new Iceberg snapshot (manifest list, manifests, data file references) and sends a commit request to the catalog.
+5. The catalog validates the snapshot (checks that the referenced files exist and match the vended credentials) and atomically updates the table's metadata pointer to the new snapshot.
+6. The catalog logs the commit with the engine's identity, timestamp, and snapshot ID for audit.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+The critical validation on step 5 is security relevant: the catalog verifies that the files referenced in the commit were written using credentials issued to the same engine session. This prevents a compromised engine from committing a snapshot that references files it did not write (a file injection attack). The catalog tracks the credentials it issued per session and checks that the committed files fall within the credential scope.
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+## Powered by Apache Polaris
 
-![Operating model diagram](/images/june8batch/snowflake-horizon-catalog-bidirectional-iceberg-writes-diagram-2.png)
+The Horizon Catalog uses Apache Polaris as its Iceberg REST catalog engine. This was a strategic decision by Snowflake, announced at Snowflake Summit 2025 and confirmed in the March 2026 engineering blog post: "Horizon Catalog integrates Apache Polaris (open source Iceberg catalog, now an Apache Top-Level Project). Grounded in open standards, no vendor lock-in for data or metadata."
 
-## A concrete operating example
+The Polaris integration means that the Horizon Catalog implements the full Iceberg REST catalog specification, including:
 
-A streaming team may want Flink to write curated events while finance analysts query the same managed Iceberg table from Snowflake. The value is not that both systems can see Parquet. The value is that both systems can operate through a catalog contract.
+- Table and namespace CRUD (all standard endpoints)
+- Credential vending (S3, ADLS, GCS)
+- Server-side commit coordination (conflict detection and retry)
+- Multi-table commits
+- Table rename, drop, and purge
+- Iceberg view support (view CRUD via REST)
+- The Scan Plan API (server-side scan planning, available in Iceberg 1.11+)
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+Snowflake adds enterprise features on top of the Polaris core: Snowflake's identity and access management integration, Cortex AI governance, classification and masking, automated metadata enrichment, and the Horizon governance dashboard. The base Polaris functionality is identical to the open-source version, which means a Spark application written to work with open-source Polaris works unchanged against the Horizon Catalog. The endpoint URL changes; the client logic does not.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+This architecture has an important implication: if you ever need to move your Iceberg tables away from Snowflake, you can point your engines at an open-source Polaris deployment (or any other Iceberg REST catalog) and access the same tables with the same metadata. The metadata format is standard Iceberg. The catalog API is the standard Iceberg REST API. The data files are standard Parquet with Iceberg manifests. There is no Snowflake-specific encoding or proprietary metadata.
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+Snowflake's own messaging confirms this: "You get the enterprise-grade scale, governance, security and compliance capabilities of Snowflake Horizon, backed by an open core that enables you to never face vendor lock-in for your data or metadata."
 
-## What this means for the lakehouse
+## Governance via REST Scan Plan API
 
-The broader market is validating the premise that open tables and open catalogs matter. An open ecosystem with federation, semantic views, Reflections, and AI interfaces across data that does not have to be copied into one warehouse is a stronger architecture than a single-vendor lock-in.
+The REST Scan Plan API (introduced in Iceberg 1.11, May 2026) is the mechanism by which the Horizon Catalog enforces governance policies for external engine access. It is a server-side query planning capability that works as follows:
 
+1. The external engine sends the query's filter predicates and column projection to the catalog.
+2. The catalog resolves the table, evaluates the requesting principal's access policies (row filters, column masks, table-level permissions), and determines which files and columns the principal is authorized to read.
+3. The catalog returns a list of scan tasks. Each scan task specifies a file path, the allowed column set (with masked columns omitted), the predicate evaluation result (pre-filtered rows), and vended credentials or pre-signed URLs for accessing the file.
+4. The engine executes the scan tasks in parallel. The engine never sees the masked columns or the filtered-out rows because the catalog did not include them in the scan tasks.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+The governance enforcement happens entirely in the catalog. The engine is a "dumb" executor: it receives a list of files and columns to read, reads them, and returns the results. The engine cannot bypass the governance policies because it never receives the metadata that would allow it to do so.
 
+For Snowflake Horizon, the Scan Plan API is the governance boundary for external engines. A row filter defined on a table in Snowflake (`CREATE ROW ACCESS POLICY ...`) is automatically applied when an external engine queries the table through the Horizon Catalog. The engine never sees the filtered rows. A column mask (`CREATE MASKING POLICY ...`) hides the column value from the external engine. The engine receives the masked value (or a NULL, depending on the masking policy configuration) without ever reading the unmasked value from storage.
 
-## Implementation checklist
+This is a strict improvement over the previous model where governance was enforced at the Snowflake compute layer. An external engine bypassed Snowflake governance entirely because it accessed storage directly. With the Scan Plan API, the Horizon Catalog intercepts the query planning, applies the policies, and returns only the authorized data. The external engine does not need to implement Snowflake's row filter or column mask syntax. The catalog handles all policy evaluation.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+## Snowflake Summit 2026 Announcements
 
-My practical checklist for this topic is:
+Snowflake Summit 2026 (June 2026) featured several Iceberg and Horizon Catalog announcements that build on the bidirectional writes capability.
 
-- Create an engine support matrix for read, append, merge, delete, schema evolution, and rollback.
-- Use a single catalog authority for production writes.
-- Run concurrent commit tests before allowing multiple writers.
-- Document which engine owns compaction and table optimization.
+**Iceberg v3 GA on Snowflake (May 7, 2026):** The v3 spec support (deletion vectors, row lineage, VARIANT, geospatial types, nanosecond timestamps, default column values, multi-argument partition transforms) is fully integrated with the Horizon Catalog. External engines reading Snowflake-managed v3 tables through the catalog see row lineage columns, default column values, and nanosecond timestamp precision. Write support for v3 tables from external engines is in public preview (as of the GA release, external v3 writes were not yet GA).
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+**Horizon Context and Semantic Studio:** New features for catalog-level semantic definitions. Horizon Context allows defining business terms and metrics at the catalog layer, and Semantic Studio provides a UI for creating and managing these definitions. When an external engine queries a table through the catalog, it can also retrieve the semantic context for the columns it accesses.
 
-![Implementation checklist diagram](/images/june8batch/snowflake-horizon-catalog-bidirectional-iceberg-writes-diagram-3.png)
+**Adaptive Compute for Iceberg:** Snowflake announced Adaptive Compute, a workload management feature that automatically scales compute resources for Iceberg tables accessed through the catalog. If an external engine submits a heavy scan to the catalog, Adaptive Compute can provision additional Snowflake warehouses to handle the scan planning workload. This is transparent to the external engine.
 
-## Failure modes worth respecting
+**Natoma Acquisition:** Snowflake acquired Natoma, a company focused on agent identity and security. The acquisition plans include integrating agent-aware access controls into the Horizon Catalog. If an AI agent accesses Iceberg data through the catalog, the agent's identity (not just the underlying engine identity) will be tracked and governed. This is expected to reach preview in late 2026.
 
-Shared writes raise the cost of sloppy governance. One poorly configured engine can write incompatible metadata, fail commits under load, or bypass expectations that another engine assumes. Compatibility testing becomes a release-management practice.
+**Horizon Catalog versus Open Catalog:** Snowflake clarified the distinction between two Iceberg catalog offerings:
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+- **Horizon Catalog** is the full enterprise catalog for Snowflake-managed assets. It includes Polaris-based Iceberg REST API, credential vending, server-side scan planning, row filters, column masks, Cortex AI governance integration, Dynamic Tables, and Horizon dashboards. This is the catalog that supports bidirectional writes.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+- **Open Catalog** is Snowflake's managed Polaris offering for externally managed Iceberg tables. You can use Open Catalog as a standalone Iceberg REST catalog without running Snowflake compute. Open Catalog supports the full Polaris feature set (credential vending, server-side commit deconflicting, multi-table commits) but does not include Snowflake-specific governance features (Cortex AI, Semantic Studio, Horizon dashboards). Open Catalog is positioned as a "Polaris as a service" deployment.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+The practical difference: if your table metadata is managed by Snowflake (Snowflake-managed Iceberg tables), you use Horizon Catalog. If your table metadata is managed elsewhere and you want Snowflake to store and serve the metadata through a Polaris-compatible API, you use Open Catalog.
 
-## What I would do first
+## Comparison with Databricks Unity Catalog
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+At Snowflake Summit 2026, the interoperability comparison between Horizon and Unity Catalog was a recurring theme. The two catalogs take different approaches to external engine access.
 
-For bidirectional Iceberg interoperability, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+**Horizon Catalog:** Exposes a standard Iceberg REST catalog endpoint (backed by Apache Polaris). Any engine with an Iceberg REST client can connect, authenticate, and read/write. The governance policies are enforced at the catalog layer via the Scan Plan API. The catalog is open-source at its core (Polaris) with enterprise features on top.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+**Unity Catalog:** Does not expose a standard Iceberg REST catalog endpoint for external engine access. External engines must use Unity Catalog-specific APIs (the UC credential vending endpoint or JDBC-based Lakehouse Federation). The governance enforcement for external engines is described as "less established" by Snowflake's comparison blog. The open-source Unity Catalog (Linux Foundation) does not include credential vending or Iceberg REST API support.
 
-## Final recommendation
+The practical implications for a multi-engine architecture: if your primary engine is Databricks and all data processing stays within Databricks, Unity Catalog provides excellent governance and interoperability. If you need external engines (Spark running on EMR, Trino for interactive queries, DuckDB for local analysis) to access the same tables, Horizon Catalog's standard Iceberg REST API is simpler to integrate because every engine already has an Iceberg REST client.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+Snowflake's engineering blog (May 2026) states the case directly: "Horizon implements the open Apache Iceberg REST Catalog specification (Apache Polaris). Any engine supporting the standard protocol can connect, receive vended credentials, and perform both reads and writes with governance policies enforced at the catalog layer regardless of engine."
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+## Getting Started with Bidirectional Writes
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+The setup process for external engine writes to Horizon Catalog is documented in Snowflake's user guide. The high-level steps:
 
-## Field notes for teams evaluating this now
+1. **Enable Horizon Catalog for your Snowflake account.** This is a configuration change in Snowflake's admin console. The Horizon Catalog endpoint URL is generated automatically.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+2. **Create a catalog integration for external engines.** The catalog integration defines the authentication method (OAuth, bearer token, or SigV4) and the allowed external identities.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+3. **Configure credential vending or remote signing.** For S3, this typically involves configuring AWS Lake Formation or IAM roles for STS-based credential vending. For ADLS and GCS, this involves configuring the storage service's credential vending mechanism.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+4. **Grant permissions.** Use standard Snowflake GRANT statements to grant SELECT, INSERT, UPDATE, DELETE, and CREATE TABLE permissions to the external engine's Snowflake identity.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+5. **Connect the external engine.** Configure the engine's Iceberg REST catalog client with the Horizon Catalog endpoint URL and the authentication credentials.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+6. **Test inbound and outbound operations.** Verify that the external engine can read and write Snowflake-managed tables, and that Snowflake can read and write tables managed by the external engine's catalog.
 
+The Snowflake documentation (docs.snowflake.com) provides detailed setup instructions for each cloud provider and each engine type.
 
-## Identity and access review
+## The Bottom Line
 
-For bidirectional Iceberg interoperability, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+Bidirectional Iceberg writes with Snowflake Horizon Catalog complete the circle of Iceberg interoperability. A Snowflake-managed table can now be written by Spark, Trino, PyIceberg, or any Iceberg REST client. The governance policies (row filters, column masks, access controls) are enforced at the catalog layer, uniformly across all engines.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+The architecture is open by design: Horizon Catalog uses Apache Polaris internally, and the Iceberg REST API it exposes is the same standard that open-source Polaris and any other compliant catalog implement. Your Spark application does not need Snowflake-specific code to write to a Horizon-managed table. It uses the same Iceberg REST client it uses for any other catalog.
 
+For teams evaluating multi-engine lakehouse architectures, Snowflake Horizon Catalog with bidirectional writes provides a practical path: keep the governance and security benefits of Snowflake while allowing specialized workloads (real-time streaming, ML training, complex ETL) to run on the engines best suited for them. The data lives in a single governed copy. The metadata is managed by an open-standard catalog. The engines compete on features, not on data access.
 
-## Documentation that actually helps
+Snowflake Summit 2026 confirmed that catalog interoperability is now the primary competitive dimension in the lakehouse market. Snowflake's bet on Apache Polaris as the standard Iceberg REST catalog implementation positions Horizon Catalog as the most interoperable option for multi-engine architectures that include external compute.
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for bidirectional Iceberg interoperability from that page, the architecture is still too implicit.
+---
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For bidirectional Iceberg interoperability, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If bidirectional Iceberg interoperability is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For bidirectional Iceberg interoperability, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For bidirectional Iceberg interoperability, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that bidirectional Iceberg interoperability helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For bidirectional Iceberg interoperability, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of bidirectional Iceberg interoperability that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For bidirectional Iceberg interoperability, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For bidirectional Iceberg interoperability, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either bidirectional Iceberg interoperability has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
+*For detailed documentation on Horizon Catalog bidirectional writes, visit [docs.snowflake.com](https://docs.snowflake.com/en/user-guide/tables-iceberg-query-using-external-query-engine-snowflake-horizon). To explore Iceberg interoperability with a governed multi-engine lakehouse, start a free trial at [dremio.com/get-started](https://www.dremio.com/get-started).*

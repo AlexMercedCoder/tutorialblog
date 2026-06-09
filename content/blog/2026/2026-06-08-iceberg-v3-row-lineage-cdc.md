@@ -1,196 +1,150 @@
 ---
 title: "CDC Without Complexity Using Iceberg v3 Row Lineage"
 date: "2026-06-08"
-description: "Row lineage gives Iceberg a native way to tell incremental consumers which rows changed and when they changed."
+description: "Iceberg v3 row lineage adds _row_id and _last_updated_sequence_number to every table, enabling native change data capture without Debezium or Kafka. Technical deep dive with Snowflake and Databricks examples."
 author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
-  - "Iceberg v3"
-  - "row lineage"
-  - "CDC"
-  - "change data capture"
+  - "Iceberg v3 row lineage CDC"
+  - "_row_id Iceberg"
+  - "_last_updated_sequence_number"
+  - "Change Data Capture lakehouse"
+  - "incremental processing Iceberg"
 ---
 
-Row lineage gives Iceberg a native way to tell incremental consumers which rows changed and when they changed. That is the useful lens for Iceberg v3 row lineage in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+Change data capture (CDC) has traditionally meant running a separate infrastructure stack. You install Debezium for MySQL or PostgreSQL, configure Kafka Connect, set up topics, tune the consumer lag, and then write a streaming pipeline that materializes the change events into your data lake. The operational burden is real: topic partitioning, schema registry compatibility, offset management, replay semantics, and the ever-present risk of a consumer falling behind and needing a full re-snapshot.
 
-![Iceberg v3 row lineage architecture diagram](/images/june8batch/iceberg-v3-row-lineage-cdc-diagram-1.png)
+Apache Iceberg v3 row lineage eliminates most of that complexity. By assigning a unique, immutable `_row_id` and a monotonically increasing `_last_updated_sequence_number` to every row in every table, Iceberg gives you native CDC without any external tooling. The change tracking is built into the table format itself, readable by any engine that supports Iceberg v3.
 
-## The market signal behind Iceberg v3 row lineage
+This is not an abstract future capability. Row lineage is GA on Snowflake as of May 7, 2026. It is GA on Databricks Runtime 18.0+. Apache Spark 3.5+ supports it via the Iceberg 1.9+ library. The feature is specified in the Iceberg v3 spec and was contributed by Snowflake engineers Russell Spitzer, Nileema Shingte, and Attila-Peter Toth, with implementation support from Ryan Blue (Iceberg PMC chair) and Amogh Jahagirdar (Spark integration).
 
-Change data capture often starts as a simple requirement and becomes a stack of log readers, replay jobs, deduplication rules, and late-arriving event logic. Iceberg v3 does not remove every CDC problem, but the new lineage fields give table consumers better metadata than a blind table scan.
+## What the v3 Spec Actually Requires
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+The Iceberg v3 spec mandates two new metadata columns for every table:
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+**`_row_id`:** A unique 64-bit integer assigned to each row at insert time. The value never changes for the lifetime of the row. Even if the row goes through 50 UPDATE operations, the `_row_id` stays the same. This is fundamentally different from surrogate keys defined at the application level, which might change during merges, re-ingests, or schema migrations.
 
+**`_last_updated_sequence_number`:** The Iceberg commit sequence number of the snapshot that last modified the row. Every Iceberg snapshot has a monotonically increasing sequence number. When an UPDATE or MERGE operation touches a row, the `_last_updated_sequence_number` advances to the current snapshot's sequence number. Inserts set both `_row_id` and `_last_updated_sequence_number` in the same commit.
 
-## How the architecture works
+The `next-row-id` table property is mandatory for v3 tables. It tracks the next available row ID across all concurrent writers. The catalog is responsible for maintaining this counter, which ensures that two writers inserting rows at the same time do not produce duplicate `_row_id` values. This is the same kind of coordination that Iceberg already does for snapshot creation, so it does not add significant overhead to the commit protocol.
 
-`_row_id` gives newly written rows a stable identity inside the table. It lets consumers track rows across snapshots without inventing identity from business columns that may not be stable.
+The lineage metadata is stored in the Parquet data files themselves, not in a separate metadata store. This means any engine that reads the Parquet files and understands the Iceberg v3 schema can query `_row_id` and `_last_updated_sequence_number` directly. The values are not hidden columns or system-managed metadata that only one engine can access. They are regular columns in the Parquet schema, fully exposed to SQL queries, and fully portable across engines.
 
-`_last_updated_sequence_number` tells a consumer the sequence number associated with the most recent update for that row. That gives downstream jobs a native filter for incremental processing.
+A subtle but important requirement: OPTIMIZE TABLE (compaction) must preserve both `_row_id` and `_last_updated_sequence_number`. Without this guarantee, a routine maintenance operation would silently destroy the lineage chain. The spec requires that compaction jobs copy the existing values to the new files unchanged. The Databricks and Snowflake implementations both honor this requirement.
 
-The design fits Iceberg's snapshot model. Instead of pretending the table is a message log, it exposes lineage through table metadata and row-level fields that engines can read with normal scan planning.
+## How Row Lineage Enables CDC
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+Traditional CDC requires capturing database logs (binlog in MySQL, WAL in PostgreSQL) and converting them into a stream of INSERT, UPDATE, and DELETE events. Each event carries the before-and-after image of the row, plus metadata about the change operation. The consumer must replay these events in order and apply them to a target table.
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+Iceberg row lineage inverts this model. Instead of capturing changes at the source database, the lineage columns let you query for changes directly in the Iceberg table. The query pattern is:
 
-![Operating model diagram](/images/june8batch/iceberg-v3-row-lineage-cdc-diagram-2.png)
+```sql
+SELECT *
+FROM my_table
+WHERE _last_updated_sequence_number > :last_processed_sequence
+```
 
-## A concrete operating example
+This returns every row that was inserted, updated, or deleted since the last time you polled. You do not need a separate CDC pipeline. You do not need Kafka. You do not need to maintain offset state for a source database connection. The sequence number is monotonically increasing and consistent across all writers, so your polling logic is straightforward: store the last sequence number you processed, then query for rows with a higher sequence number.
 
-A customer health model may need every row that changed since the last scoring run. Without row lineage, the team may compare snapshots, scan update timestamps, or read source logs. With v3 lineage, the incremental reader can work against Iceberg metadata and sequence numbers directly.
+Detecting DELETEs requires an additional step because a deleted row no longer appears in the table. The Iceberg snapshot comparison API handles this. You can compare two snapshots (the current snapshot and the snapshot at your last poll) and list the files and row positions that changed. Combine this with `_row_id` values from before the delete, and you can identify exactly which rows were removed.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+Snowflake's Dynamic Iceberg Tables use this mechanism internally. Dynamic Tables with declarative INSERT, UPDATE, DELETE, and MERGE operations use row lineage to track which rows need to be refreshed in the materialized result. The Snowflake v3 announcement confirmed this: "row lineage powers Dynamic Iceberg Tables with declarative syntax for INSERT, UPDATE, DELETE, and MERGE operations."
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+## The Debezium and Kafka Comparison
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+To understand row lineage's value, compare the operational complexity of the traditional CDC stack against the Iceberg-native approach.
 
-## What this means for the lakehouse
+**Traditional CDC (Debezium + Kafka + Kafka Connect):**
 
-Agentic analytics depends on trusted incremental context. A semantic layer can present approved business views while the underlying Iceberg table carries row-level lineage. The agent asks a business question, the platform maps it to governed SQL, and the table format supplies the change-aware foundation.
+Components required: Debezium connector for each source database, Kafka cluster (typically 3+ brokers), Kafka Connect cluster, schema registry, consumer application or streaming pipeline. Each component has its own configuration, monitoring, failure recovery, and version management.
 
+Failure modes: Debezium connector crashes and lags behind the database binlog position. Kafka topic retention expires and unprocessed events are lost. Schema registry compatibility check fails on a column rename. Consumer application crashes and offset commits are out of sync. Each of these failure modes requires manual intervention.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+Latency: End-to-end latency from source database commit to Iceberg table visibility is typically 30-60 seconds in well-tuned pipelines, dominated by the Kafka round-trip and the Iceberg commit cycle.
 
+**Iceberg row lineage CDC:**
 
-## Implementation checklist
+Components required: Iceberg v3 table. That is it. No connectors, no Kafka, no schema registry.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+Failure modes: The polling query might miss rows if the application crashes between processing rows and storing the sequence number. Mitigate by using an atomic transaction to store the sequence number and process the rows (or by accepting at-least-once semantics and deduplicating on `_row_id`).
 
-My practical checklist for this topic is:
+Latency: Limited by the Iceberg commit frequency. If your writer commits every 30 seconds, you can poll every 30 seconds and see changes within that window. For real-time use cases, you can reduce the commit interval. The minimum practical commit interval is 1-2 seconds for most Iceberg implementations.
 
-- Define the checkpoint as an Iceberg sequence number, not as wall-clock time.
-- Record each consumer's last processed snapshot and last processed sequence number.
-- Expose incremental views through a governed query layer instead of handing agents raw table internals.
-- Backfill one model from scratch and compare it to the lineage-based incremental result.
+The tradeoff is that Iceberg row lineage tracks changes within the Iceberg table only. It does not capture changes in the source operational database. If you need to replicate from a transactional database (PostgreSQL, MySQL) into your lakehouse, you still need a CDC pipeline to extract the changes. Once those changes land in Iceberg, however, row lineage lets you propagate them through downstream materialized views, aggregation tables, and data marts without additional CDC infrastructure.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+Russell Spitzer, Snowflake engineer and Iceberg PMC member, summarized the impact: "Iceberg users will be able to accurately determine the history of any row in their tables. Previously, we could only guess based on user-defined identity columns, but now it's built into the format itself."
 
-![Implementation checklist diagram](/images/june8batch/iceberg-v3-row-lineage-cdc-diagram-3.png)
+## Incremental Processing Without External State
 
-## Failure modes worth respecting
+The most practical use case for row lineage is incremental processing. Batch ETL pipelines traditionally operate on full table scans. Every hour, the pipeline reads the entire source table, applies transformations, and writes the result. As tables grow beyond billions of rows, full scans become expensive in both compute cost and query time.
 
-Row lineage describes what landed in the Iceberg table. It does not replace every upstream event log, and it does not explain business intent. If an upstream system writes a correction, lineage can show that a row changed, but your semantic layer still has to explain whether the correction should change revenue, churn, inventory, or compliance reporting.
+With row lineage, you can replace full scans with incremental queries:
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+```sql
+-- Instead of reading the full source table every hour:
+-- SELECT * FROM source_table
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+-- Read only rows that changed since last poll:
+SELECT * FROM source_table
+WHERE _last_updated_sequence_number > 1570000
+```
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+A pipeline that was scanning 500 GB every hour can reduce to scanning 1-5 GB per hour, depending on the change rate. The compute savings are proportional to the ratio of changed rows to total rows. For tables with single-digit-percentage daily change rates, the operation changes from O(total rows) to O(changed rows), which is the difference between scanning 500 GB and scanning 5 GB per cycle.
 
-## What I would do first
+The incremental pattern extends to multi-step pipelines. The first stage pulls changes from the source table. The second stage applies transformations to only the changed rows. The third stage writes the result to a target table with a MERGE operation that matches on `_row_id`. The entire pipeline runs incrementally, limited only by the change volume rather than the total table size.
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+## Audit and Compliance Use Cases
 
-For Iceberg v3 row lineage, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+Row lineage provides a tamper-evident audit trail. Every row carries its creation time (via the `_row_id` assignment timestamp) and its last modification sequence number (mappable to a specific snapshot, which has a timestamp and a committer identity).
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+**Financial reconciliation:** When a discrepancy appears in a settlement table, you can query the `_last_updated_sequence_number` for the affected rows and map those sequence numbers back to Iceberg snapshots. Each snapshot has a commit timestamp and the identity of the writer that created it (in Snowflake, the warehouse and user context). You get an exact answer: "these rows were modified by user X, at time Y, as part of snapshot Z."
 
-## Final recommendation
+**GDPR right-to-erasure:** You delete rows for a specific user. Later, you need to confirm that the deletion is effective and that the rows have not been reintroduced by a downstream merge or reprocessing job. Query for the `_row_id` values of the deleted user. If they appear in any active snapshot, the deletion was incomplete. The `_row_id` is permanent, so you can verify its absence regardless of how many compaction or repartitioning jobs have run.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+**Data quality debugging:** A batch load produces incorrect values in a fact table. The traditional approach is to sample rows and guess which operation introduced the bad data. With row lineage, you filter the affected rows by `_last_updated_sequence_number` and identify the exact snapshot that wrote them. The bad snapshot can be rolled back atomically, and the corrected pipeline can reprocess only the rows from that snapshot.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+## Snowflake and Databricks Implementation Status
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+**Snowflake:** Row lineage is GA on Snowflake as of May 7, 2026 (Iceberg v3 GA). It is available for both Snowflake-managed Iceberg tables and tables accessed through the Horizon Iceberg REST Catalog API. Row lineage values are written for all INSERT, UPDATE, DELETE, and MERGE operations on v3 tables. The columns are queryable through standard SQL. Snowflake's Dynamic Tables use row lineage internally for incremental refresh.
 
-## Field notes for teams evaluating this now
+**Databricks:** Row lineage is GA on Databricks Runtime 18.0+. Databricks emphasizes the compatibility between Iceberg v3 row lineage and Delta Lake row tracking. The two formats use compatible encodings, meaning a table written by Databricks can be read by Snowflake with lineage values intact, and vice versa. Databricks confirmed this in their v3 blog post: "Row lineage in Iceberg v3 is compatible with Delta's row tracking."
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+**Spark:** Apache Spark 3.5+ with Iceberg 1.9+ supports reading row lineage columns. Write support for the `next-row-id` metadata requires the Iceberg 1.11+ library (released May 19, 2026).
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+**Trino:** As of June 2026, Trino does not support v3 row lineage columns. The Trino Iceberg connector is not ready for v3 reads. This is consistent with Trino's slower adoption of the Iceberg spec.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+## When Row Lineage Is Not Sufficient
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+Row lineage solves CDC within Iceberg tables, but it does not replace all CDC scenarios.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+**Source database replication:** If you need to replicate changes from PostgreSQL, MySQL, MongoDB, or another operational database into Iceberg, you still need a CDC pipeline at the source. Row lineage only tracks changes once the data is already in Iceberg.
 
+**Binary log-level granularity:** Traditional CDC captures every individual row change, including intermediate states that are quickly overwritten. Row lineage only tracks the final state of each row as of each Iceberg commit. You cannot replay the exact sequence of insert-update-update-delete that a row went through; you can only query the latest state and compare snapshots.
 
-## Identity and access review
+**Transactional consistency across tables:** Row lineage tracks changes within a single table. If you need change tracking across multiple tables in a single transaction, you need Iceberg's multi-table commit feature, which is supported in the Iceberg REST catalog spec but not yet uniformly implemented across engines.
 
-For Iceberg v3 row lineage, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+**Real-time sub-second latency:** Row lineage operates at the Iceberg commit granularity. If your use case requires millisecond-level change visibility, you need a streaming platform (Kafka, Pulsar) that delivers events at sub-second latency. Row lineage is optimized for batch and micro-batch increments (seconds to minutes), not real-time streaming.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+## Operational Practices
 
+To use row lineage effectively, you need a small amount of operational discipline.
 
-## Documentation that actually helps
+**Track the sequence number externally.** Your CDC consumer needs to persist the last processed sequence number. If the consumer crashes and restarts, it resumes from the stored sequence number. The storage can be a simple database table, a file in object storage, or a key-value store. The critical requirement is that the sequence number update and the downstream side effects are atomic or idempotent.
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for Iceberg v3 row lineage from that page, the architecture is still too implicit.
+**Handle the at-least-once semantics.** The polling query reads all rows with a sequence number greater than the stored value. If the consumer crashes after reading but before persisting the new sequence number, some rows will be reprocessed. Your downstream operations should be idempotent on `_row_id`: a MERGE that matches on `_row_id` is safe to execute multiple times.
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+**Monitor the change rate.** If your table experiences a sudden spike in changes (a backfill, a full data reload, a schema migration), the incremental query will scan more data than usual. Monitor the number of rows returned by the CDC query and alert when it exceeds a threshold. This catches both unexpected data volume and potential consumer lag.
 
+**Plan for snapshot retention.** Row lineage is useful only while the relevant Iceberg snapshots still exist. If your VACUUM policy deletes snapshots older than 7 days, you can only trace changes within that window. Adjust your snapshot retention to match your audit and compliance requirements. Snowflake recommends retaining at least 14 days of snapshots for tables with lineage-dependent downstream pipelines.
 
-## How to keep agents in bounds
+## The Bottom Line
 
-Agents should not receive broad table access just because a human can ask broad questions. For Iceberg v3 row lineage, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
+Iceberg v3 row lineage eliminates the infrastructure tax of traditional CDC for lakehouse workloads. Two metadata columns (`_row_id` and `_last_updated_sequence_number`) provide change tracking that works across any Iceberg-compatible engine, requires no external infrastructure, and adds no ongoing operational burden beyond storing the values.
 
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
+The technology is mature enough for production use. Snowflake and Databricks both support it at GA level. The spec is standardized and forward-compatible. If you are building a lakehouse architecture with multi-engine access, row lineage is the simplest way to implement incremental processing, audit tracking, and change data capture for data that already lives in Iceberg.
 
+For source-to-lakehouse replication, you still need a CDC tool. But once the data is in Iceberg, row lineage replaces the Kafka-to-Iceberg pipeline, the debezium-to-iceberg connector, and the incremental processing framework. That is a significant simplification for any team managing data pipelines at scale.
 
-## What to measure after launch
+---
 
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If Iceberg v3 row lineage is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For Iceberg v3 row lineage, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For Iceberg v3 row lineage, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that Iceberg v3 row lineage helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For Iceberg v3 row lineage, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of Iceberg v3 row lineage that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For Iceberg v3 row lineage, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For Iceberg v3 row lineage, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
+*For more on Apache Iceberg v3, row lineage, and the Iceberg specification, visit [iceberg.apache.org](https://iceberg.apache.org). To try Iceberg v3 with row lineage in a governed multi-engine lakehouse, start a free trial at [dremio.com/get-started](https://www.dremio.com/get-started).*

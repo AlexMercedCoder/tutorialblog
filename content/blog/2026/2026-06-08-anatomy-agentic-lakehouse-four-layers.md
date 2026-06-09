@@ -1,212 +1,154 @@
 ---
 title: "Anatomy of an Agentic Lakehouse"
 date: "2026-06-08"
-description: "An Agentic Lakehouse is storage, catalog governance, semantic context, and agents working as one operating model."
+description: "The four-layer architecture of the agentic lakehouse: object storage, Apache Iceberg table format, Apache Polaris catalog, and the semantic/agent layer. How each layer provides guarantees for AI agent access."
 author: "Alex Merced"
-category: "Data Architecture"
+category: "Apache Iceberg"
 tags:
-  - "agentic lakehouse"
-  - "data architecture"
-  - "lakehouse layers"
-  - "AI analytics"
+  - "agentic lakehouse architecture"
+  - "four layers of agentic lakehouse"
+  - "Apache Polaris catalog"
+  - "Medallion architecture"
+  - "Iceberg table format"
+  - "AI semantic layer"
 ---
 
-An Agentic Lakehouse is storage, catalog governance, semantic context, and agents working as one operating model. That is the useful lens for agentic lakehouse in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+The term "agentic lakehouse" gets thrown around a lot in 2026. Most references describe it as a data platform that AI agents can query. That description is technically true and practically useless. A chatbot wired directly to Parquet files on S3 can "query data," but it will produce wrong answers, bypass security controls, and degrade under load.
 
-![agentic lakehouse architecture diagram](/images/june8batch/anatomy-agentic-lakehouse-four-layers-diagram-1.png)
+The agentic lakehouse is a four-layer architecture where each layer provides a specific guarantee that makes AI agent access reliable, auditable, and performant. The layers are object storage, the Iceberg table format, the catalog (Apache Polaris or compatible), and the semantic/agent interface layer. Decisions made at each layer propagate upward and constrain what agents can safely do.
 
-## The market signal behind agentic lakehouse
+This article defines each layer, explains the guarantees it provides, and shows how they combine into an architecture that agents can discover, query, and write to without human supervision.
 
-A chatbot over raw tables is not an Agentic Lakehouse. The architecture has to support discovery, query execution, optimization, policy enforcement, audit, and controlled action.
+## Layer 1: Object Storage as the Physical Foundation
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+The bottom layer is object storage: Amazon S3, Azure Data Lake Storage Gen2, or Google Cloud Storage. This is where the actual bytes live: Parquet and ORC data files, Iceberg metadata files (table metadata JSON, manifest lists, manifest files), delete files, deletion vectors, and auxiliary files like bloom filters and column statistics.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+The choice of storage class matters more for agent workloads than for batch ETL. Agents query interactively; they do not wait for Glacier restore. Gold-layer tables (certified, high-value datasets) should use hot storage tiers. Standard tier on S3, hot tier on ADLS Gen2, standard tier on GCS. Intelligent-tiering and cold tiers introduce first-byte latency that breaks the sub-second response expectation of conversational AI.
 
+Namespace layout is another architectural decision with long tail effects. Organize storage paths by business domain, not by tool or team. A path like `s3://data/finance/revenue/` is stable across catalog migrations and engine swaps. A path like `s3://data/alexmerced-iceberg-test/` is not. Agent catalogs register namespace paths once and expect them to persist.
 
-## How the architecture works
+The storage layer also hosts the Iceberg metadata tree. This tree is not an index or a cache. It is the authoritative record of every valid snapshot, every data file, and every column statistic. When an agent asks "what data exists for this date range and product category," the answer comes from pruning the metadata tree, not from scanning data files. The storage layer must provide consistent read-after-write for metadata files. S3's strong consistency (announced in 2020 and generally available since 2021) meets this requirement. ADLS's hierarchical namespace guarantees it natively. GCS's strong consistency covers it.
 
-The storage layer should use open table formats such as Apache Iceberg.
+IAM at the storage layer should be minimal. Give broad storage access only to the catalog service. Engines and agents receive short-lived, table-scoped credentials via credential vending. This is the zero-trust storage model: no agent directly touches S3. Every read goes through the catalog, the engine, and the semantic layer.
 
-The catalog layer should manage table identity, commits, access, and metadata.
+## Layer 2: The Iceberg Table Format
 
-The semantic and agent layers should expose business-approved objects and safe tools.
+The second layer is the table format. Apache Iceberg is the standard for the agentic lakehouse because it provides guarantees that raw file formats and older table formats (Hive, Delta Lake without UniForm) do not.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+**Snapshot isolation.** Every read or write operates on a consistent snapshot. An agent that reads a table at time T1 sees exactly the data that was committed at or before T1, regardless of concurrent writes. This is serializable isolation, defined in the Iceberg spec and enforced by the atomic metadata commit in the catalog.
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+**Time travel.** An agent can query the table as it existed at any previous snapshot. This is critical for reproducibility: if an agent's analysis depends on data from three hours ago, it can query the exact snapshot it needs, not the current state (which may have been updated by another agent).
 
-![Operating model diagram](/images/june8batch/anatomy-agentic-lakehouse-four-layers-diagram-2.png)
+**Schema evolution.** Agents can assume that table schemas evolve without breaking references. Iceberg supports adding columns, renaming columns, and changing column types without rewriting data files. An agent that queries `SELECT product_id, price FROM catalog.pricing.products` continues to work after a `description` column is added. In Hive, a schema change would require updating every downstream query.
 
-## A concrete operating example
+**Hidden partitioning.** Agents do not need to know the physical partition layout. They query by column values (for example, `WHERE event_date >= '2026-01-01'`), and the engine uses partition statistics in the manifest files to prune irrelevant files. The physical partitions can be reorganized without changing queries.
 
-A sales agent that investigates pipeline risk should not scan random warehouse tables. It should query certified opportunity views, respect territory permissions, use approved definitions, and write any follow-up action to an auditable system.
+**Iceberg V3 features for AI workloads.** Iceberg V3 introduces three capabilities that directly benefit agentic workloads:
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+- The variant type stores semi-structured JSON data in a binary-shredded format. Agent action logs, which are often nested JSON with varying schemas, can be stored in a variant column without defining a fixed schema upfront.
+- Nanosecond timestamp precision supports high-frequency event streams from inference monitoring, real-time analytics agents, and sensor data.
+- Deletion vectors enable efficient row-level updates without rewriting entire data files. Agents that update a small number of rows (correcting a prediction, updating a recommendation) generate only a bitmap change instead of a full file rewrite.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+The table format decision constrains everything above it. Choose Iceberg with V2 as a minimum. Enable V3 features as they become stable in your engine.
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+## Layer 3: The Catalog as the Agentic Control Plane
 
-## What this means for the lakehouse
+The catalog is where every agent interaction begins. Before an agent writes a single SQL statement, it calls the catalog to discover what tables exist, where their metadata lives, and what access the agent has.
 
+Apache Polaris, the open-source Iceberg REST catalog implementation, defines the reference architecture for this layer. Polaris uses a three-tier access model:
 
+1. **Principal:** A user, service account, or agent identity.
+2. **Principal Role:** A group of principals that share access characteristics.
+3. **Catalog Role:** A set of privileges applied to a namespace or table.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+For an AI agent, the minimum privilege set is `NAMESPACE_LIST` and `TABLE_READ_DATA` on specific namespaces. No agent should have `TABLE_WRITE_DATA` unless it is explicitly designed and tested for write operations.
 
+**Credential vending** is the catalog's most important security feature. When an engine (or an agent through an engine) requests data, the catalog vends short-lived credentials scoped to the specific data files that the query will read. On AWS, this is a temporary STS token with an S3 path prefix that matches only the required files. On Azure, it is a SAS token with a similar scope. On GCS, it is a short-lived access token.
 
-## Implementation checklist
+The credentials expire in minutes (configurable, typically 5 to 60 minutes). If an agent's token is exfiltrated, the attacker can read only the files covered by that specific query, and only until the token expires. This is the zero-trust data access model in practice.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+**Commit arbitration.** The catalog also serializes metadata commits. When two agents write to the same table, the catalog's atomic compare-and-swap ensures that only one commit succeeds. The losing writer retries with the new table state. This is Iceberg's OCC, enforced at the catalog layer, not the storage layer or the engine layer.
 
-My practical checklist for this topic is:
+**Multi-catalog federation.** An agentic lakehouse may have multiple catalogs. A production catalog (Polaris or Snowflake Horizon) holds certified tables. A development catalog holds experimental tables. An external catalog (AWS Glue or Hive Metastore) may exist for legacy data. The query engine federates across these catalogs, presenting a unified semantic layer to agents.
 
-- Start with certified semantic views over the most important datasets.
-- Add agent tools only after policy and audit are in place.
-- Use Reflections and table optimization to keep exploratory loops fast.
-- Expand from read-only investigation to controlled action only after validation.
+Dremio's architecture treats the catalog as the center of the stack. Dremio Open Catalog includes Polaris, federation connectors, and the AI semantic layer in a single deployment. Agents connect to the catalog; the catalog routes them to the right storage, the right engine, and the right semantic views.
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+## Layer 4: The Semantic and Agent Interface Layer
 
-![Implementation checklist diagram](/images/june8batch/anatomy-agentic-lakehouse-four-layers-diagram-3.png)
+The top layer is where business meaning and AI interaction converge. This layer has two sublayers: the semantic layer (which provides business context for raw tables) and the agent interface (which exposes safe tools to AI models).
 
-## Failure modes worth respecting
+**The semantic layer** translates raw column names and table structures into business concepts. A column named `rev_amt` becomes `Revenue Amount`. A join of four tables becomes a single semantic view called `Monthly Customer Profitability`. The semantic layer stores metric definitions, dimension hierarchies, and business rules in a queryable format.
 
-Autonomy without policy just creates faster mistakes. The architecture must make the allowed path easier than the unsafe path.
+For AI agents, the semantic layer is the difference between a useful answer and a hallucinated number. An agent that queries `SELECT * FROM raw_transactions` has no context about what a "transaction" means, which transactions are excluded (test transactions, refunds, inter-company transfers), or how to aggregate them correctly. An agent that queries `SELECT * FROM semantic.monthly_revenue` has a certified, documented, and governed definition.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+The semantic layer also enforces access control at the column and row level. A human analyst might see all columns. An agent serving a regional manager sees only the columns and rows relevant to that region. Row filters and column masks are applied transparently by the semantic layer, not pushed down to the storage layer.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+**The agent interface** is the MCP server or similar protocol adapter that exposes the semantic layer as a set of callable tools. Each tool has a name, description, input parameters, and a clear return type. The agent does not write arbitrary SQL. It calls `get_product_revenue(product_id, date_range)` and receives a JSON response.
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+The agent interface enforces three constraints that raw SQL access does not:
 
-## What I would do first
+1. **Validated inputs.** The tool checks that parameters are within expected ranges and types before executing the query.
+2. **Scoped execution.** The tool runs under a specific catalog principal with a specific set of privileges. It cannot escalate privileges or access data outside its scope.
+3. **Audit trail.** Every tool call is logged with agent identity, timestamp, parameters, and response size.
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+Dremio's MCP server (open source, apache-2.0 licensed, available at github.com/dremio/dremio-mcp) implements this pattern. It exposes tools for listing catalogs, describing schemas, getting table schemas, running SQL queries, and checking the status of Reflections (materialized views). The server authenticates via OAuth or personal access token, and every tool call runs under the authenticated principal's catalog role.
 
-For agentic lakehouse, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+## The Medallion Architecture Applied to the Agentic Lakehouse
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+The medallion architecture (bronze, silver, gold) maps directly onto the four-layer agentic lakehouse. Each medallion layer sits at the storage and table format layers, with catalog and semantic layers on top.
 
-## Final recommendation
+**Bronze layer.** Raw ingested data. Minimal transformations. Full audit trail of source ingestion. Agent access to bronze is read-only and restricted to debugging and data quality checks. No semantic layer on top of bronze.
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+**Silver layer.** Cleaned, conformed, and validated data. Deduplicated, typed, and partitioned for query performance. Agents may query silver with oversight, using scoped catalog roles that limit access to specific namespaces. Limited semantic layer: column descriptions and basic metric definitions.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+**Gold layer.** Aggregated, certified, business-ready data products. Defined metrics, documented dimensions, and owned data products. Agents query gold through the semantic layer. No direct table access. Every query goes through a semantic view or MCP tool.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+This layering prevents the most common agent failure: treating raw data as though it were clean data. An agent assigned to "calculate monthly churn" should only see the gold layer view `monthly_churn` which incorporates the correct definitions, exclusions, and aggregation logic. If it accessed silver or bronze, it would compute churn incorrectly (or waste compute on full-scan queries of raw data).
 
-## Field notes for teams evaluating this now
+## How the Layers Interact: An Agent Request Walkthrough
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+Here is what happens when an agent asks "What was revenue last quarter?" in a properly layered agentic lakehouse.
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+1. **Agent interface layer.** The agent calls the MCP tool `get_revenue(period='last_quarter')`. The MCP server validates the period parameter and authenticates the agent's principal.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+2. **Catalog layer.** The MCP server passes the request to the query engine. The engine authenticates with the catalog (Polaris) using the agent's vended credentials. The catalog verifies that the principal has `TABLE_READ_DATA` on the `semantic.revenue_metrics` view.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+3. **Iceberg table format layer.** The catalog returns the current metadata location for `semantic.revenue_metrics`. The engine reads the table metadata file, manifest list, and manifests. Pruning uses partition statistics to identify only the manfests and data files for the previous quarter.
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+4. **Object storage layer.** The engine requests credential vending from the catalog for the specific data files identified in pruning. The catalog returns scoped credentials. The engine reads only those files.
 
+5. **Result.** The engine returns the aggregated revenue value. The MCP server formats it as JSON. The agent receives the answer.
 
-## Identity and access review
+Each layer provided a specific guarantee. The agent interface validated inputs. The catalog enforced access. The table format enabled partition pruning (reducing the scan from all files to only the relevant quarter). The storage layer provided consistent reads with scoped credentials.
 
-For agentic lakehouse, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+If any layer were missing, the system would degrade. Without the catalog, the agent would need direct storage access (violating zero-trust). Without the table format, pruning would require scanning partition directories (O(n) with partition count). Without the semantic layer, the agent would guess which table contains "revenue" (high hallucination risk). Without the agent interface, the agent would write raw SQL (risk of injection, expensive queries, and ungoverned access).
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+## Practical Guidance for Building Each Layer
 
+**Storage.** Use a separate storage bucket or container for each medallion layer (bronze, silver, gold). Set lifecycle policies: bronze retains data indefinitely; silver retains for 90 days after gold certification; gold retains per business retention policy. Enable object versioning for recovery.
 
-## Documentation that actually helps
+**Table format.** Start with Iceberg V2. Enable V3 deletion vectors for tables with frequent row-level updates from agents. Use the variant type for agent action logs. Configure snapshot retention to keep at least 30 days of history for time travel.
 
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for agentic lakehouse from that page, the architecture is still too implicit.
+**Catalog.** Deploy Apache Polaris or use a compatible managed catalog (Snowflake Horizon Catalog, Dremio Open Catalog). Define catalog roles that map to agent functions, not individual agent instances. Use credential vending with a token lifetime of 15 minutes or less for interactive queries.
 
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
+**Semantic layer.** Create semantic views for every gold-layer table. Include metric definitions, dimension hierarchies, and business rules in the semantic model. Test each semantic view by asking an agent to produce a known-correct answer and verifying the output.
 
+**Agent interface.** Deploy an MCP server that exposes semantic views as tools. Use OAuth 2.0 for authentication. Log every tool call. Set query timeout limits (30 seconds for interactive agents, 5 minutes for analytical agents). Set result size limits (10,000 rows default, configurable).
 
-## How to keep agents in bounds
+## Why Four Layers Instead of Three or Five
 
-Agents should not receive broad table access just because a human can ask broad questions. For agentic lakehouse, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
+The four-layer architecture is the minimum viable decomposition for agentic data access. Three layers (storage, table format, agent) would require the agent to resolve catalog and semantic issues internally, which is what causes hallucinations and access control violations. Five layers (splitting semantic and agent interface) is possible but adds complexity without proportional benefit for most deployments.
 
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
+The key insight is that each layer has a different rate of change. Storage layer decisions change every few years. Table format decisions change with each Iceberg spec release (yearly). Catalog decisions change when teams reorganize or policies change (quarterly). Semantic and agent decisions change with each new agent or business requirement (weekly or daily). Separating these change domains is what makes the architecture maintainable.
 
+## Summary
 
-## What to measure after launch
+The agentic lakehouse is not a single product. It is a four-layer architecture where object storage provides durable physical storage, Iceberg provides table-level guarantees (snapshot isolation, time travel, schema evolution), the catalog provides access control and commit arbitration, and the semantic/agent layer provides business context and safe tool interfaces.
 
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If agentic lakehouse is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
+Each layer is independently deployable and independently replaceable. You can run Iceberg tables on S3 with Polaris and Dremio's semantic layer. You can run the same Iceberg tables with Snowflake Horizon Catalog and Snowflake's semantic layer. The architecture is open, and the guarantees are defined by standards, not vendor APIs.
 
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
+For teams building agentic lakehouse infrastructure, start with the catalog and storage layers. Those are the hardest to change later. Add the semantic layer before you add agents. The semantic layer is what prevents agents from producing confidently wrong answers. Add the agent interface last, after you have tested that the lower layers enforce the right constraints.
 
+Dremio's Agentic Lakehouse platform provides a unified implementation of all four layers: object storage connectors, Iceberg table support, Open Catalog (Polaris-compatible), and the AI semantic layer with MCP server. Explore the full architecture at [dremio.com/agenticai](https://www.dremio.com/agenticai) or try it free at [dremio.com/get-started](https://www.dremio.com/get-started).
 
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For agentic lakehouse, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For agentic lakehouse, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that agentic lakehouse helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For agentic lakehouse, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of agentic lakehouse that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For agentic lakehouse, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For agentic lakehouse, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either agentic lakehouse has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For agentic lakehouse, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
-
-
-## Test cases that matter
-
-Use test cases that reflect real business questions. For agentic lakehouse, include at least one happy path, one denied-access path, one stale-data path, and one rollback path. Those tests reveal more than a generic demo query.
+*Sources: Dremio Blog "Agentic Lakehouse Architecture: The Four Technical Layers" (dremio.com), Apache Iceberg Specification (iceberg.apache.org), Apache Polaris Documentation, Databricks "What is Medallion Architecture" (databricks.com), Informatica "Building the Semantic Data Layer for Agentic AI" (informatica.com).*

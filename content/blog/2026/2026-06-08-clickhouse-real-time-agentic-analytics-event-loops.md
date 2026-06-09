@@ -1,208 +1,127 @@
 ---
 title: "Real-Time Agentic Analytics with ClickHouse"
 date: "2026-06-08"
-description: "Real-time agents need analytical systems that can answer while an event still matters."
+description: "ClickHouse has become the leading real-time analytics engine for AI agent workloads, with event-loop architectures that let agents query and act at sub-second speeds."
 author: "Alex Merced"
 category: "Data Platforms"
 tags:
-  - "ClickHouse"
-  - "real-time analytics"
-  - "agentic analytics"
-  - "event loops"
+  - "real-time agentic analytics"
+  - "ClickHouse AI agents"
+  - "event-driven analytics"
+  - "agent-facing analytics"
+  - "streaming ingestion"
+  - "Iceberg query engine"
 ---
 
-Real-time agents need analytical systems that can answer while an event still matters. That is the useful lens for real-time agentic analytics in June 2026. The market is not short on announcements. What matters is whether the new pattern changes ownership, performance, governance, and agent readiness in a way your team can operate.
+## The Agent Query Wave
 
-![real-time agentic analytics architecture diagram](/images/june8batch/clickhouse-real-time-agentic-analytics-event-loops-diagram-1.png)
+In February 2025, a ClickHouse engineer noticed something strange in the production metrics. Query volume had spiked 10x in under an hour. The first assumption was a DDoS attack. The actual cause was simpler. The company had deployed a fleet of autonomous AI agents that were monitoring and optimizing business metrics. The agents were running dozens of exploratory queries per second, each one probing a different slice of the data.
 
-## The market signal behind real-time agentic analytics
+This story, recounted in the ClickHouse blog post "Agent-Facing Analytics" (Ryadh Dahimene, February 2025), captures the paradigm shift. AI agents are not human users. They do not open a BI dashboard, look at a chart, and move on. They run in sense-think-act loops. Sense the data. Think about what it means. Act on the conclusion. Then sense again.
 
-Batch architectures can support excellent reporting, but active agent loops have a different timing profile. If the agent has to detect an anomaly, check constraints, and trigger an action, the feedback loop must be measured in seconds or less.
+Each loop can generate 5 to 20 SQL queries. An agent monitoring customer churn might query active subscriptions, then segment by region, then check historical trends, then correlate with support tickets, then calculate a retention offer budget. All within seconds. All without a human looking at intermediate results.
 
-I care about this topic because it sits at the boundary between open data architecture and AI execution. Most companies are not choosing one engine for every workload anymore. They have warehouses, lakehouse engines, streaming systems, catalogs, metadata platforms, and now agents that ask for data through tools. The shared contract between those systems matters more than any single feature checkbox.
+ClickHouse at Open House 2026 announced $250M+ ARR (more than triple a year ago), 4,000 total customers, and the ClickHouse Agents service powered by Anthropic's Claude (source: HPCwire AIwire, May 2026). The company has positioned itself as the real-time analytics engine for AI workloads, and the numbers suggest the market agrees.
 
-The vendor-neutral reading is straightforward. If the underlying table and catalog standards get stronger, buyers get more freedom to choose the right engine for each job. Snowflake, Microsoft, ClickHouse, Atlan, Dremio, and the open-source Iceberg ecosystem all point to the same market reality: data platforms are becoming multi-engine and agent-facing.
+## Why Real-Time Analytics Databases Fit AI Agents
 
+Four properties make real-time analytics databases the natural query layer for AI agents.
 
-## How the architecture works
+**Near real-time data ingestion.** Agents need current data. An agent that calculates inventory reorder points using yesterday's data will either overstock or stock out. ClickHouse ingests at millions of rows per second through Kafka integrations, S3 queues, and ClickPipes. Data landing in the last second is available for queries.
 
-Fast ingestion keeps fresh events visible to the analytical system.
+**Complex aggregations at speed.** Agents do not just fetch rows. They compute ratios, running totals, percentiles, and anomaly scores. ClickHouse's columnar engine and vectorized execution mean aggregate queries on billions of rows return in milliseconds to seconds. An agent checking whether current sales deviate from the 30-day rolling average gets the answer before the user's next breath.
 
-Low-latency aggregation lets the agent test whether a signal is noise or a real anomaly.
+**High concurrency for exploratory workloads.** A single agent conversation can trigger dozens of queries. A hundred concurrent agents mean thousands of queries per second. ClickHouse handles this through its merge-tree architecture and connection pooling. The ClickHouse Agents service at Open House 2026 specifically targets this pattern with a no-code agent builder, sandboxed code interpreter, and native MCP support.
 
-Action policies define what the agent may do after it validates a signal.
+**A unified data sink.** Agents need context from multiple sources. ClickHouse can ingest from Kafka, query Iceberg tables in place via the Iceberg table engine, join with PostgreSQL data through dictionaries, and expose everything through a single SQL endpoint. The agent talks to one system. ClickHouse handles the federation.
 
-The important architectural habit is to separate responsibilities. The table format manages files, snapshots, schema evolution, and table metadata. The catalog manages identity, namespaces, commits, and access patterns. The query engine plans and executes work. The semantic layer maps raw data into business meaning. The agent interface decides which safe tools a model can call.
+## The Event Loop Architecture for Agentic Analytics
 
-That separation keeps the system honest. If a vendor says a workload is open, ask which layer is open. If a feature supports Iceberg, ask which Iceberg version, which operations, and which engines. If an agent can query data, ask whether it is querying raw tables or certified semantic views.
+The ReAct pattern (sense-think-act) maps naturally to a query-session-compute loop when the analytics database is the environment.
 
-![Operating model diagram](/images/june8batch/clickhouse-real-time-agentic-analytics-event-loops-diagram-2.png)
+In the sense phase, the agent queries a snapshot of current state. ClickHouse's `icebergS3Cluster` function can scan 95 billion rows across a 3-node cluster in 907 seconds, or about 105 million rows per second (source: ClickHouse blog, "Climbing the Iceberg with ClickHouse", February 2025). For smaller datasets that fit in ClickHouse's native MergeTree, response times drop to single-digit milliseconds.
 
-## A concrete operating example
+In the think phase, the agent processes the results. This step runs in the LLM or reasoning model, not in the database. But the database shapes what the agent can think about. If the database exposes semantic metrics through a view layer, the agent reasons about business concepts. If the database only exposes raw column names, the agent guesses.
 
-A commerce platform may detect checkout failures by region, compare the pattern against historical baselines, confirm that payment errors are above threshold, and open an incident or scale a service before the next batch window.
+In the act phase, the agent may write results back to the database or trigger an external action. ClickHouse v25.7+ supports INSERT INTO existing Iceberg tables. v25.9 adds ALTER UPDATE and distributed writes. An agent can create a table of recommended actions, then a downstream system picks up the recommendation.
 
-That example is intentionally operational. Architecture diagrams are useful, but the design only proves itself when a real workload runs through it. I want to know who owns the table, which catalog authorizes the operation, which engine writes, which engine reads, which semantic view users see, and how the team detects a bad result.
+The ClickHouse MCP server, released November 2024 and maintained by ClickHouse, exposes this loop through three tools: `list_databases`, `list_tables`, and `run_select_query`. A demo with Claude Sonnet 3.5 against ClickHouse Cloud public playground showed the pattern. First prompt: the agent explored datasets by listing tables and sampling rows. Second prompt: "Which tech stocks were hit worst by the dot-com bubble?" The agent deduced the methodology, metric, and time range without explicit instructions. It generated 10 SQL queries in seconds.
 
-For agentic analytics, the same example gets stricter. A human analyst can notice ambiguity and ask a teammate. An agent will often keep going unless the tool interface stops it. That means your architecture needs approved definitions, scoped access, query limits, logging, and a clean rollback path before it needs a flashy chat experience.
+This is the event loop in action. Sense (list tables, sample data). Think (deduce methodology). Act (run analytical query). Sense again (refine time range). The agent completes multiple loops before presenting a single answer.
 
-This is why I do not treat open table formats as the whole story. Apache Iceberg gives the platform a strong storage contract. It does not, by itself, define customer lifetime value, revenue recognition rules, data owner approval, or what an AI agent may do after it finds an anomaly. Those rules belong in catalogs, semantic layers, governance systems, and agent tools.
+## ClickHouse as an Iceberg Query Engine
 
-## What this means for the lakehouse
+ClickHouse's Iceberg integration matured significantly between 2024 and 2026. Three mechanisms now exist.
 
-ClickHouse's real-time focus clarifies an architectural truth: some workloads need specialized low-latency event stores. A lakehouse platform should federate across systems, present governed views, and keep the semantic layer consistent so agents do not treat every source as a separate truth.
+The **Iceberg table engine** creates a persistent table definition pointing to an existing Iceberg table. It supports schema evolution, partition pruning, time travel (since v25.4), and write operations (INSERT since v25.7, ALTER DELETE since v25.8, ALTER UPDATE since v25.9). The `IcebergS3Cluster` variant distributes query processing across cluster nodes with near-linear scaling.
 
+The **Iceberg table function** enables ad-hoc queries without persistent definitions. `icebergS3('s3://bucket/path/')` returns a ClickHouse table you can query directly. The `icebergS3Cluster` variant distributes across nodes. ClickHouse docs recommend the table function for most read-only use cases.
 
-A lakehouse platform needs five capabilities to serve agents reliably: query federation to reduce data movement; autonomous performance using Reflections, caching, and table optimization so interactive loops stay fast; an AI Semantic Layer that gives agents approved business context; agentic interfaces through the UI, Python, or MCP-connected tools; and AI SQL functions that bring model-assisted work into SQL without exporting data.
+The **DataLakeCatalog database engine** auto-discovers all tables from external catalogs. Point it at a Polaris, Glue, or Unity Catalog endpoint and ClickHouse lists every Iceberg table in that catalog. No manual table definitions needed. The engine auto-detects Iceberg versus Delta Lake tables and routes queries accordingly.
 
+These three mechanisms create a spectrum. Ad-hoc queries use table functions. Frequent queries on specific tables use the table engine. Full catalog exploration uses DataLakeCatalog.
 
-## Implementation checklist
+Performance varies by pattern. Ad-hoc queries run at 2-3x slower than native MergeTree (seconds instead of milliseconds). The gap is shrinking with improved Parquet reader performance. For high-concurrency dashboard workloads, the hot/cold pattern works best: recent data stays in native MergeTree for speed, older data lives in Iceberg on S3 for cost efficiency.
 
-| Decision | What to document | Why it matters |
-|---|---|---|
-| Table contract | Format version, schema rules, snapshot policy, and rollback plan | Engines need the same understanding of the table. |
-| Catalog authority | Production catalog, namespaces, commit rules, and role model | Multi-engine systems need one source of table truth. |
-| Engine matrix | Read, write, merge, delete, schema, and view support by engine | A feature is not production-ready until the exact operation is tested. |
-| Semantic layer | Certified views, metric definitions, owners, and labels | Agents need business meaning, not raw schemas alone. |
-| Security | Credential model, token lifetime, row filters, column masks, and audit logs | Open access still needs strict governance. |
-| Operations | Compaction, vacuum, retries, alerting, and incident ownership | The design must survive failed jobs and bad deploys. |
+A common production architecture uses a UNION ALL view to span both tiers:
 
-My practical checklist for this topic is:
+```sql
+CREATE VIEW unified_events AS
+SELECT * FROM events_hot WHERE event_date >= today() - 7
+UNION ALL
+SELECT * FROM icebergS3('s3://lake/events/') WHERE event_date < today() - 7;
+```
 
-- Define which actions are advisory and which actions can execute automatically.
-- Use threshold windows, anomaly validation, and rollback hooks.
-- Keep event retention and aggregation strategy explicit.
-- Expose real-time signals through certified semantic views when agents consume them.
+## Streaming Ingestion Patterns for AI Agents
 
-If those items are not written down, the project is still in the demo stage. That does not mean the idea is weak. It means the operating model is not finished.
+Agents operating in real time need streaming ingestion. ClickHouse supports multiple patterns.
 
-![Implementation checklist diagram](/images/june8batch/clickhouse-real-time-agentic-analytics-event-loops-diagram-3.png)
+**ClickPipes** is the managed ingestion service. It connects to Kafka, Confluent Cloud, Amazon MSK, and Redpanda. Data flows from source to ClickHouse table with exactly-once semantics. ClickPipes for Iceberg CDC was on the 2025 roadmap, enabling direct CDC from Iceberg tables into ClickHouse without intermediate Kafka topics.
 
-## Failure modes worth respecting
+**s3Queue** provides incremental loading from S3 with exactly-once semantics. Applications write data to S3, ClickHouse polls the bucket, and new files get ingested automatically. This pattern supports append-only tables well. UPDATE and DELETE support in Iceberg CDC is planned.
 
-Real time does not forgive weak policy. An agent that acts quickly on a bad metric can create customer impact faster than a dashboard ever could.
+**Kafka engine tables** connect ClickHouse directly to Kafka topics. Each row in the Kafka topic becomes a row in the ClickHouse table. The engine supports Avro, JSON, Protobuf, and other formats. Agents can query the Kafka-backed table in real time.
 
-The other failure mode is semantic drift. A table can be technically valid while the business definition on top of it changes quietly. That is where many AI analytics projects fail. The model generates SQL against a table that exists, the query returns rows, and the answer looks plausible. The problem is that the answer used the wrong grain, the wrong filter, or the wrong metric definition.
+The key architectural decision is whether data flows through ClickHouse as a hot layer with Iceberg as a cold archive, or whether ClickHouse queries Iceberg directly. Most production deployments use the hot/cold pattern. Netflix, for example, processes 5 PB of logs per day at 10.6 million events per second through ClickHouse for real-time queries, with Iceberg providing long-term storage.
 
-The fix is not a longer prompt. The fix is stronger data contracts. Certified semantic views should be easier for agents to use than raw tables. Sensitive columns should be masked or hidden before the model can ask for them. Write-capable tools should require intent, validation, and idempotency. Expensive queries should have limits. Every tool call should leave evidence.
+## ClickHouse Versus Dremio for Different Workload Patterns
 
-This is also where vendor-neutral thinking helps. Do not trust a platform because it has the best demo. Trust the platform when it gives you clear contracts between storage, catalog, semantic layer, engine, and agent. Trust it more when you can test those contracts with another engine or another client.
+ClickHouse and Dremio both query Iceberg tables, but they target different workload patterns.
 
-## What I would do first
+ClickHouse excels at high-throughput ingest and sub-second analytical queries on structured data. Its columnar engine is optimized for single-table aggregates with filter predicates. The MergeTree engine family provides native performance that handily beats Iceberg table functions. If your workload is "ingest millions of events per second and query them in real time," ClickHouse wins.
 
-Start with one production-shaped workflow. Do not start with the easiest toy table, and do not start with the most politically sensitive workload. Pick a table or semantic view that matters, has an owner, has known correctness checks, and can tolerate a controlled pilot.
+Dremio excels at multi-source federation and semantic layer queries. Its query engine optimizes across Iceberg tables, relational databases, and file stores without moving data. The built-in semantic layer means analysts and AI agents query business metrics instead of raw column names. If your workload is "query Iceberg tables across multiple catalogs and expose governed metrics to AI agents," Dremio wins.
 
-For real-time agentic analytics, I would write down five things before touching production: the owner, the accepted engines, the policy boundary, the rollback path, and the agent-facing interface. Then I would run the same workflow three ways: manually, through the intended query engine, and through the agent or automation layer. Differences between those paths are where the real work begins.
+The two systems are complementary. A common architecture uses ClickHouse for the real-time ingestion and hot query tier, Iceberg for the open storage tier, and Dremio for the federation and semantic layer tier. Each system does what it does best.
 
-Measure boring things. Count files. Count snapshots. Track query planning time. Track storage calls. Track failed commits. Track token issuance. Track denied access. Track whether a human can explain the result without reading tool logs for an hour. These metrics are not glamorous, but they tell you whether the architecture is ready.
+CostBench, launched by ClickHouse at Open House 2026, provides an open reproducible benchmark for comparing cost-per-query across ClickHouse Cloud, Snowflake, Databricks, BigQuery, and Redshift. ClickHouse claims to be the only system in the "Fast and Low-Cost" zone across datasets of varying scale, with the nearest competitor at 23x worse on cost-performance (source: HPCwire, May 2026).
 
-## Final recommendation
+## When to Use Specialized Engines Versus Federated Query
 
-The right conclusion is not that every team should adopt every June 2026 feature immediately. The right conclusion is that the lakehouse is becoming an execution surface for humans and agents, and that changes the quality bar. Open storage is necessary. Governed catalogs are necessary. Semantic context is necessary. Fast SQL is necessary. Scoped agent tools are necessary.
+The debate between specialized engines and federated query is not settled by one right answer. It depends on query pattern, data volume, and latency requirements.
 
-That combination is exactly why the Agentic Lakehouse is becoming the right framing. It describes the platform you need when AI agents stop answering isolated questions and start participating in analytical workflows.
+**Use a specialized engine** (ClickHouse native MergeTree) when queries need sub-second response times on frequently accessed data. Dashboards, monitoring alerts, and real-time agent decisions need native performance. The hot/cold pattern with data movement is the right trade-off.
 
-For more background on the lakehouse and AI side of this work, explore my books on data lakehouses and AI at [books.alexmerced.com](https://books.alexmerced.com). If you want to try this style of governed, open, agent-ready architecture in practice, start a free trial of Dremio's Agentic Lakehouse at [dremio.com/get-started](https://www.dremio.com/get-started).
+**Use federated query** (ClickHouse Iceberg table functions or Dremio federation) when data lives in open formats and you prioritize zero-copy access over raw speed. Data exploration, cross-system joins, and occasional analytical queries run acceptably at second-level response times.
 
-## Field notes for teams evaluating this now
+**Use both** when your architecture has clear hot and cold tiers. Keep the last 7-30 days in native ClickHouse for speed. Archive older data to Iceberg on S3 for cost. Query cold data through Iceberg table functions when needed. This pattern delivers the best balance of performance and cost for most production workloads.
 
-First, make compatibility visible. A table-format version, catalog endpoint, and engine release should appear in your runbook. If a production issue happens, nobody should have to guess which engine wrote the latest snapshot or which client introduced a metadata change.
+## The Bottom Line
 
-Second, keep the semantic layer close to the workflow. If the article topic affects analytics agents, customer-facing metrics, financial reporting, or regulated data, raw-table access should be the exception. Certified views should be the normal path.
+ClickHouse has become the real-time analytics engine for the agentic era. Its $250M ARR, 4,000 customers, and Open House 2026 announcements confirm the market trajectory. The event loop architecture of AI agents maps naturally to ClickHouse's query model, and the Iceberg integration means data does not have to move to be analyzed.
 
-Third, separate experimentation from certification. Engineers need sandboxes where they can test new Iceberg features, catalog options, and agent tools. Business users and agents need certified surfaces where definitions, owners, and policies have already been reviewed.
+The key architectural decision is whether agents query native MergeTree tables for speed or Iceberg tables for openness. The answer depends on the workload. But the pattern is clear. Agents query. ClickHouse answers. The loop repeats. And the gap between data ingestion and data action shrinks to milliseconds.
 
-Fourth, keep the architecture open. Not every byte must move into one platform. An architecture that can query data in place, add semantic context, accelerate common workloads, and expose governed agent interfaces over open data creates more flexibility.
+## Practical Architecture: ClickHouse Agents in Production
 
-Fifth, publish the limits. If a feature is read-only in one engine, say so. If write interoperability is approved only for append workloads, say so. If remote signing is required for regulated tables, say so. Clear limits create trust. Hidden limits create incidents.
+The ClickHouse Agents service, announced at Open House 2026 and powered by Anthropic's Claude, is the most concrete expression of the agentic analytics vision. It provides a no-code agent builder, a sandboxed code interpreter, shareable artifacts, skills management, memory, and multi-agent workflows. The service connects natively to ClickHouse Cloud and supports MCP-compatible third-party connections.
 
+A production architecture using ClickHouse Agents might look like this. An agent monitors customer churn signals. It queries real-time subscription data from a ClickHouse MergeTree table. It correlates with historical churn patterns stored in an Iceberg table on S3, accessed through the Iceberg table function. It cross-references support ticket sentiment from a Kafka-backed table. When the churn probability exceeds a threshold, the agent writes a recommendation to an output table and triggers a Slack notification through a webhook.
 
-## Identity and access review
+The entire loop runs without human intervention. The agent senses, thinks, and acts within seconds. If the churn pattern changes, the agent adapts because its next query will return different data.
 
-For real-time agentic analytics, I would run one full dry run with production-like identities. Use an analyst identity, a service account, and the intended agent identity. Confirm that each identity sees only the expected semantic objects, receives predictable errors, and leaves useful audit records. That test catches policy gaps before they become production incidents.
+This is the practical difference between agentic analytics and traditional business intelligence. BI dashboards show what happened yesterday. Agentic analytics triggers actions on what is happening now. The database is not just a reporting tool. It is the agent's environment for continuous decision-making.
 
-The agent identity matters most because it is easy to over-permission during a pilot. If the agent only needs a certified revenue view, do not give it namespace-wide table discovery. If the agent needs row-level access for one geography, test that a second geography returns a denial instead of silent leakage.
+---
 
-
-## Documentation that actually helps
-
-The documentation should fit on one page. Name the owner, the supported engines, the catalog authority, the accepted table operations, the security model, and the rollback path. If a new engineer cannot understand the contract for real-time agentic analytics from that page, the architecture is still too implicit.
-
-Good documentation is not a wiki dump. It is an operating contract. It should say who can approve a schema change, which engine owns compaction, how long snapshots are retained, and what happens when an agent produces a suspicious result. That level of detail is what turns a promising pattern into a maintainable system.
-
-
-## How to keep agents in bounds
-
-Agents should not receive broad table access just because a human can ask broad questions. For real-time agentic analytics, expose narrow tools over certified views first. Add write-capable tools only after you have validation rules, idempotency keys, approval gates, and audit records that a reviewer can follow.
-
-The tool description should also be honest. If a tool returns estimated data, say estimated. If a tool excludes delayed transactions, say that. If a tool is read-only, make that clear in the name and policy. Agents work better when the interface gives them fewer chances to infer the wrong contract.
-
-
-## What to measure after launch
-
-The first production month should be measurement-heavy. Track planning time, query latency, failed commits, denied access attempts, credential issuance, snapshot growth, and semantic-view usage. If real-time agentic analytics is helping, the evidence should show up in fewer manual workarounds and clearer operational ownership.
-
-I would also track human trust signals. Are analysts using the certified view more often? Are engineers filing fewer tickets about unclear table ownership? Are agents producing answers that reviewers can trace back to approved definitions? Those signals tell you whether the architecture is improving daily work, not just passing a benchmark.
-
-
-## A buyer question worth asking
-
-The buyer question is simple: does this pattern increase choice without weakening governance? For real-time agentic analytics, the best answer is specific. It should name the table format, catalog contract, semantic surface, security controls, and engine support matrix. Anything less is a demo, not an operating model.
-
-This is where the architecture should stay disciplined. The point is not that open architecture is automatically better. The point is that open architecture gives you room to test engines, keep data in place, add semantic context, and still maintain control. That is a stronger argument than a generic platform claim.
-
-
-## A realistic rollout sequence
-
-The rollout should start with read visibility, then move to operational automation, then consider action loops. For real-time agentic analytics, the first milestone is a certified read path with approved semantics. The second milestone is repeatable validation through CI or scheduled checks. The third milestone is agent access with narrow tools and strict audit.
-
-Write paths should come later unless the topic itself is about write interoperability or table maintenance. Even then, begin with append-only or isolated writes. Updates, deletes, merges, and external actions need stronger controls because they change the state other people depend on.
-
-
-## How this should sound to executives
-
-The executive version should avoid implementation trivia, but it should not become vague. Say that real-time agentic analytics helps the company keep analytical data open, governed, and ready for AI-assisted work. Then say what the team will measure: cost, speed, correctness, access control, and operational effort.
-
-That framing is useful because executives do not need every catalog detail. They do need to know whether the architecture reduces lock-in, improves reliability, and gives agents a trustworthy data foundation. Those are business outcomes tied to technical choices.
-
-
-## How this should sound to engineers
-
-The engineering version should be blunt. Which APIs are used? Which engine versions are approved? Which table operations are allowed? Which failures are retried? Which failures stop the workflow? Which logs prove that the right identity performed the right operation?
-
-For real-time agentic analytics, those questions are more valuable than broad claims. They force the team to define the boundary between the open standard, the vendor implementation, the query engine, the semantic model, and the agent tool.
-
-
-## What not to automate yet
-
-Do not automate the parts of real-time agentic analytics that the team cannot explain manually. If nobody can explain the metric, the agent should not calculate it. If nobody can explain rollback, the agent should not write. If nobody can explain the security boundary, the tool should stay internal.
-
-This is not anti-automation. It is how automation earns trust. Automate the parts with clear contracts first, then widen the scope as evidence accumulates.
-
-
-## Source-of-truth ownership
-
-Every production rollout needs one named source of truth for each layer. The table has an owner. The catalog has an owner. The semantic view has an owner. The agent tool has an owner. For real-time agentic analytics, those owners may sit on different teams, but the contract between them has to be explicit.
-
-Clear ownership across all layers keeps the architecture credible, whether the governed execution and semantic layer lives in one platform or across several independent services.
-
-Clear ownership prevents avoidable production confusion.
-
-
-## Review cadence
-
-Set a review cadence before the first production launch. For real-time agentic analytics, I would review the contract after the first week, after the first month, and after the first engine or catalog upgrade. Most problems appear when a workflow that worked in a pilot meets a new version, a new identity, or a new business definition.
-
-That review should include both platform engineers and business owners. Engineers can verify the mechanics. Business owners can verify that the answers still mean what the company thinks they mean.
-
-
-## Launch criteria
-
-The launch criteria should be binary. Either real-time agentic analytics has a named owner, passing validation checks, approved security boundaries, working rollback, and documented engine support, or it is not ready. Gray areas are acceptable in a research project. They are expensive in production.
-
-This keeps the article's recommendation practical: prove the contract first, then widen adoption.
-
-
-## Compliance evidence
-
-Save the evidence. For real-time agentic analytics, keep validation output, approval records, denied-access tests, and rollback proof with the release notes. Future audits are easier when the team can show what it tested before launch.
+**Ready to build agentic analytics on your Iceberg lakehouse?** Dremio combines Apache Iceberg-native storage with a semantic layer that makes your data AI-ready. Query Iceberg tables across clouds and catalogs without moving data, and expose governed business metrics to any AI agent through SQL or MCP. [Learn more at dremio.com](https://www.dremio.com).
