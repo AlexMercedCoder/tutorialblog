@@ -13,7 +13,7 @@ tags:
 
 Apache Iceberg v4 is not a single feature release. It is a set of architectural proposals: adaptive metadata trees, single-file commits, relative table paths, column families, and an extensible statistics model. These proposals rework how Iceberg handles metadata at scale. Separately, Databricks has proposed that **Delta Lake 5.0 adopt the same metadata structure**, which would end the decade-long schism between the two formats at the metadata level. This article walks through every proposal, the pain points each one solves, the community debates still unresolved, and what teams should do while the spec is still under discussion.
 
-![Iceberg v4 metadata architecture evolution](diagram-1.png)
+![Iceberg v4 metadata architecture evolution](/images/june8batch/apache-iceberg-v4-roadmap-adaptive-metadata-delta-convergence-diagram-1.png)
 
 ## The Problem Iceberg v4 Is Trying to Solve
 
@@ -35,7 +35,7 @@ Iceberg and Delta Lake have converged on similar ideas, like columnar metadata, 
 
 The adaptive metadata tree is the centerpiece of the v4 proposals. It restructures Iceberg's metadata from a multi-level manifest hierarchy into a flatter, tree-structured model where metadata nodes can be split, merged, or relocated dynamically based on table shape and access patterns.
 
-![Adaptive metadata tree structure](diagram-2.png)
+![Adaptive metadata tree structure](/images/june8batch/apache-iceberg-v4-roadmap-adaptive-metadata-delta-convergence-diagram-2.png)
 
 ### How It Works
 
@@ -187,7 +187,7 @@ This shift is already visible. Apache Polaris reached top-level project status i
 
 ## Practical Guidance for Teams Evaluating Iceberg v4
 
-![Implementation decision tree](diagram-3.png)
+![Implementation decision tree](/images/june8batch/apache-iceberg-v4-roadmap-adaptive-metadata-delta-convergence-diagram-3.png)
 
 ### What to Do Now
 
