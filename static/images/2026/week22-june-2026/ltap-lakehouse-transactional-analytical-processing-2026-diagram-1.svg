@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#ffffff"/></marker></defs>
+<rect width="900" height="600" fill="#102a43"/>
+<rect x="28" y="28" width="844" height="544" rx="20" fill="none" stroke="#22c1a8" stroke-width="3"/>
+<text x="450" y="78" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">What Is LTAP in the Lakehouse?</text>
+<text x="450" y="118" text-anchor="middle" font-size="18" fill="#22c1a8">LTAP lakehouse</text>
+<path d="M292 285 L335 285" stroke="#ffffff" stroke-width="5" marker-end="url(#arrow)"/><path d="M562 285 L605 285" stroke="#ffffff" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="70" y="230" width="220" height="110" rx="12" fill="#f0f7ff" stroke="#22c1a8" stroke-width="4"/><text x="180" y="280" text-anchor="middle" font-size="23" font-weight="700" fill="#102a43">LTAP lakehouse</text><text x="180" y="312" text-anchor="middle" font-size="15" fill="#102a43">validated layer</text><rect x="340" y="230" width="220" height="110" rx="12" fill="#f0f7ff" stroke="#22c1a8" stroke-width="4"/><text x="450" y="280" text-anchor="middle" font-size="23" font-weight="700" fill="#102a43">catalog</text><text x="450" y="312" text-anchor="middle" font-size="15" fill="#102a43">validated layer</text><rect x="610" y="230" width="220" height="110" rx="12" fill="#f0f7ff" stroke="#22c1a8" stroke-width="4"/><text x="720" y="280" text-anchor="middle" font-size="23" font-weight="700" fill="#102a43">semantic layer</text><text x="720" y="312" text-anchor="middle" font-size="15" fill="#102a43">validated layer</text>
+<text x="450" y="560" text-anchor="middle" font-size="15" fill="#ffffff">Educational diagram for Alex Merced, June 22, 2026</text>
+</svg>

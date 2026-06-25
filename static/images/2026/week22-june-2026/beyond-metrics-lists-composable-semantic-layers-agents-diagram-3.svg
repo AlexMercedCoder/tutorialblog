@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#ffffff"/></marker></defs>
+<rect width="900" height="600" fill="#2f3a22"/>
+<rect x="28" y="28" width="844" height="544" rx="20" fill="none" stroke="#7cc576" stroke-width="3"/>
+<text x="450" y="78" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">Composable Semantic Layers for Analytical Agents</text>
+<text x="450" y="118" text-anchor="middle" font-size="18" fill="#7cc576">composable semantic layers</text>
+<circle cx="450" cy="320" r="115" fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="13 10"/>
+<circle cx="450" cy="175" r="82" fill="#f6fff3" stroke="#7cc576" stroke-width="4"/><text x="450" y="170" text-anchor="middle" font-size="20" font-weight="700" fill="#2f3a22">semantic layer</text><text x="450" y="199" text-anchor="middle" font-size="14" fill="#2f3a22">review point</text><circle cx="660" cy="320" r="82" fill="#f6fff3" stroke="#7cc576" stroke-width="4"/><text x="660" y="315" text-anchor="middle" font-size="20" font-weight="700" fill="#2f3a22">agent tools</text><text x="660" y="344" text-anchor="middle" font-size="14" fill="#2f3a22">review point</text><circle cx="450" cy="465" r="82" fill="#f6fff3" stroke="#7cc576" stroke-width="4"/><text x="450" y="460" text-anchor="middle" font-size="20" font-weight="700" fill="#2f3a22">Dremio</text><text x="450" y="489" text-anchor="middle" font-size="14" fill="#2f3a22">review point</text><circle cx="240" cy="320" r="82" fill="#f6fff3" stroke="#7cc576" stroke-width="4"/><text x="240" y="315" text-anchor="middle" font-size="20" font-weight="700" fill="#2f3a22">composable semantic </text><text x="240" y="344" text-anchor="middle" font-size="14" fill="#2f3a22">review point</text>
+<text x="450" y="560" text-anchor="middle" font-size="15" fill="#ffffff">Educational diagram for Alex Merced, June 22, 2026</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#ffffff"/></marker></defs>
+<rect width="900" height="600" fill="#263238"/>
+<rect x="28" y="28" width="844" height="544" rx="20" fill="none" stroke="#f5b041" stroke-width="3"/>
+<text x="450" y="78" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">Autonomous Materialization for Agentic Analytics</text>
+<text x="450" y="118" text-anchor="middle" font-size="18" fill="#f5b041">autonomous materialization</text>
+<path d="M450 230 L450 252" stroke="#ffffff" stroke-width="5" marker-end="url(#arrow)"/><path d="M450 325 L450 347" stroke="#ffffff" stroke-width="5" marker-end="url(#arrow)"/><path d="M450 420 L450 442" stroke="#ffffff" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="140" y="160" width="620" height="70" rx="10" fill="#fff8ec" stroke="#f5b041" stroke-width="4"/><text x="450" y="204" text-anchor="middle" font-size="23" font-weight="700" fill="#263238">catalog</text><rect x="140" y="255" width="620" height="70" rx="10" fill="#fff8ec" stroke="#f5b041" stroke-width="4"/><text x="450" y="299" text-anchor="middle" font-size="23" font-weight="700" fill="#263238">semantic layer</text><rect x="140" y="350" width="620" height="70" rx="10" fill="#fff8ec" stroke="#f5b041" stroke-width="4"/><text x="450" y="394" text-anchor="middle" font-size="23" font-weight="700" fill="#263238">agent tools</text><rect x="140" y="445" width="620" height="70" rx="10" fill="#fff8ec" stroke="#f5b041" stroke-width="4"/><text x="450" y="489" text-anchor="middle" font-size="23" font-weight="700" fill="#263238">Dremio</text>
+<text x="450" y="560" text-anchor="middle" font-size="15" fill="#ffffff">Educational diagram for Alex Merced, June 22, 2026</text>
+</svg>
