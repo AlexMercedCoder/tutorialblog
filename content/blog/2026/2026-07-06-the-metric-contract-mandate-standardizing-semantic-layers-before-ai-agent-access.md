@@ -1,7 +1,7 @@
 ---
 title: "The Metric Contract Mandate: Standardizing Semantic Layers Before AI Agent Access"
 date: "2026-07-06"
-description: "![Papercut metric contract diagram with central metric and surrounding governance attributes](./diagram-1.png)"
+description: "![Papercut metric contract diagram with central metric and surrounding governance attributes](/images/2026/week-2026-07-06/the-metric-contract-mandate-standardizing-semantic-layers-before-ai-agent-access-diagram-1.png)"
 author: "Alex Merced"
 category: "Lakehouse"
 tags:

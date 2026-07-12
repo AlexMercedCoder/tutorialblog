@@ -1,7 +1,7 @@
 ---
 title: "Designing Private, Air-Gapped Data Lakehouses: Scaling Iceberg in Highly Secure, On-Premises Clouds"
 date: "2026-07-06"
-description: "![Papercut architecture showing private air-gapped lakehouse with storage, Iceberg, catalog, query, semantic layer, and audit inside secure boundary](./diagram-1.png)"
+description: "![Papercut architecture showing private air-gapped lakehouse with storage, Iceberg, catalog, query, semantic layer, and audit inside secure boundary](/images/2026/week-2026-07-06/designing-private-air-gapped-data-lakehouses-scaling-iceberg-in-highly-secure-on-premises-clouds-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/private-air-gapped-data-lakehouses-iceberg-secure-clouds/
 author: "Alex Merced"
 category: "Lakehouse"

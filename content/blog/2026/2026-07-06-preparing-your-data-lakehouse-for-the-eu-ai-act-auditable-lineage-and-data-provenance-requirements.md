@@ -1,18 +1,19 @@
 ---
-title: "Preparing Your Data Lakehouse for the EU AI Act: Auditable Lineage and Data Provenance"
+title: "Preparing Your Data Lakehouse for the EU AI Act: Auditable Lineage and Data Provenance Requirements"
 date: "2026-07-06"
-description: "![Layered papercut provenance chain from source systems through Iceberg tables to AI tools](/images/2026/week-2026-07-06/preparing-your-data-lakehouse-for-the-eu-ai-act-auditable-lineage-and-data-provenance-diagram-1.png)"
-canonical: https://iceberglakehouse.com/posts/eu-ai-act-data-lakehouse-lineage-provenance-compliance/
+description: "Preparing your data lakehouse for the EU AI Act with auditable lineage, data provenance, and compliance workflows."
 author: "Alex Merced"
-category: "Lakehouse"
+category: "Data Governance"
 tags:
-    - apache iceberg
-    - data lakehouse
+  - EU AI Act
+  - data lineage
+  - data provenance
+  - governance
+  - compliance
+  - data lakehouse
+canonical: https://iceberglakehouse.com/posts/eu-ai-act-data-lakehouse-lineage-provenance-compliance/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/eu-ai-act-data-lakehouse-lineage-provenance-compliance/).
-
-
-
 The EU AI Act changes the conversation around AI architecture because it makes trust operational. It is not enough to say that an AI system is useful, accurate, or monitored. For many use cases, especially those that fall into high-risk categories, organizations need a way to explain how data is governed, how systems are documented, how activity is logged, how human oversight works, and how accuracy, robustness, and cybersecurity are addressed.
 
 This is technical guidance, not legal advice. The legal interpretation belongs with counsel and compliance teams. The point I want to focus on is the data architecture implication: if an organization cannot explain where data came from, how it changed, who touched it, what logic shaped it, and how an AI workflow consumed it, then AI governance becomes a meeting exercise instead of an engineering capability.
@@ -21,7 +22,7 @@ That is where the modern lakehouse matters. Open table formats, catalog metadata
 
 For teams building toward agentic analytics, this is even more important. A dashboard user may run a handful of queries a day. An analytical agent may run many queries, inspect intermediate results, call tools, compare metrics, and recommend actions. That raises the standard for auditability. The platform needs to know not only what data exists, but what path each answer traveled.
 
-![Layered papercut provenance chain from source systems through Iceberg tables to AI tools](/images/2026/week-2026-07-06/eu-ai-act-data-lakehouse-lineage-provenance-compliance-diagram-1.png)
+![Layered papercut provenance chain from source systems through Iceberg tables to AI tools](./diagram-1.png)
 
 ## Why the AI Act is a data platform issue
 
@@ -77,7 +78,7 @@ The third layer is model and agent lineage. This includes prompt templates, retr
 
 The fourth layer is decision lineage. This connects analytical output to action. Did the system only summarize data for a human reviewer? Did it recommend an action? Did it call an external API? Did a human approve the step? Was the action reversed later? In regulated environments, these distinctions matter.
 
-![Layered papercut lineage map across raw, curated, semantic, and model-facing lakehouse layers](/images/2026/week-2026-07-06/eu-ai-act-data-lakehouse-lineage-provenance-compliance-diagram-2.png)
+![Layered papercut lineage map across raw, curated, semantic, and model-facing lakehouse layers](./diagram-2.png)
 
 The reason I like framing this through the lakehouse is that it puts lineage near the data, not only inside a separate governance tool. Governance catalogs, lineage systems, and documentation platforms are important, but they work best when the underlying architecture produces strong signals. Query engines should emit meaningful history. Catalogs should know table versions and policies. Semantic layers should expose business meaning in machine-readable form. Orchestrators should record job context. AI tools should carry identity and purpose through each request.
 
@@ -188,7 +189,7 @@ Ninth, test incident response. Pick a table, column, model answer, or agent acti
 
 Tenth, keep documentation close to execution. Documentation that drifts from the platform will fail when scrutiny arrives.
 
-![Layered papercut control plane for compliance-ready Agentic Lakehouse governance](/images/2026/week-2026-07-06/eu-ai-act-data-lakehouse-lineage-provenance-compliance-diagram-3.png)
+![Layered papercut control plane for compliance-ready Agentic Lakehouse governance](./diagram-3.png)
 
 ## The real goal: explainable operations
 

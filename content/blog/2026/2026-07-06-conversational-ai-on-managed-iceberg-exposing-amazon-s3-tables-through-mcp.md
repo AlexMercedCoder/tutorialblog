@@ -1,7 +1,7 @@
 ---
 title: "Conversational AI on Managed Iceberg: Exposing Amazon S3 Tables through MCP"
 date: "2026-07-06"
-description: "![Architecture diagram showing AI agent access through MCP, catalog governance, and managed Iceberg tables](./diagram-1.png)"
+description: "![Architecture diagram showing AI agent access through MCP, catalog governance, and managed Iceberg tables](/images/2026/week-2026-07-06/conversational-ai-on-managed-iceberg-exposing-amazon-s3-tables-through-mcp-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/
 author: "Alex Merced"
 category: "Lakehouse"

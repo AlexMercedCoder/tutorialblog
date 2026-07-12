@@ -10,9 +10,9 @@ tags:
     - access control
     - dynamic access
     - fine-grained security
-canonical: https://iceberglakehouse.com/posts/fine-grained-security-machine-speed-ai-agents/
+canonical: https://iceberglakehouse.com/posts/dynamic-access-control-ai-agents/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/fine-grained-security-machine-speed-ai-agents/).
+> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/dynamic-access-control-ai-agents/).
 
 
 

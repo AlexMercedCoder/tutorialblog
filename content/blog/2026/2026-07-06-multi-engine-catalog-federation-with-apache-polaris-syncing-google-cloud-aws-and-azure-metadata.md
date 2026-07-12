@@ -1,7 +1,7 @@
 ---
 title: "Multi-Engine Catalog Federation with Apache Polaris: Syncing Google Cloud, AWS, and Azure Metadata"
 date: "2026-07-06"
-description: "![Papercut architecture showing a central open catalog hub connected to multicloud lakehouse zones and engines](./diagram-1.png)"
+description: "![Papercut architecture showing a central open catalog hub connected to multicloud lakehouse zones and engines](/images/2026/week-2026-07-06/multi-engine-catalog-federation-with-apache-polaris-syncing-google-cloud-aws-and-azure-metadata-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/multi-engine-catalog-federation-apache-polaris-multicloud/
 author: "Alex Merced"
 category: "Lakehouse"

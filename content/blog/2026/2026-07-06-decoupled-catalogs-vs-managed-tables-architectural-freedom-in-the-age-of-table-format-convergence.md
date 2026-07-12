@@ -1,7 +1,7 @@
 ---
 title: "Decoupled Catalogs vs. Managed Tables: Architectural Freedom in the Age of Table Format Convergence"
 date: "2026-07-06"
-description: "![Papercut comparison of a bundled managed table stack and a decoupled open catalog stack](./diagram-1.png)"
+description: "![Papercut comparison of a bundled managed table stack and a decoupled open catalog stack](/images/2026/week-2026-07-06/decoupled-catalogs-vs-managed-tables-architectural-freedom-in-the-age-of-table-format-convergence-diagram-1.png)"
 author: "Alex Merced"
 category: "Lakehouse"
 tags:

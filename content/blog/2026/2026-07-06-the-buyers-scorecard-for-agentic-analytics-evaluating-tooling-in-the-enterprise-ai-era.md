@@ -1,7 +1,7 @@
 ---
 title: "The Buyer's Scorecard for Agentic Analytics: Evaluating Tooling in the Enterprise AI Era"
 date: "2026-07-06"
-description: "![Papercut five-part buyer scorecard wheel for agentic analytics](./diagram-1.png)"
+description: "![Papercut five-part buyer scorecard wheel for agentic analytics](/images/2026/week-2026-07-06/the-buyers-scorecard-for-agentic-analytics-evaluating-tooling-in-the-enterprise-ai-era-diagram-1.png)"
 author: "Alex Merced"
 category: "Lakehouse"
 tags:

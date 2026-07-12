@@ -1,7 +1,7 @@
 ---
 title: "Designing Idempotent Pipelines in the Agentic Lakehouse: Eliminating Double-Write Anomalies"
 date: "2026-07-06"
-description: "![Papercut duplicate write failure path versus idempotent retry path in a lakehouse pipeline](./diagram-1.png)"
+description: "![Papercut duplicate write failure path versus idempotent retry path in a lakehouse pipeline](/images/2026/week-2026-07-06/designing-idempotent-pipelines-in-the-agentic-lakehouse-eliminating-double-write-anomalies-diagram-1.png)"
 author: "Alex Merced"
 category: "Lakehouse"
 tags:

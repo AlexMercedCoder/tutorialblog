@@ -1,7 +1,7 @@
 ---
 title: "Mapping the Variant Type in Iceberg v3: Standardizing Semi-Structured AI JSON Payloads"
 date: "2026-07-06"
-description: "![Layered papercut diagram showing nested AI payloads flowing into an Iceberg table with promoted governed columns](./diagram-1.png)"
+description: "![Layered papercut diagram showing nested AI payloads flowing into an Iceberg table with promoted governed columns](/images/2026/week-2026-07-06/mapping-the-variant-type-in-iceberg-v3-standardizing-semi-structured-ai-json-payloads-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/iceberg-v3-variant-type-ai-json-payloads/
 author: "Alex Merced"
 category: "Lakehouse"

@@ -1,7 +1,7 @@
 ---
 title: "Migrating Proprietary Warehouses to Open Lakehouses: The 2026 Playbook for Zero-Copy Metadata Translation"
 date: "2026-07-06"
-description: "![Papercut staged migration from proprietary warehouse through metadata translation to open Iceberg lakehouse](./diagram-1.png)"
+description: "![Papercut staged migration from proprietary warehouse through metadata translation to open Iceberg lakehouse](/images/2026/week-2026-07-06/migrating-proprietary-warehouses-to-open-lakehouses-the-2026-playbook-for-zero-copy-metadata-translation-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/proprietary-warehouse-open-lakehouse-zero-copy-metadata-translation/
 author: "Alex Merced"
 category: "Lakehouse"

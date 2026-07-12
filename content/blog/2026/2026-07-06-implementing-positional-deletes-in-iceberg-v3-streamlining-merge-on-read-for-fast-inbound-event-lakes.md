@@ -1,7 +1,7 @@
 ---
 title: "Implementing Positional Deletes in Iceberg v3: Streamlining Merge-on-Read for Fast-Inbound Event Lakes"
 date: "2026-07-06"
-description: "![Papercut diagram comparing copy-on-write and merge-on-read update flows for an Iceberg event lake](./diagram-1.png)"
+description: "![Papercut diagram comparing copy-on-write and merge-on-read update flows for an Iceberg event lake](/images/2026/week-2026-07-06/implementing-positional-deletes-in-iceberg-v3-streamlining-merge-on-read-for-fast-inbound-event-lakes-diagram-1.png)"
 canonical: https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/
 author: "Alex Merced"
 category: "Lakehouse"
