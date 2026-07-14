@@ -1,20 +1,18 @@
 ---
 title: "Block vs. Object Storage: A Deep Dive Into the Foundation of Modern Data, and How the Lakehouse Made the Slow Option Fast"
 date: "2026-07-06"
-description: "Deep dive into block vs object storage, how Apache Parquet, Apache Iceberg, and query engines turned object storage into the foundation of interactive analytics."
+description: "*By Alex Merced, Head of Developer Relations at Dremio* Here is one of the strangest and most consequential plot twists in the history of data infrastru."
 author: "Alex Merced"
 category: "Data Engineering"
 tags:
-  - storage
-  - block storage
   - object storage
-  - S3
+  - block storage
+  - data engineering
   - lakehouse
-  - Apache Iceberg
-  - Apache Parquet
 canonical: https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/).
+
 *By Alex Merced, Head of Developer Relations at Dremio*
 
 Here is one of the strangest and most consequential plot twists in the history of data infrastructure: over the past decade, the analytics industry deliberately moved its data onto the slowest storage it could find, and got faster.
@@ -178,3 +176,4 @@ That design-around-the-truth-of-the-substrate discipline is, I would argue, the 
 If you want that whole story with the depth an article cannot hold, that is what my books are for. I co-authored Apache Iceberg: The Definitive Guide and Apache Polaris: The Definitive Guide for O'Reilly, with further titles on lakehouse architecture, data engineering, and agentic analytics.
 
 Browse the full collection of my books on data and AI at [books.alexmerced.com](https://books.alexmerced.com).
+To try a modern Agentic Lakehouse experience, visit [dremio.com/get-started](https://www.dremio.com/get-started).

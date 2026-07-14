@@ -1,19 +1,17 @@
 ---
 title: "The Who, What, and Why of Semantic Layers: The Layer That Decides Whether Your Numbers Can Be Trusted"
 date: "2026-07-06"
-description: "The semantic layer deep dive - why it's the deciding factor for trustworthy AI agent answers, with a tour of the market and adoption playbook."
+description: "*By Alex Merced, Head of Developer Relations at Dremio* There is a survey statistic making the rounds this year that I cannot stop quoting: 84 percent o."
 author: "Alex Merced"
-category: "Data Architecture"
+category: "Data Engineering"
 tags:
   - semantic layer
-  - metrics layer
-  - data governance
+  - data engineering
   - AI agents
-  - data modeling
-  - business intelligence
 canonical: https://iceberglakehouse.com/posts/who-what-why-semantic-layers/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/who-what-why-semantic-layers/).
+
 *By Alex Merced, Head of Developer Relations at Dremio*
 
 There is a survey statistic making the rounds this year that I cannot stop quoting: 84 percent of data teams report regularly encountering conflicting versions of the same metric. Not occasionally. Regularly. As in, most reporting cycles include an argument about whether revenue means gross or net, whether churn counts seats or accounts, whether this week's number can be compared to last week's at all.
@@ -185,3 +183,4 @@ The who, what, and why compress to this: the what is executable meaning, the why
 If you want to build that foundation properly, from the table formats and catalogs underneath to the semantics and agents on top, that is what my books are for. I co-authored Apache Iceberg: The Definitive Guide and Apache Polaris: The Definitive Guide for O'Reilly, with further titles on lakehouse architecture, data engineering, and agentic analytics.
 
 Browse the full collection of my books on data and AI at [books.alexmerced.com](https://books.alexmerced.com).
+To try a modern Agentic Lakehouse experience, visit [dremio.com/get-started](https://www.dremio.com/get-started).

@@ -1,19 +1,17 @@
 ---
 title: "Federation and the Lakehouse: Two Roads to Unified Data Access, and How to Know Which One to Take"
 date: "2026-07-06"
-description: "How federation and the lakehouse unify data access, with a decision framework, lifecycle pattern, and best practices for using both together."
+description: "*By Alex Merced, Head of Developer Relations at Dremio* Every data strategy document written this decade contains some version of the same sentence: we ."
 author: "Alex Merced"
-category: "Data Architecture"
+category: "Lakehouse Architecture"
 tags:
-  - federation
+  - query federation
   - lakehouse
-  - data virtualization
-  - Apache Iceberg
-  - data architecture
-  - data governance
+  - data unification
 canonical: https://iceberglakehouse.com/posts/federation-and-lakehouse/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/federation-and-lakehouse/).
+
 *By Alex Merced, Head of Developer Relations at Dremio*
 
 Every data strategy document written this decade contains some version of the same sentence: we need a single place to access all our data. The sentence is right. The trouble starts on the next page, because there are two fundamentally different ways to build that single place, and the industry has spent years arguing about them as if they were rivals.
@@ -197,3 +195,4 @@ That is also, not incidentally, the open lakehouse thesis I have argued across t
 If you want the deep foundations under all of it, the table formats, the catalogs, the semantics, and the AI workloads arriving on top, that is what my books are for. I co-authored Apache Iceberg: The Definitive Guide and Apache Polaris: The Definitive Guide for O'Reilly, with further titles on lakehouse architecture, data engineering, and agentic analytics.
 
 Browse the full collection of my books on data and AI at [books.alexmerced.com](https://books.alexmerced.com).
+To try a modern Agentic Lakehouse experience, visit [dremio.com/get-started](https://www.dremio.com/get-started).

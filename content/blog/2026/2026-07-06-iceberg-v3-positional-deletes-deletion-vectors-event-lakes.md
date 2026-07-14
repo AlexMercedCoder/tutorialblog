@@ -1,209 +1,199 @@
 ---
-title: "Delete Files vs Deletion Vectors in Apache Iceberg: How V3 Rewrote the Economics of Changing Data"
+title: "Implementing Positional Deletes in Iceberg v3: Streamlining Merge-on-Read for Fast-Inbound Event Lakes"
 date: "2026-07-06"
-canonical: https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/
-description: "Iceberg v2 delete files vs v3 deletion vectors. How Roaring bitmaps and per-file vectors transformed merge-on-read performance for CDC and streaming workloads."
+description: "Event data has a way of humbling neat architecture diagrams. It arrives late. It arrives twice. It arrives with incorrect attributes."
 author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
-  - Apache Iceberg
-  - data engineering
-  - lakehouse architecture
-  - open table formats
-  - merge-on-read
+  - Iceberg v3
+  - deletion vectors
+  - event lakes
+canonical: https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/).
 
-# Delete Files vs Deletion Vectors in Apache Iceberg: How V3 Rewrote the Economics of Changing Data
+Event data has a way of humbling neat architecture diagrams. It arrives late. It arrives twice. It arrives with incorrect attributes. It needs privacy removals. It needs corrections after enrichment logic changes. It needs retractions when upstream systems discover that an event should not have been emitted in the first place.
 
-*By Alex Merced, Head of Developer Relations at Dremio*
+For a long time, the lakehouse answer to change-heavy data was either to rewrite files or push the problem somewhere else. Rewriting works, but it can be expensive when the table is large and the correction is small. Pushing the problem elsewhere works until the "elsewhere" becomes another data store with its own governance and consistency problems.
 
-Here is a fact that surprises almost everyone the first time they hear it: in a data lakehouse, deleting a single row is one of the hardest things you can do.
+Apache Iceberg gives us a better set of tools. Its snapshot model, metadata structure, and delete-file support make it possible to manage row-level changes without treating object storage like a mutable database file system. Positional deletes have been a major part of that story. Deletion-vector work, including the direction discussed around newer Iceberg versions, is part of the broader effort to make row-level change more efficient and practical for high-ingestion lakehouse workloads.
 
-Inserting a billion rows? Easy. Scanning a petabyte? Routine. But run `DELETE FROM orders WHERE order_id = 12345` against a table built on files in object storage, and you have asked the system to do something its foundations actively resist. The files that hold your data cannot be edited. Object stores like Amazon S3 do not let you open a file and change byte 4,000,017. Files get written once, read many times, and eventually removed. That is the deal.
+I want to keep the language grounded. Exact Iceberg v3 details should always be checked against the current Apache Iceberg specification and the engine versions in use. The point of this article is not to promise a universal speedup. The point is to explain why merge-on-read patterns matter for event lakes and what teams should evaluate before using them in production.
 
-Apache Iceberg's answer to this constraint has evolved across versions of its table format spec, and the evolution tells a great engineering story. Version 2 introduced delete files, which made row-level changes practical. Version 3 introduced deletion vectors, which made them fast and stable under pressure. The difference between the two sounds like a storage detail, but it reshapes how reads behave, how updates scale, and what kinds of workloads a lakehouse can honestly support.
+![Papercut diagram comparing copy-on-write and merge-on-read update flows for an Iceberg event lake](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-1.png)
 
-This article is a deep dive into both mechanisms, written for the reader who wants the logic to actually make sense rather than just memorizing feature names. We will build up from first principles: why immutability forces strange designs, how v2 delete files work and where they hurt, what deletion vectors change, and why the access patterns improve so dramatically. No prior knowledge of the spec required. Some patience for analogies strongly recommended, because I intend to use several.
+## Why Event Lakes Strain Copy-on-Write Designs
 
-## The Problem: Editing Books in a Library That Forbids Pens
+Copy-on-write is conceptually simple. When data changes, the system writes new data files that reflect the changed table state. Readers do not have to apply as much change logic at query time because the files themselves have been rewritten into a cleaner form.
 
-Let me set up the mental model we will use for the whole article.
+That simplicity has value. Copy-on-write can make reads easier. It can reduce the number of delete files or change records that need to be merged during planning and execution. For relatively small updates, predictable batch windows, or tables where read performance is the only priority, copy-on-write may be the right choice.
 
-Picture a vast library. Every book in it is printed, bound, and sealed. The library's one absolute rule is that nobody may write in a book, tear out a page, or alter a volume in any way. You may add new books, and you may remove entire books from the shelves, but the books themselves are frozen the moment they arrive.
+Event lakes create pressure in a different direction. Imagine a table receiving a steady stream of user activity, sensor readings, click events, transaction events, or agent tool traces. Most events are append-only. Then a small percentage needs correction. Maybe a privacy request requires removal of events tied to a user. Maybe a fraud system marks a group of events as invalid. Maybe a late-arriving dimension update changes how events should be interpreted. Maybe a duplicated upstream batch needs to be neutralized.
 
-This library is an Iceberg table. The books are data files, typically Parquet. The rule is the immutability of object storage. And the catalog at the front desk, which tracks exactly which books belong to the current collection, is Iceberg's metadata layer. Every "edition" of the library, meaning every snapshot of the table, is just a list of which books count.
+If each small correction rewrites large data files, write amplification becomes a problem. The system may spend a lot of time rewriting mostly unchanged rows. Storage churn increases. Compaction and maintenance become harder to schedule. Ingest pipelines lose throughput because they are doing heavy file replacement work for small logical changes.
 
-Appending data fits this world perfectly. New data becomes new books, and the catalog adds them to the list. Reading fits perfectly too. But now a patron walks in and says: paragraph three on page 212 of one specific book is wrong, remove it.
+Merge-on-read shifts part of that burden. Instead of rewriting data files immediately, the table can record row-level deletes separately and apply them during reads. That can make writes lighter and faster, especially when changes are small relative to the underlying files. The tradeoff is that reads and maintenance now have to account for those delete records.
 
-You have exactly two honest strategies.
+That tradeoff is the heart of the design decision.
 
-Strategy one: reprint the book. Take the whole volume, typeset a new copy identical except for the offending paragraph, add the new book to the catalog, and drop the old book from the list. The library stays clean and simple. Every book on the shelf is fully correct, and readers just read. The cost lands entirely on the writer, who reprinted hundreds of pages to remove one paragraph. In Iceberg terms, this is copy-on-write. Deleting one row rewrites the whole data file that contains it.
+## How Iceberg Makes Row-Level Change Possible
 
-Strategy two: publish errata. Leave the sealed book alone. Instead, print a slim companion pamphlet that says "in book X, ignore paragraph three on page 212," and file it in the catalog next to the book. Writing is now nearly free. The cost moves to every future reader, who must check for pamphlets before trusting any page. In Iceberg terms, this is merge-on-read, and the pamphlets are delete files.
+Iceberg tables are not just directories full of files. They have metadata files, manifests, snapshots, schemas, partition specs, and table properties. A snapshot represents a version of the table at a point in time. Readers can plan against a snapshot, which gives them a consistent view even as new writes occur.
 
-Neither strategy is wrong. They trade the same total work between writers and readers. Copy-on-write suits tables that change rarely and get read constantly. Merge-on-read suits tables that change constantly, like anything fed by change data capture from an operational database, streaming updates, or frequent GDPR-style targeted deletes.
+Delete files are part of Iceberg's row-level change model. They let the table represent deleted rows without always rewriting the data files that contain those rows. There are different kinds of delete patterns, but positional deletes are especially important to understand.
 
-Iceberg v2 made merge-on-read a first-class citizen. And the entire story of this article is about what those pamphlets look like, because it turns out the format of an erratum matters enormously once you have millions of them.
+A positional delete identifies rows by data file and row position. In simple terms, it says that certain positions in a specific data file should be treated as deleted. When an engine reads the table, it must consider both the data files and the relevant delete files. The result is a logical table view where deleted rows are excluded.
 
-## Iceberg V2 Delete Files: Two Kinds of Pamphlets
+That is powerful because object storage is not a place where systems should constantly mutate individual rows in place. Iceberg keeps the physical files immutable while allowing the logical table to evolve. This design matches the strengths of object storage while still supporting table-level change.
 
-The v2 spec defines two kinds of delete files, and they answer the "which rows are dead" question in genuinely different ways. Understanding both is worth your time, because the difference explains a lot of real-world engine behavior.
+The cost is complexity. Query engines have to plan which delete files apply to which data files. They have to merge that information during reads. Table maintenance has to eventually compact, rewrite, or clean up when too many delete files accumulate. The lakehouse gets row-level flexibility, but it does not get it for free.
 
-**Position delete files** identify a dead row by its address: the path of the data file it lives in, plus its row number within that file. A position delete file is itself a data file, usually Parquet, whose rows are pairs like "file s3://bucket/data/00042.parquet, position 1387." The pamphlet says: in this exact book, ignore line 1,387.
+## Positional Deletes in Practical Terms
 
-Position deletes are precise. A reader holding a data file and its matching position deletes knows exactly which rows to skip, with zero ambiguity and no value comparisons. The catch is that the writer must know positions. To write "position 1387 is deleted," something first had to read file 00042 and find that the target row sits at position 1387. The writer pays a lookup cost to produce a cheap-to-apply delete.
+Think of a data file as a page of rows. If rows 5, 19, and 42 need to disappear, a positional delete file can record that those row positions in that specific data file are deleted. The original data file remains unchanged. The table's snapshot and metadata tell readers how to interpret the combination of data files and delete files.
 
-**Equality delete files** identify dead rows by their values instead: "any row where order_id equals 12345 is deleted." No file paths, no positions. The pamphlet says: wherever you see this sentence in any book, ignore it.
+This is useful when the system knows exactly which file and position a row lives in. For many update and delete operations, engines can derive that information during planning. Once the positional delete exists, future reads have to apply it.
 
-Equality deletes flip the trade. The writer pays almost nothing. A streaming pipeline receiving "order 12345 was deleted" from a source database can write that fact immediately without scanning anything. This is why engines like Apache Flink lean on equality deletes for high-velocity change data capture. But the reader inherits the search. Every scan of potentially affected data must compare row values against the equality conditions to decide what survives. The delete is cheap to declare and expensive to apply, on every read, until compaction cleans it up.
+For event lakes, positional deletes can support several common patterns:
 
-So v2 gave the ecosystem a legitimate toolkit. Targeted engine-driven deletes and updates typically produced position deletes. Streaming CDC produced equality deletes. Compaction jobs periodically folded the pamphlets back into reprinted books. Merge-on-read on an open table format became real, and it is hard to overstate how important that was for bringing warehouse-style workloads onto data lakes.
+- removing events tied to privacy requests
+- retracting events emitted by mistake
+- excluding duplicated records from a bad upstream run
+- supporting CDC-like updates where old versions should no longer be visible
+- handling late corrections without rewriting entire data files immediately
 
-Then people used it at scale, and the cracks showed.
+The operational benefit is write efficiency. A small delete file may be much cheaper to write than a replacement data file. The analytical cost is that readers now have more work to do. The platform has to balance those concerns.
 
-## Where V2 Position Deletes Hurt: A Story of Too Many Pamphlets
+![Papercut diagram showing a positional delete file pointing to specific rows inside Iceberg data files](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-2.png)
 
-The problems with v2 position deletes were not correctness problems. They were problems of accumulation and shape. Let me walk through them one at a time, because each one motivates a specific design choice in v3.
+## Where Deletion Vectors Fit
 
-**Problem one: pamphlets multiply.** Every delete operation writes new delete files. Run a small targeted delete every five minutes against the same hot data, and you do not get one growing erratum per book. You get a fresh stack of tiny pamphlets with every commit. A data file that suffers frequent updates might have dozens or hundreds of position delete files referencing it across the table's current snapshot.
+Deletion vectors are often discussed as a more compact or efficient way to represent deleted positions, especially when there are many row-level changes associated with data files. Instead of representing deletes as rows in a traditional positional delete file, a deletion-vector-style structure can mark deleted row positions more directly.
 
-Now think about what a reader must do. To scan one data file correctly, the engine must find every delete file that might apply to it, open each one, read the positions, and merge them all into a single picture of which rows are dead. That means many small reads against object storage, where every request carries latency and cost. It means memory spent holding and merging position lists. The AWS analytics team described this exact failure mode when explaining the motivation for v3: many small delete files placing a heavy burden on engines through numerous file reads and costly in-memory conversions.
+The reason people care is planning and read efficiency. If a table accumulates many delete records, engines need to process them. A compact representation can reduce overhead in some workloads. It can also make merge-on-read more attractive for high-ingestion tables where row-level corrections are common.
 
-The library version: before reading one book, the librarian must gather forty pamphlets from different drawers, cross-reference all of them, and compile a master list of lines to skip. The reading itself was never the slow part.
+The practical message is not that deletion vectors make maintenance disappear. They change the shape of the tradeoff. Teams still need to measure query performance, compaction cadence, metadata growth, and engine compatibility. They still need to decide when to leave deletes as separate records and when to rewrite files into a cleaner state.
 
-**Problem two: pamphlets go stale and pile up.** Position delete files in v2 were not consolidated on write. New deletes did not merge with old deletes against the same data file. They just accumulated as additional files until a maintenance job compacted things. Between maintenance runs, read performance degraded steadily as the pamphlet stacks grew. Tables under constant modification needed aggressive, expensive compaction schedules just to hold query latency steady. Skipping maintenance for a busy week could mean noticeably slower dashboards by Friday.
+This is why I prefer to discuss deletion vectors as part of a table maintenance strategy rather than as a single feature checkbox. They are valuable when they help the whole system balance write throughput, read performance, and operational predictability.
 
-**Problem three: the granularity dilemma.** Engines writing position deletes in v2 faced an awkward choice about how to scope delete files. Write one delete file per affected data file, and a commit touching ten thousand data files produces ten thousand new small files, an operational headache all its own. Write broader delete files scoped to a partition, and readers scanning any one data file must open delete files that mostly describe other data files, reading and filtering irrelevant positions. Neither option was good. Engines picked their poison, and users inherited whichever downside their engine chose.
+## Merge-on-Read Is a Strategy, Not a Free Lunch
 
-**Problem four: the pamphlets were books.** This one is subtle but real. Position delete files in v2 were themselves Parquet files, with schemas, columns for the file path and position, headers, footers, and all the machinery of a general-purpose columnar format. Parquet is built for large analytical datasets, and it is wonderful at that job. Using it to store what is logically a set of integers is like using a shipping container to mail a postcard. Every read of a delete file paid format overhead to extract a small amount of very simple information, and file path strings repeated over and over inside them.
+Merge-on-read often sounds like an obvious win because it reduces immediate rewrite work. But it introduces work later. Reads may need to combine base data files with delete information. Query planning may involve more metadata. Compaction becomes more important. If delete files accumulate without control, read performance can suffer.
 
-Add these up and you get the v2 experience under heavy churn: correct results, mounting read amplification, a growing metadata sprawl of tiny files, and a permanent tax paid to maintenance jobs to keep the whole thing acceptable. For moderate workloads it was fine. For the workloads people increasingly wanted, meaning near-real-time CDC mirroring of operational databases into the lakehouse, it strained.
+That does not make merge-on-read bad. It means merge-on-read needs an operating model.
 
-The v3 designers looked at all four problems and noticed something: every one of them traces back to the decision to represent deletes as an open-ended pile of files that readers must discover and reconcile. Fix the representation, and the whole pile of problems collapses.
+The operating model should answer questions like:
 
-## Enter Deletion Vectors: One Card Per Book
+- How often do row-level changes happen?
+- How many delete files are acceptable before compaction?
+- Which queries are most sensitive to read-time delete application?
+- Which partitions or data files receive the most corrections?
+- How quickly do privacy deletes need to be reflected in user-facing queries?
+- Which engines will read the table, and how well do they handle the delete pattern?
+- What metrics will signal that maintenance is falling behind?
 
-Iceberg v3 replaces position delete files with deletion vectors, and the core idea fits in a sentence: every data file gets at most one compact, binary record of exactly which of its rows are deleted.
+The best lakehouse teams treat these questions as production design, not tuning trivia.
 
-Not a stack of pamphlets. One card, kept current, per book.
+## Event-Lake Use Cases
 
-Let me unpack the three design decisions packed into that sentence, because each one kills a specific v2 problem.
+Privacy deletion is the use case people understand quickly. If a user or customer must be removed from analytical datasets, the platform needs a reliable way to make those rows disappear logically and eventually physically according to policy. Positional deletes can help represent the logical removal while maintenance processes handle longer-term cleanup.
 
-**Decision one: at most one deletion vector per data file per snapshot.** This is a hard rule in the spec, not a suggestion. When a writer deletes more rows from a data file that already has a deletion vector, it cannot just add another record. It must read the existing vector, merge the new positions into it, and write the result as the file's new single vector. The spec goes further for migration: if any position delete files still exist for a data file from its v2 days, a writer updating that file's deletes must fold them into the vector too, so readers holding a vector can safely ignore old position delete files entirely.
+Late-arriving corrections are another common case. Event systems often enrich records after the fact. A region, account tier, product category, or fraud marker may be updated later. If the original event should be replaced or neutralized, row-level change support matters.
 
-Notice what this does. The reconciliation work that v2 pushed onto every reader now happens once, at write time, performed by the party who is already writing anyway. Readers never merge anything. For any data file, there is one authoritative answer to "which rows are dead," and it is exactly one lookup away. Problem one and problem two die together. Delete information stops accumulating into stacks because the stack can never exceed height one.
+Duplicate ingestion is a third case. Distributed systems retry. Batches get replayed. Producers fail halfway through a send. An idempotent design should prevent most duplicates, but production systems still need correction tools when duplicates slip through.
 
-**Decision two: the vector is a bitmap, not a list.** A deletion vector represents deleted positions as a Roaring bitmap, a compressed bitmap structure. I will explain bitmaps properly in the next section, because they are genuinely delightful, but the immediate point is compactness and speed. Checking whether row 1,387 is deleted becomes a bitmap membership test, one of the cheapest operations computers do, rather than a search through merged lists. Storage shrinks dramatically compared to Parquet files enumerating positions. Problem four dies here: the postcard finally travels as a postcard.
+CDC-style updates are a fourth case. When source systems emit changes, the lakehouse may need to represent current state, historical state, or both. Merge-on-read patterns can help manage updates without rewriting large portions of the table on every small change.
 
-**Decision three: vectors live in Puffin files.** Puffin is a file format from the Iceberg project designed for exactly this category of thing: compact binary blobs of statistics and auxiliary structures that ride alongside data files. A single Puffin file can hold many deletion vectors for many different data files, and Iceberg's metadata records, for each data file, which Puffin file holds its vector plus the exact byte offset and length of the blob within it.
+Agentic analytics adds a newer use case. AI agents and automated systems may produce high-volume traces: observations, tool calls, decisions, validations, and actions. Some of those traces may need correction, redaction, or reclassification. If the event lake becomes the audit trail for agent behavior, row-level maintenance becomes more important.
 
-That last detail deserves a pause, because it solves problem three, the granularity dilemma, with real elegance. In v2 you chose between one delete file per data file (too many files) or broad delete files (irrelevant reads). In v3, writers get file-level granularity and file-count efficiency at the same time. A commit deleting rows across a thousand data files can pack a thousand deletion vectors into one Puffin file. Readers needing the vector for one specific data file seek directly to its offset and read only its bytes. Nobody reads anything irrelevant, and nobody floods the object store with thousands of tiny files. The trade-off simply no longer exists.
+## Query Planning and Engine Compatibility
 
-There is one more clever wrinkle: writers are not required to rewrite Puffin files that contain replaced vectors. If a vector inside a shared Puffin file gets superseded by a new merged vector elsewhere, the old bytes just become dead weight until maintenance reclaims them. That keeps the write path fast, and it is a classic Iceberg move, trading a little garbage for a lot of speed and letting cleanup happen asynchronously.
+A table feature is only useful if the engines reading the table implement it correctly and efficiently. Iceberg is an open table format, but engine support still varies by version and feature. Before depending on positional deletes or deletion-vector-style behavior, teams should test the engines that matter to them.
 
-## Roaring Bitmaps, Explained Like You Are Human
+That testing should include reads, updates, deletes, merges, compaction, snapshot rollback, schema evolution, and concurrent writes. It should include both small and large files. It should include partitions with many deletes and partitions with none. It should include the BI, notebook, batch, and agentic workloads that will actually use the table.
 
-I promised an accessible explanation of the bitmap, so let us earn the word "accessible."
+Compatibility also has a governance angle. If one engine writes delete metadata that another engine ignores or handles poorly, the table is no longer safely multi-engine. The promise of open table formats depends on consistent semantics across the tools that participate.
 
-Start with the plain idea. A data file holds rows at positions 0, 1, 2, and so on. Imagine a row of light switches, one per position. Switch on means deleted, switch off means alive. That row of switches is a bitmap. To ask "is row 1,387 deleted," you look at switch 1,387. No searching, no comparing, just a direct look. One bit of storage per row.
+This is one reason catalog and platform choices matter. The table format gives the standard. The surrounding platform helps enforce operational discipline.
 
-One bit per row is already tiny. A data file with a million rows needs a raw bitmap of one million bits, about 122 kilobytes, to describe any possible pattern of deletions across all of them. Compare that with a Parquet position delete file spelling out a long file path string and a big integer for every single deleted row.
+## Compaction Is Part of the Design
 
-But real deletion patterns let us do far better than raw bitmaps, because real patterns are not random. Deletes cluster. A batch job removes a contiguous chunk of rows that arrived together. A GDPR request touches a handful of scattered rows. Most files have either very few deletes or big dense runs of them. Roaring bitmaps are a widely used structure built to exploit exactly this, and they show up across serious data systems for good reason.
+Merge-on-read shifts work away from initial writes, but the work has to be reconciled eventually. Compaction rewrites data into a cleaner form, often combining small files, applying deletes, and improving layout for future reads.
 
-The intuition behind Roaring is neighborhood-level bookkeeping. The bitmap divides the full range of positions into fixed-size neighborhoods and picks a different representation for each neighborhood depending on how many switches are on there. A neighborhood with just three deleted rows does not deserve a full grid of switches. It stores a short list: "3, 41, 907." A neighborhood where deletion is heavy flips to the actual bit grid, which is more compact than a long list once membership gets dense. Runs of consecutive deletions can be recorded as ranges: "everything from 20,000 to 45,000 is deleted" is one compact fact rather than 25,000 entries.
+For event lakes, compaction should not be an afterthought. It should be tied to workload patterns. A hot partition with many corrections may need more frequent maintenance. A cold partition with few queries may not. A table serving real-time dashboards may need tighter limits on delete-file accumulation than a table used for offline audits.
 
-Each neighborhood independently picks whichever representation is smallest for its own situation, and the structure adapts as deletes accumulate. The result stays small whether a file has five deleted rows, five million, or a solid block in the middle. Membership tests stay fast in every representation. And merging two Roaring bitmaps, exactly the operation writers perform when folding new deletes into an existing vector, is fast and well-trodden, since the format has years of production hardening across the industry behind it. Iceberg's spec builds on this foundation, using 64-bit row positions with the standard 32-bit Roaring machinery covering the ranges that practically occur.
+Autonomous or policy-driven optimization becomes attractive here. Instead of relying on manual jobs that run at fixed times, the platform can observe table health and choose maintenance actions based on file counts, delete density, query patterns, and cost. That is where the Dremio Agentic Lakehouse narrative becomes relevant without needing a sales pitch. The market is moving toward lakehouses that can optimize themselves because human operators cannot hand-tune every table forever.
 
-Back to the library one more time. The v2 pamphlet stack made the librarian collect and cross-reference errata before every reading. The v3 card is a single laminated sheet clipped inside the book's front cover, marked up in a shorthand that compresses "ignore lines 20,000 through 45,000" into a single stroke. The librarian glances at the card and reads. That is the whole ceremony now.
+## Governance and Auditability
 
-## How the Access Patterns Actually Change
+Deletes are not just performance events. They are governance events. A privacy delete, fraud retraction, or compliance correction should be explainable later.
 
-Formats are means. Access patterns are the ends. Let us walk through the moments in a table's life and watch what changed, because this is where the design decisions become felt experience.
+A good row-level change workflow should record who requested the change, which policy or process authorized it, which rows or keys were affected, which table snapshot introduced the logical delete, and when physical cleanup is expected. If an agent initiated or recommended the change, that should also be recorded.
 
-**The read path.** In v2, planning a scan over a data file meant consulting metadata for all position delete files whose scope might cover it, fetching those files from object storage, decoding Parquet, filtering out entries about other data files, and merging everything into an in-memory structure before the actual data scan could apply it. The cost scaled with delete history: the more modification a file had suffered since its last compaction, the more work every subsequent query performed, over and over.
+Iceberg's snapshot history helps because table changes are represented as commits. But business-level auditability still needs surrounding metadata. A commit can show that a delete file was added. It may not explain the business reason unless the platform records that context.
 
-In v3, planning finds one metadata entry per data file pointing at one blob. The engine issues one ranged read at a known offset, gets a Roaring bitmap, and streams the data file while testing each row position against the bitmap. The cost is flat. It does not matter whether the file endured one delete commit or one thousand since compaction, because writers merged history into a single current vector as they went. Query latency stops degrading between maintenance runs, which the community has repeatedly called out as the headline benefit: performance no longer decays as deletions accumulate, and cost spikes from delete-file sprawl stop appearing.
+For regulated data, the difference matters. Technical lineage and business intent need to meet.
 
-**The write path.** Writers took on the merge obligation, so are writes worse? Barely, and the work is proportionate. A delete commit identifies affected data files, computes new dead positions, loads each affected file's existing vector if one exists, unions the bitmaps, and writes fresh vectors packed into a new Puffin file. Bitmap unions are cheap, and the writer was already doing per-file work to find the positions. Compare that honestly against v2's alternative: v2 writes were only cheaper because they quietly deferred reconciliation onto every future reader, forever, until compaction. V3 moves a small, bounded cost to the one moment where it is paid exactly once. This is simply better accounting.
+![Papercut circular workflow showing ingestion, row-level deletes, compaction, snapshots, and query acceleration](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-3.png)
 
-**Change data capture and streaming.** This is the workload that motivated so much of the design, and it is where the improvement compounds. A CDC pipeline mirroring an operational database delivers a relentless drizzle of small updates and deletes. Under v2, that drizzle became continuous growth in delete file count, which became read amplification, which became a compaction treadmill you could never step off. Under v3, the same drizzle becomes in-place refinement of per-file vectors. Community benchmarking of merge-on-read under v3 has shown filtered reads seeing dramatic speedups under high churn, with the advantages growing as change volume scales. The AWS teams that benchmarked v3 deletion vectors against v2 position deletes on EMR and elsewhere frame the same conclusion: stable query performance and reduced fragmentation over time, in heavy-update scenarios that previously required constant babysitting.
+## Dremio and the Open Lakehouse Reading
 
-**Maintenance.** Compaction does not disappear in v3, and nobody should tell you it does. Data files still accumulate deleted rows that occupy space until a rewrite physically drops them, and heavily deleted files still deserve rewriting for scan efficiency. What changes is the pressure. In v2, compaction defended query latency itself, so falling behind hurt immediately and visibly. In v3, queries hold steady on their own, and compaction returns to its proper job of reclaiming storage and right-sizing files on a relaxed schedule. Fewer emergency maintenance windows, more boring Tuesdays. In data infrastructure, boring is the highest compliment.
+The Dremio-positive conclusion here is not that every table should use merge-on-read for every workload. The conclusion is more nuanced: open lakehouse architecture becomes more compelling when it can support both high-throughput ingestion and governed correction patterns without forcing data into a closed warehouse.
 
-**Concurrency.** A quieter benefit worth naming: the one-vector-per-file rule gives concurrent writers a crisp conflict model. Two commits deleting rows from the same data file visibly contend on that file's vector, and Iceberg's optimistic concurrency handles retry and merge cleanly. In v2, overlapping delete commits could both succeed by each adding pamphlets to the pile, papering over contention by making readers pay for it later. V3 surfaces the conflict at the moment it happens and resolves it once.
+Event lakes are not static archives. They are living analytical systems. They need append speed, row-level correction, query performance, catalog governance, semantic consistency, and maintenance automation. That is a lot to ask from a table format alone.
 
-## What About Equality Deletes?
+The Dremio Lakehouse approach is compelling because it lines up with the whole operating model. Open Iceberg tables provide durable table semantics. Query acceleration helps keep analytical workloads responsive. Federation helps teams work across sources while they modernize. Semantic layers help keep business definitions consistent. Autonomous performance work helps reduce the manual burden of table maintenance.
 
-A careful reader will have noticed that everything above concerns position deletes. So what happened to equality deletes, the write-cheap pamphlets that streaming engines love?
+The architectural lesson is that row-level Iceberg features matter most when the surrounding platform can use them responsibly.
 
-They survive in v3. Deletion vectors are positional by nature. A bitmap of row positions can only be built by something that knows positions, which means something that has located the target rows. Equality deletes exist precisely for writers who refuse to pay that lookup at write time, so a bitmap cannot replace them without destroying their reason to exist.
+## Practical Evaluation Checklist
 
-The practical pattern in the ecosystem is a division of labor across time. Streaming writers land equality deletes for immediate, cheap durability of change events. Maintenance and compaction processes then convert that backlog, resolving equality conditions into concrete row positions and folding the results into deletion vectors, restoring the fast stable read path. Equality deletes work as a short-term buffer, and deletion vectors work as the settled steady state. Meanwhile the position delete file, the v2 workhorse, is formally deprecated in v3. New tables on the v3 format produce deletion vectors for positional deletes by default, and the spec requires that when updating deletes for a data file, any lingering position deletes get absorbed into its vector.
+Before adopting merge-on-read heavily in an event lake, I would test several things.
 
-The deprecation is worth dwelling on for a moment, because table format specs rarely remove things. Deprecating position delete files was the community saying, with unusual clarity, that the v2 representation was a dead end at scale and the ecosystem should converge on the vector model. That kind of decisive pruning keeps a spec healthy. It is also a small window into how Iceberg evolves: real workloads exposed real limits, the community absorbed lessons from across the industry, including similar vector designs proven elsewhere, and the format moved. Open standards improve in public, and this feature is one of the cleaner examples I can point to.
+Start with the workload. Measure the ratio of appends to updates and deletes. If deletes are rare, simple maintenance may be enough. If deletes are frequent, test merge-on-read carefully.
 
-## A Worked Example: One Table, One Week, Both Worlds
+Measure write amplification. Compare the cost of rewriting files against the cost of writing delete metadata. Use real data sizes, not toy examples.
 
-Abstractions settle best with a story, so let us run the same week twice.
+Measure read impact. Run representative BI queries, agent queries, notebook exploration, and batch jobs against tables with different delete densities.
 
-The table is `customer_orders`, merge-on-read, fed by CDC from a production database. It holds 2,000 data files. Business is steady: all week, order corrections and cancellations trickle in, touching a few thousand rows spread across roughly 400 of those files, in small commits landing every few minutes.
+Test compaction policies. Decide when to rewrite files, how to schedule maintenance, and how to avoid conflicting with ingestion.
 
-**The week on v2.** Each commit writes position delete files covering the rows it touched. By Wednesday, hot data files each have fifteen or twenty small delete files pointing at them, and the table has accumulated thousands of new delete files overall. The nightly dashboard queries scan wide ranges of the table, and each scanned data file drags its personal pile of pamphlets into memory first. Object storage request counts swell. Latency climbs a little each day, the way it always does, and the platform team's compaction job on Thursday night brings it back down, the way it always does. Everyone has stopped questioning this rhythm. It is just what the lakehouse costs.
+Validate engine behavior. Make sure every engine that reads the table respects the delete semantics you depend on.
 
-**The week on v3.** Each commit computes positions for the rows it touched, merges them into the existing vectors for the affected data files, and writes the updated vectors packed into one new Puffin file per commit. A hot data file that gets touched thirty times during the week still has exactly one deletion vector on Friday, reflecting all thirty commits. Dashboard queries fetch one small blob per scanned file, all week, at flat cost. Thursday's compaction still runs, but it is reclaiming space from deleted rows at leisure, not rescuing query latency. Nobody notices anything, which is the point. The dramatic version of this story is that there is no dramatic version anymore.
+Track table health. Monitor file counts, delete-file counts, delete density, planning time, scan time, and query latency.
 
-Same table, same business events, same total information. The only thing that changed is the shape of the bookkeeping, and the shape turned a weekly performance sawtooth into a flat line.
+Design privacy workflows. If row-level deletes support compliance obligations, ensure the process includes authorization, audit, logical removal, physical cleanup, and verification.
 
-## Practical Guidance for Adopting Deletion Vectors
+Document the tradeoffs. Engineers, analysts, and governance teams should understand when the table is using merge-on-read and what that means for performance and maintenance.
 
-Some grounded advice for putting this into practice, drawn from where the ecosystem stands today.
+## A Concrete Operating Example
 
-Check your engine versions before you leap. Deletion vectors require Iceberg format version 3, and v3 support has been rolling across the ecosystem since the spec's ratification in mid-2025. Apache Spark support arrived through recent Iceberg releases, engines like Dremio and Trino and the major cloud services have been shipping v3 capabilities, and vectors are produced by default once a table is on format version 3 in current implementations. Verify every engine that touches a shared table, readers included, since a v3 table with vectors is not legible to a reader that only speaks v2.
+Consider a product analytics event lake that receives clickstream and feature-usage events throughout the day. Most records are append-only. Every few hours, an upstream identity service discovers that a set of anonymous events should be associated with a different account. Separately, the privacy team sends a daily set of user identifiers that must be removed from analytical views.
 
-Upgrade deliberately. Moving a table to v3 is a metadata operation, a table property change setting the format version, and existing data files stay valid. Existing v2 position delete files also remain readable, and the spec's migration rule handles convergence: as writers touch files, old position deletes get folded into new vectors. A table under active modification therefore migrates itself gradually. Running a compaction after upgrading accelerates the convergence and gets you to the clean steady state sooner.
+In a rewrite-heavy design, those corrections may force replacement files across several partitions. The table ends up doing large physical work for small logical changes. In a merge-on-read design, the platform can record the affected row positions as deletes, commit a new table snapshot, and make the corrected logical view available faster. Later, compaction can rewrite the affected files when the table is colder or when delete density crosses a threshold.
 
-Revisit assumptions that v2 taught you. If your platform runs aggressive compaction schedules purely to defend read latency against delete file sprawl, v3 likely lets you relax the frequency and spend that compute elsewhere. If you steered workloads toward copy-on-write specifically because merge-on-read reads degraded too fast, that calculus deserves a rerun, since merge-on-read under vectors holds up far better. Copy-on-write still wins for read-hot, rarely modified tables. The gap for update-heavy tables just narrowed a lot.
+The key is that every step is observable. The ingestion job records the source batch. The correction job records the reason and affected keys. The Iceberg commit records the table change. The query layer applies the delete semantics. The maintenance service eventually rewrites files and records that cleanup. Analysts see the correct table view, while operators retain the evidence trail.
 
-And keep expectations honest. Deletion vectors do not make deleted rows free. The dead rows still sit inside data files consuming storage until a rewrite drops them, and a file that is 90 percent deleted still deserves compaction. Vectors fix the cost of knowing what is deleted, which was the part that scaled badly. Physical cleanup remains a maintenance concern, just a calmer one.
+That example shows why the pattern is attractive. It reduces immediate rewrite pressure without asking the organization to give up table history or governance.
 
-## Questions I Hear Most Often
+One guardrail is worth naming: never let delete metadata grow invisibly. If the platform cannot show delete density, planning cost, compaction lag, and query impact, the team will discover the problem only after users feel it.
 
-When I cover this topic at meetups and on my podcast, a familiar set of questions comes back from the audience. Working through them here fills in edges the main narrative skipped, and each answer is a chance to reinforce the core model.
+## A Balanced Way to Think About It
 
-**Do deletion vectors change my query results in any way?** No. Vectors and delete files are alternative encodings of the same logical fact, namely the set of rows that no longer belong to the current snapshot. A query against a v3 table with vectors returns exactly what the equivalent v2 table would return. What changes is the cost profile of producing that answer, not the answer. Correctness was never v2's problem.
+Copy-on-write and merge-on-read are not moral choices. They are workload choices. Copy-on-write can be excellent when read simplicity and predictable query performance matter more than write efficiency. Merge-on-read can be excellent when write throughput and frequent small corrections matter more, provided the platform manages read-time complexity and maintenance.
 
-**How do deletion vectors interact with time travel?** Beautifully, and this trips people up in a good way. Iceberg snapshots are immutable, and each snapshot references the specific vectors that were current when it was committed. When a writer merges new deletes into a file's vector, it writes a new vector for the new snapshot. The old snapshot still points at the old vector. Query the table as of last Tuesday and you get last Tuesday's deletion state, applied through last Tuesday's vectors. Nothing about the vector model weakens the format's history guarantees, since vectors participate in snapshots exactly like data files always have.
+Event lakes often lean toward merge-on-read because event correction patterns are common and rewriting large files for small changes is wasteful. But every team should test that assumption with its own data, engines, and service-level goals.
 
-**Does a delete now require reading data files to find row positions?** For positional deletes, yes, something has to locate the target rows, and that was equally true in v2 for position delete files. The engine scans candidate files, identifies matching rows, and records their positions. Iceberg's metadata makes this cheaper than it sounds, since partition pruning and column statistics narrow the candidate files before any scanning starts. And for writers that genuinely cannot afford the lookup, equality deletes remain available as the deferred option, as covered earlier.
+The broader trend is clear. As lakehouses become systems of record for more operational and AI-generated events, row-level change support becomes more important. Iceberg's delete model, and the newer work around more efficient representations, are part of that evolution.
 
-**What happens if a data file has both an old position delete file and a new deletion vector?** The spec resolves this cleanly in favor of the vector. When a writer creates a vector for a data file, it must absorb all previously written position deletes for that file, and from that point readers holding the vector can ignore matching position delete files entirely. There is never a situation where a reader must combine both representations for one file. One card per book, and once the card exists, the pamphlets for that book are void.
+## The Direction of Travel
 
-**Can multiple deletion vectors share a Puffin file, and does that cause coupling problems?** Many vectors can share one Puffin file, and no, coupling stays loose. Each vector is addressed by its own offset and length within the file, so readers touch only the bytes for the data file they care about. When one vector in a shared Puffin file gets superseded, the others remain perfectly valid where they sit, and the stale bytes wait for cleanup. Writers gain the file-count efficiency of packing without readers inheriting any cross-file entanglement.
+The lakehouse is moving from append-only analytics toward active, governed, change-aware data infrastructure. That is necessary because modern data products are not static. They need corrections, privacy handling, CDC updates, agent traces, and reliable table history.
 
-**Is this the same as Delta Lake's deletion vectors?** The family resemblance is real and acknowledged. Delta Lake shipped a deletion vector feature earlier, and the broader industry, including systems well outside the table format world, converged on compressed bitmaps for row invalidation because the approach genuinely works. Iceberg's version is its own design within the Iceberg metadata model, with the one-vector-per-file rule, Puffin storage, and spec-mandated migration behavior. I take the convergence as a healthy sign. When independent communities land on the same shape of answer, the shape is probably right.
+Positional deletes are one of the mechanisms that make this possible. Deletion-vector-style improvements point toward more efficient merge-on-read operation. Compaction, catalog governance, query acceleration, and auditability make the pattern production-ready.
 
-**Does merge-on-read now beat copy-on-write everywhere?** No, and beware anyone selling that conclusion. Copy-on-write still produces the purest read path there is, plain data files with nothing to check, and for tables that are read constantly and modified rarely, rewriting the occasional file remains a great bargain. What v3 changed is the slope of the trade. Merge-on-read used to degrade under churn badly enough that teams avoided it even for workloads it suited. Now it holds steady, so the decision returns to the honest fundamentals: modification frequency, read patterns, and latency requirements, rather than fear of pamphlet sprawl.
+The important conclusion is architectural. Teams should not evaluate row-level table features in isolation. They should evaluate the whole system: table format, catalog, engines, maintenance, semantics, and governance. When those pieces work together, an open lakehouse can handle event-scale change without giving up trust.
 
-**Do I still need to run compaction and snapshot expiration?** Yes, on both counts, and it bears repeating because "vectors fix deletes" is easy to over-read. Deleted rows still physically occupy space inside data files until compaction rewrites them out. Old snapshots still pin old files, vectors included, until expiration releases them. Vectors removed the emergency from maintenance, not the need for it. Think of v3 as converting maintenance from a performance defense into routine housekeeping.
+That is why this topic lands so naturally in the Dremio Lakehouse narrative. The more dynamic the lakehouse becomes, the more valuable it is to have open tables, fast query access, semantic consistency, and intelligent performance management around them.
 
-**How does this affect my object storage bill?** Generally favorably, through two channels. Request counts drop, since readers fetch one ranged blob per data file instead of opening piles of small delete files, and request charges on high-traffic tables are a real line item. Storage for delete information drops too, since compressed bitmaps are far smaller than Parquet files enumerating paths and positions row by row. Offsetting this slightly, superseded vectors linger in shared Puffin files until cleanup. Net effect across published tests and field reports points the right direction: less storage, fewer requests, cheaper scans.
-
-**Where should I go deeper after this article?** The Iceberg spec's sections on row-level deletes and the Puffin format are more readable than most specs, and the engine documentation for whatever you run, whether Dremio, Spark, Trino, or a managed service, will cover the version knobs and defaults. The benchmark posts from AWS and community authors on v2 versus v3 delete performance are worth your time for concrete numbers on workloads resembling yours. And the dev list archives show the design discussions themselves, which I find is where the deepest understanding lives.
-
-## The Bigger Lesson Hiding in a Small Feature
-
-Zoom out with me, because I think deletion vectors teach something beyond Iceberg.
-
-Every durable storage system that supports modification eventually faces the same question: when you cannot change the past, where do you record the corrections? Accountants faced it centuries ago and invented adjusting entries rather than erasing ledgers. Version control systems faced it and chose immutable commits with evolving references. Iceberg v2 and v3 are two answers to the same question, and the difference between them is a lesson in where to spend work.
-
-V2 let corrections accumulate as an open set of records and asked readers to assemble the truth. V3 requires writers to maintain the assembled truth continuously, one compact structure per data file, so readers just look it up. The total information is identical. The difference is that v3 does the assembly once, at the moment of change, instead of on every read forever after. Almost every scaling problem in data systems eventually yields to some version of this move: find the work being repeated implicitly, and do it once explicitly.
-
-It also shows why representation is destiny. Position delete files and deletion vectors encode the same facts. Yet one representation produced file sprawl, read amplification, and a maintenance treadmill, and the other produced flat lookups and bounded state, purely through choices about granularity, format, and ownership of the merge. When someone tells you a format war is bikeshedding, remember this pair.
-
-If you take one model away from this article, take the library. V2 answered "which rows are deleted" with a stack of pamphlets the reader must reconcile. V3 answers it with one laminated card per book, kept current by whoever last made a change, written in a shorthand built for exactly this job. Everything else, the Puffin packing, the Roaring compression, the one-per-file rule, the deprecation of the old way, is engineering in service of that single clean idea.
-
-The lakehouse promise has always been warehouse capabilities on open, ownable storage. Row-level change was the capability where that promise strained hardest, and deletion vectors are the moment it stopped straining. Tables that mutate constantly now behave like tables, not like archives with apology notes attached.
-
-If explanations like this one work for you, this is how I write books too. I co-authored Apache Iceberg: The Definitive Guide and Apache Polaris: The Definitive Guide for O'Reilly, and I have written additional titles on lakehouse architecture, data engineering, and AI, all built around making the underlying logic of these systems genuinely understandable. You can browse the full collection of my books on data and AI at [books.alexmerced.com](https://books.alexmerced.com).
+For more of my thinking on data lakehouse and AI architecture, explore my books at [books.alexmerced.com](https://books.alexmerced.com). To try a modern Agentic Lakehouse experience, visit [dremio.com/get-started](https://www.dremio.com/get-started).
