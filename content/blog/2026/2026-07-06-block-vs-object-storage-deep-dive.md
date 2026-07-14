@@ -1,17 +1,17 @@
 ---
 title: "Block vs. Object Storage: A Deep Dive Into the Foundation of Modern Data, and How the Lakehouse Made the Slow Option Fast"
 date: "2026-07-06"
-description: "*By Alex Merced, Head of Developer Relations at Dremio* Here is one of the strangest and most consequential plot twists in the history of data infrastru."
 author: "Alex Merced"
 category: "Data Engineering"
 tags:
-  - object storage
-  - block storage
-  - data engineering
-  - lakehouse
+  - data lakehouse
+  - storage
+  - architecture
 canonical: https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/).
+
+# Block vs. Object Storage: A Deep Dive Into the Foundation of Modern Data, and How the Lakehouse Made the Slow Option Fast
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

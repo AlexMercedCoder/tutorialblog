@@ -1,17 +1,17 @@
 ---
 title: "File Encryption for the Lakehouse: The Terminology, the Machinery, and the Hard Problem of Interoperable Encrypted Tables"
 date: "2026-07-06"
-description: "*By Alex Merced, Head of Developer Relations at Dremio* For years, the open lakehouse had an honest gap that practitioners whispered about and slide dec."
 author: "Alex Merced"
-category: "Security"
+category: "Data Engineering"
 tags:
   - encryption
-  - Parquet
-  - Iceberg
+  - data lakehouse
   - security
 canonical: https://iceberglakehouse.com/posts/lakehouse-encryption-deep-dive/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/lakehouse-encryption-deep-dive/).
+
+# File Encryption for the Lakehouse: The Terminology, the Machinery, and the Hard Problem of Interoperable Encrypted Tables
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

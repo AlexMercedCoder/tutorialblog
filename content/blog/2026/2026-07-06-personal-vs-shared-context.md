@@ -1,16 +1,17 @@
 ---
 title: "Personal Context vs. Shared Context: A Deep Dive Into How Humans and Organizations Should Feed Their AI Agents"
 date: "2026-07-06"
-description: "*By Alex Merced, Head of Developer Relations at Dremio* The most important discovery of the agent era fits in one sentence: most AI failures are context."
 author: "Alex Merced"
-category: "AI & Analytics"
+category: "AI & Agents"
 tags:
-  - AI agents
-  - context
-  - personal knowledge
+  - personal context
+  - shared context
+  - ai agents
 canonical: https://iceberglakehouse.com/posts/personal-vs-shared-context/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/personal-vs-shared-context/).
+
+# Personal Context vs. Shared Context: A Deep Dive Into How Humans and Organizations Should Feed Their AI Agents
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

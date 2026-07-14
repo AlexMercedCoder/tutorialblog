@@ -1,16 +1,17 @@
 ---
 title: "The Buyer's Scorecard for Agentic Analytics: Evaluating Tooling in the Enterprise AI Era"
 date: "2026-07-06"
-description: "Agentic analytics demos are easy to enjoy and hard to evaluate."
 author: "Alex Merced"
-category: "AI & Analytics"
+category: "Agentic Analytics"
 tags:
-  - AI agents
-  - enterprise AI
-  - buyer's guide
+  - agentic analytics
+  - enterprise ai
+  - evaluation
 canonical: https://iceberglakehouse.com/posts/buyers-scorecard-agentic-analytics-enterprise-ai-era/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/buyers-scorecard-agentic-analytics-enterprise-ai-era/).
+
+# The Buyer's Scorecard for Agentic Analytics: Evaluating Tooling in the Enterprise AI Era
 
 Agentic analytics demos are easy to enjoy and hard to evaluate. A user asks a question, an assistant answers, a chart appears, and the room leans forward. The problem is that a good demo does not prove production readiness.
 
@@ -20,7 +21,7 @@ That difference matters. Agentic analytics is not only a user interface. It is a
 
 This scorecard is meant to help buyers separate interface polish from platform substance. It is vendor neutral by design, but the conclusions naturally favor an open Agentic Lakehouse approach. If a tool scores well on semantics, open data access, governance, validation, observability, and action safety, it points toward the same architecture Dremio has been advocating.
 
-![Papercut five-part buyer scorecard wheel for agentic analytics](/images/2026/wk-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-./diagram-1.png)
+![Papercut five-part buyer scorecard wheel for agentic analytics](/images/2026/week-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-diagram-1.png)
 
 ## Category 1: Semantic Grounding
 
@@ -66,7 +67,7 @@ Buyers should ask for evidence. Can the vendor show traces for the agent's plan,
 
 Platforms that cannot show their work should score poorly.
 
-![Papercut comparison of simple demo chatbot versus production analytics agent architecture](/images/2026/wk-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-./diagram-2.png)
+![Papercut comparison of simple demo chatbot versus production analytics agent architecture](/images/2026/week-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-diagram-2.png)
 
 ## Category 5: Action Controls
 
@@ -108,7 +109,7 @@ Buyers should ask whether semantic definitions can be reused outside the product
 
 Interoperability is not only a technical preference. It is a hedge against semantic fragmentation.
 
-![Papercut open lakehouse evaluation model for agentic analytics with governance, semantics, federation, observability, cost, and action safety](/images/2026/wk-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-./diagram-3.png)
+![Papercut open lakehouse evaluation model for agentic analytics with governance, semantics, federation, observability, cost, and action safety](/images/2026/week-jul06/buyers-scorecard-agentic-analytics-enterprise-ai-era-diagram-3.png)
 
 ## A Simple Scoring Model
 

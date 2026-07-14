@@ -1,16 +1,17 @@
 ---
 title: "Implementing Positional Deletes in Iceberg v3: Streamlining Merge-on-Read for Fast-Inbound Event Lakes"
 date: "2026-07-06"
-description: "Event data has a way of humbling neat architecture diagrams. It arrives late. It arrives twice. It arrives with incorrect attributes."
 author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
-  - Iceberg v3
-  - deletion vectors
+  - iceberg v3
+  - positional deletes
   - event lakes
 canonical: https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/).
+
+# Implementing Positional Deletes in Iceberg v3: Streamlining Merge-on-Read for Fast-Inbound Event Lakes
 
 Event data has a way of humbling neat architecture diagrams. It arrives late. It arrives twice. It arrives with incorrect attributes. It needs privacy removals. It needs corrections after enrichment logic changes. It needs retractions when upstream systems discover that an event should not have been emitted in the first place.
 
@@ -20,7 +21,7 @@ Apache Iceberg gives us a better set of tools. Its snapshot model, metadata stru
 
 I want to keep the language grounded. Exact Iceberg v3 details should always be checked against the current Apache Iceberg specification and the engine versions in use. The point of this article is not to promise a universal speedup. The point is to explain why merge-on-read patterns matter for event lakes and what teams should evaluate before using them in production.
 
-![Papercut diagram comparing copy-on-write and merge-on-read update flows for an Iceberg event lake](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-1.png)
+![Papercut diagram comparing copy-on-write and merge-on-read update flows for an Iceberg event lake](/images/2026/week-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-diagram-1.png)
 
 ## Why Event Lakes Strain Copy-on-Write Designs
 
@@ -64,7 +65,7 @@ For event lakes, positional deletes can support several common patterns:
 
 The operational benefit is write efficiency. A small delete file may be much cheaper to write than a replacement data file. The analytical cost is that readers now have more work to do. The platform has to balance those concerns.
 
-![Papercut diagram showing a positional delete file pointing to specific rows inside Iceberg data files](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-2.png)
+![Papercut diagram showing a positional delete file pointing to specific rows inside Iceberg data files](/images/2026/week-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-diagram-2.png)
 
 ## Where Deletion Vectors Fit
 
@@ -134,7 +135,7 @@ Iceberg's snapshot history helps because table changes are represented as commit
 
 For regulated data, the difference matters. Technical lineage and business intent need to meet.
 
-![Papercut circular workflow showing ingestion, row-level deletes, compaction, snapshots, and query acceleration](/images/2026/wk-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-./diagram-3.png)
+![Papercut circular workflow showing ingestion, row-level deletes, compaction, snapshots, and query acceleration](/images/2026/week-jul06/iceberg-v3-positional-deletes-deletion-vectors-event-lakes-diagram-3.png)
 
 ## Dremio and the Open Lakehouse Reading
 

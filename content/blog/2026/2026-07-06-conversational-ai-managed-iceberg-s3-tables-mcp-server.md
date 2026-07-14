@@ -1,17 +1,17 @@
 ---
 title: "Conversational AI on Managed Iceberg: Exposing Amazon S3 Tables through MCP"
 date: "2026-07-06"
-description: "The most interesting part of conversational analytics is not the chat box. The chat box is just the surface area."
 author: "Alex Merced"
-category: "AI & Lakehouse"
+category: "Apache Iceberg"
 tags:
-  - MCP
-  - AI agents
-  - S3 Tables
-  - Iceberg
+  - conversational ai
+  - amazon s3 tables
+  - mcp
 canonical: https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/
 ---
 > **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/).
+
+# Conversational AI on Managed Iceberg: Exposing Amazon S3 Tables through MCP
 
 The most interesting part of conversational analytics is not the chat box. The chat box is just the surface area. The harder question is what happens after a person asks a question, especially when that question touches governed data, shared definitions, cloud storage, and production systems that cannot afford sloppy access patterns.
 
@@ -23,7 +23,7 @@ That distinction matters more than it first appears. Most weak conversational da
 
 A stronger approach begins with the lakehouse itself.
 
-![Architecture diagram showing AI agent access through MCP, catalog governance, and managed Iceberg tables](/images/2026/wk-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-./diagram-1.png)
+![Architecture diagram showing AI agent access through MCP, catalog governance, and managed Iceberg tables](/images/2026/week-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-diagram-1.png)
 
 ## Why Managed Iceberg Changes the Starting Point
 
@@ -85,7 +85,7 @@ The fifth layer is the MCP server. This layer exposes tools to AI applications. 
 
 The MCP server becomes the agent-facing doorway. The lakehouse remains the foundation.
 
-![Security flow diagram showing consent, scoped tool calls, catalog checks, query execution, and audit logging](/images/2026/wk-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-./diagram-2.png)
+![Security flow diagram showing consent, scoped tool calls, catalog checks, query execution, and audit logging](/images/2026/week-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-diagram-2.png)
 
 ## The Security Model Has to Be Designed First
 
@@ -154,7 +154,7 @@ For agentic analytics, I would ask a few practical questions:
 
 If the answer to those questions is yes, the architecture is probably on the right track.
 
-![Open lakehouse layered map showing storage, table format, catalog governance, semantic layer, and AI agents](/images/2026/wk-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-./diagram-3.png)
+![Open lakehouse layered map showing storage, table format, catalog governance, semantic layer, and AI agents](/images/2026/week-jul06/conversational-ai-managed-iceberg-s3-tables-mcp-server-diagram-3.png)
 
 ## A Practical Builder Checklist
 
