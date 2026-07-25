@@ -164,6 +164,8 @@ async function main() {
     const slug = slugify(file);
     const outPath = join(outDir, `${slug}.png`);
 
+    const fullPath = join(blogDir, file);
+
     // Skip if already exists and source hasn't changed
     if (existsSync(outPath)) {
       const srcStat = statSync(fullPath);
@@ -174,7 +176,6 @@ async function main() {
       }
     }
 
-    const fullPath = join(blogDir, file);
     const content = readFileSync(fullPath, 'utf-8');
     let title;
 
@@ -208,6 +209,17 @@ async function main() {
 
     writeFileSync(outPath, pngBuffer);
     console.log(`  Saved: public/og/${slug}.png`);
+    generated++;
+  }
+
+  // Default/homepage OG card
+  const defaultPath = join(outDir, 'default.png');
+  if (!existsSync(defaultPath)) {
+    console.log('  Generating default OG card');
+    const svg = await satori(renderOG('Coding Tutorials by Alex Merced'), {
+      width: WIDTH, height: HEIGHT, fonts: [fontRegular, fontBold],
+    });
+    writeFileSync(defaultPath, new Resvg(svg, { fitTo: { mode: 'width', value: WIDTH } }).render().asPng());
     generated++;
   }
 

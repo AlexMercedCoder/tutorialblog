@@ -102,9 +102,16 @@ const Layout = ({ location, title, children }) => {
         </header>
         <main>{children}</main>
         <footer>
-            © {new Date().getFullYear()}, Built with
+            © {new Date().getFullYear()} Alex Merced, Built with
             {` `}
             <a href="https://www.gatsbyjs.com">Gatsby</a>
+            <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
+                More from Alex Merced:{` `}
+                <a href="https://alexmerced.com">alexmerced.com</a> ·{` `}
+                <a href="https://grokoverflow.com">GrokOverflow</a> ·{` `}
+                <a href="https://ingestthis.com">IngestThis</a> ·{` `}
+                <a href="https://books.alexmerced.com">Books</a>
+            </div>
         </footer>
         <ScrollToTop />
         </div>

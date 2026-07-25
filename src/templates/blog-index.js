@@ -91,7 +91,7 @@ export default BlogIndex
 
 export const Head = ({ pageContext, location }) => {
   const { currentPage } = pageContext
-  const pageTitle = currentPage && currentPage > 1 ? `Articles - Page ${currentPage}` : "All Posts"
+  const pageTitle = currentPage && currentPage > 1 ? `Articles - Page ${currentPage}` : "Alex Merced Tutorials"
   return (
     <Seo
       title={pageTitle}
