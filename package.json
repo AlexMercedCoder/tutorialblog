@@ -60,7 +60,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "node scripts/generate-og-images.mjs && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
