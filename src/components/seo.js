@@ -88,7 +88,14 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
           author: {
               "@type": "Person",
               name: site.siteMetadata.author?.name || "Alex Merced",
-              url: "https://alexmercedcoder.dev/"
+              url: "https://alexmercedcoder.dev/",
+              sameAs: [
+                  "https://alexmerced.com",
+                  "https://alexmercedcoder.dev",
+                  "https://whoisalexmerced.com",
+                  "https://www.linkedin.com/in/alexmerced",
+                  "https://github.com/alexmercedcoder"
+              ]
           },
           publisher: {
               "@type": "Organization",

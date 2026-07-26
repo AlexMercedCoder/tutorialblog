@@ -45,6 +45,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         const button = document.createElement('button');
         button.innerText = 'Copy';
         button.className = 'copy-btn';
+        button.setAttribute('type', 'button');
+        button.setAttribute('aria-label', 'Copy code to clipboard');
         button.style.position = 'absolute';
         button.style.top = '5px';
         button.style.right = '5px';

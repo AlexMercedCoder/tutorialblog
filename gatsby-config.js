@@ -1,12 +1,12 @@
 module.exports = {
   trailingSlash: `always`,
   siteMetadata: {
-    title: `Coding Tutorials Blog`,
+    title: `Coding Tutorials by Alex Merced`,
     author: {
       name: `Alex Merced`,
       summary: `Developer from devNursery.com and alexmercedcoder.dev`,
     },
-    description: `A Blog of coding tutorials`,
+    description: `Hands-on web development and programming tutorials by Alex Merced — JavaScript, TypeScript, React, Python, data engineering, and more.`,
     siteUrl: `https://tuts.alexmercedcoder.dev/`,
     social: {
       twitter: `alexmercedcoder`,
@@ -115,7 +115,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Gatsby Starter Blog RSS Feed",
+            title: "Coding Tutorials by Alex Merced — RSS Feed",
           },
         ],
       },
@@ -159,12 +159,16 @@ module.exports = {
             policy: [
               { userAgent: '*', allow: '/' },
               { userAgent: 'GPTBot', allow: '/' },
+              { userAgent: 'OAI-SearchBot', allow: '/' },
+              { userAgent: 'ChatGPT-User', allow: '/' },
               { userAgent: 'ClaudeBot', allow: '/' },
-              { userAgent: 'Claude-Web', allow: '/' },
+              { userAgent: 'Claude-User', allow: '/' },
               { userAgent: 'PerplexityBot', allow: '/' },
+              { userAgent: 'Perplexity-User', allow: '/' },
               { userAgent: 'Google-Extended', allow: '/' },
-              { userAgent: 'Anthropic-ai', allow: '/' },
-              { userAgent: 'OAI-SearchBot', allow: '/' }
+              { userAgent: 'Applebot-Extended', allow: '/' },
+              { userAgent: 'CCBot', allow: '/' },
+              { userAgent: 'Meta-ExternalAgent', allow: '/' }
             ]
           }
         }
