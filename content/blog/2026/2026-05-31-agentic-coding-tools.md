@@ -54,7 +54,7 @@ It supports multi-turn autonomous sessions, can browse the web, read documentati
 
 Goose started as an internal tool at Block (Square) and open-sourced under Apache 2.0. It transitioned to foundation governance under the Linux Foundation's Agentic AI initiative in early 2026, which gives it a neutrality that other projects lack.
 
-Goose is MCP-extensible, meaning any tool that speaks the Model Context Protocol can plug into it. It runs full development workflows — plan, code, test, commit — and is genuinely model-agnostic. The desktop companion app gives you a GUI without losing the CLI's power.
+Goose is MCP-extensible, meaning any tool that speaks the Model Context Protocol can plug into it. It runs full development workflows: plan, code, test, commit, and is genuinely model-agnostic. The desktop companion app gives you a GUI without losing the CLI's power.
 
 ### Gemini CLI
 
@@ -76,7 +76,7 @@ The pricing is unusual. Amp is free, ad-supported, with a $10 per day API cost c
 
 ### Warp
 
-Warp is a full terminal replacement written in Rust with GPU acceleration. It runs multiple agents simultaneously — you can have Claude Code, Codex, and Gemini CLI all working in split panes. The built-in file editor and code review panel eliminate the need to alt-tab to an IDE.
+Warp is a full terminal replacement written in Rust with GPU acceleration. It runs multiple agents simultaneously, so you can have Claude Code, Codex, and Gemini CLI all working in split panes. The built-in file editor and code review panel eliminate the need to alt-tab to an IDE.
 
 Warp claims its agent ships over 50 percent of its own pull requests. The WARP.md project configuration file lets you define project-specific agent behaviors. It is the right tool for developers who basically live in their terminal and want an all-in-one environment.
 
@@ -164,7 +164,7 @@ Copilot is the default choice for millions of VS Code users because it ships wit
 
 ### Continue.dev
 
-Continue is the open-source IDE extension that works with both VS Code and JetBrains. With 26,000 GitHub stars, it is the only tool in this category with full cross-editor support. You bring your own models — local via Ollama, cloud via any provider, or a mix of both.
+Continue is the open-source IDE extension that works with both VS Code and JetBrains. With 26,000 GitHub stars, it is the only tool in this category with full cross-editor support. You bring your own models: local via Ollama, cloud via any provider, or a mix of both.
 
 The tab completion quality is improving, and the slash command system lets you define custom workflows. Continue is not as polished as Cursor, but it is the most flexible option for developers who refuse to switch editors.
 
@@ -178,7 +178,7 @@ Cline supports browser automation, checkpoint rollback (undo any agent action), 
 
 Amazon's Kiro takes a spec-driven development approach. Before it writes any code, it converts your prompt into EARS notation requirements. The agent then implements against those requirements, creating an auditable trail from request to implementation.
 
-Kiro has agent hooks that automate follow-ups — run tests on save, deploy on green, rollback on red. The free tier is generous, and the per-prompt credit pricing means you only pay for what you use.
+Kiro has agent hooks that automate follow-ups: run tests on save, deploy on green, rollback on red. The free tier is generous, and the per-prompt credit pricing means you only pay for what you use.
 
 ### Zed
 
@@ -388,7 +388,7 @@ LiteLLM is the default choice for Python projects that need model routing withou
 
 ### Helix (Kilo Code)
 
-Kilo Code's built-in router, Helix, optimizes for coding agent workflows specifically. It understands which models excel at which coding tasks — code generation, refactoring, debugging, test writing — and routes accordingly.
+Kilo Code's built-in router, Helix, optimizes for coding agent workflows specifically. It understands which models excel at which coding tasks (code generation, refactoring, debugging, test writing) and routes accordingly.
 
 Helix supports 500-plus models across 60-plus providers. The real-time cost display shows exactly what each model choice costs per turn, which builds intuition about model economics over time.
 
