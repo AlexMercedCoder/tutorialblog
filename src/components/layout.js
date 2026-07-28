@@ -112,6 +112,9 @@ const Layout = ({ location, title, children }) => {
                 <a href="https://ingestthis.com">IngestThis</a> ·{` `}
                 <a href="https://books.alexmerced.com">Books</a>
             </div>
+            <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', opacity: 0.7 }}>
+                The views, thoughts, and opinions expressed on this site belong solely to Alex Merced and do not represent the views of any organization or employer.
+            </div>
         </footer>
         <ScrollToTop />
         </div>
