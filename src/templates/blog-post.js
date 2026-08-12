@@ -80,51 +80,49 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <ProgressBar />
-      <article>
-        <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {post.frontmatter.date} • {post.timeToRead} min read
-          </p>
+      <article className="hb-article">
+        <header className="hb-articleHead">
+          {post.frontmatter.category && (
+            <Link
+              to={`/tags/${kebabCase(post.frontmatter.category)}/`}
+              className="hb-chip"
+            >
+              {post.frontmatter.category}
+            </Link>
+          )}
+          <h1 className="hb-articleTitle">{post.frontmatter.title}</h1>
+          <div className="hb-articleMeta">
+            <span>{post.frontmatter.date}</span>
+            <span>{post.timeToRead} min read</span>
+            <span>Alex Merced</span>
+          </div>
         </header>
         {post.tableOfContents && (
-          <details style={{ marginBottom: rhythm(1), background: "#f9f9f9", padding: "10px", borderRadius: "5px" }}>
-              <summary style={{ cursor: "pointer", fontWeight: "bold" }}>Table of Contents</summary>
-              <div dangerouslySetInnerHTML={{ __html: post.tableOfContents }} />
+          <details className="hb-toc">
+            <summary>Table of contents</summary>
+            <div dangerouslySetInnerHTML={{ __html: post.tableOfContents }} />
           </details>
         )}
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
+        <section
+          className="hb-prose"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
         {post.frontmatter.tags && (
-            <div style={{ marginTop: rhythm(1), marginBottom: rhythm(1) }}>
-                <ul style={{ listStyle: 'none', display: 'flex', flexWrap: 'wrap', padding: 0 }}>
-                    {post.frontmatter.tags.map(tag => {
-                        return (
-                            <li key={tag} style={{ marginRight: '10px' }}>
-                                <Link to={`/tags/${kebabCase(tag)}/`}>#{tag}</Link>
-                            </li>
-                        )
-                    })}
+            <div className="hb-tagRow">
+                <ul>
+                    {post.frontmatter.tags.map(tag => (
+                        <li key={tag}>
+                            <Link to={`/tags/${kebabCase(tag)}/`}>#{tag}</Link>
+                        </li>
+                    ))}
                 </ul>
             </div>
         )}
         <Share title={post.frontmatter.title} url={url} twitterHandle={twitterHandle} />
         
         {pageContext.relatedPosts && pageContext.relatedPosts.length > 0 && (
-            <div style={{ marginTop: rhythm(1), marginBottom: rhythm(1) }}>
-                <h3>Related Posts</h3>
+            <div className="hb-related">
+                <h3>Related tutorials</h3>
                 <ul style={{ listStyle: 'none', marginLeft: 0 }}>
                     {pageContext.relatedPosts.map(p => (
                         <li key={p.slug} style={{ marginBottom: rhythm(0.25) }}>
@@ -148,26 +146,20 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       </article>
 
       <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+        <ul className="hb-postNav">
           <li>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+                <small>← Previous</small>
+                <span>{previous.frontmatter.title}</span>
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+                <small>Next →</small>
+                <span>{next.frontmatter.title}</span>
               </Link>
             )}
           </li>
@@ -218,6 +210,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
         description
+        category
         tags
       }
     }

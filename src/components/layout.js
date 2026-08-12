@@ -1,123 +1,105 @@
 import React from "react"
 import { Link } from "gatsby"
 import ScrollToTop from "./scrollToTop"
-import { rhythm, scale } from "../utils/typography"
 import ThemeContext from "../context/ThemeContext"
 
 const useDarkMode = () => {
-    const [isDark, setIsDark] = React.useState(false);
-    
-    React.useEffect(() => {
-        const stored = localStorage.getItem('darkMode') === 'true';
-        setIsDark(stored);
-        if (stored) {
-             document.body.classList.add('dark-mode');
-        }
-    }, []);
+  const [isDark, setIsDark] = React.useState(false)
 
-    const toggle = () => {
-        const newState = !isDark;
-        setIsDark(newState);
-        localStorage.setItem('darkMode', newState);
-        document.body.classList.toggle('dark-mode', newState);
-    };
+  React.useEffect(() => {
+    const stored = localStorage.getItem("darkMode") === "true"
+    setIsDark(stored)
+    document.body.classList.toggle("dark-mode", stored)
+    document.body.classList.toggle("light-mode", !stored)
+  }, [])
 
-    return { value: isDark, toggle };
+  const toggle = () => {
+    const newState = !isDark
+    setIsDark(newState)
+    localStorage.setItem("darkMode", newState)
+    document.body.classList.toggle("dark-mode", newState)
+    document.body.classList.toggle("light-mode", !newState)
+  }
+
+  return { value: isDark, toggle }
 }
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
+const NAV = [
+  { label: "Tutorials", to: "/" },
+  { label: "Topics", to: "/tags/" },
+]
+
+/**
+ * `wide` opts a page into the full-width shell. Article pages stay narrow so
+ * the measure suits long-form reading.
+ */
+const Layout = ({ location, title, children, wide = false }) => {
   const darkMode = useDarkMode()
-  
-  let header
-  const isIndexPage = location.pathname === rootPath || location.pathname.startsWith('/page/') || location.pathname === '/ten' || location.pathname === '/ten/'
-  
-  if (isIndexPage) {
-    header = (
-      <h1
-        style={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <h3
-        style={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          style={{
-            boxShadow: `none`,
-            textDecoration: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
-    )
-  }
+  const wrapClass = wide ? "hb-wrap" : "hb-wrap hb-wrap--read"
 
   return (
     <ThemeContext.Provider value={darkMode}>
-        <div
-        style={{
-            marginLeft: `auto`,
-            marginRight: `auto`,
-            maxWidth: rhythm(24),
-            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-        >
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>{header}</div>
-            <button 
-                type="button" 
+      <div className="hb-shell">
+        <header className="hb-header">
+          <div className="hb-wrap hb-headerInner">
+            <Link to="/" className="hb-brand" aria-label={title}>
+              <span>
+                Alex Merced <em>Tutorials</em>
+              </span>
+              <span className="hb-brandTag">handbook</span>
+            </Link>
+
+            <nav className="hb-nav">
+              {NAV.map(item => (
+                <Link key={item.to} to={item.to}>
+                  {item.label}
+                </Link>
+              ))}
+              <a
+                href="https://alexmerced.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                About
+              </a>
+              <button
+                type="button"
+                className="hb-toggle"
                 onClick={darkMode.toggle}
-                style={{ 
-                    cursor: 'pointer',
-                    background: 'transparent',
-                    border: 'none',
-                    fontSize: '1.5rem'
-                }}
-            >
-                {darkMode.value ? '☀️' : '🌙'}
-            </button>
+                aria-label={
+                  darkMode.value ? "Switch to light theme" : "Switch to dark theme"
+                }
+              >
+                {darkMode.value ? "☀" : "☾"}
+              </button>
+            </nav>
+          </div>
         </header>
-        <main>{children}</main>
-        <footer>
-            © {new Date().getFullYear()} Alex Merced, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.com">Gatsby</a>
-            <div style={{ marginTop: '0.5rem', fontSize: '0.85rem' }}>
-                More from Alex Merced:{` `}
-                <a href="https://alexmerced.com">alexmerced.com</a> ·{` `}
-                <a href="https://grokoverflow.com">GrokOverflow</a> ·{` `}
-                <a href="https://ingestthis.com">IngestThis</a> ·{` `}
+
+        <main className={wrapClass}>{children}</main>
+
+        <footer className="hb-footer">
+          <div className="hb-wrap">
+            <div className="hb-footerRow">
+              <span>© {new Date().getFullYear()} Alex Merced</span>
+              <span className="hb-footerLinks">
+                <a href="https://alexmerced.com">alexmerced.com</a>
+                <a href="https://grokoverflow.com">GrokOverflow</a>
+                <a href="https://ingestthis.com">IngestThis</a>
                 <a href="https://books.alexmerced.com">Books</a>
+                <a href="/rss.xml">RSS</a>
+              </span>
             </div>
-            <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', opacity: 0.7 }}>
-                The views, thoughts, and opinions expressed on this site belong solely to Alex Merced and do not represent the views of any organization or employer.
-            </div>
+            <p className="hb-disclaimer">
+              The views, thoughts, and opinions expressed on this site belong
+              solely to Alex Merced and do not represent the views of any
+              organization or employer.
+            </p>
+          </div>
         </footer>
+
         <ScrollToTop />
-        </div>
+      </div>
     </ThemeContext.Provider>
   )
 }

@@ -1,88 +1,205 @@
-import React, { useState, useRef } from "react"
+import React, { useMemo, useState } from "react"
 import { Link, graphql } from "gatsby"
+import kebabCase from "lodash/kebabCase"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { rhythm } from "../utils/typography"
+
+/**
+ * Tags in the archive are inconsistently cased ("data lakehouse" vs
+ * "Data Lakehouse"), and both slugify to the same page. Merge them by slug and
+ * show the most frequent spelling so the topic grid does not list near
+ * duplicates.
+ */
+function mergeTags(group) {
+  const bySlug = new Map()
+  group.forEach(({ fieldValue, totalCount }) => {
+    if (!fieldValue) return
+    const slug = kebabCase(fieldValue)
+    const caps = (fieldValue.match(/[A-Z]/g) || []).length
+    const existing = bySlug.get(slug)
+    if (existing) {
+      existing.total += totalCount
+      // Prefer the best-cased spelling ("Apache Iceberg" over "apache
+      // iceberg"), falling back to the most common one when they tie.
+      if (caps > existing.caps || (caps === existing.caps && totalCount > existing.topCount)) {
+        existing.label = fieldValue
+        existing.caps = caps
+        existing.topCount = totalCount
+      }
+    } else {
+      bySlug.set(slug, {
+        slug,
+        label: fieldValue,
+        total: totalCount,
+        topCount: totalCount,
+        caps,
+      })
+    }
+  })
+  return [...bySlug.values()].sort((a, b) => b.total - a.total)
+}
 
 const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
   const { currentPage, numPages } = pageContext
-  
+
   const isFirst = currentPage === 1
   const isLast = currentPage === numPages
   const prevPage = currentPage - 1 === 1 ? "/" : `/page/${currentPage - 1}`
   const nextPage = `/page/${currentPage + 1}`
 
-  const searchRef = useRef(null)
-  const [renderedPosts, setRenderedPosts] = useState(posts)
+  const [term, setTerm] = useState("")
+  const query = term.trim().toLowerCase()
 
-  const search = () => {
-    const term = searchRef.current.value
-    if (!term) {
-        setRenderedPosts(posts);
-        return;
-    }
-    const results = posts.filter(({node}) => {
-      return node.frontmatter.title.toLowerCase().includes(term.toLowerCase())
+  const topics = useMemo(
+    () => mergeTags(data.tagGroup.group).slice(0, 14),
+    [data.tagGroup.group]
+  )
+
+  // Searching spans the whole archive, not just the page currently in view.
+  const MAX_RESULTS = 40
+  const matches = useMemo(() => {
+    if (!query) return null
+    return data.allPosts.nodes.filter(node => {
+      const f = node.frontmatter
+      return (
+        (f.title || "").toLowerCase().includes(query) ||
+        (f.category || "").toLowerCase().includes(query)
+      )
     })
-    setRenderedPosts(results)
-  }
+  }, [query, data.allPosts.nodes])
+
+  const results = matches ? matches.slice(0, MAX_RESULTS) : null
+
+  const listed = results
+    ? results.map(node => ({ node, dek: null }))
+    : posts.map(({ node }) => ({
+        node,
+        dek: node.frontmatter.description || node.excerpt,
+      }))
 
   return (
-    <Layout location={location} title={siteTitle}>
-      <Bio />
-      <div className="search" style={{ marginBottom: rhythm(1) }}>
-        <input 
-            type="text" 
-            ref={searchRef} 
-            placeholder="Search articles..." 
-            style={{ padding: '4px', marginRight: '8px' }}
-        />
-        <button onClick={search}>Search</button>
+    <Layout location={location} title={siteTitle} wide>
+      <section className="hb-hero">
+        <p className="hb-kicker">
+          {data.allPosts.totalCount} tutorials · free to read
+        </p>
+        <h1 className="hb-title">
+          A working handbook for data and software engineering.
+        </h1>
+        <p className="hb-lede">
+          Hands-on tutorials by Alex Merced on Apache Iceberg, the data
+          lakehouse, pipelines, agentic AI, and the languages and tools that
+          hold it all together.
+        </p>
+
+        <div className="hb-search" role="search">
+          <input
+            type="search"
+            value={term}
+            onChange={e => setTerm(e.target.value)}
+            placeholder="Search all tutorials by title or topic"
+            aria-label="Search tutorials"
+          />
+          {term && (
+            <button
+              type="button"
+              className="hb-btn hb-btnGhost"
+              onClick={() => setTerm("")}
+            >
+              Clear
+            </button>
+          )}
+        </div>
+      </section>
+
+      {!query && (
+        <>
+          <div className="hb-sectionHead">
+            <h2>Browse by topic</h2>
+            <span className="hb-sectionNote">
+              <Link to="/tags/">All topics</Link>
+            </span>
+          </div>
+          <ul className="hb-topics">
+            {topics.map(topic => (
+              <li key={topic.slug}>
+                <Link to={`/tags/${topic.slug}/`} className="hb-topic">
+                  <span>{topic.label}</span>
+                  <span className="hb-topicCount">{topic.total}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      <div className="hb-sectionHead">
+        <h2>{query ? "Search results" : "Latest tutorials"}</h2>
+        <span className="hb-sectionNote">
+          {query
+            ? matches.length > MAX_RESULTS
+              ? `Showing ${MAX_RESULTS} of ${matches.length} matches`
+              : `${matches.length} match${matches.length === 1 ? "" : "es"}`
+            : `Page ${currentPage} of ${numPages}`}
+        </span>
       </div>
 
-      {renderedPosts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
+      {listed.length === 0 ? (
+        <p className="hb-empty">
+          Nothing matches “{term}”. Try a broader term.
+        </p>
+      ) : (
+        <ol className="hb-list">
+          {listed.map(({ node, dek }, i) => (
+            <li key={node.fields.slug}>
+              <Link to={node.fields.slug} className="hb-entry">
+                <span className="hb-entryNum">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="hb-entryBody">
+                  <span className="hb-entryTitle">
+                    {node.frontmatter.title || node.fields.slug}
+                  </span>
+                  {dek && (
+                    <span
+                      className="hb-entryDek"
+                      dangerouslySetInnerHTML={{ __html: dek }}
+                    />
+                  )}
+                </span>
+                <span className="hb-entryMeta">
+                  {node.frontmatter.category && (
+                    <span className="hb-entryCat">
+                      {node.frontmatter.category}
+                    </span>
+                  )}
+                  {node.frontmatter.date}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ol>
+      )}
 
-      <nav style={{ display: 'flex', justifyContent: 'space-between', marginTop: rhythm(1) }}>
-        {!isFirst && (
+      {!query && (
+        <nav className="hb-pager">
+          {!isFirst ? (
             <Link to={prevPage} rel="prev">
-            ← Previous Page
+              ← Newer
             </Link>
-        )}
-        {!isLast && (
+          ) : (
+            <span className="hb-pagerSpacer" />
+          )}
+          {!isLast && (
             <Link to={nextPage} rel="next">
-            Next Page →
+              Older →
             </Link>
-        )}
-      </nav>
+          )}
+        </nav>
+      )}
     </Layout>
   )
 }
@@ -91,13 +208,11 @@ export default BlogIndex
 
 export const Head = ({ pageContext, location }) => {
   const { currentPage } = pageContext
-  const pageTitle = currentPage && currentPage > 1 ? `Articles - Page ${currentPage}` : "Alex Merced Tutorials"
-  return (
-    <Seo
-      title={pageTitle}
-      pathname={location.pathname}
-    />
-  )
+  const pageTitle =
+    currentPage && currentPage > 1
+      ? `Tutorials - Page ${currentPage}`
+      : "Alex Merced Tutorials"
+  return <Seo title={pageTitle} pathname={location.pathname} />
 }
 
 export const pageQuery = graphql`
@@ -119,10 +234,30 @@ export const pageQuery = graphql`
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMM DD, YYYY")
             title
             description
+            category
           }
+        }
+      }
+    }
+    tagGroup: allMarkdownRemark {
+      group(field: { frontmatter: { tags: SELECT } }) {
+        fieldValue
+        totalCount
+      }
+    }
+    allPosts: allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+      totalCount
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          title
+          category
+          date(formatString: "MMM DD, YYYY")
         }
       }
     }
