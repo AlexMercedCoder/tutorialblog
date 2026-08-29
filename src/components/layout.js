@@ -88,7 +88,8 @@ const Layout = ({ location, title, children, wide = false }) => {
                 <a href="https://ingestthis.com">IngestThis</a>
                 <a href="https://openagenticplatform.com">OpenAgenticPlatform</a>
                 <a href="https://www.alexmercedai.com">AlexMercedAI</a>
-                <a href="https://books.alexmerced.com">Books</a>
+                <Link to="/books/">Books</Link>
+                <a href="https://books.alexmerced.com">All books</a>
                 <a href="/rss.xml">RSS</a>
               </span>
             </div>

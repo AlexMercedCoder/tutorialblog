@@ -921,3 +921,84 @@ body.dark-mode .token.class-name { color: #ffd08a; }
 body.dark-mode .token.regex,
 body.dark-mode .token.important,
 body.dark-mode .token.variable { color: #ffcf99; }
+
+/* ---------- Books page ---------- */
+.hb-books {
+  padding-bottom: 2rem;
+}
+.hb-booksHeader {
+  max-width: 46rem;
+  margin-bottom: 2.5rem;
+}
+.hb-booksEyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.hb-booksIntro {
+  margin: 0 0 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+.hb-booksMeta {
+  margin: 0;
+  font-size: 0.9375rem;
+  opacity: 0.8;
+}
+.hb-bookList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hb-bookItem {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  padding-bottom: 2rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.28);
+}
+.hb-bookCover img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  margin: 0;
+}
+.hb-bookTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+.hb-bookPublisher {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.hb-bookDesc {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+.hb-bookLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+@media (max-width: 30rem) {
+  .hb-bookItem {
+    grid-template-columns: 5rem 1fr;
+    gap: 1rem;
+  }
+}
