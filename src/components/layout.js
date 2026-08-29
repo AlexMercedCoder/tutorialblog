@@ -86,10 +86,17 @@ const Layout = ({ location, title, children, wide = false }) => {
                 <a href="https://alexmerced.com">alexmerced.com</a>
                 <a href="https://grokoverflow.com">GrokOverflow</a>
                 <a href="https://ingestthis.com">IngestThis</a>
+                <a href="https://openagenticplatform.com">OpenAgenticPlatform</a>
+                <a href="https://www.alexmercedai.com">AlexMercedAI</a>
                 <a href="https://books.alexmerced.com">Books</a>
                 <a href="/rss.xml">RSS</a>
               </span>
             </div>
+            <p className="hb-newsletter">
+              Two free weekly newsletters: an AI newsletter on Thursdays and an
+              Apache lakehouse newsletter on Fridays.{" "}
+              <a href="https://amdatalakehouse.substack.com">Subscribe on Substack</a>
+            </p>
             <p className="hb-disclaimer">
               The views, thoughts, and opinions expressed on this site belong
               solely to Alex Merced and do not represent the views of any
