@@ -87,6 +87,7 @@ const Layout = ({ location, title, children, wide = false }) => {
                 <a href="https://grokoverflow.com">GrokOverflow</a>
                 <a href="https://ingestthis.com">IngestThis</a>
                 <a href="https://openagenticplatform.com">OpenAgenticPlatform</a>
+                <a href="https://openlakehouse.alexmerced.com">OpenLakehouse</a>
                 <a href="https://www.alexmercedai.com">AlexMercedAI</a>
                 <Link to="/books/">Books</Link>
                 <a href="https://books.alexmerced.com">All books</a>
