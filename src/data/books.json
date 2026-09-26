@@ -3,9 +3,25 @@
   "source": "https://alexmerced.com/entity/books.json",
   "catalog": "https://books.alexmerced.com/",
   "intro": "Books that go further than a tutorial: working productively with AI tooling, building agents, and shipping AI systems.",
-  "totalInCatalog": 65,
-  "count": 30,
+  "totalInCatalog": 77,
+  "count": 32,
   "books": [
+    {
+      "title": "Building the Software Factory",
+      "slug": "building-the-software-factory",
+      "description": "Co-authored with Benedikt Stemmildt. How to turn AI coding agents into a dependable, team-wide software factory using context engineering, AI-TDD, harness design, and the AEMM and Elastic Loop frameworks, moving teams from vibe coding to disciplined agentic engineering.",
+      "category": "Tech",
+      "categorySlug": "tech",
+      "topics": [
+        "ai-productivity",
+        "ai-engineering"
+      ],
+      "publisher": "Packt Publishing",
+      "flagship": true,
+      "cover": "https://m.media-amazon.com/images/I/81-gPruyXyL._SL1500_.jpg",
+      "canonicalPage": "https://books.alexmerced.com/books/building-the-software-factory/",
+      "amazon": "https://www.amazon.com/dp/1807782778"
+    },
     {
       "title": "AI and Agents for Normal People",
       "slug": "ai-and-agents-for-normal-people",
@@ -112,6 +128,22 @@
       "cover": "https://images.amazon.com/images/P/B0H766477L.01._SCLZZZZZZZ_.jpg",
       "canonicalPage": "https://books.alexmerced.com/books/being-productive-with-openai-codex/",
       "amazon": "https://www.amazon.com/dp/B0H766477L"
+    },
+    {
+      "title": "Reputation as Code",
+      "slug": "reputation-as-code",
+      "description": "The companion book to branding.alexmerced.com, covering personal branding, reputation engineering, and career sovereignty for developers and tech professionals.",
+      "category": "Tech",
+      "categorySlug": "tech",
+      "topics": [
+        "devrel",
+        "ai-productivity"
+      ],
+      "publisher": null,
+      "flagship": false,
+      "cover": "https://images.amazon.com/images/P/B0HHXV4L42.01._SCLZZZZZZZ_.jpg",
+      "canonicalPage": "https://books.alexmerced.com/books/reputation-as-code/",
+      "amazon": "https://www.amazon.com/dp/B0HHXV4L42"
     },
     {
       "title": "The 2026 Guide to AI-Assisted Development",
