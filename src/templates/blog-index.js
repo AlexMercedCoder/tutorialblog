@@ -94,6 +94,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
           lakehouse, pipelines, agentic AI, and the languages and tools that
           hold it all together.
         </p>
+        <p><Link to="/tracks/">Follow an ordered learning track with prerequisites and checkpoints →</Link></p>
 
         <div className="hb-search" role="search">
           <input
