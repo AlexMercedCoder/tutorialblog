@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/guardrails-ai-company-data/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/guardrails-ai-company-data/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/guardrails-ai-company-data/).
 
 The security review question that ends agent projects is short: what is this thing allowed to do?
 

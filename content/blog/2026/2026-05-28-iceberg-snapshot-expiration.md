@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
   - Iceberg Snapshot Expiration
+canonical: https://iceberglakehouse.com/posts/iceberg-snapshot-expiration/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-snapshot-expiration/).
 
 # Designing an Immutable Data Lakehouse: Best Practices for Iceberg Snapshot Expiration
 

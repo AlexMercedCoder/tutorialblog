@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/arrow-flight-adbc-explained/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/arrow-flight-adbc-explained/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/arrow-flight-adbc-explained/).
 
 A data scientist runs a query against a warehouse. The engine finishes the scan in three seconds. Then the notebook sits there for four minutes while the result set trickles into a DataFrame. The query was fast. The download was not.
 

@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
   - Iceberg Hybrid Cloud Regulated Markets
+canonical: https://iceberglakehouse.com/posts/iceberg-hybrid-cloud-regulated-markets/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-hybrid-cloud-regulated-markets/).
 
 # How Apache Iceberg Resolves the Hybrid-Cloud Challenge in Heavily Regulated Markets
 

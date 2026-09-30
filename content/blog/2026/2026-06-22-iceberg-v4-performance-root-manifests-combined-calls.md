@@ -8,8 +8,10 @@ tags:
   - root manifests
   - metadata round trips
   - object storage planning
+canonical: https://iceberglakehouse.com/posts/iceberg-v4-performance-root-manifests-combined-calls/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-performance-root-manifests-combined-calls/).
 
 Apache Iceberg v4 discussion should focus on planning cost, metadata layout, and object storage round trips, not vague claims about faster tables. For platform engineers running Iceberg on S3, ADLS, or GCS, the useful question is what changes in production and what simply sounds current.
 

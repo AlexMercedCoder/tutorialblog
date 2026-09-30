@@ -10,7 +10,10 @@ tags:
   - Apache Iceberg
   - Apache Polaris
   - Dremio
+canonical: https://iceberglakehouse.com/posts/2025-11-dremio-next-gen-cloud-tutorial/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2025-11-dremio-next-gen-cloud-tutorial/).
 
 [Video Playlist of this Walkthough](https://www.youtube.com/playlist?list=PL-gIUf9e9CCvY0bcRBGu2SzFFR-yJGIB6)
 

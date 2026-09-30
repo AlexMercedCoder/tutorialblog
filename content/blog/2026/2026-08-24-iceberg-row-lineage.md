@@ -11,7 +11,7 @@ tags:
   - CDC
   - AI
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-row-lineage/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-row-lineage/).
 
 Every roundup of Apache Iceberg v3 runs the same order: deletion vectors first, the Variant type second, and then, somewhere in the back half, a sentence about row lineage before the geospatial types close the show. The billing is understandable, deletes and Variant solve pains people already feel, and it is going to look wrong in retrospect, because row lineage is the v3 feature that changes what a table is. For the first time in the format's history, a row has an identity: a stable identifier assigned at birth, carried across every update, alongside a marker recording when the row was last touched. Identity is the primitive that change data capture, incremental computation, deduplication, auditing, and machine learning reproducibility have all been faking with application-level keys and timestamp guessing, and v3 builds it into the format itself, mandatory, for every table.
 

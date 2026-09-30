@@ -10,7 +10,10 @@ tags:
   - machine learning
   - llm
   - productivity
+canonical: https://datalakehousehub.com/blog/ai-for-all-levels-4-specialized-ai-tools/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/ai-for-all-levels-4-specialized-ai-tools/).
 
 The first three parts of this series covered general purpose AI assistants: the chatbots and writing tools that handle text based tasks. But AI in 2026 extends far beyond chat windows. A whole ecosystem of specialized tools creates original music, generates cinematic video, produces professional images, and designs presentations.
 

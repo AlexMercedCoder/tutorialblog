@@ -8,9 +8,9 @@ tags:
   - Lakehouse Architecture
   - AI Agents
   - Enterprise
-canonical: "https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse-architecture-enterprise-pattern/"
+canonical: https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse-architecture-enterprise-pattern/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse-architecture-enterprise-pattern/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse-architecture-enterprise-pattern/).
 
 Hand an AI agent a database connection string and broad SQL access, and you have built the fastest possible path to an inconsistent, unauditable, and occasionally dangerous analytics system. The agent will query things it should not, define metrics however the schema suggests, and leave you no clean record of why it did what it did. The problem is not the agent's competence. It is that you gave it raw storage access with no layer in between to supply meaning, constrain actions, and enforce policy.
 

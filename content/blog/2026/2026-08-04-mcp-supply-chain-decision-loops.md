@@ -10,10 +10,10 @@ tags:
   - Supply Chain
   - Decision Loops
   - Apache Iceberg
-canonical: "https://iceberglakehouse.com/posts/mcp-supply-chain-decision-loops/"
+canonical: https://iceberglakehouse.com/posts/mcp-supply-chain-decision-loops/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/mcp-supply-chain-decision-loops/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-supply-chain-decision-loops/).
 
 # Moving From Supply Chain Dashboards to Decision Loops With the Model Context Protocol
 

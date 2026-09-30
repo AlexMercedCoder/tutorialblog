@@ -9,7 +9,7 @@ tags:
   - architecture
 canonical: https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/block-vs-object-storage-deep-dive/).
 
 # Block vs. Object Storage: A Deep Dive Into the Foundation of Modern Data, and How the Lakehouse Made the Slow Option Fast
 

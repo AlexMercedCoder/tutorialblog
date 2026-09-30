@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Javascript"
 tags:
   - Database
+canonical: https://datalakehousehub.com/blog/2024/2024-02-row-based-oltp-column-based-olapmd/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-02-row-based-oltp-column-based-olapmd/).
 
 [Follow my Data Youtube Channel](https://www.youtube.com/@alexmerceddata)
 

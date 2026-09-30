@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Lakehouse"
 tags:
   - Why Lakehouses Fail AI Agents
+canonical: https://datalakehousehub.com/blog/why-lakehouses-fail-ai-agents/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/why-lakehouses-fail-ai-agents/).
 
 # Why Traditional Lakehouses Fail AI Agents: The Mathematical Case for the Agentic Lakehouse
 

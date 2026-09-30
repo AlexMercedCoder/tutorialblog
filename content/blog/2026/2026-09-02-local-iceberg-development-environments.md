@@ -13,7 +13,7 @@ tags:
   - PyIceberg
 canonical: https://iceberglakehouse.com/posts/local-iceberg-development-environments/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/local-iceberg-development-environments/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/local-iceberg-development-environments/).
 
 A data engineer changes the merge logic in a pipeline that writes to an Apache Iceberg table. To test it, they run the job against the development catalog, which is a shared Apache Polaris instance backed by a shared bucket in the cloud. The test takes eleven minutes because the Spark job has to start a cluster. It fails, because a colleague's test left a table in a half-migrated state. The engineer drops the table, reruns, and it passes, and in the process deletes a snapshot the colleague was using. Two people have lost an afternoon and neither has learned whether the merge logic is correct.
 

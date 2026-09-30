@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Data Lakehouse"
 tags:
   - Real Time Bi Iceberg Lakehouse
+canonical: https://datalakehousehub.com/blog/real-time-bi-iceberg-lakehouse/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/real-time-bi-iceberg-lakehouse/).
 
 # Real-Time BI: Enabling Sub-Second Queries on Apache Iceberg Data Lakehouses
 

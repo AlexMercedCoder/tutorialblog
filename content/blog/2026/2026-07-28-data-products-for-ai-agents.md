@@ -9,10 +9,10 @@ tags:
   - Apache Iceberg
   - Semantic Layer
   - Data Products
-canonical: "https://iceberglakehouse.com/posts/data-products-for-ai-agents/"
+canonical: https://iceberglakehouse.com/posts/data-products-for-ai-agents/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/data-products-for-ai-agents/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/data-products-for-ai-agents/).
 
 # Why AI Agents Fail on Raw Data, and What to Give Them Instead
 

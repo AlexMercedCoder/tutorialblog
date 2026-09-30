@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-sap-hana/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-sap-hana/).
 
 SAP HANA is the in-memory database platform that powers SAP S/4HANA, SAP BW/4HANA, and custom enterprise applications across finance, manufacturing, logistics, and supply chain. It's fast for SAP-native analytics : real-time financial reporting, material requirements planning, and production analytics run directly on HANA's in-memory columnar engine. But SAP HANA exists in a walled garden.
 

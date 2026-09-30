@@ -9,10 +9,10 @@ tags:
   - Air-Gapped
   - Data Engineering
   - On-Premises
-canonical: "https://iceberglakehouse.com/posts/air-gapped-iceberg-lakehouse/"
+canonical: https://iceberglakehouse.com/posts/air-gapped-iceberg-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/air-gapped-iceberg-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/air-gapped-iceberg-lakehouse/).
 
 # Running an Apache Iceberg Lakehouse With No Internet Connection
 

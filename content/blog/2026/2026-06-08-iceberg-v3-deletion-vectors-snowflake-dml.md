@@ -11,7 +11,10 @@ tags:
   - "copy-on-write Iceberg"
   - "Puffin files"
   - "Iceberg v3 performance"
+canonical: https://datalakehousehub.com/blog/iceberg-v3-deletion-vectors-snowflake-dml/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/iceberg-v3-deletion-vectors-snowflake-dml/).
 
 A single row-level DELETE or UPDATE against a 2 TB fact table should not require rewriting hundreds of megabytes of Parquet files. That is the problem Apache Iceberg v3 deletion vectors solve, and it is the most consequential performance change to the Iceberg specification since the format was created.
 

@@ -9,7 +9,7 @@ tags:
   - multicloud
 canonical: https://iceberglakehouse.com/posts/multi-engine-catalog-federation-apache-polaris-multicloud/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/multi-engine-catalog-federation-apache-polaris-multicloud/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/multi-engine-catalog-federation-apache-polaris-multicloud/).
 
 # Multi-Engine Catalog Federation with Apache Polaris: Syncing Google Cloud, AWS, and Azure Metadata
 

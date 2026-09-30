@@ -9,7 +9,10 @@ tags:
   - Data Engineering
   - Apache Iceberg
   - Apache Polaris
+canonical: https://iceberglakehouse.com/posts/2025-10-exploring-commerical-apache-iceberg-catalogs/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2025-10-exploring-commerical-apache-iceberg-catalogs/).
 
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)

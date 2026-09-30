@@ -9,7 +9,10 @@ tags:
   - data lakehouse
   - data engineering
   - table formats
+canonical: https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-09/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-09/).
 
 <!-- Meta Description: Iceberg tables degrade through small files, orphan files, metadata bloat, sort order decay, and partition skew. Here is how to diagnose each problem. -->
 <!-- Primary Keyword: Iceberg storage degradation -->

@@ -10,7 +10,10 @@ tags:
   - "S3SignRequest API"
   - "credential vs remote signing"
   - "PII data lakehouse"
+canonical: https://datalakehousehub.com/blog/iceberg-remote-signing-regulated-datasets/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/iceberg-remote-signing-regulated-datasets/).
 
 When a compute engine requests a file from object storage, the engine needs credentials. In a traditional architecture, those credentials are static keys with bucket-wide permissions. If they leak, every file in the bucket is exposed. Credential vending improves this by issuing short-lived, table-scoped tokens. But even vended credentials carry risk: the token can be used to read any file within its scope, and a compromised token grants file-level read or write access for its duration.
 

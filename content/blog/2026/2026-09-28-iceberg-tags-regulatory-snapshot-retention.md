@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-tags-regulatory-snapshot-retention/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-tags-regulatory-snapshot-retention/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-tags-regulatory-snapshot-retention/).
 
 To keep a specific Apache Iceberg snapshot through routine expiration, point a tag at it. Snapshot expiration never removes a snapshot that a live branch or tag references. A tag's `RETAIN` clause sets how long the tag itself lives, measured from the snapshot's own timestamp. A tag created without `RETAIN` lives until someone drops it.
 

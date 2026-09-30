@@ -11,7 +11,7 @@ tags:
   - analytical
 canonical: https://iceberglakehouse.com/posts/operational-vs-analytical-systems/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/operational-vs-analytical-systems/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/operational-vs-analytical-systems/).
 
 # Operational vs. Analytical Systems: Why the Oldest Divide in Data Exists, What Physics Enforces It, and the Honest Truth About Hybrid Systems
 

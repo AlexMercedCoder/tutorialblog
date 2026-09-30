@@ -11,7 +11,10 @@ tags:
   - "Iceberg state store"
   - "agent tool-use patterns"
   - "analytics agent security"
+canonical: https://datalakehousehub.com/blog/goal-directed-analytics-agents-apache-iceberg-action-loops/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/goal-directed-analytics-agents-apache-iceberg-action-loops/).
 
 A prompt-response AI answers one question and stops. A goal-directed analytics agent holds a business objective, decomposes it into sub-tasks, executes each sub-task against live data, evaluates the result, and decides whether to continue or escalate. It does not stop after one query because one query is rarely enough to answer a real business question.
 

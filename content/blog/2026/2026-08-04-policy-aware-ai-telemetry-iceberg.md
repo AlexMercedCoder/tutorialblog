@@ -10,10 +10,10 @@ tags:
   - EU AI Act
   - Governance
   - Compliance
-canonical: "https://iceberglakehouse.com/posts/policy-aware-ai-telemetry-iceberg/"
+canonical: https://iceberglakehouse.com/posts/policy-aware-ai-telemetry-iceberg/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/policy-aware-ai-telemetry-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/policy-aware-ai-telemetry-iceberg/).
 
 # Designing Policy-Aware Telemetry Tables for AI Systems in Apache Iceberg
 

@@ -8,7 +8,10 @@ tags:
   - Data Lakehouse
   - Data Lake
   - Apache Iceberg
+canonical: https://iceberglakehouse.com/posts/2024-1-nessie-an-alternative-to-hive/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-1-nessie-an-alternative-to-hive/).
 
 Unlike traditional table formats, Apache Iceberg provides a comprehensive solution for handling big data's complexity, volume, and diversity. It's designed to improve data processing in various analytics engines like Apache Spark, Apache Flink, and others. One of Iceberg's key features is its ability to maintain massive datasets efficiently while ensuring reliable data snapshots, schema evolution, and hidden partitioning.
 

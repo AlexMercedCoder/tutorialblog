@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-batch-vs-streaming/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-batch-vs-streaming/).
 
 ![Batch processing in scheduled groups vs streaming in continuous flow](images/debp/06/batch-vs-streaming.png)
 

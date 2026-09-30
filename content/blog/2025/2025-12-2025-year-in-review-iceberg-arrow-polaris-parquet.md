@@ -11,7 +11,10 @@ tags:
   - apache polaris
   - apache parquet
   - apache arrow
+canonical: https://datalakehousehub.com/blog/2025-12-2025-year-in-review-iceberg-arrow-polaris-parquet/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-12-2025-year-in-review-iceberg-arrow-polaris-parquet/).
 
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)

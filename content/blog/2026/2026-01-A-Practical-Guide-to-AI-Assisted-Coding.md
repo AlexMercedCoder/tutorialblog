@@ -9,7 +9,10 @@ tags:
   - developer tools
   - software development
   - ai assistants
+canonical: https://datalakehousehub.com/blog/2026-01-a-practical-guide-to-ai-assisted-coding-tools/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-01-a-practical-guide-to-ai-assisted-coding-tools/).
 
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)

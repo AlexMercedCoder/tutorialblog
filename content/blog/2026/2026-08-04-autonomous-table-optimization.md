@@ -10,10 +10,10 @@ tags:
   - Compaction
   - Autonomous
   - Data Lakehouse
-canonical: "https://iceberglakehouse.com/posts/autonomous-table-optimization/"
+canonical: https://iceberglakehouse.com/posts/autonomous-table-optimization/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/autonomous-table-optimization/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/autonomous-table-optimization/).
 
 # Autonomous Table Optimization When Your Query Workload Stops Being Predictable
 

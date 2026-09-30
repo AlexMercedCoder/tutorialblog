@@ -9,9 +9,9 @@ tags:
   - Migration
   - Iceberg
   - Lakehouse
-canonical: "https://iceberglakehouse.com/posts/zero-copy-mirroring-migration-proprietary-warehouses-open-iceberg/"
+canonical: https://iceberglakehouse.com/posts/zero-copy-mirroring-migration-proprietary-warehouses-open-iceberg/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/zero-copy-mirroring-migration-proprietary-warehouses-open-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/zero-copy-mirroring-migration-proprietary-warehouses-open-iceberg/).
 
 The most expensive part of moving off a proprietary warehouse is usually not the compute contract. It is the copy. Rewriting terabytes of data into a new format means paying twice for storage during the transition, burning compute on the rewrite, and holding your breath during a cutover window while every downstream consumer waits. "Zero-copy mirroring" promises to skip most of that: point [Apache Iceberg](https://iceberg.apache.org/spec/) metadata at your existing data files, expose them as open tables, and migrate the definition instead of the data.
 

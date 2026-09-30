@@ -9,7 +9,7 @@ tags:
   - double-write
 canonical: https://iceberglakehouse.com/posts/idempotent-pipelines-agentic-lakehouse-double-write-anomalies/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/idempotent-pipelines-agentic-lakehouse-double-write-anomalies/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/idempotent-pipelines-agentic-lakehouse-double-write-anomalies/).
 
 # Designing Idempotent Pipelines in the Agentic Lakehouse: Eliminating Double-Write Anomalies
 

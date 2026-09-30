@@ -10,7 +10,10 @@ tags:
   - "_last_updated_sequence_number"
   - "Change Data Capture lakehouse"
   - "incremental processing Iceberg"
+canonical: https://datalakehousehub.com/blog/iceberg-v3-row-lineage-cdc/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/iceberg-v3-row-lineage-cdc/).
 
 Change data capture (CDC) has traditionally meant running a separate infrastructure stack. You install Debezium for MySQL or PostgreSQL, configure Kafka Connect, set up topics, tune the consumer lag, and then write a streaming pipeline that materializes the change events into your data lake. The operational burden is real: topic partitioning, schema registry compatibility, offset management, replay semantics, and the ever-present risk of a consumer falling behind and needing a full re-snapshot.
 

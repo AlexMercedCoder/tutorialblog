@@ -10,7 +10,10 @@ tags:
   - lakehouse
   - databricks
   - snowflake
+canonical: https://iceberglakehouse.com/posts/transaction-to-agent-race/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/transaction-to-agent-race/).
 
 A customer changes their shipping address in your order system at 9:14 a.m. At 9:20 a.m. someone asks an AI agent where that order is going. The agent reads a table that was last refreshed at 6:00 a.m. and answers with the old address. Nobody did anything wrong. The change landed in Postgres, the change data capture job runs hourly, the transformation job runs after that, and the semantic model was built on the output of the transformation job. Every link in that chain works exactly as designed. The design is the problem.
 

@@ -11,7 +11,10 @@ tags:
   - openlineage dbt
   - openlineage data observability
   - openlineage spark
+canonical: https://iceberglakehouse.com/posts/2026-05-24-openlineage-observability/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-openlineage-observability/).
 
 # OpenLineage as the Spine of Data Observability
 

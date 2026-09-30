@@ -12,7 +12,7 @@ tags:
     - data lakehouse
     - zero-copy
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/proprietary-warehouse-open-lakehouse-zero-copy-metadata-translation/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/proprietary-warehouse-open-lakehouse-zero-copy-metadata-translation/).
 
 
 

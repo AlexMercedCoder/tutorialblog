@@ -11,7 +11,7 @@ tags:
   - token budgets
   - agentic analytics
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/managing-tco-agentic-analytics/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/managing-tco-agentic-analytics/).
 
 The AI budget conversation changed its tone this year, and the numbers explain why. Industry surveys of enterprise AI spending in 2026 keep finding the same pattern: roughly three quarters of organizations blew through their original AI cost plans, agentic projects specifically overran by multiples rather than percentages, and the war stories went mainstream, including the widely-repeated one about a major tech company exhausting its annual AI budget in four months. The cruel twist is that unit prices moved the other way: the average price per token fell by well over half across the same period. Intelligence got cheaper, bills got bigger, and the gap between those two facts is where agentic analytics economics lives.
 

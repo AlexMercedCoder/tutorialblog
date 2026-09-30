@@ -8,7 +8,10 @@ tags:
   - Apache Iceberg
   - Data Engineering
   - Data Lakehouse
+canonical: https://datalakehousehub.com/blog/2024/2024-06-apache-iceberg-intro-to-lakehouse-engineering-course/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-06-apache-iceberg-intro-to-lakehouse-engineering-course/).
 
 [Get a Free Copy of "Apache Iceberg: The Definitive Guide"](https://bit.ly/am-iceberg-book)
 

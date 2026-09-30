@@ -7,7 +7,10 @@ category: "Data Analytics"
 tags:
   - data apps
   - streamlit
+canonical: https://iceberglakehouse.com/posts/2024-9-deep-dive-into-data-apps-with-streamlit/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-9-deep-dive-into-data-apps-with-streamlit/).
 
 # Introduction
 

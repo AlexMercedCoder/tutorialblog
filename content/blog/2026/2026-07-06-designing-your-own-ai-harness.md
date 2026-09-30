@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/designing-your-own-ai-harness/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/designing-your-own-ai-harness/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/designing-your-own-ai-harness/).
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

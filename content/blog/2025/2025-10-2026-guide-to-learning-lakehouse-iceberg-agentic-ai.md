@@ -9,7 +9,10 @@ tags:
   - Data Engineering
   - Apache Iceberg
   - Apache Polaris
+canonical: https://datalakehousehub.com/blog/2025-10-2026-guide-to-learning-lakehouse-iceberg-agentic-ai/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-10-2026-guide-to-learning-lakehouse-iceberg-agentic-ai/).
 
 The data world is evolving fast. Just a few years ago, building a modern analytics stack meant stitching together tools, ETL pipelines, and compromises. Today, open standards like Apache Iceberg, modular architectures like the data lakehouse, and emerging patterns like Agentic AI are reshaping how teams store, manage, and use data.
 

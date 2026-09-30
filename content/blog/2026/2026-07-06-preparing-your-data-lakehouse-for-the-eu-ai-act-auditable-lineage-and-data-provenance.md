@@ -9,7 +9,7 @@ tags:
     - apache iceberg
     - data lakehouse
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/eu-ai-act-data-lakehouse-lineage-provenance-compliance/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/eu-ai-act-data-lakehouse-lineage-provenance-compliance/).
 
 
 

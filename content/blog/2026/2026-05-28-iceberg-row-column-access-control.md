@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
   - Iceberg Row Column Access Control
+canonical: https://iceberglakehouse.com/posts/iceberg-row-column-access-control/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-row-column-access-control/).
 
 # Securing Apache Iceberg Tables with Fine-Grained Row and Column Level Access Control
 

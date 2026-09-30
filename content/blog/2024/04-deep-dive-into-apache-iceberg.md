@@ -8,7 +8,10 @@ tags:
   - Data Architecture
   - Apache Iceberg
   - Data Lakehouse
+canonical: https://datalakehousehub.com/blog/2024/2024-04-deep-dive-into-apache-iceberg/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-04-deep-dive-into-apache-iceberg/).
 
 For a long time, siloed data systems such as databases and data warehouses were sufficient. These systems provided convenient abstractions for various data management tasks, including:
 

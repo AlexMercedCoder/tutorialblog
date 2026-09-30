@@ -10,7 +10,10 @@ tags:
   - optimization
   - data engineering
   - distributed systems
+canonical: https://iceberglakehouse.com/posts/2026-04-29-query-engine-09/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-query-engine-09/).
 
 <!-- Meta Description: Distributed joins move data across the network using shuffle, broadcast, or co-location strategies. Here is how each works and when engines choose which. -->
 <!-- Primary Keyword: distributed join algorithms -->

@@ -12,7 +12,7 @@ tags:
   - columnar storage
   - open table formats
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/state-of-apache-parquet-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/state-of-apache-parquet-2026/).
 
 # The State of Apache Parquet in 2026: The Quiet Format Enters Its Loudest Decade
 

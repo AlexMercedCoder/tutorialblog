@@ -9,10 +9,10 @@ tags:
   - Apache Iceberg
   - Data Engineering
   - File Formats
-canonical: "https://iceberglakehouse.com/posts/parquet-versioning-iceberg-v4/"
+canonical: https://iceberglakehouse.com/posts/parquet-versioning-iceberg-v4/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/parquet-versioning-iceberg-v4/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/parquet-versioning-iceberg-v4/).
 
 # The Parquet Versioning Problem, and Why Iceberg Cares About It
 

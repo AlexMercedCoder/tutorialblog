@@ -11,10 +11,10 @@ tags:
   - Parquet Shredding
   - S3 Tables
   - Semi-Structured Data
-canonical: "https://iceberglakehouse.com/posts/iceberg-v3-variant-shredding-s3-tables/"
+canonical: https://iceberglakehouse.com/posts/iceberg-v3-variant-shredding-s3-tables/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-variant-shredding-s3-tables/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v3-variant-shredding-s3-tables/).
 
 # How Iceberg V3 Variant Shredding Changed Semi-Structured Data on S3 Tables
 

@@ -8,8 +8,10 @@ tags:
   - enterprise AI moat
   - semantic layer
   - governed lakehouse AI
+canonical: https://iceberglakehouse.com/posts/model-not-moat-semantic-lakehouse-layer-enterprise-ai/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/model-not-moat-semantic-lakehouse-layer-enterprise-ai/).
 
 Enterprise AI advantage increasingly comes from governed context, semantic models, and operational data contracts, not only from model choice. For executives and platform leaders planning enterprise AI strategy, the useful question is what changes in production and what simply sounds current.
 

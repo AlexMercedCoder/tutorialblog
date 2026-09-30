@@ -11,7 +11,10 @@ tags:
   - security
   - spark
   - flink
+canonical: https://datalakehousehub.com/blog/2026-05-apache-iceberg-1-11-0-deep-dive/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-05-apache-iceberg-1-11-0-deep-dive/).
 
 # An In-Depth Overview of the Apache Iceberg 1.11.0 Release
 

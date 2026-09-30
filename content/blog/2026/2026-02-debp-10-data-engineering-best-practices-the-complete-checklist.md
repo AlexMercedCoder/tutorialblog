@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-de-best-practices-checklist/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-de-best-practices-checklist/).
 
 ![Comprehensive data engineering checklist organized by categories with status indicators](images/debp/10/de-checklist.png)
 

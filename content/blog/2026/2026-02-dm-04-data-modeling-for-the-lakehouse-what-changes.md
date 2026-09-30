@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-data-modeling-lakehouse/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-data-modeling-lakehouse/).
 
 ![Traditional data warehouse model vs. open lakehouse model with flexible schema and views](images/data_modeling/04/lakehouse-data-modeling.png)
 

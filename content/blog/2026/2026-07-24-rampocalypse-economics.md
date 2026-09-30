@@ -11,7 +11,10 @@ tags:
   - Hardware
   - AI Infrastructure
   - Semiconductors
+canonical: https://iceberglakehouse.com/posts/rampocalypse-economics/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/rampocalypse-economics/).
 
 *By Alex Merced*
 

@@ -9,10 +9,10 @@ tags:
   - Guardrails
   - Data Governance
   - Human-in-the-Loop
-canonical: "https://iceberglakehouse.com/posts/agent-guardrails-human-in-the-loop/"
+canonical: https://iceberglakehouse.com/posts/agent-guardrails-human-in-the-loop/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agent-guardrails-human-in-the-loop/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agent-guardrails-human-in-the-loop/).
 
 # Guardrails for Analytics Agents That Do More Than Answer Questions
 

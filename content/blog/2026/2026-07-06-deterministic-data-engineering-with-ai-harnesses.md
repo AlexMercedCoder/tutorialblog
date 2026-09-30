@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/deterministic-data-engineering-with-ai-harnesses/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/deterministic-data-engineering-with-ai-harnesses/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/deterministic-data-engineering-with-ai-harnesses/).
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

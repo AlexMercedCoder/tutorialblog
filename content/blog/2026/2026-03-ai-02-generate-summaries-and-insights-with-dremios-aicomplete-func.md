@@ -10,7 +10,10 @@ tags:
   - SQL
   - data lakehouse
   - machine learning
+canonical: https://iceberglakehouse.com/posts/2026-03-ai-ai-complete/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-ai-ai-complete/).
 
 Every data team has a version of this problem: a table full of raw data that needs human-readable summaries, translations, or narrative descriptions. Product descriptions that need rewriting for a new market. Customer records that need one-sentence executive summaries. Support interactions that need post-call notes.
 

@@ -9,7 +9,10 @@ tags:
   - open-table-formats
   - data-engineering
   - lakehouse-architecture
+canonical: https://datalakehousehub.com/blog/apache-iceberg-v4-roadmap-adaptive-metadata-delta-convergence/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/apache-iceberg-v4-roadmap-adaptive-metadata-delta-convergence/).
 
 Apache Iceberg v4 is not a single feature release. It is a set of architectural proposals: adaptive metadata trees, single-file commits, relative table paths, column families, and an extensible statistics model. These proposals rework how Iceberg handles metadata at scale. Separately, Databricks has proposed that **Delta Lake 5.0 adopt the same metadata structure**, which would end the decade-long schism between the two formats at the metadata level. This article walks through every proposal, the pain points each one solves, the community debates still unresolved, and what teams should do while the spec is still under discussion.
 

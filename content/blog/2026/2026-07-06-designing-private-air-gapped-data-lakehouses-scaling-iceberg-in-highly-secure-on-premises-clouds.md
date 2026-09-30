@@ -12,7 +12,7 @@ tags:
     - apache iceberg
     - air-gapped
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/private-air-gapped-data-lakehouses-iceberg-secure-clouds/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/private-air-gapped-data-lakehouses-iceberg-secure-clouds/).
 
 
 

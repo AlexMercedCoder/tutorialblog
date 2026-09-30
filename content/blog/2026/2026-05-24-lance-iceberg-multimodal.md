@@ -12,7 +12,10 @@ tags:
   - lancedb format
   - lancedb iceberg multimodal ai data
   - duckdb lance integration
+canonical: https://iceberglakehouse.com/posts/2026-05-24-lance-iceberg-multimodal/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-lance-iceberg-multimodal/).
 
 # Lance and Iceberg for Multimodal AI Data
 

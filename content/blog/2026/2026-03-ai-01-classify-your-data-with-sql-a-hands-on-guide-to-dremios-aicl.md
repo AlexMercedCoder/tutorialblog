@@ -10,7 +10,10 @@ tags:
   - SQL
   - data lakehouse
   - machine learning
+canonical: https://iceberglakehouse.com/posts/2026-03-ai-ai-classify/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-ai-ai-classify/).
 
 Most classification workflows require exporting data to Python, running a model, and importing results back into your warehouse. Dremio's `AI_CLASSIFY` function eliminates that entire pipeline. You write a SELECT statement, pass in your text and your categories, and the LLM assigns a label. The classified data stays in your lakehouse, governed and queryable immediately.
 

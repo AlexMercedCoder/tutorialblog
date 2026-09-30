@@ -8,9 +8,9 @@ tags:
   - Hybrid Lakehouse
   - Regulated Markets
   - Data Engineering
-canonical: "https://iceberglakehouse.com/posts/hybrid-lakehouse-regulated-markets-on-prem-public-metadata/"
+canonical: https://iceberglakehouse.com/posts/hybrid-lakehouse-regulated-markets-on-prem-public-metadata/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/hybrid-lakehouse-regulated-markets-on-prem-public-metadata/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/hybrid-lakehouse-regulated-markets-on-prem-public-metadata/).
 
 A bank, a hospital network, and a defense contractor walk into a cloud migration and all three stop at the same wall: their data is not allowed to move. Not "would be inconvenient to move." Not allowed. A regulator, a national data residency law, or a contractual sovereignty clause says the bytes must stay inside a specific facility, jurisdiction, or network boundary. For teams in these positions, the standard advice to centralize everything in a public cloud data platform is a non-starter, and no amount of enthusiasm about analytics changes that.
 

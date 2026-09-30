@@ -9,10 +9,10 @@ tags:
   - Streaming
   - Data Engineering
   - Deletion Vectors
-canonical: "https://iceberglakehouse.com/posts/equality-deletes-iceberg-v4/"
+canonical: https://iceberglakehouse.com/posts/equality-deletes-iceberg-v4/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/equality-deletes-iceberg-v4/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/equality-deletes-iceberg-v4/).
 
 # Why Iceberg V4 Wants to Retire Equality Deletes, and What Streaming Teams Should Do About It
 

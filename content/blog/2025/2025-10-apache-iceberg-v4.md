@@ -8,7 +8,10 @@ tags:
   - Data Lakehouse
   - Data Engineering
   - Apache Iceberg
+canonical: https://datalakehousehub.com/blog/2025-10-apache-iceberg-v4-october-2025/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-10-apache-iceberg-v4-october-2025/).
 
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)

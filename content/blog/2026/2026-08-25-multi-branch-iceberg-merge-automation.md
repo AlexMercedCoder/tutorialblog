@@ -11,7 +11,7 @@ tags:
   - concurrency
   - automation
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/multi-branch-iceberg-merge-automation/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/multi-branch-iceberg-merge-automation/).
 
 A data engineering team of 30 has adopted Apache Iceberg's branching for everything. Each ingestion stream writes to its own branch. Each transformation job stages output on a branch and publishes to main after validation. Each engineer gets a branch per feature. On a busy day there are 40 active branches on the core fact tables, and the merge queue into main has become the bottleneck: publishes wait behind each other, a validation that ran on a branch is stale by the time the branch merges, and twice a week somebody fast-forwards over a change they did not know about.
 

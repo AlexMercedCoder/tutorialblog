@@ -8,8 +8,10 @@ tags:
   - built for agents
   - managed by agents
   - autonomous lakehouse
+canonical: https://iceberglakehouse.com/posts/built-for-agents-managed-by-agents-dremio-agentic-lakehouse/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/built-for-agents-managed-by-agents-dremio-agentic-lakehouse/).
 
 Dremio Agentic Lakehouse is easiest to understand as two ideas: data built for agent access and platform work managed by agents. For Dremio readers, data leaders, and AI platform teams, the useful question is what changes in production and what simply sounds current.
 

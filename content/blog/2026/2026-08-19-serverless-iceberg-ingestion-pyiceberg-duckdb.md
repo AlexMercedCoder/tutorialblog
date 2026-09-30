@@ -11,7 +11,7 @@ tags:
   - serverless
   - ingestion
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/serverless-iceberg-ingestion-pyiceberg-duckdb/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/serverless-iceberg-ingestion-pyiceberg-duckdb/).
 
 The most common ingestion job in most companies is small. A vendor drops a CSV in a bucket every hour. A webhook delivers a few thousand JSON events a minute. A SaaS export lands nightly at a few hundred megabytes. For years, the standard answer to "get this into the lakehouse" was the same regardless of size: stand up a Spark job, or buy a managed pipeline tool, and accept that the smallest task in the platform runs on the heaviest machinery.
 

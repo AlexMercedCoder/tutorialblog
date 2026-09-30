@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Lakehouse"
 tags:
   - Zero Etl Federation AI Agents
+canonical: https://datalakehousehub.com/blog/zero-etl-federation-ai-agents/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/zero-etl-federation-ai-agents/).
 
 # The Era of Zero-ETL Federation: Fueling AI Agents with Real-Time Cross-Enterprise Data
 

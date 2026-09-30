@@ -11,7 +11,10 @@ tags:
   - data warehouse cost attribution
   - warehouse finops focus specification
   - focus billing data
+canonical: https://iceberglakehouse.com/posts/2026-05-24-finops-warehouse-cost/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-finops-warehouse-cost/).
 
 # FinOps for Data Warehouses with Open Billing Data
 

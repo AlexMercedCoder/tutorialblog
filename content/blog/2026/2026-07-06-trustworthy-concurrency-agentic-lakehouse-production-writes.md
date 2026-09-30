@@ -9,7 +9,7 @@ tags:
   - production writes
 canonical: https://iceberglakehouse.com/posts/trustworthy-concurrency-agentic-lakehouse-production-writes/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/trustworthy-concurrency-agentic-lakehouse-production-writes/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/trustworthy-concurrency-agentic-lakehouse-production-writes/).
 
 # Trustworthy Concurrency in the Agentic Lakehouse: Reconciling Academic Proofs with High-Frequency Production Writes
 

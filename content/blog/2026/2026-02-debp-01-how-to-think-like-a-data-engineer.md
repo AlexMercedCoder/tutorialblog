@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-think-like-data-engineer/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-think-like-data-engineer/).
 
 ![Data flowing through a system of interconnected pipeline stages from sources to consumers](images/debp/01/data-engineer-mindset.png)
 

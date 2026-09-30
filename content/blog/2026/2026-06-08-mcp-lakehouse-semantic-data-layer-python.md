@@ -11,7 +11,10 @@ tags:
   - "semantic data layer"
   - "Dremio MCP server"
   - "lakehouse AI tools"
+canonical: https://datalakehousehub.com/blog/mcp-lakehouse-semantic-data-layer-python/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/mcp-lakehouse-semantic-data-layer-python/).
 
 When an AI agent needs data, it has two options. It can write raw SQL through an unfiltered connection, which creates security and correctness risks. Or it can call a tool that presents curated, governed data through a clean interface. The Model Context Protocol (MCP) standardizes the second option.
 

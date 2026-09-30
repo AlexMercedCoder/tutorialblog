@@ -12,7 +12,7 @@ tags:
   - Restore
 canonical: https://iceberglakehouse.com/posts/disaster-recovery-for-iceberg-tables/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/disaster-recovery-for-iceberg-tables/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/disaster-recovery-for-iceberg-tables/).
 
 A region goes dark on a Tuesday. The catalog service is unreachable, the object store returns errors, and the executive dashboard that reads from the lakehouse is blank. The team has a replicated bucket in a second region that they set up eighteen months ago. Someone points an engine at it and the first query fails, because every manifest in the replicated metadata still names files in the original region. The second query fails because the replicated catalog database restored from a nightly dump points at a metadata file that was written six hours after the dump was taken. The third query works, on one table, after someone finds the right metadata file by hand.
 

@@ -13,7 +13,10 @@ tags:
   - iceberg
   - polaris
   - arrow
+canonical: https://iceberglakehouse.com/posts/2026-03-07-apache-software-foundation/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-07-apache-software-foundation/).
 
 *Read the complete Open Source and the Lakehouse series:*
 * [Part 1: Apache Software Foundation](/2026/2026-04-al-01-apache-software-foundation-history-purpose-and-process/)

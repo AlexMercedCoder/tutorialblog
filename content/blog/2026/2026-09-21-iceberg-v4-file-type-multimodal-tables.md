@@ -12,7 +12,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-v4-file-type-multimodal-tables/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v4-file-type-multimodal-tables/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-file-type-multimodal-tables/).
 
 A product catalog table has two million rows. Each row has a SKU, a price, a category, and three product photos. The photos live in an object storage bucket, and the table stores their paths as plain strings. An AI team wants to run a vision model over every photo in one category to generate alt text.
 

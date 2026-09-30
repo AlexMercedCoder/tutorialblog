@@ -9,7 +9,10 @@ tags:
   - data lakehouse
   - data engineering
   - table formats
+canonical: https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-01/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-01/).
 
 <!-- Meta Description: Table formats like Apache Iceberg solved the ACID, schema, and performance problems that turned data lakes into data swamps. Here is how each one works. -->
 <!-- Primary Keyword: data lake table formats -->

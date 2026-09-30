@@ -9,7 +9,10 @@ tags:
   - data lakehouse
   - data engineering
   - table formats
+canonical: https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-07/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-07/).
 
 <!-- Meta Description: Lakehouse catalogs store metadata pointers, manage namespaces, and enforce access control. Here is the complete catalog landscape from Polaris to Glue. -->
 <!-- Primary Keyword: lakehouse catalogs -->

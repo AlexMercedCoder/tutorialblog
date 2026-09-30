@@ -11,7 +11,7 @@ tags:
   - governance
 canonical: https://iceberglakehouse.com/posts/open-source-foundations-explained/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/open-source-foundations-explained/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/open-source-foundations-explained/).
 
 # Open Source Foundations, Explained: What Apache, Linux, Eclipse, and Their Peers Actually Do, and Why Governance Differences Matter
 

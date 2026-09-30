@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-mcp-deep-dive/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-mcp-deep-dive/).
 
 The Model Context Protocol (MCP) has become the universal standard for connecting AI models to external tools, data sources, and services. Originally open-sourced by Anthropic in November 2024 and now managed by the Linux Foundation, MCP solves one of the biggest frustrations in working with AI: getting models to interact with the systems where your actual work lives. Instead of copying and pasting data into chat windows or uploading files manually, MCP lets AI tools query databases, read documentation, interact with APIs, manage files, and perform actions across your entire tool ecosystem through a standardized protocol.
 

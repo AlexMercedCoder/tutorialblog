@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-pipeline-assertions/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-pipeline-assertions/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-pipeline-assertions/).
 
 Here is a test that passes on every pipeline I have ever seen and proves almost nothing:
 

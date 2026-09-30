@@ -8,7 +8,10 @@ tags:
   - data lakehouse
   - data engineering
   - streaming
+canonical: https://iceberglakehouse.com/posts/2024-10-cdc-when-there-is-no-cdc/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-10-cdc-when-there-is-no-cdc/).
 
 - [Free Copy of Apache Iceberg: The Definitive Guide](https://hello.dremio.com/wp-apache-iceberg-the-definitive-guide-reg.html?utm_source=alexmerced&utm_medium=external_blog&utm_campaign=cdc_when_there_is_no_cdc)
 - [Free Apache Iceberg Crash Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=alexmerced&utm_medium=external_blog&utm_campaign=cdc_when_there_is_no_cdc)

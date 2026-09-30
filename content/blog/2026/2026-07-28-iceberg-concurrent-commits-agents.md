@@ -9,10 +9,10 @@ tags:
   - Concurrency
   - Data Engineering
   - AI Agents
-canonical: "https://iceberglakehouse.com/posts/iceberg-concurrent-commits-agents/"
+canonical: https://iceberglakehouse.com/posts/iceberg-concurrent-commits-agents/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-concurrent-commits-agents/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-concurrent-commits-agents/).
 
 # Surviving Commit Conflicts When Dozens of Writers Hit the Same Iceberg Table
 

@@ -13,7 +13,7 @@ tags:
   - data engineering
   - Jev
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/jev-classification-models-iceberg-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/jev-classification-models-iceberg-lakehouse/).
 
 Open the bill for any team that has put a large language model into a data pipeline and look at what the calls are doing. A big share of them are not writing anything. They are answering questions with a short, fixed set of answers. Is this support ticket about billing or about an outage? Does this review mention a safety problem? Is this row of free text a complaint, a question, or a compliment? The team sends a paragraph of context, a paragraph of instructions, and a request for JSON. The model spends seconds generating tokens, the pipeline parses the JSON, and sometimes the JSON comes back broken.
 

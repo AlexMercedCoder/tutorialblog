@@ -12,7 +12,7 @@ tags:
     - decision agents
 canonical: https://iceberglakehouse.com/posts/closed-loop-decision-agents-passive-bi-active-workflows/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/closed-loop-decision-agents-passive-bi-active-workflows/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/closed-loop-decision-agents-passive-bi-active-workflows/).
 
 
 

@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Analytics"
 tags:
   - Active Monitoring Agentic AI Pipelines
+canonical: https://datalakehousehub.com/blog/active-monitoring-agentic-ai-pipelines/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/active-monitoring-agentic-ai-pipelines/).
 
 # Active Monitoring: How Agentic AI Auto-Heals and Protects Enterprise Data Pipelines
 

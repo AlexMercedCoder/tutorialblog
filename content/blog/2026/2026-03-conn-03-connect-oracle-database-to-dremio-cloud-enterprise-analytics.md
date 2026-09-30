@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-oracle/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-oracle/).
 
 Oracle Database runs the most critical enterprise applications in the world : ERP systems, financial ledgers, supply chain management, and HR platforms. These systems generate massive volumes of data that business teams want to analyze, but running analytical queries directly against Oracle is expensive (license costs scale with CPU usage), complex (Oracle-specific SQL dialects and tooling), and risky (heavy queries can impact transactional performance).
 

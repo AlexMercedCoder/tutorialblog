@@ -10,7 +10,10 @@ tags:
   - "lakehouse security token vending"
   - "Polaris credential vending"
   - "Unity Catalog credential vending"
+canonical: https://datalakehousehub.com/blog/rest-catalog-credential-vending-secure-lakehouse-storage/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/rest-catalog-credential-vending-secure-lakehouse-storage/).
 
 Every query engine in a lakehouse needs access to object storage. In the simplest architecture, every engine shares a static access key with bucket-wide permissions. This creates a single point of failure: if any engine is compromised, the entire storage bucket is exposed. The audit trail says "the key was used," but it does not say which engine or which user used it.
 

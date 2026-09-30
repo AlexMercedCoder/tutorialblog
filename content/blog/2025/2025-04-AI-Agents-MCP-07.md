@@ -10,7 +10,10 @@ tags:
   - Python
   - MCP
   - AI Agents
+canonical: https://datalakehousehub.com/blog/2025-04-under-the-hood-of-mcp/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-04-under-the-hood-of-mcp/).
 
 # A Journey from AI to LLMs and MCP - 7 - Under the Hood : The Architecture of MCP and Its Core Components
 

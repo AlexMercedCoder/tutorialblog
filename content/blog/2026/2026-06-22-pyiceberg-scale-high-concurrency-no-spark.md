@@ -8,8 +8,10 @@ tags:
   - Spark-free Iceberg
   - Python Iceberg pipelines
   - REST catalog concurrency
+canonical: https://iceberglakehouse.com/posts/pyiceberg-scale-high-concurrency-no-spark/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/pyiceberg-scale-high-concurrency-no-spark/).
 
 Python-first Iceberg work is useful when it stays honest about what Python should and should not do. For Python data engineers and platform teams, the useful question is what changes in production and what simply sounds current.
 

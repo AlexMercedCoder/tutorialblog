@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-in-place-migration/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-in-place-migration/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-in-place-migration/).
 
 There are three ways to get an existing dataset into Iceberg and only one of them involves copying files. Teams reach for the copy by default, because it is the mental model everyone brings from warehouse migrations, and then discover that a 40 TB migration is a two-week job with a transfer bill attached.
 

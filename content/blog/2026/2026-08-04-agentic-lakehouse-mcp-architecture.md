@@ -10,10 +10,10 @@ tags:
   - Agentic Lakehouse
   - Apache Polaris
   - Apache Iceberg
-canonical: "https://iceberglakehouse.com/posts/agentic-lakehouse-mcp-architecture/"
+canonical: https://iceberglakehouse.com/posts/agentic-lakehouse-mcp-architecture/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agentic-lakehouse-mcp-architecture/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agentic-lakehouse-mcp-architecture/).
 
 # The Five Layers of an Agentic Lakehouse and Where the MCP Server Sits
 

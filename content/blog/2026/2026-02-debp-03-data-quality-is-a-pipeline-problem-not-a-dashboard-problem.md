@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-data-quality-first/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-data-quality-first/).
 
 ![Data quality checks enforced at the pipeline validation stage before data reaches consumers](images/debp/03/data-quality-pipeline.png)
 

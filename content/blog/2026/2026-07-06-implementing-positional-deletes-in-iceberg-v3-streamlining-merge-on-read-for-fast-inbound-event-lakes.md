@@ -12,7 +12,7 @@ tags:
     - positional deletes
     - event lakes
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v3-positional-deletes-deletion-vectors-event-lakes/).
 
 
 

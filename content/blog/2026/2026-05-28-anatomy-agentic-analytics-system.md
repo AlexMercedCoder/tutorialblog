@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Analytics"
 tags:
   - Anatomy Agentic Analytics System
+canonical: https://datalakehousehub.com/blog/anatomy-agentic-analytics-system/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/anatomy-agentic-analytics-system/).
 
 # Anatomy of an Agentic Analytics System: Inside the Multi-Step Reasoning Loop
 

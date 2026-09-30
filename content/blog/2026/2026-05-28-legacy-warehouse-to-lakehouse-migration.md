@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Data Lakehouse"
 tags:
   - Legacy Warehouse To Lakehouse Migration
+canonical: https://datalakehousehub.com/blog/legacy-warehouse-to-lakehouse-migration/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/legacy-warehouse-to-lakehouse-migration/).
 
 # Legacy Warehouses to Open Lakehouses: A Step-by-Step Migration Playbook
 

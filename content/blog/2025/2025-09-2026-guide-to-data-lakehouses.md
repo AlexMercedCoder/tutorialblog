@@ -9,7 +9,10 @@ tags:
   - Data Engineering
   - Agentic AI
   - Apache Iceberg
+canonical: https://datalakehousehub.com/blog/2025-09-2026-guide-to-data-lakehouses/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-09-2026-guide-to-data-lakehouses/).
 
 - [Join the Data Lakehouse Community](https://www.datalakehousehub.com)
 - [Data Lakehouse Blog Listings](https://lakehouseblogs.com)

@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-03-aitool-claude-code/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-aitool-claude-code/).
 
 Claude Code is Anthropic's terminal-based coding agent. It reads your files, writes code, runs commands, and maintains context across a session. Dremio is a unified lakehouse platform that gives AI agents three things they need to answer business questions accurately: deep business context through its semantic layer, universal data access through query federation, and interactive speed through Reflections and Apache Arrow.
 

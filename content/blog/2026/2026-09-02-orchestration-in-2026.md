@@ -12,7 +12,7 @@ tags:
   - Event-Driven
 canonical: https://iceberglakehouse.com/posts/orchestration-in-2026/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/orchestration-in-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/orchestration-in-2026/).
 
 The orchestration question used to be simple: Airflow, or something that wanted to be Airflow. It is not simple in 2026. Apache Airflow 3 shipped in April 2025 and has moved through three minor releases since, each adding capabilities that its competitors spent years selling as differentiators. Prefect announced on July 13, 2026 that it is acquiring Dagster Labs, with both products continuing under their own names and licenses, which puts the two most widely adopted alternatives to Airflow inside one company. And a growing share of lakehouse pipelines do not run on any of the three, because the events that should trigger them, a snapshot committed, a file landed, a message published, are handled by the catalog, the object store, or a streaming engine directly.
 

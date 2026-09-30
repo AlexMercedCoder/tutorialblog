@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/laptop-scale-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/laptop-scale-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/laptop-scale-lakehouse/).
 
 A colleague spent forty minutes last month provisioning a cluster to profile a 90 GB Parquet dataset. Startup, dependency resolution, a permissions error, another restart, then the actual work, which took four minutes. I ran the same profiling on a laptop in under two, including the download.
 

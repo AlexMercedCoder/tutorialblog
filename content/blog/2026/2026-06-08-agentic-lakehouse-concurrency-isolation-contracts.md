@@ -11,7 +11,10 @@ tags:
   - "partition-level isolation"
   - "idempotency keys"
   - "lakehouse isolation contracts"
+canonical: https://datalakehousehub.com/blog/agentic-lakehouse-concurrency-isolation-contracts/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/agentic-lakehouse-concurrency-isolation-contracts/).
 
 When a human analyst runs a query, they wait for the result before deciding the next step. When a fleet of AI agents runs against the same Iceberg table, every agent discovers, reads, reasons, and writes simultaneously. The result is a new class of concurrency problem that the lakehouse must solve at the storage layer, not just the application layer.
 

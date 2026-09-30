@@ -11,7 +11,7 @@ tags:
   - position deletes
   - equality deletes
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-delete-story-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-delete-story-2026/).
 
 Deleting a row from an immutable file is a contradiction, and every table format on object storage is, at bottom, a system for managing that contradiction gracefully. Apache Iceberg has now shipped three different answers to it: position delete files, equality delete files, and deletion vectors, with a fourth generation taking shape in the v4 design discussions. Each answer encodes a different bet about where the cost of change should land, at write time, at read time, or at maintenance time, and in 2026 all three coexist in production tables, sometimes in the same table's history, which is exactly why a canonical comparison is worth writing. Vendors quote whichever mechanism flatters their benchmark, migration guides assume whichever one their author last operated, and the spec text, precise as it is, never puts the three side by side for a decision-maker.
 

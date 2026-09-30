@@ -9,9 +9,9 @@ tags:
   - Governance
   - AI Agents
   - Metrics
-canonical: "https://iceberglakehouse.com/posts/semantic-view-autopilot-dynamic-metric-definition-governance/"
+canonical: https://iceberglakehouse.com/posts/semantic-view-autopilot-dynamic-metric-definition-governance/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/semantic-view-autopilot-dynamic-metric-definition-governance/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/semantic-view-autopilot-dynamic-metric-definition-governance/).
 
 Most data glossaries are wrong by the time you read them. A column gets renamed, a metric changes its grain, a new product line ships, and the human who was supposed to update the documentation is three sprints behind. The glossary that was accurate in January describes a schema that no longer exists in July. For a human analyst this is an annoyance they route around by asking a colleague. For an AI agent that treats the glossary as ground truth, it is a source of confident, wrong answers.
 

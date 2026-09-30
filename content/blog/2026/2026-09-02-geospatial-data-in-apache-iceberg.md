@@ -12,7 +12,7 @@ tags:
   - Geography
 canonical: https://iceberglakehouse.com/posts/geospatial-data-in-apache-iceberg/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/geospatial-data-in-apache-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/geospatial-data-in-apache-iceberg/).
 
 A logistics team stores 40 million delivery stops in an Apache Iceberg table. Every row has a latitude and a longitude. The analyst wants every stop inside a polygon that outlines one metro area. The query engine scans every data file in the table, because nothing in the table metadata tells it which files contain points inside that polygon. Forty million rows get read to return two hundred thousand.
 

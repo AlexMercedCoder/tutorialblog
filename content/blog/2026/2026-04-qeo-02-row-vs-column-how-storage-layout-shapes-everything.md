@@ -10,7 +10,10 @@ tags:
   - optimization
   - data engineering
   - distributed systems
+canonical: https://iceberglakehouse.com/posts/2026-04-29-query-engine-02/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-query-engine-02/).
 
 <!-- Meta Description: Row stores keep records together for fast transactions. Column stores keep field values together for fast analytics. Here is how each layout works and when to use it. -->
 <!-- Primary Keyword: columnar vs row storage -->

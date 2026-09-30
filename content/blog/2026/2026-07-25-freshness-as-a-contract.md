@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/freshness-as-a-contract/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/freshness-as-a-contract/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/freshness-as-a-contract/).
 
 An inventory agent rerouted a shipment last quarter for a company I spoke with, based on stock levels that were six hours old. The warehouse had already committed that stock to a different order. The agent was not wrong about the data it read. The data was wrong about the world, and nothing in the system told the agent how old the numbers were.
 

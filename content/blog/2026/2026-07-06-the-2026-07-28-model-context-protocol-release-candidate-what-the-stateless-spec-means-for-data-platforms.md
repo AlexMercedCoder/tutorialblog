@@ -11,9 +11,9 @@ tags:
   - agentic
   - data platforms
   - AI agents
-canonical: https://datalakehousehub.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/
+canonical: https://iceberglakehouse.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/
 ---
-> **Cross-posted.** This article's canonical home is [datalakehousehub.com](https://datalakehousehub.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/).
 The date in this topic matters. Today is July 6, 2026. A release candidate dated July 28, 2026 is still in the future. That means this article should not describe the release candidate as published or summarize details that are not public yet.
 
 What we can do is use the date as a watch item. If the Model Context Protocol continues moving toward stateless or more horizontally scalable server patterns, data platforms should pay attention. Stateless MCP patterns would matter because analytics agents may generate many short-lived tool calls across metadata, semantic definitions, query engines, catalogs, and workflow systems.

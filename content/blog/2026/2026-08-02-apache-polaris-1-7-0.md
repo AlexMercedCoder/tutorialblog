@@ -10,10 +10,10 @@ tags:
   - Catalog
   - Data Engineering
   - Open Source
-canonical: "https://iceberglakehouse.com/posts/apache-polaris-1-7-0/"
+canonical: https://iceberglakehouse.com/posts/apache-polaris-1-7-0/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/apache-polaris-1-7-0/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/apache-polaris-1-7-0/).
 
 # Apache Polaris 1.7.0 and the Quiet Work of Making a Catalog Trustworthy
 

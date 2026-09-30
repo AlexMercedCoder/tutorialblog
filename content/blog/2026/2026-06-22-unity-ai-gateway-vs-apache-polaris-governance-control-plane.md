@@ -8,8 +8,10 @@ tags:
   - governance control plane
   - Apache Polaris
   - AI gateway
+canonical: https://iceberglakehouse.com/posts/unity-ai-gateway-vs-apache-polaris-governance-control-plane/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/unity-ai-gateway-vs-apache-polaris-governance-control-plane/).
 
 The right comparison is not vendor scoreboard. It is closed AI governance gateway versus open catalog control plane. For enterprise architects choosing governance patterns, the useful question is what changes in production and what simply sounds current.
 

@@ -8,8 +8,10 @@ tags:
   - real-time event streams
   - active analytics agents
   - low latency BI
+canonical: https://iceberglakehouse.com/posts/clickhouse-loop-real-time-event-streams-active-agents/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/clickhouse-loop-real-time-event-streams-active-agents/).
 
 Low-latency analytical systems can help active agents, but only when event loops include validation, context, and safety boundaries. For teams building low-latency analytical action loops, the useful question is what changes in production and what simply sounds current.
 

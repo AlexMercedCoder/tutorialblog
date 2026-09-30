@@ -10,7 +10,10 @@ tags:
   - schema evolution flink
   - flink iceberg sink
   - real-time lakehouse flink
+canonical: https://datalakehousehub.com/blog/2026-05-real-time-lakehouse-flink/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-05-real-time-lakehouse-flink/).
 
 # Real-Time Lakehouse Patterns with Apache Flink and Iceberg
 

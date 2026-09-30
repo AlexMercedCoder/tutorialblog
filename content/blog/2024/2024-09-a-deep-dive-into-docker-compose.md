@@ -7,7 +7,10 @@ category: "Devops"
 tags:
   - docker
   - devops
+canonical: https://iceberglakehouse.com/posts/2024-9-a-deep-dive-into-docker-compose/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-9-a-deep-dive-into-docker-compose/).
 
 ## Understanding the Docker Compose File Structure
 

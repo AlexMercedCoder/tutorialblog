@@ -11,7 +11,7 @@ tags:
   - multi-engine
   - Apache Polaris
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/decoupled-data-lakehouse-multi-engine-rest-catalogs/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/decoupled-data-lakehouse-multi-engine-rest-catalogs/).
 
 Every few years a data team discovers, mid-contract-renewal, exactly how much of their platform they do not control. The data sits in the vendor's format. The metadata lives in the vendor's catalog. The security policies exist only in the vendor's console. Moving any workload means moving all of it, and the vendor's pricing team knows that better than anyone. The technical name for this position is coupling, and the commercial name for it is the renewal quote.
 

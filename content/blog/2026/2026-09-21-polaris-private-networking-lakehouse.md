@@ -12,7 +12,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/polaris-private-networking-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/polaris-private-networking-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/polaris-private-networking-lakehouse/).
 
 A bank's security team reviews its new lakehouse design. Apache Polaris serves as the Iceberg REST catalog. Query engines run in private subnets. The catalog sits behind an internal load balancer. Everything looks private.
 

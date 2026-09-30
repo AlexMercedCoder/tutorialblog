@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-denormalization-when-why/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-denormalization-when-why/).
 
 ![Normalized model with many interconnected tables vs. denormalized wide flat table](images/data_modeling/08/denormalization-overview.png)
 

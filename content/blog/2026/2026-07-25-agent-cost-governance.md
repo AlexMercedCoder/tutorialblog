@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/agent-cost-governance/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agent-cost-governance/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agent-cost-governance/).
 
 A platform team I spoke with watched their query volume rise 40 times in six weeks. No new dashboards, no new users, no new data sources. What changed was that three product teams shipped agents, and each agent issues somewhere between eight and sixty queries per user request depending on how many reasoning steps the task takes and how many of them fail and retry.
 

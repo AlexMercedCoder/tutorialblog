@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-testing-data-pipelines/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-testing-data-pipelines/).
 
 ![Data pipeline testing pyramid with schema tests at the base, contract tests in the middle, and regression tests at the top](images/debp/08/testing-pyramid.png)
 

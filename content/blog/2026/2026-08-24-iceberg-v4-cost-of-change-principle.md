@@ -11,7 +11,7 @@ tags:
   - metadata
   - architecture
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v4-cost-of-change-principle/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-cost-of-change-principle/).
 
 Read enough of the Apache Iceberg v4 proposals, the design documents, the dev-list threads, the community sync notes, and a pattern emerges that no single proposal states as its title: every one of them exists to stop the format from charging for things that did not change. Single-file commits stop a small append from rewriting table-scale metadata. Column families stop a one-column update from rewriting whole rows. Relative paths stop a table relocation from rewriting every file reference. Delta-encoded schemas stop an unchanged schema from being re-serialized per commit. Snapshot offloading stops accumulated history from riding in every write. Different layers, different mechanisms, different authors and threads, one sentence underneath them all: updating 1 percent of a table should not require work proportional to 100 percent of it.
 

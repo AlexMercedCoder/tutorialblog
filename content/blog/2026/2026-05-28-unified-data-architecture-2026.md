@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Data Lakehouse"
 tags:
   - Unified Data Architecture 2026
+canonical: https://datalakehousehub.com/blog/unified-data-architecture-2026/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/unified-data-architecture-2026/).
 
 # The 2026 Unified Data Architecture: Reconciling Multi-Cloud Data Lakehouses
 

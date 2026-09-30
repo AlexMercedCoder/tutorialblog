@@ -10,7 +10,10 @@ tags:
   - Python
   - MCP
   - AI Agents
+canonical: https://datalakehousehub.com/blog/2025-04-resources-in-mcp/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-04-resources-in-mcp/).
 
 ## Free Resources  
 - **[Free Apache Iceberg Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=AItoLLMS&utm_content=alexmerced&utm_term=external_blog)**  

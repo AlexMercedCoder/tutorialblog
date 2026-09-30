@@ -10,10 +10,10 @@ tags:
   - Metadata
   - Streaming
   - Data Lakehouse
-canonical: "https://iceberglakehouse.com/posts/iceberg-v4-roadmap/"
+canonical: https://iceberglakehouse.com/posts/iceberg-v4-roadmap/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v4-roadmap/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-roadmap/).
 
 # Reading the Apache Iceberg V4 Proposals Before They Land
 

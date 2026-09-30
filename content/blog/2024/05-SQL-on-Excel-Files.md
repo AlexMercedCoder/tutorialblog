@@ -8,7 +8,10 @@ tags:
   - Data Architecture
   - Apache Iceberg
   - Data Lakehouse
+canonical: https://datalakehousehub.com/blog/2024/2024-05-sql-on-excel-files/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-05-sql-on-excel-files/).
 
 Being able to quickly analyze and gain insights from your data is crucial. Excel is widely used for data storage, but when it comes to complex queries and analytics, SQL is often the preferred tool. [Dremio, a data lakehouse platform](https://www.dremio.com/solutions/data-lakehouse/), bridges this gap by allowing you to run SQL queries directly on your Excel files without extensive setup. In this tutorial, I'll guide you through setting up Dremio in a Docker container on your laptop and running SQL queries on an Excel file.
 

@@ -13,7 +13,10 @@ tags:
   - Open Lakehouse
   - Dremio
   - Data Architecture
+canonical: https://iceberglakehouse.com/posts/open-lakehouse-breakdown-2026/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/open-lakehouse-breakdown-2026/).
 
 *By Alex Merced, Head of Developer Relations at Dremio*
 

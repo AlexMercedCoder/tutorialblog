@@ -9,10 +9,10 @@ tags:
   - MCP
   - AI Agents
   - Apache Polaris
-canonical: "https://iceberglakehouse.com/posts/mcp-apache-polaris/"
+canonical: https://iceberglakehouse.com/posts/mcp-apache-polaris/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/mcp-apache-polaris/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-apache-polaris/).
 
 # Wiring an AI Agent to Apache Polaris with the Model Context Protocol
 

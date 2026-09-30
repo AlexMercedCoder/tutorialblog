@@ -11,7 +11,7 @@ tags:
   - compliance
   - Apache Iceberg
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/policy-aware-lakehouse-telemetry-eu-ai-act/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/policy-aware-lakehouse-telemetry-eu-ai-act/).
 
 Every article in my agentic lakehouse series has quietly assumed a plane that sees everything: the catalog's audit stream, the semantic layer's request log, the gateway's traces, the agents' case histories. That observability plane was built for operations, debugging, and cost, and in 2026 it acquired a second constituency with subpoena power. The EU AI Act's high-risk obligations, arriving on the statute's August 2026 clock with record-keeping at their operational core, make automatic, durable, inspectable logging a legal property of AI systems, not an engineering preference, and the organizations deploying agents against enterprise data are discovering, some by planning and some by counsel's memo, that their telemetry is no longer just how they understand their systems. It is how they prove them, to assessors, to authorities, and eventually to courts.
 

@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Analytics"
 tags:
   - Building Custom Agentic Analytics Python
+canonical: https://datalakehousehub.com/blog/building-custom-agentic-analytics-python/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/building-custom-agentic-analytics-python/).
 
 # Building a Custom Agentic Analytics System: Python, LangChain, and SQL Data Lakes
 

@@ -12,7 +12,10 @@ tags:
   - data product thinking
   - domain ownership data
   - data mesh vs data warehouse
+canonical: https://iceberglakehouse.com/posts/2026-05-24-data-mesh-after-hype/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-data-mesh-after-hype/).
 
 # Data Mesh After the Hype: What Actually Works
 

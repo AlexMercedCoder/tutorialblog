@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Lakehouse"
 tags:
   - Semantic Layer Translation Engine
+canonical: https://datalakehousehub.com/blog/semantic-layer-translation-engine/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/semantic-layer-translation-engine/).
 
 # The Semantic Layer as a Translation Engine: Bridging Natural Language and SQL
 

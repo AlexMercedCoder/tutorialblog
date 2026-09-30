@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-data-vault-modeling/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-data-vault-modeling/).
 
 ![Data Vault model showing Hubs, Links, and Satellites as interconnected components](images/data_modeling/09/data-vault-overview.png)
 

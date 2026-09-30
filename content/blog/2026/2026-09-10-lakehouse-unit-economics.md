@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/lakehouse-unit-economics/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/lakehouse-unit-economics/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/lakehouse-unit-economics/).
 
 Finance asks the data platform team what a dashboard costs to run. The honest answer is that nobody knows. The cloud bill arrives as a handful of large numbers: compute for a cluster several teams share, storage for a bucket holding everything, a transfer line nobody has looked at closely. Mapping those numbers onto the dashboard, the team that owns it, or the decision it supports is not a report anyone has built.
 

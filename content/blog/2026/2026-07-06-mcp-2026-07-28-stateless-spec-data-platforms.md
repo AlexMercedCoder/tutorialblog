@@ -9,7 +9,7 @@ tags:
   - data platforms
 canonical: https://iceberglakehouse.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-2026-07-28-stateless-spec-data-platforms/).
 
 # The 2026-07-28 Model Context Protocol Release Candidate: What the Stateless Spec Means for Data Platforms
 

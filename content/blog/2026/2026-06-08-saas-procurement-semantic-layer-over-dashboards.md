@@ -10,7 +10,10 @@ tags:
   - "MCP for SaaS"
   - "data as an API"
   - "enterprise AI data readiness"
+canonical: https://datalakehousehub.com/blog/saas-procurement-semantic-layer-over-dashboards/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/saas-procurement-semantic-layer-over-dashboards/).
 
 ## The New Procurement Question
 

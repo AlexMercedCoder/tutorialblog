@@ -10,10 +10,10 @@ tags:
   - Cost Management
   - Token Budgets
   - Apache Iceberg
-canonical: "https://iceberglakehouse.com/posts/agentic-analytics-tco-token-budgets/"
+canonical: https://iceberglakehouse.com/posts/agentic-analytics-tco-token-budgets/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agentic-analytics-tco-token-budgets/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agentic-analytics-tco-token-budgets/).
 
 # Budgeting for Agentic Analytics When Every Question Costs Something Different
 

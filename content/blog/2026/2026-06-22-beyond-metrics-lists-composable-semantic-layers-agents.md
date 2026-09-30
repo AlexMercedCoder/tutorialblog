@@ -8,8 +8,10 @@ tags:
   - semantic layer agents
   - metrics catalogs
   - agentic analytics
+canonical: https://iceberglakehouse.com/posts/beyond-metrics-lists-composable-semantic-layers-agents/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/beyond-metrics-lists-composable-semantic-layers-agents/).
 
 AI agents need more than metric names. They need composable business logic that survives multi-step analysis. For analytics engineers and AI platform teams, the useful question is what changes in production and what simply sounds current.
 

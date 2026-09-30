@@ -12,7 +12,7 @@ tags:
   - Iceberg v4
   - open table formats
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v4-state-july-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-state-july-2026/).
 
 # The State of Apache Iceberg v4 in July 2026: What the Dev List Tells Us About the Format's Next Chapter
 

@@ -9,7 +9,10 @@ tags:
   - Databases
   - Data Lakes
   - Data Lakehouses
+canonical: https://iceberglakehouse.com/posts/2025-05-intro-to-data-engineering-concepts-12/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2025-05-intro-to-data-engineering-concepts-12/).
 
 # Introduction to Data Engineering Concepts: Scheduling and Workflow Orchestration
 

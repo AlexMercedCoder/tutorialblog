@@ -10,10 +10,10 @@ tags:
   - Semantic Layer
   - Apache Ossie
   - Apache Polaris
-canonical: "https://iceberglakehouse.com/posts/mcp-governed-semantic-layer/"
+canonical: https://iceberglakehouse.com/posts/mcp-governed-semantic-layer/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/mcp-governed-semantic-layer/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-governed-semantic-layer/).
 
 # Why Agentic AI Needs a Governed Semantic Layer Behind the Model Context Protocol
 

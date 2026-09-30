@@ -9,9 +9,9 @@ tags:
   - Variant Type
   - JSON
   - AI
-canonical: "https://iceberglakehouse.com/posts/iceberg-variant-type-semi-structured-ai-datasets/"
+canonical: https://iceberglakehouse.com/posts/iceberg-variant-type-semi-structured-ai-datasets/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-variant-type-semi-structured-ai-datasets/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-variant-type-semi-structured-ai-datasets/).
 
 A single LLM response is not a single value. It carries the generated text, a reasoning trace, one or more tool calls with their arguments, source references, a confidence field, token usage counts, and sometimes an error object. Store a million of those responses and you have a dataset where every row is a small nested document, the shapes vary from row to row, and the fields you care about are buried two or three levels deep. This is the normal shape of AI data, and it does not fit a rigid columnar schema without a fight. A native variant-style type in [Apache Iceberg](https://iceberg.apache.org/spec/) is the format's answer to that mismatch.
 

@@ -13,7 +13,7 @@ tags:
   - DuckDB
 canonical: https://iceberglakehouse.com/posts/postgres-meets-the-lakehouse/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/postgres-meets-the-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/postgres-meets-the-lakehouse/).
 
 For a long time the answer to "we need analytics on our Postgres data" was a pipeline. Replicate the transactional tables into a warehouse or a lake, transform them there, and query them with an engine built for scans. The pipeline was the tax you paid for keeping the operational database operational. Postgres was not going to scan a billion rows quickly, and nobody expected it to.
 

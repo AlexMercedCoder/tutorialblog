@@ -11,7 +11,10 @@ tags:
   - "REST Scan Plan API"
   - "Open Catalog vs Horizon"
   - "Snowflake Summit 2026"
+canonical: https://datalakehousehub.com/blog/snowflake-horizon-catalog-bidirectional-iceberg-writes/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/snowflake-horizon-catalog-bidirectional-iceberg-writes/).
 
 For years, the limitation of Snowflake's Iceberg support was direction. You could read Iceberg tables managed by external catalogs (AWS Glue, Polaris, Unity Catalog) from Snowflake. You could write Iceberg tables through Snowflake and read them in Snowflake. But you could not write to a Snowflake-managed Iceberg table from an external engine. If your Spark pipeline needed to update a table that Snowflake also owned, you either ran the pipeline inside Snowflake or you accepted a multi-copy architecture where the two engines maintained separate tables.
 

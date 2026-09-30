@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Lakehouse"
 tags:
   - Trustworthy AI Concurrency Isolation
+canonical: https://datalakehousehub.com/blog/trustworthy-ai-concurrency-isolation/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/trustworthy-ai-concurrency-isolation/).
 
 # Trustworthy AI in the Agentic Lakehouse: Reconciling Concurrency and Isolation Contracts
 

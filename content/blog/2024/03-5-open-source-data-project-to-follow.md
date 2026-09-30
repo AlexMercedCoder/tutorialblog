@@ -9,7 +9,10 @@ tags:
   - Apache Iceberg
   - Data Lakehouse
   - Open Source
+canonical: https://datalakehousehub.com/blog/2024/2024-03-5-open-source-data-project-to-follow/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-03-5-open-source-data-project-to-follow/).
 
 [Follow Me On Social](https://bio.alexmerced.com/data)
 [Subscribe to my SubStack](https://amdatalakehouse.substack.com)

@@ -11,7 +11,7 @@ tags:
   - ALP
   - FSST
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/fsst-alp-parquet-encodings/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/fsst-alp-parquet-encodings/).
 
 Look at the byte breakdown of a large Parquet table in a lakehouse and two column types dominate out of proportion to their row count. The first is high-cardinality strings: user agents, URLs, log messages, JSON fragments, free-text fields. The second is floating-point measurements: sensor readings, prices, model scores, embedding components. Both compress badly under the encodings Parquet has shipped for a decade, and both are becoming a larger share of what gets written as observability and AI workloads move into Apache Iceberg tables.
 

@@ -11,7 +11,10 @@ tags:
   - nous research
   - slack integration
   - free ai tools
+canonical: https://iceberglakehouse.com/posts/2026-05-hermes-agent-free-deepseek-setup/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-hermes-agent-free-deepseek-setup/).
 
 # Use Hermes Agent for Free With DeepSeek V4 and Slack
 

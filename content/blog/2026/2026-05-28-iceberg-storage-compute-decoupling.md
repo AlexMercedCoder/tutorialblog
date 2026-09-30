@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
   - Iceberg Storage Compute Decoupling
+canonical: https://iceberglakehouse.com/posts/iceberg-storage-compute-decoupling/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-storage-compute-decoupling/).
 
 # Decoupling Storage and Compute in Apache Iceberg: A Cost Optimization Deep Dive
 

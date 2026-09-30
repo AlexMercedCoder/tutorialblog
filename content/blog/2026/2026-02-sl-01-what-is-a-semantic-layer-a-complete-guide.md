@@ -10,7 +10,10 @@ tags:
   - analytics
   - data engineering
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-sl-what-is-a-semantic-layer/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-sl-what-is-a-semantic-layer/).
 
 ![Semantic layer concept : translating raw data into business terms](images/semantic_layer_seo/01/semantic-layer-concept.png)
 

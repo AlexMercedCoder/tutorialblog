@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-partition-and-organize/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-partition-and-organize/).
 
 ![Table data split into partitions by date with query scanning only the relevant partition](images/debp/07/partition-overview.png)
 

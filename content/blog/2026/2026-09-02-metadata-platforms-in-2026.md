@@ -13,7 +13,7 @@ tags:
   - Polaris
 canonical: https://iceberglakehouse.com/posts/metadata-platforms-in-2026/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/metadata-platforms-in-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/metadata-platforms-in-2026/).
 
 The word "catalog" has meant two different things in data infrastructure for about a decade, and in 2026 the two are colliding.
 

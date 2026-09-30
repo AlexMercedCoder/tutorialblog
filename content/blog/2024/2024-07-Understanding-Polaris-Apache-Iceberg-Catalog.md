@@ -8,7 +8,10 @@ tags:
   - data lakehouse
   - data engineering
   - apache iceberg
+canonical: https://iceberglakehouse.com/posts/2024-7-understanding-polaris-apache-iceberg-catalog/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-7-understanding-polaris-apache-iceberg-catalog/).
 
 NOTE: I am working on a hands-on tutorial for Polaris, so please watch for the [Dremio Blog](https://www.dremio.com/blog) in the coming days. Also, check out many other great articles on the Dremio blog about Apache Iceberg, Data Lakehouses, and more.
 

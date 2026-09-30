@@ -9,7 +9,7 @@ tags:
   - mcp
 canonical: https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/).
 
 # Conversational AI on Managed Iceberg: Exposing Amazon S3 Tables through MCP
 

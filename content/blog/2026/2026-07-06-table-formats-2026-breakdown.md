@@ -11,7 +11,7 @@ tags:
   - paimon
 canonical: https://iceberglakehouse.com/posts/table-formats-2026-breakdown/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/table-formats-2026-breakdown/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/table-formats-2026-breakdown/).
 
 # Lakehouse Table Formats in 2026: Iceberg, Delta Lake, Hudi, Paimon, and DuckLake, How They Work, Where They Stand, and Where They're Going
 

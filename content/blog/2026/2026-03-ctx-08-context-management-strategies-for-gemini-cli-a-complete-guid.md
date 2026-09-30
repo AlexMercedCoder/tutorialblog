@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-gemini-cli/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-gemini-cli/).
 
 Gemini CLI is an open-source terminal agent powered by Gemini models that operates directly in your command line. It brings Google's AI capabilities into the environment where many developers already live, with a context management system built around hierarchical configuration files, persistent memory, MCP server integration, and direct codebase interaction. Unlike web-based tools where context is managed through uploads and conversation, Gemini CLI assembles its context from your project structure, your instruction files, and the tools you connect to it.
 

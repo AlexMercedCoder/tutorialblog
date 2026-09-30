@@ -7,7 +7,10 @@ category: "Data Lakehouse"
 tags:
   - data lakehouse
   - data engineering
+canonical: https://iceberglakehouse.com/posts/2024-8-acid-guarantees-and-apache-iceberg/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-8-acid-guarantees-and-apache-iceberg/).
 
 Apache Iceberg has become a prominent name in the data world, with numerous platforms integrating support for Iceberg tables as part of the growing open data lakehouse ecosystem. A key feature often highlighted is Iceberg's ability to enable ACID transactions. In this blog, I will explore what ACID guarantees mean and how Iceberg delivers them, to help you better understand the value Apache Iceberg brings to the table.
 

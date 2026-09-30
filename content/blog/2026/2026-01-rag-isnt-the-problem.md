@@ -8,7 +8,11 @@ tags:
   - data engineering
   - retrieval-augmented generation
   - RAG
+canonical: https://iceberglakehouse.com/posts/2026-01-rag-isnt-the-problem/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-01-rag-isnt-the-problem/).
+
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)
 - [Apache Polaris: The Defintive Guide](https://drmevn.fyi/tableformatblog-62P6t)

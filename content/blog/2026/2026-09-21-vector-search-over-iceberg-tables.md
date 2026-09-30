@@ -12,7 +12,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/vector-search-over-iceberg-tables/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/vector-search-over-iceberg-tables/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/vector-search-over-iceberg-tables/).
 
 A support platform stores every ticket, article, and chat transcript in Apache Iceberg tables. The retrieval team embeds each document and copies the vectors into a separate vector database for semantic search. Now there are two copies of the corpus. A pipeline keeps them in sync. When a customer invokes their right to deletion, the row disappears from Iceberg on Tuesday and from the vector database whenever the sync job next succeeds. When a new tenant isolation rule lands, it gets implemented twice, once in the catalog and once in the vector store's own access model.
 

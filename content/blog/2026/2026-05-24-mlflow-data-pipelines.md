@@ -11,7 +11,10 @@ tags:
   - mlflow 3 features
   - mlflow 3 genai tracing
   - model lineage data pipeline
+canonical: https://iceberglakehouse.com/posts/2026-05-24-mlflow-data-pipelines/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-mlflow-data-pipelines/).
 
 # Bringing MLflow and Data Pipelines Closer Together
 

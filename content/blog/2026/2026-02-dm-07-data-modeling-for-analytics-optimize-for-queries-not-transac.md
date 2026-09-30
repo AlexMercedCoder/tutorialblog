@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-data-modeling-for-analytics/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-data-modeling-for-analytics/).
 
 ![OLTP normalized model vs. OLAP denormalized model side by side](images/data_modeling/07/analytics-data-modeling.png)
 

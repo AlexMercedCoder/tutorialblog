@@ -9,10 +9,10 @@ tags:
   - Apache Polaris
   - Data Governance
   - Multi-Region
-canonical: "https://iceberglakehouse.com/posts/multi-region-catalog-federation/"
+canonical: https://iceberglakehouse.com/posts/multi-region-catalog-federation/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/multi-region-catalog-federation/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/multi-region-catalog-federation/).
 
 # Governing Iceberg Tables Across Regions Without Three Sets of Permissions
 

@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Data Lakehouse"
 tags:
   - Open Lakehouse Vs Proprietary Warehouse Tco
+canonical: https://iceberglakehouse.com/posts/open-lakehouse-vs-proprietary-warehouse-tco/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/open-lakehouse-vs-proprietary-warehouse-tco/).
 
 # Evaluating the TCO of an Open Lakehouse vs. Proprietary Data Warehouses
 

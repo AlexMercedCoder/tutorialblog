@@ -11,7 +11,10 @@ tags:
   - "AI business logic"
   - "Snowflake Summit 2026"
   - "Horizon Context"
+canonical: https://datalakehousehub.com/blog/snowflake-semantic-view-autopilot-business-logic/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/snowflake-semantic-view-autopilot-business-logic/).
 
 ## The Automation Promise
 

@@ -9,10 +9,10 @@ tags:
   - Query Optimization
   - AI Agents
   - Materialized Views
-canonical: "https://iceberglakehouse.com/posts/autonomous-reflections-agentic-lakehouse/"
+canonical: https://iceberglakehouse.com/posts/autonomous-reflections-agentic-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/autonomous-reflections-agentic-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/autonomous-reflections-agentic-lakehouse/).
 
 # When the Query Optimizer Starts Managing Its Own Materializations
 

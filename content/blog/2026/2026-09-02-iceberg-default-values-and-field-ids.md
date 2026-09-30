@@ -11,7 +11,7 @@ tags:
   - Default Values
 canonical: https://iceberglakehouse.com/posts/iceberg-default-values-and-field-ids/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-default-values-and-field-ids/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-default-values-and-field-ids/).
 
 An engineer runs `ALTER TABLE orders ADD COLUMN channel STRING` against a 200-terabyte table. The command returns in under a second. Every query afterward sees the new column, old rows show `NULL`, and nothing was rewritten. The same engineer then renames `customer_id` to `account_id`, moves it to the front of the schema, and drops a column that had been there for three years. Still under a second. Still no rewrite. Queries against snapshots from last month return the old schema, and queries against the current snapshot return the new one, reading the same Parquet files.
 

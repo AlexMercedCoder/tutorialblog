@@ -10,7 +10,10 @@ tags:
   - cdc streaming lakehouse
   - apache paimon mutable streams
   - paimon lsm tree
+canonical: https://iceberglakehouse.com/posts/2026-05-24-paimon-vs-iceberg-mutable-streams/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-paimon-vs-iceberg-mutable-streams/).
 
 # When Paimon Beats Iceberg for Mutable Streams
 

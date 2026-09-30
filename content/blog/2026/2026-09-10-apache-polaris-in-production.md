@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/apache-polaris-in-production/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/apache-polaris-in-production/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/apache-polaris-in-production/).
 
 The Polaris quickstart takes about four minutes. Pull a container, hit the OAuth endpoint, create a catalog, point Spark at it, write a table. It works, and it teaches you the object model, and then it quietly leaves you with a service that stores everything in memory, signs tokens with keys it generated at startup, and has never been asked what happens when the pod restarts.
 

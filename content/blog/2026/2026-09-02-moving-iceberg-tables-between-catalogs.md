@@ -12,7 +12,7 @@ tags:
   - PyIceberg
 canonical: https://iceberglakehouse.com/posts/moving-iceberg-tables-between-catalogs/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/moving-iceberg-tables-between-catalogs/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/moving-iceberg-tables-between-catalogs/).
 
 A platform team has 3,000 Iceberg tables in a Hive Metastore and 900 terabytes of Parquet behind them. They are moving to a REST catalog. Someone on the team asks how long the copy will take, and someone else starts pricing out the egress. Both questions are the wrong questions. An Iceberg table is not stored in its catalog. The catalog stores one string per table: the path of the current metadata file. Moving a table between catalogs means writing that string into a new catalog and deleting it from the old one. The 900 terabytes do not move.
 

@@ -13,7 +13,7 @@ tags:
     - managed tables
     - apache iceberg
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/conversational-ai-managed-iceberg-s3-tables-mcp-server/).
 
 
 

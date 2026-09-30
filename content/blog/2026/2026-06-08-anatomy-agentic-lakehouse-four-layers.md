@@ -11,7 +11,10 @@ tags:
   - "Medallion architecture"
   - "Iceberg table format"
   - "AI semantic layer"
+canonical: https://datalakehousehub.com/blog/anatomy-agentic-lakehouse-four-layers/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/anatomy-agentic-lakehouse-four-layers/).
 
 The term "agentic lakehouse" gets thrown around a lot in 2026. Most references describe it as a data platform that AI agents can query. That description is technically true and practically useless. A chatbot wired directly to Parquet files on S3 can "query data," but it will produce wrong answers, bypass security controls, and degrade under load.
 

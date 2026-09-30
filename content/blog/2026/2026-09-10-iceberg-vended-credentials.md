@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-vended-credentials/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-vended-credentials/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-vended-credentials/).
 
 Look at how most lakehouses were wired in 2023. Spark had an IAM role with read and write on the whole data bucket. Trino had another one. The Python notebook someone ran on a laptop had a static access key pasted into a config file, and that key had been there for eight months. Every engine that touched the lakehouse held broad, long-lived storage credentials, and the catalog told it where the files were.
 

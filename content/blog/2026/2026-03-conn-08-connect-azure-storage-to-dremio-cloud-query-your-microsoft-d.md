@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-azure-storage/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-azure-storage/).
 
 Azure Storage is Microsoft's cloud storage platform, spanning Blob Storage, Azure Data Lake Storage Gen2 (ADLS Gen2), and Azure Files. If your organization uses Microsoft Azure, your data lake almost certainly lives in Azure Storage : Parquet files from Azure Data Factory pipelines, CSV exports from Azure SQL Database, JSON event streams from Azure Event Hubs, and raw data from Azure IoT Hub all land in Azure Storage containers.
 

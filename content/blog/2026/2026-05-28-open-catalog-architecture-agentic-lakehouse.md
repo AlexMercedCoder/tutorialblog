@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Lakehouse"
 tags:
   - Open Catalog Architecture Agentic Lakehouse
+canonical: https://datalakehousehub.com/blog/open-catalog-architecture-agentic-lakehouse/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/open-catalog-architecture-agentic-lakehouse/).
 
 # Building the Brain of the Agentic Lakehouse: Designing an Open Catalog Architecture
 

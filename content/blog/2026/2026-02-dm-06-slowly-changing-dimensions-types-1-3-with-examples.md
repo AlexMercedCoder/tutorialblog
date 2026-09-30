@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-slowly-changing-dimensions/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-slowly-changing-dimensions/).
 
 ![Dimension timeline showing attribute values changing across time periods](images/data_modeling/06/slowly-changing-dimensions.png)
 

@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-03-aitool-gemini-cli/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-aitool-gemini-cli/).
 
 Gemini CLI is Google's open-source terminal-based AI agent. It runs directly in your terminal, powered by Gemini models with a 1-million token context window. Dremio is a unified lakehouse platform that provides business context through its semantic layer, universal data access through query federation, and interactive speed through Reflections and Apache Arrow.
 

@@ -9,9 +9,9 @@ tags:
   - Security
   - Credential Vending
   - Iceberg
-canonical: "https://iceberglakehouse.com/posts/rest-catalog-credential-vending-zero-copy-security/"
+canonical: https://iceberglakehouse.com/posts/rest-catalog-credential-vending-zero-copy-security/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/rest-catalog-credential-vending-zero-copy-security/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/rest-catalog-credential-vending-zero-copy-security/).
 
 Handing a query engine a long-lived cloud storage key so it can read an Iceberg table is one of the most common and most dangerous patterns in lakehouse deployments. That key is broad, hard to rotate, and once it exists it tends to spread into config files, notebooks, CI systems, and every engine cluster that touches the data. Credential vending replaces that pattern. Instead of distributing static keys, an Iceberg REST catalog issues short-lived, scoped storage credentials at the moment a client needs them, for exactly the table and operation the client is authorized to perform, expiring shortly after.
 

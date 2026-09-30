@@ -9,7 +9,10 @@ tags:
   - data lakehouse
   - data engineering
   - table formats
+canonical: https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-02/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-iceberg-masterclass-02/).
 
 <!-- Meta Description: Iceberg uses a metadata tree, Delta Lake uses a transaction log, Hudi uses a timeline. Here is exactly how each format organizes metadata and why it matters. -->
 <!-- Primary Keyword: table format metadata -->

@@ -12,7 +12,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/ossie-semantic-query-interface-agents/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/ossie-semantic-query-interface-agents/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/ossie-semantic-query-interface-agents/).
 
 An analyst asks an AI agent for revenue per support ticket by region. The agent knows the schema. It sees an `orders` table and a `support` table, both keyed by customer. It writes a clean SQL query that joins them, sums order amounts, counts tickets, and divides. The query runs. The numbers look reasonable. They are wrong.
 

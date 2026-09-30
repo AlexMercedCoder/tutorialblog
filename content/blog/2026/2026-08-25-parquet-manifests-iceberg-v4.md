@@ -11,7 +11,7 @@ tags:
   - Parquet
   - metadata
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/parquet-manifests-iceberg-v4/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/parquet-manifests-iceberg-v4/).
 
 Picture a table with 40 million data files. Every one of those files has an entry in a manifest, and every entry carries per-column statistics for 300 columns. A query arrives that filters on one timestamp column and touches two others. To plan that query, the engine has to walk the manifests, compare the timestamp bounds of each file against the predicate, and decide which files to open. In theory that is a cheap job. The engine only needs three things per entry: the file path, the partition tuple, and the lower and upper bound of one column.
 

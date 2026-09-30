@@ -11,7 +11,7 @@ tags:
   - ADBC
   - connectivity
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/arrow-flight-sql-adbc-connectivity/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/arrow-flight-sql-adbc-connectivity/).
 
 Run a query that returns 50 million rows from a fast analytical engine and watch where the time goes. The engine plans the query in 200 milliseconds, scans a few gigabytes of Parquet in 3 seconds, and finishes executing. Then the client waits another 40 seconds. Nothing is wrong with the engine. The client is pulling results through a JDBC or ODBC driver, and that driver is converting every row from the server's wire format into driver objects, one field at a time, and then the application is converting those objects into a DataFrame, one field at a time again.
 

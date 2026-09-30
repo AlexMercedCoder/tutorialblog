@@ -9,10 +9,10 @@ tags:
   - Analytics
   - Cost Optimization
   - Apache Iceberg
-canonical: "https://iceberglakehouse.com/posts/agentic-analytics-tco/"
+canonical: https://iceberglakehouse.com/posts/agentic-analytics-tco/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agentic-analytics-tco/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agentic-analytics-tco/).
 
 # What Agentic Analytics Actually Costs, and How to Keep It Bounded
 

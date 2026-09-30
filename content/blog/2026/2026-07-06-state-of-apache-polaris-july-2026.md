@@ -13,7 +13,7 @@ tags:
   - governance
   - open table formats
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/state-of-apache-polaris-july-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/state-of-apache-polaris-july-2026/).
 
 # The State of Apache Polaris in July 2026: From Incubating Catalog to the Governance Layer of the Open Lakehouse
 

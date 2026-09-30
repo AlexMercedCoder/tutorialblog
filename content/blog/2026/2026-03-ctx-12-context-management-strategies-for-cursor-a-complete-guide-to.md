@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://datalakehousehub.com/blog/2026-03-context-management-cursor/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-03-context-management-cursor/).
 
 Cursor is an AI-native code editor built on the VS Code foundation that integrates AI deeply into every aspect of the development workflow. Its context management system is one of the most sophisticated among coding tools, combining workspace-level indexing, granular rules files, documentation integration, MCP server support, and intelligent context assembly that automatically determines which files and symbols are relevant to your current task.
 

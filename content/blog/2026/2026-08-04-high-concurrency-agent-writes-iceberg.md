@@ -10,10 +10,10 @@ tags:
   - Optimistic Concurrency
   - Agent Writes
   - Commit
-canonical: "https://iceberglakehouse.com/posts/high-concurrency-agent-writes-iceberg/"
+canonical: https://iceberglakehouse.com/posts/high-concurrency-agent-writes-iceberg/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/high-concurrency-agent-writes-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/high-concurrency-agent-writes-iceberg/).
 
 # Surviving Optimistic Commit Collisions When Hundreds of Agents Write to Iceberg
 

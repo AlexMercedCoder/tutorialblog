@@ -11,10 +11,10 @@ tags:
   - MinIO
   - Lakekeeper
   - Security
-canonical: "https://iceberglakehouse.com/posts/building-air-gapped-iceberg-lakehouse/"
+canonical: https://iceberglakehouse.com/posts/building-air-gapped-iceberg-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/building-air-gapped-iceberg-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/building-air-gapped-iceberg-lakehouse/).
 
 # Building Apache Iceberg Lakehouses That Run Without an Internet Connection
 

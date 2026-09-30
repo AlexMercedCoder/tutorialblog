@@ -9,10 +9,10 @@ tags:
   - Streaming
   - Data Serving
   - Hot Tier
-canonical: "https://iceberglakehouse.com/posts/hot-tier-iceberg-serving/"
+canonical: https://iceberglakehouse.com/posts/hot-tier-iceberg-serving/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/hot-tier-iceberg-serving/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/hot-tier-iceberg-serving/).
 
 # Serving Sub-Second Queries Over an Iceberg Lakehouse With a Hot Tier
 

@@ -10,7 +10,10 @@ tags:
   - analytics
   - data engineering
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-sl-semantic-layer-vs-data-catalog/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-sl-semantic-layer-vs-data-catalog/).
 
 ![Data catalog and semantic layer : complementary systems bridged together](images/semantic_layer_seo/04/catalog-vs-semantic.png)
 

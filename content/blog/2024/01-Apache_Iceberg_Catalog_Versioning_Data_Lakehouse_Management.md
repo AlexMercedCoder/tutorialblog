@@ -8,7 +8,10 @@ tags:
   - Data Lakehouse
   - Data Lake
   - Apache Iceberg
+canonical: https://iceberglakehouse.com/posts/2024-1-apache-iceberg-git-life-catalog-versioning/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-1-apache-iceberg-git-life-catalog-versioning/).
 
 Managing vast amounts of data efficiently and effectively is crucial for any organization aiming to leverage its data for strategic decisions. The key to unlocking this potential lies in advanced data management practices, particularly in versioning and catalog management. This is where the combined power of Dremio’s Lakehouse Management features and Project Nessie's catalog-level versioning comes into play.
 

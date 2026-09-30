@@ -11,7 +11,7 @@ tags:
   - Parquet
   - shredding
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/variant-shredding-explained/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/variant-shredding-explained/).
 
 The Variant type in Apache Iceberg v3 gets described in one sentence so often that the sentence has started doing damage: "store JSON without a schema and query it fast." The first half is the type. The second half is shredding, a separate specification with its own file layout, its own reconstruction rules, and its own operational behavior, and if you run Variant tables in production without understanding it, you will eventually stare at a query plan wondering why one table prunes beautifully and its twin scans everything.
 

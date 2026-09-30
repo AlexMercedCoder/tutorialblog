@@ -11,7 +11,10 @@ tags:
   - dbt fusion analytics engineering
   - dbt fusion vs code
   - dbt sql comprehension
+canonical: https://iceberglakehouse.com/posts/2026-05-24-dbt-fusion-analytics-engineering/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-dbt-fusion-analytics-engineering/).
 
 # How dbt Fusion Reshapes Analytics Engineering
 

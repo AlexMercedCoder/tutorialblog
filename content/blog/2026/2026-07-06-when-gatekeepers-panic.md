@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/when-gatekeepers-panic/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/when-gatekeepers-panic/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/when-gatekeepers-panic/).
 
 *By Alex Merced*
 

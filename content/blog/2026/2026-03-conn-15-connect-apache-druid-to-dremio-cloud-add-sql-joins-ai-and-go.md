@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-apache-druid/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-apache-druid/).
 
 Apache Druid is a real-time analytics database designed for sub-second queries on high-ingestion-rate event data. Clickstream analytics, application monitoring, IoT telemetry, and ad-tech workloads rely on Druid's columnar storage and inverted indexes for instantaneous queries.
 

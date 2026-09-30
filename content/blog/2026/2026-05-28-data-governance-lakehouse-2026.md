@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Data Lakehouse"
 tags:
   - Data Governance Lakehouse 2026
+canonical: https://datalakehousehub.com/blog/data-governance-lakehouse-2026/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/data-governance-lakehouse-2026/).
 
 # The Death of the Data Swamp: Establishing Governance in Your 2026 Data Lakehouse
 

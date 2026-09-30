@@ -10,7 +10,10 @@ tags:
   - SQL
   - data lakehouse
   - machine learning
+canonical: https://iceberglakehouse.com/posts/2026-03-ai-ai-generate/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-ai-ai-generate/).
 
 Unstructured text is the most underused data in most organizations. Customer emails sit in inboxes. Contract notes live in text fields. Meeting summaries exist as free-text columns in CRM systems. The information is there, but it's locked inside prose that SQL can't filter, join, or aggregate.
 

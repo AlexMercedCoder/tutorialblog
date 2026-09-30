@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Apache Iceberg"
 tags:
   - Apache Iceberg V3 Upgrade
+canonical: https://iceberglakehouse.com/posts/apache-iceberg-v3-upgrade/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/apache-iceberg-v3-upgrade/).
 
 # Apache Iceberg v3: What Changed and How to Upgrade Safely
 

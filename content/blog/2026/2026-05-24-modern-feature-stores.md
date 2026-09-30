@@ -12,7 +12,10 @@ tags:
   - feast kafka kinesis
   - feast streaming features
   - training serving skew
+canonical: https://datalakehousehub.com/blog/2026-05-modern-feature-stores/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-05-modern-feature-stores/).
 
 # Modern Feature Stores Beyond Batch Pipelines
 

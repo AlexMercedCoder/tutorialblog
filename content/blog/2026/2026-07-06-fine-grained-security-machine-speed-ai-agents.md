@@ -9,7 +9,7 @@ tags:
   - access control
 canonical: https://iceberglakehouse.com/posts/fine-grained-security-machine-speed-ai-agents/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/fine-grained-security-machine-speed-ai-agents/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/fine-grained-security-machine-speed-ai-agents/).
 
 # Enforcing Fine-Grained Security at Machine Speed: Dynamic Access Control for High-Frequency AI Agents
 

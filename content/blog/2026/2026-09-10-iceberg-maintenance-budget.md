@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-maintenance-budget/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-maintenance-budget/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-maintenance-budget/).
 
 Someone eventually asks the question, usually in a quarterly planning meeting: why are we running a Spark cluster every night against tables nobody queried that day?
 

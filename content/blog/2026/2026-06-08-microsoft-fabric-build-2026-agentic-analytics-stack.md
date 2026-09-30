@@ -11,7 +11,10 @@ tags:
   - "OneLake agents"
   - "Microsoft Build 2026"
   - "Iceberg OneLake"
+canonical: https://datalakehousehub.com/blog/microsoft-fabric-build-2026-agentic-analytics-stack/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/microsoft-fabric-build-2026-agentic-analytics-stack/).
 
 ## The Build 2026 Data Story
 

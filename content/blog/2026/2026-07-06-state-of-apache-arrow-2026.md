@@ -13,7 +13,7 @@ tags:
   - ADBC
   - Flight SQL
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/state-of-apache-arrow-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/state-of-apache-arrow-2026/).
 
 # The State of Apache Arrow in 2026: Ten Years In, the Invisible Standard Is Everywhere
 

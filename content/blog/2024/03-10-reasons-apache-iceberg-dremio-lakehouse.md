@@ -8,7 +8,10 @@ tags:
   - Data Architecture
   - Apache Iceberg
   - Data Lakehouse
+canonical: https://iceberglakehouse.com/posts/2024-3-10-reasons-to-make-dremio-part-of-your-data-lakehouse-strategy/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-3-10-reasons-to-make-dremio-part-of-your-data-lakehouse-strategy/).
 
 > [Get a Free Copy of "Apache Iceberg: The Definitive Guide"](https://hello.dremio.com/wp-apache-iceberg-the-definitive-guide-reg.html)
 

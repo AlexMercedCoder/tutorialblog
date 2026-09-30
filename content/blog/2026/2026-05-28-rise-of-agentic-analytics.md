@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Analytics"
 tags:
   - Rise Of Agentic Analytics
+canonical: https://datalakehousehub.com/blog/rise-of-agentic-analytics/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/rise-of-agentic-analytics/).
 
 # The Rise of Agentic Analytics: Shifting BI from Passive Dashboards to Goal-Directed Action
 

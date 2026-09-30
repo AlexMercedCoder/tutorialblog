@@ -12,7 +12,10 @@ tags:
   - data product rag
   - rag access control
   - ai guardrails data
+canonical: https://iceberglakehouse.com/posts/2026-05-24-governed-rag-data-products/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-governed-rag-data-products/).
 
 # Designing Governed RAG on Data Products
 

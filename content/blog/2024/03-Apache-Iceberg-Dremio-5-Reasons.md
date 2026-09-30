@@ -8,7 +8,10 @@ tags:
   - Data Architecture
   - Apache Iceberg
   - Data Lakehouse
+canonical: https://iceberglakehouse.com/posts/2024-3-5-reasons-dremio-is-the-ideal-iceberg-lakehouse-platform/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-3-5-reasons-dremio-is-the-ideal-iceberg-lakehouse-platform/).
 
 [The Apache Iceberg table format](https://www.dremio.com/blog/apache-iceberg-101-your-guide-to-learning-apache-iceberg-concepts-and-practices/) has seen an impressive expansion in its compatibility with a vast spectrum of data platforms and tools. Among these, [Dremio stands out as a pioneer](https://www.dremio.com/resources/topic/apache-iceberg/), having [embraced Apache Iceberg early on](https://amdatalakehouse.substack.com/p/the-apache-iceberg-lakehouse-the). In this article, we delve into the multitude of ways Dremio has seamlessly integrated Apache Iceberg, establishing itself as one of [the most formidable platforms for Iceberg lakehouses](https://www.dremio.com/solutions/data-lakehouse/) available today.
 

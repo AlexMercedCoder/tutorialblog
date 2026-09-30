@@ -11,7 +11,10 @@ tags:
   - "credential vending"
   - "fine-grained access control agents"
   - "OAuth 2.1 device grant"
+canonical: https://datalakehousehub.com/blog/securing-agent-identities-lakehouse-token-exchange/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/securing-agent-identities-lakehouse-token-exchange/).
 
 An AI agent is not a human. It does not log in with a password. It does not close sessions at the end of the day. It does not notice when its credentials are stolen. Yet most data platforms in 2026 still authenticate agents the same way they authenticate humans: with long-lived tokens that grant broad access.
 

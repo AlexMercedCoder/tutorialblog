@@ -8,9 +8,9 @@ tags:
   - AI Agents
   - Enterprise
   - Agentic AI
-canonical: "https://iceberglakehouse.com/posts/chase-catch-gap-agentic-ai-enterprise-scale-2026/"
+canonical: https://iceberglakehouse.com/posts/chase-catch-gap-agentic-ai-enterprise-scale-2026/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/chase-catch-gap-agentic-ai-enterprise-scale-2026/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/chase-catch-gap-agentic-ai-enterprise-scale-2026/).
 
 Building an impressive AI agent demo takes an afternoon. Wire an LLM to a few tools, give it a system prompt, point it at a sample dataset, and it will answer questions, generate SQL, and chain a few steps together convincingly. Getting that same agent to run reliably against real enterprise data, under real access policies, with real business definitions, and having people trust its answers, takes far longer and defeats a large share of the teams that try. That distance, between an agent that works in a demo and an agent that works in production, is the chase-catch gap. Enterprises are chasing agents faster than they can catch up on the operational foundation those agents need.
 

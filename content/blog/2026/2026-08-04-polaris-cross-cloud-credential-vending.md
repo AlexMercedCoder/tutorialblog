@@ -11,10 +11,10 @@ tags:
   - RBAC
   - Multi-Cloud
   - Apache Iceberg
-canonical: "https://iceberglakehouse.com/posts/polaris-cross-cloud-credential-vending/"
+canonical: https://iceberglakehouse.com/posts/polaris-cross-cloud-credential-vending/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/polaris-cross-cloud-credential-vending/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/polaris-cross-cloud-credential-vending/).
 
 # Cross-Cloud Credential Vending in Apache Polaris and the End of Permanent Storage Keys
 

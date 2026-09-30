@@ -9,7 +9,7 @@ tags:
   - ai agents
 canonical: https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/).
 
 # The Metric Contract Mandate: Standardizing Semantic Layers Before AI Agent Access
 

@@ -9,10 +9,10 @@ tags:
   - AI Agents
   - Data Governance
   - Telemetry
-canonical: "https://iceberglakehouse.com/posts/agent-telemetry-iceberg-audit/"
+canonical: https://iceberglakehouse.com/posts/agent-telemetry-iceberg-audit/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agent-telemetry-iceberg-audit/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agent-telemetry-iceberg-audit/).
 
 # Building Agent Telemetry Tables in Iceberg That Survive an Audit
 

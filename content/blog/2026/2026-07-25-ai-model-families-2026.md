@@ -13,7 +13,7 @@ tags:
 canonical: https://datalakehousehub.com/blog/ai-model-families-2026/
 ---
 
-> **Cross-posted.** This article's canonical home is [datalakehousehub.com](https://datalakehousehub.com/blog/ai-model-families-2026/).
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/ai-model-families-2026/).
 
 A team I talked with recently had hardcoded one model name into forty places in their codebase. The model was deprecated with sixty days notice. They spent three weeks on a migration that produced no new features, and then the replacement model's pricing changed the economics of their cheapest feature. Nobody made a bad decision. They just treated a model as a permanent dependency in a market where the average flagship stays flagship for about ten weeks.
 

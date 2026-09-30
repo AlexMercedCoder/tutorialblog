@@ -11,7 +11,7 @@ tags:
   - developer tools
   - agent harnesses
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/agents-with-personalities/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/agents-with-personalities/).
 
 Open your terminal and count the agent CLIs installed on it. On my machine the number is fourteen. Each one was configured separately. Each one has its own idea of what "an agent" is, its own place to store a system prompt, its own way to pin a model, its own permission dialog. When I want a code reviewer that refuses to edit files, I set that up in Claude Code. Then I set it up again in Codex. Then again in Goose. The reviewer I trust is not a thing I own. It is a configuration scattered across five tools, none of which agree on the shape.
 

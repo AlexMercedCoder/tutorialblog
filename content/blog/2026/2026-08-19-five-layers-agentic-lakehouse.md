@@ -11,7 +11,7 @@ tags:
   - MCP
   - semantic layer
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/five-layers-agentic-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/five-layers-agentic-lakehouse/).
 
 Every architecture era gets its reference diagram. The warehouse era had its star schemas and its staging-to-mart flow. The big data era had its lambda architectures. The lakehouse era drew storage, format, catalog, and engines, and settled the argument about where data should live. The agentic era needs its own diagram, because the question changed: not where data lives, but how autonomous systems get to use it, correctly, governedly, and affordably, at machine scale. After two years of building, stalling, and rebuilding, the estates that work have converged on the same shape, and it has five layers: Storage, Catalog, Semantic, Gateway, and Agent Surface.
 

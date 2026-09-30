@@ -10,7 +10,10 @@ tags:
   - optimization
   - data engineering
   - distributed systems
+canonical: https://iceberglakehouse.com/posts/2026-04-29-query-engine-01/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-04-29-query-engine-01/).
 
 <!-- Meta Description: Every database is a collection of engineering tradeoffs. Learn the 9 design decisions that shape how query engines store, index, and process your data. -->
 <!-- Primary Keyword: query engine design -->

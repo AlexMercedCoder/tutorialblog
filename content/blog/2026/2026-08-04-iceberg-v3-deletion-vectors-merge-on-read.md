@@ -11,10 +11,10 @@ tags:
   - Merge-on-Read
   - CDC
   - Streaming
-canonical: "https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read/"
+canonical: https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read/).
 
 # How Iceberg V3 Deletion Vectors Fixed Merge-on-Read for Streaming Tables
 

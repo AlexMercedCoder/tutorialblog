@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-mysql/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-mysql/).
 
 MySQL runs more web applications, SaaS platforms, and e-commerce backends than any other database. It's fast for transactional reads and writes, but it becomes a bottleneck when your data team needs to run analytical queries, join MySQL data with other sources, or build dashboards that don't compete with application traffic.
 

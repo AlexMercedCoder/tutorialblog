@@ -8,8 +8,10 @@ tags:
   - agent identities
   - token exchange
   - column guardrails
+canonical: https://datalakehousehub.com/blog/fine-grained-security-ai-agents/
 ---
 
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/fine-grained-security-ai-agents/).
 
 Machine-speed analytics requires machine-enforced policy, identity, masking, filtering, and audit controls. For security architects and platform teams exposing data tools to agents, the useful question is what changes in production and what simply sounds current.
 

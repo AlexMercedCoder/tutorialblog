@@ -9,10 +9,10 @@ tags:
   - Apache Fluss
   - Kafka
   - Streaming
-canonical: "https://iceberglakehouse.com/posts/fluss-kafka-iceberg-streaming/"
+canonical: https://iceberglakehouse.com/posts/fluss-kafka-iceberg-streaming/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/fluss-kafka-iceberg-streaming/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/fluss-kafka-iceberg-streaming/).
 
 # Apache Fluss and Kafka Solve Different Problems in an Iceberg Pipeline
 

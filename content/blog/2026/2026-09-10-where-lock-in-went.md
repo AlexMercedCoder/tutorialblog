@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/where-lock-in-went/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/where-lock-in-went/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/where-lock-in-went/).
 
 A CIO says the company is not locked in anymore, because the data is in Apache Iceberg on their own object storage in their own account. Any engine can read it. The format is an Apache project. Nobody owns the tables.
 

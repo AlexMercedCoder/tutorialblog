@@ -8,7 +8,10 @@ tags:
   - Dremio
   - Data Engineering
   - Python
+canonical: https://iceberglakehouse.com/posts/2025-12-dremioframe-and-iceframe/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2025-12-dremioframe-and-iceframe/).
 
 Modern data teams want simple tools to work with Iceberg tables and Dremio. Two new Python libraries now make that work easier. The first is DremioFrame. It gives you a clear set of functions for managing your Dremio Cloud or Dremio Software project through code. The second is IceFrame. It gives you a direct way to create and maintain Iceberg tables using PyIceberg and Polars with native extensions. Both libraries are in alpha. This is the best time to try them, share your ideas, and report issues.
 

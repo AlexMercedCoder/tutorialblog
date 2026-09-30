@@ -8,8 +8,10 @@ tags:
   - agentic analytics
   - lakehouse operating layer
   - governed AI data
+canonical: https://iceberglakehouse.com/posts/databricks-summit-2026-lakehouse-agentic-ai-operating-layer/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/databricks-summit-2026-lakehouse-agentic-ai-operating-layer/).
 
 Agentic AI announcements are useful when they validate the need for governed data, semantic context, and cost-aware execution. For data leaders comparing agentic analytics platforms, the useful question is what changes in production and what simply sounds current.
 

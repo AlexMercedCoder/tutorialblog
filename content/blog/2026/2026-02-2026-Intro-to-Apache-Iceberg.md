@@ -10,7 +10,10 @@ tags:
   - apache iceberg
   - apache polaris
   - open source
+canonical: https://iceberglakehouse.com/posts/2026-02-intro-to-apache-iceberg/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-intro-to-apache-iceberg/).
 
 Apache Iceberg is an open-source table format for large analytic datasets. It defines how data files stored on object storage (S3, ADLS, GCS) are organized into a logical table with a schema, partition layout, and consistent point-in-time snapshots. If you've heard the term "data lakehouse," Iceberg is the layer that makes it possible by bringing warehouse-grade reliability to data lake storage.
 

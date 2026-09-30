@@ -10,7 +10,10 @@ tags:
   - connectors
   - data lakehouse
   - federated queries
+canonical: https://iceberglakehouse.com/posts/2026-03-connector-microsoft-sql-server/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-connector-microsoft-sql-server/).
 
 Microsoft SQL Server is one of the most widely deployed enterprise databases in the world. ERP systems, CRM platforms, financial applications, and custom business applications run on SQL Server across on-premises data centers and Azure cloud deployments. But connecting SQL Server data to a modern analytics platform typically requires building ETL pipelines, managing SSIS packages, or purchasing additional SQL Server Enterprise licenses for analytics workloads.
 

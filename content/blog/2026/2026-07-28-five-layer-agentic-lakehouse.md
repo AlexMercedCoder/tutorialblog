@@ -9,10 +9,10 @@ tags:
   - Apache Iceberg
   - Data Architecture
   - Semantic Layer
-canonical: "https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse/"
+canonical: https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/five-layer-agentic-lakehouse/).
 
 # The Five Layers Between Your Lakehouse and a Trustworthy Agent
 

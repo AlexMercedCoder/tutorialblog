@@ -8,7 +8,10 @@ tags:
   - Data Architecture
   - Apache Iceberg
   - Data Lakehouse
+canonical: https://iceberglakehouse.com/posts/2024-3-06-apache-iceberg-the-great-data-equalizer/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-3-06-apache-iceberg-the-great-data-equalizer/).
 
 > [Get a Free Copy of "Apache Iceberg: The Definitive Guide"](https://hello.dremio.com/wp-apache-iceberg-the-definitive-guide-reg.html)
 

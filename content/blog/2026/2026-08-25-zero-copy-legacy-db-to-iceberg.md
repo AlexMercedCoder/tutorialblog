@@ -11,7 +11,7 @@ tags:
   - federation
   - warehouse
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/zero-copy-legacy-db-to-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/zero-copy-legacy-db-to-iceberg/).
 
 The migration plan looked reasonable in the kickoff deck. Extract 4,000 tables from a 15-year-old enterprise warehouse, load them into cloud object storage as Apache Iceberg, repoint the 600 dashboards and 200 scheduled jobs, decommission the old system, and save the license fee. Eighteen months later the warehouse is still running, the object store holds three inconsistent copies of most tables, the dashboards are split between the two systems with nobody sure which is current, and the migration team is running a "double-ETL" pipeline that loads every source into both places every night so neither falls behind. The license fee is still being paid. The cloud bill has doubled.
 

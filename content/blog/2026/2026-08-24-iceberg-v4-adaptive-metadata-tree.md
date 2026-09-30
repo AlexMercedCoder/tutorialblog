@@ -11,7 +11,7 @@ tags:
   - metadata
   - performance
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v4-adaptive-metadata-tree/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v4-adaptive-metadata-tree/).
 
 The best way to understand the centerpiece of the Apache Iceberg v4 design effort is not to read the proposal first. It is to earn the proposal: start from one question, why does every Iceberg commit need to touch so much metadata, follow the format's own requirements to the structure v1 through v3 chose, find the invariant that structure locked in, and then ask what a structure without that invariant has to look like. Do the derivation honestly and you arrive, step by step, at something remarkably close to what the community is actually designing: a root manifest that absorbs small changes directly, flushes accumulated state downward into leaves, and gives the metadata tree a depth that adapts to the table instead of being fixed by the spec. The proposal stops looking like a clever invention and starts looking like the conclusion of an argument, which is the strongest position a design can occupy.
 

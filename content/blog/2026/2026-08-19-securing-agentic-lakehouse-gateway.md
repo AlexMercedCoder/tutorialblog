@@ -11,7 +11,7 @@ tags:
   - MCP
   - threat modeling
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/securing-agentic-lakehouse-gateway/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/securing-agentic-lakehouse-gateway/).
 
 My article on building stateless tool gateways ended with a promise deferred: the gateway is where agent traffic converges, which makes it where governance, metering, and security all attach, and the security story is large enough to deserve its own treatment. This is that treatment, and it is deliberately the adversary's article rather than the builder's. Where the build piece asked how do I stand up a gateway that scales, this one asks how does an attacker turn my agent estate against me, and what stops them, because the two questions have different shapes: the first is answered by architecture, the second by threat modeling, and an estate that got the first right can still lose badly to the second.
 

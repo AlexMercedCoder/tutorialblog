@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-03-aitool-jetbrains-ai/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-aitool-jetbrains-ai/).
 
 JetBrains AI Assistant is built into IntelliJ IDEA, PyCharm, DataGrip, and every JetBrains IDE. It provides AI chat, inline code generation, multi-file refactoring, and agentic background workers that can autonomously execute multi-step tasks. Dremio is a unified lakehouse platform that provides business context through its semantic layer, universal data access through query federation, and interactive speed through Reflections and Apache Arrow.
 

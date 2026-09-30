@@ -7,7 +7,10 @@ category: "AI"
 tags:
   - AI
   - langchain
+canonical: https://iceberglakehouse.com/posts/2025-02-crash-course-on-langchain/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2025-02-crash-course-on-langchain/).
 
 ## Free Resources
 

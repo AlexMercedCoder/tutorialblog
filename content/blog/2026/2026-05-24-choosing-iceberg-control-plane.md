@@ -10,7 +10,10 @@ tags:
   - apache polaris
   - unity catalog iceberg
   - iceberg rest catalog
+canonical: https://iceberglakehouse.com/posts/2026-05-24-choosing-iceberg-control-plane/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-choosing-iceberg-control-plane/).
 
 # Choosing the Right Iceberg Control Plane: Polaris vs. Unity Catalog vs. Cloud REST
 

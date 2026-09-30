@@ -11,7 +11,10 @@ tags:
   - Hugging Face
   - Cybersecurity
   - OpenAI
+canonical: https://iceberglakehouse.com/posts/value-of-open-models-security/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/value-of-open-models-security/).
 
 *By Alex Merced*
 

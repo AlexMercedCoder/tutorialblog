@@ -6,7 +6,10 @@ author: "Alex Merced"
 category: "Agentic Analytics"
 tags:
   - Top Agentic Analytics Tools 2026
+canonical: https://datalakehousehub.com/blog/top-agentic-analytics-tools-2026/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/top-agentic-analytics-tools-2026/).
 
 # Comparing the Top 2026 Agentic Analytics Tools: ThoughtSpot, Databricks, and Tableau
 

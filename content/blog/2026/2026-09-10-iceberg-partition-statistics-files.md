@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-partition-statistics-files/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-partition-statistics-files/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-partition-statistics-files/).
 
 A table with 40,000 partitions takes eleven seconds to plan a query that scans three of them. The scan itself finishes in two. Somebody looks at the query profile, sees that most of the time went into planning, and asks the reasonable question: why does the engine have to read so much metadata to figure out it needs almost none of it?
 

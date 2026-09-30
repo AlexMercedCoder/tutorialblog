@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/ags-multi-agent-analytics-workflow/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/ags-multi-agent-analytics-workflow/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/ags-multi-agent-analytics-workflow/).
 
 A multi-agent analytics workflow built with the Agentic Graph Specification (AGS) is a YAML file that splits one business question into bounded steps. Each step declares its inputs, outputs, model tier, budget, and machine-checkable success criteria. Verification gates sit between steps, so a wrong number fails a check before any person reads it.
 

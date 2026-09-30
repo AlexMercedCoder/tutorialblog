@@ -8,9 +8,9 @@ tags:
   - Dremio
   - Materialized Views
   - Lakehouse Optimization
-canonical: "https://iceberglakehouse.com/posts/automated-materialized-views-autonomous-table-optimization-dremio-agentic-lakehouse/"
+canonical: https://iceberglakehouse.com/posts/automated-materialized-views-autonomous-table-optimization-dremio-agentic-lakehouse/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/automated-materialized-views-autonomous-table-optimization-dremio-agentic-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/automated-materialized-views-autonomous-table-optimization-dremio-agentic-lakehouse/).
 
 Traditional lakehouse maintenance runs on a schedule. Someone writes a cron job to compact small files at 2 a.m., another to refresh a materialized view every hour, another to expire old snapshots on Sunday. This works when workloads are predictable, when the same dashboards hit the same tables in the same patterns week after week. AI-era workloads are not predictable. An agent investigating a business question does not run one query. It runs a burst of ten or twenty, each building on the last, joining datasets no one anticipated, filtering on columns no one indexed for, and it does this at whatever moment the business question arises rather than on a schedule you set in advance. Static maintenance built for steady BI traffic falls behind irregular agentic demand, and it falls behind in ways that are hard to see until latency and cost both creep up.
 

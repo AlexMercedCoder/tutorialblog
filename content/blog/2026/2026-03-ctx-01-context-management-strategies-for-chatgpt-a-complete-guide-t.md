@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-chatgpt/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-chatgpt/).
 
 Getting consistently useful results from ChatGPT requires more than writing good prompts. The real differentiator is how you manage context: the background information, instructions, documents, and accumulated knowledge that shapes every response ChatGPT generates. Without deliberate context management, you end up repeating yourself, getting generic answers, and wasting time course-correcting the AI.
 

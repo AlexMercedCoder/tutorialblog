@@ -11,7 +11,10 @@ tags:
   - delta sharing
   - privacy budget data analytics
   - aws clean rooms
+canonical: https://iceberglakehouse.com/posts/2026-05-24-clean-rooms-privacy/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-clean-rooms-privacy/).
 
 # Clean Rooms for Privacy-Preserving Analytics
 

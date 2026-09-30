@@ -12,7 +12,10 @@ tags:
   - opa rego lakehouse
   - tag-based policies
   - bigquery row-level security
+canonical: https://iceberglakehouse.com/posts/2026-05-24-policy-as-code-governance/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-policy-as-code-governance/).
 
 # Policy as Code for Lakehouse Governance
 

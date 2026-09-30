@@ -8,7 +8,10 @@ tags:
   - data lakehouse
   - data engineering
   - data modeling
+canonical: https://iceberglakehouse.com/posts/2024-10-data-modeling-events-entities/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-10-data-modeling-events-entities/).
 
 Structuring data thoughtfully is critical for both operational efficiency and analytical value. Data modeling helps us define the relationships, constraints, and organization of data within our systems. One of the key decisions in data modeling is choosing between modeling for events or entities. Both approaches offer unique insights, but deciding when to use each can make or break the effectiveness of a data platform.
 

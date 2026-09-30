@@ -9,7 +9,7 @@ tags:
   - security
 canonical: https://iceberglakehouse.com/posts/lakehouse-encryption-deep-dive/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/lakehouse-encryption-deep-dive/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/lakehouse-encryption-deep-dive/).
 
 # File Encryption for the Lakehouse: The Terminology, the Machinery, and the Hard Problem of Interoperable Encrypted Tables
 

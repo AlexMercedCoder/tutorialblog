@@ -12,7 +12,7 @@ tags:
   - Organization
 canonical: https://iceberglakehouse.com/posts/data-team-of-the-agentic-era/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/data-team-of-the-agentic-era/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/data-team-of-the-agentic-era/).
 
 The standard data team was assembled around a set of scarcities. Writing production pipelines required someone who knew Spark internals, so there was a data engineer. Building models required someone who knew statistics and Python, so there was a data scientist. Answering business questions required someone who knew SQL and the warehouse, so there was an analyst. Running the platform required someone who knew Kubernetes and cost management, so there was a platform engineer. Each role existed because the skill was hard to acquire and the work was too much for one person to hold.
 

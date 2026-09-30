@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-claude-cowork/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-claude-cowork/).
 
 Claude CoWork represents a fundamentally different approach to AI context management. Unlike chat interfaces where you send messages and receive responses, CoWork is an autonomous agent that works on your local machine, reads and writes files directly, and executes multi-step tasks with minimal supervision. For knowledge workers who spend their days in documents, spreadsheets, and presentations, CoWork replaces the constant back-and-forth of copy-paste workflows with direct delegation.
 

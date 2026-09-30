@@ -8,7 +8,10 @@ tags:
   - data lakehouse
   - apache iceberg
   - dremio
+canonical: https://datalakehousehub.com/blog/2024-12-2025-guide-architecting-an-iceberg-lakehouse/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024-12-2025-guide-architecting-an-iceberg-lakehouse/).
 
 - [Blog: What is a Data Lakehouse and a Table Format?](https://www.dremio.com/blog/apache-iceberg-crash-course-what-is-a-data-lakehouse-and-a-table-format/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=iceberg-2025-guide&utm_content=alexmerced&utm_term=external_blog)
 - [Free Copy of Apache Iceberg the Definitive Guide](https://hello.dremio.com/wp-apache-iceberg-the-definitive-guide-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=iceberg-2025-guide&utm_content=alexmerced&utm_term=external_blog)

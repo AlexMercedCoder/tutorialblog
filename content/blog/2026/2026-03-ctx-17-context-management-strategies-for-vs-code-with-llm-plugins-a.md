@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-vscode-llm-plugins/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-vscode-llm-plugins/).
 
 Visual Studio Code is the most widely used code editor in the world, and its extensibility means you can integrate AI capabilities through a growing ecosystem of LLM plugins. Unlike purpose-built AI editors (Cursor, Windsurf, Zed), VS Code gives you the freedom to choose and combine AI extensions, configure them to your preferences, and even switch between providers without changing editors. The tradeoff is that context management is not as seamlessly integrated as in dedicated AI editors. It requires more deliberate configuration.
 

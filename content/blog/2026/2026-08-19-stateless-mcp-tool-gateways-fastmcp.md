@@ -12,7 +12,7 @@ tags:
   - Kubernetes
   - AI agents
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/stateless-mcp-tool-gateways-fastmcp/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/stateless-mcp-tool-gateways-fastmcp/).
 
 The gap between an agent demo and an agent platform is an infrastructure gap, and it has a specific shape. The demo runs one MCP server on a laptop, one client connected, state held comfortably in process memory. The platform serves thousands of agents through load balancers into autoscaled pods, where in-process state is a bug, sessions are a scaling ceiling, and every assumption the demo made about who talks to whom breaks on the second replica. For two years, teams building serious Model Context Protocol deployments engineered around a protocol that assumed the demo's shape. As of the 2026-07-28 specification, they no longer have to: MCP's core went stateless, and tool gateways can finally be built like the web services they always needed to be.
 

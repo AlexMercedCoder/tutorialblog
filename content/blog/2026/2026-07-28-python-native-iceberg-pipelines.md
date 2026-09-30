@@ -9,10 +9,10 @@ tags:
   - Python
   - PyIceberg
   - Data Pipelines
-canonical: "https://iceberglakehouse.com/posts/python-native-iceberg-pipelines/"
+canonical: https://iceberglakehouse.com/posts/python-native-iceberg-pipelines/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/python-native-iceberg-pipelines/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/python-native-iceberg-pipelines/).
 
 # Building Iceberg Pipelines in Python Without Standing Up Spark
 

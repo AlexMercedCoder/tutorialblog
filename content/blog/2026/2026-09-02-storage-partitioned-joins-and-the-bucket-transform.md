@@ -12,7 +12,7 @@ tags:
   - Spark
 canonical: https://iceberglakehouse.com/posts/storage-partitioned-joins-and-the-bucket-transform/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/storage-partitioned-joins-and-the-bucket-transform/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/storage-partitioned-joins-and-the-bucket-transform/).
 
 A nightly job joins a 3-billion-row orders table to a 400-million-row customers table on `customer_id`. Both are Apache Iceberg tables. Both are large enough that neither side fits in a broadcast. The engine does what engines do: it reads both tables, hashes every row by `customer_id`, shuffles both sides across the network so that matching keys land on the same worker, sorts, and merges. The shuffle moves close to a terabyte. The job takes ninety minutes and most of that time is spent moving data that is already sitting in files, waiting to be rearranged.
 

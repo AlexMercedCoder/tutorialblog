@@ -10,10 +10,10 @@ tags:
   - Security
   - Lakehouse
   - MCP
-canonical: "https://iceberglakehouse.com/posts/preventing-prompt-injection-lakehouse-gateway/"
+canonical: https://iceberglakehouse.com/posts/preventing-prompt-injection-lakehouse-gateway/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/preventing-prompt-injection-lakehouse-gateway/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/preventing-prompt-injection-lakehouse-gateway/).
 
 # Defending the Lakehouse Gateway Against Prompt Injection and Data Exfiltration
 

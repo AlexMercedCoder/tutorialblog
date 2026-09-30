@@ -12,7 +12,7 @@ tags:
     - semantic layer
 canonical: https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/metric-contract-mandate-semantic-layers-ai-agent-access/).
 
 
 

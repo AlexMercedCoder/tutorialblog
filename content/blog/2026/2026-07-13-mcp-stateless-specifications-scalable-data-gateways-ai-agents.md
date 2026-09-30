@@ -9,9 +9,9 @@ tags:
   - Data Gateways
   - AI Agents
   - Specifications
-canonical: "https://iceberglakehouse.com/posts/mcp-stateless-specifications-scalable-data-gateways-ai-agents/"
+canonical: https://iceberglakehouse.com/posts/mcp-stateless-specifications-scalable-data-gateways-ai-agents/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/mcp-stateless-specifications-scalable-data-gateways-ai-agents/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/mcp-stateless-specifications-scalable-data-gateways-ai-agents/).
 
 A Model Context Protocol server that holds session state in memory is a server you cannot scale by adding replicas. The moment one process remembers which user is on which connection, which query results are cached for whom, and where a multi-step tool interaction left off, you have coupled correctness to a specific instance. Kill that instance and the state is gone. Add another instance and requests routed to it know nothing. This is the core operational problem with stateful gateways, and it is why the direction of travel for enterprise MCP deployments is toward stateless designs.
 

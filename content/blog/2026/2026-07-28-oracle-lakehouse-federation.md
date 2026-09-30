@@ -9,10 +9,10 @@ tags:
   - Oracle
   - Data Federation
   - Lakehouse
-canonical: "https://iceberglakehouse.com/posts/oracle-lakehouse-federation/"
+canonical: https://iceberglakehouse.com/posts/oracle-lakehouse-federation/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/oracle-lakehouse-federation/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/oracle-lakehouse-federation/).
 
 # Federating Oracle With an Open Lakehouse Instead of Migrating It
 

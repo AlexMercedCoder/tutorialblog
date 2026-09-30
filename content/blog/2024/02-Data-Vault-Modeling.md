@@ -8,7 +8,10 @@ tags:
   - Data Lakehouse
   - Data Lake
   - Data Modeling
+canonical: https://datalakehousehub.com/blog/2024/2024-02-data-vault-modeling/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024/2024-02-data-vault-modeling/).
 
 [Subscribe to my Data Youtube Channel and Podcasts, Links Here](https://bio.alexmerced.com/data)
 

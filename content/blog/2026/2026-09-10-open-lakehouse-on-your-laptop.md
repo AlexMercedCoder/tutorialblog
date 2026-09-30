@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/open-lakehouse-on-your-laptop/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/open-lakehouse-on-your-laptop/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/open-lakehouse-on-your-laptop/).
 
 Most people learn the open lakehouse backwards. They read five vendor pages, collect a stack of Apache project names, and still cannot answer a basic question: when I run a query, what does each piece actually do?
 

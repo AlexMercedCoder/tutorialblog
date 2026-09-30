@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-types-of-data-models/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-types-of-data-models/).
 
 ![Three layers of data modeling from business concepts to database implementation](images/data_modeling/02/types-of-data-models.png)
 

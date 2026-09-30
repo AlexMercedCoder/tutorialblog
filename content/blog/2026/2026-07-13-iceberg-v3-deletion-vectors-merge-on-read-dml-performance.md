@@ -9,9 +9,9 @@ tags:
   - Iceberg v3
   - Deletion Vectors
   - DML
-canonical: "https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read-dml-performance/"
+canonical: https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read-dml-performance/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read-dml-performance/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v3-deletion-vectors-merge-on-read-dml-performance/).
 
 Deleting one row from a data lake used to mean rewriting a whole file. If a 512 MB Parquet file held a million rows and you needed to delete one of them, the classic copy-on-write approach read the file, dropped the row, and wrote a fresh 512 MB file, all to remove a single record. That write amplification is the reason updates and deletes were historically painful on immutable file formats, and it is the problem that deletion vectors and merge-on-read tables set out to reduce.
 

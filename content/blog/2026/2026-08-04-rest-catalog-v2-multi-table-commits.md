@@ -10,10 +10,10 @@ tags:
   - Apache Polaris
   - Catalog
   - Data Lakehouse
-canonical: "https://iceberglakehouse.com/posts/rest-catalog-v2-multi-table-commits/"
+canonical: https://iceberglakehouse.com/posts/rest-catalog-v2-multi-table-commits/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/rest-catalog-v2-multi-table-commits/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/rest-catalog-v2-multi-table-commits/).
 
 # How the Iceberg REST Catalog Turned Into the Lakehouse Control Plane
 

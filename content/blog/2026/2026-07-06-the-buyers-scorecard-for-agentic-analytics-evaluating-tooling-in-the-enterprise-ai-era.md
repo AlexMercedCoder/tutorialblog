@@ -13,7 +13,7 @@ tags:
     - procurement
 canonical: https://iceberglakehouse.com/posts/buyers-scorecard-agentic-analytics-enterprise-ai-era/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/buyers-scorecard-agentic-analytics-enterprise-ai-era/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/buyers-scorecard-agentic-analytics-enterprise-ai-era/).
 
 
 

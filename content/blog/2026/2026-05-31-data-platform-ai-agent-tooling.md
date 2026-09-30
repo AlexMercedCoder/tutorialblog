@@ -10,7 +10,10 @@ tags:
   - MCP
   - Agentic Analytics
   - Data Engineering
+canonical: https://iceberglakehouse.com/posts/data-platform-ai-agent-tooling/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/data-platform-ai-agent-tooling/).
 
 # Data Platform Native AI Agent Tooling in 2026
 

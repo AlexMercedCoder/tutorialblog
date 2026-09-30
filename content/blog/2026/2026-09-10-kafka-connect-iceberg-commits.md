@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/kafka-connect-iceberg-commits/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/kafka-connect-iceberg-commits/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/kafka-connect-iceberg-commits/).
 
 A team runs the Iceberg sink connector for six months without thinking about it. Then a Kafka Connect worker gets restarted during a deployment, and a downstream reconciliation turns up several thousand rows that exist twice. The connector documentation says exactly-once. The team's assumption was that exactly-once meant exactly once.
 

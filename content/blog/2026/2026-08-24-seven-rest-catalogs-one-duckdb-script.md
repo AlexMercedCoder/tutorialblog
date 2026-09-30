@@ -11,7 +11,7 @@ tags:
   - DuckDB
   - Polaris
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/seven-rest-catalogs-one-duckdb-script/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/seven-rest-catalogs-one-duckdb-script/).
 
 A question has been making the rounds in lakehouse circles this year, usually phrased with some disbelief: someone points DuckDB, the in-process analytical database, at an Apache Iceberg REST catalog, creates a table, inserts rows, runs an update, and then repoints the same script at a completely different catalog from a completely different vendor, and it mostly just works. Practitioners have been trading notes on running near-identical DuckDB code against a half dozen or more catalog implementations, open source and commercial, self-hosted and managed. The disbelief is earned. Five years ago, "same code, different catalog" was not a claim anyone in this ecosystem made with a straight face, and the people making it now include the maintainers of the client itself.
 

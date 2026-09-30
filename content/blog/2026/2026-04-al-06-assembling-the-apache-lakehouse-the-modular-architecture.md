@@ -13,7 +13,10 @@ tags:
   - iceberg
   - polaris
   - arrow
+canonical: https://iceberglakehouse.com/posts/2026-03-07-assembling-apache-lakehouse/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-07-assembling-apache-lakehouse/).
 
 *Read the complete Open Source and the Lakehouse series:*
 * [Part 1: Apache Software Foundation: History, Purpose, and Process](/2026/2026-04-al-01-apache-software-foundation-history-purpose-and-process/)

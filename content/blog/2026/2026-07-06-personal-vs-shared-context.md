@@ -9,7 +9,7 @@ tags:
   - ai agents
 canonical: https://iceberglakehouse.com/posts/personal-vs-shared-context/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/personal-vs-shared-context/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/personal-vs-shared-context/).
 
 # Personal Context vs. Shared Context: A Deep Dive Into How Humans and Organizations Should Feed Their AI Agents
 

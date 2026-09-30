@@ -12,7 +12,10 @@ tags:
   - choosing vector database
   - weaviate bm25
   - milvus hybrid search
+canonical: https://iceberglakehouse.com/posts/2026-05-24-vector-stores-retrieval/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-05-24-vector-stores-retrieval/).
 
 # Choosing Vector Stores for Retrieval Workloads
 

@@ -8,8 +8,10 @@ tags:
   - lakehouse transactional analytical processing
   - Iceberg updates
   - analytical freshness
+canonical: https://iceberglakehouse.com/posts/ltap-lakehouse-transactional-analytical-processing-2026/
 ---
 
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/ltap-lakehouse-transactional-analytical-processing-2026/).
 
 Lakehouse transactional analytical processing is useful only when teams define freshness, isolation, and workload boundaries clearly. For data architects evaluating mixed analytical and operational workloads, the useful question is what changes in production and what simply sounds current.
 

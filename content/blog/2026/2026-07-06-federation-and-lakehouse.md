@@ -9,7 +9,7 @@ tags:
   - unified access
 canonical: https://iceberglakehouse.com/posts/federation-and-lakehouse/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/federation-and-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/federation-and-lakehouse/).
 
 # Federation and the Lakehouse: Two Roads to Unified Data Access, and How to Know Which One to Take
 

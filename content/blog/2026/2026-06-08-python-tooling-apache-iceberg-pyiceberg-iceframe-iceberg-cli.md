@@ -11,7 +11,10 @@ tags:
   - "iceberg-cli"
   - "Spark-free Iceberg"
   - "Iceberg Python ecosystem"
+canonical: https://datalakehousehub.com/blog/python-tooling-apache-iceberg-pyiceberg-iceframe-iceberg-cli/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/python-tooling-apache-iceberg-pyiceberg-iceframe-iceberg-cli/).
 
 ## The Python Iceberg Ecosystem in 2026
 

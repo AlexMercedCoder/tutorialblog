@@ -9,7 +9,7 @@ tags:
     - data lakehouse
     - apache iceberg
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-v3-variant-type-ai-json-payloads/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-v3-variant-type-ai-json-payloads/).
 
 
 

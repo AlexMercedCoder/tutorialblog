@@ -7,7 +7,10 @@ category: "Data Lakehouse"
 tags:
   - data lakehouse
   - data engineering
+canonical: https://iceberglakehouse.com/posts/2024-8-data-lakehouses-101/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-8-data-lakehouses-101/).
 
 - [Sign-up for this free Apache Iceberg Crash Course](https://bit.ly/am-2024-iceberg-live-crash-course-1)
 - [Get a free copy of Apache Iceberg the Definitive Guide](https://bit.ly/am-iceberg-book)

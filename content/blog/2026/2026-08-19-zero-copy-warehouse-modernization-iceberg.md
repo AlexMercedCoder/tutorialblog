@@ -11,7 +11,7 @@ tags:
   - zero-copy
   - data engineering
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/zero-copy-warehouse-modernization-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/zero-copy-warehouse-modernization-iceberg/).
 
 Warehouse migrations have a reputation, and the reputation is earned. The classic project copies everything: export the tables, rebuild the schemas, port the pipelines, recreate the reports, run both systems in parallel until trust transfers, then cut over. Industry analyses of these projects find the same pattern year after year: significant delays in a large share of them, parallel-run periods that stretch from months into years, and organizations paying two full infrastructure bills long past the date the business case promised one. The migration becomes a residency.
 

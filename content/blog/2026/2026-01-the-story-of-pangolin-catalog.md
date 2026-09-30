@@ -10,7 +10,10 @@ tags:
   - apache iceberg
   - apache polaris
   - open source
+canonical: https://iceberglakehouse.com/posts/2026-01-the-story-of-pangolin-catalog/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-01-the-story-of-pangolin-catalog/).
 
 **Get Data Lakehouse Books:**
 - [Apache Iceberg: The Definitive Guide](https://drmevn.fyi/tableformatblog)

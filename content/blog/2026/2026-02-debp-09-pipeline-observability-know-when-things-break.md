@@ -10,7 +10,10 @@ tags:
   - data pipelines
   - data quality
   - data lakehouse
+canonical: https://iceberglakehouse.com/posts/2026-02-debp-observability-monitoring/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-debp-observability-monitoring/).
 
 ![Pipeline observability dashboard showing metrics, logs, and data lineage](images/debp/09/observability-dashboard.png)
 

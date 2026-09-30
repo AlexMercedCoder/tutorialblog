@@ -9,9 +9,9 @@ tags:
   - Concurrency
   - AI Agents
   - Data Engineering
-canonical: "https://iceberglakehouse.com/posts/llm-agency-concurrency-isolation-high-frequency-agent-writes-iceberg/"
+canonical: https://iceberglakehouse.com/posts/llm-agency-concurrency-isolation-high-frequency-agent-writes-iceberg/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/llm-agency-concurrency-isolation-high-frequency-agent-writes-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/llm-agency-concurrency-isolation-high-frequency-agent-writes-iceberg/).
 
 A single autonomous agent can attempt more table commits in an hour than a team of analysts produces in a week. Multiply that by a fleet of agents running remediation loops, annotation passes, feature backfills, and audit logging, and you get a write pattern that looks nothing like the batch jobs Apache Iceberg was first tuned for. The table format still holds. Iceberg's transactional guarantees are real. But the operational assumptions behind "a handful of well-behaved writers" fall apart when the writers are software that never sleeps and rarely coordinates with each other.
 

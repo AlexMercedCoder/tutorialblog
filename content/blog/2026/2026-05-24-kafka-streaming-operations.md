@@ -10,7 +10,10 @@ tags:
   - kafka 4.0 upgrade
   - kip-848 consumer rebalance
   - kafka kraft
+canonical: https://datalakehousehub.com/blog/2026-05-kafka-streaming-operations/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2026-05-kafka-streaming-operations/).
 
 # Kafka 4.0 Changes Streaming Platform Operations
 

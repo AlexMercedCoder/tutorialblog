@@ -11,7 +11,7 @@ tags:
   - Maintenance
 canonical: https://iceberglakehouse.com/posts/iceberg-table-properties-that-matter/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-table-properties-that-matter/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-table-properties-that-matter/).
 
 Every Apache Iceberg table carries a `properties` map in its metadata file. The reference implementation defines somewhere north of a hundred keys that engines read from it, and the configuration page that lists them is organized alphabetically by prefix rather than by consequence. The result is that most tables run on defaults, and most tuning happens by copying a `TBLPROPERTIES` block from a blog post without knowing what each line does.
 

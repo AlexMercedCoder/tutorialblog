@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/sovereign-lakehouse/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/sovereign-lakehouse/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/sovereign-lakehouse/).
 
 A manufacturer in southern Germany asked me a question during an architecture review that I have thought about since. Their data sat in a Frankfurt region. Their contract specified EU processing. Their auditor had signed off. Then somebody asked where the catalog ran, and the answer was a software-as-a-service control plane in Virginia.
 

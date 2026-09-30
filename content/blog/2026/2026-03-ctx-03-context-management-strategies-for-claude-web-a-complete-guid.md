@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-claude-web/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-claude-web/).
 
 Claude's web interface at claude.ai combines one of the largest context windows in the industry with a structured Project system that makes it genuinely useful for sustained, complex work. While many AI chat interfaces are limited to one-off conversations, Claude Web is designed for ongoing engagement where the AI accumulates understanding of your work over time. The key to unlocking that potential is managing context deliberately rather than treating each conversation as a blank slate.
 

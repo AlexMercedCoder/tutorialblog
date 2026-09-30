@@ -7,7 +7,10 @@ category: "Data Engineering"
 tags:
   - Data Lakehouse
   - Data Engineering
+canonical: https://datalakehousehub.com/blog/2025-07-discovering-or-organizing-lakehouse-iceberg-meetups/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2025-07-discovering-or-organizing-lakehouse-iceberg-meetups/).
 
 ## Free Resources  
 - **[Free Apache Iceberg Course](https://hello.dremio.com/webcast-an-apache-iceberg-lakehouse-crash-course-reg.html?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=lakehouse-meetups&utm_content=alexmerced&utm_term=external_blog)**  

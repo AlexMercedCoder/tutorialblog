@@ -10,7 +10,10 @@ tags:
   - developer tools
   - agentic development
   - prompt engineering
+canonical: https://iceberglakehouse.com/posts/2026-03-context-perplexity/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-03-context-perplexity/).
 
 Perplexity AI occupies a unique position in the AI landscape: it is a research-first tool that combines conversational AI with real-time web search to produce answers grounded in current sources. Unlike coding-focused tools or general chatbots, Perplexity is built for information retrieval, analysis, and synthesis. Its context management is designed around Spaces (persistent research workspaces), Focus Modes (search scope control), and an elastic context window that adapts to the complexity of your query.
 

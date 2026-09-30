@@ -8,7 +8,10 @@ tags:
   - data lakehouse
   - data engineering
 slug: 2024-7-upcoming-data-talks-from-alex-merced
+canonical: https://datalakehousehub.com/blog/2024-7-upcoming-data-talks-from-alex-merced/
 ---
+
+> **Cross-posted.** This article's canonical home is [Data Lakehouse Hub](https://datalakehousehub.com/blog/2024-7-upcoming-data-talks-from-alex-merced/).
 
 In this article, I will provide you with a list of events I'm currently scheduled to speak at. New events are regularly being added, so here are a couple of good spots to always be in the know.
 

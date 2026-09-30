@@ -12,7 +12,7 @@ tags:
   - Compliance
 canonical: https://iceberglakehouse.com/posts/gdpr-hard-deletes-on-iceberg/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/gdpr-hard-deletes-on-iceberg/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/gdpr-hard-deletes-on-iceberg/).
 
 A privacy team receives an erasure request under Article 17 of the General Data Protection Regulation (GDPR). The customer wants every record about them gone. An engineer runs `DELETE FROM events WHERE user_id = 48213` against the Apache Iceberg table, the query returns "1,204 rows deleted," and the ticket is closed. Three weeks later a compliance audit asks for proof, and the engineer time-travels to the snapshot from the day before the delete. All 1,204 rows are there. So are the ones in the snapshot from a month before, and the ones in the disaster-recovery replica, and the ones in the object store's version history.
 

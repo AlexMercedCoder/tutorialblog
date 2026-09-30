@@ -10,7 +10,7 @@ tags:
   - columnar storage
 canonical: https://iceberglakehouse.com/posts/file-formats-renaissance/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/file-formats-renaissance/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/file-formats-renaissance/).
 
 # The File Format Renaissance: Parquet, Lance, Vortex, Nimble, BtrBlocks, and the New Physics of Columnar Storage
 

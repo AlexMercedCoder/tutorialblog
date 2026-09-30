@@ -13,7 +13,7 @@ tags:
     - open table formats
     - apache iceberg
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/arrow-flight-iceberg-rest-catalog-columnar-transfers/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/arrow-flight-iceberg-rest-catalog-columnar-transfers/).
 
 
 

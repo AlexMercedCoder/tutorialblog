@@ -13,7 +13,7 @@ tags:
 canonical: https://iceberglakehouse.com/posts/iceberg-on-kubernetes/
 ---
 
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/iceberg-on-kubernetes/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/iceberg-on-kubernetes/).
 
 A team moves their lakehouse onto Kubernetes because everything else already runs there. The catalog goes into a Deployment, Spark jobs run through the Spark operator, and maintenance becomes a CronJob. Six weeks later the catalog is getting evicted to make room for batch executors, a compaction job that overlaps with the next night's ingestion is producing commit conflicts nobody is watching, and a credential that expires mid-job takes down a maintenance run that then retries from the beginning.
 

@@ -7,7 +7,10 @@ category: "Data Lakehouse"
 tags:
   - data lakehouse
   - data engineering
+canonical: https://iceberglakehouse.com/posts/2024-10-bronze-silver-gold-data/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2024-10-bronze-silver-gold-data/).
 
 - [Apache Iceberg 101](https://www.dremio.com/lakehouse-deep-dives/apache-iceberg-101/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=threelayers&utm_content=alexmerced&utm_term=external_blog)
 - [Hands-on Intro with Apache iceberg](https://www.dremio.com/blog/intro-to-dremio-nessie-and-apache-iceberg-on-your-laptop/?utm_source=ev_external_blog&utm_medium=influencer&utm_campaign=threelayers&utm_content=alexmerced&utm_term=external_blog)

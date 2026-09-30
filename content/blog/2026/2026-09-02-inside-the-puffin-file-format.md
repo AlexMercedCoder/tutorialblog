@@ -12,7 +12,7 @@ tags:
   - Theta Sketches
 canonical: https://iceberglakehouse.com/posts/inside-the-puffin-file-format/
 ---
-> **Cross-posted.** This article's canonical home is [iceberglakehouse.com](https://iceberglakehouse.com/posts/inside-the-puffin-file-format/).
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/inside-the-puffin-file-format/).
 
 A query joins a 2-billion-row fact table to a 40,000-row dimension table. The optimizer has to decide which side to broadcast and which side to hash. It reads the manifests and finds row counts, min and max values, and null counts for every column in every file. What it does not find is how many distinct customer IDs exist in the fact table. Without that number it guesses, and a wrong guess means shuffling terabytes that a broadcast join avoids.
 

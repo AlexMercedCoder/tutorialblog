@@ -10,7 +10,10 @@ tags:
   - data lakehouse
   - star schema
   - data architecture
+canonical: https://iceberglakehouse.com/posts/2026-02-dm-dimensional-modeling/
 ---
+
+> **Cross-posted.** This article's canonical home is [Alex Merced's Lakehouse Blog](https://iceberglakehouse.com/posts/2026-02-dm-dimensional-modeling/).
 
 ![Dimensional model showing a central fact table connected to surrounding dimension tables](images/data_modeling/05/dimensional-modeling.png)
 
