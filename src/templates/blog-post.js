@@ -105,7 +105,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         )}
         <section
           className="hb-prose"
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: post.html.replace(/<(\/?)h1(\s|>)/g, "<$1h2$2") }}
         />
         {post.frontmatter.tags && (
             <div className="hb-tagRow">
