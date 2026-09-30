@@ -6,7 +6,7 @@ module.exports = {
       name: `Alex Merced`,
       summary: `Developer from devNursery.com and alexmercedcoder.dev`,
     },
-    description: `Hands-on web development and programming tutorials by Alex Merced — JavaScript, TypeScript, React, Python, data engineering, and more.`,
+    description: `Hands-on web development and programming tutorials by Alex Merced: JavaScript, TypeScript, React, Python, data engineering, and more.`,
     siteUrl: `https://tuts.alexmercedcoder.dev/`,
     social: {
       twitter: `alexmercedcoder`,
@@ -14,18 +14,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        trackingIds: [
-          "G-GL7YLRDWX1", // Google Analytics / GA
-        ],
-        pluginConfig: {
-          head: true,
-          respectDNT: true,
-        },
-      },
-    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -144,6 +132,17 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         excludes: [`/404`, `/404.html`, `/using-typescript`, `/page/*`],
+        query: `
+          {
+            site { siteMetadata { siteUrl } }
+            allSitePage { nodes { path pageContext } }
+          }
+        `,
+        // Thin tag pages and syndicated copies (canonical elsewhere) are left out.
+        resolvePages: ({ allSitePage: { nodes } }) =>
+          nodes.filter(n => !(n.pageContext && n.pageContext.sitemapExclude)),
+        // Netlify serves lowercase paths; list the URL that answers 200.
+        serialize: ({ path }) => ({ url: encodeURI(decodeURI(path).toLowerCase()) }),
       },
     },
     {

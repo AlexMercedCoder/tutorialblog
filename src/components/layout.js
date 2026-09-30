@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import ScrollToTop from "./scrollToTop"
 import ThemeContext from "../context/ThemeContext"
+import network from "../../network/network.json"
 
 const useDarkMode = () => {
   const [isDark, setIsDark] = React.useState(false)
@@ -78,42 +79,53 @@ const Layout = ({ location, title, children, wide = false }) => {
 
         <main className={wrapClass}>{children}</main>
 
+        {network.cta && (
+          <section className="hb-cta" aria-label={network.cta.heading}>
+            <div className="hb-wrap hb-ctaInner">
+              <h2 className="hb-ctaTitle">{network.cta.heading}</h2>
+              <ul className="hb-ctaLinks">
+                {network.cta.links.map((link, i) => (
+                  <li key={link.event}>
+                    <a
+                      href={link.url}
+                      data-network-event={link.event}
+                      className={i === 0 ? "hb-ctaPrimary" : "hb-ctaSecondary"}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <footer className="hb-footer">
           <div className="hb-wrap">
             <div className="hb-footerRow">
               <span>© {new Date().getFullYear()} Alex Merced</span>
               <span className="hb-footerLinks">
-                <a href="https://alexmerced.com">AlexMerced.com</a>
-                <a href="https://whoisalexmerced.com">WhoIsAlexMerced.com</a>
-                <a href="https://alexmercedmedia.com">AlexMercedMedia.com</a>
-                <a href="https://branding.alexmerced.com">Branding.AlexMerced.com</a>
-                <a href="https://alexmercedcoder.dev">AlexMercedCoder.dev</a>
-                <a href="https://www.alexmercedai.com">AlexMercedAI.com</a>
-                <a href="https://alexmerceddata.com">AlexMercedData.com</a>
-                <a href="https://resources.alexmerced.com">Resources.AlexMerced.com</a>
-                <a href="https://opendatalakehouse.com">OpenDataLakehouse.com</a>
-                <a href="https://openlakehouse.alexmerced.com">OpenLakehouse.AlexMerced.com</a>
-                <a href="https://semanticlakehouse.com">SemanticLakehouse.com</a>
-                <a href="https://agenticlakehouse.com">AgenticLakehouse.com</a>
-                <a href="https://agenticanalyticsnow.com">AgenticAnalyticsNow.com</a>
-                <a href="https://openagenticplatform.com">OpenAgenticPlatform.com</a>
-                <a href="https://dataengnr.com">DataEngnr.com</a>
-                <a href="https://datalakehouse.help">DataLakehouse.help</a>
-                <a href="https://dataaiwiki.com">DataAIWiki.com</a>
-                <a href="https://iceberglakehouse.com">IcebergLakehouse.com</a>
-                <a href="https://datalakehousehub.com">DataLakehouseHub.com</a>
-                <a href="https://weekofdata.com">WeekOfData.com</a>
-                <a href="https://alexmerced.blog">AlexMerced.blog</a>
-                <a href="https://ingestthis.com">IngestThis.com</a>
-                <a href="https://grokoverflow.com">GrokOverflow.com</a>
-                <a href="https://alexmercedlibertarian.com">AlexMercedLibertarian.com</a>
-                <a href="https://alexmercedmusic.com">AlexMercedMusic.com</a>
-                <a href="https://d6storyteller.alexmerced.com">D6Storyteller.AlexMerced.com</a>
                 <Link to="/books/">Books</Link>
-                <a href="https://books.alexmerced.com">All books</a>
                 <a href="/rss.xml">RSS</a>
               </span>
             </div>
+            <nav className="hb-network" aria-label="The Alex Merced Network">
+              {network.footer.groups.map(group => (
+                <div key={group.title}>
+                  <h2 className="hb-networkTitle">{group.title}</h2>
+                  <ul className="hb-footerLinks">
+                    {group.links.map(link => (
+                      <li key={link.url}>
+                        <a href={link.url}>{link.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              <p className="hb-allSites">
+                <a href={network.footer.allSitesUrl}>{network.footer.allSitesLabel}</a>
+              </p>
+            </nav>
             <p className="hb-newsletter">
               Two free weekly newsletters: an AI newsletter on Thursdays and an
               Apache lakehouse newsletter on Fridays.{" "}
