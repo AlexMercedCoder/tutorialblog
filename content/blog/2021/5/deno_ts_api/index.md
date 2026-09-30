@@ -4,6 +4,8 @@ date: "2021-05-10T12:12:03.284Z"
 description: Using that Cool New Javascript Runtime
 ---
 
+> **Last tested with:** Deno 1.9.2 and Pogo 0.5.2, the versions this tutorial uses (May 2021). Later releases may need changes.
+
 - In this tutorial, I'm using Deno version 1.9.2
 - If unfamiliar with Deno [watch my intro Server-Side JS Video](https://youtu.be/nWjBkjyEJyY)
 

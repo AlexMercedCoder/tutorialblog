@@ -4,6 +4,8 @@ date: "2021-05-28T12:12:03.284Z"
 description: Batteries Included Python Web Framework
 ---
 
+> **Last tested with:** Python 3.6, the version this tutorial lists as a prerequisite (May 2021), with the Masonite release current at that time. Later Masonite releases may need changes.
+
 We all love Ruby on Rails and how easy it makes creating APIs and websites. In python, Django has generally been the main batteries included framework used for many projects. The problem is Django has a lot of quirks that make its patterns quite different than the more railsesque approach frameworks for other languages have taken. Masonite provides a much more rails like experience in the Python language, let's try it out!
 
 ## Pre-requisites

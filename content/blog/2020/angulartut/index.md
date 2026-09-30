@@ -4,6 +4,8 @@ date: "2020-08-21T22:12:03.284Z"
 description: "Enterprise level frontend framework"
 ---
 
+> **Last tested with:** Angular 9, the version this tutorial covers (August 2020). Later Angular releases changed parts of the CLI output and project structure.
+
 **ANGULAR VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbahNK_YUsjTzP5U-FkGA544
 
 ## What is Angular?

@@ -4,6 +4,8 @@ date: "2021-03-04T12:12:03.284Z"
 description: Buffalo, The Rails of the Go World
 ---
 
+> **Last tested with:** Go 1.16 and gobuffalo/pop v5.3.0, the versions this tutorial uses (March 2021). Later releases may need changes.
+
 Go is becoming a popular choice for those who need to increase the speed of their web server and microservices. Buffalo is a framework to allow rapid development in GO similar to Ruby on Rails. In this tutorial, we will make a basic API with buffalo and deploy it to Heroku.
 
 ## Prerequisites

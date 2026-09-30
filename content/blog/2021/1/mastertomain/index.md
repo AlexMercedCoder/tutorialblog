@@ -4,6 +4,8 @@ date: "2021-01-09T12:12:03.284Z"
 description: Getting with the times
 ---
 
+> **Last tested with:** Git 2.28, the minimum version this tutorial requires (January 2021).
+
 ## Why Should I do this?
 
 Bottom Line, the industry is making the shift of naming a project's default branch, "main", from the prior standard, "master". The change has already been happening so the sooner you get all your settings to change the less tricky it will be to make the adjustment later. So here are some steps in order to make the shift.

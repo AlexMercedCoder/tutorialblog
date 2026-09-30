@@ -3,6 +3,9 @@ title: Comparing React Router 5, 6, and React Location
 date: "2021-10-21T12:12:03.284Z"
 description: For simple web development
 ---
+
+> **Last tested with:** react-router-dom 5.3.0 for the React Router 5 examples, the version this tutorial installs (October 2021). The React Router 6 and React Location examples use the releases current at that time.
+
 ![Comparing React Router 5, 6, and React Location](https://i.imgur.com/YxqmEmR.jpg)
 
 Recently React Router released version 6 which created a lot of confusion as several aspects of its API are quite different. Also, Tanstack released React-Location, an entrant to React Routing space from the creators of beloved libraries like React-Query, React-Table, React-Charts, etc. So let's see how we'd install and do common routing tasks with all three.
