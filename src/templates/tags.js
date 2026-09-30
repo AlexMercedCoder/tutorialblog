@@ -17,6 +17,7 @@ const Tags = ({ pageContext, data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <h1>{tagHeader}</h1>
+      {pageContext.intro && <p className="hb-tagIntro">{pageContext.intro}</p>}
       <ul style={{ listStyle: `none`, padding: 0 }}>
         {edges.map(({ node }) => {
           const { slug } = node.fields
@@ -77,12 +78,13 @@ Tags.propTypes = {
 export default Tags
 
 export const Head = ({ data, pageContext, location }) => {
-  const { tag } = pageContext
+  const { tag, intro, noindex } = pageContext
   return (
     <Seo
       title={`Posts tagged with "${tag}"`}
-      description={`Browse all coding tutorials and posts tagged with ${tag} on ${data.site.siteMetadata.title}.`}
+      description={intro || `Browse all coding tutorials and posts tagged with ${tag} on ${data.site.siteMetadata.title}.`}
       pathname={location.pathname}
+      meta={noindex ? [{ name: "robots", content: "noindex, follow" }] : []}
     />
   )
 }

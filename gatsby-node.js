@@ -1,6 +1,14 @@
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
+// Indexed topic hubs with a written intro (alexmerced.blog model).
+const TOPIC_INTROS = {
+  python: "Python tutorials: virtual environments, web frameworks such as Flask, FastAPI and Masonite, and Python for data work. Check the library versions in each tutorial before running older code.",
+  javascript: "JavaScript tutorials and references, from the DOM and promises to functional patterns and sorting algorithms. Older posts show the syntax and tooling that was current when they were written.",
+  rust: "Rust tutorials for developers coming from other languages: syntax basics, strings, collections, and building web APIs.",
+  "developer-tools": "Posts on the tools developers use day to day: editors, command line utilities, AI coding assistants, and their configuration.",
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -20,6 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
               frontmatter {
                 title
                 tags
+                canonical
               }
             }
           }
@@ -70,6 +79,8 @@ exports.createPages = async ({ graphql, actions }) => {
         previous,
         next,
         relatedPosts,
+        // Syndicated copies (canonical on another site) stay out of the sitemap.
+        sitemapExclude: /^https:\/\//.test(post.node.frontmatter.canonical || ""),
       },
     })
   })
@@ -103,16 +114,28 @@ exports.createPages = async ({ graphql, actions }) => {
       tags = tags.concat(edge.node.frontmatter.tags)
     }
   })
+  // Count posts per tag page path before de-duplicating
+  const tagCounts = _.countBy(tags, t => _.kebabCase(t))
   // Eliminate duplicate tags
   tags = _.uniq(tags)
 
-  // Make tag pages
+  // Make tag pages. Tags with fewer than 5 posts are thin: noindex and left
+  // out of the sitemap. Topic hubs in TOPIC_INTROS get a written intro.
+  const seen = new Set()
   tags.forEach(tag => {
+    const slug = _.kebabCase(tag)
+    if (seen.has(slug)) return
+    seen.add(slug)
+    const count = tagCounts[slug] || 0
     createPage({
-      path: `/tags/${_.kebabCase(tag)}/`,
+      path: `/tags/${slug}/`,
       component: tagsTemplate,
       context: {
         tag,
+        count,
+        intro: TOPIC_INTROS[slug] || null,
+        noindex: count < 5,
+        sitemapExclude: count < 5,
       },
     })
   })
@@ -153,6 +176,7 @@ exports.onPostBuild = async ({ graphql }) => {
             description
             date(formatString: "MMMM DD, YYYY")
             tags
+            canonical
           }
         }
       }
@@ -165,63 +189,52 @@ exports.onPostBuild = async ({ graphql }) => {
   }
 
   const { site, allMarkdownRemark } = result.data;
-  const { title, description, siteUrl } = site.siteMetadata;
+  const { title, siteUrl } = site.siteMetadata;
   const cleanSiteUrl = siteUrl.endsWith('/') ? siteUrl.slice(0, -1) : siteUrl;
+  const nodes = allMarkdownRemark.nodes;
+  const isHttps = u => /^https:\/\/\S+$/.test(u || '');
+  // Netlify serves lowercase paths, so list the URL that answers 200.
+  const ownUrl = node => `${cleanSiteUrl}${encodeURI(decodeURI(node.fields.slug).toLowerCase())}`;
+  const urlFor = node => (isHttps(node.frontmatter.canonical) ? node.frontmatter.canonical : ownUrl(node));
+  const line = node => {
+    const d = node.frontmatter.description ? `: ${String(node.frontmatter.description).replace(/\s+/g, ' ').trim()}` : '';
+    const date = node.frontmatter.date ? ` (${node.frontmatter.date})` : '';
+    return `- [${node.frontmatter.title}](${urlFor(node)})${date}${d}`;
+  };
+  const masters = nodes.filter(n => !isHttps(n.frontmatter.canonical));
+  const copies = nodes.filter(n => isHttps(n.frontmatter.canonical));
 
-  // Build the structured primary llms.txt
-  let llmsContent = `# ${title}\n`;
-  llmsContent += `> ${description}\n\n`;
-  llmsContent += `This is a high-authority blog by Alex Merced containing extensive coding tutorials, database connectors guides, semantic layer best practices, Lakehouse architectures, and prompt engineering strategies.\n\n`;
-  
-  llmsContent += `## Core Sections & Capabilities\n`;
-  llmsContent += `- **Data Engineering & Lakehouses**: Deep dives into Apache Iceberg, Apache Polaris, Apache Arrow, Parquet, and modular lakehouse designs.\n`;
-  llmsContent += `- **Semantic Layer**: Comprehensive guides on universal semantic layers, metrics layers, headless BI, and data virtualization.\n`;
-  llmsContent += `- **Database Connectors**: Direct federated query tutorials for connecting S3, BigQuery, Snowflake, PostgreSQL, MySQL, Oracle, and MongoDB to Dremio.\n`;
-  llmsContent += `- **AI Prompt & Context Management**: Hands-on guides for maximizing developer velocity with Claude Code, Cursor, Windsurf, JetBrains AI, and Google Antigravity.\n\n`;
-  
-  llmsContent += `## Essential Navigation\n`;
-  llmsContent += `- [Home Page](${cleanSiteUrl}/): The main blog containing all posts.\n`;
-  llmsContent += `- [Tags Index](${cleanSiteUrl}/tags/): Browse and filter posts by specific programming languages or frameworks.\n`;
-  llmsContent += `- [RSS Feed](${cleanSiteUrl}/rss.xml): Raw RSS feed for feed readers.\n`;
-  llmsContent += `- [Full Articles Catalog](${cleanSiteUrl}/llms-full.txt): Complete flat text list of all tutorials.\n\n`;
-  
-  llmsContent += `## Recent & Featured Tutorials\n`;
-  
-  const featuredLimit = 30;
-  const featuredNodes = allMarkdownRemark.nodes.slice(0, featuredLimit);
-  featuredNodes.forEach(node => {
-    const postUrl = `${cleanSiteUrl}${node.fields.slug}`;
-    const postTitle = node.frontmatter.title;
-    const postDesc = node.frontmatter.description || '';
-    const dateStr = node.frontmatter.date ? ` (${node.frontmatter.date})` : '';
-    llmsContent += `- [${postTitle}](${postUrl})${dateStr}: ${postDesc}\n`;
-  });
+  const header = `# ${title}
+> Hands-on programming tutorials by Alex Merced, mostly written between 2020 and 2024: JavaScript and TypeScript, React, Vue, Svelte, Angular, Node.js with Express, Koa and Fastify, Deno, Python with Flask, FastAPI, Django and Masonite, Ruby on Rails and Sinatra, Go, Rust, PHP, databases, and deployment. Older tutorials show the library versions that were current when they were written; where a tutorial states its versions, a "Last tested with" line at the top says so.
 
-  const primaryPath = path.join(__dirname, 'public', 'llms.txt');
-  fs.writeFileSync(primaryPath, llmsContent);
-  console.log('Successfully generated primary llms.txt for AEO.');
+This site also carries syndicated copies of Alex Merced's data lakehouse and AI articles. Each copy declares its canonical home with rel=canonical: Alex Merced's Lakehouse Blog (iceberglakehouse.com) or Data Lakehouse Hub (datalakehousehub.com). New data and AI articles are no longer published here.
 
-  // Build the secondary llms-full.txt
-  let llmsFullContent = `# ${title} - Full Index\n`;
-  llmsFullContent += `> Flat index of all ${allMarkdownRemark.nodes.length} tutorials published on the Coding Tutorials Blog.\n\n`;
-  llmsFullContent += `[Return to Summary Index](${cleanSiteUrl}/llms.txt)\n\n`;
-  llmsFullContent += `## Complete Tutorials List\n`;
+Author: Alex Merced, Head of Developer Relations at Dremio (https://alexmerced.com)
+`;
 
-  allMarkdownRemark.nodes.forEach((node, idx) => {
-    const postUrl = `${cleanSiteUrl}${node.fields.slug}`;
-    const postTitle = node.frontmatter.title;
-    const postDesc = node.frontmatter.description || '';
-    const dateStr = node.frontmatter.date ? ` [${node.frontmatter.date}]` : '';
-    const tagsStr = node.frontmatter.tags && node.frontmatter.tags.length > 0 ? ` [Tags: ${node.frontmatter.tags.join(', ')}]` : '';
-    llmsFullContent += `${idx + 1}. [${postTitle}](${postUrl})${dateStr}${tagsStr}\n`;
-    if (postDesc) {
-      llmsFullContent += `   *Description: ${postDesc}*\n`;
-    }
-  });
+  let llmsContent = header + `
+## Navigation
+- [All tutorials](${cleanSiteUrl}/)
+- [Topics](${cleanSiteUrl}/tags/)
+${Object.keys(TOPIC_INTROS).map(t => `- [${t} tutorials](${cleanSiteUrl}/tags/${t}/): ${TOPIC_INTROS[t]}`).join('\n')}
+- [RSS feed](${cleanSiteUrl}/rss.xml)
+- [llms-full.txt](${cleanSiteUrl}/llms-full.txt): every post on this site, including syndicated copies with their canonical URLs
 
-  const fullPath = path.join(__dirname, 'public', 'llms-full.txt');
-  fs.writeFileSync(fullPath, llmsFullContent);
-  console.log('Successfully generated full index llms-full.txt for AEO.');
+## Tutorials whose canonical home is this site (${masters.length}), newest first
+${masters.map(line).join('\n')}
+`;
+  fs.writeFileSync(path.join(__dirname, 'public', 'llms.txt'), llmsContent);
+  console.log('Successfully generated llms.txt.');
+
+  const llmsFullContent = header + `
+## Tutorials whose canonical home is this site (${masters.length}), newest first
+${masters.map(line).join('\n')}
+
+## Syndicated data and AI articles (${copies.length}); links point to the canonical copy
+${copies.map(line).join('\n')}
+`;
+  fs.writeFileSync(path.join(__dirname, 'public', 'llms-full.txt'), llmsFullContent);
+  console.log('Successfully generated llms-full.txt.');
 
   // Generate OG images
   try {
@@ -245,6 +258,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       tags: [String]
       category: String
       author: String
+      canonical: String
     }
   `);
 };
