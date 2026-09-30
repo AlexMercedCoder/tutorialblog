@@ -169,13 +169,26 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   )
 }
 
+// The generated excerpt starts with the cross-post note on syndicated copies;
+// drop that sentence so the fallback description is the first real paragraph.
+const cleanExcerpt = excerpt => {
+  const text = String(excerpt || "")
+    .replace(
+      /^Cross-posted\.\s+This article['’]s canonical home is (?:Alex Merced['’]s Lakehouse Blog|Data Lakehouse Hub|AlexMerced\.blog|Coding Tutorials Blog|[^.]+)\.\s*/,
+      ""
+    )
+    .trim()
+  return text.length > 160 ? `${text.slice(0, 157).replace(/\s+\S*$/, "")}...` : text
+}
+
 export const Head = ({ data, location }) => {
   const post = data.markdownRemark
   return (
     <Seo
       title={post.frontmatter.title}
-      description={post.frontmatter.description || post.excerpt}
+      description={post.frontmatter.description || cleanExcerpt(post.excerpt)}
       pathname={location.pathname}
+      canonical={post.frontmatter.canonical}
       article={true}
       datePublished={post.frontmatter.isoDate}
       dateModified={post.frontmatter.isoDate}
@@ -198,7 +211,7 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
-      excerpt(pruneLength: 160)
+      excerpt(pruneLength: 320)
       html
       tableOfContents(absolute: false, maxDepth: 3)
       timeToRead
@@ -212,6 +225,7 @@ export const pageQuery = graphql`
         description
         category
         tags
+        canonical
       }
     }
   }

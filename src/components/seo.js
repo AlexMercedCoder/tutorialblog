@@ -8,8 +8,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import network from "../../network/network.json"
 
-const Seo = ({ description, lang, meta, title, pathname = "", image, article = false, datePublished, dateModified }) => {
+const Seo = ({ description, lang, meta, title, pathname = "", image, article = false, datePublished, dateModified, canonical: canonicalOverride }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -42,7 +43,11 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
     cleanPathname = `${cleanPathname}/`
   }
 
-  const canonical = pathname ? `${cleanSiteUrl}${cleanPathname}` : null
+  // Netlify serves lowercase paths and 301s mixed case, so the self-canonical
+  // uses the lowercase path. A syndicated copy's frontmatter `canonical`
+  // (an absolute https URL to the master copy) wins.
+  const selfCanonical = pathname ? `${cleanSiteUrl}${encodeURI(decodeURI(cleanPathname).toLowerCase())}` : null
+  const canonical = /^https:\/\/\S+$/.test(canonicalOverride || "") ? canonicalOverride : selfCanonical
 
   // Schema.org/WebSite
   const webSiteSchema = {
@@ -70,7 +75,7 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
                   "@type": "ListItem",
                   "position": 2,
                   "name": title,
-                  "item": canonical || siteUrl
+                  "item": selfCanonical || siteUrl
               }
           ]
       };
@@ -85,18 +90,7 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
           headline: title,
           description: metaDescription,
           image: image ? `${siteUrl}${image}` : undefined,
-          author: {
-              "@type": "Person",
-              name: site.siteMetadata.author?.name || "Alex Merced",
-              url: "https://alexmercedcoder.dev/",
-              sameAs: [
-                  "https://alexmerced.com",
-                  "https://alexmercedcoder.dev",
-                  "https://whoisalexmerced.com",
-                  "https://www.linkedin.com/in/alexmerced",
-                  "https://github.com/alexmercedcoder"
-              ]
-          },
+          author: { "@id": "https://alexmerced.com/#alexmerced" },
           publisher: {
               "@type": "Organization",
               name: defaultTitle,
@@ -138,7 +132,7 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
       <meta property="og:type" content={article ? "article" : "website"} />
       <meta property="og:image" content={ogImageUrl} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content={site.siteMetadata?.social?.twitter || ``} />
+      <meta name="twitter:site" content={network.twitterSite} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={ogImageUrl} />
@@ -166,6 +160,7 @@ Seo.propTypes = {
   article: PropTypes.bool,
   datePublished: PropTypes.string,
   dateModified: PropTypes.string,
+  canonical: PropTypes.string,
 }
 
 export default Seo
