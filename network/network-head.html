@@ -8,8 +8,11 @@ gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_pe
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4F1DTQJNDM"></script>
 <script>
 gtag('js', new Date());
-gtag('config', 'G-4F1DTQJNDM');
-gtag('config', 'G-GL7YLRDWX1');
+// Report only from the site's own domain: never localhost, Netlify previews, or alias domains.
+if (/^(www\.)?tuts\.alexmercedcoder\.dev$/.test(location.hostname)) {
+  gtag('config', 'G-4F1DTQJNDM');
+  gtag('config', 'G-GL7YLRDWX1');
+}
 document.addEventListener('click', function (e) {
   var a = e.target && e.target.closest ? e.target.closest('[data-network-event]') : null;
   if (a) gtag('event', a.getAttribute('data-network-event'), { link_url: a.href, link_text: (a.textContent || '').trim(), site: location.hostname });
