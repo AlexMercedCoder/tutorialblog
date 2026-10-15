@@ -1,7 +1,7 @@
 ---
 title: React Data Flow - Understanding State and Props
 date: "2021-01-15T12:12:03.284Z"
-description: Learn the Pre-Hypertext Processor Language
+description: "How React decides what to re-render, and how data moves between components: parent to child, child to parent, siblings, prop drilling and the Context API."
 ---
 
 ## What is the VirtualDOM

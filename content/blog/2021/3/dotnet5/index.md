@@ -1,7 +1,7 @@
 ---
 title: Intro to .Net 5 with VSCode - Zero to Deploy
 date: "2021-03-11T12:12:03.284Z"
-description: Microsoft Goes Cross Platform
+description: "Build a cross-platform .NET 5 web API in VSCode on Linux or Mac, add a model with Entity Framework and Postgres, then deploy to Heroku using a Dockerfile."
 ---
 
 > **Last tested with:** .NET 5 with Microsoft.EntityFrameworkCore.Design 5.0.4 and Npgsql.EntityFrameworkCore.PostgreSQL 5.0.2, the versions this tutorial installs (March 2021). Later releases may need changes.

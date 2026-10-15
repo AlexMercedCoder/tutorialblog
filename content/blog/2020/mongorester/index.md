@@ -1,7 +1,7 @@
 ---
 title: Full Crud Mongo/Express API in One Line with MongoRester
 date: "2020-10-22T22:12:03.284Z"
-description: Scaffolding Mongo/Express APIs with ease
+description: "MongoRester takes a model name and schema and returns a Mongoose model plus an Express router with full CRUD routes. See how it works and try it in a project."
 ---
 
 ## Explanation of Mongorester

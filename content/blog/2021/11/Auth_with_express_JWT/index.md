@@ -1,7 +1,7 @@
 ---
 title: Auth with Express with JWT, MongoDB, and Postgres
 date: "2021-11-24T12:12:03.284Z"
-description: For simple web development
+description: "Build JWT auth in Express twice, first with MongoDB and Mongoose, then Postgres and Sequelize: user and todo models, bcryptjs hashing, and auth middleware."
 ---
 
 ![Header Image](https://imgur.com/W1WsHqL.jpg)

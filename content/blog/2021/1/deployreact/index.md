@@ -1,7 +1,7 @@
 ---
 title: Deploying React, Angular, Svelte and Vue to Netlify & Vercel
 date: "2021-01-12T12:12:03.284Z"
-description: Getting Your Project Online
+description: "Find the build command and output folder for React, Vue, Angular and Svelte, connect a GitHub repo to Netlify or Vercel, and configure redirects for routing."
 ---
 
 ## Creating Your Project

@@ -49,6 +49,12 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
   const selfCanonical = pathname ? `${cleanSiteUrl}${encodeURI(decodeURI(cleanPathname).toLowerCase())}` : null
   const canonical = /^https:\/\/\S+$/.test(canonicalOverride || "") ? canonicalOverride : selfCanonical
 
+  // Keep <title> under about 60 characters: full site suffix when it fits,
+  // then a short suffix, then the page title alone.
+  const fullTitle = !title
+    ? defaultTitle
+    : [`${title} | ${defaultTitle}`, `${title} | Alex Merced`, title].find(s => s.length <= 60) || title
+
   // Schema.org/WebSite
   const webSiteSchema = {
     "@context": "https://schema.org",
@@ -122,7 +128,7 @@ const Seo = ({ description, lang, meta, title, pathname = "", image, article = f
   return (
     <>
       <html lang={lang} />
-      <title>{title ? `${title} | ${defaultTitle}` : defaultTitle}</title>
+      <title>{fullTitle}</title>
       {canonical && <link rel="canonical" href={canonical} />}
       <link rel="alternate" type="text/plain" href={`${cleanSiteUrl}/llms.txt`} title="LLMs.txt" />
       <meta name="description" content={metaDescription} />

@@ -1,7 +1,7 @@
 ---
 title: Frontend Javascript Ajax/Http Request Guide
 date: "2021-08-25T12:12:03.284Z"
-description: Getting Data from an external API
+description: "What AJAX, APIs and promises are, plus working examples of frontend HTTP requests with jQuery $.ajax, the browser fetch function and the Axios library."
 ---
 
 ## What is AJAX?

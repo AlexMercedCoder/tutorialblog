@@ -1,7 +1,7 @@
 ---
 title: More on Python Virtual Environments
 date: "2021-03-02T12:12:03.284Z"
-description: Using Pythons Built in venv module
+description: "Python 3.3 and later ship a built-in venv module. See how to create, activate and deactivate one, plus two bash functions that make the routine quicker."
 ---
 
 **My Original Article on [Virtual Environments](https://tuts.alexmercedcoder.dev/2021/1/pythonvirtualenv/)**

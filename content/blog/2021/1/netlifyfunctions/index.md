@@ -1,7 +1,7 @@
 ---
 title: How to use Netlify Cloud Functions
 date: "2021-01-23T12:12:03.284Z"
-description: Your First Cloud Function
+description: "Create a Netlify cloud function: set up functions and public folders, configure netlify.toml for builds, redirects and headers, then call it from its URL."
 ---
 
 ## Context

@@ -1,7 +1,7 @@
 ---
 title: Developer Team Work Best Practices (Git, Agile/Scrum/Kanban, CI/CD)
 date: "2021-11-16T12:12:03.284Z"
-description: How to be part of a developer team
+description: "How developer teams work day to day: main and dev branches, ticket branches and pull requests, Agile with Scrum or Kanban, CI/CD pipelines, and team habits."
 ---
 
 ## The Why?

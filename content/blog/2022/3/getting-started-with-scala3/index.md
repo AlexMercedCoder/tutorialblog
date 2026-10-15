@@ -1,7 +1,7 @@
 ---
 title: Creating a Markdown Blog in 2022 with Next JS
 date: "2022-03-13T12:12:03.284Z"
-description: Creating a Blog and Deploying with NextJS
+description: "Make a Markdown blog with Next.js: posts as .md files, gray-matter for front matter, markdown-it for rendering, getStaticProps and getStaticPaths, then Vercel."
 ---
 
 ## Why Do you want a markdown blog

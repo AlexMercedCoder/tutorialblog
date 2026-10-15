@@ -1,7 +1,7 @@
 ---
 title: Konjection - ORM Helper using Knex and Objection
 date: "2020-11-16T22:12:03.284Z"
-description: Connect and Setup Your Models with Ease
+description: "Konjection wraps Knex and Objection with helpers like Model.all, one, create, update, destroy, relate and related. Connect a database and put them to use."
 ---
 
 **Konjection Tutorial Video:** https://youtu.be/zfp7D_MB9c0

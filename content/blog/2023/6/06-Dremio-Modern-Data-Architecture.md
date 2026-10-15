@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Dremio and Modern Data Architecture: Data Lakes, Data Lakehouses and Data Mesh"
+description: "Why data warehouses and data lakes led to the data lakehouse and data mesh patterns, the problems each addresses, and how Dremio supports both architectures."
 date: "2023-06-02T12:12:03.284Z"
 category: "data engineering"
 

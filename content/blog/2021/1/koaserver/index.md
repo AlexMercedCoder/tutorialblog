@@ -1,7 +1,7 @@
 ---
 title: Intro to Building Backend Servers with KOAjs
 date: "2021-01-14T12:12:03.284Z"
-description: Building a Web Server with Node and KOA
+description: "Build a backend web server with Node and Koa: set up koa-router and nodemon, write a hello world route, read URL queries and params, and render web pages."
 ---
 
 ## What is the Backend

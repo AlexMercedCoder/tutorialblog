@@ -1,7 +1,7 @@
 ---
 title: Creating a GraphQL Based Habit Tracker with Hasura and React (GraphQL/Hasura 101)
 date: "2021-11-16T12:12:03.284Z"
-description: GraphQL Made Easy
+description: "GraphQL basics through a habit tracker: build the API on Hasura, write queries and mutations, then call them in React with fetch, Apollo or make-graphql-query."
 ---
 
 ## What is GraphQL?

@@ -1,7 +1,7 @@
 ---
 title: Web Component Libraries
 date: "2020-12-18T22:12:03.284Z"
-description: Libraries of Pre-Built Web Components
+description: "A roundup of pre-built Web Component libraries such as Shoelace, Material, Vaadin, Wired, Elix and Microsoft FAST that work in any framework or plain HTML."
 ---
 
 ## What are Web Components

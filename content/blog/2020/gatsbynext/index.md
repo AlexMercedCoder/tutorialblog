@@ -1,7 +1,7 @@
 ---
 title: Creating a Gatsby or NextJS Markdown Blog
 date: "2020-12-05T22:12:03.284Z"
-description: Using merced-spinup templates
+description: "Spin up a Markdown blog with merced-spinup templates for NextJS or Gatsby, with a walkthrough of the post template, page template, main page and scripts."
 ---
 
 ## Why a Markdown Blog

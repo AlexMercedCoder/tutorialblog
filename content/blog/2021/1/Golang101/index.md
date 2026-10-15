@@ -1,7 +1,7 @@
 ---
 title: Go/Golang 101 - The Syntax and Basics
 date: "2021-01-04T12:12:03.284Z"
-description: A Fun Language for Fast Compiled Apps
+description: "Install Go, understand GOROOT and Go modules with go mod init, write and run your first files with go run, compile with go build and use the walrus operator."
 ---
 
 ## Why do we need another lower-level compiled language?

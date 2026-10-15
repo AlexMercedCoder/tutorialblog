@@ -1,7 +1,7 @@
 ---
 title: Implementing a GraphQL API with a Solid-Start Application
 date: "2022-11-26"
-description: "Using this cutting edge framework with a Graphql api"
+description: "Walk through a Solid Start todo app backed by a GraphQL API in the same project: schema and resolvers in a graphql route, then createRouteData queries."
 author: "Alex Merced"
 category: "javascript"
 tags:

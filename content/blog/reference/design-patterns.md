@@ -1,7 +1,7 @@
 ---
 title: "Design Patterns"
 date: "2023-10-21T23:27:29-04:00"
-description: "Design patterns are reusable solutions to common problems that occur during software design and development."
+description: "Design patterns in JavaScript: Singleton, Factory, Builder, and Prototype, behavioral ones like Observer, Command, and State, and architectural patterns."
 author: "Alex Merced"
 tags:
   - reference

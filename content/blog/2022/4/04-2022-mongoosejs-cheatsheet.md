@@ -1,7 +1,7 @@
 ---
 title: 2022 MongooseJS Cheatsheet
 date: "2022-04-19"
-description: "Details on working with MongooseJS"
+description: "Quick Mongoose reference: the connection URI, connecting, defining schemas and models, common model methods, and relating documents with refs and populate."
 author: "Alex Merced"
 category: "database"
 tags:

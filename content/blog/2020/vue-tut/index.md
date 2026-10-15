@@ -1,7 +1,7 @@
 ---
 title: Hello World in Vue
 date: "2020-08-17T22:12:03.284Z"
-description: "Firs Blog Post and Vue Tutorial"
+description: "A beginner Vue tutorial with a script tag setup and no bundler: interpolation, conditional rendering, looping over arrays, and binding forms to data and events."
 ---
 
 **VUE VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbbsEAIDfFAlhAVbSCIt2Bxx

@@ -1,7 +1,7 @@
 ---
 title: RenderBlocks
 date: "2020-08-23T22:12:03.284Z"
-description: "Beginners Tutorial"
+description: "RenderBlocks is a small frontend library inspired by Vue instances. Set up a page with script tags, write your first block, pass props, and use the info object."
 ---
 
 ## What is RenderBlocks

@@ -1,7 +1,7 @@
 ---
 title: Ruby on Rails Tutorial - Many to Many Relationships
 date: "2020-11-11T22:12:03.284Z"
-description: How to create a many to many relationship
+description: "Set up a many to many relationship in a Rails API: create the models and join model, declare the associations between them, then test the relationships out."
 ---
 **My Learning Ruby on Rails Video Playlist:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbYlAqVHgzZl5lou54bizdbV
 

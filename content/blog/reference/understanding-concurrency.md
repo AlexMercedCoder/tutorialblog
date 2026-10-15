@@ -1,7 +1,7 @@
 ---
 title: "Understanding Concurrency"
 date: "2023-10-21T23:27:29-04:00"
-description: "Concurrency is a fundamental concept in computing that deals with the execution of multiple tasks or processes seemingly at the same time."
+description: "Processes, threads, and cores explained, when concurrency helps and when it hurts, and how JavaScript, Python, Go, Rust, Java, C#, and others handle it."
 author: "Alex Merced"
 tags:
   - reference

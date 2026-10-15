@@ -1,7 +1,7 @@
 ---
 title: SolidJS - React meets Svelte?
 date: "2021-04-09T12:12:03.284Z"
-description: The new shiny frontend toy!
+description: "SolidJS pairs React style JSX with compiled, no virtual DOM output like Svelte. Set up a project and compare createSignal and createEffect with React hooks."
 ---
 
 React is by far the biggest frontend Javascript framework in modern web development. Although, Svelte has been growing steadily in popularity over the last few years. What makes Svelte so special.

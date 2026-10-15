@@ -1,7 +1,7 @@
 ---
 title: The Guide to How to Implement Authorization in any language and framework
 date: "2021-11-18T12:12:03.284Z"
-description: Having Users Login
+description: "The auth flow for any backend: user model, signup and login with bcrypt, session vs JWT auth, logout, middleware, frontend handling, and Auth0 type providers."
 ---
 
 ![Title Image](https://i.imgur.com/XbV0EzX.jpg)

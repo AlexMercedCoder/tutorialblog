@@ -4,6 +4,7 @@ tags:
   - "data engineering"
 author: "Alex Merced"
 title: "Overview of the Open Lakehouse: Why Dremio?"
+description: "Common data pain points like runaway cloud bills and data copies, and how Dremio addresses them for greenfield, early-stage, Snowflake, Databricks, and on-prem."
 date: "2023-10-11T12:12:03.284Z"
 category: "data lakehouse"
 ---

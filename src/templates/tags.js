@@ -78,11 +78,14 @@ Tags.propTypes = {
 export default Tags
 
 export const Head = ({ data, pageContext, location }) => {
-  const { tag, intro, noindex } = pageContext
+  const { tag, intro, noindex, count } = pageContext
+  let generic = `${count} posts tagged ${tag} on Alex Merced's coding tutorials blog, newest first, each listed with its date and a short summary of what it covers.`
+  if (generic.length < 140) generic += " Pick one to start."
+  const description = intro && intro.length <= 160 ? intro : generic
   return (
     <Seo
       title={`Posts tagged with "${tag}"`}
-      description={intro || `Browse all coding tutorials and posts tagged with ${tag} on ${data.site.siteMetadata.title}.`}
+      description={description}
       pathname={location.pathname}
       meta={noindex ? [{ name: "robots", content: "noindex, follow" }] : []}
     />

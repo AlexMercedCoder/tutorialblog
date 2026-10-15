@@ -1,7 +1,7 @@
 ---
 title: mBlocks - Frontend UI Library
 date: "2020-08-22T22:12:03.284Z"
-description: "Beginners Tutorial"
+description: "mBlocks builds reactive UI without the Web Component API. Starting from a plain HTML setup, create your first block and work with props and state in it."
 ---
 
 ## What is mBlocks

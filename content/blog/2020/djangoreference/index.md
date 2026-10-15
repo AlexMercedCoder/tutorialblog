@@ -1,7 +1,7 @@
 ---
 title: Ultimate Django Reference (Deployment, Rest API, Commands, .env)
 date: "2020-08-27T22:12:03.284Z"
-description: "A one stop shop for many of the things you'll have to look up a lot"
+description: "Django commands you look up often: project and app setup, connecting Postgres, reading secrets from a .env file, and deploying to Heroku with a gitignore."
 ---
 
 #### Other Useful Python Articles:

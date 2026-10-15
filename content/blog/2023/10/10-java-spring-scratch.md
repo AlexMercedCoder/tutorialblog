@@ -4,6 +4,7 @@ tags:
   - "spring"
 author: "Alex Merced"
 title: "How to build a Java Spring JSON API from scratch"
+description: "A JSON API with Java Spring Boot step by step: a Maven project, PostgreSQL with Spring Data JPA, then the model, repository, and controller, and running it."
 date: "2023-10-01T12:12:03.284Z"
 category: "java"
 ---

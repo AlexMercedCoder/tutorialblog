@@ -1,7 +1,7 @@
 ---
 title: Basic Intro to NextJS
 date: "2021-06-07T12:12:03.284Z"
-description: The next generation of Frontend Frameworks
+description: "NextJS mixes static, server side and client side rendering in one React app. Set up a project and learn pages, API routes, URL params, Link and useRouter."
 ---
 
 Some people will call NextJS a Static Site Generator like GatsbyJS but it's so much more. Essentially NextJS allows you to create an Isomorphic Application, meaning:

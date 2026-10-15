@@ -1,7 +1,7 @@
 ---
 title: Big List of Hosted Headless CMS Providers with Free or Developer Tier in 2021
 date: "2021-01-12T12:12:03.284Z"
-description: Get Your JAM Stack ON
+description: "A list of hosted headless CMS providers with a free or developer tier, including Contentful, Sanity and Prismic, plus small-scale and self-hosted alternatives."
 ---
 
 ## What is a Headless CMS

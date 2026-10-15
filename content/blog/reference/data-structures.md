@@ -1,7 +1,7 @@
 ---
 title: "Data Structures"
 date: "2023-10-21T23:27:29-04:00"
-description: "Data structures are fundamental constructs used to organize and store data in a computer's memory or storage."
+description: "Common data structures built in JavaScript: arrays, linked lists, stacks, queues, BSTs, hash tables, graphs, heaps, tries, Bloom filters, and disjoint sets."
 author: "Alex Merced"
 tags:
   - reference

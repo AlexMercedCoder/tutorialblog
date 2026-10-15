@@ -1,7 +1,7 @@
 ---
 title: Understanding Spark Configurations with Apache Iceberg
 date: "2022-11-22"
-description: "How to configure Spark for using Apache Iceberg"
+description: "A breakdown of the Spark settings Apache Iceberg needs: --packages, catalog configs for Hadoop, Hive, Glue and Nessie, S3 credentials, and sample configs."
 author: "Alex Merced"
 category: "data"
 tags:

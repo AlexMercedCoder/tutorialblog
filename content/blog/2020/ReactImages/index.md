@@ -1,7 +1,7 @@
 ---
 title: React Pro Tips in Several Images
 date: "2020-10-12T22:12:03.284Z"
-description: Super Charge Your React Code
+description: "Code images with React tips: conditional rendering, fetch inside useEffect, lifting state, spreading props, forms, routes, context and higher order components."
 ---
 
 **Watch My Intro to React Video Playlist Here: https://www.youtube.com/playlist?list=PLY6oTPmKnKbb5sh681mrY7u3Hm1g5ecze**

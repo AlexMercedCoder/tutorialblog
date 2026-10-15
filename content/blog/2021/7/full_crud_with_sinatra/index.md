@@ -1,7 +1,7 @@
 ---
 title: Basics of Building a CRUD API with Ruby Sinatra
 date: "2021-07-24T12:12:03.284Z"
-description: Learning REST conventions with Ruby Sinatra
+description: "Write all seven RESTful style CRUD routes for a JSON API in Ruby Sinatra, using a simple model class in place of a database, plus a bonus section on CORS."
 ---
 
 Ruby Sinatra is probably the second most popular web framework in the Ruby ecosystem, second to the behemoth of Ruby on Rails. Ruby is a more minimalist framework like Javascripts, Express or Pythons, Flask.

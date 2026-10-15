@@ -1,7 +1,7 @@
 ---
 title: FoalTS - Building a Typescript Based API
 date: "2021-05-27T12:12:03.284Z"
-description: Making an API with this Typescript Based Framework
+description: "Set up a FoalTS project, the Typescript-first Node framework, then create routes in a controller, test them, and see what else the framework ships with."
 ---
 
 Bottom Line, like bow-ties... Typescript is cool!

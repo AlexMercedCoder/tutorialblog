@@ -1,7 +1,7 @@
 ---
 title: Building a Full-Stack Todo App with Typescript, NextJS and Mongo - 0 To Deploy
 date: "2021-09-09T12:12:03.284Z"
-description: Trying out the hottest framework around
+description: "Build a todo app with NextJS, Typescript and Mongoose: a shared Mongo connection, API routes, index, show and create pages, then deploy by linking to Vercel."
 ---
 
 ## What are we going to build

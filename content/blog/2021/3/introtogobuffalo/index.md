@@ -1,7 +1,7 @@
 ---
 title: API With GO Buffalo, from zero to deploy
 date: "2021-03-04T12:12:03.284Z"
-description: Buffalo, The Rails of the Go World
+description: "Build a todo JSON API in Go with Buffalo: generate an API project, run pop migrations, create a model, actions and routes, then deploy the app to Heroku."
 ---
 
 > **Last tested with:** Go 1.16 and gobuffalo/pop v5.3.0, the versions this tutorial uses (March 2021). Later releases may need changes.

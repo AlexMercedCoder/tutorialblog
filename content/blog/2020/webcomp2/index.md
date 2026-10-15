@@ -1,7 +1,7 @@
 ---
 title: Web Components Part 2 - Styling and Slots
 date: "2020-08-27T22:12:03.284Z"
-description: "Making Pretty and Flexible Components"
+description: "Part 2 of the Web Components series: styling with external stylesheets, style tags and parts, then flexible layouts with slots, named slots and slotted styles."
 ---
 
 ## What is a Web Component

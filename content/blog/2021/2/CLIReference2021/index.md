@@ -1,7 +1,7 @@
 ---
 title: Ultimate Command Line Reference 2021 - Bash, Git, Node, Python, Ruby, PHP
 date: "2021-02-05T12:12:03.284Z"
-description: All the commands you'll need all the time
+description: "Everyday commands in one place: bash basics, git, npm, nano and vim, Ruby gems, bundler and Rails, pip and Django, PHP, Composer and Laravel artisan."
 ---
 
 ---

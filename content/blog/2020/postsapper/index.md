@@ -1,7 +1,7 @@
 ---
 title: Svelte after Sapper - The Svelte Ecosystem
 date: "2020-12-23T22:12:03.284Z"
-description: "Enterprise level frontend framework"
+description: "With Sapper being replaced by SvelteKit, here are your options for Svelte projects: plain Svelte, keep using Sapper, Elder.js, Routify, Plenti and more."
 ---
 
 ## What is the story?

@@ -1,7 +1,7 @@
 ---
 title: Python Virtual Environment 101
 date: "2021-01-27T12:12:03.284Z"
-description: Understanding that Pesky Virtual Environment Thing
+description: "Why Python projects need virtual environments, and the commands to create, activate, list and remove them with pyenv-virtualenv or virtualenvwrapper."
 ---
 
 ## Why do we care?

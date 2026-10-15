@@ -1,7 +1,7 @@
 ---
 title: Understanding SSH and What it is for
 date: "2022-02-27T12:12:03.284Z"
-description: Logging Securely and Conveniently with SSH
+description: "How SSH lets you log into remote machines securely, how public and private key pairs work, and how to generate a key with ssh-keygen and add it to GitHub."
 ---
 
 ## What is SSH

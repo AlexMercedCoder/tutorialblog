@@ -1,7 +1,7 @@
 ---
 title: A Tale of Memory and the Garbage Collector
 date: "2021-01-29T12:12:03.284Z"
-description: The Stack, The Heap, and Memory Management
+description: "A plain explanation of RAM, the stack and the heap, why pointers make memory tricky, how C handles it manually, and how garbage collection, Go and Rust differ."
 ---
 
 ## It all starts with memory

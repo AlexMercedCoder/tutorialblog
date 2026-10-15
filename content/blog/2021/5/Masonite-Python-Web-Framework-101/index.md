@@ -1,7 +1,7 @@
 ---
 title: How to Work with Masonite - Python Web Framework
 date: "2021-05-28T12:12:03.284Z"
-description: Batteries Included Python Web Framework
+description: "Masonite is a batteries included Python web framework with a Rails feel. Install it, scaffold a project, create routes and connect controllers to them."
 ---
 
 > **Last tested with:** Python 3.6, the version this tutorial lists as a prerequisite (May 2021), with the Masonite release current at that time. Later Masonite releases may need changes.

@@ -1,7 +1,7 @@
 ---
 title: Pattern Matching in Javascript with alexmerced-patternmatcher
 date: "2021-09-06T12:12:03.284Z"
-description: Like a Switch Statement on Steroids
+description: "Replace long if chains and switch statements in JavaScript with the alexmerced-patternmatcher library, using createMatcher, createSingleMatcher and matchArray."
 ---
 
 ## Conditionals in Javscript

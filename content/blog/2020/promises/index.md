@@ -1,7 +1,7 @@
 ---
 title: Promises 101  and Fetch, Axios and $.ajax
 date: "2020-09-17T22:12:03.284Z"
-description: Asynchronous Javascript in Nutshell
+description: "Why async JavaScript moved from callbacks to promises, and how to handle the promises returned by fetch, jQuery's $.ajax and Axios using then and catch."
 ---
 
 ## What is the problem?

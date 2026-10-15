@@ -1,7 +1,7 @@
 ---
 title: Many Useful Javascript Tricks
 date: "2021-02-21T12:12:03.284Z"
-description: Upping Your Javascript Gains
+description: "Handy JavaScript patterns: copying arrays and objects with spread, destructuring, deduping arrays, optional chaining, nullish coalescing, mixins and closures."
 ---
 
 **Learn more Javascript with my Javascript Video Playlist => [Javascript Playlist](https://www.youtube.com/playlist?list=PLY6oTPmKnKbZDZ9cRrRby4Wnr4GIJj5O3)**

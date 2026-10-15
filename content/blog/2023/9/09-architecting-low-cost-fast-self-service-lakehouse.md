@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "An Approach to Architecting a Lower Cost, Fast and Self-Service Data Lakehouse"
+description: "Cut copies and pipelines from your lakehouse: land data in Apache Iceberg with a Nessie catalog, model views in Dremio, and accelerate with reflections."
 date: "2023-09-22T12:12:03.284Z"
 category: "data engineering"
 

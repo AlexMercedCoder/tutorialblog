@@ -1,7 +1,7 @@
 ---
 title: "Python Virtual Environments"
 date: "2023-10-21T22:40:16-04:00"
-description: "Python virtual environments are isolated environments where you can install Python packages and dependencies separately from the system-wide Python installation."
+description: "Create, activate, and rebuild isolated Python environments with venv, Conda, Pipenv, and Poetry, including how to export dependencies and reinstall them."
 author: "Alex Merced"
 tags:
   - reference

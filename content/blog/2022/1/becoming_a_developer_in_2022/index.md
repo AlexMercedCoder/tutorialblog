@@ -1,7 +1,7 @@
 ---
 title: Becoming a Developer in 2022
 date: "2022-01-22T12:12:03.284Z"
-description: How to switch careers within 12-18 months
+description: "A 12 to 18 month plan for switching careers into software: first steps, the terminal, an IDE, Git and GitHub, deployment, programming concepts, the job hunt."
 ---
 
 ## Your Mission if you choose to accept it

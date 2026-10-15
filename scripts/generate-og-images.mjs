@@ -27,7 +27,8 @@ function slugify(relativePath) {
   let slug = relativePath.replace(/\.md$/i, '');       // 2020/10JSObjects/index
   slug = slug.replace(/\//g, '-');                      // 2020-10JSObjects-index
   slug = slug.replace(/-index$/, '');                   // 2020-10JSObjects
-  return slug;
+  // Page paths are lowercase (gatsby-node), and seo.js builds the OG URL from them.
+  return slug.toLowerCase();
 }
 
 function renderOG(title) {

@@ -1,7 +1,7 @@
 ---
 title: Ultimate Express & Mongo Reference
 date: "2021-03-18T12:12:03.284Z"
-description: Building Backends with NodeJS
+description: "Quick reference for Express and Mongoose: the app, request and response objects, popular middleware and view engines, Mongo connections, models and queries."
 ---
 
 This is not a guide on how to use express and mongo, but a useful reference especially for those starting to learn these technologies. This guide will serve as documentation of the basics of all the main functions and patterns in these libraries.

@@ -1,7 +1,7 @@
 ---
 title: Understanding and Solving Cors Errors
 date: "2020-10-20T22:12:03.284Z"
-description: Allowing Cross-Origin API Requests
+description: "A video on what CORS errors are and why browsers block cross-origin requests, plus the Express code that configures CORS so your frontend can call your API."
 ---
 
 ## Explanation

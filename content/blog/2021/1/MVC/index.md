@@ -1,7 +1,7 @@
 ---
 title: Understanding MVC (Models - Views - Controllers)
 date: "2021-01-05T12:12:03.284Z"
-description: Web Application Architecture
+description: "The Model View Controller pattern for web apps: models map data through an ORM or ODM, views render templates, and controllers connect requests to both."
 ---
 
 ## Why Does MVC Matter?

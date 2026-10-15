@@ -1,7 +1,7 @@
 ---
 title: Introduction to Sorting Algorithms in JavaScript
 date: "2024-06-13"
-description: "Working with Sorting Algorithms in Javascript"
+description: "Bubble, selection, insertion, merge, quick, and heap sort in JavaScript, with notes on performance, stability, space complexity, and the built-in sort method."
 author: "Alex Merced"
 category: "Data Lakehouse"
 tags:

@@ -1,7 +1,7 @@
 ---
 title: My First React App - 2021 Intro to React
 date: "2021-10-29T12:12:03.284Z"
-description: The Basics of React
+description: "A first React app: create-react-app, what is in the generated project, the rules of JSX, components and props, state with useState, and separation of concerns."
 ---
 
 ## Before Starting this tutorial

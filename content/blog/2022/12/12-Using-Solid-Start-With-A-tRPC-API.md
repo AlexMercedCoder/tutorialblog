@@ -1,7 +1,7 @@
 ---
 title: Implementing a tRPC API with a Solid-Start Application
 date: "2022-11-26"
-description: "Using this cutting edge framework with a tRPC api"
+description: "Add a tRPC API to a Solid Start app: define a router with @trpc/server and zod, mount it at a catch-all route, and call it from components with @trpc/client."
 author: "Alex Merced"
 category: "javascript"
 tags:

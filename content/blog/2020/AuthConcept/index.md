@@ -1,7 +1,7 @@
 ---
 title: Authorization and Authentication in Concept
 date: "2020-12-07T22:12:03.284Z"
-description: Understand JWT, Sessions and Bcrypt
+description: "How sign up and login work on the server, why passwords get hashed with bcrypt, and how sessions compare to JSON Web Tokens for authorizing user actions."
 ---
 
 ## What is Authentication and Authorization?

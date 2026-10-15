@@ -1,7 +1,7 @@
 ---
 title: Typescript 101 - Typing, Interfaces and Enums oh MY!
 date: "2020-10-02T22:12:03.284Z"
-description: Super charging Javascript Scalability
+description: "TypeScript basics for JavaScript developers: why typing helps, typing variables, arrays, objects and functions, then defining enums and your own custom types."
 ---
 
 **Watch My Typescript Video Playlist Here: https://www.youtube.com/playlist?list=PLY6oTPmKnKbboGAL_-MineM-zcOblOm6V**

@@ -1,7 +1,7 @@
 ---
 title: Understanding and Using Environment Variables in React
 date: "2021-01-16T12:12:03.284Z"
-description: Learning How to hide Data
+description: "Keep API keys out of your repo: what environment variables are, using a .env file and .gitignore in React, and how to set the variables when you deploy."
 ---
 
 ## Why do you care?

@@ -1,7 +1,7 @@
 ---
 title: Ultimate Basic Coder Reference (Bash, Git, VSCode, Nodejs, more)
 date: "2020-09-05T22:12:03.284Z"
-description: "The Basics We Should all know"
+description: "A daily reference for core tools: Bash commands and profile files, nano and vim, VSCode extensions, Git rules and commands, and Node commands and packages."
 ---
 
 ## About

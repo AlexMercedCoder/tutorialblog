@@ -1,7 +1,7 @@
 ---
 title: Create Your Dev Portfolio with this Gatsby Template
 date: "2020-12-30T12:12:03.284Z"
-description: Template designed for Dev Portfolios
+description: "Generate a Gatsby developer portfolio with npx create-markdown-blog, add projects to a JSON file, write Markdown posts, and get offline PWA support built in."
 ---
 
 ## create-markdown-blog

@@ -1,7 +1,7 @@
 ---
 title: Guide to Becoming a Developer in 2021
 date: "2021-01-07T12:12:03.284Z"
-description: Step by Step Guide and Advice
+description: "Thinking about a developer career? Weigh time, cost and risk, compare the main ways to learn coding, review the career paths, and pick up practical tips."
 ---
 
 ## Reasons to Become a Developer

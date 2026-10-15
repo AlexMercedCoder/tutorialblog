@@ -1,7 +1,7 @@
 ---
 title: "Java Spring"
 date: "2023-10-21T23:27:29-04:00"
-description: "Java Spring, commonly referred to as Spring, is an open-source framework for building robust and scalable enterprise applications in Java."
+description: "A Java Spring reference: project layout, Maven and Gradle, modules like Spring Boot and Security, entities and repositories, and CRUD APIs in Java and Kotlin."
 author: "Alex Merced"
 tags:
   - reference

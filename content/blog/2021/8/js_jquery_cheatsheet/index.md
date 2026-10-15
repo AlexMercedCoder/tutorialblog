@@ -1,7 +1,7 @@
 ---
 title: Ultimate Plain Vanilla DOM JS & JQuery Cheatsheet
 date: "2021-08-04T14:12:03.284Z"
-description: A Beginning oriented dive into databases
+description: "Side by side snippets for plain DOM JavaScript and jQuery: loading scripts, selecting and creating elements, manipulating nodes, handling events and forms."
 ---
 
 While for larger projects using one of the main frontend frameworks is usually the way to go:

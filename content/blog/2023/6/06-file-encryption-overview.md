@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Overview of File Encryption Algorithms for Everyone"
+description: "A plain-language look at file encryption and hashing algorithms, including AES, MD5, SHA-1, and SHA-2, and the factors to weigh when choosing one for your data."
 date: "2023-06-21T12:12:03.284Z"
 category: "data engineering"
 

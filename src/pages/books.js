@@ -16,10 +16,6 @@ const BooksPage = ({
 
   return (
     <Layout location={location} title={title}>
-      <Seo
-        title="Books by Alex Merced"
-        description="Books on AI-assisted development, building agents, shipping AI systems, and data engineering, written by Alex Merced."
-      />
       <div className="hb-books">
         <header className="hb-booksHeader">
           <p className="hb-booksEyebrow">Books by Alex Merced</p>
@@ -74,6 +70,15 @@ const BooksPage = ({
 }
 
 export default BooksPage
+
+// Head API, so the JSON-LD is emitted raw in <head> (rendered in the body it was HTML-escaped).
+export const Head = ({ location }) => (
+  <Seo
+    title="Books by Alex Merced"
+    description="Books by Alex Merced on AI-assisted development, building agents, shipping AI systems and data engineering, each with a summary and a link to buy on Amazon."
+    pathname={location.pathname}
+  />
+)
 
 export const pageQuery = graphql`
   query {

@@ -1,7 +1,7 @@
 ---
 title: Basic Authentication with Node/Express and Mongo
 date: "2021-08-20T14:12:03.284Z"
-description: A Beginning oriented dive into databases
+description: "Step by step, add JSON Web Token authentication to an Express and Mongo API: user and todo models, signup and login routes, auth middleware and protected todos."
 ---
 
 [REPO OF CODE FROM THIS LESSON HERE AS A TEMPLATE](https://github.com/AlexMercedCoder/Express-Mongo-Auth-Template)

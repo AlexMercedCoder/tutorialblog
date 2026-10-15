@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Creating a Local Data Lakehouse using Spark/Minio/Dremio/Nessie"
+description: "Run a data lakehouse on your laptop with Docker Compose: Spark, MinIO, Nessie, and Dremio working together to create, insert into, and query Iceberg tables."
 date: "2023-08-08T12:12:03.284Z"
 category: "data engineering"
 

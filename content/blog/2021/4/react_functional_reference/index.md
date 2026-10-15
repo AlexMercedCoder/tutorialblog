@@ -1,7 +1,7 @@
 ---
 title: Ultimate 2021 Reference for React Functional Components
 date: "2021-04-21T12:12:03.284Z"
-description: React for Everyone
+description: "A reference for React function components: generators, JSX rules, props, rendering arrays, useState, useEffect, useRef, forms, context, useReducer and routing."
 ---
 
 [I will Continue to Expand on Guide in this Gist](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c)

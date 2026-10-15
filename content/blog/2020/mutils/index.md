@@ -1,7 +1,7 @@
 ---
 title: Using mutils to supercharge arrays!
 date: "2020-10-17T22:12:03.284Z"
-description: Arrays with superpowers!
+description: "The mutils library extends Array and Set to add extra methods without touching the prototype. Install it and work with its Rand, MArray and MSet helpers."
 ---
 
 ## What is mutils?

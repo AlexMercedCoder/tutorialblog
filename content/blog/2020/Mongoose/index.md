@@ -1,7 +1,7 @@
 ---
 title: Mongoose, Connecting to Mongo via Javascript
 date: "2020-09-17T22:12:03.284Z"
-description: Documents, Collections and Databases oh my!
+description: "What document databases and Mongoose are, then connect to MongoDB Atlas from JavaScript, seed sample data with a script, and query your collections."
 ---
 
 ## What is Mongo and Mongoose?

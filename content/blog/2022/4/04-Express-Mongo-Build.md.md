@@ -1,7 +1,7 @@
 ---
 title: Express/EJS/Mongooose Build from Zero to Deploy
 date: "2022-04-19"
-description: "Building A Full Stack Application with ExpressJS"
+description: "Build a todo app with Express, EJS and Mongoose from scratch: connect MongoDB with dotenv, add morgan and method-override, seed todos, then deploy to Heroku."
 author: "Alex Merced"
 category: "javascript"
 tags:

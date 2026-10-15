@@ -1,7 +1,7 @@
 ---
 title: Walkthrough - Deploy Anything with Nginx
 date: "2021-08-30T12:12:03.284Z"
-description: Getting Data from an external API
+description: "Set up a Linux VPS over SSH, run your web app as a systemd service, proxy it through an Nginx config, and add free SSL certificates with certbot."
 ---
 
 ## Purpose of this article

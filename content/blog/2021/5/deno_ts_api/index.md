@@ -1,7 +1,7 @@
 ---
 title: Creating an API with Deno (import maps, deps.ts, etc.)
 date: "2021-05-10T12:12:03.284Z"
-description: Using that Cool New Javascript Runtime
+description: "Build a CRUD API in Deno 1.9.2 with the Pogo framework, organizing imports through a deps.ts file and import maps, starting from a ready-made template repo."
 ---
 
 > **Last tested with:** Deno 1.9.2 and Pogo 0.5.2, the versions this tutorial uses (May 2021). Later releases may need changes.

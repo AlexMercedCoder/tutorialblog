@@ -1,7 +1,7 @@
 ---
 title: How to use Vercel Cloud Functions
 date: "2021-01-23T12:12:03.284Z"
-description: Your First Cloud Function
+description: "Write your first Vercel serverless function in an api folder, call it by URL with query params, and set CORS headers for requests from other origins."
 ---
 
 ## Context

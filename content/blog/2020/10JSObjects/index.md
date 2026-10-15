@@ -1,7 +1,7 @@
 ---
 title: 6 JS Object Types You May Not Have Used
 date: "2020-11-30T22:12:03.284Z"
-description: Getting Advanced with Javascript
+description: "Code examples for six lesser-used JavaScript features: Map, Set, Symbol, generator functions, the Reflect API and Proxy objects, with notes on when each helps."
 ---
 
 **My Javascript Playlist:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbZDZ9cRrRby4Wnr4GIJj5O3

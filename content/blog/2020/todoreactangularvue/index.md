@@ -1,7 +1,7 @@
 ---
 title: 1 Backend, 5 Frontends - Todo List with Rails, React, Angular, Vue, Svelte, and jQuery
 date: "2020-11-17T22:12:03.284Z"
-description: Same app... different frontend frameworks
+description: "One Rails todo API with Postgres and CORS, then the same todo app built as five frontends in React, Vue, Angular, Svelte and jQuery to compare frameworks."
 ---
 
 ## Why are we doing this?

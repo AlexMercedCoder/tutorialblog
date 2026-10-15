@@ -1,7 +1,7 @@
 ---
 title: Chart of Backend Web Frameworks 2021
 date: "2021-02-26T12:12:03.284Z"
-description: Build your application or microservice
+description: "A table of backend frameworks across Node, Deno, PHP, Python, Ruby, Go and Rust, each tagged minimalist like Express or robust like Rails, plus more links."
 ---
 
 **Find tutorials for many of these frameworks at my website, devNursery.com**

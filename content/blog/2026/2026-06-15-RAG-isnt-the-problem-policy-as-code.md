@@ -1,7 +1,7 @@
 ---
 title: "RAG Isn't the Problem : Policy as Code Is"
 date: "2026-06-15"
-description: "The real bottleneck with enterprise AI isn't retrieval augmentation or model accuracy : it's governance. Policy-as-code (OPA, ABAC, Rego) lets you enforce access rules, column masks, and row filters on any data source at query time."
+description: "Enterprise AI governance comes down to policy-as-code: Rego and OPA rules, row filters, column masks, and ABAC enforced by the semantic layer at query time."
 author: "Alex Merced"
 category: "semantic layer"
 tags:

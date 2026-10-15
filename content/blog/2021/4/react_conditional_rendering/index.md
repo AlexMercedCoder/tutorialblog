@@ -1,7 +1,7 @@
 ---
 title: React Conditional Rendering
 date: "2021-04-21T12:12:03.284Z"
-description: React for Everyone
+description: "Nine patterns for conditional rendering in React, from if blocks and ternaries to conditional classes and styles, object key lookups and switch statements."
 ---
 
 [My React Breakdown 2021 Github Gist](https://gist.github.com/AlexMercedCoder/b4d86790176f2f5c7b374235cf3dc23c)

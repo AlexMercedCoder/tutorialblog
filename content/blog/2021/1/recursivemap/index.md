@@ -1,7 +1,7 @@
 ---
 title: Javascript - Writing Map as a Recursive Function
 date: "2021-01-01T12:12:03.284Z"
-description: Thinking Recursively
+description: "Rebuild JavaScript's array map method twice, first as a higher-order function with a for loop and then as a recursive function with a base case."
 ---
 
 ## The Map Function

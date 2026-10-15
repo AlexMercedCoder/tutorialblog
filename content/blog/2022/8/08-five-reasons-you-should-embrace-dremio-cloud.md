@@ -1,7 +1,7 @@
 ---
 title: 5 Reasons Your Data Lakehouse should Embrace Dremio Cloud
 date: "2022-08-09"
-description: "How your data lakehouse can expand what's possible with Dremio Cloud."
+description: "Five reasons to run Dremio Cloud on your data lakehouse: easy setup, low cost, fast queries with reflections, open formats like Iceberg, and a semantic layer."
 author: "Alex Merced"
 category: "data lakehouse"
 tags:
@@ -91,4 +91,4 @@ With these granular controls to organize and secure your data Dremio can satisfy
 **Other Resources for Learning about Data Lakehouses**
 - [Subsurface Data Lakehouse Community Blog](https://www.dremio.com/subsurface/)
 - [Subsurface Meetup Group](https://www.meetup.com/subsurface-global/)
-- Twitter: [Dremio](https://twitter.com/dremio), [Subsurface]([https://twitter.com/Dipankartnt](https://twitter.com/SubsurfaceComm)), [Alex Merced](https://twitter.com/AMdatalakehouse), [Dipankar Mazumdar](https://twitter.com/Dipankartnt)
+- Twitter: [Dremio](https://twitter.com/dremio), [Subsurface](https://twitter.com/SubsurfaceComm), [Alex Merced](https://twitter.com/AMdatalakehouse), [Dipankar Mazumdar](https://twitter.com/Dipankartnt)

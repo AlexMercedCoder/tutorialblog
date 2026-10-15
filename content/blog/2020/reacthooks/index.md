@@ -1,7 +1,7 @@
 ---
 title: React Hooks Basics Reference
 date: "2020-09-23T22:12:03.284Z"
-description: useEffect, useState, UseReducer and more!
+description: "A reference for the core React hooks with examples: useState for state, useEffect for side effects, useRef, useContext for shared data, and useReducer."
 ---
 
 ## What are React Hooks?

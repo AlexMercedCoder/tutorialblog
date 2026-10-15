@@ -1,7 +1,7 @@
 ---
 title: Javascript Basic Reference
 date: "2021-02-07T12:12:03.284Z"
-description: Quickly find what you need
+description: "A quick JavaScript cheat sheet covering variables, math and boolean operators, conditionals, loops, function styles, arrays, objects and DOM manipulation."
 ---
 
 ## Declaring Variables

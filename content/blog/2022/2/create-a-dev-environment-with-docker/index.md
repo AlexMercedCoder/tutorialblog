@@ -1,7 +1,7 @@
 ---
 title: Creating a Consistent Developer Environment with Docker
 date: "2022-02-05T12:12:03.284Z"
-description: Using Docker to create an Environment in PHP, Ruby, Python and more
+description: "Use Docker and docker-compose to get one reusable dev environment with PHP, Ruby, Python, Node, Go, Deno and more, then attach to it from Visual Studio Code."
 ---
 
 [VIDEO OVERVIEW OF USING DOCKER IMAGE FROM DOCKER HUB](https://youtu.be/mN5UHsMNm4U)

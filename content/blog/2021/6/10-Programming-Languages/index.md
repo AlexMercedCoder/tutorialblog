@@ -1,10 +1,10 @@
 ---
 title: 10 Programming Languages Side by Side (JS, Python, Ruby, PHP, GO, Rust, Dart, C Sharp, Java, Ballerina)
 date: "2021-06-02T12:12:03.284Z"
-description: Learn Languages by see what's similar and different
+description: "Compare the basics of JS, Python, Ruby, PHP, Go, Rust, Dart, C#, Java and Ballerina: printing to the console, variables, arrays, maps and function definitions."
 ---
 
-Using the below you can see the basics of 10 different languages. For most of these langauges you should be able to try them out by [generating a REPL](https//www.repl.it).
+Using the below you can see the basics of 10 different languages. For most of these langauges you should be able to try them out by [generating a REPL](https://replit.com).
 
 ## How to print text to the console
 

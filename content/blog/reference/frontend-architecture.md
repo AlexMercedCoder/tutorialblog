@@ -1,7 +1,7 @@
 ---
 title: "Understanding Frontend Architecture"
 date: "2023-10-21T23:27:29-04:00"
-description: "Frontend application architecture refers to the high-level structure and organization of the code, components, and technologies used in building the user interface (UI) and user experience (UX) of a web or mobile application."
+description: "Frontend architecture reference: components, state management, client-side routing, data fetching, CSS, performance, and security, with good and bad practices."
 author: "Alex Merced"
 tags:
   - reference

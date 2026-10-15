@@ -28,7 +28,10 @@ exports.createPages = async ({ graphql, actions }) => {
               frontmatter {
                 title
                 tags
+                category
+                description
                 canonical
+                isoDate: date(formatString: "YYYY-MM-DD")
               }
             }
           }
@@ -43,6 +46,15 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create blog posts pages.
   const posts = result.data.allMarkdownRemark.edges
+  const _l = require("lodash")
+  // Tag page slugs, so a category chip only links when that page exists.
+  const tagSlugs = new Set(
+    posts.flatMap(p => (p.node.frontmatter.tags || []).map(t => _l.kebabCase(t)))
+  )
+  // Descriptions shared by more than one post fall back to the post excerpt.
+  const descCounts = _l.countBy(
+    posts.map(p => (p.node.frontmatter.description || "").trim()).filter(Boolean)
+  )
 
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
@@ -79,6 +91,11 @@ exports.createPages = async ({ graphql, actions }) => {
         previous,
         next,
         relatedPosts,
+        categoryHasPage: !!post.node.frontmatter.category &&
+          tagSlugs.has(_l.kebabCase(post.node.frontmatter.category)),
+        descIsShared: descCounts[(post.node.frontmatter.description || "").trim()] > 1,
+        // Content date, used for the sitemap lastmod.
+        lastmod: post.node.frontmatter.isoDate || null,
         // Syndicated copies (canonical on another site) stay out of the sitemap.
         sitemapExclude: /^https:\/\//.test(post.node.frontmatter.canonical || ""),
       },
@@ -99,6 +116,8 @@ exports.createPages = async ({ graphql, actions }) => {
               skip: i * postsPerPage,
               numPages,
               currentPage: i + 1,
+              // Newest post date on the site (the home page lists it first).
+              lastmod: i === 0 ? (posts[0] && posts[0].node.frontmatter.isoDate) || null : null,
           },
       });
   });
@@ -116,6 +135,14 @@ exports.createPages = async ({ graphql, actions }) => {
   })
   // Count posts per tag page path before de-duplicating
   const tagCounts = _.countBy(tags, t => _.kebabCase(t))
+  // Newest post date per tag page path (posts are sorted newest first).
+  const tagLastmod = {}
+  posts.forEach(edge => {
+    ;(edge.node.frontmatter.tags || []).forEach(t => {
+      const s = _.kebabCase(t)
+      if (!tagLastmod[s]) tagLastmod[s] = edge.node.frontmatter.isoDate || null
+    })
+  })
   // Eliminate duplicate tags
   tags = _.uniq(tags)
 
@@ -135,6 +162,7 @@ exports.createPages = async ({ graphql, actions }) => {
         count,
         intro: TOPIC_INTROS[slug] || null,
         noindex: count < 5,
+        lastmod: tagLastmod[slug] || null,
         sitemapExclude: count < 5,
       },
     })
@@ -145,7 +173,9 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    // Netlify 301s mixed-case paths to lowercase, so build every page at its
+    // lowercase URL; internal links and the client router then use the final URL.
+    const value = createFilePath({ node, getNode }).toLowerCase()
     createNodeField({
       name: `slug`,
       node,

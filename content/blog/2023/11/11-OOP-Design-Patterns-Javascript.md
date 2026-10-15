@@ -1,7 +1,7 @@
 ---
 title: OOP Design Patterns in Javascript
 date: "2023-11-26"
-description: "An overview of OOP Design Patterns in Spark"
+description: "Creational, structural, and behavioral design patterns in JavaScript with example code, from Singleton and Builder to Adapter, Proxy, Observer, and Visitor."
 author: "Alex Merced"
 category: "javascript"
 tags:

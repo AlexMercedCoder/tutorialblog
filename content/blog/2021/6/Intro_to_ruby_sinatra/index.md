@@ -1,7 +1,7 @@
 ---
 title: Intro to Ruby Sinatra
 date: "2021-06-03T12:12:03.284Z"
-description: Minimalist Ruby Web Framework
+description: "Get started with Sinatra, Ruby's minimalist answer to Flask and Express: install the gem, write a server.rb file, define routes and read URL params."
 ---
 
 In Python there is Django, the big batteries included web framework. There there is Flask, the minimalist web framework similar ExpressJS on node. In the Ruby world, along with the batteries included Rails framework, there is the Sinatra web framework. Let's take it for a spin.

@@ -1,7 +1,7 @@
 ---
 title: "Python"
 date: "2023-10-21T22:40:16-04:00"
-description: "Python is a high-level, interpreted programming language known for its simplicity and readability."
+description: "Python fundamentals as a quick reference: Hello World, variables and types, conditionals, loops, lists, dictionaries, functions, and classes, with code samples."
 author: "Alex Merced"
 tags:
   - reference

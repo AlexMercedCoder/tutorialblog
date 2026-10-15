@@ -1,7 +1,7 @@
 ---
 title: Understanding Data and Databases 101
 date: "2021-08-04T12:12:03.284Z"
-description: A Beginning oriented dive into databases
+description: "A beginner's primer on persistent data: how to design data, the main types of databases such as relational and document stores, and how apps use a database."
 ---
 
 No matter what kind of application you are working on in any programming language you eventually care about having data that exist beyond the running of the application. Data that doesn't disappear when a program stops running is referred to as being "persistent". Databases are essentially programs that organize large amounts of data and writes them to disk (hard drives) so they can persist.

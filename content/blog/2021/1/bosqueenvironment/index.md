@@ -1,7 +1,7 @@
 ---
 title: Creating a Bosque Programming Language Dev Environment in 2021
 date: "2021-01-18T12:12:03.284Z"
-description: Microsoft Exeperimental Language
+description: "Run Microsoft's experimental Bosque language in a Docker container with the VS Code Remote Containers extension, then compile a first .bsq file with exegen."
 ---
 
 ## What is Bosque?

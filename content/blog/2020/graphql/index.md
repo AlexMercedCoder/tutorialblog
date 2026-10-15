@@ -1,7 +1,7 @@
 ---
 title: Tutorial - Writing Your First GraphQL API
 date: "2020-11-20T22:12:03.284Z"
-description: An Alternative to RESTFul API
+description: "Build a first GraphQL API step by step: project structure, sample data, typeDefs, queries and mutations, testing, then calling it from the frontend with fetch."
 ---
 
 ## What is GraphQL?

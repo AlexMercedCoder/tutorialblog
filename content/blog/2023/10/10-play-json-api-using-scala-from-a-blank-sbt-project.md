@@ -4,6 +4,7 @@ tags:
   - "play"
 author: "Alex Merced"
 title: "How to write a JSON API in Scala with Play from scratch"
+description: "Build a todo JSON API in Scala with Play, starting from a blank SBT project: PostgreSQL with Play Slick, a model, a controller, routes, and running the app."
 date: "2023-10-01T12:12:03.284Z"
 category: "scala"
 ---

@@ -1,7 +1,7 @@
 ---
 title: Rust 101 - The Syntax and Basics
 date: "2021-01-04T12:12:03.284Z"
-description: A Fun Language for Fast Compiled Apps
+description: "Why Rust exists among compiled languages, how to install it with rustup, compile a file with rustc, start a project with cargo and declare variables."
 ---
 
 ## Why do we need another lower-level compiled language?

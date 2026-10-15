@@ -6,7 +6,7 @@ module.exports = {
       name: `Alex Merced`,
       summary: `Developer from devNursery.com and alexmercedcoder.dev`,
     },
-    description: `Hands-on web development and programming tutorials by Alex Merced: JavaScript, TypeScript, React, Python, data engineering, and more.`,
+    description: `Hands-on programming tutorials by Alex Merced: JavaScript, TypeScript, React, Node, Python, Rust and SQL, with runnable code and notes on library versions.`,
     siteUrl: `https://tuts.alexmercedcoder.dev/`,
     social: {
       twitter: `alexmercedcoder`,
@@ -142,7 +142,13 @@ module.exports = {
         resolvePages: ({ allSitePage: { nodes } }) =>
           nodes.filter(n => !(n.pageContext && n.pageContext.sitemapExclude)),
         // Netlify serves lowercase paths; list the URL that answers 200.
-        serialize: ({ path }) => ({ url: encodeURI(decodeURI(path).toLowerCase()) }),
+        // lastmod is the content date (newest post for home and tag pages);
+        // pages without a content date get none rather than the build time.
+        serialize: ({ path, pageContext }) => {
+          const entry = { url: encodeURI(decodeURI(path).toLowerCase()) }
+          if (pageContext && pageContext.lastmod) entry.lastmod = pageContext.lastmod
+          return entry
+        },
       },
     },
     {

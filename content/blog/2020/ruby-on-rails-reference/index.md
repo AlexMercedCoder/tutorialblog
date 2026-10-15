@@ -1,7 +1,7 @@
 ---
 title: Ruby on Rails Reference - CLI Commands, Bundler, Macros
 date: "2020-10-22T22:12:03.284Z"
-description: All You need to know to be productive in Rails
+description: "Quick reference images for Rails work: gem commands, Bundler and the Gemfile, Rails CLI commands, Active Record column types, plus model and route macros."
 ---
 **My Learning Ruby on Rails Video Playlist:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbYlAqVHgzZl5lou54bizdbV
 

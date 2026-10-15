@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Parquet File Compression for Everyone (zstd, brotli, lz4, gzip, snappy)"
+description: "How the Parquet compression codecs zstd, brotli, lz4, gzip, and snappy compare, what each one is good at, and how to choose between compression ratio and speed."
 date: "2023-06-19T12:12:03.284Z"
 category: "data engineering"
 

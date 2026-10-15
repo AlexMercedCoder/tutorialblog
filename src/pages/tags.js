@@ -5,9 +5,8 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-const kebabCase = (str) => str && str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-  .map(x => x.toLowerCase())
-  .join('-');
+// Same slug function gatsby-node uses to create the tag pages.
+import kebabCase from "lodash/kebabCase"
 
 const TagsPage = ({
   data: {
@@ -18,14 +17,23 @@ const TagsPage = ({
   },
   location,
 }) => {
+    // Tags that differ only in case or punctuation share one page; list it once.
+    const bySlug = {}
+    group.forEach(tag => {
+        const slug = kebabCase(tag.fieldValue)
+        if (!slug) return
+        if (bySlug[slug]) bySlug[slug].totalCount += tag.totalCount
+        else bySlug[slug] = { slug, fieldValue: tag.fieldValue, totalCount: tag.totalCount }
+    })
+    const tags = Object.values(bySlug).sort((a, b) => a.slug.localeCompare(b.slug))
     return (
         <Layout location={location} title={title}>
         <div>
             <h1>Tags</h1>
             <ul style={{ listStyle: 'none' }}>
-            {group.map(tag => (
-                <li key={tag.fieldValue} style={{ marginBottom: rhythm(0.5) }}>
-                <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+            {tags.map(tag => (
+                <li key={tag.slug} style={{ marginBottom: rhythm(0.5) }}>
+                <Link to={`/tags/${tag.slug}/`}>
                     {tag.fieldValue} ({tag.totalCount})
                 </Link>
                 </li>
@@ -59,7 +67,7 @@ export default TagsPage
 export const Head = ({ data, location }) => (
   <Seo
     title="All Tags"
-    description={`Browse articles by tags on ${data.site.siteMetadata.title}.`}
+    description="Every topic on Coding Tutorials by Alex Merced, from JavaScript, Python and Rust to SQL, data engineering and AI agents, with the post count for each one."
     pathname={location.pathname}
   />
 )

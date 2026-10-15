@@ -1,7 +1,7 @@
 ---
 title: Svelte - The New Kids on the Frontend Framework Block
 date: "2020-09-05T22:12:03.284Z"
-description: "Compiling based frontend framework"
+description: "Svelte compiles your UI instead of diffing a virtual DOM. Generate a project with degit, read its scripts and files, then build components with reactive state."
 ---
 
 ## What is Svelte

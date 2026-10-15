@@ -1,7 +1,7 @@
 ---
 title: React in Concept - The Terms and Idea
 date: "2020-09-24T22:12:03.284Z"
-description: Props, State, Forms, Classes, Functions
+description: "The core ideas behind React explained without much code: why components and reactive data matter, state versus props, the component lifecycle, and context."
 ---
 
 **MY SET OF REACT TUTORIAL VIDEOS** => https://www.youtube.com/playlist?list=PLY6oTPmKnKbba6LlpF7kcnsyWdlwePt_V

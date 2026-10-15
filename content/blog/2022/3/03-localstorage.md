@@ -1,7 +1,7 @@
 ---
 title: Web Storage API Part 1 - LocalStorage and SessionStorage
 date: "2022-03-23"
-description: "Where to store data in the users browser"
+description: "How localStorage and sessionStorage keep data in the user's browser, with setItem, getItem and removeItem, plus JSON.stringify and JSON.parse for objects."
 author: "Alex Merced"
 category: "oltp"
 tags:

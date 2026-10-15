@@ -1,7 +1,7 @@
 ---
 title: Using SimpleRPC with SvelteKit 1.0/Typescript
 date: "2023-01-02T12:12:03.284Z"
-description: Easy to use RPC in your SvelteKit Application
+description: "Set up SimpleRPC in a SvelteKit 1.0 TypeScript app: define actions and context, expose a handler through a +server.ts route, then call rpcDispatch."
 ---
 
 SvelteKit is the official SvelteKit meta framework in the vein of Next/Remix for React, Nuxt for Vue, Analog for Angular and Solid-Start for Solid.

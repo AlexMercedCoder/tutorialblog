@@ -3,7 +3,7 @@ noteId: "d6eea4e0d3ec11ed8fd1ed948fd51e27"
 tags: []
 title: "Overview of the Data Lakehouse, Dremio and Apache Iceberg"
 date: "2023-04-05T12:12:03.284Z"
-description: "Understanding the Cutting Edge of Data Engineering"
+description: "What a data lakehouse is and why it beats a lake plus warehouse, plus what Dremio Cloud, Sonar, Arctic and Apache Iceberg each contribute to the architecture."
 
 ---
 

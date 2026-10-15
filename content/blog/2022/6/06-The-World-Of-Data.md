@@ -1,7 +1,7 @@
 ---
 title: Introduction to The World of Data - (OLTP, OLAP, Data Warehouses, Data Lakes and more)
 date: "2022-06-20"
-description: "An accessible high-level guide for data and non-data professionals"
+description: "A plain tour of the data world: OLTP vs OLAP, warehouses, data lakes, ETL, and how Parquet, Iceberg and Arrow come together to make a data lakehouse possible."
 author: "Alex Merced"
 category: "data"
 tags:

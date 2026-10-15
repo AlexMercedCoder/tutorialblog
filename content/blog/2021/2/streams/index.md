@@ -1,7 +1,7 @@
 ---
 title: Understanding Node Streams with Https.get
 date: "2021-02-08T12:12:03.284Z"
-description: Learn How to use Streams
+description: "How Node streams handle large transfers in chunks, shown with the built-in https.get function and its data, end and error events to assemble a JSON response."
 ---
 
 ## What are Streams?

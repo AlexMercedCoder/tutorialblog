@@ -1,7 +1,7 @@
 ---
 title: Passing Data Between Components in Vue
 date: "2020-09-20T22:12:03.284Z"
-description: Props, Queries and Events oh my!
+description: "How data moves between Vue components: props and $attrs from parent to child, passing data into router-view, and emitting events to send data up to parents."
 ---
 
 ## The dilemma

@@ -1,7 +1,7 @@
 ---
 title: Understanding RPC (tour of API protocols, gRPC nodejs walkthrough, and Apache Arrow Flight)
 date: "2022-02-19T12:12:03.284Z"
-description: How to write Markdown and where you can use it
+description: "A tour of protocols and API styles (REST, GraphQL, RPC), then a gRPC API in Node.js with a .proto file, @grpc/grpc-js and proto-loader, plus Arrow Flight."
 ---
 
 ## The World of Protocols

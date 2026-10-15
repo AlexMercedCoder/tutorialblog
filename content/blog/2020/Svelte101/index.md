@@ -1,7 +1,7 @@
 ---
 title: Learning Svelte 101
 date: "2020-10-05T22:12:03.284Z"
-description: Cybernetically Enhanced Web Apps!
+description: "A hands-on Svelte intro in CodeSandbox: how App.svelte is laid out, declaring variables, passing props, events with reactive data, and looping over arrays."
 ---
 
 **This tutorial will be using this codesandbox, so open it up and fork it**: https://codesandbox.io/s/welcome-to-svelte-is0hb

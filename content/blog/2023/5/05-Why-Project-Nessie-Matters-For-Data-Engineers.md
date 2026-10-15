@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "What is Nessie and Why as a Data Engineer or Architect you should care?"
+description: "Why data engineers should care about Project Nessie: what lakehouses need, why Apache Iceberg matters, and how catalog commits enable branches and rollbacks."
 date: "2023-05-30T12:12:03.284Z"
 category: "data engineering"
 

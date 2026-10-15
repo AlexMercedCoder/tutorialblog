@@ -1,7 +1,7 @@
 ---
 title: Understanding Postgres on Linux
 date: "2021-02-14T12:12:03.284Z"
-description: The Little Things that May not be obvious
+description: "Why psql fails right after installing Postgres on Linux, how to switch to the postgres user, create a superuser and database, and what port 5432 is for."
 ---
 
 ## Installing Postgres

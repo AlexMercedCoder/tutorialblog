@@ -1,7 +1,7 @@
 ---
 title: Express Todo List for Beginners
 date: "2022-04-06"
-description: "Creating backend applications with Nodejs"
+description: "A beginner Express walkthrough: what a web server is, serving static files, EJS templates and partials, building a todo list you can cross off, and deploying."
 author: "Alex Merced"
 category: "javascript"
 tags:

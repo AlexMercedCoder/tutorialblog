@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Rust - A Modern Systems Programming Language
 date: "2024-09-13"
-description: "Get Started with Rust"
+description: "A beginner's start with Rust: set up Cargo and a first project, learn variables, types, functions, and control flow, then see how the borrow checker works."
 author: "Alex Merced"
 category: "Rust"
 tags:

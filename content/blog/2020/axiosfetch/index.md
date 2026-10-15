@@ -1,7 +1,7 @@
 ---
 title: Axios, Fetch and other useful images!
 date: "2020-10-19T22:12:03.284Z"
-description: Javascript in Review
+description: "Reference images showing CRUD requests written with fetch and with Axios, followed by quick visual refreshers on JavaScript object keys and destructuring."
 ---
 
 ## Fetch

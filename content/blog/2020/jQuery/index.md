@@ -1,7 +1,7 @@
 ---
 title: Ultimate jQuery/Plain Vanilla JS DOM Reference
 date: "2020-09-13T22:12:03.284Z"
-description: "The Basics of one of the most popular libraries ever"
+description: "Side by side jQuery slim and plain JavaScript DOM code for querying, creating and appending elements, looping over elements, and adding event listeners."
 ---
 
 ## What is jQuery

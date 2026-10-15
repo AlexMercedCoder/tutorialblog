@@ -1,7 +1,7 @@
 ---
 title: The renaissance of server side rendering with Alpine and HTMX, Reactivity with Minimal JS
 date: "2021-08-19T14:12:03.284Z"
-description: A Beginning oriented dive into databases
+description: "Why HTML-centric, server rendered apps are back, and how Alpine and HTMX add reactivity and dynamic requests with very little JavaScript of your own."
 ---
 
 One of the biggest recent trends has been to have MORE javascript in your web applications whether that meant doing your backend web server in node/deno or shifting your entire stateful view logic into the client using frontend frameworks like React and Angular.

@@ -1,7 +1,7 @@
 ---
 title: Web Components Part 3 - Lifecycle Functions
 date: "2020-09-05T22:12:03.284Z"
-description: "Built in functions that run at certain points"
+description: "Part 3 of the Web Components series covers lifecycle hooks you can override: connectedCallback, disconnectedCallback, adoptedCallback and observedAttributes."
 ---
 
 ## What is a Web Component

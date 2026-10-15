@@ -1,7 +1,7 @@
 ---
 title: Go, Rust and C++ Side by Side
 date: "2021-02-10T12:12:03.284Z"
-description: Learn All The Things
+description: "Hello world, variables, arrays, functions and OOP written in Go, Rust and C++ side by side, so you can compare the syntax of three compiled languages."
 ---
 
 ## Why?

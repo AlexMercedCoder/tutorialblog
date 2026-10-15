@@ -1,7 +1,7 @@
 ---
 title: What is HTMX? Why it Matters? and How to use it.
 date: "2023-11-30"
-description: "The framework that is getting all the buzz about reducing the javascript you need to write"
+description: "HTMX gives server-rendered apps interactivity through HTML attributes like hx-get, hx-post, hx-target, and hx-swap. Why that matters and how to set it up."
 author: "Alex Merced"
 category: "HTML"
 tags:

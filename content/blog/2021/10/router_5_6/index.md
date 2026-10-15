@@ -1,7 +1,7 @@
 ---
 title: Comparing React Router 5, 6, and React Location
 date: "2021-10-21T12:12:03.284Z"
-description: For simple web development
+description: "Compare React Router 5, React Router 6 and React Location side by side: installing, defining routes, reading URL params with useParams or useMatch, redirects."
 ---
 
 > **Last tested with:** react-router-dom 5.3.0 for the React Router 5 examples, the version this tutorial installs (October 2021). The React Router 6 and React Location examples use the releases current at that time.

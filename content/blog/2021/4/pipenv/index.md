@@ -1,7 +1,7 @@
 ---
 title: Pipenv - Yep, another post about Python Virtual Environments
 date: "2021-04-07T12:12:03.284Z"
-description: Venv... the best way?
+description: "Pipenv manages Python virtual environments and dependencies together. Install it, create an environment, add libraries with pipenv install and run pipenv shell."
 ---
 
 Virtual environments have always been one of those areas of constant discovery as I've learned python. I've been writing on articles what, how, and why of Virtual Environments and you can find those articles here:

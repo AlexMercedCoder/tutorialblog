@@ -1,7 +1,7 @@
 ---
 title: Python Flask 101 - Intro and API Building
 date: "2021-05-21T12:12:03.284Z"
-description: Making an API with this Powerful Python Framework
+description: "Start a Flask project, write your first route, then build a basic JSON API with CRUD routes in Python's most popular minimalist web framework after Django."
 ---
 
 Every programming language has frameworks for building web server, also known as a web framework. In Python, there are several such as Django, Bottle, Pyramid, Masonite, FastAPI, Web2Py and many more. Next to Django, the most heavily used Python web framework is Flask. Flask is the ExpressJS (minimalist web framework) what Django is to Ruby on Rails (Batteries Included Web Framework).

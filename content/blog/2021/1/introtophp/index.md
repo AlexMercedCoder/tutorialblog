@@ -1,7 +1,7 @@
 ---
 title: Intro to PHP
 date: "2021-01-15T12:12:03.284Z"
-description: Learn the Pre-Hypertext Processor Language
+description: "Get started with PHP 7: check the CLI install, write your first file, declare variables, arrays and associative arrays, and use PHP as a templating language."
 ---
 
 ## What is PHP?

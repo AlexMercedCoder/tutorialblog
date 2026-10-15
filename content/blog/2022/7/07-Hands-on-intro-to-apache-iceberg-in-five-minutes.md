@@ -1,7 +1,7 @@
 ---
 title: Brief Hands on Intro to Apache Iceberg
 date: "2022-07-18"
-description: "Engineer a Data Lakehouse with Apache Iceberg"
+description: "Run the alexmerced/table-format-playground Docker image and try Apache Iceberg with Spark SQL: create a table, insert some records, then query them."
 author: "Alex Merced"
 category: "frontend"
 tags:

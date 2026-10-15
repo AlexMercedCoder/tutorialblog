@@ -1,7 +1,7 @@
 ---
 title: Mastering Git | A Comprehensive Guide to git pull and git push
 date: "2024-02-21"
-description: "Having a better understanding of git pull and git push"
+description: "What git pull and git push actually do, the flags worth knowing, and how to undo a push, set aliases, configure defaults, and handle large files with Git LFS."
 author: "Alex Merced"
 category: "Javascript"
 tags:

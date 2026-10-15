@@ -1,7 +1,7 @@
 ---
 title: "Understanding Memory Management"
 date: "2023-10-21T23:27:29-04:00"
-description: "Memory is a fundamental concept in software development, responsible for storing and managing data that programs use during execution."
+description: "How programs use memory: the stack and the heap, how garbage collectors work, practices that keep GC efficient, and how Rust's borrow checker avoids a GC."
 author: "Alex Merced"
 tags:
   - reference

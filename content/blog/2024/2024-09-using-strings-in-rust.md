@@ -1,7 +1,7 @@
 ---
 title: In-Depth Guide to Working with Strings in Rust
 date: "2024-09-14"
-description: "Strings in Rust"
+description: "Rust has two string types, String and &str. See how to convert between them, concatenate, slice, split, and trim, use the regex crate, and mind performance."
 author: "Alex Merced"
 category: "Rust"
 tags:

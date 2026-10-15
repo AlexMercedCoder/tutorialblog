@@ -1,7 +1,7 @@
 ---
 title: Fundamentals of Client Side Javascript
 date: "2020-12-28T12:12:03.284Z"
-description: The Building Blocks of Client-Side Javascript Master
+description: "Browser APIs worth knowing before DOM work: navigator, window.location, the customElements registry, document, and adding and removing data in localStorage."
 ---
 
 ## Why read this?

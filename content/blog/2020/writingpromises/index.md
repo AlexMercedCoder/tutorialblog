@@ -1,7 +1,7 @@
 ---
 title: Writing Javascript Promises
 date: "2020-09-25T22:12:03.284Z"
-description: Under the Hood of Asynchronous Javascript
+description: "Write your own JavaScript promise: when a promise is the right tool, how to build one with resolve and reject, and what to keep in mind when you use them."
 ---
 
 To read my previous article explaining promises, go here:

@@ -1,7 +1,7 @@
 ---
 title: React Cheat Sheet
 date: "2020-09-24T22:12:03.284Z"
-description: Props, State, Forms, Classes, Functions
+description: "React syntax side by side for class and function components: starting a project, props, state, lifecycle, form handling, the rules of JSX, and the main hooks."
 ---
 
 **MY SET OF REACT TUTORIAL VIDEOS** => https://www.youtube.com/playlist?list=PLY6oTPmKnKbba6LlpF7kcnsyWdlwePt_V

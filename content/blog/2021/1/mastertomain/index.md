@@ -1,7 +1,7 @@
 ---
 title: Git/Github - Making the Switch from Master to Main
 date: "2021-01-09T12:12:03.284Z"
-description: Getting with the times
+description: "Make main your default branch name on GitHub and in local git with git config init.defaultBranch, which requires git 2.28 or later, plus a quick push alias."
 ---
 
 > **Last tested with:** Git 2.28, the minimum version this tutorial requires (January 2021).

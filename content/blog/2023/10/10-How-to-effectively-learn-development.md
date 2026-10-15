@@ -3,6 +3,7 @@ tags:
   - "software development"
 author: "Alex Merced"
 title: "How to effectively learn software development"
+description: "How to learn to code: pick a first language, learn syntax in order, practice simple challenges, then rebuild one todo app with more features each pass."
 date: "2023-10-15T12:12:03.284Z"
 category: "software development"
 ---

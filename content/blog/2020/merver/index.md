@@ -1,7 +1,7 @@
 ---
 title: Create Your Next Microservice with Merver!
 date: "2020-10-17T22:12:03.284Z"
-description: NodeJS Micro-Web Framework
+description: "Merver is a NodeJS micro web framework built on the core HTTP library. Scaffold it with merced-spinup, then set up config, middleware and response controllers."
 ---
 
 ## What is Merver?

@@ -1,7 +1,7 @@
 ---
 title: Javascript Callback Array Methods
 date: "2020-10-13T22:12:03.284Z"
-description: Map, Reduce, Some, Every, Filter, Find, FindIndex
+description: "Annotated images explaining the JavaScript array methods that take callbacks: filter, map, some, every, find, findIndex and reduce, plus bonus JS videos."
 ---
 
 ## Array Callback Methods

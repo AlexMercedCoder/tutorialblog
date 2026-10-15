@@ -1,7 +1,7 @@
 ---
 title: MongoDB Relationships using Mongoose in NodeJS
 date: "2021-11-19T12:12:03.284Z"
-description: Guide to Relating Data
+description: "Model one to one, one to many and many to many relationships in MongoDB with Mongoose, using ObjectId refs and populate to pull related documents together."
 ---
 ![Title Image](https://i.imgur.com/tleNmhh.jpg)
 

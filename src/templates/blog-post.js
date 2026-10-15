@@ -11,9 +11,16 @@ import Comments from "../components/comments"
 import ProgressBar from "../components/progressBar"
 
 
-const kebabCase = (str) => str && str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
-  .map(x => x.toLowerCase())
-  .join('-');
+// Same slug function gatsby-node uses to create the tag pages.
+import kebabCase from "lodash/kebabCase"
+
+// Netlify 301s mixed-case paths to lowercase, so links to posts on this site
+// written with capitals in the Markdown point at the final URL instead.
+const lowercaseInternalLinks = html =>
+  html.replace(
+    /href="((?:https:\/\/tuts\.alexmercedcoder\.dev)?\/(?:20\d\d|reference|tags)\/[^"#?]*)/g,
+    (m, href) => `href="${href.toLowerCase()}`
+  )
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
@@ -82,13 +89,16 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       <ProgressBar />
       <article className="hb-article">
         <header className="hb-articleHead">
-          {post.frontmatter.category && (
+          {post.frontmatter.category && pageContext.categoryHasPage && (
             <Link
               to={`/tags/${kebabCase(post.frontmatter.category)}/`}
               className="hb-chip"
             >
               {post.frontmatter.category}
             </Link>
+          )}
+          {post.frontmatter.category && !pageContext.categoryHasPage && (
+            <span className="hb-chip">{post.frontmatter.category}</span>
           )}
           <h1 className="hb-articleTitle">{post.frontmatter.title}</h1>
           <div className="hb-articleMeta">
@@ -105,7 +115,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         )}
         <section
           className="hb-prose"
-          dangerouslySetInnerHTML={{ __html: post.html.replace(/<(\/?)h1(\s|>)/g, "<$1h2$2") }}
+          dangerouslySetInnerHTML={{ __html: lowercaseInternalLinks(post.html.replace(/<(\/?)h1(\s|>)/g, "<$1h2$2")) }}
         />
         {post.frontmatter.tags && (
             <div className="hb-tagRow">
@@ -181,12 +191,14 @@ const cleanExcerpt = excerpt => {
   return text.length > 160 ? `${text.slice(0, 157).replace(/\s+\S*$/, "")}...` : text
 }
 
-export const Head = ({ data, location }) => {
+export const Head = ({ data, location, pageContext }) => {
   const post = data.markdownRemark
+  const own = post.frontmatter.description
+  const description = own && !(pageContext && pageContext.descIsShared) ? own : cleanExcerpt(post.excerpt) || own
   return (
     <Seo
       title={post.frontmatter.title}
-      description={post.frontmatter.description || cleanExcerpt(post.excerpt)}
+      description={description}
       pathname={location.pathname}
       canonical={post.frontmatter.canonical}
       article={true}

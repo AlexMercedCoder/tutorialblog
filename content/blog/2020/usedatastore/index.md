@@ -1,7 +1,7 @@
 ---
 title: Rollout Application Level State Quickly with useDataStore
 date: "2020-10-15T22:12:03.284Z"
-description: Context, Reducers and Hooks, yes!
+description: "useDataStore wraps React Context and useReducer in createDataStore for Redux-style global state. Install it, add the provider, then use state and dispatch."
 ---
 
 ## What is useDataStore?

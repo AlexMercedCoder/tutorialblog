@@ -1,1 +1,6 @@
 /sitemap.xml /sitemap-index.xml 301
+
+# Posts whose old file names had spaces (crawl fix 2026-10-15).
+/2020/ruby%20on%20rails/*                 /2020/ruby-on-rails-reference/        301!
+/2022/4/04-express-todo-list%20copy/      /2022/4/04-expressjs-cheatsheet-2022/  301!
+/2022/4/04-express-todo-list%20copy       /2022/4/04-expressjs-cheatsheet-2022/  301!

@@ -1,7 +1,7 @@
 ---
 title: Simple Setup for Application Wide State in React
 date: "2021-11-20T12:12:03.284Z"
-description: Sharing State Across Your React App with just React (No Redux or Recoil)
+description: "Share state across a React app with only createContext, useState and useContext: one GlobalState.js file with a Provider, no Redux or Recoil needed."
 ---
 
 ![Blog Title Image - React Application Wide State](https://i.imgur.com/shntfak.jpg)

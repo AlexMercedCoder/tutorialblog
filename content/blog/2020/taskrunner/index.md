@@ -1,7 +1,7 @@
 ---
 title: React - Why use TaskRunner over Redux, useReducer
 date: "2020-12-24T12:12:03.284Z"
-description: "A State Management Alternative"
+description: "An alternative to Redux and useReducer: the TaskRunner pattern from merced-react-hooks lets React state logic run async actions and set state where needed."
 ---
 
 ## What is the story?

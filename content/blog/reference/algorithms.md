@@ -1,7 +1,7 @@
 ---
 title: "Algorithms"
 date: "2023-10-21T23:27:29-04:00"
-description: "Algorithms are step-by-step procedures or sets of rules designed to solve specific problems or perform tasks."
+description: "Why algorithms matter, how to read Big O notation, and examples of linear, binary, interpolation, exponential, and jump search plus classic sorting algorithms."
 author: "Alex Merced"
 tags:
   - reference

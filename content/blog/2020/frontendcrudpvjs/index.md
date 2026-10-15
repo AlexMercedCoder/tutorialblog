@@ -1,7 +1,7 @@
 ---
 title: Frontend CRUD with Plain Vanilla JS
 date: "2020-08-18T22:12:03.284Z"
-description: "A Basic Exploration of Frontend DOM Manipulation"
+description: "Practice DOM manipulation by building create, read, update and delete operations for a small dataset with only plain JavaScript, HTML and CSS, no framework."
 ---
 
 ## Our Mission

@@ -1,7 +1,7 @@
 ---
 title: Creating Deno Scripts Like Node NPM Scripts
 date: "2021-05-19T12:12:03.284Z"
-description: Replicating One of Nodes Greatest Features
+description: "Deno permission flags make commands long. Here is a small scripts.ts template that uses Deno.args and Deno.run to give you npm style named scripts."
 ---
 
 One of the greatest features of NodeJS is the package.json file. The file not only tracks dependencies but also allows us to easily create scripts as easy as writing some JSON.

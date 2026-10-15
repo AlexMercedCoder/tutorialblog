@@ -5,6 +5,7 @@ tags:
   - "dremio"
 author: "Alex Merced"
 title: "Project Nessie: A Look in the Depths"
+description: "How Project Nessie brings Git-style versioning to Apache Iceberg: commits, branches, tags, backend databases, garbage collection, and metadata authorization."
 date: "2023-07-10T12:12:03.284Z"
 category: "data engineering"
 

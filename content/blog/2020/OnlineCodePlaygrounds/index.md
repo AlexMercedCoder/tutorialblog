@@ -1,7 +1,7 @@
 ---
 title: Big List of Online Places to Code/Prototype
 date: "2020-09-24T22:12:03.284Z"
-description: Code on the Go
+description: "Browser-based places to code and prototype, including Repl.it, CodePen, CodeSandbox, RunKit, JSFiddle, Glitch and PythonAnywhere, and what each one does."
 ---
 
 Across the internet that has always been many code playgrounds, places we can practice basic coding drills. Nowadays we have even more robus online coding tools that allow us to even build whole applications online. This is meant to be a list of such tools.

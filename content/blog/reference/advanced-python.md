@@ -1,7 +1,7 @@
 ---
 title: "Advanced Python"
 date: "2023-10-21T22:40:16-04:00"
-description: "List comprehensions and dictionary comprehensions are powerful and concise ways to create lists and dictionaries in Python."
+description: "Three intermediate Python features with examples: list and dictionary comprehensions, the * and ** unpacking operators, and pattern matching with match."
 author: "Alex Merced"
 tags:
   - reference

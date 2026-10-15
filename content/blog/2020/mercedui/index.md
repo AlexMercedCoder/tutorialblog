@@ -1,7 +1,7 @@
 ---
 title: MercedUI - Web Components with Super Powers
 date: "2020-08-22T22:12:03.284Z"
-description: "Beginners Tutorial"
+description: "MercedUI is a library for building Web Components with extra features. Set up a plain HTML page, write a first component, then add props and state to it."
 ---
 
 ## What is MercedUI

@@ -1,7 +1,7 @@
 ---
 title: Intro to Express
 date: "2020-10-12T22:12:03.284Z"
-description: Creating a Backend Server
+description: "Where Express fits among Node web servers like Koa, Fastify and Polka, how to start a basic Express server, what else it can do, and templates to start from."
 ---
 
 **Watch My Intro to Express Video Playlist Here: https://www.youtube.com/playlist?list=PLY6oTPmKnKbamIu4uuDJ3QNNDU1SoOkjl**

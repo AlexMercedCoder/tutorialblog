@@ -1,7 +1,7 @@
 ---
 title: What is a Makefile and how do I use them?
 date: "2021-02-14T12:12:03.284Z"
-description: Automating all the things
+description: "Make can automate any chain of terminal commands. Write a Makefile with named targets, run them with make, and point make at a differently named file."
 ---
 
 ## The beauty of scripting and automation

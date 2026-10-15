@@ -1,7 +1,7 @@
 ---
 title: Intro to Angular 9 Tutorial
 date: "2020-08-21T22:12:03.284Z"
-description: "Enterprise level frontend framework"
+description: "Get started with Angular 9: install the Angular CLI, learn the project basics, interpolate data, create components, use directives, and set up the router."
 ---
 
 > **Last tested with:** Angular 9, the version this tutorial covers (August 2020). Later Angular releases changed parts of the CLI output and project structure.

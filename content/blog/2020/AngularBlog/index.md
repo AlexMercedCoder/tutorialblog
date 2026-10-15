@@ -1,7 +1,7 @@
 ---
 title: Creating a Portfolio/Blog with Angular/Agility CMS
 date: "2020-12-21T22:12:03.284Z"
-description: An Introductory Angular Tutorial
+description: "Build a portfolio and blog in Angular: install the CLI, generate components and services, set up routing, and pull blog posts from Agility CMS with a service."
 ---
 
 ## Pre-Requisites

@@ -208,12 +208,15 @@ const BlogIndex = ({ data, location, pageContext }) => {
 export default BlogIndex
 
 export const Head = ({ pageContext, location }) => {
-  const { currentPage } = pageContext
-  const pageTitle =
-    currentPage && currentPage > 1
-      ? `Tutorials - Page ${currentPage}`
-      : "Alex Merced Tutorials"
-  return <Seo title={pageTitle} pathname={location.pathname} />
+  const { currentPage, numPages } = pageContext
+  const paged = currentPage && currentPage > 1
+  const pageTitle = paged
+    ? `Tutorials, page ${currentPage} of ${numPages}`
+    : "Alex Merced's Coding Tutorials: JavaScript, Python, Rust"
+  const description = paged
+    ? `Page ${currentPage} of ${numPages} of Alex Merced's coding tutorials, newest first: JavaScript, Python, Rust, databases and data engineering posts with dates and summaries.`
+    : undefined
+  return <Seo title={pageTitle} description={description} pathname={location.pathname} />
 }
 
 export const pageQuery = graphql`

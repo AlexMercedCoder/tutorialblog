@@ -1,7 +1,7 @@
 ---
 title: The Basics of React Testing With Jest
 date: "2021-04-22T12:12:03.284Z"
-description: Making Sure React Works
+description: "Why automated tests catch bugs that manual checks miss, how to think like a tester, and how to write React component tests with Jest and React Testing Library."
 ---
 
 [MY VIDEO ON REACT TESTING](https://youtu.be/Qpp67fEqtxo)

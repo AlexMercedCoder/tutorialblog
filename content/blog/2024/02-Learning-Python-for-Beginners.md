@@ -1,7 +1,7 @@
 ---
 title: An Introduction to Python
 date: "2024-02-23"
-description: "An overview of Python for beginners"
+description: "New to Python? Start here: installation, syntax, variables, control flow, functions and modules, lists, tuples, dictionaries, sets, the CLI, and error handling."
 author: "Alex Merced"
 category: "Python"
 tags:

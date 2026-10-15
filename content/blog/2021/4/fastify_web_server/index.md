@@ -1,7 +1,7 @@
 ---
 title: Intro to Fastify & The Liquid Templating Language
 date: "2021-04-24T12:12:03.284Z"
-description: Making Sure React Works
+description: "Why server speed matters and how to build a first Fastify web app, then render pages with the Liquid templating language using conditionals and iteration."
 ---
 
 ## What is Fastify

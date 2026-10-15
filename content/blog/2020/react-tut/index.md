@@ -1,7 +1,7 @@
 ---
 title: React 101 Tutorial
 date: "2020-08-18T22:12:03.284Z"
-description: "Basics of How React Works"
+description: "A first look at React using only script tags, no build tools: set up the page, write JSX, interpolate values, build components, pass props and manage state."
 ---
 
 ## What is React?

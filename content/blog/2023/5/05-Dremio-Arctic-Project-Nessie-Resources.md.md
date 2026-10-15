@@ -5,6 +5,7 @@ tags:
   - "data lakehouse"
   - "dremio"
 title: "Resources for Learning more about Catalog level versioning with Project Nessie & Dremio Arctic (Rollbacks, Branching, Tagging and Multi-Table Txns)"
+description: "Tutorials and links for catalog versioning with Project Nessie and Dremio Arctic: branching, tagging, rollbacks, multi-table transactions, and CI/CD patterns."
 date: "2023-05-10T12:12:03.284Z"
 author: "Alex Merced"
 category: "data engineering"

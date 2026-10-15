@@ -52,4 +52,4 @@ export default function Tracks({ location }) {
   </Layout>
 }
 
-export const Head = () => <Seo title="Learning tracks for data and software engineering" description="Three ordered tracks with prerequisites and checkpoints for SQL and Python, open lakehouses, and AI agents." />
+export const Head = ({ location }) => <Seo pathname={location.pathname} title="Learning tracks for data and software engineering" description="Three ordered learning tracks with prerequisites, steps and outcomes: SQL and Python basics, building an open lakehouse, and developing with AI agents." />

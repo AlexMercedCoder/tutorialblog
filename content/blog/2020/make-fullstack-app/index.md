@@ -1,7 +1,7 @@
 ---
 title: npx make-fullstack-app - Scaffolding your back and frontend
 date: "2020-10-22T22:12:03.284Z"
-description: One Project, Two Apps, One Command
+description: "One npx command, make-fullstack-app, generates backend and frontend folders together, pairing Express, Koa, Fastify, Polka or Merver with the frontend you pick."
 ---
 
 ## Why?

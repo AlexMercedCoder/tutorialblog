@@ -1,7 +1,7 @@
 ---
 title: Understanding JavaScript Promises In-Depth
 date: "2024-02-03"
-description: "Understanding Javascript Promises and Asynchronous Code"
+description: "JavaScript Promises from the ground up: creating them, handling errors with .catch, Promise.all, race, allSettled, and any, wrapping callbacks, and async/await."
 author: "Alex Merced"
 category: "Javascript"
 tags:

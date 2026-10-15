@@ -1,7 +1,7 @@
 ---
 title: "Computer Science"
 date: "2023-10-21T23:27:29-04:00"
-description: "Computer science fundamentals in one reference: number bases, how processors, RAM, and storage work together, assembly language, and object-oriented versus functional programming."
+description: "Core computer science in one place: binary, decimal, and hex, how CPUs, RAM, and drives work, assembly versus high-level languages, and OOP versus FP."
 author: "Alex Merced"
 tags:
   - reference

@@ -1,7 +1,7 @@
 ---
 title: merced-react-hooks => Application State, LocalStorage, Lifecycle
 date: "2020-10-29T22:12:03.284Z"
-description: Utility Hooks Library for React
+description: "Tour of merced-react-hooks: useDataStore and TaskRunner for app state, useFormState for forms, local and session storage hooks, plus semantic lifecycle hooks."
 ---
 
 **merced-react-hooks VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbYurl9-_fSMY4X6DZ1sx39s

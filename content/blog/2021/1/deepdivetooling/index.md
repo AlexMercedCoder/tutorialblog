@@ -1,7 +1,7 @@
 ---
 title: Deep Dive on Javascript Tooling (Bundlers, Linters, Oh MY!)
 date: "2021-01-08T12:12:03.284Z"
-description: Node, ESLint, Babel, Bundlers
+description: "What each piece of the JavaScript toolchain does: Node, Babel, ESLint, CSS preprocessors, TypeScript, Prettier, bundlers and task runners, in plain terms."
 ---
 
 ## Node

@@ -4,6 +4,7 @@ tags:
   - "data engineering"
 author: "Alex Merced"
 title: "An In-Depth Overview of Open Lakehouse Tech: Apache Iceberg & Nessie"
+description: "What table formats and catalogs do in an open lakehouse, how Apache Iceberg fixes the Hive table problem, how Nessie adds branches and tags, and Dremio's role."
 date: "2023-10-28T12:12:03.284Z"
 category: "data lakehouse"
 ---

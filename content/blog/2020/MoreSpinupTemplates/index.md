@@ -1,7 +1,7 @@
 ---
 title: More Merced-Spinup Templates
 date: "2020-10-05T22:12:03.284Z"
-description: Gulp, Express and React!
+description: "New merced-spinup templates: Express with socket.io, plain Webpack and Rollup, Commander CLIs, basic React, script-tag React and Vue, and AngularJS."
 ---
 
 **To See me list my prior templates go here**: https://tuts.alexmercedcoder.dev/2020/mercedspinuptut/

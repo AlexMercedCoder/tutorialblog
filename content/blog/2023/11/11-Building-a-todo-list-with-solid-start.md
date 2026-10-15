@@ -1,7 +1,7 @@
 ---
 title: Building a Todo List with Solid Start
 date: "2022-11-26"
-description: "Seeing the Power of the latest javascript meta-framework"
+description: "Build a todo app in Solid Start with file based routing, a MongoDB and Mongoose model, API routes for the data, and createRouteData to load todos into the page."
 author: "Alex Merced"
 category: "javascript"
 tags:

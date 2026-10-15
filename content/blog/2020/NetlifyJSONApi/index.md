@@ -1,7 +1,7 @@
 ---
 title: Delivering JSON Data with Netlify
 date: "2020-12-20T22:12:03.284Z"
-description: Using Netlify to Deliver Static JSON
+description: "Serve static JSON files from Netlify as a simple API for a JAMstack site, set CORS headers so other sites can fetch the data, and see ways to use it."
 ---
 
 ## Why use JSON to Deliver Data and What is JAMStack

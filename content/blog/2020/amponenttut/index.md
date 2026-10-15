@@ -1,7 +1,7 @@
 ---
 title: AMPonent, Webcomponent Building Library
 date: "2020-08-19T22:12:03.284Z"
-description: "Building Reactive and Styling UI Components"
+description: "AMPonent is a function-based Web Component library with reactive data, reducers and styled components. Set it up, use props and the box, and style components."
 ---
 
 ## What is AMPonent?

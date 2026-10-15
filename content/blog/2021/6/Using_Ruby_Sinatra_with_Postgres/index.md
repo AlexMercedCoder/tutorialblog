@@ -1,7 +1,7 @@
 ---
 title: Ruby Sinatra with Postgres using Sequel
 date: "2021-06-04T12:12:03.284Z"
-description: Connecting a Sinatra App to a Database
+description: "Connect a minimalist Ruby Sinatra app to a Postgres database with the Sequel ORM, from creating the database to writing a server file that queries it."
 ---
 
 In Ruby on Rails we use ActiveRecord as our ORM (Object Relationship Mapper). Sinatra, being a minimalist framework is unopinionated about what Ruby ORM you use to work with to connect to the database of your choice. We will use the ORM, sequel, to connect our small application to a database.

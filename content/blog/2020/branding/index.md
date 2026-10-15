@@ -1,7 +1,7 @@
 ---
 title: Building Your Coder/Developer Brand
 date: "2020-09-16T22:12:03.284Z"
-description: "Creating the Demand For You"
+description: "Practical ways to build a developer brand: shipping libraries, LinkedIn, GitHub, blogging, StackOverflow, podcasts, YouTube, coding challenges and free work."
 ---
 
 ## Why do you need a brand?

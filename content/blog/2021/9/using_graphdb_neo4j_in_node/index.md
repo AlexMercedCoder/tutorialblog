@@ -1,7 +1,7 @@
 ---
 title: How to use Neo4j Graph Database in your Node Project (Express, Koa, Fastify, etc.)
 date: "2021-09-25T12:12:03.284Z"
-description: Graph Databases are Cool
+description: "Set up a free Neo4j Aura graph database and connect to it from a Node project with neo4j-driver, a pattern that fits Express, Koa, Fastify or any framework."
 ---
 
 If you haven't seen it before, I highly recommend first watch this video from fireship on [7 Different Database Paradigms](https://www.youtube.com/watch?v=W2Z7fbCLSTw).

@@ -1,7 +1,7 @@
 ---
 title: Making Framework Agnostic Web Components with StencilJS
 date: "2020-10-26T22:12:03.284Z"
-description: Ionics Component Creation Tool
+description: "Use Ionic's StencilJS to build Web Components that work across frameworks: install, dev server, folder layout, component anatomy, state, props and events."
 ---
 
 **STENCIL VIDEO PLAYLIST:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbazpUTMcGmvMtgU5sr0Ip-V

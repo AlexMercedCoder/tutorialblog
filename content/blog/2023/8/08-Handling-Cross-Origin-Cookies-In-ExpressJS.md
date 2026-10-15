@@ -1,237 +1,240 @@
 ---
 tags:
-  - "data engineering"
-  - "data lakehouse"
-  - "dremio"
+  - "express"
+  - "javascript"
+  - "node"
 author: "Alex Merced"
 title: "Handling Cross-Origin Cookies with ExpressJS"
 date: "2023-08-23T12:12:03.284Z"
-category: "data engineering"
-
+category: "javascript"
+description: "Send cookies across origins in Express: CORS headers, the cors middleware with credentials, and httpOnly, secure and sameSite settings for dev and production."
 ---
 
-> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+## What is CORS (Cross Origin Resource Sharing)
 
-Data is becoming the cornerstone of modern businesses. As businesses scale, so does their data, and this leads to the need for efficient data storage, retrieval, and processing systems. This is where Data Lakehouses come into the picture.
+This is security feature in web browsers for preventing unwanted cross-origin requests (this doesn't apply to requests outside of a web browser like backend->backend requests or http clients like CURL or postman). A cross origin requests is when the origin of the sender is different than that of the receiver.
 
-## What is a Data Lakehouse?
+Example:
+- abc.xyz.com sending a post request to def.xyz.com
+- localhost:3000 sending a post request to localhost:5000
 
-A Data Lakehouse combines the best of both data lakes and data warehouses. It provides data lakes' raw storage capabilities and data warehouses' structured querying capabilities. This hybrid model ensures flexibility in storing vast amounts of unstructured data, while also enabling SQL-based structured queries, ensuring that businesses can derive meaningful insights from their data.
+In both these situations as far as the browser is concerned these are two completely different applications, and the application receiving the request needs to express that it is ok with receiving the incoming request. This is done in a two step process.
 
-![A Data Lake vs a Data Lakehouse](https://i.imgur.com/gMLcYGV.png)
+- Browser sends a "pre-flight" request usually of the OPTIONS HTTP method
+- The receiver responds to this request with ALLOW headers specifying what is allowed
+- If the headers allow the appropriate details, the main request is made and handled. If not, a CORS error is thrown by the browser.
 
-We will be implementing a basic lakehouse locally on your laptop with the following components:
+The headers that handle this are:
+- Access-Control-Allow-Origin: This details what origins are allowed to send a request
+- Access-Control-Allow-Methods: Specifies which methods are allowed
+- Access-Control-Allow-Headers: Specifies which headers are allowed
+- Access-Control-Max-Age: Max age of the request
+- Access-Control-Allow-Credentials: whether cookies can attached to requests
 
-- Apache Spark, which can be used for ingesting streaming or batch data into our lakehouse
-- Minio to act as our data lake repository and be the s3 compatible storage layer.
-- [Apache Iceberg, as our table format](https://www.dremio.com/blog/apache-iceberg-101-your-guide-to-learning-apache-iceberg-concepts-and-practices/), allows query engines to plan smarter, faster queries on our data lakehouse data.
-- [Nessie is our data catalog](https://www.dremio.com/getting-started-with-project-nessie-apache-iceberg-and-apache-spark-using-docker/) allowing our datasets to be discoverable and accessible across our tools. Nessie also provides git-like features for data quality, experimentation and disaster recovery. (Get even more features like an intuitive UI and automated table optimization when you use a [Dremio Arctic cloud-managed Nessie based catalog](https://www.dremio.com/blog/managing-data-as-code-with-dremio-arctic-easily-ensure-data-quality-in-your-data-lakehouse/).)
-- [Dremio will be our query engine](https://www.youtube.com/watch?v=d5ay8dmTKUg&pp=ygUSQWxleCBNZXJjZWQgRHJlbWlv) which we can use performantly query our data but also document, organize and deliver our data to our consumers, such as data analysts doing ad-hoc analytics or building out BI dashboards.
+## Handling Cors in Express
 
-## Create a Docker Compose File and Running it
+In expressJS applications, you can manually set these headers on your own in custom middleware or in each route like so.
 
-Building a Data Lakehouse on your local machine requires orchestrating multiple services, and Docker Compose is a perfect tool for this task. This section will create a docker-compose.yml file to define and run multi-container Docker applications for our Data Lakehouse environment.
-
-#### Steps:
-
-**Install Docker:** Ensure that you have Docker installed on your laptop. If not, you can download it from the official Docker website.
-
-**Create Docker Compose File:**
-Navigate to a directory where you want to create your project. Here, create a file named docker-compose.yml. Populate this file with the following content:
-
-```yaml
-version: "3.9"
-
-services:
-  dremio:
-    platform: linux/x86_64
-    image: dremio/dremio-oss:latest
-    ports:
-      - 9047:9047
-      - 31010:31010
-      - 32010:32010
-    container_name: dremio
-
-  minioserver:
-    image: minio/minio
-    ports:
-      - 9000:9000
-      - 9001:9001
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
-    container_name: minio
-    command: server /data --console-address ":9001"
-
-  spark_notebook:
-    image: alexmerced/spark33-notebook
-    ports: 
-      - 8888:8888
-    env_file: .env
-    container_name: notebook
+```js
+  // Allow requests from any origin
+  res.setHeader('Access-Control-Allow-Origin', '*');
   
-  nessie:
-    image: projectnessie/nessie
-    container_name: nessie
-    ports:
-      - "19120:19120"
-
-networks:
-  default:
-    name: iceberg_env
-    driver: bridge 
-
-```
-**Create Environment File:**
-
-Alongside your docker-compose.yml file, create an .env file to manage your environment variables. Start with the given template and fill in the details as you progress.
-
-```shell
-# Fill in Details
-
-# AWS_REGION is used by Spark
-AWS_REGION=us-east-1
-# This must match if using minio
-MINIO_REGION=us-east-1
-# Used by pyIceberg
-AWS_DEFAULT_REGION=us-east-1
-# AWS Credentials (this can use minio credential, to be filled in later)
-AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXX
-AWS_SECRET_ACCESS_KEY=xxxxxxx
-# If using Minio, this should be the API address of Minio Server
-AWS_S3_ENDPOINT=http://minioserver:9000
-# Location where files will be written when creating new tables
-WAREHOUSE=s3a://warehouse/
-# URI of Nessie Catalog
-NESSIE_URI=http://nessie:19120/api/v1
+  // Allow specific HTTP methods
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  
+  // Allow specific headers to be sent in the request
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  // Allow credentials (e.g., cookies, authentication) to be included in requests
+  res.setHeader('Access-Control-Allow-Credentials', true);
 ```
 
-**Run the Docker Compose:** 
+But like more backend frameworks there are native or 3rd party libraries for doing this in a much easier way. 
 
-Open four terminals for clearer log visualization. Each service should have its terminal. Ensure you are in the directory containing the docker-compose.yml file, and then run:
+[cors](https://www.npmjs.com/package/cors)
 
-**In the first terminal:**
-```
-docker-compose up minioserver
-```
-Headover to localhost:9001 in your browser and login with credentials minioadmin/minioadmin. Once your logged in do the following:
+The Cors middleware library makes setting all these cors headers as easy as this...
 
-- create a bucket called "warehouse"
-- create an access key and copy the access key and secret key to your .env file
+```js
+// Use the cors middleware
+app.use(cors());
+``` 
 
-**In the second terminal:**
-```
-docker-compose up nessie
-```
+Much easier and this generally works for most situations but when your dealing with cookies, the security issues are bigger so the level of configuration is greater. So let's discuss what these settings would look like for cross-origin cookies.
 
-**In the third terminal:**
-```
-docker-compose up spark_notebook 
-```
+## Cookies
 
-In the logs when this container open look for output the looks like the following and copy and paste the URL into your browser.
+Cookies are a string of data you can store on the users computer that can be attached to all subsequent requests to the backend server.
 
-```
-notebook  |  or http://127.0.0.1:8888/?token=9db2c8a4459b4aae3132dfabdf9bf4396393c608816743a9
+These can be set manually in your response headers, as an example:
+
+```js
+res.setHeader('Set-Cookie', 'myCookie=exampleValue; HttpOnly');
 ```
 
-**In the fourth terminal:**
+Although express makes setting cookies easier with `res.cookie`
+
+```js
+res.cookie('myCookie', 'exampleValue', { httpOnly: true });
 ```
-docker-compose up dremio 
+
+This makes for an easier form of defining your cookies and its settings vs using one long string.
+
+## For Local Development
+
+For cross-origin cookies, you have to have specific origins in your cors headers along witht he Allow Credentials header set to true so incoming cookies can be send.
+
+```js
+app.use(
+    cors({
+      origin: "https://xyz.onrender.com",
+      credentials: true,
+    })
+  );
 ```
 
-After completing these steps, you will have Dremio, Minio, and a Spark Notebook running in separate Docker containers on your laptop, ready for further Data Lakehouse operations!
+For Local Development where you are behind http:// your cookie settings should look like:
 
-**Creating a Table in Spark**
-
-From the jupyter notebook window you opened in the browser earlier, create a new notebook with the following code.
-
-```py
-import pyspark
-from pyspark.sql import SparkSession
-import os
-
-
-## DEFINE SENSITIVE VARIABLES
-NESSIE_URI = os.environ.get("NESSIE_URI") ## Nessie Server URI
-WAREHOUSE = os.environ.get("WAREHOUSE") ## BUCKET TO WRITE DATA TOO
-AWS_ACCESS_KEY = os.environ.get("AWS_ACCESS_KEY") ## AWS CREDENTIALS
-AWS_SECRET_KEY = os.environ.get("AWS_SECRET_KEY") ## AWS CREDENTIALS
-AWS_S3_ENDPOINT= os.environ.get("AWS_S3_ENDPOINT") ## MINIO ENDPOINT
-
-
-print(AWS_S3_ENDPOINT)
-print(NESSIE_URI)
-print(WAREHOUSE)
-
-
-conf = (
-    pyspark.SparkConf()
-        .setAppName('app_name')
-        .set('spark.jars.packages', 'org.apache.iceberg:iceberg-spark-runtime-3.3_2.12:1.3.1,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.3_2.12:0.67.0,software.amazon.awssdk:bundle:2.17.178,software.amazon.awssdk:url-connection-client:2.17.178')
-        .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions')
-        .set('spark.sql.catalog.nessie', 'org.apache.iceberg.spark.SparkCatalog')
-        .set('spark.sql.catalog.nessie.uri', NESSIE_URI)
-        .set('spark.sql.catalog.nessie.ref', 'main')
-        .set('spark.sql.catalog.nessie.authentication.type', 'NONE')
-        .set('spark.sql.catalog.nessie.catalog-impl', 'org.apache.iceberg.nessie.NessieCatalog')
-        .set('spark.sql.catalog.nessie.s3.endpoint', AWS_S3_ENDPOINT)
-        .set('spark.sql.catalog.nessie.warehouse', WAREHOUSE)
-        .set('spark.sql.catalog.nessie.io-impl', 'org.apache.iceberg.aws.s3.S3FileIO')
-        .set('spark.hadoop.fs.s3a.access.key', AWS_ACCESS_KEY)
-        .set('spark.hadoop.fs.s3a.secret.key', AWS_SECRET_KEY)
-)
-
-
-## Start Spark Session
-spark = SparkSession.builder.config(conf=conf).getOrCreate()
-print("Spark Running")
-
-
-## Create a Table
-spark.sql("CREATE TABLE nessie.names (name STRING) USING iceberg;").show()
-
-
-## Insert Some Data
-spark.sql("INSERT INTO nessie.names VALUES ('Alex Merced'), ('Dipankar Mazumdar'), ('Jason Hughes')").show()
-
-
-## Query the Data
-spark.sql("SELECT * FROM nessie.names;").show()
+```js
+      res.cookie("token", token, {
+        // can only be accessed by server requests
+        httpOnly: true,
+        // path = where the cookie is valid
+        path: "/",
+        // domain = what domain the cookie is valid on
+         domain: "localhost",
+        // secure = only send cookie over https
+        secure: false,
+        // sameSite = only send cookie if the request is coming from the same origin
+        sameSite: "lax", // "strict" | "lax" | "none" (secure must be true)
+        // maxAge = how long the cookie is valid for in milliseconds
+        maxAge: 3600000, // 1 hour
+      });
 ```
-Run the code, creating a table you can confirm by opening up the minio dashboard.
 
-![The Minio Dashboard](https://i.imgur.com/3GJ6AiX.png)
+- domain must be localhost to allow for local apps
+- secure must be false
+- sameSite's "Strict" setting won't allow cross-origin and "none" only works if secure is true, so "lax" is the best option
 
-## Querying the Data in Dremio
+once your application is deployed the setting on your cookies should be:
 
-Now that the data has been created, catalogs like Nessie for your Apache Iceberg tables offer easy visibility of your tables from tool to tool. We open Dremio and see we can immediately query the data we have in our Nessie catalog.
+```js
+      res.cookie("token", token, {
+        // can only be accessed by server requests
+        httpOnly: true,
+        // path = where the cookie is valid
+        path: "/",
+        // secure = only send cookie over https
+        secure: true,
+        // sameSite = only send cookie if the request is coming from the same origin
+        sameSite: "none", // "strict" | "lax" | "none" (secure must be true)
+        // maxAge = how long the cookie is valid for in milliseconds
+        maxAge: 3600000, // 1 hour
+      });
+```
 
-- head over to localhost:9047 where Dremio web application resides
-- create your admin user account
-- once on the dashboard click on "add source" in the bottom left
-- select "nessie"
-- Fill out the first two tabs as shown in the images below:
+- we remove the domain setting, it'll figure it out fine
+- secure is now true
+- sameSite can be "none" to allow for cross-origin requests
 
-![Nessie Connector Main Tab](https://i.imgur.com/lW9QofE.png)
-![Nessie Connected Storage Tab](https://i.imgur.com/1QPjz4a.png)
+Now it can be tedious changing these settings everytime you want to do local development vs deploying to production, let's talk about how we can handle that.
 
-- We use the docker network URL for our Nessie server since it's on the same docker network as our Dremio container
-- None for authentication unless you setup your Nessie server to use tokens (default is none)
-- The second tab allows us to provide credentials for the storage of the data the catalog tracks where we the keys we got from minio
-- we set the fs.s3a.path.style.access, fs.s3a.endpoint and dremio.s3.compat settings in order to use S3 compatible storage solutions like Minio
-- Since we are working with a local non-SSL network, turn off encryption on the connection.
+## Environmentally Conditional Code
 
-Now you can see our names table on the Dremio dashboard under our new connected source.
+Often time you may have different versions of code you want to run in different environments, usually you have three possible environments.
 
-![Seeing Your Data in Dremio](https://i.imgur.com/2x43mDo.png)
+- development: you running the code to develop it, so you don't want to use your production database and probably want a lot of logs to diagnose bugs
 
-You can now click on it and run a query:
+- test: when the code is being run against tests, sometimes you'll have seperate database and logs for this situation
 
-![Querying the Data in Dremio](https://i.imgur.com/eNMy5Uw.png)
+- production: when the code is deployed and available publically to the world, should be using a production database that holds the actual data of your users instead of the sample data you may have in development and test environments.
 
-Keep in mind Dremio also has full DML support for Apache Iceberg so you can do creates and inserts directly from Dremio like in the screenshot below.
+You will often signal to your what the environment is using an environmental variable, environment variables can be called anything but typical ones are.
 
-![Creating and Inserting in Dremio](https://i.imgur.com/eNMy5Uw.png)
+- ENVIRONMENT
+- NODE_ENV
 
-So now you get the performance of Dremio and Apache Iceberg along with the git-like capabilities that the Nessie catalog brings, allowing you to isolate ingestion on branches, create zero-clones for experimentation, and rollback your catalog for disaster recovery all on your data lakehouse.
+For most NodeJS development, NODE_ENV is used to specify the environment which you can use to run code conditionally like so.
+
+```js
+// get environment from environment variables
+const ENVIRONMENT = process.env.NODE_ENV
+
+// run code conditionally
+if(ENVIRONMENT === "development"){
+  // code to run 
+}
+```
+
+For environmental logs to avoid writing a bajillion if statements you can wrap the logic in a function like so.
+
+```js
+function devLog(...args){
+if(process.env.NODE_ENV === "development")
+   console.log(...args)
+}
+
+devLog("this log will only run in development")
+```
+
+We can use this for CORS logic like so:
+
+cors middleware
+```js
+if (process.env.NODE_ENV === "development"){
+  app.use(
+    cors({
+      origin: "https://localhost:3000",
+      credentials: true,
+    })
+  );
+}
+
+if (process.env.NODE_ENV === "production"){
+  app.use(
+    cors({
+      origin: "https://xyz.onrender.com",
+      credentials: true,
+    })
+  );
+}
+```
+
+cookie settings
+```js
+if (process.env.NODE_ENV === "development"){
+        res.cookie("token", token, {
+        // can only be accessed by server requests
+        httpOnly: true,
+        // path = where the cookie is valid
+        path: "/",
+        // domain = what domain the cookie is valid on
+         domain: "localhost",
+        // secure = only send cookie over https
+        secure: false,
+        // sameSite = only send cookie if the request is coming from the same origin
+        sameSite: "lax", // "strict" | "lax" | "none" (secure must be true)
+        // maxAge = how long the cookie is valid for in milliseconds
+        maxAge: 3600000, // 1 hour
+      });
+}
+
+if (process.env.NODE_ENV === "production"){
+        res.cookie("token", token, {
+        // can only be accessed by server requests
+        httpOnly: true,
+        // path = where the cookie is valid
+        path: "/",
+        // secure = only send cookie over https
+        secure: true,
+        // sameSite = only send cookie if the request is coming from the same origin
+        sameSite: "none", // "strict" | "lax" | "none" (secure must be true)
+        // maxAge = how long the cookie is valid for in milliseconds
+        maxAge: 3600000, // 1 hour
+      });
+}
+```
+
+## Conlclusion
+
+Hope this email helps you understand how to take advantage of cross-origin cookies in your expressJS apps.

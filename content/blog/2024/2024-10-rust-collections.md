@@ -1,7 +1,7 @@
 ---
 title: Working with Collections in Rust | A Comprehensive Guide
 date: "2024-10-14"
-description: "Rust Arrays, Vectors and more!"
+description: "Rust collections with code: Vec, arrays, slices, HashMap, HashSet, LinkedList, and BinaryHeap, plus conversions, Option and Result handling, and iterators."
 author: "Alex Merced"
 category: "rust"
 tags:

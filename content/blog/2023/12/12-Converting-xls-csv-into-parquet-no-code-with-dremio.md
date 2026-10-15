@@ -1,7 +1,7 @@
 ---
 title: No Code - Convert XLS/CSV files into Parquet with Dremio
 date: "2023-12-18"
-description: "Convert XLS/CSV Files without having to write python"
+description: "Turn CSV and Excel files into Parquet without Python: run Dremio in Docker, upload your files, explore and prepare the data, then download it as Parquet."
 author: "Alex Merced"
 category: "Data Engineering"
 tags:

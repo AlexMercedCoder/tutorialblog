@@ -1,7 +1,7 @@
 ---
 title: 5 Cool Things You Can Do In React
 date: "2021-01-07T12:12:03.284Z"
-description: Cool React Tips
+description: "Five React techniques: spreading props onto a child, destructuring props in the parameter list, render functions, passing JSX as props and custom hooks."
 ---
 
 ## 1 - Spreading Props

@@ -1,7 +1,7 @@
 ---
 title: "Python Backend Development"
 date: "2023-10-21T22:40:16-04:00"
-description: "Django is a high-level and open-source web framework written in Python that encourages rapid development and clean, pragmatic design."
+description: "Python web backends side by side: Django models, views, and DRF, Flask and FastAPI routes and CORS, WSGI and ASGI with Gunicorn and Uvicorn, and SQLAlchemy."
 author: "Alex Merced"
 tags:
   - reference

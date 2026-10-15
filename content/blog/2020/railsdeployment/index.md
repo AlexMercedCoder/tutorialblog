@@ -1,7 +1,7 @@
 ---
 title: Ruby on Rails Tutorial - Heroku API Deployment
 date: "2020-11-12T22:12:03.284Z"
-description: Deploy a Full Crud API Quickly!
+description: "Generate a Rails API with PostgreSQL, scaffold a quick full CRUD resource, test the endpoints, and deploy the finished API to Heroku in a few short steps."
 ---
 
 **My Learning Ruby on Rails Video Playlist:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbYlAqVHgzZl5lou54bizdbV

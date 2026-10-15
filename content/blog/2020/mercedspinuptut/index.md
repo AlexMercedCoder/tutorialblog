@@ -1,7 +1,7 @@
 ---
 title: Spin-up your next project with merced-spinup
 date: "2020-09-19T22:12:03.284Z"
-description: Templates for days
+description: "npx merced-spinup scaffolds projects from templates for web component libraries, React, Vue, Angular, Svelte, Express, Koa, Fastify, Apollo and TypeScript."
 ---
 
 ## What is merced-spinup

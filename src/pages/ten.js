@@ -12,6 +12,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
+      <h1>The 10 Latest Posts</h1>
       <Bio />
       {posts
         .map(({ node }) => {
@@ -47,7 +48,7 @@ const BlogIndex = ({ data, location }) => {
 
 export default BlogIndex
 
-export const Head = ({ location }) => <Seo title="Top 10 Posts" pathname={location.pathname} />
+export const Head = ({ location }) => <Seo title="The 10 Latest Posts" description="The ten most recent posts on Coding Tutorials by Alex Merced, newest first, each listed with its publication date and a short summary of what it covers." pathname={location.pathname} />
 
 export const pageQuery = graphql`
   query {

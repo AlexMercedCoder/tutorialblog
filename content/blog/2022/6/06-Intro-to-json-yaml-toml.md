@@ -1,7 +1,7 @@
 ---
 title: Guide to JSON, YAML and TOML
 date: "2022-06-11"
-description: "Popular formats for configuration"
+description: "Compare JSON, YAML and TOML by writing the same JavaScript object in all three, with notes on where each format shows up, from package.json to Netlify."
 author: "Alex Merced"
 category: "devops"
 tags:

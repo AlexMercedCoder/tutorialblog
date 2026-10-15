@@ -1,7 +1,7 @@
 ---
 title: Why Dremio is a must for Apache Iceberg Data Lakehouses
 date: "2023-11-30"
-description: "Why is Dremio so useful for Apache Iceberg data lakehouses"
+description: "How Dremio supports Apache Iceberg lakehouses: DDL and DML across catalogs, Nessie-based catalog management, fine-grained access controls, and reflections."
 author: "Alex Merced"
 category: "data lakehouse"
 tags:

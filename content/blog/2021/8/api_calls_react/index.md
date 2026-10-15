@@ -1,7 +1,7 @@
 ---
 title: 3 Ways to make API Requests in React (fetch/axios, merced-react-hooks, react-request)
 date: "2021-08-12T12:12:03.284Z"
-description: Getting Data from an external API
+description: "Compare three ways to fetch API data in React components: plain fetch or Axios with useState and useEffect, the merced-react-hooks package, and react-request."
 ---
 
 When working with React there are several things that can be particularly annoying to deal with...

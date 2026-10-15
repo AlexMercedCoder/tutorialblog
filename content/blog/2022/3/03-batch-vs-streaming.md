@@ -1,7 +1,7 @@
 ---
 title: What is Batch and Streaming Data? (Data 101)
 date: "2021-03-18"
-description: "The fundamentals of data engineering"
+description: "Where analytics data comes from, how OLTP and OLAP systems differ, what ETL does, and how batch processing compares to streaming data in a data pipeline."
 ---
 
 

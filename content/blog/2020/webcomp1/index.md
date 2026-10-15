@@ -1,7 +1,7 @@
 ---
 title: Web Components Part 1 - The Basics
 date: "2020-08-26T22:12:03.284Z"
-description: "Creating, ShadowDOM"
+description: "Part 1 of the Web Components series: build a hello world custom element in plain JavaScript, attach a ShadowDOM, and pass in data through attributes."
 ---
 
 ## What is a Web Component

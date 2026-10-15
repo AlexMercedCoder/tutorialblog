@@ -1,7 +1,7 @@
 ---
 title: ExpressJS Cheatsheet 2022
 date: "2022-04-09"
-description: "Easy reference for using express"
+description: "Express quick reference covering project setup, middleware like morgan and cors, routes, the req and res objects, templates, routers, databases and API calls."
 author: "Alex Merced"
 category: "javascript"
 tags:

@@ -1,7 +1,7 @@
 ---
 title: "Understanding Backend Architecture"
 date: "2023-10-21T23:27:29-04:00"
-description: "In software development, a backend application, often referred to simply as the \"backend,\" is a crucial component of a web or mobile application that operates behind the scenes."
+description: "How backends are built: web versus application servers, databases, models, controllers, and services in Express, and REST, GraphQL, RPC, and SOAP APIs."
 author: "Alex Merced"
 tags:
   - reference

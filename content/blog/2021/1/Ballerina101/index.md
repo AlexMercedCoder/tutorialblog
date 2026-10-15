@@ -1,7 +1,7 @@
 ---
 title: Getting Started Programming Ballerina 101
 date: "2021-01-05T12:12:03.284Z"
-description: Web Application Architecture
+description: "Install Ballerina, use its CLI to manage versions and packages, build a first project with a second module, and pull libraries from Ballerina Central."
 ---
 
 ## What is Ballerina?

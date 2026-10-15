@@ -1,7 +1,7 @@
 ---
 title: Building a Blog with Agility Headless CMS
 date: "2020-12-19T22:12:03.284Z"
-description: Using Headless CMS's
+description: "Create a free Agility CMS account, define a blog content model, publish posts, and fetch them into your JavaScript app using your guid and API key."
 ---
 
 ## What is a Headless CMS

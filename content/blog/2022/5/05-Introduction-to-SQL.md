@@ -1,7 +1,7 @@
 ---
 title: A 2022 Introduction to SQL
 date: "2022-05-13"
-description: "Learning Structured Query Language"
+description: "What SQL is, where it runs (SQLite, PostgreSQL, MySQL and more), and a first hands on session creating a table, inserting rows and querying them with SELECT."
 author: "Alex Merced"
 category: "database"
 tags:

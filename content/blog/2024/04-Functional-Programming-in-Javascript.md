@@ -1,7 +1,7 @@
 ---
 title: Deep Dive into Functional Programming in Javascript
 date: "2024-04-20"
-description: "Currying, Monad and Memos, Oh my!"
+description: "Pure functions, immutability, currying, memoization, and monads in JavaScript, each with code examples, common pitfalls, and how the concepts fit together."
 author: "Alex Merced"
 category: "Javascript"
 tags:

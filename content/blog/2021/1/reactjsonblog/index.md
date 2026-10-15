@@ -1,7 +1,7 @@
 ---
 title: React 101 - Basic JSON Blog from 0 to deployment
 date: "2021-01-08T12:12:03.284Z"
-description: A Simple Build to Learn React
+description: "Build a three component React blog with create-react-app that reads posts from a JSON file, passes data with state and props, and deploys to Netlify."
 ---
 
 ## Our Goal

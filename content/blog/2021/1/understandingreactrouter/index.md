@@ -1,7 +1,7 @@
 ---
 title: Understanding React Router
 date: "2021-01-15T12:12:03.284Z"
-description: Learn the Pre-Hypertext Processor Language
+description: "How client-side routing works and how to use React Router: the Route component, Link, history.push, Switch and URL params in a single page app."
 ---
 
 ## What is Routing?

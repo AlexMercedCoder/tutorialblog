@@ -1,7 +1,7 @@
 ---
 title: EZComponent -Open Source Frontend Framework using Web Components
 date: "2021-01-06T12:12:03.284Z"
-description: Component Based Frontend Framework
+description: "Try EZComponent, an open source web components framework: generate an app with create-ezcomponent-app, then define components, styles, lifecycle and methods."
 ---
 
 ## The Origin Story

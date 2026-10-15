@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Scala 3
 date: "2022-03-06T12:12:03.284Z"
-description: Powerful Functional & OOP JVM Language
+description: "Start writing Scala 3 on the JVM: why its cleaner syntax matters, installing with Coursier and sbt, hello world, val vs var, functions with def, control flow."
 ---
 
 ## Why Scala 3

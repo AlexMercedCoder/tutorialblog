@@ -1,7 +1,7 @@
 ---
 title: Why All Developers Should Master Markdown
 date: "2022-02-05T12:12:03.284Z"
-description: How to write Markdown and where you can use it
+description: "Why Markdown is worth knowing, where it shows up (GitHub READMEs, dev.to, Notion, Obsidian), and the syntax for headings, bold, italics, lists, links and code."
 ---
 
 ## What is Markdown

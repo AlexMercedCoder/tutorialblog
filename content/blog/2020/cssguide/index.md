@@ -1,7 +1,7 @@
 ---
 title: Ultimate CSS Reference
 date: "2020-12-27T12:12:03.284Z"
-description: "CSS All the Things!"
+description: "A CSS reference to bookmark: selectors, specificity, BEM, block versus inline elements, Flexbox, Grid, centering, pseudo selectors, CSS variables and functions."
 ---
 
 ## What is this guide?

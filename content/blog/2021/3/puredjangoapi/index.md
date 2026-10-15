@@ -1,7 +1,7 @@
 ---
 title: Django Rest API without DjangoRestFramework
 date: "2021-03-01T12:12:03.284Z"
-description: In case you were wondering
+description: "A full CRUD JSON API in plain Django with no DjangoRestFramework, using JsonResponse, the serializers module, csrf_exempt and a single Todo model."
 ---
 
 **Find tutorials for django at my website, devNursery.com**

@@ -1,7 +1,7 @@
 ---
 title: Learn Python, PHP, Ruby and Javascript in one Blog Post
 date: "2021-01-30T12:12:03.284Z"
-description: Be the Polyglot you know you can be!
+description: "Printing, variables, conditionals, loops, collections and functions in JavaScript, Python, Ruby and PHP, with the run command and package manager for each."
 ---
 
 ## Getting Started

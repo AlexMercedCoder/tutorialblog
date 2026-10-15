@@ -1,7 +1,7 @@
 ---
 title: Understanding Dependency Injection
 date: "2021-01-24T12:12:03.284Z"
-description: What a Fancy Word
+description: "Dependency injection explained with a small JavaScript WebServer class that accepts an array of functions to add features, the way a framework adds plugins."
 ---
 
 - [Watch My Video Explanation](https://youtu.be/qGVJVqHNTNo)

@@ -1,7 +1,7 @@
 ---
 title: How to create an One to Many Relationship with Auth in Python with Masonite
 date: "2021-12-07T12:12:03.284Z"
-description: Using A Developer Friendly Web Framework in Python
+description: "Add authentication to a Masonite app, then build an Owner and Dog one to many relationship with craft migrations, has_many models, and user scoped routes."
 ---
 
 ## To Get Started with Masonite, Start Here

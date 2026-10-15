@@ -1,7 +1,7 @@
 ---
 title: Using Docker & Docker Compose to Create an Express/Neo4J Dev Environment(Intro to Graph Databases)
 date: "2021-05-03T12:12:03.284Z"
-description: The Joys of Docker
+description: "Use a Dockerfile and docker-compose.yml to run an Express app next to a Neo4j graph database container, then query the graph from Express with neo4j-driver."
 ---
 
 ## Previous Content on Docker

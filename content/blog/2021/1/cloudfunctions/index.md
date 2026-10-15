@@ -1,7 +1,7 @@
 ---
 title: Cloud Functions - Server-Side Code On Demand
 date: "2021-01-22T12:12:03.284Z"
-description: Why you should embrace serverless tech
+description: "What serverless cloud functions are, what triggers them, common uses like hiding API keys, and which providers offer them, from AWS Lambda to Netlify or Vercel."
 ---
 
 ## How things have been done

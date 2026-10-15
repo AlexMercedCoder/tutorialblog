@@ -1,7 +1,7 @@
 ---
 title: Express Templating Cheatsheet
 date: "2021-10-19T12:12:03.284Z"
-description: Sever Side Rendering for All the People!
+description: "Side by side syntax for the LiquidJS, EJS, Mustache, Pug and Handlebars template engines in Express: injecting variables, looping arrays, conditional rendering."
 ---
 
 # Intro

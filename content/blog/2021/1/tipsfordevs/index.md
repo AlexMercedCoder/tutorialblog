@@ -1,7 +1,7 @@
 ---
 title: Tips for Aspiring Developers
 date: "2021-01-20T12:12:03.284Z"
-description: Good Advice
+description: "Advice for new developers: master one language's fundamentals, immerse yourself in coding vocabulary, keep coding, accept imposter feelings and share knowledge."
 ---
 
 ### Solid houses are built on strong foundations

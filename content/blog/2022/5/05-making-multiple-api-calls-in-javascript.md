@@ -1,7 +1,7 @@
 ---
 title: Making Multiple API Calls in Javascript
 date: "2022-05-15"
-description: "Different Patterns of Making Multiple API Calls"
+description: "Two patterns for multiple API calls with fetch and async/await: run independent requests together with Promise.all, or chain one that needs a prior result."
 author: "Alex Merced"
 category: "javascript"
 tags:

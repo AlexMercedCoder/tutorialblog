@@ -1,7 +1,7 @@
 ---
 title: Where Does My Code Run? - Compilers, Interpreters, Transpilers and Virtual Machines
 date: "2021-01-21T12:12:03.284Z"
-description: Making Code Happen
+description: "How source code turns into machine code: low versus high level languages, compiled versus interpreted, transpilation, and where virtual machines fit in."
 ---
 
 ## Machine Code

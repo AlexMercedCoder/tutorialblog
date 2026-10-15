@@ -5,6 +5,7 @@ tags:
   - "python"
 author: "Alex Merced"
 title: "Building Full CRUD Rest API's with Flask & FastAPI using PsychoPG2"
+description: "Full CRUD REST APIs in Flask and FastAPI using raw SQL through psycopg2 and PostgreSQL, with create, index, show, update, and delete routes and Pydantic models."
 date: "2023-09-10T12:12:03.284Z"
 category: "web development"
 ---

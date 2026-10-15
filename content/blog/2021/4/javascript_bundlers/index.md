@@ -1,7 +1,7 @@
 ---
 title: The Wonderful World of Javascript Bundlers
 date: "2021-04-19T12:12:03.284Z"
-description: Yay! Javascript Build Tools.
+description: "How JavaScript build tools evolved, problem by problem: task runners, Webpack, tree shaking in Rollup, zero config Parcel, then Snowpack and Vite on ES modules."
 ---
 
 ## Problem #1 - Too Many Script Tags

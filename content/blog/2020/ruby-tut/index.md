@@ -1,7 +1,7 @@
 ---
 title: Ruby on Rails API with JWT Auth Tutorial
 date: "2020-08-18T22:12:03.284Z"
-description: "Creating a Ruby on Rails API with Auth"
+description: "Build a Rails API with JWT authentication: configure CORS, create a secure User model, add auth routes and controllers, then let users create their own notes."
 ---
 
 _Certain parts of this tutorial were adapted from this tutorial, https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833_

@@ -1,7 +1,7 @@
 ---
 title: Guide to Free/Cheap Deployment Options 2020
 date: "2020-08-30T22:12:03.284Z"
-description: "Quality, Fast, Deployment for your static or full stack site."
+description: "Free and low-cost hosting options from 2020: static hosts like Netlify and Vercel, full stack hosts like Heroku, cloud and VPS providers, and headless CMSs."
 ---
 
 ## And the categories are...

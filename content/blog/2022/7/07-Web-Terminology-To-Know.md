@@ -1,7 +1,7 @@
 ---
 title: Web Development Glossary 2022
 date: "2022-07-16"
-description: "The words you need to know as a web professional"
+description: "Plain definitions of 23 web development terms, from abstraction, client and server to frontend, backend, CLI vs GUI, programming styles, REST, GraphQL and RPC."
 author: "Alex Merced"
 category: "frontend"
 tags:

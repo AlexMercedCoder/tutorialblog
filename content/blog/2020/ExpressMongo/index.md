@@ -1,7 +1,7 @@
 ---
 title: Mongo, Mongoose and Express Reference
 date: "2020-10-15T22:12:03.284Z"
-description: Queries and Endpoints oh my!
+description: "Reference images for Mongo shell commands, three ways to write Mongoose queries, schemas, populate and ObjectIDs, and Express CRUD routes with async/await."
 ---
 
 **CHECK OUT MY PLAYLIST ON CREATING A REACT/EXPRESS APPLICATION WITH MONGO AND JWT AUTH HERE:** https://www.youtube.com/playlist?list=PLY6oTPmKnKbZsBHeBGNL9suAPIJdLaVk9
