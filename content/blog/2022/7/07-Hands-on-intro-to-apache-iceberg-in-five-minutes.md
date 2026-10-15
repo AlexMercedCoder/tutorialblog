@@ -9,6 +9,8 @@ tags:
   - data lake
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 As a Developer Advocate for [Dremio](https://www.dremio.com) I spend a lot of time doing research on technology and best practices around engineering Data Lakehouses and sharing what I learn through content for [Subsurface - The Data Lakehouse Community](https://www.dremio.com/subsurface). One of the major topics I've been diving deep into is the topic of Data Lakehouse Table Formats, these allow you to take the files on your data lake and group them into tables data processing engines like Dremio can operate on.
 
 What I'd like to do today is show you how to very quickly get a docker container up and running to get hands on and try Apache Iceberg with Spark, do keep an eye out for an even more in-depth introduction on Subsurface. Before we get into our exercise, here is some content to help get you introduced to Apache Iceberg and the world of Data Lakehouse table formats.

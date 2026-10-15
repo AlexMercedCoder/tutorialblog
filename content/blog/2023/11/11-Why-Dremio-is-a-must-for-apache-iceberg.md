@@ -9,6 +9,8 @@ tags:
   - Data Lakehouse
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 When crafting an [Apache Iceberg-based Data Lakehouse](https://www.dremio.com/blog/apache-iceberg-101-your-guide-to-learning-apache-iceberg-concepts-and-practices/), there are many things you need to concern yourself with:
 
 - Portability of your tables

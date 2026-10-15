@@ -8,6 +8,8 @@ date: "2023-10-28T12:12:03.284Z"
 category: "data lakehouse"
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 # Unleashing the Power of Open Lakehouse Technologies: Apache Iceberg and Project Nessie
 
 Organizations are seeking innovative solutions to harness the full potential of their data while maintaining flexibility and avoiding vendor lock-in. Enter the era of the Data Lakehouse, a groundbreaking concept that marries the agility of a data lake with the structure and reliability of a data warehouse.

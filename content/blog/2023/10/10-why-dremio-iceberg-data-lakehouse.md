@@ -8,6 +8,8 @@ date: "2023-10-11T12:12:03.284Z"
 category: "data lakehouse"
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 ## Pain Points
 
 ### What are the modern data pain points:

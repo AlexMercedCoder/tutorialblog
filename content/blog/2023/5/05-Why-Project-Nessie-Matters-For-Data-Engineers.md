@@ -10,6 +10,8 @@ category: "data engineering"
 
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 We need to establish a few things to understand why the open-source data catalog, Project Nessie, matters so much.
 
 ## Why do Data Lakehouses Matter?

@@ -97,6 +97,6 @@ The semantic layer is not just a nicer way to query : it is the **control plane*
 - **Result:** AI agents get governed access without losing speed or accuracy
 - **OG Image:** This post uses the dynamic `/og?title=RAG+Isnt+the+Problem+Policy+as+Code+Is` branded card : no local banner needed
 
-This is the direction every data platform is heading. Iceberg + Polaris catalogs already support column masking. Dremio's Arctic catalog now enforces row/column policies via Nous Portal for Hermes Agent. Snowflake Horizon enforces ABAC via SQL policies. dbt's semantic layer can push governance into the lakehouse.
+This is the direction every data platform is heading. Iceberg + Polaris catalogs already support column masking. Dremio enforces row and column policies at query time. Snowflake Horizon enforces ABAC via SQL policies. dbt's semantic layer can push governance into the lakehouse.
 
 The age of "just give the AI all the data and hope it behaves" is over. Policy-as-code is the new baseline for enterprise AI data access.

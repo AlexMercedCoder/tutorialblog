@@ -9,6 +9,8 @@ tags:
   - data
 ---
 
+> **Update (October 2026):** Dremio Arctic has since become Dremio Catalog, which is built on Apache Polaris. Project Nessie continues as its own open source project.
+
 ## Apache Iceberg
 [Apache Iceberg is quickly becoming the industry standard for interfacing with data on data lakes](https://www.dremio.com/blog/why-should-i-care-about-table-formats-like-apache-iceberg/). A lot of the time when people first [try out Iceberg they do so using Apache Spark](https://www.dremio.com/subsurface/introduction-to-apache-iceberg-using-spark/).
 

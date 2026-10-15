@@ -53,7 +53,7 @@ As Iceberg adoption grows, managing Iceberg tables across distributed query engi
 
 Polaris is an implementation of the Apache Iceberg REST catalog specification. It provides a centralized service for managing metadata about Iceberg tables and their organizational structure. Instead of having every engine implement its own catalog logic, Polaris provides a shared layer that orchestrates access across tools like Spark, Flink, Trino, and Snowflake.
 
-At the heart of Polaris is the concept of a **catalog**: a logical container for Iceberg tables, configured to point to your cloud storage. Polaris supports both internal and external catalogs. Internal catalogs are fully managed within Polaris, while external catalogs sync with systems like Snowflake or Dremio Arctic. This flexibility lets you bring your existing Iceberg assets under centralized governance without locking them in.
+At the heart of Polaris is the concept of a **catalog**: a logical container for Iceberg tables, configured to point to your cloud storage. Polaris supports both internal and external catalogs. Internal catalogs are fully managed within Polaris, while external catalogs sync with other catalog systems, such as Snowflake. This flexibility lets you bring your existing Iceberg assets under centralized governance without locking them in.
 
 Polaris organizes tables into **namespaces**, which are essentially folders within a catalog. These namespaces can be nested to reflect organizational or project hierarchies. Within a namespace, you register Iceberg tables, which can then be accessed by multiple engines through a consistent API.
 
